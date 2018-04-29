@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "",
   "scripts": {
-    "dev": "webpack-dev-server --content-base . --inline --open --port 9966"
+    "dev": "webpack-dev-server --content-base . --inline --open --host 0.0.0.0 --port 9966"
   },
   "author": "",
   "license": "ISC",
