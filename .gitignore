@@ -2,3 +2,4 @@ venv/
 .idea/goldfish-learning.iml
 *.xml
 node_modules
+.DS_Store
