@@ -1,0 +1,104 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video
+	{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	font-size: 100%;
+	vertical-align: baseline;
+	color: #4D4D4D;
+	/* font-family: arial, courier new, courier, \5b8b\4f53, monospace; */
+}
+.ranking-menu {
+	width: 320px;
+	height: 510px;
+	float: left;
+	overflow: hidden;
+	background-color: #fcfcfc;
+	border: solid 1px #ccc;
+	margin: 20px 15px 30px 0;
+}
+
+.ranking-menu h3 {
+	clear: both;
+	background-color: #f7f7f7;
+	border-left: none;
+	border-right: none;
+}
+
+.radius {
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+.font14 {
+	font-size: 14px;
+}
+
+.ranking-group {
+	margin-bottom: 5px;
+}
+
+.ranking-item{
+	display: inline-block;
+	line-height: 36px;
+	height: 36px;
+	width: 100%;
+	padding-left: 3%;
+	text-align: left;
+	border-bottom: dotted 1px #ccc;
+	font-size:16px;
+	cursor:pointer;
+}
+
+.ranking-item:hover {
+	background-color: #f1f1e4;
+	opacity: 0.9;
+	filter: Alpha(Opacity = 90);
+}
+
+.item-index
+{
+	display: inline-block;
+	float:left;
+	width:8%;
+}
+.item-user
+{
+	display: inline-block;
+	float:left;
+	width:59%;
+}
+
+.item-user-top
+{
+	display: inline-block;
+	float:left;
+	width:59%;
+	color: #FF6600;
+}
+
+.item-value
+{
+	display: inline-block;
+	float:left;
+	width:30%;
+}
+
+.item-value-img
+{
+	float:left; padding-right:5px; display:block;height:16px; margin-top: 9px;
+}
+
+#balls2{
+    top: 400px;
+    width: 20px;
+    height: 20px;
+    background-color: red; 
+    border: 1px solid;
+    border-radius: 20px;
+}
+.share{width:978px; height:45px; margin:0 auto; border:1px solid #dcdcdc; border-radius:3px; padding:10px; font-size:16px;}
+.share .sharetb{display:inline-block; float:right; margin-right:30px;}
+.share .fr{ float:right;}
