@@ -1,0 +1,282 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>龙门教育-单词赢</title>
+  <link rel="stylesheet" href="../Content/css/home.css" />
+  <link rel="stylesheet" type="text/css" href="../Content/css/slide.css">
+  <link rel="stylesheet" type="text/css" href="../Content/css/index2.css" />
+  <script type="text/javascript">
+    // 判断浏览器ie6创建的div样式和非ie6创建的div样式
+    // 显示弹出层
+    function showGreyBox(idname) {
+      var isIE = (document.all) ? true : false;
+      var isIE6 = isIE
+        && ([/MSIE (\d)\.0/i.exec(navigator.userAgent)][0][1] == 6);
+      var newbox = document.getElementById(idname);
+      newbox.style.zIndex = "9999";
+      newbox.style.display = "block"
+      newbox.style.position = !isIE6 ? "fixed" : "absolute";
+      newbox.style.top = newbox.style.left = "50%";
+      newbox.style.marginTop = -newbox.offsetHeight / 2 + "px";
+      newbox.style.marginLeft = -newbox.offsetWidth / 2 + "px";
+      var layer = document.getElementById("layer");
+      if (layer == null || layer == "undefined") {
+        layer = document.createElement("div");
+        layer.id = "layer";
+        document.body.appendChild(layer);
+      } else {
+        layer.style.display = "block";
+      }
+      layer.style.width = layer.style.height = "100%";
+      layer.style.position = !isIE6 ? "fixed" : "absolute";
+      layer.style.top = layer.style.left = 0;
+      layer.style.backgroundColor = "#000";
+      layer.style.zIndex = "9998";
+      layer.style.opacity = "0.6";
+      // 隐藏下拉列表
+      var sel = document.getElementsByTagName("select");
+      for (var i = 0; i < sel.length; i++) {
+        sel[i].style.visibility = "hidden";
+      }
+      function layer_iestyle() {
+        layer.style.width = Math.max(document.documentElement.scrollWidth,
+          document.documentElement.clientWidth)
+          + "px";
+        layer.style.height = Math.max(document.documentElement.scrollHeight,
+          document.documentElement.clientHeight)
+          + "px";
+      }
+      function newbox_iestyle() {
+        newbox.style.marginTop = document.documentElement.scrollTop
+          - newbox.offsetHeight / 2 + "px";
+        newbox.style.marginLeft = document.documentElement.scrollLeft
+          - newbox.offsetWidth / 2 + "px";
+      }
+      if (isIE) {
+        layer.style.filter = "alpha(opacity=30)";
+      }
+      if (isIE6) {
+        layer_iestyle()
+        newbox_iestyle();
+        window.attachEvent("onscroll", function () {
+          newbox_iestyle();
+        })
+        window.attachEvent("onresize", layer_iestyle)
+      }
+    }
+    /**
+     * 关闭弹出层
+     */
+    function closeGreyBox(divId) {
+      var uwindow = document.getElementById(divId);// 关闭弹出层
+      uwindow.style.display = "none";
+      var grayLayer = document.getElementById("layer");// 关闭遮罩层
+      grayLayer.style.display = "none";
+    }
+  </script>
+  <script src="../Content/js/jquery.min.js"></script>
+  <script src="../Content/js/unified2.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+  <div class=" containter">
+    <div class="slide-list">
+      <!-- <div class="wrapper">
+        <div class="logo_pos">
+          <img src="../Content/images/logo.png" alt="" title="" />
+        </div>
+        <p class="div-weixin">
+          <img src="../Content/images/weixin.png" />
+        </p>
+      </div> -->
+
+      <section class="hc-banner">
+        <ol></ol>
+        <ul class="banner">
+          <!-- <li class="hc-bannerbg" style="background-image: url(../Content/images/banner1.jpg);">
+            
+          </li> -->
+          <li class="hc-bannerbg" style="background-image: url(../Content/images/banner2.jpg);">
+
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <div class="section2" id="reading">
+      <div class="wrapper">
+        <h1>
+          <span class="span1">Do you mind if I win?</span>
+          <br>
+          <span class="span2">中高考，赢在速度，赢在效率</span>
+        </h1>
+        <div class="bg">
+          <p>
+            <span>单词赢</span>
+          </p>
+          <p>在线英语单词速记平台
+            <br>背单词，将快进行到底</p>
+          <p>北师大博士团队开发的仿生英语词汇学习系统
+            <br> 记忆雷达机制，建立“熟悉词、夹生词和陌生词”个性化数据库
+            <br> 多感官策略，利用色彩记忆、右脑α音频提升记忆效果
+            <br> 眼耳手口四位一体，边听边看，边读边写
+            <br> 模块化记忆，分音节，归纳常见发音组合，特别适合基础薄弱学生
+            <br> 最高记录七天记忆单词16010个
+          </p>
+          <span class="btn-login">
+            <a href="#" onclick="showGreyBox('newDiv');">登录</a>&nbsp;|&nbsp;
+            <a href="javascript:;" onclick="javascript:location.href = '/Account/Register';" onclick="showGreyBox('newDiv');">注册</a>
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+        <p>
+          成都小金鱼信息科技有限公司 版权所有 备案号：
+          <a href="http://www.miitbeian.gov.cn" target="_blank">川ICP备XXXXXXX号</a>
+        </p>
+    </div>
+  </div>
+  <div id="newDiv" class="div_class">
+    <div class="div_header">
+      <a href="javascript:closeGreyBox('newDiv')">
+        <img src="../Content/images/close.png" title="关闭" alt="关闭" />
+      </a>
+    </div>
+    <div class="div_cont">
+      <p>
+        <img src="../Content/images/logo_win.png" />
+      </p>
+      <p>
+        <input type="text" class="input" id="user" placeholder="用户名" />
+      </p>
+      <p>
+        <input type="password" class="pass" id="passwd" placeholder="密码" />
+      </p>
+      <p>
+        <input type="button" class="btn-sub" onclick="Check();" value="登录" />
+      </p>
+      <p>
+        <span class="span-l txt">
+          <a href="javascript:;" onclick="javascript:location.href = '/Account/register.html';">注册</a>
+        </span>
+        <span class="span-r txt">
+          <a href="Index#">忘记密码</a>&nbsp;
+          <a href="http://admin.wordtraining.cn/">家长入口</a>
+        </span>
+      </p>
+      <br>
+
+    </div>
+  </div>
+  <div id="readingDiv" class="div_class">
+    <div class="div_header">
+      <a href="javascript:closeGreyBox('readingDiv')">
+        <img src="../Content/images/close.png" title="关闭" alt="关闭" />
+      </a>
+    </div>
+    <div class="div_cont">
+
+      <p>
+        <img src="../Content/images/logo_win.png" />
+      </p>
+      <p>
+        <input type="text" class="input" id="txtUserName" name="txtUserName" placeholder="用户名" />
+      </p>
+      <p>
+        <input type="password" class="pass" id="txtPassword" name="txtPassword" placeholder="密码" />
+      </p>
+      <p>
+        <input type="button" class="btn-sub" onclick="http://reading.wordtraining.cn/Login/#reading1" value="登录" />
+      </p>
+      <p>
+        <span class="span-l txt">
+          <a href="javascript:;">注册</a>
+        </span>
+        <span class="span-r txt">
+          <a href="/Account">忘记密码</a>&nbsp;
+          <a href="http://admin.wordtraining.cn/">家长入口</a>
+        </span>
+      </p>
+      <br>
+
+    </div>
+  </div>
+  <script>	
+    $('#txtPassword').keydown(function (e) {
+      if (e.keyCode == 13) {
+        CheckReading();
+      }
+    });
+    function CheckReadingForm() {
+      if ($("#txtUserName").val() == "") {
+        alert("请输入用户名！");
+        $("#txtUserName").focus();
+        return false;
+      }
+      if ($("#txtPassword").val() == "") {
+        alert("请输入密码！");
+        $("#txtPassword").focus();
+        return false;
+      }
+      return true;
+    }
+
+    function CheckReading() {
+      if (!CheckReadingForm()) {
+        return false;
+      }
+      $.post("http://reading.wordtraining.cn/Login/Index", { UserName: $("#txtUserName").val(), Password: $("#txtPassword").val() }, function (data) {
+
+        if (data.flag) {//如果验证成功，则跳转
+          window.location.href = data.msg;
+        }
+        else {
+          alert(data.msg);//弹出失败信息
+        }
+      });
+    }
+  </script>
+
+  <script>	
+    $('#passwd').keydown(function (e) {
+      if (e.keyCode == 13) {
+        Check();
+      }
+    });
+    function CheckForm() {
+      if ($("#user").val() == "") {
+        alert("请输入用户名！");
+        $("#user").focus();
+        return false;
+      }
+      if ($("#passwd").val() == "") {
+        alert("请输入密码！");
+        $("#passwd").focus();
+        return false;
+      }
+      return true;
+    }
+
+    function Check() {
+      if (!CheckForm()) {
+        return false;
+      }
+      $.post("/Account/LoginIn", { UserName: $("#user").val(), Password: $("#passwd").val(), CheckCode: $("#CheckCode").val() }, function (data) {
+
+        if (data.flag) {//如果验证成功，则跳转
+          window.location.href = data.msg;
+        }
+        else {
+          alert(data.msg);//弹出失败信息
+        }
+
+      });
+    }
+  </script>
+</body>
+
+</html>

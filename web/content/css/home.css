@@ -398,13 +398,13 @@ border:4px solid #ffa903
 .div_cont p .txt a:hover{color:#666; text-decoration:underline}
 .div_cont p  .span-l{
 width:40%; 
-display:inline-block;
+float: left;
 text-align:left
 }
 .div_cont p  .span-r{
 width:60%; 
-display:inline-block;
-text-align:right
+text-align:right;
+float: right;
 }
 .div-weixin{
 	display:none;

@@ -1,0 +1,344 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <title>龙门单词小栈 . 用户设置</title>
+  <meta name="viewport" content="width=device-width" charset="utf-8">
+
+  <script type="text/javascript" src="/Content/js/jquery.js"></script>
+  <script type="text/javascript" src="/Content/js/jquery.form.min.js"></script>
+  <link rel="Stylesheet" type="text/css" href="/Content/css/screen-s.css">
+  <link rel="Stylesheet" type="text/css" href="/Content/css/advance.css">
+  <link rel="stylesheet" type="text/css" href="/Content/css/common.css">
+
+</head>
+
+<body>
+    <div class="topline">
+      <div class="topcon">
+        <div class="l_con">小金鱼软件 . 集训赢欢迎您！！！</div>
+        <div class="r_con">
+          <a href="/">首页</a>
+          <a href="/UserCenter/UserCenter/">用户中心</a>
+          <a href="/ranking?ClassID=171" target="_blank">排行榜</a>
+          <a href="/UserCenter/setting.html" id="btnPrivateSetting" class="selected">设置</a>
+          <a href="/UserCenter/updatepassword.html">修改密码</a>
+          <a href="/Account">退出</a>
+        </div>
+      </div>
+    </div>
+
+  <p class="clearf"></p>
+  <div style="width: 1000px; height: auto; margin: 20px auto;">
+
+
+    <style type="text/css">
+      .font16 {
+        font-size: 16px;
+      }
+
+      .user_titbg {
+        width: 990px;
+        height: 36px;
+        background: #eeeeee;
+        border-bottom: 1px solid #cdcdcd;
+        padding: 10px 0 0 10px;
+      }
+
+      #privateSetting {
+        width: 1000px;
+        height: auto;
+        border: 1px solid #dcdcdc;
+        margin: 0 auto;
+      }
+
+      #privateSetting .tableinfo {
+        width: 450px;
+        height: auto;
+        margin: 15px auto;
+        font-size: 16px;
+        color: #666;
+      }
+
+      #privateSetting .tableinfo td {
+        padding: 5px 0;
+      }
+
+      #privateSetting .tableinfo .input_text {
+        width: 296px;
+        height: 32px;
+        line-height: 32px;
+        padding-left: 10px;
+        border: 1px solid #dcdcdc;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+
+      }
+
+      .btn_red {
+        border: none;
+        width: 90px;
+        height: 32px;
+        background: #d2191f;
+        line-height: 32px;
+        font-weight: bold;
+        color: #fff;
+        font-size: 14px;
+        cursor: pointer;
+        font-family: 幼圆;
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        /* Mozilla浏览器的私有属性 */
+        -webkit-border-radius: 3px;
+        /* Webkit浏览器的私有属性 */
+      }
+
+      .btn_redframe {
+        border: none;
+        width: 90px;
+        height: 32px;
+        border: 1px solid #d2191f;
+        background: #fff;
+        color: #d2191f;
+        line-height: 32px;
+        font-weight: bold;
+        font-size: 14px;
+        cursor: pointer;
+        font-family: 幼圆;
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        /* Mozilla浏览器的私有属性 */
+        -webkit-border-radius: 3px;
+        /* Webkit浏览器的私有属性 */
+      }
+
+      .orange {
+        color: #fe9400
+      }
+    </style>
+
+    <div style="width: 1000px; height: auto; margin: 20px auto;">
+
+      <input id="hfUserID" type="hidden" value="9185" />
+      <div id="privateSetting">
+        <form>
+
+          <p class="user_titbg">
+            <img alt="" src="/content/image/set_icon.png" style="vertical-align: bottom; margin-right: 0.4em; margin-bottom: -3px;">
+            <span class="font16">基本设置</span>
+          </p>
+          <table class="tableinfo" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                <td>自动播放右脑记忆辅助音频（Alpha音乐）</td>
+                <td>
+                  <input id="usautoMusic" type="checkbox" checked="checked" style="display:none;" />
+                  <input id="alphaOn_setting" type="checkbox" checked="checked" />
+                </td>
+              </tr>
+              <tr>
+                <td>自动复习</td>
+                <td>
+                  <input id="usautoReview" type="checkbox" checked="checked" style="display:none;" />
+                  <input type="checkbox" id="reviewOn_setting" checked="checked" />
+                </td>
+              </tr>
+              <tr>
+                <td>显示单词识别倒计时</td>
+                <td>
+                  <input id="usdisplayLeftTime" type="checkbox" checked="checked" style="display:none;" />
+                  <input type="checkbox" id="vocRecTimeCounterOff_setting" checked="checked" value="value" />
+                </td>
+              </tr>
+              <tr>
+                <td>单词基础每组单词个数</td>
+                <td>
+                  <input id="uscountPerGroup" type="hidden" value="5" />
+                  <select style="width: 58px;" id="vocNbrByGroup_setting">
+                    <option value="5">5个</option>
+                    <option value="10">10个</option>
+                    <option value="15">15个</option>
+                    <option value="20">20个</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="user_titbg">
+            <span class="font16">高级设置</span>
+          </p>
+          <table class="tableinfo" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                <td>单词识别倒计时时间</td>
+                <td>
+                  <input id="usrecognitionTime" type="hidden" value="5" />
+                  <select style="width: 58px;" id="vocRecTime_setting">
+                    <option value="5">5秒</option>
+                    <option value="6">6秒</option>
+                    <option value="7">7秒</option>
+                    <option value="8">8秒</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>最大复习单词数</td>
+                <td>
+                  <input id="usmaxReviewCount" type="hidden" value="10" />
+                  <select style="width: 58px;" id="vocNbrByReview_setting">
+                    <option selected value="10">10个</option>
+                    <option value="20">20个</option>
+                    <option value="30">30个</option>
+                    <option value="40">40个</option>
+                    <option value="50">50个</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>正确单词提示秒数</td>
+                <td>
+                  <input id="ustipsSeconds" type="hidden" value="2" />
+                  <select style="width: 58px;" id="vocPromptTime_setting">
+                    <option value="1">1秒</option>
+                    <option selected="selected" value="2">2秒</option>
+                    <option value="3">3秒</option>
+                    <option value="4">4秒</option>
+                    <option value="5">5秒</option>
+                  </select>
+                </td>
+              </tr>
+              <!-- <tr>
+                        <td>正确句子提示秒数</td>
+                        <td><select style="width:58px;" id="senPromptTime_setting"><option value="3">3秒</option><option value="4">4秒</option><option value="5">5秒</option><option value="7">7秒</option><option value="10">10秒</option></select></td>
+                    </tr> -->
+            </tbody>
+          </table>
+
+          <p class="user_titbg">
+            <span class="font16">加强型学习（Mt四维学习）</span>
+          </p>
+          <table class="tableinfo" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                <td>达到指定单词数后进行逆向回忆（看词义回忆单词）</td>
+                <td>
+                  <input id="usreverseMemoryCount" type="hidden" value="5" />
+                  <select style="width: 69px;" id="reverseOn_setting">
+                    <option value="5">5个</option>
+                    <option value="10">10个</option>
+                    <option value="15">15个</option>
+                    <option value="20">20个</option>
+                    <option value="10000">不进行</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>单元结束后是否进行整体回忆</td>
+                <td>
+                  <input id="usmemoryAllAfterUnit" type="checkbox" style="display:none;" />
+                  <input type="checkbox" id="unitReviewOn_setting" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="padding-top: 10px; margin: 60px auto; width: 200px;">
+            <input type="button" class="btn_red" id="save_setting" value="保存" />
+            <input type="button" id="cancel_setting" class="btn_redframe" value="取消" style="margin-left: 3px;" />
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+    <!--搜索用户-->
+    <script>
+
+      $(document).ready(function () {
+        if ($("#hfUserID").val().length > 0) {
+          if ($("#usautoMusic:checked").length == 1) {
+            $("#alphaOn_setting").attr("checked", "checked");
+          }
+          else {
+            $("#alphaOn_setting").removeAttr("checked");
+          }
+          if ($("#usautoReview:checked").length == 1) {
+            $("#reviewOn_setting").attr("checked", "checked");
+          }
+          else {
+            $("#reviewOn_setting").removeAttr("checked");
+          }
+          if ($("#usdisplayLeftTime:checked").length == 1) {
+            $("#vocRecTimeCounterOff_setting").attr("checked", "checked");
+          }
+          else {
+            $("#vocRecTimeCounterOff_setting").removeAttr("checked");
+          }
+
+          $("#vocNbrByGroup_setting").val($("#uscountPerGroup").val());
+          $("#vocRecTime_setting").val($("#usrecognitionTime").val());
+          $("#vocNbrByReview_setting").val($("#usmaxReviewCount").val());
+
+          $("#vocPromptTime_setting").val($("#ustipsSeconds").val());
+          $("#reverseOn_setting").val($("#usreverseMemoryCount").val());
+          if ($("#usmemoryAllAfterUnit:checked").length == 1) {
+            $("#unitReviewOn_setting").attr("checked", "checked");
+          }
+          else {
+            $("#unitReviewOn_setting").removeAttr("checked");
+          }
+        }
+      });
+
+      $("input.btn_red").click(function () {
+
+        var y_music = $("#alphaOn_setting:checked").length;
+        var y_review = $("#reviewOn_setting:checked").length;
+        var y_displaytime = $("#vocRecTimeCounterOff_setting:checked").length;
+
+        var y_count = $("#vocNbrByGroup_setting").val();
+        var y_reivewtime = $("#vocRecTime_setting").val();
+        var y_maxcount = $("#vocNbrByReview_setting").val();
+
+        var y_tipstime = $("#vocPromptTime_setting").val();
+        var y_memorycount = $("#reverseOn_setting").val();
+        var y_memoryall = $("#unitReviewOn_setting:checked").length;
+
+        $.post("/UserCenter/Setting", {
+          k_music: y_music,
+          k_review: y_review,
+          k_displaytime: y_displaytime,
+
+          k_count: y_count,
+          k_reivewtime: y_reivewtime,
+          k_maxcount: y_maxcount,
+
+          k_tipstime: y_tipstime,
+          k_memorycount: y_memorycount,
+          k_memoryall: y_memoryall
+        }, function (result) {
+          if (result > 0) {
+            window.location.href = "/Home/Index";
+          }
+          else {
+            alert("修改设置失败，请检查是否登录超时！");
+          }
+        });
+
+      });
+
+    </script>
+  </div>
+      <div class="foot">
+        <p>
+          成都小金鱼信息科技有限公司 版权所有 备案号：
+          <a href="http://www.miitbeian.gov.cn" target="_blank">川ICP备XXXXXXX号</a>
+        </p>
+      </div>
+</body>
+
+</html>

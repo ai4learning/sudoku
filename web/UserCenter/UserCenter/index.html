@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <title>龙门单词小栈 . 用户中心</title>
+  <meta name="viewport" content="width=device-width" charset="utf-8">
+
+  <script type="text/javascript" src="/Content/js/jquery.js"></script>
+  <script type="text/javascript" src="/Content/js/jquery.form.min.js"></script>
+  <link rel="Stylesheet" type="text/css" href="/Content/css/screen-s.css">
+  <link rel="Stylesheet" type="text/css" href="/Content/css/advance.css">
+  <link rel="stylesheet" type="text/css" href="/Content/css/common.css">
+
+</head>
+
+<body>
+    <div class="topline">
+      <div class="topcon">
+        <div class="l_con">小金鱼软件 . 集训赢欢迎您！！！</div>
+        <div class="r_con">
+          <a href="/">首页</a>
+          <a href="/UserCenter/UserCenter/" class="selected">用户中心</a>
+          <a href="/ranking?ClassID=171" target="_blank">排行榜</a>
+          <a href="/UserCenter/setting.html" id="btnPrivateSetting">设置</a>
+          <a href="/UserCenter/updatepassword.html">修改密码</a>
+          <a href="/Account">退出</a>
+        </div>
+      </div>
+    </div>
+
+  <p class="clearf"></p>
+  <div style="width: 1000px; height: auto; margin: 20px auto;">
+
+
+    <link href="/Content/css/icon.css" rel="stylesheet" />
+    <link href="/Content/css/easyui.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="/Scripts/jquery.easyui.min.js"></script>
+
+    <div id="userinfo-content">
+
+      <div style="font-size: 14px; color: #666; line-height: 30px;">
+        <a href="/Home/Index">首页</a>&nbsp;>&nbsp;
+        <span class="orange">用户中心</span>
+      </div>
+
+      <div id="userdetailinfo">
+
+        <form action="/UserCenter/UserCenter" method="post">
+
+          <p class="user_titbg">
+            <img alt="" src="/Content/image/user_info.png" style="vertical-align: bottom; margin-right: 0.4em; margin-bottom: -3px;">
+            <span class="font16">个人信息</span>
+          </p>
+          <table class="tableinfo">
+            <tbody>
+              <tr>
+                <td colspan="2" class="success_tips"></td>
+              </tr>
+              <tr>
+                <td width="116" align="right">用户名：</td>
+                <td width="322">
+                  <span class="orange">jiaoshi</span>
+                </td>
+              </tr>
+              <tr>
+                <td align="right">总登陆次数：</td>
+                <td align="left">
+                  46
+                </td>
+              </tr>
+              <tr>
+                <td align="right">
+                  上次登陆时间：
+                </td>
+                <td align="left">
+                  2018/5/1 15:43:17
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="user_titbg">
+            <img alt="" src="/Content/image/user_person.png" style="vertical-align: bottom; margin-right: 0.4em; margin-bottom: -3px;">
+            <span class="font16">私人信息</span>
+          </p>
+          <table class="tableinfo">
+
+            <tbody>
+              <tr>
+                <td align="right">真实姓名：</td>
+                <td>
+                  <input type="text" class="input_text" id="realName" name="umModify_realName" value="教师" maxlength="20" />
+                </td>
+              </tr>
+
+              <tr>
+                <td align="right">性别：</td>
+                <td id="sex" name="umModify_sex">
+                  <input id="hfSex" type="hidden" />
+                  <input name="txtSex" type="radio" value="1" />男
+                  <input name="txtSex" type="radio" value="0" />女
+                  <input name="txtSex" type="radio" value="-1" checked="checked" />保密
+                </td>
+              </tr>
+              <tr>
+                <td align="right">生日：</td>
+                <td>
+                  <input id="age" name="txtBrithday" type="text" class="easyui-datebox" value="" data-options="formatter:myformatter,parser:myparser"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td align="right">注册时间：</td>
+                <td>
+                  2018/2/2 23:19:28
+                </td>
+              </tr>
+              <tr>
+                <td align="right">用户状态：</td>
+                <td>
+                  <span>正常</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="user_titbg">
+            <img alt="" src="/Content/image/user_tel.png" style="vertical-align: bottom; margin-right: 0.4em; margin-bottom: -3px;">
+            <span class="font16">联系方式</span>
+          </p>
+          <table class="tableinfo">
+            <tbody>
+              <tr>
+                <td align="right">邮箱地址：</td>
+                <td>
+                  <input type="text" class="input_text" id="email" name="umModify_email" maxlength="30" />
+                </td>
+              </tr>
+              <tr>
+                <td align="right">微信号：</td>
+                <td>
+                  <input type="text" class="input_text" id="weixinNumber" name="umModify_weixinNumber" maxlength="30" />
+                </td>
+              </tr>
+              <tr>
+                <td align="right">手机号码：</td>
+                <td>
+                  <input type="text" class="input_text" id="mobile" name="umModify_mobile" value="" maxlength="20" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="handle-save">
+            <input id="btnConfirmSave" class="btn_red" type="submit" value="保存">
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+      $(document).ready(function () {
+
+        $('[name="txtSex"]').each(function () {
+          if ($(this).val() == $("#hfSex").val()) {
+            $(this).attr("checked", "checked");
+          }
+        });
+
+        $("#btnConfirmSave").click(function () {
+          if ($('input:[name="txtBrithday"]:eq(0)').val().length == 0) {
+            alert("生日不能为空！");
+            return false;
+          }
+          if ($("#email").val().length == 0) {
+            alert("邮箱不为能空！");
+            return false;
+          }
+        });
+      });
+
+    </script>
+
+    <!--时间格式设置-->
+    <script type="text/javascript">
+
+      function myformatter(date) {
+
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        var d = date.getDate();
+        var myDate = y + '-' + (m < 10 ? ('0' + m) : m) + '-' + (d < 10 ? ('0' + d) : d);
+
+        return myDate;
+
+      }
+
+      function myparser(s) {
+        if (!s) return new Date();
+        var ss = (s.split('-'));
+        var y = parseInt(ss[0], 10);
+        var m = parseInt(ss[1], 10);
+        var d = parseInt(ss[2], 10);
+        if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+          return new Date(y, m - 1, d);
+        } else {
+          return new Date();
+        }
+      }
+
+    </script>
+
+
+  </div>
+  <div class="foot">
+    <p>
+      成都小金鱼信息科技有限公司 版权所有 备案号：
+      <a href="http://www.miitbeian.gov.cn" target="_blank">川ICP备XXXXXXX号</a>
+    </p>
+  </div>
+</body>
+
+</html>
