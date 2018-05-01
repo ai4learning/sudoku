@@ -35,7 +35,7 @@ module.exports = {
         changeOrigin: true
       },
       {
-        context: ['/UserCenter/Setting', '/UserCenter/UpdatePassword'],
+        context: ['/UserCenter/UserCenter', '/UserCenter/Setting', '/UserCenter/UpdatePassword'],
         target: 'http://www.wordtraining.cn',
         changeOrigin: true,
         bypass: function (req, res, proxyOptions) {
