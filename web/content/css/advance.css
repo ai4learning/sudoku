@@ -331,7 +331,7 @@
 /* Solid Colors */
 .solid-blue { background:#00BBE2; }
 .solid-blue-2 { background:#2C84EE; }
-.solid-darkblue { background:#044E94; background-image:url(http://www.wordtraining.cn/Content/css/images/lock01.png); background-repeat:no-repeat; background-position:bottom right;}
+.solid-darkblue { background:#044E94; background-image:url(http://www.wordtraining.cn/content/css/images/lock01.png); background-repeat:no-repeat; background-position:bottom right;}
 .solid-darkblue-nolock { background:#044E94; background-repeat:no-repeat; background-position:bottom right;}
 .solid-violetred { background:#781766; }
 .solid-red { background:#E51400;}
@@ -344,7 +344,7 @@
 .solid-coral { background:#CD5B45; }
 .solid-green { background:#67B239; }
 .solid-green-2 {background:#96BF01; }
-.solid-darkgreen { background:#016C38; background-image:url(http://www.wordtraining.cn/Content/css/images/right06.png); background-repeat:no-repeat; background-position:bottom right; }
+.solid-darkgreen { background:#016C38; background-image:url(http://www.wordtraining.cn/content/css/images/right06.png); background-repeat:no-repeat; background-position:bottom right; }
 .solid-olive { background:#999900}
 .solid-grass { background:#CDCD00; }
 .solid-darkred { background:#5F0000; }
@@ -353,10 +353,10 @@
 .solid-black { background:#000; }
 .solid-smoke { background:#F5F5F5; }
 .solid-gray2 {background:#737373;}
-.studied-gray { background-color:#cccccc; background-image:url(http://www.wordtraining.cn/Content/css/images/right3.png); background-repeat:no-repeat; background-position:bottom right; }
-.studied-gray2 { background-color:#737373; background-image:url(http://www.wordtraining.cn/Content/css/images/right08.png); background-repeat:no-repeat; background-position:bottom right; }
+.studied-gray { background-color:#cccccc; background-image:url(http://www.wordtraining.cn/content/css/images/right3.png); background-repeat:no-repeat; background-position:bottom right; }
+.studied-gray2 { background-color:#737373; background-image:url(http://www.wordtraining.cn/content/css/images/right08.png); background-repeat:no-repeat; background-position:bottom right; }
 .unstudy-orange {background-color:#ff8800;}
-.studied-green { background-color:#67B239; background-image:url(http://www.wordtraining.cn/Content/css/images/right05.png); background-repeat:no-repeat; background-position:bottom right; }
+.studied-green { background-color:#67B239; background-image:url(http://www.wordtraining.cn/content/css/images/right05.png); background-repeat:no-repeat; background-position:bottom right; }
 .studing-green{background-color:#67B239;}
 /* End Solid Colors */
 
@@ -424,14 +424,14 @@
 /* End Transparent Colors */
 
 /* Background Images */
-.img-wood { background:#FB8F02 url(http://www.wordtraining.cn/Content/images/bg/wood_pattern.jpg) repeat; }
-.img-purtywood { background:#FB8F02 url(http://www.wordtraining.cn/Content/images/bg/purty_wood.jpg) repeat; }
-.img-woodtexture { background:#FB8F02 url(http://www.wordtraining.cn/Content/images/bg/wood_texture.jpg) repeat; }
-.img-darkwood { background:#000 url(http://www.wordtraining.cn/Content/images/bg/dark_wood.jpg) repeat; }
-.img-retinawood { background:#FB8F02 url(http://www.wordtraining.cn/Content/images/bg/retina_wood.png) repeat; }
-.img-nastyfabric { background:#999 url(http://www.wordtraining.cn/Content/images/bg/nasty_fabric.png) repeat; }
-.img-wildoliva { background:#555 url(http://www.wordtraining.cn/Content/images/bg/wild_oliva.png) repeat; }
-.img-darkbrick { background:#555 url(http://www.wordtraining.cn/Content/images/bg/dark_brick_wall.png) repeat; }
+.img-wood { background:#FB8F02 url(http://www.wordtraining.cn/content/images/bg/wood_pattern.jpg) repeat; }
+.img-purtywood { background:#FB8F02 url(http://www.wordtraining.cn/content/images/bg/purty_wood.jpg) repeat; }
+.img-woodtexture { background:#FB8F02 url(http://www.wordtraining.cn/content/images/bg/wood_texture.jpg) repeat; }
+.img-darkwood { background:#000 url(http://www.wordtraining.cn/content/images/bg/dark_wood.jpg) repeat; }
+.img-retinawood { background:#FB8F02 url(http://www.wordtraining.cn/content/images/bg/retina_wood.png) repeat; }
+.img-nastyfabric { background:#999 url(http://www.wordtraining.cn/content/images/bg/nasty_fabric.png) repeat; }
+.img-wildoliva { background:#555 url(http://www.wordtraining.cn/content/images/bg/wild_oliva.png) repeat; }
+.img-darkbrick { background:#555 url(http://www.wordtraining.cn/content/images/bg/dark_brick_wall.png) repeat; }
 /* End Background Images */
 
 /* END BACKGROUND LIST */
