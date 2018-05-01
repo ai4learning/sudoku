@@ -22,7 +22,7 @@ module.exports = {
   devServer: {
     proxy: [
       {
-        context: ['/api', '/UserCenter', '/Reading', '/Scripts', '/ranking', '/Acount', '/Test'].concat(content_paths),
+        context: ['/api', '/UserCenter', '/UnitTest', '/Reading', '/Scripts', '/ranking', '/Account', '/Test'].concat(content_paths),
         target: 'http://www.wordtraining.cn',
         changeOrigin: true,
         bypass: function (req, res, proxyOptions) {
