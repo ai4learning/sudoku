@@ -28,7 +28,17 @@ if (typeof jQuery == 'undefined') {
 </head>
 <body>
     <div class="topline">
-        <div class="topcon"><div class="l_con">单词小栈 . 集训赢欢迎您！！！！</div><div class="r_con"><a href="index.html">首页</a> | <a href="UserCenter/UserCenter/">用户中心</a>｜ <a href="ranking?ClassID=171" target="_blank">排行榜</a>｜ <a href="UserCenter/Subscribe">激活</a> ｜ <a href="UserCenter/Setting" id="btnPrivateSetting">设置</a>｜ <a href="UserCenter/UpdatePassword">修改密码</a>｜ <a href="Account/Index">退出</a></div></div>
+        <div class="topcon"><div class="l_con">小金鱼软件 . 集训赢欢迎您！！！</div>
+        <div class="r_con">
+          <a href="index.html" class="selected">首页</a>
+          <a href="UserCenter/UserCenter/">用户中心</a>
+          <a href="ranking?ClassID=171" target="_blank">排行榜</a>
+          <a href="UserCenter/Subscribe">激活</a>
+          <a href="UserCenter/Setting" id="btnPrivateSetting">设置</a>
+          <a href="UserCenter/UpdatePassword">修改密码</a>
+          <a href="Account/Index">退出</a>
+        </div>
+      </div>
     </div>
     <audio id="generalVocSound" preload="auto">
         <source src="index.html" type="audio/mpeg" />
@@ -1191,9 +1201,18 @@ $(document).ready(function () {
         </div>
     </div>
     <p class="clearf"></p>
-    <div class="foot gray">
+    <style>
+    .foot {
+      background-color: #3b414f;
+    }
+    .foot *{
+      color: #808080;
+    }
+    </style>
+    <div class="foot">
         <p>
-            跃龙门育才科技（深圳）有限公司 版权所有 备案号：<a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备16028569号</a>
+             成都小金鱼信息科技有限公司 版权所有 备案号：
+            <a href="http://www.miitbeian.gov.cn" target="_blank">川ICP备XXXXXXX号</a>
         </p>
     </div>
 
