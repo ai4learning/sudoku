@@ -1,0 +1,102 @@
+        <div class="row-fluid">
+            <div class="span12">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th><span>id</span></th>
+                        <th><span>账户名</span></th>
+                        <th><span>密码</span></th>
+                        <th><span>用户code</span></th>
+                        <th><span>别名</span></th>
+                        <th><span>角色</span></th>
+                        <th><span>权限等级</span></th>
+                        <th><span>parent_id</span></th>
+                        <th><span>激活码</span></th>
+                        <th><span>用户状态</span></th>
+                        <th><span>登录次数</span></th>
+                        <th><span>训练ID</span></th>
+                        <th><span>训练CODE</span></th>
+                        <th><span>当前班级</span></th>
+                        <th><span>当前老师</span></th>
+                        <th><span>等级</span></th>
+                        <th><span>积分</span></th>
+                        <th><span>创建时间</span></th>
+                        <th><span>修改时间</span></th>
+                        <th class="operate">操作</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+						#if($list && $list.size()!=0)
+							#foreach($item in $list)
+                            <tr>
+                                <td>$!item.id</td>
+                                <td>$!item.userId</td>
+                                <td>$!item.passwd</td>
+                                <td>$!item.userCode</td>
+                                <td>$!item.nikeName</td>
+                                <td>$item.roleType	</td>
+                                <td>$!item.authorityLevel</td>
+                                <td>$!item.parentId</td>
+                                <td>$!item.activateCode</td>
+                                <td>
+									#if($item.userState==0)<span class="">初始状态</span> #end
+									#if($item.userState==1)<span class="">正常</span> #end
+									#if($item.userState==2)<span class="">欠费</span> #end
+									#if($item.userState==3)<span class="">不可用</span> #end
+                                </td>
+                                <td>$!item.totalLoginTimes</td>
+                                <td>$!item.wordTrainingId</td>
+                                <td>$!item.wordTrainingCode</td>
+                                <td>$!item.currentClass</td>
+                                <td>$!item.currentTeacher</td>
+                                <td>$!item.level</td>
+                                <td>$!item.cashPoint</td>
+                                <td>$!item.created</td>
+                                <td>$!item.modified</td>
+
+                                <td class="operate">
+                                    <button class="btn btn-primary JUpdate-user" type="button" itemid="$!item.id">编辑</button>
+                                    <button class="btn btn-info JView-user" type="button" itemid="$!item.id">查看</button>
+                                    <button class="btn btn-warning JDelete-user" type="button" itemid="$!item.id">删除</button>
+                                </td>
+                            </tr>
+							#end
+						#else
+                        <tr>
+                            <td colspan="20" class="message_default">没有记录！</td>
+                        </tr>
+						#end
+
+
+                    </tbody>
+
+                </table>
+
+                #if($pageQuery)
+                    #parse('/WEB-INF/vm/layout/pageQuery.vm')
+                #end
+
+            </div>
+        </div>
+
+<script language="javascript">
+void function(j) {	
+	j('.JDelete-user').click(function() {
+		var id = j(this).attr('itemid');
+		var config={title:'删除User',info:'您确定要删除User吗？',url: '/user/doDelete',param:'id='+id};
+		gUtils.fConfirmAndRefreshList(config);
+	});
+	
+	j('.JUpdate-user').click(function() {
+		var id = j(this).attr('itemid');
+		gDialog.fCreate({ title: '修改User', url: '/user/update?id='+id,width:700}).show();
+	});
+
+	j('.JView-user').click(function() {
+		var id = j(this).attr('itemid');
+		gDialog.fCreate({ title: '查看User', url: '/user/view?id='+id,width:700}).show();
+	});
+}(jQuery);
+</script>

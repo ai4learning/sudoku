@@ -1,0 +1,16 @@
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home home-icon"></i>
+            <a href="/index">首页</a>
+        </li>
+        <li class="active">系统异常</li>
+    </ul>
+</div>
+<div class="page-content">
+    <div class="seach-bar">
+    	系统异常，请稍候再试!
+    </div>
+
+	
+</div>

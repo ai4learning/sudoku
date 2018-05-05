@@ -1,0 +1,80 @@
+<head>
+    <meta charset="utf-8">
+    <title>单词赢管理后台</title>
+    <link href="/images/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" href="/css/ui.jqgrid.min.css"/>
+    <link rel="stylesheet" href="/css/ui-dialog.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-modal.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-modalmanager.css"/>
+    <link rel="stylesheet" href="/css/select2/3.5.4/select2.css"/>
+    <link rel="stylesheet" href="/css/ace.min.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/css/jquery-ui-1.10.3.full.min.css"/>
+    <link rel="stylesheet" href="/js/validator/jquery.validator.css"/>
+    
+    <script> var BASE_PATH = '';</script>
+
+    <script src='/js/jquery-2.0.3.min.js'></script>
+    #*<script src='/js/jquery-1.7.2.js'></script>*#
+
+#*    <script src="/js/bootstrap.min.js"></script>*#
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/bootstrap-modal.js"></script>
+    <script src="/js/bootstrap-modalmanager.js"></script>
+    <script src="/js/dialog-min.js"></script>
+    <script src="/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+
+    <script src="/js/jquery.form.min.js"></script>
+    <script src="/js/jquery-ui-1.10.3.full.min.js"></script>
+
+    <!-- 表单验证相关-->
+    <script src="/js/validator/jmq.validator.js"></script>
+    <script src="/js/validator/local/zh_CN.js"></script>
+
+    <!-- jqGrid scripts -->
+    <script src="/js/jqGrid/jquery.jqGrid.src.js"></script>
+    <script src="/js/jqGrid/i18n/grid.locale-cn.js"></script>
+    <!--select2 -->
+    <script src="/js/select2/select2.min.js"></script>
+    <script src="/js/select2/select2_locale_zh-CN.js"></script>
+    <script src="/js/message.common.js"></script>
+    <!-- ace scripts -->
+    <script src="/js/ace.min.js"></script>
+
+    <!--goldfish script-->
+    <script src="/js/goldfish/jshow.utils.js"></script>
+    <script src="/js/goldfish/modal.manager.plugin1.0.js"></script>
+    <script src="/js/goldfish/form.validate.js"></script>
+    
+    
+    #*<script src="/taskManager/common/format.jsx"></script>*#
+    <style>
+        .menu-span {
+            margin-left: 5px;
+        }
+
+        .seach-bar {
+            margin: 0 0 12px;
+            border-bottom: 1px dotted #e2e2e2;
+            padding-bottom: 8px;
+            padding-top: 4px
+        }
+
+        .font-fm {
+            font-family: "微软雅黑", "宋体", Arial, sans-serif;
+        }
+        /* select2 覆盖样式*/
+        .select2-container .select2-choice{
+            background: #FFF none;
+            overflow: visible;
+        }
+        .message-select2{
+            width: 265px;
+        }
+    </style>
+
+ </head>
+ 

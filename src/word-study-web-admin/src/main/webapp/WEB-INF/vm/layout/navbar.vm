@@ -1,0 +1,40 @@
+<div class="navbar navbar-default" id="navbar">
+    <div class="navbar-container" id="navbar-container">
+
+        <div class="navbar-header pull-left">
+            <a href="#" class="navbar-brand">
+                <small>
+                    <i class="icon-signal"></i>
+                    单词赢管理后台
+                </small>
+            </a><!-- /.brand -->
+        </div>
+        <!-- /.navbar-header -->
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+               
+
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <i class="icon-user"></i>
+                        <span>
+                             	${pin}<i class="icon-caret-down"></i>
+                        </span>
+                    </a>
+
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="/logout">
+                                <i class="icon-off"></i>
+                               	 退出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.ace-nav -->
+        </div>
+        <!-- /.navbar-header -->
+    </div>
+    <!-- /.container -->
+</div>

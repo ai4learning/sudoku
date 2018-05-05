@@ -1,0 +1,44 @@
+
+	<!--struts config start-->
+	<!-- User -->
+	<package name="-user" namespace="//user" extends="jshow-admin">
+		<action name="*" method="{1}" class="com.goldfish.web.action.UserAction">
+			<result>${path}//user/{1}.vm</result>
+		</action>
+	</package>
+	<!--struts config end-->
+	
+
+	<!-- mybatis 配置开始-->
+	
+	<typeAlias type="com.goldfish.domain.User" alias="User"/>
+
+	<mapper resource="sqlmap/User.xml" />
+	
+	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">  
+	   <property name="mapperInterface" value="com.goldfish.dao.UserDao"/>  
+	  <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
+	</bean>
+	
+	<!-- mybatis 配置end-->
+
+
+
+	<!-- ibatis 配置开始-->
+
+	<sqlMap resource="sqlmap//User.xml" />
+	
+	<bean id="userDao" class="com.goldfish.dao.impl.UserDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- ibatis 配置end-->
+
+
+	
+	<!-- 可选配置项 start -->
+	<bean id="userManager" class="com.goldfish.dao.impl.UserManagerImpl">
+	</bean>
+	
+	<bean id="userService" class="com.goldfish.dao.impl.UserServiceImpl">
+	</bean>
+	<!-- 可选配置项 end -->

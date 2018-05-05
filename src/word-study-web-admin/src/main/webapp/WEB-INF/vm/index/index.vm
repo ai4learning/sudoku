@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	#parse( "/WEB-INF/vm/layout/head.vm" )
+<body class="navbar-fixed font-fm">
+	#parse( "/WEB-INF/vm/layout/navbar.vm" )
+
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <div class="main-container-inner">
+		#parse( "/WEB-INF/vm/layout/sidebar.vm" )
+
+#*        <div class="main-content" id="main-content">
+			<div class="right-content" id="right-content">
+                <div class="jumbotron masthead">
+                     <h3>Welcome</h3>
+					<p>欢迎来到九宫格单词训练营后台</p>
+				</div>
+			</div>
+        </div>*#
+
+        <!-- 主内容区 -->
+        <div id="main_content" class="main-content">
+            <div class="jumbotron masthead">
+                <h3>Welcome</h3>
+                <p>欢迎来到九宫格单词训练营后台</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+	#parse( "/WEB-INF/vm/layout/footer.vm" )
+	#parse( "/WEB-INF/vm/layout/hidden.vm" )
+</body>
+</html>
+
+

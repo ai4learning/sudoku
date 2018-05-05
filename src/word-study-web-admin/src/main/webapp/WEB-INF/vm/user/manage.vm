@@ -1,0 +1,121 @@
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home home-icon"></i>
+            <a href="/index">首页</a>
+        </li>
+        <li class="active">账户管理</li>
+        <li class="active">用户管理</li>
+    </ul>
+</div>
+
+
+<div class="page-content">
+    <div class="seach-bar">
+        <div class="manage-content">
+            <form class="form-inline">
+
+
+                <label>id</label>
+
+                <input type="text"  name="id" id="id_search" class="input" placeholder="请输入id">
+                <label>账户名</label>
+
+                <input type="text"  name="userId" id="userId_search" class="input" placeholder="请输入账户名">
+                <label>角色</label>
+                <select class="forms_select" name="roleType" id="roleType_search">
+                    <option value="">全部</option>
+                    <option value="1">学生</option>
+                    <option value="2">老师</option>
+                    <option value="3">管理员</option>
+                </select>
+
+
+                <label>父ID</label>
+
+                <input type="text"  name="parentId" id="parentId_search" class="input" placeholder="父ID">
+                <label>用户状态</label>
+                <select class="forms_select" name="userState" id="userState_search">
+                    <option value="">全部</option>
+                    <option value="0">初始状态</option>
+                    <option value="1">正常</option>
+                    <option value="2">欠费</option>
+                    <option value="3">不可用</option>
+                </select>
+                <label>训练ID</label>
+                <input type="text"  name="wordTrainingId" id="wordTrainingId_search" class="input" placeholder="请输入训练ID">
+                <input type="button" onclick="queryList();" class="btn" value="搜索"  />
+            </form>
+
+            <br/>
+            <div class="page_operate">
+                <button class="btn  btn-primary" type="button" id="add-user">创建 User</button>
+            </div>
+            <div id="dl"></div>
+        </div>
+    </div>
+</div>
+
+
+<script language="javascript">
+	function queryList(pageNo) {	
+		if (!pageNo) {
+			pageNo = 1;
+		}
+		var page = pageNo;
+		var url = '/user/list';
+		var param = {
+			page: page
+		};
+		
+		var pageSize=jQuery("#JPageSize_queryList").val();
+        if(pageSize && !isNaN(pageSize)){
+            param['pageSize']=pageSize;
+        }
+
+		getOtherParams(param);
+		gUtils.fGetHtml(url, 'dl', param,'数据加载中...');
+//		gUtils.fGetHtml(url, 'dl', param);
+	}
+	queryList();
+
+	function getOtherParams(param){
+   
+	  	var id_search=jQuery("#id_search").val();
+		if(id_search!=null&&id_search!=''){
+				param.id=id_search;
+			}
+			 
+	  	var userId_search=jQuery("#userId_search").val();
+		if(userId_search!=null&&userId_search!=''){
+				param.userId=userId_search;
+			}
+			 
+	  	var roleType_search=jQuery("#roleType_search").val();
+		if(roleType_search!=null&&roleType_search!=''){
+				param.roleType=roleType_search;
+			}
+			 
+	  	var parentId_search=jQuery("#parentId_search").val();
+		if(parentId_search!=null&&parentId_search!=''){
+				param.parentId=parentId_search;
+			}
+			 
+	  	var userState_search=jQuery("#userState_search").val();
+		if(userState_search!=null&&userState_search!=''){
+				param.userState=userState_search;
+			}
+			 
+	  	var wordTrainingId_search=jQuery("#wordTrainingId_search").val();
+		if(wordTrainingId_search!=null&&wordTrainingId_search!=''){
+				param.wordTrainingId=wordTrainingId_search;
+			}
+	}
+
+void function(j) {
+	jQuery("#add-user").click(function(){
+		gDialog.fCreate({title: '创建 User', url: '/user/add',width:700}).show();
+	});
+}(jQuery);
+
+</script>
