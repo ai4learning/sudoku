@@ -16,22 +16,23 @@
 			
 
 		
-		<label>角色，1</label>
+		<label>角色</label>
 			
 	
 		<select class="forms_select" name="roleType" id="roleType_search">
 			<option value="">全部</option>
 			
-				<option value="默认为学生;2">老师；3：管理员</option>
+				<option value="1">用户</option>
+				<option value="2">管理员</option>
 		</select>
 	
 	
 
 
 		
-		<label>parent_id</label>
+		<label>父ID</label>
 			
-			<input type="text"  name="parentId" id="parentId_search" class="input" placeholder="请输入parent_id">
+			<input type="text"  name="parentId" id="parentId_search" class="input" placeholder="请输入父ID">
 			
 
 		
@@ -42,17 +43,27 @@
 			<option value="">全部</option>
 			
 				<option value="0">初始状态</option>
-				<option value="1">正常；2：欠费；3：不可用</option>
+				<option value="1">正常</option>
+				<option value="2">欠费</option>
+				<option value="3">不可用</option>
 		</select>
 	
 	
 
 
 		
-		<label>word_training_id</label>
+		<label>状态</label>
 			
-			<input type="text"  name="wordTrainingId" id="wordTrainingId_search" class="input" placeholder="请输入word_training_id">
+	
+		<select class="forms_select" name="state" id="state_search">
+			<option value="">全部</option>
 			
+				<option value="1">有效</option>
+				<option value="2">无效</option>
+		</select>
+	
+	
+
 
 		
 		<input type="button" onclick="queryList();" class="btn" value="搜索"  />
@@ -116,9 +127,9 @@
 				param.userState=userState_search;
 			}
 			 
-	  	var wordTrainingId_search=jQuery("#wordTrainingId_search").val();
-		if(wordTrainingId_search!=null&&wordTrainingId_search!=''){
-				param.wordTrainingId=wordTrainingId_search;
+	  	var state_search=jQuery("#state_search").val();
+		if(state_search!=null&&state_search!=''){
+				param.state=state_search;
 			}
 					
 	}

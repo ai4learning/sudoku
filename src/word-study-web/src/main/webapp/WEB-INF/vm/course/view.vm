@@ -1,0 +1,205 @@
+
+
+<div class="modal-body auto-height-body">
+	<form class="form-horizontal"  id="form1">
+	
+		 <div class="control-group">
+			<label class="control-label" for="id">ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="id" id="id" value="$!{course.id}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="type">课程类型</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="type" id="type" disabled>
+				<option value="1" #if($course.type==1) selected  #end>教材</option>
+				<option value="2" #if($course.type==2) selected  #end>错词本</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="moduleCode">课程CODE</label>
+			<div class="controls">
+			
+							<input type="text"  name="moduleCode" id="moduleCode" value="$!{course.moduleCode}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="bookNumber">课程号</label>
+			<div class="controls">
+			
+							<input type="text"  name="bookNumber" id="bookNumber" value="$!{course.bookNumber}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="bookName">课程名</label>
+			<div class="controls">
+			
+							<input type="text"  name="bookName" id="bookName" value="$!{course.bookName}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="bookType">课程类型</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="bookType" id="bookType" disabled>
+				<option value="1" #if($course.bookType==1) selected  #end>教材</option>
+				<option value="2" #if($course.bookType==2) selected  #end>特色</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="orderType">年级类型</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="orderType" id="orderType" disabled>
+				<option value="0" #if($course.orderType==0) selected  #end>无</option>
+				<option value="1" #if($course.orderType==1) selected  #end>小学</option>
+				<option value="2" #if($course.orderType==2) selected  #end>初中</option>
+				<option value="3" #if($course.orderType==3) selected  #end>高中</option>
+				<option value="4" #if($course.orderType==4) selected  #end>大学</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="bookState">课程状态</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="bookState" id="bookState" disabled>
+				<option value="1" #if($course.bookState==1) selected  #end>有效</option>
+				<option value="2" #if($course.bookState==2) selected  #end>无效</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="bookPrice">课程定价</label>
+			<div class="controls">
+			
+							<input type="text"  name="bookPrice" id="bookPrice" value="$!{course.bookPrice}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="introduce">课程简介</label>
+			<div class="controls">
+			
+							<input type="text"  name="introduce" id="introduce" value="$!{course.introduce}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="coverImageUrl">封面</label>
+			<div class="controls">
+			
+							<input type="text"  name="coverImageUrl" id="coverImageUrl" value="$!{course.coverImageUrl}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="totalUnitNbr">总单元数</label>
+			<div class="controls">
+			
+							<input type="text"  name="totalUnitNbr" id="totalUnitNbr" value="$!{course.totalUnitNbr}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="totalWords">单词总数</label>
+			<div class="controls">
+			
+							<input type="text"  name="totalWords" id="totalWords" value="$!{course.totalWords}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="outDate">是否过期</label>
+			<div class="controls">
+			
+							<input type="text"  name="outDate" id="outDate" value="$!{course.outDate}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="unitType">单元类型</label>
+			<div class="controls">
+			
+							<input type="text"  name="unitType" id="unitType" value="$!{course.unitType}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="ext">扩展信息</label>
+			<div class="controls">
+			
+							<input type="text"  name="ext" id="ext" value="$!{course.ext}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="created">创建时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!course.created)" readonly/>
+						
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="modified">修改时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!course.modified)" readonly/>
+						
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+</div>
+

@@ -1,12 +1,11 @@
 <head>
     <meta charset="utf-8">
-    <title>单词赢管理后台</title>
+    <title>九宫格单词集训营-管理后台</title>
     <link href="/images/favicon.ico" type="image/x-icon" rel="shortcut icon">
     <link rel="stylesheet" href="/css/ui.jqgrid.min.css"/>
     <link rel="stylesheet" href="/css/ui-dialog.min.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/bootstrap-modal.css"/>
-    <link rel="stylesheet" href="/css/bootstrap-modalmanager.css"/>
     <link rel="stylesheet" href="/css/select2/3.5.4/select2.css"/>
     <link rel="stylesheet" href="/css/ace.min.css"/>
     <link rel="stylesheet" href="/css/font-awesome.min.css"/>

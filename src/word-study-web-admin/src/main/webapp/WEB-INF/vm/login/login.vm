@@ -2,63 +2,56 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>九宫格单词集训  - 登录</title>
-<link href="/misc/css/2012base.css"  type="text/css"  rel="stylesheet" />
-<link type="text/css" rel="stylesheet" href="/misc/css/oauth_web.css" />
+    #parse( "/WEB-INF/vm/layout/head.vm" )
 </head>
-<body>
-<form id="formlogin" method="post" onsubmit="return false;">
-	<div class="oauth-bline">
-		<div class="oauth-oline"></div>
-	</div>
-	
-	<div class="oauth-dline">
-		<div class="oauth-wrap">
-			<div class="oauth-logo">
-				<a href="http://www.jd.com/"><img src="/misc/images/logo.png" alt="九宫格单词集训" /></a>
-			</div>
-		</div>
-	</div>
-	
-	<div class="oauth-wrap oauth-shadow">
-		<!--
-		<p class="oauth-tit">
-			使用您的京东账户访问<strong><a href="http://$!domain" target="_blank">$!name</a></strong>，一键通行更方便
-		</p>
-	-->
-		
-		<div class="oauth-main" id="loginForm">
-			<div class="oauth-main-top"></div>
-			<div class="oauth-con">
-                <div class="item"><span class="label">账户名：</span>
+<body class="navbar-fixed font-fm">
 
-                    <div class="fl">
-                        <input type="text" id="loginname" name="loginname" tabindex="1" onblur="if(this.value==''){this.value='用户名/邮箱/已验证手机';this.style.color='#999'}" onfocus="if(this.value=='用户名/邮箱/已验证手机'){this.value='';this.style.color='#333'}" value="用户名/邮箱/已验证手机" class="text_blank" autocomplete="off">
-                        <label id="loginname_succeed" class="blank invisible"></label>
-                        <span class="clr"></span>
-                        <label id="loginname_error"></label>
-                    </div>
-                </div>
-                <div class="item">
-                    <span class="label">密码：</span>
+<div class="modal-body auto-height-body">
+    <form class="form-horizontal"  id="form1">
 
-                    <div class="fl">
-                        <input type="password" id="loginpwd" name="loginpwd" class="text" tabindex="2" autocomplete="off">
-                        <label id="loginpwd_succeed" class="blank invisible"></label>
-                        <label><a href="http://safe.jd.com/findPwd/index.action" class="flk13">忘记密码</a></label>
-                        <span class="clr"></span>
-                        <label id="loginpwd_error"></label>
-                    </div>
-                </div>
-                <div class="item">
-                    <span class="label">&nbsp;</span>
-                    <input type="button" class="btn-img btn-entry" id="loginsubmit" value="登录" tabindex="4">
-                </div>
-                <div class="oauth-tips">提示：为保障账户安全，请认准本页URL地址</div>
-			</div>
-			<div class="oauth-main-bottom"></div>
-		</div>
-	</div>
-</form>
+        <div class="control-group">
+            <label class="control-label" for="userName">用户名</label>
+            <div class="controls">
+                <input type="text"  name="userName" id="userName" placeholder="请输入用户名" maxlength="50"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="password">密码</label>
+            <div class="controls">
+                <input type="text"  name="password" id="password" placeholder="请输入密码" maxlength="19"/>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <a href="javascript:;" class="btn btn-primary" id="btn_login">登录</a>
+</div>
+
+
+<script language="javascript">
+    void function(j) {
+        j('#btn_login').click(function(e) {
+            j.ajax({
+                url: '/user/login',
+                type:'post',
+//                dataType: "json",
+                data: j("#form1").serialize(),
+                success: function(data, ts) {
+                    console.log("success");
+                    window.location.href="/index";
+                },
+                beforeSend: function() {
+                    //$('.btn_submit').attr('disabled', true);
+                }
+            });
+        });
+    }(jQuery);
+</script>
+
+
 </body>
 </html>
+
+
+

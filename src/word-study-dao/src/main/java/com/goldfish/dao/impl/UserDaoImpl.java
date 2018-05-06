@@ -27,6 +27,9 @@ public class UserDaoImpl  extends SqlMapClientTemplate implements UserDao {
 	    public static final String UPDATE = "User.update";
 	    public static final String DELETE = "User.delete";
 	 	
+	    public static final String GET_ALL = "User.getAll";
+	    public static final String GET_BY_EXAMPLE = "User.getByExample";
+	   
 	    public static final String GET_BY_ID = "User.getById";
 	    public static final String GET_BY_PAGE = "User.getByPage";
 	    public static final String COUNT = "User.count";
@@ -47,7 +50,7 @@ public class UserDaoImpl  extends SqlMapClientTemplate implements UserDao {
     public void updateUser(User user) {
     	this.update(UPDATE, user);
     }
-    
+
     	
     /**
 	 * 删除
@@ -63,6 +66,19 @@ public class UserDaoImpl  extends SqlMapClientTemplate implements UserDao {
     
 
 	
+    public List<User> getAll() {
+    	return this.queryForList(GET_ALL);
+    }
+
+    public List<User> getListByExample(User user) {
+    	return this.queryForList(GET_BY_EXAMPLE, user);
+    }
+
+    public User getUnique(User user) {
+		List<User> list = this.getListByExample(user);
+    	return list.size() > 0 ? list.get(0) : null;
+    }
+      	
 
       
     /**

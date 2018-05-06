@@ -1,0 +1,166 @@
+
+
+<div class="modal-body auto-height-body">
+	<form class="form-horizontal"  id="form1">
+	
+		 <div class="control-group">
+			<label class="control-label" for="id">ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="id" id="id" value="$!{selfWords.id}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="moduleCode">模块CODE</label>
+			<div class="controls">
+			
+							<input type="text"  name="moduleCode" id="moduleCode" value="$!{selfWords.moduleCode}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="studyId">学生ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="studyId" id="studyId" value="$!{selfWords.studyId}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="type">类型</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="type" id="type" disabled>
+				<option value="1" #if($selfWords.type==1) selected  #end>复习词库</option>
+				<option value="2" #if($selfWords.type==2) selected  #end>错词库</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="studentId">学生ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="studentId" id="studentId" value="$!{selfWords.studentId}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="userCode">用户CODE</label>
+			<div class="controls">
+			
+							<input type="text"  name="userCode" id="userCode" value="$!{selfWords.userCode}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="lessonId">课程ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="lessonId" id="lessonId" value="$!{selfWords.lessonId}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="unitNbr">单元号</label>
+			<div class="controls">
+			
+							<input type="text"  name="unitNbr" id="unitNbr" value="$!{selfWords.unitNbr}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="vocCode">单词CODE</label>
+			<div class="controls">
+			
+							<input type="text"  name="vocCode" id="vocCode" value="$!{selfWords.vocCode}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="vocIndex">单词索引</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="vocIndex" id="vocIndex" disabled>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="wordId">单词ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="wordId" id="wordId" value="$!{selfWords.wordId}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="spelling">单词拼写</label>
+			<div class="controls">
+			
+							<input type="text"  name="spelling" id="spelling" value="$!{selfWords.spelling}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="state">状态</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="state" id="state" disabled>
+				<option value="1" #if($selfWords.state==1) selected  #end>有效</option>
+				<option value="2" #if($selfWords.state==2) selected  #end>无效</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="created">创建时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!selfWords.created)" readonly/>
+						
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="modified">修改时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!selfWords.modified)" readonly/>
+						
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+</div>
+

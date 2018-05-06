@@ -1,9 +1,9 @@
 
 	<!--struts config start-->
-	<!-- User -->
-	<package name="-user" namespace="//user" extends="jshow-admin">
-		<action name="*" method="{1}" class="com.goldfish.web.action.UserAction">
-			<result>${path}//user/{1}.vm</result>
+	<!-- WordStudyStatistic -->
+	<package name="-wordStudyStatistic" namespace="//wordStudyStatistic" extends="jshow-admin">
+		<action name="*" method="{1}" class="com.goldfish.web.action.WordStudyStatisticAction">
+			<result>${path}//wordStudyStatistic/{1}.vm</result>
 		</action>
 	</package>
 	<!--struts config end-->
@@ -11,12 +11,12 @@
 
 	<!-- mybatis 配置开始-->
 	
-	<typeAlias type="com.goldfish.domain.User" alias="User"/>
+	<typeAlias type="com.goldfish.domain.WordStudyStatistic" alias="WordStudyStatistic"/>
 
-	<mapper resource="sqlmap/User.xml" />
+	<mapper resource="sqlmap/WordStudyStatistic.xml" />
 	
-	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">  
-	   <property name="mapperInterface" value="com.goldfish.dao.UserDao"/>  
+	<bean id="wordStudyStatisticDao" class="org.mybatis.spring.mapper.MapperFactoryBean">  
+	   <property name="mapperInterface" value="com.goldfish.dao.WordStudyStatisticDao"/>  
 	  <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
 	</bean>
 	
@@ -26,9 +26,9 @@
 
 	<!-- ibatis 配置开始-->
 
-	<sqlMap resource="sqlmap//User.xml" />
+	<sqlMap resource="sqlmap//WordStudyStatistic.xml" />
 	
-	<bean id="userDao" class="com.goldfish.dao.impl.UserDaoImpl">
+	<bean id="wordStudyStatisticDao" class="com.goldfish.dao.impl.WordStudyStatisticDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<!-- ibatis 配置end-->
@@ -36,9 +36,9 @@
 
 	
 	<!-- 可选配置项 start -->
-	<bean id="userManager" class="com.goldfish.dao.impl.UserManagerImpl">
+	<bean id="wordStudyStatisticManager" class="com.goldfish.dao.impl.WordStudyStatisticManagerImpl">
 	</bean>
 	
-	<bean id="userService" class="com.goldfish.dao.impl.UserServiceImpl">
+	<bean id="wordStudyStatisticService" class="com.goldfish.dao.impl.WordStudyStatisticServiceImpl">
 	</bean>
 	<!-- 可选配置项 end -->

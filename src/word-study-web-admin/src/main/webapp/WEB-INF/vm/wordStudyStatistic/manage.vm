@@ -1,0 +1,96 @@
+
+
+<div class="manage-content">
+<form class="form-inline">
+
+
+		<label>ID</label>
+			
+			<input type="text"  name="id" id="id_search" class="input" placeholder="请输入ID">
+			
+
+		
+		<label>学生ID</label>
+			
+			<input type="text"  name="studentId" id="studentId_search" class="input" placeholder="请输入学生ID">
+			
+
+		
+		<label>状态</label>
+			
+	
+		<select class="forms_select" name="state" id="state_search">
+			<option value="">全部</option>
+			
+				<option value="1">有效</option>
+				<option value="2">无效</option>
+		</select>
+	
+	
+
+
+		
+		<input type="button" onclick="queryList();" class="btn" value="搜索"  />
+
+	</form>
+		
+<br/>
+		 <div class="page_operate">
+			 <button class="btn  btn-primary" type="button" id="add-wordStudyStatistic">创建 WordStudyStatistic</button>
+		</div>
+
+
+	<div id="dl"></div>
+</div>
+<script language="javascript">
+	function queryList(pageNo) {	
+		if (!pageNo) {
+			pageNo = 1;
+		}
+		var page = pageNo;
+		var url = '/wordStudyStatistic/list.action';
+		var param = {
+			page: page
+		};
+		
+		var pageSize=jQuery("#JPageSize_queryList").val();
+        if(pageSize && !isNaN(pageSize)){
+            param['pageSize']=pageSize;
+        }
+
+		getOtherParams(param);
+		gUtils.fGetHtml(url, 'dl', param,'数据加载中...');
+	}
+	queryList();
+	
+
+	function getOtherParams(param){
+   
+	  	var id_search=jQuery("#id_search").val();
+		if(id_search!=null&&id_search!=''){
+				param.id=id_search;
+			}
+			 
+	  	var studentId_search=jQuery("#studentId_search").val();
+		if(studentId_search!=null&&studentId_search!=''){
+				param.studentId=studentId_search;
+			}
+			 
+	  	var state_search=jQuery("#state_search").val();
+		if(state_search!=null&&state_search!=''){
+				param.state=state_search;
+			}
+					
+	}
+
+
+
+
+void function(j) {
+	jQuery("#add-wordStudyStatistic").click(function(){
+		gDialog.fCreate({title: '创建 WordStudyStatistic', url: '/wordStudyStatistic/add.action',width:700}).show();
+	});
+	
+}(jQuery);
+
+</script>

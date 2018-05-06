@@ -1,0 +1,112 @@
+
+<div class="row-fluid">
+	<div class="span12">
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+ 			<th><span>ID</span></th>
+			<th><span>模块CODE</span></th>
+			<th><span>学生ID</span></th>
+			<th><span>类型</span></th>
+			<th><span>学生ID</span></th>
+			<th><span>用户CODE</span></th>
+			<th><span>课程ID</span></th>
+			<th><span>单元号</span></th>
+			<th><span>单词CODE</span></th>
+			<th><span>单词索引</span></th>
+			<th><span>单词ID</span></th>
+			<th><span>单词拼写</span></th>
+			<th><span>状态</span></th>
+			<th><span>修改时间</span></th>
+
+				<th class="operate">操作</th>
+				</tr>
+			</thead>
+
+
+			<tbody>
+	#if($list && $list.size()!=0)
+		    #foreach($item in $list)
+		   <tr>
+				 			<td>$!item.id</td>
+			<td>$!item.moduleCode</td>
+			<td>$!item.studyId</td>
+			<td>
+	
+			
+				#if($item.type==1)<span class="">复习词库</span> #end	
+			
+				#if($item.type==2)<span class="">错词库</span> #end	
+			
+	
+	</td>
+			<td>$!item.studentId</td>
+			<td>$!item.userCode</td>
+			<td>$!item.lessonId</td>
+			<td>$!item.unitNbr</td>
+			<td>$!item.vocCode</td>
+			<td>
+	
+			
+	
+	</td>
+			<td>$!item.wordId</td>
+			<td>$!item.spelling</td>
+			<td>
+	
+			
+				#if($item.state==1)<span class="">有效</span> #end	
+			
+				#if($item.state==2)<span class="">无效</span> #end	
+			
+	
+	</td>
+			<td>$!dateFormatUtils.format($!item.modified)</td>
+
+				<td class="operate">
+					<button class="btn btn-primary JUpdate-selfWords" type="button" itemid="$!item.id">编辑</button>
+					<button class="btn btn-info JView-selfWords" type="button" itemid="$!item.id">查看</button>
+					<button class="btn btn-warning JDelete-selfWords" type="button" itemid="$!item.id">删除</button>
+				</td>
+		  </tr>
+			#end
+		#else
+		<tr>
+					<td colspan="16" class="message_default">没有记录！</td>
+		</tr>
+		#end
+
+
+			</tbody>
+
+
+		</table>
+
+		#if($pageQuery)
+			#showPageQuery($pageQuery,'queryList','input')
+		#end
+
+	</div>
+</div>
+
+
+
+<script language="javascript">
+void function(j) {	
+	j('.JDelete-selfWords').click(function() {
+		var id = j(this).attr('itemid');
+		var config={title:'删除SelfWords',info:'您确定要删除SelfWords吗？',url: '/selfWords/doDelete',param:'id='+id};
+		gUtils.fConfirmAndRefreshList(config);
+	});
+	
+	j('.JUpdate-selfWords').click(function() {
+		var id = j(this).attr('itemid');
+		gDialog.fCreate({ title: '修改SelfWords', url: '/selfWords/update?id='+id,width:700}).show();
+	});
+
+	j('.JView-selfWords').click(function() {
+		var id = j(this).attr('itemid');
+		gDialog.fCreate({ title: '查看SelfWords', url: '/selfWords/view?id='+id,width:700}).show();
+	});
+}(jQuery);
+</script>

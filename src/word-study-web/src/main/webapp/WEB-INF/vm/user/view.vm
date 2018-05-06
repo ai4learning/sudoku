@@ -49,12 +49,13 @@
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="roleType">角色，1</label>
+			<label class="control-label" for="roleType">角色</label>
 			<div class="controls">
 			
 	
 		<select class="forms_select" name="roleType" id="roleType" disabled>
-				<option value="默认为学生;2" #if($user.roleType==默认为学生;2) selected  #end>老师；3：管理员</option>
+				<option value="1" #if($user.roleType==1) selected  #end>用户</option>
+				<option value="2" #if($user.roleType==2) selected  #end>管理员</option>
 
 		</select>
 	
@@ -67,13 +68,20 @@
 			<label class="control-label" for="authorityLevel">权限等级</label>
 			<div class="controls">
 			
-							<input type="text"  name="authorityLevel" id="authorityLevel" value="$!{user.authorityLevel}" readonly/>
-				
+	
+		<select class="forms_select" name="authorityLevel" id="authorityLevel" disabled>
+				<option value="1" #if($user.authorityLevel==1) selected  #end>默认</option>
+				<option value="2" #if($user.authorityLevel==2) selected  #end>其他</option>
+
+		</select>
+	
+	
+
 			</div>
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="parentId">parent_id</label>
+			<label class="control-label" for="parentId">父ID</label>
 			<div class="controls">
 			
 							<input type="text"  name="parentId" id="parentId" value="$!{user.parentId}" readonly/>
@@ -97,7 +105,9 @@
 	
 		<select class="forms_select" name="userState" id="userState" disabled>
 				<option value="0" #if($user.userState==0) selected  #end>初始状态</option>
-				<option value="1" #if($user.userState==1) selected  #end>正常；2：欠费；3：不可用</option>
+				<option value="1" #if($user.userState==1) selected  #end>正常</option>
+				<option value="2" #if($user.userState==2) selected  #end>欠费</option>
+				<option value="3" #if($user.userState==3) selected  #end>不可用</option>
 
 		</select>
 	
@@ -116,25 +126,7 @@
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="wordTrainingId">word_training_id</label>
-			<div class="controls">
-			
-							<input type="text"  name="wordTrainingId" id="wordTrainingId" value="$!{user.wordTrainingId}" readonly/>
-				
-			</div>
-		</div>
-		
-		 <div class="control-group">
-			<label class="control-label" for="wordTrainingCode">word_training_code</label>
-			<div class="controls">
-			
-							<input type="text"  name="wordTrainingCode" id="wordTrainingCode" value="$!{user.wordTrainingCode}" readonly/>
-				
-			</div>
-		</div>
-		
-		 <div class="control-group">
-			<label class="control-label" for="currentClass">current_class</label>
+			<label class="control-label" for="currentClass">当前班级</label>
 			<div class="controls">
 			
 							<input type="text"  name="currentClass" id="currentClass" value="$!{user.currentClass}" readonly/>
@@ -143,7 +135,7 @@
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="currentTeacher">current_teacher</label>
+			<label class="control-label" for="currentTeacher">当前老师</label>
 			<div class="controls">
 			
 							<input type="text"  name="currentTeacher" id="currentTeacher" value="$!{user.currentTeacher}" readonly/>
@@ -152,16 +144,29 @@
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="level">level</label>
+			<label class="control-label" for="level">等级</label>
 			<div class="controls">
 			
-							<input type="text"  name="level" id="level" value="$!{user.level}" readonly/>
-				
+	
+		<select class="forms_select" name="level" id="level" disabled>
+				<option value="1" #if($user.level==1) selected  #end>庶人</option>
+				<option value="2" #if($user.level==2) selected  #end>童生</option>
+				<option value="3" #if($user.level==3) selected  #end>秀才</option>
+				<option value="4" #if($user.level==4) selected  #end>举人</option>
+				<option value="5" #if($user.level==5) selected  #end>进士</option>
+				<option value="6" #if($user.level==6) selected  #end>探花</option>
+				<option value="7" #if($user.level==7) selected  #end>榜眼</option>
+				<option value="8" #if($user.level==8) selected  #end>状元</option>
+
+		</select>
+	
+	
+
 			</div>
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="cashPoint">cash_point</label>
+			<label class="control-label" for="cashPoint">积分</label>
 			<div class="controls">
 			
 							<input type="text"  name="cashPoint" id="cashPoint" value="$!{user.cashPoint}" readonly/>
@@ -170,7 +175,23 @@
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="created">created</label>
+			<label class="control-label" for="state">状态</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="state" id="state" disabled>
+				<option value="1" #if($user.state==1) selected  #end>有效</option>
+				<option value="2" #if($user.state==2) selected  #end>无效</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="created">创建时间</label>
 			<div class="controls">
 			
 							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!user.created)" readonly/>
@@ -179,7 +200,7 @@
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="modified">modified</label>
+			<label class="control-label" for="modified">修改时间</label>
 			<div class="controls">
 			
 							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!user.modified)" readonly/>

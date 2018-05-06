@@ -1,0 +1,192 @@
+
+
+<div class="modal-body auto-height-body">
+	<form class="form-horizontal"  id="form1">
+	
+		 <div class="control-group">
+			<label class="control-label" for="id">ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="id" id="id" value="$!{selfWordsStudy.id}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="studentId">学生ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="studentId" id="studentId" value="$!{selfWordsStudy.studentId}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="studentCode">学生CODE</label>
+			<div class="controls">
+			
+							<input type="text"  name="studentCode" id="studentCode" value="$!{selfWordsStudy.studentCode}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="lessonId">课程ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="lessonId" id="lessonId" value="$!{selfWordsStudy.lessonId}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="unitNbr">课程号</label>
+			<div class="controls">
+			
+							<input type="text"  name="unitNbr" id="unitNbr" value="$!{selfWordsStudy.unitNbr}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="type">类型</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="type" id="type" disabled>
+				<option value="1" #if($selfWordsStudy.type==1) selected  #end>复习学习</option>
+				<option value="2" #if($selfWordsStudy.type==2) selected  #end>错词学习</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="currentPhase">当前学习阶段</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="currentPhase" id="currentPhase" disabled>
+				<option value="1" #if($selfWordsStudy.currentPhase==1) selected  #end>分批学习</option>
+				<option value="2" #if($selfWordsStudy.currentPhase==2) selected  #end>整体回忆</option>
+				<option value="3" #if($selfWordsStudy.currentPhase==3) selected  #end>单元测试</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="totalReadingTime">总读时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="totalReadingTime" id="totalReadingTime" value="$!{selfWordsStudy.totalReadingTime}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="totalWritingTime">总写时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="totalWritingTime" id="totalWritingTime" value="$!{selfWordsStudy.totalWritingTime}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="totalNumber">总学习单词数</label>
+			<div class="controls">
+			
+							<input type="text"  name="totalNumber" id="totalNumber" value="$!{selfWordsStudy.totalNumber}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="isFinished">是否学习完成</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="isFinished" id="isFinished" disabled>
+				<option value="1" #if($selfWordsStudy.isFinished==1) selected  #end>未完成</option>
+				<option value="2" #if($selfWordsStudy.isFinished==2) selected  #end>已完成</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="isTested">是否测试完成</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="isTested" id="isTested" disabled>
+				<option value="1" #if($selfWordsStudy.isTested==1) selected  #end>未完成</option>
+				<option value="2" #if($selfWordsStudy.isTested==2) selected  #end>已完成</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="studyPos">单词学习位置</label>
+			<div class="controls">
+			
+							<input type="text"  name="studyPos" id="studyPos" value="$!{selfWordsStudy.studyPos}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="state">状态</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="state" id="state" disabled>
+				<option value="1" #if($selfWordsStudy.state==1) selected  #end>有效</option>
+				<option value="2" #if($selfWordsStudy.state==2) selected  #end>无效</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="created">创建时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!selfWordsStudy.created)" readonly/>
+						
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="modified">修改时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!selfWordsStudy.modified)" readonly/>
+						
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+</div>
+

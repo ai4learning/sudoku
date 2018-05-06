@@ -1,5 +1,7 @@
 package com.goldfish.service.impl;
 
+
+
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
@@ -24,7 +26,7 @@ import com.goldfish.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-
+	
 	@Resource(name="userManager")
 	private UserManager userManager;
     
@@ -87,6 +89,46 @@ public class UserServiceImpl implements UserService {
 	
 
         
+	
+	public CommonResult<List<User>> getAll() {
+		CommonResult<List<User>> result = new CommonResult<List<User>>();
+		try {
+			List<User> list = userManager.getAll();
+			result.addDefaultModel("list", list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("取得所有 User失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+	
+	public CommonResult<List<User>> getListByExample(User user) {
+		CommonResult<List<User>> result = new CommonResult<List<User>>();
+		try {
+			List<User> list = userManager.getListByExample(user);
+			result.addDefaultModel("list", list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("取得 User失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+
+	public CommonResult<User> getUnique(User user) {
+		CommonResult<User> result = new CommonResult<User>();
+		try {
+			result.addDefaultModel(userManager.getUnique(user));
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("根据example获取唯一 User失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+
+	
 
 
 

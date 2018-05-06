@@ -9,19 +9,18 @@
 			<th><span>密码</span></th>
 			<th><span>用户code</span></th>
 			<th><span>别名</span></th>
-			<th><span>角色，1</span></th>
+			<th><span>角色</span></th>
 			<th><span>权限等级</span></th>
-			<th><span>parent_id</span></th>
+			<th><span>父ID</span></th>
 			<th><span>激活码</span></th>
 			<th><span>用户状态</span></th>
 			<th><span>登录次数</span></th>
-			<th><span>word_training_id</span></th>
-			<th><span>word_training_code</span></th>
-			<th><span>current_class</span></th>
-			<th><span>current_teacher</span></th>
-			<th><span>level</span></th>
-			<th><span>cash_point</span></th>
-			<th><span>modified</span></th>
+			<th><span>当前班级</span></th>
+			<th><span>当前老师</span></th>
+			<th><span>等级</span></th>
+			<th><span>积分</span></th>
+			<th><span>状态</span></th>
+			<th><span>修改时间</span></th>
 
 				<th class="operate">操作</th>
 				</tr>
@@ -40,11 +39,21 @@
 			<td>
 	
 			
-				#if($item.roleType==默认为学生;2)<span class="">老师；3：管理员</span> #end	
+				#if($item.roleType==1)<span class="">用户</span> #end	
+			
+				#if($item.roleType==2)<span class="">管理员</span> #end	
 			
 	
 	</td>
-			<td>$!item.authorityLevel</td>
+			<td>
+	
+			
+				#if($item.authorityLevel==1)<span class="">默认</span> #end	
+			
+				#if($item.authorityLevel==2)<span class="">其他</span> #end	
+			
+	
+	</td>
 			<td>$!item.parentId</td>
 			<td>$!item.activateCode</td>
 			<td>
@@ -52,17 +61,48 @@
 			
 				#if($item.userState==0)<span class="">初始状态</span> #end	
 			
-				#if($item.userState==1)<span class="">正常；2：欠费；3：不可用</span> #end	
+				#if($item.userState==1)<span class="">正常</span> #end	
+			
+				#if($item.userState==2)<span class="">欠费</span> #end	
+			
+				#if($item.userState==3)<span class="">不可用</span> #end	
 			
 	
 	</td>
 			<td>$!item.totalLoginTimes</td>
-			<td>$!item.wordTrainingId</td>
-			<td>$!item.wordTrainingCode</td>
 			<td>$!item.currentClass</td>
 			<td>$!item.currentTeacher</td>
-			<td>$!item.level</td>
+			<td>
+	
+			
+				#if($item.level==1)<span class="">庶人</span> #end	
+			
+				#if($item.level==2)<span class="">童生</span> #end	
+			
+				#if($item.level==3)<span class="">秀才</span> #end	
+			
+				#if($item.level==4)<span class="">举人</span> #end	
+			
+				#if($item.level==5)<span class="">进士</span> #end	
+			
+				#if($item.level==6)<span class="">探花</span> #end	
+			
+				#if($item.level==7)<span class="">榜眼</span> #end	
+			
+				#if($item.level==8)<span class="">状元</span> #end	
+			
+	
+	</td>
 			<td>$!item.cashPoint</td>
+			<td>
+	
+			
+				#if($item.state==1)<span class="">有效</span> #end	
+			
+				#if($item.state==2)<span class="">无效</span> #end	
+			
+	
+	</td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -74,7 +114,7 @@
 			#end
 		#else
 		<tr>
-					<td colspan="20" class="message_default">没有记录！</td>
+					<td colspan="19" class="message_default">没有记录！</td>
 		</tr>
 		#end
 

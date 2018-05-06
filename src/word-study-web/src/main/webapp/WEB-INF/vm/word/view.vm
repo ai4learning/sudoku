@@ -1,0 +1,109 @@
+
+
+<div class="modal-body auto-height-body">
+	<form class="form-horizontal"  id="form1">
+	
+		 <div class="control-group">
+			<label class="control-label" for="id">ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="id" id="id" value="$!{word.id}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="spelling">单词拼写</label>
+			<div class="controls">
+			
+							<input type="text"  name="spelling" id="spelling" value="$!{word.spelling}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="meaning">释义</label>
+			<div class="controls">
+			
+							<input type="text"  name="meaning" id="meaning" value="$!{word.meaning}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="soundMarkUs">美音音标</label>
+			<div class="controls">
+			
+							<input type="text"  name="soundMarkUs" id="soundMarkUs" value="$!{word.soundMarkUs}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="soundMarkUk">国际音标</label>
+			<div class="controls">
+			
+							<input type="text"  name="soundMarkUk" id="soundMarkUk" value="$!{word.soundMarkUk}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="wordType">词性</label>
+			<div class="controls">
+			
+							<input type="text"  name="wordType" id="wordType" value="$!{word.wordType}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="mediaUri">读音</label>
+			<div class="controls">
+			
+							<input type="text"  name="mediaUri" id="mediaUri" value="$!{word.mediaUri}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="state">状态</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="state" id="state" disabled>
+				<option value="1" #if($word.state==1) selected  #end>有效</option>
+				<option value="2" #if($word.state==2) selected  #end>无效</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="created">创建时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!word.created)" readonly/>
+						
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="modified">修改时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!word.modified)" readonly/>
+						
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+</div>
+

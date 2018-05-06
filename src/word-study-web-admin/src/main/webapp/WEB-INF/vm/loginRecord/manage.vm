@@ -1,0 +1,121 @@
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home home-icon"></i>
+            <a href="/index">首页</a>
+        </li>
+        <li class="active">账户管理</li>
+        <li class="active">登录管理</li>
+    </ul>
+</div>
+
+<div class="page-content">
+    <div class="manage-content">
+        <form class="form-inline">
+
+
+            <label>ID</label>
+
+            <input type="text"  name="id" id="id_search" class="input" placeholder="请输入ID">
+
+
+
+            <label>训练ID</label>
+
+            <input type="text"  name="wordTrainingId" id="wordTrainingId_search" class="input" placeholder="请输入训练ID">
+
+
+
+            <label>用户ID</label>
+
+            <input type="text"  name="userId" id="userId_search" class="input" placeholder="请输入用户ID">
+
+
+
+            <label>状态</label>
+
+
+            <select class="forms_select" name="state" id="state_search">
+                <option value="">全部</option>
+
+                <option value="1">有效</option>
+                <option value="2">无效</option>
+            </select>
+
+
+
+
+
+            <input type="button" onclick="queryList();" class="btn" value="搜索"  />
+
+        </form>
+
+        <br/>
+        <div class="page_operate">
+            <button class="btn  btn-primary" type="button" id="add-loginRecord">创建 LoginRecord</button>
+        </div>
+
+
+        <div id="dl"></div>
+    </div>
+</div>
+
+
+
+<script language="javascript">
+	function queryList(pageNo) {	
+		if (!pageNo) {
+			pageNo = 1;
+		}
+		var page = pageNo;
+		var url = '/loginRecord/list.action';
+		var param = {
+			page: page
+		};
+		
+		var pageSize=jQuery("#JPageSize_queryList").val();
+        if(pageSize && !isNaN(pageSize)){
+            param['pageSize']=pageSize;
+        }
+
+		getOtherParams(param);
+		gUtils.fGetHtml(url, 'dl', param,'数据加载中...');
+	}
+	queryList();
+	
+
+	function getOtherParams(param){
+   
+	  	var id_search=jQuery("#id_search").val();
+		if(id_search!=null&&id_search!=''){
+				param.id=id_search;
+			}
+			 
+	  	var wordTrainingId_search=jQuery("#wordTrainingId_search").val();
+		if(wordTrainingId_search!=null&&wordTrainingId_search!=''){
+				param.wordTrainingId=wordTrainingId_search;
+			}
+			 
+	  	var userId_search=jQuery("#userId_search").val();
+		if(userId_search!=null&&userId_search!=''){
+				param.userId=userId_search;
+			}
+			 
+	  	var state_search=jQuery("#state_search").val();
+		if(state_search!=null&&state_search!=''){
+				param.state=state_search;
+			}
+					
+	}
+
+
+
+
+void function(j) {
+	jQuery("#add-loginRecord").click(function(){
+		gDialog.fCreate({title: '创建 LoginRecord', url: '/loginRecord/add.action',width:700}).show();
+	});
+	
+}(jQuery);
+
+</script>

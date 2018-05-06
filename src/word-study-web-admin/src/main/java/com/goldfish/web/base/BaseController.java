@@ -51,7 +51,12 @@ public class BaseController {
 
 
     public int getPageSize(HttpServletRequest request, int min, int max) {
-        int pageSize = Integer.parseInt(request.getParameter("pageSize"));
+        int pageSize = 10;
+        try {
+            pageSize =  Integer.parseInt(request.getParameter("pageSize"));
+        } catch (NumberFormatException e) {
+
+        }
         return pageSize;
     }
 }

@@ -1,0 +1,151 @@
+
+    
+<div class="modal-body auto-height-body">
+	<form class="form-horizontal"  id="form1">
+	
+		 <div class="control-group">
+			<label class="control-label" for="id">ID</label>
+			<div class="controls">
+			
+				<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{paper.id}"readonly/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="lessonId">课程ID</label>
+			<div class="controls">
+			
+				<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10" value="$!{paper.lessonId}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="unitNbr">单元号</label>
+			<div class="controls">
+			
+				<input type="text"  name="unitNbr" id="unitNbr" placeholder="请输入单元号" maxlength="3" value="$!{paper.unitNbr}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="type">试卷类型</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="type" id="type">
+				<option value="1" #if($paper.type==1) selected #end>单元测试</option>
+				<option value="2" #if($paper.type==2) selected #end>自主测试</option>
+
+		</select>
+		
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="testArea">测试范围</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="testArea" id="testArea">
+				<option value="0" #if($paper.testArea==0) selected #end>单元内</option>
+				<option value="1" #if($paper.testArea==1) selected #end>课程内</option>
+
+		</select>
+		
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="questionNbr">题数</label>
+			<div class="controls">
+			
+				<input type="text"  name="questionNbr" id="questionNbr" placeholder="请输入题数" maxlength="3" value="$!{paper.questionNbr}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="questonType">题目类型</label>
+			<div class="controls">
+			
+				<input type="text"  name="questonType" id="questonType" placeholder="请输入题目类型" maxlength="20" value="$!{paper.questonType}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="standardDuration">考试时长</label>
+			<div class="controls">
+			
+				<input type="text"  name="standardDuration" id="standardDuration" placeholder="请输入考试时长" maxlength="19" value="$!{paper.standardDuration}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="questions">题目</label>
+			<div class="controls">
+			
+				<input type="text"  name="questions" id="questions" placeholder="请输入题目" maxlength="255" value="$!{paper.questions}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="state">状态</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="state" id="state">
+				<option value="1" #if($paper.state==1) selected #end>有效</option>
+				<option value="2" #if($paper.state==2) selected #end>无效</option>
+
+		</select>
+		
+	
+
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存修改</a>
+	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+</div>
+
+
+
+<script language="javascript">
+void function(j) {
+	var set = {
+		 
+		 id:  {must: true, maxlength:19, ftip:'ID,最多19个字符'},
+		 lessonId:  {must: true, maxlength:10, ftip:'课程ID,最多10个字符'},
+		 unitNbr:  {must: true, maxlength:3, ftip:'单元号,最多3个字符'},
+		 type:  {must: true, maxlength:3, ftip:'试卷类型,最多3个字符'},
+		 testArea:  {must: true, maxlength:3, ftip:'测试范围,最多3个字符'},
+		 questionNbr:  {must: true, maxlength:3, ftip:'题数,最多3个字符'},
+		 questonType:  {must: true, maxlength:20, ftip:'题目类型,最多20个字符'},
+		 standardDuration:  {must: true, maxlength:19, ftip:'考试时长,最多19个字符'},
+		 questions:  {must: true, maxlength:255, ftip:'题目,最多255个字符'},
+		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+	};
+	
+
+	j('#btn_submit').click(function(e) {
+		gUtils.fSubmitForm(
+			j("#form1").serialize(), 
+			set, 
+			'/paper/doUpdate.action', 
+			function() {
+				gDialog.fClose();
+				queryList(1);
+			}
+		);
+	});
+	
+	//form.friend.init(set);
+}(jQuery);
+</script>

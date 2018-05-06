@@ -1,0 +1,141 @@
+
+
+<div class="modal-body auto-height-body">
+	<form class="form-horizontal"  id="form1">
+	
+		 <div class="control-group">
+			<label class="control-label" for="id">ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="id" id="id" value="$!{paper.id}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="lessonId">课程ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="lessonId" id="lessonId" value="$!{paper.lessonId}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="unitNbr">单元号</label>
+			<div class="controls">
+			
+							<input type="text"  name="unitNbr" id="unitNbr" value="$!{paper.unitNbr}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="type">试卷类型</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="type" id="type" disabled>
+				<option value="1" #if($paper.type==1) selected  #end>单元测试</option>
+				<option value="2" #if($paper.type==2) selected  #end>自主测试</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="testArea">测试范围</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="testArea" id="testArea" disabled>
+				<option value="0" #if($paper.testArea==0) selected  #end>单元内</option>
+				<option value="1" #if($paper.testArea==1) selected  #end>课程内</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="questionNbr">题数</label>
+			<div class="controls">
+			
+							<input type="text"  name="questionNbr" id="questionNbr" value="$!{paper.questionNbr}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="questonType">题目类型</label>
+			<div class="controls">
+			
+							<input type="text"  name="questonType" id="questonType" value="$!{paper.questonType}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="standardDuration">考试时长</label>
+			<div class="controls">
+			
+							<input type="text"  name="standardDuration" id="standardDuration" value="$!{paper.standardDuration}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="questions">题目</label>
+			<div class="controls">
+			
+							<input type="text"  name="questions" id="questions" value="$!{paper.questions}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="state">状态</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="state" id="state" disabled>
+				<option value="1" #if($paper.state==1) selected  #end>有效</option>
+				<option value="2" #if($paper.state==2) selected  #end>无效</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="created">创建时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!paper.created)" readonly/>
+						
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="modified">修改时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!paper.modified)" readonly/>
+						
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+</div>
+

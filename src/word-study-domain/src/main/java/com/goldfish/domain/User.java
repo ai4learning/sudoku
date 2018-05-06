@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public class User  implements Serializable {
 	
-  private static final long serialVersionUID = -8276677199789020278L;
+  private static final long serialVersionUID = 8364227660054241166L;
 	
 	/**  id  */
 	private Long id; 
@@ -21,11 +21,11 @@ public class User  implements Serializable {
 	private String userCode; 
 	/**  别名  */
 	private String nikeName; 
-	/**  角色，1  */
+	/**  角色  */
 	private Integer roleType; 
 	/**  权限等级  */
 	private Integer authorityLevel; 
-	/**  parent_id  */
+	/**  父ID  */
 	private Long parentId; 
 	/**  激活码  */
 	private String activateCode; 
@@ -33,21 +33,19 @@ public class User  implements Serializable {
 	private Integer userState; 
 	/**  登录次数  */
 	private Long totalLoginTimes; 
-	/**  word_training_id  */
-	private String wordTrainingId; 
-	/**  word_training_code  */
-	private String wordTrainingCode; 
-	/**  current_class  */
+	/**  当前班级  */
 	private Long currentClass; 
-	/**  current_teacher  */
+	/**  当前老师  */
 	private Long currentTeacher; 
-	/**  level  */
+	/**  等级  */
 	private Integer level; 
-	/**  cash_point  */
+	/**  积分  */
 	private Long cashPoint; 
-	/**  created  */
+	/**  状态  */
+	private Integer state; 
+	/**  创建时间  */
 	private java.util.Date created; 
-	/**  modified  */
+	/**  修改时间  */
 	private java.util.Date modified; 
 
   	public void setId(Long id) {
@@ -160,26 +158,6 @@ public class User  implements Serializable {
 	
 	  	
 
-  	public void setWordTrainingId(String wordTrainingId) {
-  	  this.wordTrainingId=wordTrainingId;
-  	}
-  
-  	public String getWordTrainingId() {
-  	  return this.wordTrainingId;
-  	}
-	
-	  	
-
-  	public void setWordTrainingCode(String wordTrainingCode) {
-  	  this.wordTrainingCode=wordTrainingCode;
-  	}
-  
-  	public String getWordTrainingCode() {
-  	  return this.wordTrainingCode;
-  	}
-	
-	  	
-
   	public void setCurrentClass(Long currentClass) {
   	  this.currentClass=currentClass;
   	}
@@ -216,6 +194,16 @@ public class User  implements Serializable {
   
   	public Long getCashPoint() {
   	  return this.cashPoint;
+  	}
+	
+	  	
+
+  	public void setState(Integer state) {
+  	  this.state=state;
+  	}
+  
+  	public Integer getState() {
+  	  return this.state;
   	}
 	
 	  	

@@ -1,0 +1,168 @@
+package com.goldfish.service.impl;
+
+
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import com.goldfish.common.PageQuery;
+import com.goldfish.common.CommonResult;
+import com.goldfish.domain.ActivateCode;
+import com.goldfish.manager.ActivateCodeManager;
+import com.goldfish.service.ActivateCodeService;
+
+
+/**
+ * @author hellosscat
+ * @since 2018-5-2
+ *<p>  ActivateCodeservice实现</p>
+ *
+ */
+@Service("activateCodeService")
+public class ActivateCodeServiceImpl implements ActivateCodeService {
+
+	private static final Logger logger = LoggerFactory.getLogger(ActivateCodeServiceImpl.class);
+	
+	@Resource(name="activateCodeManager")
+	private ActivateCodeManager activateCodeManager;
+    
+    public CommonResult<ActivateCode> addActivateCode(ActivateCode activateCode) {
+		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
+		try {
+			
+				activateCode.setCreated(new Date());
+			 
+			result.addDefaultModel(activateCodeManager.addActivateCode(activateCode));
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("添加 ActivateCode失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+	
+	public CommonResult<ActivateCode> updateActivateCode(ActivateCode activateCode) {
+		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
+		try {
+			
+				activateCode.setModified(new Date());
+			 
+			activateCodeManager.updateActivateCode(activateCode);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("更新 ActivateCode失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+	
+   
+
+	public CommonResult<ActivateCode> deleteActivateCode(Long id) {
+		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
+		try {
+			activateCodeManager.deleteActivateCode(id);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("删除 ActivateCode失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+    }
+
+
+    	public CommonResult<ActivateCode> getActivateCodeById(Long id) {
+		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
+		try {
+			result.addDefaultModel("activateCode", activateCodeManager.getActivateCodeById(id));
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("根据主键获取 ActivateCode失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+	
+
+        
+	
+	public CommonResult<List<ActivateCode>> getAll() {
+		CommonResult<List<ActivateCode>> result = new CommonResult<List<ActivateCode>>();
+		try {
+			List<ActivateCode> list = activateCodeManager.getAll();
+			result.addDefaultModel("list", list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("取得所有 ActivateCode失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+	
+	public CommonResult<List<ActivateCode>> getListByExample(ActivateCode activateCode) {
+		CommonResult<List<ActivateCode>> result = new CommonResult<List<ActivateCode>>();
+		try {
+			List<ActivateCode> list = activateCodeManager.getListByExample(activateCode);
+			result.addDefaultModel("list", list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("取得 ActivateCode失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+
+	public CommonResult<ActivateCode> getUnique(ActivateCode activateCode) {
+		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
+		try {
+			result.addDefaultModel(activateCodeManager.getUnique(activateCode));
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("根据example获取唯一 ActivateCode失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+
+	
+
+
+
+	
+	public CommonResult<List<ActivateCode>> getActivateCodeByPage(PageQuery pageQuery) {
+		CommonResult<List<ActivateCode>> result = new CommonResult<List<ActivateCode>>();
+		try {
+			int totalCount = this.count(pageQuery);
+			if (totalCount > 0) {
+				pageQuery.setTotalCount(totalCount);
+				List<ActivateCode> list = activateCodeManager.getActivateCodeByPage(pageQuery);
+				result.addDefaultModel("list", list);
+				result.addModel("pageQuery", pageQuery);
+			}
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("分页获取 ActivateCode失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+	
+	public int count(PageQuery pageQuery) {
+		return activateCodeManager.count(pageQuery);
+	}
+
+
+	/******* getter and setter ***/
+	public ActivateCodeManager getActivateCodeManager() {
+		return activateCodeManager;
+	}
+
+	public void setActivateCodeManager(ActivateCodeManager activateCodeManager) {
+		this.activateCodeManager = activateCodeManager;
+	}
+
+}

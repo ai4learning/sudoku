@@ -32,12 +32,19 @@
     </a>
 
     <ul class="submenu">
-        <li id="user_manage">
+        <li id="login_record_manage">
             <a href="#" class="wordstudy_nav" url="/user/manage">
                 <i class="icon-double-angle-right"></i>
                	 用户管理
             </a>
         </li>
+        <li id="activate_manage">
+            <a href="#" class="wordstudy_nav" url="/loginRecord/manage">
+                <i class="icon-double-angle-right"></i>
+               	 登录管理
+            </a>
+        </li>
+
         <li id="activate_manage">
             <a href="#" class="wordstudy_nav" url="/activateCode/manage">
                 <i class="icon-double-angle-right"></i>

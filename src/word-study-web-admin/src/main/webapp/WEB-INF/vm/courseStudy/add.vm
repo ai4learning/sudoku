@@ -1,0 +1,236 @@
+
+
+    
+<div class="modal-body auto-height-body">
+	<form class="form-horizontal"  id="form1">
+	
+		 <div class="control-group">
+			<label class="control-label" for="studentId">学生ID</label>
+			<div class="controls">
+			
+				<input type="text"  name="studentId" id="studentId" placeholder="请输入学生ID" maxlength="10"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="studentCode">学生CODE</label>
+			<div class="controls">
+			
+				<input type="text"  name="studentCode" id="studentCode" placeholder="请输入学生CODE" maxlength="50"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="lessonId">课程ID</label>
+			<div class="controls">
+			
+				<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="isCurrentPos">是当前学习位置</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="isCurrentPos" id="isCurrentPos">
+			
+				<option value="1">是；2.否；</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="studyPositionCode">学习位置CODE</label>
+			<div class="controls">
+			
+				<input type="text"  name="studyPositionCode" id="studyPositionCode" placeholder="请输入学习位置CODE" maxlength="50"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="positionType">位置类型</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="positionType" id="positionType">
+			
+				<option value="1">单词</option>
+				<option value="2">单元</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="unitNbr">单元号</label>
+			<div class="controls">
+			
+				<input type="text"  name="unitNbr" id="unitNbr" placeholder="请输入单元号" maxlength="3"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="vocCode">单词CODE</label>
+			<div class="controls">
+			
+				<input type="text"  name="vocCode" id="vocCode" placeholder="请输入单词CODE" maxlength="50"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="startFrom">从哪开始学</label>
+			<div class="controls">
+			
+				<input type="text"  name="startFrom" id="startFrom" placeholder="请输入从哪开始学" maxlength="3"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="studyMode">学习模式</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="studyMode" id="studyMode">
+			
+				<option value="0">逆向学习</option>
+				<option value="1">正向学习</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="completeWordCount">完成单词数统计</label>
+			<div class="controls">
+			
+				<input type="text"  name="completeWordCount" id="completeWordCount" placeholder="请输入完成单词数统计" maxlength="10"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="isFinished">是否学习完成</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="isFinished" id="isFinished">
+			
+				<option value="0">未完成</option>
+				<option value="1">已完成</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="isTest">是否测试完成</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="isTest" id="isTest">
+			
+				<option value="0">未完成</option>
+				<option value="1">已完成</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="isAllFinished">全部完成</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="isAllFinished" id="isAllFinished">
+			
+				<option value="0">未完成</option>
+				<option value="1">已完成</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="status">状态</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="status" id="status">
+			
+				<option value="0">有效</option>
+				<option value="1">无效</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+</div>
+
+
+
+<script language="javascript">
+void function(j) {
+	var set = {
+		 
+		 studentId:  {must: true, maxlength:10, ftip:'学生ID,最多10个字符'},
+		 studentCode:  {must: true, maxlength:50, ftip:'学生CODE,最多50个字符'},
+		 lessonId:  {must: true, maxlength:10, ftip:'课程ID,最多10个字符'},
+		 isCurrentPos:  {must: true, maxlength:1, ftip:'是当前学习位置,最多1个字符'},
+		 studyPositionCode:  {must: true, maxlength:50, ftip:'学习位置CODE,最多50个字符'},
+		 positionType:  {must: true, maxlength:3, ftip:'位置类型,最多3个字符'},
+		 unitNbr:  {must: true, maxlength:3, ftip:'单元号,最多3个字符'},
+		 vocCode:  {must: true, maxlength:50, ftip:'单词CODE,最多50个字符'},
+		 startFrom:  {must: true, maxlength:3, ftip:'从哪开始学,最多3个字符'},
+		 studyMode:  {must: true, maxlength:3, ftip:'学习模式,最多3个字符'},
+		 completeWordCount:  {must: true, maxlength:10, ftip:'完成单词数统计,最多10个字符'},
+		 isFinished:  {must: true, maxlength:3, ftip:'是否学习完成,最多3个字符'},
+		 isTest:  {must: true, maxlength:3, ftip:'是否测试完成,最多3个字符'},
+		 isAllFinished:  {must: true, maxlength:3, ftip:'全部完成,最多3个字符'},
+		 status:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+	};
+	
+
+	j('#btn_submit').click(function(e) {
+		gUtils.fSubmitForm(
+			j("#form1").serialize(), 
+			set, 
+			'/courseStudy/doAdd.action', 
+			function() {
+				gDialog.fClose();
+				queryList(1);
+			}
+		);
+	});
+	
+	//form.friend.init(set);
+}(jQuery);
+</script>

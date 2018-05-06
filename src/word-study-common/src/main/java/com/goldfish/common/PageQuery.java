@@ -74,6 +74,9 @@ public class PageQuery {
 		this.params.put("totalPage",this.totalPage);
 	}
 
+	public void setParam(String key ,Object value) {
+		this.params.put(key,value);
+	}
 
 	public Long getStartIndex() {
 		return startIndex;
@@ -82,6 +85,9 @@ public class PageQuery {
 	public void setStartIndex(Long startIndex) {
 		this.startIndex = startIndex;
 	}
+
+
+
 	public void setParams(Map<String, Object> params) {
 		this.params = params;
 	}

@@ -13,14 +13,14 @@ import com.goldfish.manager.UserManager;
  * @since 2018-5-2
  * UserManager实现类
  */
-@Component("userManager")
+ @Component("userManager")
 public class UserManagerImpl implements UserManager {
 
 	@Resource(name="userDao")
 	private UserDao userDao;
 
 
-  	public User addUser(User user) {
+  public User addUser(User user) {
 		return userDao.addUser(user);
     }
     
@@ -42,6 +42,20 @@ public class UserManagerImpl implements UserManager {
    
 
    
+    
+    public List<User> getAll() {
+    	return userDao.getAll();
+    }
+    	
+    public List<User> getListByExample(User user) {
+		return userDao.getListByExample(user);
+    }
+
+        public User getUnique(User user) {
+		return userDao.getUnique(user);
+    }
+
+    
     
 
     

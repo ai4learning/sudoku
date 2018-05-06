@@ -1,0 +1,204 @@
+
+
+    
+<div class="modal-body auto-height-body">
+	<form class="form-horizontal"  id="form1">
+	
+		 <div class="control-group">
+			<label class="control-label" for="studentId">学生ID</label>
+			<div class="controls">
+			
+				<input type="text"  name="studentId" id="studentId" placeholder="请输入学生ID" maxlength="10"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="studentCode">学生CODE</label>
+			<div class="controls">
+			
+				<input type="text"  name="studentCode" id="studentCode" placeholder="请输入学生CODE" maxlength="50"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="lessonId">课程ID</label>
+			<div class="controls">
+			
+				<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="unitNbr">课程号</label>
+			<div class="controls">
+			
+				<input type="text"  name="unitNbr" id="unitNbr" placeholder="请输入课程号" maxlength="3"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="type">类型</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="type" id="type">
+			
+				<option value="1">复习学习</option>
+				<option value="2">错词学习</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="currentPhase">当前学习阶段</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="currentPhase" id="currentPhase">
+			
+				<option value="1">分批学习</option>
+				<option value="2">整体回忆</option>
+				<option value="3">单元测试</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="totalReadingTime">总读时间</label>
+			<div class="controls">
+			
+				<input type="text"  name="totalReadingTime" id="totalReadingTime" placeholder="请输入总读时间" maxlength="19"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="totalWritingTime">总写时间</label>
+			<div class="controls">
+			
+				<input type="text"  name="totalWritingTime" id="totalWritingTime" placeholder="请输入总写时间" maxlength="19"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="totalNumber">总学习单词数</label>
+			<div class="controls">
+			
+				<input type="text"  name="totalNumber" id="totalNumber" placeholder="请输入总学习单词数" maxlength="10"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="isFinished">是否学习完成</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="isFinished" id="isFinished">
+			
+				<option value="1">未完成</option>
+				<option value="2">已完成</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="isTested">是否测试完成</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="isTested" id="isTested">
+			
+				<option value="1">未完成</option>
+				<option value="2">已完成</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="studyPos">单词学习位置</label>
+			<div class="controls">
+			
+				<input type="text"  name="studyPos" id="studyPos" placeholder="请输入单词学习位置" maxlength="3"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="state">状态</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="state" id="state">
+			
+				<option value="1">有效</option>
+				<option value="2">无效</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+</div>
+
+
+
+<script language="javascript">
+void function(j) {
+	var set = {
+		 
+		 studentId:  {must: true, maxlength:10, ftip:'学生ID,最多10个字符'},
+		 studentCode:  {must: true, maxlength:50, ftip:'学生CODE,最多50个字符'},
+		 lessonId:  {must: true, maxlength:10, ftip:'课程ID,最多10个字符'},
+		 unitNbr:  {must: true, maxlength:3, ftip:'课程号,最多3个字符'},
+		 type:  {must: true, maxlength:3, ftip:'类型,最多3个字符'},
+		 currentPhase:  {must: true, maxlength:3, ftip:'当前学习阶段,最多3个字符'},
+		 totalReadingTime:  {must: true, maxlength:19, ftip:'总读时间,最多19个字符'},
+		 totalWritingTime:  {must: true, maxlength:19, ftip:'总写时间,最多19个字符'},
+		 totalNumber:  {must: true, maxlength:10, ftip:'总学习单词数,最多10个字符'},
+		 isFinished:  {must: true, maxlength:3, ftip:'是否学习完成,最多3个字符'},
+		 isTested:  {must: true, maxlength:3, ftip:'是否测试完成,最多3个字符'},
+		 studyPos:  {must: true, maxlength:3, ftip:'单词学习位置,最多3个字符'},
+		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+	};
+	
+
+	j('#btn_submit').click(function(e) {
+		gUtils.fSubmitForm(
+			j("#form1").serialize(), 
+			set, 
+			'/selfWordsStudy/doAdd.action', 
+			function() {
+				gDialog.fClose();
+				queryList(1);
+			}
+		);
+	});
+	
+	//form.friend.init(set);
+}(jQuery);
+</script>

@@ -1,0 +1,203 @@
+
+    
+<div class="modal-body auto-height-body">
+	<form class="form-horizontal"  id="form1">
+	
+		 <div class="control-group">
+			<label class="control-label" for="id">ID</label>
+			<div class="controls">
+			
+				<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{exam.id}"readonly/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="userId">用户ID</label>
+			<div class="controls">
+			
+				<input type="text"  name="userId" id="userId" placeholder="请输入用户ID" maxlength="10" value="$!{exam.userId}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="userCode">用户CODE</label>
+			<div class="controls">
+			
+				<input type="text"  name="userCode" id="userCode" placeholder="请输入用户CODE" maxlength="50" value="$!{exam.userCode}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="lessonId">课程ID</label>
+			<div class="controls">
+			
+				<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10" value="$!{exam.lessonId}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="unitNbr">课程号</label>
+			<div class="controls">
+			
+				<input type="text"  name="unitNbr" id="unitNbr" placeholder="请输入课程号" maxlength="3" value="$!{exam.unitNbr}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="pageId">试卷ID</label>
+			<div class="controls">
+			
+				<input type="text"  name="pageId" id="pageId" placeholder="请输入试卷ID" maxlength="19" value="$!{exam.pageId}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="testType">测试类型</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="testType" id="testType">
+				<option value="1" #if($exam.testType==1) selected #end>单元测试；2.自主测试；</option>
+
+		</select>
+		
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="resultScore">得分</label>
+			<div class="controls">
+			
+				<input type="text"  name="resultScore" id="resultScore" placeholder="请输入得分" maxlength="3" value="$!{exam.resultScore}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="standardDuration">考试时长</label>
+			<div class="controls">
+			
+				<input type="text"  name="standardDuration" id="standardDuration" placeholder="请输入考试时长" maxlength="19" value="$!{exam.standardDuration}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="realDuration">实际用时</label>
+			<div class="controls">
+			
+				<input type="text"  name="realDuration" id="realDuration" placeholder="请输入实际用时" maxlength="19" value="$!{exam.realDuration}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="errorNbr">错误数</label>
+			<div class="controls">
+			
+				<input type="text"  name="errorNbr" id="errorNbr" placeholder="请输入错误数" maxlength="3" value="$!{exam.errorNbr}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="cashPoint">积分</label>
+			<div class="controls">
+			
+				<input type="text"  name="cashPoint" id="cashPoint" placeholder="请输入积分" maxlength="10" value="$!{exam.cashPoint}"/>
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="cashPointType">积分类型</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="cashPointType" id="cashPointType">
+				<option value="0" #if($exam.cashPointType==0) selected #end>未知</option>
+				<option value="1" #if($exam.cashPointType==1) selected #end>金币</option>
+
+		</select>
+		
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="isPass">是否通过</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="isPass" id="isPass">
+				<option value="0" #if($exam.isPass==0) selected #end>未通过</option>
+				<option value="1" #if($exam.isPass==1) selected #end>通过</option>
+
+		</select>
+		
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="state">状态</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="state" id="state">
+				<option value="1" #if($exam.state==1) selected #end>有效</option>
+				<option value="2" #if($exam.state==2) selected #end>无效</option>
+
+		</select>
+		
+	
+
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存修改</a>
+	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+</div>
+
+
+
+<script language="javascript">
+void function(j) {
+	var set = {
+		 
+		 id:  {must: true, maxlength:19, ftip:'ID,最多19个字符'},
+		 userId:  {must: true, maxlength:10, ftip:'用户ID,最多10个字符'},
+		 userCode:  {must: true, maxlength:50, ftip:'用户CODE,最多50个字符'},
+		 lessonId:  {must: true, maxlength:10, ftip:'课程ID,最多10个字符'},
+		 unitNbr:  {must: true, maxlength:3, ftip:'课程号,最多3个字符'},
+		 pageId:  {must: true, maxlength:19, ftip:'试卷ID,最多19个字符'},
+		 testType:  {must: true, maxlength:3, ftip:'测试类型,最多3个字符'},
+		 resultScore:  {must: true, maxlength:3, ftip:'得分,最多3个字符'},
+		 standardDuration:  {must: true, maxlength:19, ftip:'考试时长,最多19个字符'},
+		 realDuration:  {must: true, maxlength:19, ftip:'实际用时,最多19个字符'},
+		 errorNbr:  {must: true, maxlength:3, ftip:'错误数,最多3个字符'},
+		 cashPoint:  {must: true, maxlength:10, ftip:'积分,最多10个字符'},
+		 cashPointType:  {must: true, maxlength:3, ftip:'积分类型,最多3个字符'},
+		 isPass:  {must: true, maxlength:1, ftip:'是否通过,最多1个字符'},
+		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+	};
+	
+
+	j('#btn_submit').click(function(e) {
+		gUtils.fSubmitForm(
+			j("#form1").serialize(), 
+			set, 
+			'/exam/doUpdate.action', 
+			function() {
+				gDialog.fClose();
+				queryList(1);
+			}
+		);
+	});
+	
+	//form.friend.init(set);
+}(jQuery);
+</script>

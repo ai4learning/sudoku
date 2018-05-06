@@ -48,6 +48,31 @@ public interface UserService {
 
      
 
+    /**
+     * 取得所有User
+     * 
+     * @return
+     */
+    public CommonResult<List<User>> getAll();
+    
+	/**
+     * 根据example取得User列表
+     * 
+     * @param  user
+     * @return
+     */
+    public CommonResult<List<User>> getListByExample(User user);
+    
+	/**
+     * 根据example取得唯一的User
+     * 
+     * @param user
+     * @return
+     */
+    public CommonResult<User> getUnique(User user);
+    
+    
+
 
     
 

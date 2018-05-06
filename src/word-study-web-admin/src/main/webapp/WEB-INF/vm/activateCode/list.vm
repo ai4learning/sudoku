@@ -1,0 +1,86 @@
+
+<div class="row-fluid">
+	<div class="span12">
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+ 			<th><span>ID</span></th>
+			<th><span>激活码</span></th>
+			<th><span>课程ID</span></th>
+			<th><span>超时时间</span></th>
+			<th><span>状态</span></th>
+			<th><span>修改时间</span></th>
+
+				<th class="operate">操作</th>
+				</tr>
+			</thead>
+
+
+			<tbody>
+	#if($list && $list.size()!=0)
+		    #foreach($item in $list)
+		   <tr>
+				 			<td>$!item.id</td>
+			<td>$!item.activateCode</td>
+			<td>$!item.lessonId</td>
+			<td>$!dateFormatUtils.format($!item.expireTime)</td>
+			<td>
+	
+			
+				#if($item.state==1)<span class="">正常</span> #end	
+			
+				#if($item.state==2)<span class="">超期</span> #end	
+			
+				#if($item.state==3)<span class="">无效</span> #end	
+			
+	
+	</td>
+			<td>$!dateFormatUtils.format($!item.modified)</td>
+
+				<td class="operate">
+					<button class="btn btn-primary JUpdate-activateCode" type="button" itemid="$!item.id">编辑</button>
+					<button class="btn btn-info JView-activateCode" type="button" itemid="$!item.id">查看</button>
+					<button class="btn btn-warning JDelete-activateCode" type="button" itemid="$!item.id">删除</button>
+				</td>
+		  </tr>
+			#end
+		#else
+		<tr>
+					<td colspan="8" class="message_default">没有记录！</td>
+		</tr>
+		#end
+
+
+			</tbody>
+
+
+		</table>
+
+		#if($pageQuery)
+			#showPageQuery($pageQuery,'queryList','input')
+		#end
+
+	</div>
+</div>
+
+
+
+<script language="javascript">
+void function(j) {	
+	j('.JDelete-activateCode').click(function() {
+		var id = j(this).attr('itemid');
+		var config={title:'删除ActivateCode',info:'您确定要删除ActivateCode吗？',url: '/activateCode/doDelete',param:'id='+id};
+		gUtils.fConfirmAndRefreshList(config);
+	});
+	
+	j('.JUpdate-activateCode').click(function() {
+		var id = j(this).attr('itemid');
+		gDialog.fCreate({ title: '修改ActivateCode', url: '/activateCode/update?id='+id,width:700}).show();
+	});
+
+	j('.JView-activateCode').click(function() {
+		var id = j(this).attr('itemid');
+		gDialog.fCreate({ title: '查看ActivateCode', url: '/activateCode/view?id='+id,width:700}).show();
+	});
+}(jQuery);
+</script>

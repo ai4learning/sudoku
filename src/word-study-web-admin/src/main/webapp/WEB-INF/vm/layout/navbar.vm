@@ -5,7 +5,7 @@
             <a href="#" class="navbar-brand">
                 <small>
                     <i class="icon-signal"></i>
-                    单词赢管理后台
+                    九宫格单词集训营后台
                 </small>
             </a><!-- /.brand -->
         </div>
@@ -18,7 +18,7 @@
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <i class="icon-user"></i>
                         <span>
-                             	${pin}<i class="icon-caret-down"></i>
+                             	${userId}<i class="icon-caret-down"></i>
                         </span>
                     </a>
 

@@ -1,0 +1,88 @@
+
+<div class="row-fluid">
+	<div class="span12">
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+ 			<th><span>ID</span></th>
+			<th><span>单元CODE</span></th>
+			<th><span>课程ID</span></th>
+			<th><span>单元号</span></th>
+			<th><span>单元名称</span></th>
+			<th><span>单元单词数</span></th>
+			<th><span>状态</span></th>
+			<th><span>修改时间</span></th>
+
+				<th class="operate">操作</th>
+				</tr>
+			</thead>
+
+
+			<tbody>
+	#if($list && $list.size()!=0)
+		    #foreach($item in $list)
+		   <tr>
+				 			<td>$!item.id</td>
+			<td>$!item.moduleCode</td>
+			<td>$!item.lessonId</td>
+			<td>$!item.unitNbr</td>
+			<td>$!item.unit</td>
+			<td>$!item.totalWords</td>
+			<td>
+	
+			
+				#if($item.state==1)<span class="">有效</span> #end	
+			
+				#if($item.state==2)<span class="">无效</span> #end	
+			
+	
+	</td>
+			<td>$!dateFormatUtils.format($!item.modified)</td>
+
+				<td class="operate">
+					<button class="btn btn-primary JUpdate-unit" type="button" itemid="$!item.id">编辑</button>
+					<button class="btn btn-info JView-unit" type="button" itemid="$!item.id">查看</button>
+					<button class="btn btn-warning JDelete-unit" type="button" itemid="$!item.id">删除</button>
+				</td>
+		  </tr>
+			#end
+		#else
+		<tr>
+					<td colspan="10" class="message_default">没有记录！</td>
+		</tr>
+		#end
+
+
+			</tbody>
+
+
+		</table>
+
+		#if($pageQuery)
+			#showPageQuery($pageQuery,'queryList','input')
+		#end
+
+	</div>
+</div>
+
+
+
+<script language="javascript">
+void function(j) {	
+	j('.JDelete-unit').click(function() {
+		var id = j(this).attr('itemid');
+		var config={title:'删除Unit',info:'您确定要删除Unit吗？',url: '/unit/doDelete',param:'id='+id};
+		gUtils.fConfirmAndRefreshList(config);
+	});
+	
+	j('.JUpdate-unit').click(function() {
+		var id = j(this).attr('itemid');
+		gDialog.fCreate({ title: '修改Unit', url: '/unit/update?id='+id,width:700}).show();
+	});
+
+	j('.JView-unit').click(function() {
+		var id = j(this).attr('itemid');
+		gDialog.fCreate({ title: '查看Unit', url: '/unit/view?id='+id,width:700}).show();
+	});
+}(jQuery);
+</script>

@@ -1,0 +1,150 @@
+
+
+    
+<div class="modal-body auto-height-body">
+	<form class="form-horizontal"  id="form1">
+	
+		 <div class="control-group">
+			<label class="control-label" for="unitCode">单元CODE</label>
+			<div class="controls">
+			
+				<input type="text"  name="unitCode" id="unitCode" placeholder="请输入单元CODE" maxlength="50"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="lessonId">课程ID</label>
+			<div class="controls">
+			
+				<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="19"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="unitNbr">单元号</label>
+			<div class="controls">
+			
+				<input type="text"  name="unitNbr" id="unitNbr" placeholder="请输入单元号" maxlength="3"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="fstClassId">单词归类</label>
+			<div class="controls">
+			
+				<input type="text"  name="fstClassId" id="fstClassId" placeholder="请输入单词归类" maxlength="3"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="unit">单元名</label>
+			<div class="controls">
+			
+				<input type="text"  name="unit" id="unit" placeholder="请输入单元名" maxlength="20"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="vocCode">单词CODE</label>
+			<div class="controls">
+			
+				<input type="text"  name="vocCode" id="vocCode" placeholder="请输入单词CODE" maxlength="50"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="vocIndex">单词索引号</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="vocIndex" id="vocIndex">
+			
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="wordId">单词ID</label>
+			<div class="controls">
+			
+				<input type="text"  name="wordId" id="wordId" placeholder="请输入单词ID" maxlength="19"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="spelling">拼写</label>
+			<div class="controls">
+			
+				<input type="text"  name="spelling" id="spelling" placeholder="请输入拼写" maxlength="128"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="state">状态</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="state" id="state">
+			
+				<option value="1">有效</option>
+				<option value="2">无效</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+</div>
+
+
+
+<script language="javascript">
+void function(j) {
+	var set = {
+		 
+		 unitCode:  {must: true, maxlength:50, ftip:'单元CODE,最多50个字符'},
+		 lessonId:  {must: true, maxlength:19, ftip:'课程ID,最多19个字符'},
+		 unitNbr:  {must: true, maxlength:3, ftip:'单元号,最多3个字符'},
+		 fstClassId:  {must: true, maxlength:3, ftip:'单词归类,最多3个字符'},
+		 unit:  {must: true, maxlength:20, ftip:'单元名,最多20个字符'},
+		 vocCode:  {must: true, maxlength:50, ftip:'单词CODE,最多50个字符'},
+		 vocIndex:  {must: true, maxlength:10, ftip:'单词索引号,最多10个字符'},
+		 wordId:  {must: true, maxlength:19, ftip:'单词ID,最多19个字符'},
+		 spelling:  {must: true, maxlength:128, ftip:'拼写,最多128个字符'},
+		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+	};
+	
+
+	j('#btn_submit').click(function(e) {
+		gUtils.fSubmitForm(
+			j("#form1").serialize(), 
+			set, 
+			'/unitWords/doAdd.action', 
+			function() {
+				gDialog.fClose();
+				queryList(1);
+			}
+		);
+	});
+	
+	//form.friend.init(set);
+}(jQuery);
+</script>

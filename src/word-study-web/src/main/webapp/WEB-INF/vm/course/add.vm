@@ -1,0 +1,219 @@
+
+
+    
+<div class="modal-body auto-height-body">
+	<form class="form-horizontal"  id="form1">
+	
+		 <div class="control-group">
+			<label class="control-label" for="type">课程类型</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="type" id="type">
+			
+				<option value="1">教材</option>
+				<option value="2">错词本</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="moduleCode">课程CODE</label>
+			<div class="controls">
+			
+				<input type="text"  name="moduleCode" id="moduleCode" placeholder="请输入课程CODE" maxlength="50"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="bookNumber">课程号</label>
+			<div class="controls">
+			
+				<input type="text"  name="bookNumber" id="bookNumber" placeholder="请输入课程号" maxlength="10"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="bookName">课程名</label>
+			<div class="controls">
+			
+				<input type="text"  name="bookName" id="bookName" placeholder="请输入课程名" maxlength="50"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="bookType">课程类型</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="bookType" id="bookType">
+			
+				<option value="1">教材</option>
+				<option value="2">特色</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="orderType">年级类型</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="orderType" id="orderType">
+			
+				<option value="0">无</option>
+				<option value="1">小学</option>
+				<option value="2">初中</option>
+				<option value="3">高中</option>
+				<option value="4">大学</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="bookState">课程状态</label>
+			<div class="controls">
+			
+		
+		<select class="forms_select" name="bookState" id="bookState">
+			
+				<option value="1">有效</option>
+				<option value="2">无效</option>
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="bookPrice">课程定价</label>
+			<div class="controls">
+			
+				<input type="text"  name="bookPrice" id="bookPrice" placeholder="请输入课程定价" maxlength="11"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="introduce">课程简介</label>
+			<div class="controls">
+			
+				<input type="text"  name="introduce" id="introduce" placeholder="请输入课程简介" maxlength="255"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="coverImageUrl">封面</label>
+			<div class="controls">
+			
+				<input type="text"  name="coverImageUrl" id="coverImageUrl" placeholder="请输入封面" maxlength="255"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="totalUnitNbr">总单元数</label>
+			<div class="controls">
+			
+				<input type="text"  name="totalUnitNbr" id="totalUnitNbr" placeholder="请输入总单元数" maxlength="3"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="totalWords">单词总数</label>
+			<div class="controls">
+			
+				<input type="text"  name="totalWords" id="totalWords" placeholder="请输入单词总数" maxlength="10"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="outDate">是否过期</label>
+			<div class="controls">
+			
+				<input type="text"  name="outDate" id="outDate" placeholder="请输入是否过期" maxlength="1"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="unitType">单元类型</label>
+			<div class="controls">
+			
+				<input type="text"  name="unitType" id="unitType" placeholder="请输入单元类型" maxlength="50"/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="ext">扩展信息</label>
+			<div class="controls">
+			
+				<input type="text"  name="ext" id="ext" placeholder="请输入扩展信息" maxlength="255"/>
+				
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+</div>
+
+
+
+<script language="javascript">
+void function(j) {
+	var set = {
+		 
+		 type:  {must: true, maxlength:3, ftip:'课程类型,最多3个字符'},
+		 moduleCode:  {must: true, maxlength:50, ftip:'课程CODE,最多50个字符'},
+		 bookNumber:  {must: true, maxlength:10, ftip:'课程号,最多10个字符'},
+		 bookName:  {must: true, maxlength:50, ftip:'课程名,最多50个字符'},
+		 bookType:  {must: true, maxlength:3, ftip:'课程类型,最多3个字符'},
+		 orderType:  {must: true, maxlength:3, ftip:'年级类型,最多3个字符'},
+		 bookState:  {must: true, maxlength:3, ftip:'课程状态,最多3个字符'},
+		 bookPrice:  {must: true, maxlength:11, ftip:'课程定价,最多11个字符'},
+		 introduce:  {must: true, maxlength:255, ftip:'课程简介,最多255个字符'},
+		 coverImageUrl:  {must: true, maxlength:255, ftip:'封面,最多255个字符'},
+		 totalUnitNbr:  {must: true, maxlength:3, ftip:'总单元数,最多3个字符'},
+		 totalWords:  {must: true, maxlength:10, ftip:'单词总数,最多10个字符'},
+		 outDate:  {must: true, maxlength:1, ftip:'是否过期,最多1个字符'},
+		 unitType:  {must: true, maxlength:50, ftip:'单元类型,最多50个字符'},
+		 ext:  {must: true, maxlength:255, ftip:'扩展信息,最多255个字符'}
+	};
+	
+
+	j('#btn_submit').click(function(e) {
+		gUtils.fSubmitForm(
+			j("#form1").serialize(), 
+			set, 
+			'/course/doAdd.action', 
+			function() {
+				gDialog.fClose();
+				queryList(1);
+			}
+		);
+	});
+	
+	//form.friend.init(set);
+}(jQuery);
+</script>

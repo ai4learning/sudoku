@@ -1,0 +1,109 @@
+
+
+<div class="modal-body auto-height-body">
+	<form class="form-horizontal"  id="form1">
+	
+		 <div class="control-group">
+			<label class="control-label" for="id">ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="id" id="id" value="$!{loginRecord.id}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="wordTrainingId">训练ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="wordTrainingId" id="wordTrainingId" value="$!{loginRecord.wordTrainingId}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="wordTraningCode">训练CODE</label>
+			<div class="controls">
+			
+							<input type="text"  name="wordTraningCode" id="wordTraningCode" value="$!{loginRecord.wordTraningCode}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="studyToken">学习token</label>
+			<div class="controls">
+			
+							<input type="text"  name="studyToken" id="studyToken" value="$!{loginRecord.studyToken}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="userId">用户ID</label>
+			<div class="controls">
+			
+							<input type="text"  name="userId" id="userId" value="$!{loginRecord.userId}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="userCode">用户CODE</label>
+			<div class="controls">
+			
+							<input type="text"  name="userCode" id="userCode" value="$!{loginRecord.userCode}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="userName">用户名</label>
+			<div class="controls">
+			
+							<input type="text"  name="userName" id="userName" value="$!{loginRecord.userName}" readonly/>
+				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="state">状态</label>
+			<div class="controls">
+			
+	
+		<select class="forms_select" name="state" id="state" disabled>
+				<option value="1" #if($loginRecord.state==1) selected  #end>有效</option>
+				<option value="2" #if($loginRecord.state==2) selected  #end>无效</option>
+
+		</select>
+	
+	
+
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="created">创建时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!loginRecord.created)" readonly/>
+						
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="modified">修改时间</label>
+			<div class="controls">
+			
+							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!loginRecord.modified)" readonly/>
+						
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+</div>
+

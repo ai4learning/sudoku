@@ -1,0 +1,90 @@
+
+<div class="row-fluid">
+	<div class="span12">
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+ 			<th><span>ID</span></th>
+			<th><span>训练ID</span></th>
+			<th><span>训练CODE</span></th>
+			<th><span>学习token</span></th>
+			<th><span>用户ID</span></th>
+			<th><span>用户CODE</span></th>
+			<th><span>用户名</span></th>
+			<th><span>状态</span></th>
+			<th><span>修改时间</span></th>
+
+				<th class="operate">操作</th>
+				</tr>
+			</thead>
+
+
+			<tbody>
+	#if($list && $list.size()!=0)
+		    #foreach($item in $list)
+		   <tr>
+				 			<td>$!item.id</td>
+			<td>$!item.wordTrainingId</td>
+			<td>$!item.wordTraningCode</td>
+			<td>$!item.studyToken</td>
+			<td>$!item.userId</td>
+			<td>$!item.userCode</td>
+			<td>$!item.userName</td>
+			<td>
+	
+			
+				#if($item.state==1)<span class="">有效</span> #end	
+			
+				#if($item.state==2)<span class="">无效</span> #end	
+			
+	
+	</td>
+			<td>$!dateFormatUtils.format($!item.modified)</td>
+
+				<td class="operate">
+					<button class="btn btn-primary JUpdate-loginRecord" type="button" itemid="$!item.id">编辑</button>
+					<button class="btn btn-info JView-loginRecord" type="button" itemid="$!item.id">查看</button>
+					<button class="btn btn-warning JDelete-loginRecord" type="button" itemid="$!item.id">删除</button>
+				</td>
+		  </tr>
+			#end
+		#else
+		<tr>
+					<td colspan="11" class="message_default">没有记录！</td>
+		</tr>
+		#end
+
+
+			</tbody>
+
+
+		</table>
+
+		#if($pageQuery)
+			#showPageQuery($pageQuery,'queryList','input')
+		#end
+
+	</div>
+</div>
+
+
+
+<script language="javascript">
+void function(j) {	
+	j('.JDelete-loginRecord').click(function() {
+		var id = j(this).attr('itemid');
+		var config={title:'删除LoginRecord',info:'您确定要删除LoginRecord吗？',url: '/loginRecord/doDelete',param:'id='+id};
+		gUtils.fConfirmAndRefreshList(config);
+	});
+	
+	j('.JUpdate-loginRecord').click(function() {
+		var id = j(this).attr('itemid');
+		gDialog.fCreate({ title: '修改LoginRecord', url: '/loginRecord/update?id='+id,width:700}).show();
+	});
+
+	j('.JView-loginRecord').click(function() {
+		var id = j(this).attr('itemid');
+		gDialog.fCreate({ title: '查看LoginRecord', url: '/loginRecord/view?id='+id,width:700}).show();
+	});
+}(jQuery);
+</script>

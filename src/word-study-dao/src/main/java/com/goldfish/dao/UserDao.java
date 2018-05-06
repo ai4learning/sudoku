@@ -55,6 +55,31 @@ public interface UserDao {
 
 
 	
+    /**
+     * 取得所有User
+     * 
+     * @return
+     */
+    public List<User> getAll();
+    
+	/**
+     * 根据example取得User列表
+     * 
+     * @param  user
+     * @return
+     */
+    public List<User> getListByExample(User user);
+    
+    	/**
+     * 根据example取得唯一的User
+     * 
+     * @param user
+     * @return
+     */
+    public User getUnique(User user);
+    
+
+    
 
     
 

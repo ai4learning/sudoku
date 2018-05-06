@@ -44,12 +44,13 @@
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="roleType">角色，1</label>
+			<label class="control-label" for="roleType">角色</label>
 			<div class="controls">
 			
 		
 		<select class="forms_select" name="roleType" id="roleType">
-				<option value="默认为学生;2" #if($user.roleType==默认为学生;2) selected #end>老师；3：管理员</option>
+				<option value="1" #if($user.roleType==1) selected #end>用户</option>
+				<option value="2" #if($user.roleType==2) selected #end>管理员</option>
 
 		</select>
 		
@@ -62,15 +63,23 @@
 			<label class="control-label" for="authorityLevel">权限等级</label>
 			<div class="controls">
 			
-				<input type="text"  name="authorityLevel" id="authorityLevel" placeholder="请输入权限等级" maxlength="3" value="$!{user.authorityLevel}"/>
+		
+		<select class="forms_select" name="authorityLevel" id="authorityLevel">
+				<option value="1" #if($user.authorityLevel==1) selected #end>默认</option>
+				<option value="2" #if($user.authorityLevel==2) selected #end>其他</option>
+
+		</select>
+		
+	
+
 			</div>
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="parentId">parent_id</label>
+			<label class="control-label" for="parentId">父ID</label>
 			<div class="controls">
 			
-				<input type="text"  name="parentId" id="parentId" placeholder="请输入parent_id" maxlength="19" value="$!{user.parentId}"/>
+				<input type="text"  name="parentId" id="parentId" placeholder="请输入父ID" maxlength="19" value="$!{user.parentId}"/>
 			</div>
 		</div>
 		
@@ -89,7 +98,9 @@
 		
 		<select class="forms_select" name="userState" id="userState">
 				<option value="0" #if($user.userState==0) selected #end>初始状态</option>
-				<option value="1" #if($user.userState==1) selected #end>正常；2：欠费；3：不可用</option>
+				<option value="1" #if($user.userState==1) selected #end>正常</option>
+				<option value="2" #if($user.userState==2) selected #end>欠费</option>
+				<option value="3" #if($user.userState==3) selected #end>不可用</option>
 
 		</select>
 		
@@ -107,50 +118,64 @@
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="wordTrainingId">word_training_id</label>
+			<label class="control-label" for="currentClass">当前班级</label>
 			<div class="controls">
 			
-				<input type="text"  name="wordTrainingId" id="wordTrainingId" placeholder="请输入word_training_id" maxlength="50" value="$!{user.wordTrainingId}"/>
+				<input type="text"  name="currentClass" id="currentClass" placeholder="请输入当前班级" maxlength="19" value="$!{user.currentClass}"/>
 			</div>
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="wordTrainingCode">word_training_code</label>
+			<label class="control-label" for="currentTeacher">当前老师</label>
 			<div class="controls">
 			
-				<input type="text"  name="wordTrainingCode" id="wordTrainingCode" placeholder="请输入word_training_code" maxlength="50" value="$!{user.wordTrainingCode}"/>
+				<input type="text"  name="currentTeacher" id="currentTeacher" placeholder="请输入当前老师" maxlength="19" value="$!{user.currentTeacher}"/>
 			</div>
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="currentClass">current_class</label>
+			<label class="control-label" for="level">等级</label>
 			<div class="controls">
 			
-				<input type="text"  name="currentClass" id="currentClass" placeholder="请输入current_class" maxlength="19" value="$!{user.currentClass}"/>
+		
+		<select class="forms_select" name="level" id="level">
+				<option value="1" #if($user.level==1) selected #end>庶人</option>
+				<option value="2" #if($user.level==2) selected #end>童生</option>
+				<option value="3" #if($user.level==3) selected #end>秀才</option>
+				<option value="4" #if($user.level==4) selected #end>举人</option>
+				<option value="5" #if($user.level==5) selected #end>进士</option>
+				<option value="6" #if($user.level==6) selected #end>探花</option>
+				<option value="7" #if($user.level==7) selected #end>榜眼</option>
+				<option value="8" #if($user.level==8) selected #end>状元</option>
+
+		</select>
+		
+	
+
 			</div>
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="currentTeacher">current_teacher</label>
+			<label class="control-label" for="cashPoint">积分</label>
 			<div class="controls">
 			
-				<input type="text"  name="currentTeacher" id="currentTeacher" placeholder="请输入current_teacher" maxlength="19" value="$!{user.currentTeacher}"/>
+				<input type="text"  name="cashPoint" id="cashPoint" placeholder="请输入积分" maxlength="19" value="$!{user.cashPoint}"/>
 			</div>
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="level">level</label>
+			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-				<input type="text"  name="level" id="level" placeholder="请输入level" maxlength="3" value="$!{user.level}"/>
-			</div>
-		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="cashPoint">cash_point</label>
-			<div class="controls">
-			
-				<input type="text"  name="cashPoint" id="cashPoint" placeholder="请输入cash_point" maxlength="19" value="$!{user.cashPoint}"/>
+		<select class="forms_select" name="state" id="state">
+				<option value="1" #if($user.state==1) selected #end>有效</option>
+				<option value="2" #if($user.state==2) selected #end>无效</option>
+
+		</select>
+		
+	
+
 			</div>
 		</div>
 		
@@ -173,18 +198,17 @@ void function(j) {
 		 passwd:  {must: true, maxlength:50, ftip:'密码,最多50个字符'},
 		 userCode:  {must: true, maxlength:50, ftip:'用户code,最多50个字符'},
 		 nikeName:  {must: true, maxlength:50, ftip:'别名,最多50个字符'},
-		 roleType:  {must: true, maxlength:3, ftip:'角色，1,最多3个字符'},
+		 roleType:  {must: true, maxlength:3, ftip:'角色,最多3个字符'},
 		 authorityLevel:  {must: true, maxlength:3, ftip:'权限等级,最多3个字符'},
-		 parentId:  {must: true, maxlength:19, ftip:'parent_id,最多19个字符'},
+		 parentId:  {must: true, maxlength:19, ftip:'父ID,最多19个字符'},
 		 activateCode:  {must: true, maxlength:50, ftip:'激活码,最多50个字符'},
 		 userState:  {must: true, maxlength:3, ftip:'用户状态,最多3个字符'},
 		 totalLoginTimes:  {must: true, maxlength:19, ftip:'登录次数,最多19个字符'},
-		 wordTrainingId:  {must: true, maxlength:50, ftip:'word_training_id,最多50个字符'},
-		 wordTrainingCode:  {must: true, maxlength:50, ftip:'word_training_code,最多50个字符'},
-		 currentClass:  {must: true, maxlength:19, ftip:'current_class,最多19个字符'},
-		 currentTeacher:  {must: true, maxlength:19, ftip:'current_teacher,最多19个字符'},
-		 level:  {must: true, maxlength:3, ftip:'level,最多3个字符'},
-		 cashPoint:  {must: true, maxlength:19, ftip:'cash_point,最多19个字符'}
+		 currentClass:  {must: true, maxlength:19, ftip:'当前班级,最多19个字符'},
+		 currentTeacher:  {must: true, maxlength:19, ftip:'当前老师,最多19个字符'},
+		 level:  {must: true, maxlength:3, ftip:'等级,最多3个字符'},
+		 cashPoint:  {must: true, maxlength:19, ftip:'积分,最多19个字符'},
+		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
 	};
 	
 

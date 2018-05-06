@@ -1,0 +1,155 @@
+
+
+<div class="manage-content">
+<form class="form-inline">
+
+
+		<label>ID</label>
+			
+			<input type="text"  name="id" id="id_search" class="input" placeholder="请输入ID">
+			
+
+		
+		<label>用户ID</label>
+			
+			<input type="text"  name="userId" id="userId_search" class="input" placeholder="请输入用户ID">
+			
+
+		
+		<label>课程ID</label>
+			
+			<input type="text"  name="lessonId" id="lessonId_search" class="input" placeholder="请输入课程ID">
+			
+
+		
+		<label>试卷ID</label>
+			
+			<input type="text"  name="pageId" id="pageId_search" class="input" placeholder="请输入试卷ID">
+			
+
+		
+		<label>测试类型</label>
+			
+	
+		<select class="forms_select" name="testType" id="testType_search">
+			<option value="">全部</option>
+			
+				<option value="1">单元测试；2.自主测试；</option>
+		</select>
+	
+	
+
+
+		
+		<label>积分类型</label>
+			
+	
+		<select class="forms_select" name="cashPointType" id="cashPointType_search">
+			<option value="">全部</option>
+			
+				<option value="0">未知</option>
+				<option value="1">金币</option>
+		</select>
+	
+	
+
+
+		
+		<label>状态</label>
+			
+	
+		<select class="forms_select" name="state" id="state_search">
+			<option value="">全部</option>
+			
+				<option value="1">有效</option>
+				<option value="2">无效</option>
+		</select>
+	
+	
+
+
+		
+		<input type="button" onclick="queryList();" class="btn" value="搜索"  />
+
+	</form>
+		
+<br/>
+		 <div class="page_operate">
+			 <button class="btn  btn-primary" type="button" id="add-exam">创建 Exam</button>
+		</div>
+
+
+	<div id="dl"></div>
+</div>
+<script language="javascript">
+	function queryList(pageNo) {	
+		if (!pageNo) {
+			pageNo = 1;
+		}
+		var page = pageNo;
+		var url = '/exam/list.action';
+		var param = {
+			page: page
+		};
+		
+		var pageSize=jQuery("#JPageSize_queryList").val();
+        if(pageSize && !isNaN(pageSize)){
+            param['pageSize']=pageSize;
+        }
+
+		getOtherParams(param);
+		gUtils.fGetHtml(url, 'dl', param,'数据加载中...');
+	}
+	queryList();
+	
+
+	function getOtherParams(param){
+   
+	  	var id_search=jQuery("#id_search").val();
+		if(id_search!=null&&id_search!=''){
+				param.id=id_search;
+			}
+			 
+	  	var userId_search=jQuery("#userId_search").val();
+		if(userId_search!=null&&userId_search!=''){
+				param.userId=userId_search;
+			}
+			 
+	  	var lessonId_search=jQuery("#lessonId_search").val();
+		if(lessonId_search!=null&&lessonId_search!=''){
+				param.lessonId=lessonId_search;
+			}
+			 
+	  	var pageId_search=jQuery("#pageId_search").val();
+		if(pageId_search!=null&&pageId_search!=''){
+				param.pageId=pageId_search;
+			}
+			 
+	  	var testType_search=jQuery("#testType_search").val();
+		if(testType_search!=null&&testType_search!=''){
+				param.testType=testType_search;
+			}
+			 
+	  	var cashPointType_search=jQuery("#cashPointType_search").val();
+		if(cashPointType_search!=null&&cashPointType_search!=''){
+				param.cashPointType=cashPointType_search;
+			}
+			 
+	  	var state_search=jQuery("#state_search").val();
+		if(state_search!=null&&state_search!=''){
+				param.state=state_search;
+			}
+					
+	}
+
+
+
+
+void function(j) {
+	jQuery("#add-exam").click(function(){
+		gDialog.fCreate({title: '创建 Exam', url: '/exam/add.action',width:700}).show();
+	});
+	
+}(jQuery);
+
+</script>

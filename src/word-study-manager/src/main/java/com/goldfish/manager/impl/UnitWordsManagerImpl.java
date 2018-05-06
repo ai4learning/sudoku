@@ -1,0 +1,79 @@
+package com.goldfish.manager.impl;
+
+import org.springframework.stereotype.Component;
+import javax.annotation.Resource;
+import java.util.List;
+import com.goldfish.common.PageQuery;
+import com.goldfish.domain.UnitWords;
+import com.goldfish.dao.UnitWordsDao;
+import com.goldfish.manager.UnitWordsManager;
+
+/**
+ * @author hellosscat
+ * @since 2018-5-2
+ * UnitWordsManager实现类
+ */
+ @Component("unitWordsManager")
+public class UnitWordsManagerImpl implements UnitWordsManager {
+
+	@Resource(name="unitWordsDao")
+	private UnitWordsDao unitWordsDao;
+
+
+  public UnitWords addUnitWords(UnitWords unitWords) {
+		return unitWordsDao.addUnitWords(unitWords);
+    }
+    
+    public void updateUnitWords(UnitWords unitWords) {
+		unitWordsDao.updateUnitWords(unitWords);
+    }
+    
+
+    
+    public void deleteUnitWords(Long id) {
+		unitWordsDao.deleteUnitWords(id);
+    }
+
+
+    public UnitWords getUnitWordsById(Long id) {
+		return unitWordsDao.getUnitWordsById(id);
+    }
+    
+   
+
+   
+    
+    public List<UnitWords> getAll() {
+    	return unitWordsDao.getAll();
+    }
+    	
+    public List<UnitWords> getListByExample(UnitWords unitWords) {
+		return unitWordsDao.getListByExample(unitWords);
+    }
+
+        public UnitWords getUnique(UnitWords unitWords) {
+		return unitWordsDao.getUnique(unitWords);
+    }
+
+    
+    
+
+    
+    public List<UnitWords> getUnitWordsByPage(PageQuery pageQuery) {
+		return unitWordsDao.getUnitWordsByPage( pageQuery.getParams());
+    }
+    	
+    public int count(PageQuery pageQuery) {
+		return unitWordsDao.count( pageQuery.getParams());
+    }
+
+    /******* getter and setter ***/
+    
+	public UnitWordsDao getUnitWordsDao() {
+		return unitWordsDao;
+	}
+
+	public void setUnitWordsDao(UnitWordsDao unitWordsDao) {
+		this.unitWordsDao = unitWordsDao;
+	}
+}
