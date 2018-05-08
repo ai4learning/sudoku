@@ -7,8 +7,8 @@ import com.goldfish.domain.ActivateCode;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow ActivateCodeservice 接口
+ * @since 2018-5-8
+ * jshow 激活码service 接口
  *
  */
 public interface ActivateCodeService {
@@ -48,20 +48,8 @@ public interface ActivateCodeService {
 
      
 
-    /**
-     * 取得所有ActivateCode
-     * 
-     * @return
-     */
-    public CommonResult<List<ActivateCode>> getAll();
-    
-	/**
-     * 根据example取得ActivateCode列表
-     * 
-     * @param  activateCode
-     * @return
-     */
-    public CommonResult<List<ActivateCode>> getListByExample(ActivateCode activateCode);
+
+	
     
 	/**
      * 根据example取得唯一的ActivateCode
@@ -71,9 +59,16 @@ public interface ActivateCodeService {
      */
     public CommonResult<ActivateCode> getUnique(ActivateCode activateCode);
     
-    
 
 
+
+    /**
+     * 根据example取得ActivateCode列表
+     * 
+     * @param  activateCode
+     * @return
+     */
+    public CommonResult<List<ActivateCode>> getListByExample(ActivateCode activateCode);
     
 
 	/**

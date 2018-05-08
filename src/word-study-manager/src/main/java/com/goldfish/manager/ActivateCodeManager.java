@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.ActivateCodeManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.ActivateCode;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * ActivateCodeManager接口类
+ * @since 2018-5-8
+ * 激活码Manager接口类
  */
 public interface ActivateCodeManager {
  
@@ -50,21 +51,7 @@ public interface ActivateCodeManager {
     
 
 
-       
-    /**
-     * 取得所有ActivateCode
-     * 
-     * @return
-     */
-    public List<ActivateCode> getAll();
-    
-	/**
-     * 根据example取得ActivateCode列表
-     * 
-     * @param  activateCode
-     * @return
-     */
-    public List<ActivateCode> getListByExample(ActivateCode activateCode);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface ActivateCodeManager {
     
 
     
+    /**
+     * 根据example取得ActivateCode列表
+     * 
+     * @param  activateCode
+     * @return
+     */
+    public List<ActivateCode> getListByExample(ActivateCode activateCode);
 
 	/**
      * 分页取得ActivateCode列表

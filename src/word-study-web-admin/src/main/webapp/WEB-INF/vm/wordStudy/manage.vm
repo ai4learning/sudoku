@@ -1,49 +1,65 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
-
-<div class="manage-content">
-<form class="form-inline">
-
-
-		<label>ID</label>
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
 			
-			<input type="text"  name="id" id="id_search" class="input" placeholder="请输入ID">
-			
+				jQuery("#search_wordstudy").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
 
-		
-		<label>学生ID</label>
-			
-			<input type="text"  name="studentId" id="studentId_search" class="input" placeholder="请输入学生ID">
-			
-
-		
-		<label>状态</label>
-			
+	</script>
 	
-		<select class="forms_select" name="state" id="state_search">
+    
+
+
+<div class="manage-content"  id="search_wordstudy">
+<form class="form-inline" id="searchForm_WordStudy" onsubmit="return false;">
+
+
+		<label for="id">ID</label>
+			
+			<input type="text"  name="id" id="id_search" class="input input-medium" placeholder="请输入ID">
+			
+
+		
+		<label for="studentId">学生ID</label>
+			
+			<input type="text"  name="studentId" id="studentId_search" class="input input-medium" placeholder="请输入学生ID">
+			
+
+		
+		<label for="state">状态</label>
+			
+        
+		<select class="forms_select input-medium" name="state" id="state_search">
 			<option value="">全部</option>
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
 
 		
-		<input type="button" onclick="queryList();" class="btn" value="搜索"  />
+		<input type="button" onclick="queryWordStudyList();" class="btn" value="搜索"  />
 
 	</form>
 		
 <br/>
 		 <div class="page_operate">
-			 <button class="btn  btn-primary" type="button" id="add-wordStudy">创建 WordStudy</button>
+			 <button class="btn  btn-primary" type="button" id="add-wordStudy">创建 单词学习</button>
 		</div>
 
 
-	<div id="dl"></div>
+	<div id="dl_WordStudy"></div>
 </div>
 <script language="javascript">
-	function queryList(pageNo) {	
+	function queryWordStudyList(pageNo) {
 		if (!pageNo) {
 			pageNo = 1;
 		}
@@ -58,37 +74,17 @@
             param['pageSize']=pageSize;
         }
 
-		getOtherParams(param);
-		gUtils.fGetHtml(url, 'dl', param,'数据加载中...');
+		gUtils.fMergeParam(param,"searchForm_WordStudy");
+		gUtils.fGetHtml(url, 'dl_WordStudy', param,'数据加载中...');
 	}
-	queryList();
-	
-
-	function getOtherParams(param){
-   
-	  	var id_search=jQuery("#id_search").val();
-		if(id_search!=null&&id_search!=''){
-				param.id=id_search;
-			}
-			 
-	  	var studentId_search=jQuery("#studentId_search").val();
-		if(studentId_search!=null&&studentId_search!=''){
-				param.studentId=studentId_search;
-			}
-			 
-	  	var state_search=jQuery("#state_search").val();
-		if(state_search!=null&&state_search!=''){
-				param.state=state_search;
-			}
-					
-	}
+	queryWordStudyList();
 
 
 
 
 void function(j) {
 	jQuery("#add-wordStudy").click(function(){
-		gDialog.fCreate({title: '创建 WordStudy', url: '/wordStudy/add.action',width:700}).show();
+		gDialog.fCreate({title: '创建 单词学习', url: '/wordStudy/add.action',width:700}).show();
 	});
 	
 }(jQuery);

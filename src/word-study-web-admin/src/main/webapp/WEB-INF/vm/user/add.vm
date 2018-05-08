@@ -1,8 +1,8 @@
-
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"   id="add_user">
+	<form class="form-horizontal"  id="form_add_User">
 	
 		 <div class="control-group">
 			<label class="control-label" for="userId">账户名</label>
@@ -43,14 +43,15 @@
 		 <div class="control-group">
 			<label class="control-label" for="roleType">角色</label>
 			<div class="controls">
-		
-				<select class="forms_select" name="roleType" id="roleType">
-
-						<option value="1">学生</option>
-						<option value="2">老师</option>
-						<option value="3">管理员</option>
-				</select>
+			
+        
+		<select class="forms_select input-medium" name="roleType" id="roleType">
+			
+				<option value="1">用户</option>
+				<option value="2">管理员</option>
+		</select>
 	
+    
 
 			</div>
 		</div>
@@ -59,8 +60,15 @@
 			<label class="control-label" for="authorityLevel">权限等级</label>
 			<div class="controls">
 			
-				<input type="text"  name="authorityLevel" id="authorityLevel" placeholder="请输入权限等级" maxlength="3"/>
-				
+        
+		<select class="forms_select input-medium" name="authorityLevel" id="authorityLevel">
+			
+				<option value="1">默认</option>
+				<option value="2">其他</option>
+		</select>
+	
+    
+
 			</div>
 		</div>
 		
@@ -68,7 +76,7 @@
 			<label class="control-label" for="parentId">父ID</label>
 			<div class="controls">
 			
-				<input type="text"  name="parentId" id="parentId" placeholder="请输入parent_id" maxlength="19"/>
+				<input type="text"  name="parentId" id="parentId" placeholder="请输入父ID" maxlength="19"/>
 				
 			</div>
 		</div>
@@ -85,14 +93,17 @@
 		 <div class="control-group">
 			<label class="control-label" for="userState">用户状态</label>
 			<div class="controls">
-		
-				<select class="forms_select" name="userState" id="userState">
-
-						<option value="0">初始状态</option>
-						<option value="1">正常</option>
-						<option value="2">欠费</option>
-						<option value="3">不可用</option>
-				</select>
+			
+        
+		<select class="forms_select input-medium" name="userState" id="userState">
+			
+				<option value="0">初始状态</option>
+				<option value="1">正常</option>
+				<option value="2">欠费</option>
+				<option value="3">不可用</option>
+		</select>
+	
+    
 
 			</div>
 		</div>
@@ -107,28 +118,10 @@
 		</div>
 		
 		 <div class="control-group">
-			<label class="control-label" for="wordTrainingId">word_training_id</label>
-			<div class="controls">
-			
-				<input type="text"  name="wordTrainingId" id="wordTrainingId" placeholder="请输入word_training_id" maxlength="50"/>
-				
-			</div>
-		</div>
-		
-		 <div class="control-group">
-			<label class="control-label" for="wordTrainingCode">word_training_code</label>
-			<div class="controls">
-			
-				<input type="text"  name="wordTrainingCode" id="wordTrainingCode" placeholder="请输入word_training_code" maxlength="50"/>
-				
-			</div>
-		</div>
-		
-		 <div class="control-group">
 			<label class="control-label" for="currentClass">当前班级</label>
 			<div class="controls">
 			
-				<input type="text"  name="currentClass" id="currentClass" placeholder="请输入current_class" maxlength="19"/>
+				<input type="text"  name="currentClass" id="currentClass" placeholder="请输入当前班级" maxlength="19"/>
 				
 			</div>
 		</div>
@@ -137,7 +130,7 @@
 			<label class="control-label" for="currentTeacher">当前老师</label>
 			<div class="controls">
 			
-				<input type="text"  name="currentTeacher" id="currentTeacher" placeholder="请输入current_teacher" maxlength="19"/>
+				<input type="text"  name="currentTeacher" id="currentTeacher" placeholder="请输入当前老师" maxlength="19"/>
 				
 			</div>
 		</div>
@@ -146,8 +139,21 @@
 			<label class="control-label" for="level">等级</label>
 			<div class="controls">
 			
-				<input type="text"  name="level" id="level" placeholder="请输入level" maxlength="3"/>
-				
+        
+		<select class="forms_select input-medium" name="level" id="level">
+			
+				<option value="1">庶人</option>
+				<option value="2">童生</option>
+				<option value="3">秀才</option>
+				<option value="4">举人</option>
+				<option value="5">进士</option>
+				<option value="6">探花</option>
+				<option value="7">榜眼</option>
+				<option value="8">状元</option>
+		</select>
+	
+    
+
 			</div>
 		</div>
 		
@@ -155,8 +161,24 @@
 			<label class="control-label" for="cashPoint">积分</label>
 			<div class="controls">
 			
-				<input type="text"  name="cashPoint" id="cashPoint" placeholder="请输入cash_point" maxlength="19"/>
+				<input type="text"  name="cashPoint" id="cashPoint" placeholder="请输入积分" maxlength="19"/>
 				
+			</div>
+		</div>
+		
+		 <div class="control-group">
+			<label class="control-label" for="state">状态</label>
+			<div class="controls">
+			
+        
+		<select class="forms_select input-medium" name="state" id="state">
+			
+				<option value="1">有效</option>
+				<option value="2">无效</option>
+		</select>
+	
+    
+
 			</div>
 		</div>
 		
@@ -164,45 +186,44 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_User">保存</a>
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
+
+
 
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 userId:  {must: true, maxlength:50, ftip:'账户名,最多50个字符'},
-		 passwd:  {must: true, maxlength:50, ftip:'密码,最多50个字符'},
-		 userCode:  {must: true, maxlength:50, ftip:'用户code,最多50个字符'},
-		 nikeName:  {must: true, maxlength:50, ftip:'别名,最多50个字符'},
-		 roleType:  {must: true, maxlength:3, ftip:'角色，1,最多3个字符'},
-		 authorityLevel:  {must: true, maxlength:3, ftip:'权限等级,最多3个字符'},
-		 parentId:  {must: true, maxlength:19, ftip:'parent_id,最多19个字符'},
-		 activateCode:  {must: true, maxlength:50, ftip:'激活码,最多50个字符'},
-		 userState:  {must: true, maxlength:3, ftip:'用户状态,最多3个字符'},
-		 totalLoginTimes:  {must: true, maxlength:19, ftip:'登录次数,最多19个字符'},
-		 wordTrainingId:  {must: true, maxlength:50, ftip:'word_training_id,最多50个字符'},
-		 wordTrainingCode:  {must: true, maxlength:50, ftip:'word_training_code,最多50个字符'},
-		 currentClass:  {must: true, maxlength:19, ftip:'current_class,最多19个字符'},
-		 currentTeacher:  {must: true, maxlength:19, ftip:'current_teacher,最多19个字符'},
-		 level:  {must: true, maxlength:3, ftip:'level,最多3个字符'},
-		 cashPoint:  {must: true, maxlength:19, ftip:'cash_point,最多19个字符'}
+		 		userId:  {must: true, maxlength:50, ftip:'账户名,最多50个字符'},
+		passwd:  {must: true, maxlength:50, ftip:'密码,最多50个字符'},
+		userCode:  {must: true, maxlength:50, ftip:'用户code,最多50个字符'},
+		nikeName:  {must: false, maxlength:50, ftip:'别名,最多50个字符'},
+		roleType:  {must: false, maxlength:3, ftip:'角色,最多3个字符' ,handler:'int' },
+		authorityLevel:  {must: false, maxlength:3, ftip:'权限等级,最多3个字符' ,handler:'int' },
+		parentId:  {must: false, maxlength:19, ftip:'父ID,最多19个字符' ,handler:'int' },
+		activateCode:  {must: false, maxlength:50, ftip:'激活码,最多50个字符'},
+		userState:  {must: false, maxlength:3, ftip:'用户状态,最多3个字符' ,handler:'int' },
+		totalLoginTimes:  {must: false, maxlength:19, ftip:'登录次数,最多19个字符' ,handler:'int' },
+		currentClass:  {must: false, maxlength:19, ftip:'当前班级,最多19个字符' ,handler:'int' },
+		currentTeacher:  {must: false, maxlength:19, ftip:'当前老师,最多19个字符' ,handler:'int' },
+		level:  {must: false, maxlength:3, ftip:'等级,最多3个字符' ,handler:'int' },
+		cashPoint:  {must: false, maxlength:19, ftip:'积分,最多19个字符' ,handler:'int' },
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_add_User').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_add_User").serialize(),
 			set, 
-			'/user/doAdd',
+			'/user/doAdd.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				queryUserList(1);
 			}
 		);
 	});
 	
-	//form.friend.init(set);
 }(jQuery);
 </script>

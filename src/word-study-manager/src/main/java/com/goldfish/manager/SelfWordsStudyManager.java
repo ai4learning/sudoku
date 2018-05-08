@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.SelfWordsStudyManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.SelfWordsStudy;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * SelfWordsStudyManager接口类
+ * @since 2018-5-8
+ * 学生自身单词学习Manager接口类
  */
 public interface SelfWordsStudyManager {
  
@@ -50,21 +51,7 @@ public interface SelfWordsStudyManager {
     
 
 
-       
-    /**
-     * 取得所有SelfWordsStudy
-     * 
-     * @return
-     */
-    public List<SelfWordsStudy> getAll();
-    
-	/**
-     * 根据example取得SelfWordsStudy列表
-     * 
-     * @param  selfWordsStudy
-     * @return
-     */
-    public List<SelfWordsStudy> getListByExample(SelfWordsStudy selfWordsStudy);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface SelfWordsStudyManager {
     
 
     
+    /**
+     * 根据example取得SelfWordsStudy列表
+     * 
+     * @param  selfWordsStudy
+     * @return
+     */
+    public List<SelfWordsStudy> getListByExample(SelfWordsStudy selfWordsStudy);
 
 	/**
      * 分页取得SelfWordsStudy列表

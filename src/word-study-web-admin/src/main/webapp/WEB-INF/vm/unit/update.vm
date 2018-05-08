@@ -1,13 +1,13 @@
-
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"  id="update_unit">
+	<form class="form-horizontal"  id="form_update_Unit">
 	
 		 <div class="control-group">
 			<label class="control-label" for="id">ID</label>
 			<div class="controls">
 			
-				<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{unit.id}"readonly/>
+			<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{unit.id}"readonly/>
 			</div>
 		</div>
 		
@@ -15,7 +15,7 @@
 			<label class="control-label" for="moduleCode">单元CODE</label>
 			<div class="controls">
 			
-				<input type="text"  name="moduleCode" id="moduleCode" placeholder="请输入单元CODE" maxlength="50" value="$!{unit.moduleCode}"/>
+			<input type="text"  name="moduleCode" id="moduleCode" placeholder="请输入单元CODE" maxlength="50" value="$!{unit.moduleCode}"/>
 			</div>
 		</div>
 		
@@ -23,7 +23,7 @@
 			<label class="control-label" for="lessonId">课程ID</label>
 			<div class="controls">
 			
-				<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="19" value="$!{unit.lessonId}"/>
+			<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="19" value="$!{unit.lessonId}"/>
 			</div>
 		</div>
 		
@@ -31,7 +31,7 @@
 			<label class="control-label" for="unitNbr">单元号</label>
 			<div class="controls">
 			
-				<input type="text"  name="unitNbr" id="unitNbr" placeholder="请输入单元号" maxlength="3" value="$!{unit.unitNbr}"/>
+			<input type="text"  name="unitNbr" id="unitNbr" placeholder="请输入单元号" maxlength="3" value="$!{unit.unitNbr}"/>
 			</div>
 		</div>
 		
@@ -39,7 +39,7 @@
 			<label class="control-label" for="unit">单元名称</label>
 			<div class="controls">
 			
-				<input type="text"  name="unit" id="unit" placeholder="请输入单元名称" maxlength="20" value="$!{unit.unit}"/>
+			<input type="text"  name="unit" id="unit" placeholder="请输入单元名称" maxlength="20" value="$!{unit.unit}"/>
 			</div>
 		</div>
 		
@@ -47,7 +47,7 @@
 			<label class="control-label" for="totalWords">单元单词数</label>
 			<div class="controls">
 			
-				<input type="text"  name="totalWords" id="totalWords" placeholder="请输入单元单词数" maxlength="3" value="$!{unit.totalWords}"/>
+			<input type="text"  name="totalWords" id="totalWords" placeholder="请输入单元单词数" maxlength="3" value="$!{unit.totalWords}"/>
 			</div>
 		</div>
 		
@@ -55,14 +55,13 @@
 			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 				<option value="1" #if($unit.state==1) selected #end>有效</option>
 				<option value="2" #if($unit.state==2) selected #end>无效</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
@@ -71,8 +70,8 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存修改</a>
-	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-sm btn-primary" id="btn_update_Unit">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
 
@@ -80,25 +79,24 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 id:  {must: true, maxlength:19, ftip:'ID,最多19个字符'},
-		 moduleCode:  {must: true, maxlength:50, ftip:'单元CODE,最多50个字符'},
-		 lessonId:  {must: true, maxlength:19, ftip:'课程ID,最多19个字符'},
-		 unitNbr:  {must: true, maxlength:3, ftip:'单元号,最多3个字符'},
-		 unit:  {must: true, maxlength:20, ftip:'单元名称,最多20个字符'},
-		 totalWords:  {must: true, maxlength:3, ftip:'单元单词数,最多3个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
+		moduleCode:  {must: false, maxlength:50, ftip:'单元CODE,最多50个字符'},
+		lessonId:  {must: false, maxlength:19, ftip:'课程ID,最多19个字符' ,handler:'int' },
+		unitNbr:  {must: false, maxlength:3, ftip:'单元号,最多3个字符' ,handler:'int' },
+		unit:  {must: false, maxlength:20, ftip:'单元名称,最多20个字符'},
+		totalWords:  {must: false, maxlength:3, ftip:'单元单词数,最多3个字符' ,handler:'int' },
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_update_Unit').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_update_Unit").serialize(),
 			set, 
 			'/unit/doUpdate.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				queryUnitList(1);
 			}
 		);
 	});

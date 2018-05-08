@@ -1,15 +1,22 @@
+/**
+ * Copyright(c) 2004-2018 bianfeng
+ */
+
+
 package com.goldfish.domain;
 
 import java.io.Serializable;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * SelfWordsStudy Domain 类
+ * @since 2018-5-8
+ * 学生自身单词学习 Domain 类
  */
 public class SelfWordsStudy  implements Serializable {
 	
-  private static final long serialVersionUID = -1722439902345078010L;
+  private static final long serialVersionUID = 6453241747280886716L;
 	
 	/**  ID  */
 	private Long id; 
@@ -40,8 +47,10 @@ public class SelfWordsStudy  implements Serializable {
 	/**  状态  */
 	private Integer state; 
 	/**  创建时间  */
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date created; 
 	/**  修改时间  */
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date modified; 
 
   	public void setId(Long id) {

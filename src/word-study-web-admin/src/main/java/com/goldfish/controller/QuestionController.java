@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.controller.QuestionController.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.controller;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import com.goldfish.service.QuestionService;
 import com.goldfish.domain.Question;
 
 @Controller
-@RequestMapping("//question")
+@RequestMapping("/question")
 public class QuestionController extends BaseController {
 
 //	private final static Log log = LogFactory.getLog(QuestionAction.class);

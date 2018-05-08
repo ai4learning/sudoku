@@ -10,8 +10,8 @@ import com.goldfish.manager.ExamManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * ExamManager实现类
+ * @since 2018-5-8
+ * 考试Manager实现类
  */
  @Component("examManager")
 public class ExamManagerImpl implements ExamManager {
@@ -21,7 +21,8 @@ public class ExamManagerImpl implements ExamManager {
 
 
   public Exam addExam(Exam exam) {
-		return examDao.addExam(exam);
+		int i=examDao.addExam(exam);
+		return exam;
     }
     
     public void updateExam(Exam exam) {
@@ -41,22 +42,17 @@ public class ExamManagerImpl implements ExamManager {
     
    
 
-   
-    
-    public List<Exam> getAll() {
-    	return examDao.getAll();
-    }
-    	
-    public List<Exam> getListByExample(Exam exam) {
-		return examDao.getListByExample(exam);
-    }
 
-        public Exam getUnique(Exam exam) {
+    	
+   
+   public Exam getUnique(Exam exam) {
 		return examDao.getUnique(exam);
     }
 
     
-    
+ public List<Exam> getListByExample(Exam exam) {
+    return examDao.getListByExample(exam);
+    }
 
     
     public List<Exam> getExamByPage(PageQuery pageQuery) {

@@ -7,8 +7,8 @@ import com.goldfish.domain.WordStudy;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow WordStudyservice 接口
+ * @since 2018-5-8
+ * jshow 单词学习service 接口
  *
  */
 public interface WordStudyService {
@@ -48,20 +48,8 @@ public interface WordStudyService {
 
      
 
-    /**
-     * 取得所有WordStudy
-     * 
-     * @return
-     */
-    public CommonResult<List<WordStudy>> getAll();
-    
-	/**
-     * 根据example取得WordStudy列表
-     * 
-     * @param  wordStudy
-     * @return
-     */
-    public CommonResult<List<WordStudy>> getListByExample(WordStudy wordStudy);
+
+	
     
 	/**
      * 根据example取得唯一的WordStudy
@@ -71,9 +59,16 @@ public interface WordStudyService {
      */
     public CommonResult<WordStudy> getUnique(WordStudy wordStudy);
     
-    
 
 
+
+    /**
+     * 根据example取得WordStudy列表
+     * 
+     * @param  wordStudy
+     * @return
+     */
+    public CommonResult<List<WordStudy>> getListByExample(WordStudy wordStudy);
     
 
 	/**

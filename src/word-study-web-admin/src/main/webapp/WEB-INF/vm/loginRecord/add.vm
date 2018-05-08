@@ -1,8 +1,8 @@
-
+#set($layout='/WEB-INF/vm/layout/comLayout.vm')
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"   id="add_loginrecord">
+	<form class="form-horizontal"  id="form_add_LoginRecord">
 	
 		 <div class="control-group">
 			<label class="control-label" for="wordTrainingId">训练ID</label>
@@ -62,14 +62,14 @@
 			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -78,7 +78,7 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_LoginRecord">保存</a>
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
@@ -87,29 +87,27 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 wordTrainingId:  {must: true, maxlength:50, ftip:'训练ID,最多50个字符'},
-		 wordTraningCode:  {must: true, maxlength:50, ftip:'训练CODE,最多50个字符'},
-		 studyToken:  {must: true, maxlength:50, ftip:'学习token,最多50个字符'},
-		 userId:  {must: true, maxlength:10, ftip:'用户ID,最多10个字符'},
-		 userCode:  {must: true, maxlength:50, ftip:'用户CODE,最多50个字符'},
-		 userName:  {must: true, maxlength:50, ftip:'用户名,最多50个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		wordTrainingId:  {must: false, maxlength:50, ftip:'训练ID,最多50个字符'},
+		wordTraningCode:  {must: false, maxlength:50, ftip:'训练CODE,最多50个字符'},
+		studyToken:  {must: false, maxlength:50, ftip:'学习token,最多50个字符'},
+		userId:  {must: false, maxlength:10, ftip:'用户ID,最多10个字符' ,handler:'int' },
+		userCode:  {must: false, maxlength:50, ftip:'用户CODE,最多50个字符'},
+		userName:  {must: false, maxlength:50, ftip:'用户名,最多50个字符'},
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_add_LoginRecord').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_add_LoginRecord").serialize(),
 			set, 
 			'/loginRecord/doAdd.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				queryLoginRecordList(1);
 			}
 		);
 	});
 	
-	//form.friend.init(set);
 }(jQuery);
 </script>

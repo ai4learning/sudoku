@@ -7,8 +7,8 @@ import com.goldfish.domain.WordStudyStatistic;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow WordStudyStatisticservice 接口
+ * @since 2018-5-8
+ * jshow 单词学习统计service 接口
  *
  */
 public interface WordStudyStatisticService {
@@ -48,20 +48,8 @@ public interface WordStudyStatisticService {
 
      
 
-    /**
-     * 取得所有WordStudyStatistic
-     * 
-     * @return
-     */
-    public CommonResult<List<WordStudyStatistic>> getAll();
-    
-	/**
-     * 根据example取得WordStudyStatistic列表
-     * 
-     * @param  wordStudyStatistic
-     * @return
-     */
-    public CommonResult<List<WordStudyStatistic>> getListByExample(WordStudyStatistic wordStudyStatistic);
+
+	
     
 	/**
      * 根据example取得唯一的WordStudyStatistic
@@ -71,9 +59,16 @@ public interface WordStudyStatisticService {
      */
     public CommonResult<WordStudyStatistic> getUnique(WordStudyStatistic wordStudyStatistic);
     
-    
 
 
+
+    /**
+     * 根据example取得WordStudyStatistic列表
+     * 
+     * @param  wordStudyStatistic
+     * @return
+     */
+    public CommonResult<List<WordStudyStatistic>> getListByExample(WordStudyStatistic wordStudyStatistic);
     
 
 	/**

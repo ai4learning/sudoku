@@ -1,8 +1,9 @@
 
 /**
- * Copyright(c) 2013-  www.jd.com
- *
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.dao;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.SelfWords;
 import java.util.Map;
 /**
  * @author hellosscat
- * @since 2018-5-2
- * SelfWords Dao接口类
+ * @since 2018-5-8
+ * 学生自身单词 Dao接口类
  */
 public interface SelfWordsDao {
     
@@ -23,7 +24,7 @@ public interface SelfWordsDao {
      * @param selfWords
      * @return
      */
-    public SelfWords addSelfWords(SelfWords selfWords);
+    public int addSelfWords(SelfWords selfWords);
     
 	/**
      * 更新SelfWords
@@ -32,45 +33,29 @@ public interface SelfWordsDao {
      */
     public void updateSelfWords(SelfWords selfWords);
     
+    
+    
 
-
-    	
-	 /**
+    /**
      * 根据主键删除SelfWords
      * 
      * @param id
      */
     public void deleteSelfWords(Long id);
-    
 
-    	/**
+
+	/**
      * 根据主键获取SelfWords
      * 
      * @param id
      * @return
      */	
     public SelfWords getSelfWordsById(Long id);
+    
 
-   
 
-
-	
+    
     /**
-     * 取得所有SelfWords
-     * 
-     * @return
-     */
-    public List<SelfWords> getAll();
-    
-	/**
-     * 根据example取得SelfWords列表
-     * 
-     * @param  selfWords
-     * @return
-     */
-    public List<SelfWords> getListByExample(SelfWords selfWords);
-    
-    	/**
      * 根据example取得唯一的SelfWords
      * 
      * @param selfWords
@@ -79,24 +64,30 @@ public interface SelfWordsDao {
     public SelfWords getUnique(SelfWords selfWords);
     
 
-    
+
+    /**
+     * 根据example取得SelfWords列表
+     * 
+     * @param  selfWords
+     * @return
+     */
+    public List<SelfWords> getListByExample(SelfWords selfWords);
 
     
-
 	/**
      * 分页取得SelfWords列表
      * 
-     * @param params
+     * @param paramMap
      * @return
      */
-    public List<SelfWords> getSelfWordsByPage(Map<String,Object> params);
+    public List<SelfWords> getSelfWordsByPage(Map<String,Object> paramMap);
 	
 	/**
      * 根据查询条件返回数量
      * 
-     * @param params
+     * @param paramMap
      * @return
      */
-    public int count(Map<String,Object> params);
+    public int count(Map<String,Object> paramMap);
 
 }

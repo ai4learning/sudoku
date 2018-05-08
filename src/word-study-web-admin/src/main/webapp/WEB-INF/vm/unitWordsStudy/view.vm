@@ -1,174 +1,189 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#view_unitwordsstudy").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
 
 
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
-	
-		 <div class="control-group">
-			<label class="control-label" for="id">ID</label>
-			<div class="controls">
-			
-							<input type="text"  name="id" id="id" value="$!{unitWordsStudy.id}" readonly/>
+<div class="modal-body auto-height-body" id="view_unitwordsstudy">
+		<form class="form-horizontal"  id="form1">
+    	
+    		 <div class="control-group">
+    			<label class="control-label" for="id">ID</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="id" id="id" value="$!{unitWordsStudy.id}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="studentId">学生ID</label>
-			<div class="controls">
-			
-							<input type="text"  name="studentId" id="studentId" value="$!{unitWordsStudy.studentId}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="studentId">学生ID</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="studentId" id="studentId" value="$!{unitWordsStudy.studentId}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="studentCode">学生CODE</label>
-			<div class="controls">
-			
-							<input type="text"  name="studentCode" id="studentCode" value="$!{unitWordsStudy.studentCode}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="studentCode">学生CODE</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="studentCode" id="studentCode" value="$!{unitWordsStudy.studentCode}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="lessonId">课程ID</label>
-			<div class="controls">
-			
-							<input type="text"  name="lessonId" id="lessonId" value="$!{unitWordsStudy.lessonId}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="lessonId">课程ID</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="lessonId" id="lessonId" value="$!{unitWordsStudy.lessonId}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="unitNbr">课程号</label>
-			<div class="controls">
-			
-							<input type="text"  name="unitNbr" id="unitNbr" value="$!{unitWordsStudy.unitNbr}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="unitNbr">课程号</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="unitNbr" id="unitNbr" value="$!{unitWordsStudy.unitNbr}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="currentPhase">学习阶段</label>
-			<div class="controls">
-			
-	
-		<select class="forms_select" name="currentPhase" id="currentPhase" disabled>
-				<option value="1" #if($unitWordsStudy.currentPhase==1) selected  #end>分批学习</option>
+    		 <div class="control-group">
+    			<label class="control-label" for="currentPhase">学习阶段</label>
+    			<div class="controls">
+    			
+        
+		<select class="forms_select input-medium form-control" name="currentPhase" id="currentPhase" disabled>
+						<option value="1" #if($unitWordsStudy.currentPhase==1) selected  #end>分批学习</option>
 				<option value="2" #if($unitWordsStudy.currentPhase==2) selected  #end>整体回忆</option>
 				<option value="3" #if($unitWordsStudy.currentPhase==3) selected  #end>单元测试</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="totalReadingTime">总读时间</label>
-			<div class="controls">
-			
-							<input type="text"  name="totalReadingTime" id="totalReadingTime" value="$!{unitWordsStudy.totalReadingTime}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="totalReadingTime">总读时间</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="totalReadingTime" id="totalReadingTime" value="$!{unitWordsStudy.totalReadingTime}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="totalWritingTime">总写时间</label>
-			<div class="controls">
-			
-							<input type="text"  name="totalWritingTime" id="totalWritingTime" value="$!{unitWordsStudy.totalWritingTime}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="totalWritingTime">总写时间</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="totalWritingTime" id="totalWritingTime" value="$!{unitWordsStudy.totalWritingTime}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="totalNumber">总学习单词数</label>
-			<div class="controls">
-			
-							<input type="text"  name="totalNumber" id="totalNumber" value="$!{unitWordsStudy.totalNumber}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="totalNumber">总学习单词数</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="totalNumber" id="totalNumber" value="$!{unitWordsStudy.totalNumber}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="isFinished">是否学习完成</label>
-			<div class="controls">
-			
-	
-		<select class="forms_select" name="isFinished" id="isFinished" disabled>
-				<option value="1" #if($unitWordsStudy.isFinished==1) selected  #end>未完成</option>
+    		 <div class="control-group">
+    			<label class="control-label" for="isFinished">是否学习完成</label>
+    			<div class="controls">
+    			
+        
+		<select class="forms_select input-medium form-control" name="isFinished" id="isFinished" disabled>
+						<option value="1" #if($unitWordsStudy.isFinished==1) selected  #end>未完成</option>
 				<option value="2" #if($unitWordsStudy.isFinished==2) selected  #end>已完成</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="isTested">是否测试完成</label>
-			<div class="controls">
-			
-	
-		<select class="forms_select" name="isTested" id="isTested" disabled>
-				<option value="1" #if($unitWordsStudy.isTested==1) selected  #end>未完成</option>
+    		 <div class="control-group">
+    			<label class="control-label" for="isTested">是否测试完成</label>
+    			<div class="controls">
+    			
+        
+		<select class="forms_select input-medium form-control" name="isTested" id="isTested" disabled>
+						<option value="1" #if($unitWordsStudy.isTested==1) selected  #end>未完成</option>
 				<option value="2" #if($unitWordsStudy.isTested==2) selected  #end>已完成</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="studyPos">单词学习位置</label>
-			<div class="controls">
-			
-							<input type="text"  name="studyPos" id="studyPos" value="$!{unitWordsStudy.studyPos}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="studyPos">单词学习位置</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="studyPos" id="studyPos" value="$!{unitWordsStudy.studyPos}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="state">状态</label>
-			<div class="controls">
-			
-	
-		<select class="forms_select" name="state" id="state" disabled>
-				<option value="1" #if($unitWordsStudy.state==1) selected  #end>有效</option>
+    		 <div class="control-group">
+    			<label class="control-label" for="state">状态</label>
+    			<div class="controls">
+    			
+        
+		<select class="forms_select input-medium form-control" name="state" id="state" disabled>
+						<option value="1" #if($unitWordsStudy.state==1) selected  #end>有效</option>
 				<option value="2" #if($unitWordsStudy.state==2) selected  #end>无效</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="created">创建时间</label>
-			<div class="controls">
-			
-							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!unitWordsStudy.created)" readonly/>
-						
+    		 <div class="control-group">
+    			<label class="control-label" for="created">创建时间</label>
+    			<div class="controls">
+    			
+						<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!unitWordsStudy.created)" readonly/>
+					
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="modified">修改时间</label>
-			<div class="controls">
-			
-							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!unitWordsStudy.modified)" readonly/>
-						
+    		 <div class="control-group">
+    			<label class="control-label" for="modified">修改时间</label>
+    			<div class="controls">
+    			
+						<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!unitWordsStudy.modified)" readonly/>
+					
 			</div>
 		</div>
 		
 
-	</form>
+    	</form>
 </div>
 <div class="modal-footer">
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>

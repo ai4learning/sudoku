@@ -25,7 +25,7 @@
 			<td>$!item.lessonId</td>
 			<td>$!dateFormatUtils.format($!item.expireTime)</td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">正常</span> #end	
 			
@@ -34,7 +34,7 @@
 				#if($item.state==3)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -57,7 +57,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryActivateCodeList','input')
 		#end
 
 	</div>
@@ -69,18 +69,18 @@
 void function(j) {	
 	j('.JDelete-activateCode').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除ActivateCode',info:'您确定要删除ActivateCode吗？',url: '/activateCode/doDelete',param:'id='+id};
+		var config={title:'删除激活码',info:'您确定要删除激活码吗？',queryList:"queryActivateCodeList",url: '/activateCode/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-activateCode').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改ActivateCode', url: '/activateCode/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改激活码', url: '/activateCode/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-activateCode').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看ActivateCode', url: '/activateCode/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看激活码', url: '/activateCode/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

@@ -10,8 +10,8 @@ import com.goldfish.manager.UnitWordsManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * UnitWordsManager实现类
+ * @since 2018-5-8
+ * 单元单词Manager实现类
  */
  @Component("unitWordsManager")
 public class UnitWordsManagerImpl implements UnitWordsManager {
@@ -21,7 +21,8 @@ public class UnitWordsManagerImpl implements UnitWordsManager {
 
 
   public UnitWords addUnitWords(UnitWords unitWords) {
-		return unitWordsDao.addUnitWords(unitWords);
+		int i=unitWordsDao.addUnitWords(unitWords);
+		return unitWords;
     }
     
     public void updateUnitWords(UnitWords unitWords) {
@@ -41,22 +42,17 @@ public class UnitWordsManagerImpl implements UnitWordsManager {
     
    
 
-   
-    
-    public List<UnitWords> getAll() {
-    	return unitWordsDao.getAll();
-    }
-    	
-    public List<UnitWords> getListByExample(UnitWords unitWords) {
-		return unitWordsDao.getListByExample(unitWords);
-    }
 
-        public UnitWords getUnique(UnitWords unitWords) {
+    	
+   
+   public UnitWords getUnique(UnitWords unitWords) {
 		return unitWordsDao.getUnique(unitWords);
     }
 
     
-    
+ public List<UnitWords> getListByExample(UnitWords unitWords) {
+    return unitWordsDao.getListByExample(unitWords);
+    }
 
     
     public List<UnitWords> getUnitWordsByPage(PageQuery pageQuery) {

@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.PaperManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.Paper;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * PaperManager接口类
+ * @since 2018-5-8
+ * 试卷Manager接口类
  */
 public interface PaperManager {
  
@@ -50,21 +51,7 @@ public interface PaperManager {
     
 
 
-       
-    /**
-     * 取得所有Paper
-     * 
-     * @return
-     */
-    public List<Paper> getAll();
-    
-	/**
-     * 根据example取得Paper列表
-     * 
-     * @param  paper
-     * @return
-     */
-    public List<Paper> getListByExample(Paper paper);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface PaperManager {
     
 
     
+    /**
+     * 根据example取得Paper列表
+     * 
+     * @param  paper
+     * @return
+     */
+    public List<Paper> getListByExample(Paper paper);
 
 	/**
      * 分页取得Paper列表

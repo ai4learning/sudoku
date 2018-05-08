@@ -1,98 +1,113 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#view_unit").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
 
 
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
-	
-		 <div class="control-group">
-			<label class="control-label" for="id">ID</label>
-			<div class="controls">
-			
-							<input type="text"  name="id" id="id" value="$!{unit.id}" readonly/>
+<div class="modal-body auto-height-body" id="view_unit">
+		<form class="form-horizontal"  id="form1">
+    	
+    		 <div class="control-group">
+    			<label class="control-label" for="id">ID</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="id" id="id" value="$!{unit.id}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="moduleCode">单元CODE</label>
-			<div class="controls">
-			
-							<input type="text"  name="moduleCode" id="moduleCode" value="$!{unit.moduleCode}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="moduleCode">单元CODE</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="moduleCode" id="moduleCode" value="$!{unit.moduleCode}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="lessonId">课程ID</label>
-			<div class="controls">
-			
-							<input type="text"  name="lessonId" id="lessonId" value="$!{unit.lessonId}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="lessonId">课程ID</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="lessonId" id="lessonId" value="$!{unit.lessonId}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="unitNbr">单元号</label>
-			<div class="controls">
-			
-							<input type="text"  name="unitNbr" id="unitNbr" value="$!{unit.unitNbr}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="unitNbr">单元号</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="unitNbr" id="unitNbr" value="$!{unit.unitNbr}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="unit">单元名称</label>
-			<div class="controls">
-			
-							<input type="text"  name="unit" id="unit" value="$!{unit.unit}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="unit">单元名称</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="unit" id="unit" value="$!{unit.unit}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="totalWords">单元单词数</label>
-			<div class="controls">
-			
-							<input type="text"  name="totalWords" id="totalWords" value="$!{unit.totalWords}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="totalWords">单元单词数</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="totalWords" id="totalWords" value="$!{unit.totalWords}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="state">状态</label>
-			<div class="controls">
-			
-	
-		<select class="forms_select" name="state" id="state" disabled>
-				<option value="1" #if($unit.state==1) selected  #end>有效</option>
+    		 <div class="control-group">
+    			<label class="control-label" for="state">状态</label>
+    			<div class="controls">
+    			
+        
+		<select class="forms_select input-medium form-control" name="state" id="state" disabled>
+						<option value="1" #if($unit.state==1) selected  #end>有效</option>
 				<option value="2" #if($unit.state==2) selected  #end>无效</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="created">创建时间</label>
-			<div class="controls">
-			
-							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!unit.created)" readonly/>
-						
+    		 <div class="control-group">
+    			<label class="control-label" for="created">创建时间</label>
+    			<div class="controls">
+    			
+						<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!unit.created)" readonly/>
+					
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="modified">修改时间</label>
-			<div class="controls">
-			
-							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!unit.modified)" readonly/>
-						
+    		 <div class="control-group">
+    			<label class="control-label" for="modified">修改时间</label>
+    			<div class="controls">
+    			
+						<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!unit.modified)" readonly/>
+					
 			</div>
 		</div>
 		
 
-	</form>
+    	</form>
 </div>
 <div class="modal-footer">
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>

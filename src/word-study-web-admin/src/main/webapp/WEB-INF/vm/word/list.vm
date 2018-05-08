@@ -31,14 +31,14 @@
 			<td>$!item.wordType</td>
 			<td>$!item.mediaUri</td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -61,7 +61,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryWordList','input')
 		#end
 
 	</div>
@@ -73,18 +73,18 @@
 void function(j) {	
 	j('.JDelete-word').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除Word',info:'您确定要删除Word吗？',url: '/word/doDelete',param:'id='+id};
+		var config={title:'删除单词库',info:'您确定要删除单词库吗？',queryList:"queryWordList",url: '/word/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-word').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改Word', url: '/word/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改单词库', url: '/word/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-word').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看Word', url: '/word/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看单词库', url: '/word/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

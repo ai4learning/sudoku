@@ -1,47 +1,69 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
-
-<div class="manage-content">
-<form class="form-inline">
-
-
-		<label>ID</label>
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
 			
-			<input type="text"  name="id" id="id_search" class="input" placeholder="请输入ID">
+				jQuery("#search_course").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
+
+
+<div class="manage-content"  id="search_course">
+<form class="form-inline" id="searchForm_Course" onsubmit="return false;">
+
+
+		<label for="id">ID</label>
+			
+			<input type="text"  name="id" id="id_search" class="input input-medium" placeholder="请输入ID">
 			
 
 		
-		<label>课程类型</label>
+		<label for="type">课程类型</label>
 			
-	
-		<select class="forms_select" name="type" id="type_search">
+        
+		<select class="forms_select input-medium" name="type" id="type_search">
 			<option value="">全部</option>
 			
 				<option value="1">教材</option>
 				<option value="2">错词本</option>
 		</select>
 	
-	
+    
 
 
 		
-		<label>课程类型</label>
+		<label for="bookName">课程名</label>
 			
-	
-		<select class="forms_select" name="bookType" id="bookType_search">
+			<input type="text"  name="bookName" id="bookName_search" class="input input-medium" placeholder="请输入课程名">
+			
+
+		
+		<label for="bookType">课程类型</label>
+			
+        
+		<select class="forms_select input-medium" name="bookType" id="bookType_search">
 			<option value="">全部</option>
 			
 				<option value="1">教材</option>
 				<option value="2">特色</option>
 		</select>
 	
-	
+    
 
 
 		
-		<label>年级类型</label>
+		<label for="orderType">年级类型</label>
 			
-	
-		<select class="forms_select" name="orderType" id="orderType_search">
+        
+		<select class="forms_select input-medium" name="orderType" id="orderType_search">
 			<option value="">全部</option>
 			
 				<option value="0">无</option>
@@ -51,44 +73,44 @@
 				<option value="4">大学</option>
 		</select>
 	
-	
+    
 
 
 		
-		<label>课程状态</label>
+		<label for="bookState">课程状态</label>
 			
-	
-		<select class="forms_select" name="bookState" id="bookState_search">
+        
+		<select class="forms_select input-medium" name="bookState" id="bookState_search">
 			<option value="">全部</option>
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
 
 		
-		<label>单元类型</label>
+		<label for="unitType">单元类型</label>
 			
-			<input type="text"  name="unitType" id="unitType_search" class="input" placeholder="请输入单元类型">
+			<input type="text"  name="unitType" id="unitType_search" class="input input-medium" placeholder="请输入单元类型">
 			
 
 		
-		<input type="button" onclick="queryList();" class="btn" value="搜索"  />
+		<input type="button" onclick="queryCourseList();" class="btn" value="搜索"  />
 
 	</form>
 		
 <br/>
 		 <div class="page_operate">
-			 <button class="btn  btn-primary" type="button" id="add-course">创建 Course</button>
+			 <button class="btn  btn-primary" type="button" id="add-course">创建 课程</button>
 		</div>
 
 
-	<div id="dl"></div>
+	<div id="dl_Course"></div>
 </div>
 <script language="javascript">
-	function queryList(pageNo) {	
+	function queryCourseList(pageNo) {
 		if (!pageNo) {
 			pageNo = 1;
 		}
@@ -103,52 +125,17 @@
             param['pageSize']=pageSize;
         }
 
-		getOtherParams(param);
-		gUtils.fGetHtml(url, 'dl', param,'数据加载中...');
+		gUtils.fMergeParam(param,"searchForm_Course");
+		gUtils.fGetHtml(url, 'dl_Course', param,'数据加载中...');
 	}
-	queryList();
-	
-
-	function getOtherParams(param){
-   
-	  	var id_search=jQuery("#id_search").val();
-		if(id_search!=null&&id_search!=''){
-				param.id=id_search;
-			}
-			 
-	  	var type_search=jQuery("#type_search").val();
-		if(type_search!=null&&type_search!=''){
-				param.type=type_search;
-			}
-			 
-	  	var bookType_search=jQuery("#bookType_search").val();
-		if(bookType_search!=null&&bookType_search!=''){
-				param.bookType=bookType_search;
-			}
-			 
-	  	var orderType_search=jQuery("#orderType_search").val();
-		if(orderType_search!=null&&orderType_search!=''){
-				param.orderType=orderType_search;
-			}
-			 
-	  	var bookState_search=jQuery("#bookState_search").val();
-		if(bookState_search!=null&&bookState_search!=''){
-				param.bookState=bookState_search;
-			}
-			 
-	  	var unitType_search=jQuery("#unitType_search").val();
-		if(unitType_search!=null&&unitType_search!=''){
-				param.unitType=unitType_search;
-			}
-					
-	}
+	queryCourseList();
 
 
 
 
 void function(j) {
 	jQuery("#add-course").click(function(){
-		gDialog.fCreate({title: '创建 Course', url: '/course/add.action',width:700}).show();
+		gDialog.fCreate({title: '创建 课程', url: '/course/add.action',width:700}).show();
 	});
 	
 }(jQuery);

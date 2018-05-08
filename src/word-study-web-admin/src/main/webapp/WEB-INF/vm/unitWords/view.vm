@@ -1,139 +1,154 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#view_unitwords").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
 
-
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+	</script>
 	
-		 <div class="control-group">
-			<label class="control-label" for="id">ID</label>
-			<div class="controls">
-			
-							<input type="text"  name="id" id="id" value="$!{unitWords.id}" readonly/>
-				
-			</div>
-		</div>
-		
-		 <div class="control-group">
-			<label class="control-label" for="unitCode">单元CODE</label>
-			<div class="controls">
-			
-							<input type="text"  name="unitCode" id="unitCode" value="$!{unitWords.unitCode}" readonly/>
-				
-			</div>
-		</div>
-		
-		 <div class="control-group">
-			<label class="control-label" for="lessonId">课程ID</label>
-			<div class="controls">
-			
-							<input type="text"  name="lessonId" id="lessonId" value="$!{unitWords.lessonId}" readonly/>
-				
-			</div>
-		</div>
-		
-		 <div class="control-group">
-			<label class="control-label" for="unitNbr">单元号</label>
-			<div class="controls">
-			
-							<input type="text"  name="unitNbr" id="unitNbr" value="$!{unitWords.unitNbr}" readonly/>
-				
-			</div>
-		</div>
-		
-		 <div class="control-group">
-			<label class="control-label" for="fstClassId">单词归类</label>
-			<div class="controls">
-			
-							<input type="text"  name="fstClassId" id="fstClassId" value="$!{unitWords.fstClassId}" readonly/>
-				
-			</div>
-		</div>
-		
-		 <div class="control-group">
-			<label class="control-label" for="unit">单元名</label>
-			<div class="controls">
-			
-							<input type="text"  name="unit" id="unit" value="$!{unitWords.unit}" readonly/>
-				
-			</div>
-		</div>
-		
-		 <div class="control-group">
-			<label class="control-label" for="vocCode">单词CODE</label>
-			<div class="controls">
-			
-							<input type="text"  name="vocCode" id="vocCode" value="$!{unitWords.vocCode}" readonly/>
-				
-			</div>
-		</div>
-		
-		 <div class="control-group">
-			<label class="control-label" for="vocIndex">单词索引号</label>
-			<div class="controls">
-			
-	
-		<select class="forms_select" name="vocIndex" id="vocIndex" disabled>
+    
 
+
+<div class="modal-body auto-height-body" id="view_unitwords">
+		<form class="form-horizontal"  id="form1">
+    	
+    		 <div class="control-group">
+    			<label class="control-label" for="id">ID</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="id" id="id" value="$!{unitWords.id}" readonly/>
+				
+			</div>
+		</div>
+		
+    		 <div class="control-group">
+    			<label class="control-label" for="unitCode">单元CODE</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="unitCode" id="unitCode" value="$!{unitWords.unitCode}" readonly/>
+				
+			</div>
+		</div>
+		
+    		 <div class="control-group">
+    			<label class="control-label" for="lessonId">课程ID</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="lessonId" id="lessonId" value="$!{unitWords.lessonId}" readonly/>
+				
+			</div>
+		</div>
+		
+    		 <div class="control-group">
+    			<label class="control-label" for="unitNbr">单元号</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="unitNbr" id="unitNbr" value="$!{unitWords.unitNbr}" readonly/>
+				
+			</div>
+		</div>
+		
+    		 <div class="control-group">
+    			<label class="control-label" for="fstClassId">单词归类</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="fstClassId" id="fstClassId" value="$!{unitWords.fstClassId}" readonly/>
+				
+			</div>
+		</div>
+		
+    		 <div class="control-group">
+    			<label class="control-label" for="unit">单元名</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="unit" id="unit" value="$!{unitWords.unit}" readonly/>
+				
+			</div>
+		</div>
+		
+    		 <div class="control-group">
+    			<label class="control-label" for="vocCode">单词CODE</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="vocCode" id="vocCode" value="$!{unitWords.vocCode}" readonly/>
+				
+			</div>
+		</div>
+		
+    		 <div class="control-group">
+    			<label class="control-label" for="vocIndex">单词索引号</label>
+    			<div class="controls">
+    			
+        
+		<select class="forms_select input-medium form-control" name="vocIndex" id="vocIndex" disabled>
+		
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="wordId">单词ID</label>
-			<div class="controls">
-			
-							<input type="text"  name="wordId" id="wordId" value="$!{unitWords.wordId}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="wordId">单词ID</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="wordId" id="wordId" value="$!{unitWords.wordId}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="spelling">拼写</label>
-			<div class="controls">
-			
-							<input type="text"  name="spelling" id="spelling" value="$!{unitWords.spelling}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="spelling">拼写</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="spelling" id="spelling" value="$!{unitWords.spelling}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="state">状态</label>
-			<div class="controls">
-			
-	
-		<select class="forms_select" name="state" id="state" disabled>
-				<option value="1" #if($unitWords.state==1) selected  #end>有效</option>
+    		 <div class="control-group">
+    			<label class="control-label" for="state">状态</label>
+    			<div class="controls">
+    			
+        
+		<select class="forms_select input-medium form-control" name="state" id="state" disabled>
+						<option value="1" #if($unitWords.state==1) selected  #end>有效</option>
 				<option value="2" #if($unitWords.state==2) selected  #end>无效</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="created">创建时间</label>
-			<div class="controls">
-			
-							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!unitWords.created)" readonly/>
-						
+    		 <div class="control-group">
+    			<label class="control-label" for="created">创建时间</label>
+    			<div class="controls">
+    			
+						<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!unitWords.created)" readonly/>
+					
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="modified">修改时间</label>
-			<div class="controls">
-			
-							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!unitWords.modified)" readonly/>
-						
+    		 <div class="control-group">
+    			<label class="control-label" for="modified">修改时间</label>
+    			<div class="controls">
+    			
+						<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!unitWords.modified)" readonly/>
+					
 			</div>
 		</div>
 		
 
-	</form>
+    	</form>
 </div>
 <div class="modal-footer">
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>

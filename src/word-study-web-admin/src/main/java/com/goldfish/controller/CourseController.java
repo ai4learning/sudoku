@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.controller.CourseController.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.controller;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import com.goldfish.service.CourseService;
 import com.goldfish.domain.Course;
 
 @Controller
-@RequestMapping("//course")
+@RequestMapping("/course")
 public class CourseController extends BaseController {
 
 //	private final static Log log = LogFactory.getLog(CourseAction.class);

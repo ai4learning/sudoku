@@ -29,7 +29,7 @@
 		   <tr>
 				 			<td>$!item.id</td>
 			<td>
-	
+        
 			
 				#if($item.questionType==0)<span class="">英译汉</span> #end	
 			
@@ -40,7 +40,7 @@
 				#if($item.questionType==4)<span class="">听写</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.lessonId</td>
 			<td>$!item.unitNbr</td>
 			<td>$!item.wordId</td>
@@ -50,7 +50,7 @@
 			<td>$!item.choices</td>
 			<td>$!item.answerIndex</td>
 			<td>
-	
+        
 			
 				#if($item.level==0)<span class="">未知</span> #end	
 			
@@ -61,16 +61,16 @@
 				#if($item.level==3)<span class="">较难</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -93,7 +93,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryQuestionList','input')
 		#end
 
 	</div>
@@ -105,18 +105,18 @@
 void function(j) {	
 	j('.JDelete-question').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除Question',info:'您确定要删除Question吗？',url: '/question/doDelete',param:'id='+id};
+		var config={title:'删除试题',info:'您确定要删除试题吗？',queryList:"queryQuestionList",url: '/question/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-question').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改Question', url: '/question/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改试题', url: '/question/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-question').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看Question', url: '/question/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看试题', url: '/question/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

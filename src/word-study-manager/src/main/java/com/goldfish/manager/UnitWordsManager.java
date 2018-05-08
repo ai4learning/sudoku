@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.UnitWordsManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.UnitWords;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * UnitWordsManager接口类
+ * @since 2018-5-8
+ * 单元单词Manager接口类
  */
 public interface UnitWordsManager {
  
@@ -50,21 +51,7 @@ public interface UnitWordsManager {
     
 
 
-       
-    /**
-     * 取得所有UnitWords
-     * 
-     * @return
-     */
-    public List<UnitWords> getAll();
-    
-	/**
-     * 根据example取得UnitWords列表
-     * 
-     * @param  unitWords
-     * @return
-     */
-    public List<UnitWords> getListByExample(UnitWords unitWords);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface UnitWordsManager {
     
 
     
+    /**
+     * 根据example取得UnitWords列表
+     * 
+     * @param  unitWords
+     * @return
+     */
+    public List<UnitWords> getListByExample(UnitWords unitWords);
 
 	/**
      * 分页取得UnitWords列表

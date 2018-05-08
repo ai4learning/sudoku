@@ -1,8 +1,8 @@
-
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"   id="add_wordstudy">
+	<form class="form-horizontal"  id="form_add_WordStudy">
 	
 		 <div class="control-group">
 			<label class="control-label" for="vocCode">单词CODE</label>
@@ -53,15 +53,15 @@
 			<label class="control-label" for="memoryLevel">记忆等级</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="memoryLevel" id="memoryLevel">
+        
+		<select class="forms_select input-medium" name="memoryLevel" id="memoryLevel">
 			
 				<option value="1">生词</option>
 				<option value="2">熟词</option>
 				<option value="3">半生熟</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -97,13 +97,13 @@
 			<label class="control-label" for="isFstReadSuccess">是否第一次就读成功</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="isFstReadSuccess" id="isFstReadSuccess">
+        
+		<select class="forms_select input-medium" name="isFstReadSuccess" id="isFstReadSuccess">
 			
 				<option value="0">否；1.是；</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -130,14 +130,14 @@
 			<label class="control-label" for="isHalfReading">是否半读</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="isHalfReading" id="isHalfReading">
+        
+		<select class="forms_select input-medium" name="isHalfReading" id="isHalfReading">
 			
 				<option value="0">否</option>
 				<option value="1">是</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -146,14 +146,14 @@
 			<label class="control-label" for="isFstSpellSuccess">是否第一个就拼写成功</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="isFstSpellSuccess" id="isFstSpellSuccess">
+        
+		<select class="forms_select input-medium" name="isFstSpellSuccess" id="isFstSpellSuccess">
 			
 				<option value="0">否</option>
 				<option value="1">是</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -180,13 +180,13 @@
 			<label class="control-label" for="isHalfSpelling">是否为半写</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="isHalfSpelling" id="isHalfSpelling">
+        
+		<select class="forms_select input-medium" name="isHalfSpelling" id="isHalfSpelling">
 			
 				<option value="0">否；1.是；</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -195,13 +195,13 @@
 			<label class="control-label" for="isRemember">是否记住</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="isRemember" id="isRemember">
+        
+		<select class="forms_select input-medium" name="isRemember" id="isRemember">
 			
 				<option value="0">否；1.是；</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -210,13 +210,13 @@
 			<label class="control-label" for="isCancelReview">是否取消复习</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="isCancelReview" id="isCancelReview">
+        
+		<select class="forms_select input-medium" name="isCancelReview" id="isCancelReview">
 			
 				<option value="0">否；1.是；</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -225,13 +225,13 @@
 			<label class="control-label" for="iscollected">是否被收藏</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="iscollected" id="iscollected">
+        
+		<select class="forms_select input-medium" name="iscollected" id="iscollected">
 			
 				<option value="0">否；1.是；</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -240,14 +240,14 @@
 			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -256,7 +256,7 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_WordStudy">保存</a>
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
@@ -265,43 +265,41 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 vocCode:  {must: true, maxlength:50, ftip:'单词CODE,最多50个字符'},
-		 userVocCode:  {must: true, maxlength:50, ftip:'用户单词CODE,最多50个字符'},
-		 spell:  {must: true, maxlength:128, ftip:'单词拼写,最多128个字符'},
-		 studentId:  {must: true, maxlength:10, ftip:'学生ID,最多10个字符'},
-		 userCode:  {must: true, maxlength:50, ftip:'用户CODE,最多50个字符'},
-		 memoryLevel:  {must: true, maxlength:3, ftip:'记忆等级,最多3个字符'},
-		 reviewTimes:  {must: true, maxlength:3, ftip:'复习次数,最多3个字符'},
-		 timeLeft:  {must: true, maxlength:19, ftip:'剩余时间,最多19个字符'},
-		 finishReadingTime:  {must: true, maxlength:19, ftip:'完成阅读时间,最多19个字符'},
-		 isFstReadSuccess:  {must: true, maxlength:1, ftip:'是否第一次就读成功,最多1个字符'},
-		 readFailTimes:  {must: true, maxlength:3, ftip:'读失败次数,最多3个字符'},
-		 continueReadFailTimes:  {must: true, maxlength:3, ftip:'持续读失败次数,最多3个字符'},
-		 isHalfReading:  {must: true, maxlength:1, ftip:'是否半读,最多1个字符'},
-		 isFstSpellSuccess:  {must: true, maxlength:1, ftip:'是否第一个就拼写成功,最多1个字符'},
-		 spellFailTimes:  {must: true, maxlength:3, ftip:'拼写错误次数,最多3个字符'},
-		 continueSpellFailTimes:  {must: true, maxlength:3, ftip:'连续拼写错误次数,最多3个字符'},
-		 isHalfSpelling:  {must: true, maxlength:1, ftip:'是否为半写,最多1个字符'},
-		 isRemember:  {must: true, maxlength:1, ftip:'是否记住,最多1个字符'},
-		 isCancelReview:  {must: true, maxlength:1, ftip:'是否取消复习,最多1个字符'},
-		 iscollected:  {must: true, maxlength:1, ftip:'是否被收藏,最多1个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		vocCode:  {must: false, maxlength:50, ftip:'单词CODE,最多50个字符'},
+		userVocCode:  {must: false, maxlength:50, ftip:'用户单词CODE,最多50个字符'},
+		spell:  {must: false, maxlength:128, ftip:'单词拼写,最多128个字符'},
+		studentId:  {must: false, maxlength:10, ftip:'学生ID,最多10个字符' ,handler:'int' },
+		userCode:  {must: false, maxlength:50, ftip:'用户CODE,最多50个字符'},
+		memoryLevel:  {must: false, maxlength:3, ftip:'记忆等级,最多3个字符' ,handler:'int' },
+		reviewTimes:  {must: false, maxlength:3, ftip:'复习次数,最多3个字符' ,handler:'int' },
+		timeLeft:  {must: false, maxlength:19, ftip:'剩余时间,最多19个字符' ,handler:'int' },
+		finishReadingTime:  {must: false, maxlength:19, ftip:'完成阅读时间,最多19个字符' ,handler:'int' },
+		isFstReadSuccess:  {must: false, maxlength:1, ftip:'是否第一次就读成功,最多1个字符'},
+		readFailTimes:  {must: false, maxlength:3, ftip:'读失败次数,最多3个字符' ,handler:'int' },
+		continueReadFailTimes:  {must: false, maxlength:3, ftip:'持续读失败次数,最多3个字符' ,handler:'int' },
+		isHalfReading:  {must: false, maxlength:1, ftip:'是否半读,最多1个字符'},
+		isFstSpellSuccess:  {must: false, maxlength:1, ftip:'是否第一个就拼写成功,最多1个字符'},
+		spellFailTimes:  {must: false, maxlength:3, ftip:'拼写错误次数,最多3个字符' ,handler:'int' },
+		continueSpellFailTimes:  {must: false, maxlength:3, ftip:'连续拼写错误次数,最多3个字符' ,handler:'int' },
+		isHalfSpelling:  {must: false, maxlength:1, ftip:'是否为半写,最多1个字符'},
+		isRemember:  {must: false, maxlength:1, ftip:'是否记住,最多1个字符'},
+		isCancelReview:  {must: false, maxlength:1, ftip:'是否取消复习,最多1个字符'},
+		iscollected:  {must: false, maxlength:1, ftip:'是否被收藏,最多1个字符'},
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_add_WordStudy').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_add_WordStudy").serialize(),
 			set, 
 			'/wordStudy/doAdd.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				queryWordStudyList(1);
 			}
 		);
 	});
 	
-	//form.friend.init(set);
 }(jQuery);
 </script>

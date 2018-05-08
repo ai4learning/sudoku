@@ -36,71 +36,71 @@
 			<td>$!item.studentCode</td>
 			<td>$!item.lessonId</td>
 			<td>
-	
+        
 			
 				#if($item.isCurrentPos==1)<span class="">是；2.否；</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.studyPositionCode</td>
 			<td>
-	
+        
 			
 				#if($item.positionType==1)<span class="">单词</span> #end	
 			
 				#if($item.positionType==2)<span class="">单元</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.unitNbr</td>
 			<td>$!item.vocCode</td>
 			<td>$!item.startFrom</td>
 			<td>
-	
+        
 			
 				#if($item.studyMode==0)<span class="">逆向学习</span> #end	
 			
 				#if($item.studyMode==1)<span class="">正向学习</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.completeWordCount</td>
 			<td>
-	
+        
 			
 				#if($item.isFinished==0)<span class="">未完成</span> #end	
 			
 				#if($item.isFinished==1)<span class="">已完成</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.isTest==0)<span class="">未完成</span> #end	
 			
 				#if($item.isTest==1)<span class="">已完成</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.isAllFinished==0)<span class="">未完成</span> #end	
 			
 				#if($item.isAllFinished==1)<span class="">已完成</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.status==0)<span class="">有效</span> #end	
 			
 				#if($item.status==1)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -123,7 +123,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryCourseStudyList','input')
 		#end
 
 	</div>
@@ -135,18 +135,18 @@
 void function(j) {	
 	j('.JDelete-courseStudy').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除CourseStudy',info:'您确定要删除CourseStudy吗？',url: '/courseStudy/doDelete',param:'id='+id};
+		var config={title:'删除课程学习',info:'您确定要删除课程学习吗？',queryList:"queryCourseStudyList",url: '/courseStudy/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-courseStudy').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改CourseStudy', url: '/courseStudy/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改课程学习', url: '/courseStudy/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-courseStudy').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看CourseStudy', url: '/courseStudy/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看课程学习', url: '/courseStudy/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

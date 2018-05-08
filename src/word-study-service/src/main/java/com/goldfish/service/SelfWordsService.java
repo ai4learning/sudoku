@@ -7,8 +7,8 @@ import com.goldfish.domain.SelfWords;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow SelfWordsservice 接口
+ * @since 2018-5-8
+ * jshow 学生自身单词service 接口
  *
  */
 public interface SelfWordsService {
@@ -48,20 +48,8 @@ public interface SelfWordsService {
 
      
 
-    /**
-     * 取得所有SelfWords
-     * 
-     * @return
-     */
-    public CommonResult<List<SelfWords>> getAll();
-    
-	/**
-     * 根据example取得SelfWords列表
-     * 
-     * @param  selfWords
-     * @return
-     */
-    public CommonResult<List<SelfWords>> getListByExample(SelfWords selfWords);
+
+	
     
 	/**
      * 根据example取得唯一的SelfWords
@@ -71,9 +59,16 @@ public interface SelfWordsService {
      */
     public CommonResult<SelfWords> getUnique(SelfWords selfWords);
     
-    
 
 
+
+    /**
+     * 根据example取得SelfWords列表
+     * 
+     * @param  selfWords
+     * @return
+     */
+    public CommonResult<List<SelfWords>> getListByExample(SelfWords selfWords);
     
 
 	/**

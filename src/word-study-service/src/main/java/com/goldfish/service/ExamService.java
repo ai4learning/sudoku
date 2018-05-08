@@ -7,8 +7,8 @@ import com.goldfish.domain.Exam;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow Examservice 接口
+ * @since 2018-5-8
+ * jshow 考试service 接口
  *
  */
 public interface ExamService {
@@ -48,20 +48,8 @@ public interface ExamService {
 
      
 
-    /**
-     * 取得所有Exam
-     * 
-     * @return
-     */
-    public CommonResult<List<Exam>> getAll();
-    
-	/**
-     * 根据example取得Exam列表
-     * 
-     * @param  exam
-     * @return
-     */
-    public CommonResult<List<Exam>> getListByExample(Exam exam);
+
+	
     
 	/**
      * 根据example取得唯一的Exam
@@ -71,9 +59,16 @@ public interface ExamService {
      */
     public CommonResult<Exam> getUnique(Exam exam);
     
-    
 
 
+
+    /**
+     * 根据example取得Exam列表
+     * 
+     * @param  exam
+     * @return
+     */
+    public CommonResult<List<Exam>> getListByExample(Exam exam);
     
 
 	/**

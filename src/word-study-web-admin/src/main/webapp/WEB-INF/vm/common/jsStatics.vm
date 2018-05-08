@@ -1,0 +1,23 @@
+<!-- jQuery 2.1.4 -->
+#*
+<script src="/misc/js/jQuery-2.1.4.min.js"></script>
+*#
+<script src="/misc/js/jquery-1.10.2.min.js"></script>
+
+<!-- Bootstrap 3.3.5 -->
+<script src="/misc/js/bootstrap.min.js"></script>
+<script src="/misc/aceadmin/js/typeahead-bs2.min.js"></script>
+
+<!-- ace scripts -->
+
+<script src="/misc/aceadmin/js/ace-elements.min.js"></script>
+<script src="/misc/aceadmin/js/ace.min.js"></script>
+
+
+<script src="/misc/js/requirejs/2.1.18/require.min.js"></script>
+<script src="/misc/js/plugin/config.js"></script>
+
+
+<script src="/misc/js/modal.manager.plugin1.0.js"></script>
+<script src="/misc/js/jshow.utils.js" charset="utf-8"></script>
+<script src="/misc/js/form.validate.js"></script>

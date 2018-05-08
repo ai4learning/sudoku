@@ -1,13 +1,13 @@
-
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"  id="update_question">
+	<form class="form-horizontal"  id="form_update_Question">
 	
 		 <div class="control-group">
 			<label class="control-label" for="id">ID</label>
 			<div class="controls">
 			
-				<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{question.id}"readonly/>
+			<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{question.id}"readonly/>
 			</div>
 		</div>
 		
@@ -15,16 +15,15 @@
 			<label class="control-label" for="questionType">试题类型</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="questionType" id="questionType">
+        
+		<select class="forms_select input-medium" name="questionType" id="questionType">
 				<option value="0" #if($question.questionType==0) selected #end>英译汉</option>
 				<option value="1" #if($question.questionType==1) selected #end>汉译英</option>
 				<option value="3" #if($question.questionType==3) selected #end>听选</option>
 				<option value="4" #if($question.questionType==4) selected #end>听写</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
@@ -33,7 +32,7 @@
 			<label class="control-label" for="lessonId">课程ID</label>
 			<div class="controls">
 			
-				<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10" value="$!{question.lessonId}"/>
+			<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10" value="$!{question.lessonId}"/>
 			</div>
 		</div>
 		
@@ -41,7 +40,7 @@
 			<label class="control-label" for="unitNbr">单元号</label>
 			<div class="controls">
 			
-				<input type="text"  name="unitNbr" id="unitNbr" placeholder="请输入单元号" maxlength="3" value="$!{question.unitNbr}"/>
+			<input type="text"  name="unitNbr" id="unitNbr" placeholder="请输入单元号" maxlength="3" value="$!{question.unitNbr}"/>
 			</div>
 		</div>
 		
@@ -49,7 +48,7 @@
 			<label class="control-label" for="wordId">单词ID</label>
 			<div class="controls">
 			
-				<input type="text"  name="wordId" id="wordId" placeholder="请输入单词ID" maxlength="10" value="$!{question.wordId}"/>
+			<input type="text"  name="wordId" id="wordId" placeholder="请输入单词ID" maxlength="10" value="$!{question.wordId}"/>
 			</div>
 		</div>
 		
@@ -57,7 +56,7 @@
 			<label class="control-label" for="vocCode">单词CODE</label>
 			<div class="controls">
 			
-				<input type="text"  name="vocCode" id="vocCode" placeholder="请输入单词CODE" maxlength="50" value="$!{question.vocCode}"/>
+			<input type="text"  name="vocCode" id="vocCode" placeholder="请输入单词CODE" maxlength="50" value="$!{question.vocCode}"/>
 			</div>
 		</div>
 		
@@ -65,7 +64,7 @@
 			<label class="control-label" for="spelling">单词拼写</label>
 			<div class="controls">
 			
-				<input type="text"  name="spelling" id="spelling" placeholder="请输入单词拼写" maxlength="128" value="$!{question.spelling}"/>
+			<input type="text"  name="spelling" id="spelling" placeholder="请输入单词拼写" maxlength="128" value="$!{question.spelling}"/>
 			</div>
 		</div>
 		
@@ -73,7 +72,7 @@
 			<label class="control-label" for="question">题描述</label>
 			<div class="controls">
 			
-				<input type="text"  name="question" id="question" placeholder="请输入题描述" maxlength="255" value="$!{question.question}"/>
+			<input type="text"  name="question" id="question" placeholder="请输入题描述" maxlength="255" value="$!{question.question}"/>
 			</div>
 		</div>
 		
@@ -81,7 +80,7 @@
 			<label class="control-label" for="choices">选项</label>
 			<div class="controls">
 			
-				<input type="text"  name="choices" id="choices" placeholder="请输入选项" maxlength="255" value="$!{question.choices}"/>
+			<input type="text"  name="choices" id="choices" placeholder="请输入选项" maxlength="255" value="$!{question.choices}"/>
 			</div>
 		</div>
 		
@@ -89,7 +88,7 @@
 			<label class="control-label" for="answerIndex">正确答案</label>
 			<div class="controls">
 			
-				<input type="text"  name="answerIndex" id="answerIndex" placeholder="请输入正确答案" maxlength="20" value="$!{question.answerIndex}"/>
+			<input type="text"  name="answerIndex" id="answerIndex" placeholder="请输入正确答案" maxlength="20" value="$!{question.answerIndex}"/>
 			</div>
 		</div>
 		
@@ -97,16 +96,15 @@
 			<label class="control-label" for="level">难易层度</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="level" id="level">
+        
+		<select class="forms_select input-medium" name="level" id="level">
 				<option value="0" #if($question.level==0) selected #end>未知</option>
 				<option value="1" #if($question.level==1) selected #end>容易</option>
 				<option value="2" #if($question.level==2) selected #end>中等</option>
 				<option value="3" #if($question.level==3) selected #end>较难</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
@@ -115,14 +113,13 @@
 			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 				<option value="1" #if($question.state==1) selected #end>有效</option>
 				<option value="2" #if($question.state==2) selected #end>无效</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
@@ -131,8 +128,8 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存修改</a>
-	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-sm btn-primary" id="btn_update_Question">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
 
@@ -140,30 +137,29 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 id:  {must: true, maxlength:19, ftip:'ID,最多19个字符'},
-		 questionType:  {must: true, maxlength:3, ftip:'试题类型,最多3个字符'},
-		 lessonId:  {must: true, maxlength:10, ftip:'课程ID,最多10个字符'},
-		 unitNbr:  {must: true, maxlength:3, ftip:'单元号,最多3个字符'},
-		 wordId:  {must: true, maxlength:10, ftip:'单词ID,最多10个字符'},
-		 vocCode:  {must: true, maxlength:50, ftip:'单词CODE,最多50个字符'},
-		 spelling:  {must: true, maxlength:128, ftip:'单词拼写,最多128个字符'},
-		 question:  {must: true, maxlength:255, ftip:'题描述,最多255个字符'},
-		 choices:  {must: true, maxlength:255, ftip:'选项,最多255个字符'},
-		 answerIndex:  {must: true, maxlength:20, ftip:'正确答案,最多20个字符'},
-		 level:  {must: true, maxlength:3, ftip:'难易层度,最多3个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
+		questionType:  {must: false, maxlength:3, ftip:'试题类型,最多3个字符' ,handler:'int' },
+		lessonId:  {must: false, maxlength:10, ftip:'课程ID,最多10个字符' ,handler:'int' },
+		unitNbr:  {must: false, maxlength:3, ftip:'单元号,最多3个字符' ,handler:'int' },
+		wordId:  {must: false, maxlength:10, ftip:'单词ID,最多10个字符' ,handler:'int' },
+		vocCode:  {must: false, maxlength:50, ftip:'单词CODE,最多50个字符'},
+		spelling:  {must: false, maxlength:128, ftip:'单词拼写,最多128个字符'},
+		question:  {must: false, maxlength:255, ftip:'题描述,最多255个字符'},
+		choices:  {must: false, maxlength:255, ftip:'选项,最多255个字符'},
+		answerIndex:  {must: false, maxlength:20, ftip:'正确答案,最多20个字符'},
+		level:  {must: false, maxlength:3, ftip:'难易层度,最多3个字符' ,handler:'int' },
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_update_Question').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_update_Question").serialize(),
 			set, 
 			'/question/doUpdate.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				queryQuestionList(1);
 			}
 		);
 	});

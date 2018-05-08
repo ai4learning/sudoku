@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.QuestionManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.Question;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * QuestionManager接口类
+ * @since 2018-5-8
+ * 试题Manager接口类
  */
 public interface QuestionManager {
  
@@ -50,21 +51,7 @@ public interface QuestionManager {
     
 
 
-       
-    /**
-     * 取得所有Question
-     * 
-     * @return
-     */
-    public List<Question> getAll();
-    
-	/**
-     * 根据example取得Question列表
-     * 
-     * @param  question
-     * @return
-     */
-    public List<Question> getListByExample(Question question);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface QuestionManager {
     
 
     
+    /**
+     * 根据example取得Question列表
+     * 
+     * @param  question
+     * @return
+     */
+    public List<Question> getListByExample(Question question);
 
 	/**
      * 分页取得Question列表

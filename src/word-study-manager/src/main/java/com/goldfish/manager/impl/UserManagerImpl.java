@@ -10,8 +10,8 @@ import com.goldfish.manager.UserManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * UserManager实现类
+ * @since 2018-5-8
+ * 用户Manager实现类
  */
  @Component("userManager")
 public class UserManagerImpl implements UserManager {
@@ -21,7 +21,8 @@ public class UserManagerImpl implements UserManager {
 
 
   public User addUser(User user) {
-		return userDao.addUser(user);
+		int i=userDao.addUser(user);
+		return user;
     }
     
     public void updateUser(User user) {
@@ -41,22 +42,17 @@ public class UserManagerImpl implements UserManager {
     
    
 
-   
-    
-    public List<User> getAll() {
-    	return userDao.getAll();
-    }
-    	
-    public List<User> getListByExample(User user) {
-		return userDao.getListByExample(user);
-    }
 
-        public User getUnique(User user) {
+    	
+   
+   public User getUnique(User user) {
 		return userDao.getUnique(user);
     }
 
     
-    
+ public List<User> getListByExample(User user) {
+    return userDao.getListByExample(user);
+    }
 
     
     public List<User> getUserByPage(PageQuery pageQuery) {

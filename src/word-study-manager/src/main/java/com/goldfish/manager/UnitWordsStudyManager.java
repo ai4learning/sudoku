@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.UnitWordsStudyManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.UnitWordsStudy;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * UnitWordsStudyManager接口类
+ * @since 2018-5-8
+ * 单元单词学习Manager接口类
  */
 public interface UnitWordsStudyManager {
  
@@ -50,21 +51,7 @@ public interface UnitWordsStudyManager {
     
 
 
-       
-    /**
-     * 取得所有UnitWordsStudy
-     * 
-     * @return
-     */
-    public List<UnitWordsStudy> getAll();
-    
-	/**
-     * 根据example取得UnitWordsStudy列表
-     * 
-     * @param  unitWordsStudy
-     * @return
-     */
-    public List<UnitWordsStudy> getListByExample(UnitWordsStudy unitWordsStudy);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface UnitWordsStudyManager {
     
 
     
+    /**
+     * 根据example取得UnitWordsStudy列表
+     * 
+     * @param  unitWordsStudy
+     * @return
+     */
+    public List<UnitWordsStudy> getListByExample(UnitWordsStudy unitWordsStudy);
 
 	/**
      * 分页取得UnitWordsStudy列表

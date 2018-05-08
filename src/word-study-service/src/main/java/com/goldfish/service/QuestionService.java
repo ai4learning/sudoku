@@ -7,8 +7,8 @@ import com.goldfish.domain.Question;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow Questionservice 接口
+ * @since 2018-5-8
+ * jshow 试题service 接口
  *
  */
 public interface QuestionService {
@@ -48,20 +48,8 @@ public interface QuestionService {
 
      
 
-    /**
-     * 取得所有Question
-     * 
-     * @return
-     */
-    public CommonResult<List<Question>> getAll();
-    
-	/**
-     * 根据example取得Question列表
-     * 
-     * @param  question
-     * @return
-     */
-    public CommonResult<List<Question>> getListByExample(Question question);
+
+	
     
 	/**
      * 根据example取得唯一的Question
@@ -71,9 +59,16 @@ public interface QuestionService {
      */
     public CommonResult<Question> getUnique(Question question);
     
-    
 
 
+
+    /**
+     * 根据example取得Question列表
+     * 
+     * @param  question
+     * @return
+     */
+    public CommonResult<List<Question>> getListByExample(Question question);
     
 
 	/**

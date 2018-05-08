@@ -29,14 +29,14 @@
 			<td>$!item.unit</td>
 			<td>$!item.totalWords</td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -59,7 +59,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryUnitList','input')
 		#end
 
 	</div>
@@ -71,18 +71,18 @@
 void function(j) {	
 	j('.JDelete-unit').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除Unit',info:'您确定要删除Unit吗？',url: '/unit/doDelete',param:'id='+id};
+		var config={title:'删除课程单元',info:'您确定要删除课程单元吗？',queryList:"queryUnitList",url: '/unit/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-unit').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改Unit', url: '/unit/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改课程单元', url: '/unit/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-unit').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看Unit', url: '/unit/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看课程单元', url: '/unit/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

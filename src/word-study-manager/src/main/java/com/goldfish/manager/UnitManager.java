@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.UnitManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.Unit;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * UnitManager接口类
+ * @since 2018-5-8
+ * 课程单元Manager接口类
  */
 public interface UnitManager {
  
@@ -50,21 +51,7 @@ public interface UnitManager {
     
 
 
-       
-    /**
-     * 取得所有Unit
-     * 
-     * @return
-     */
-    public List<Unit> getAll();
-    
-	/**
-     * 根据example取得Unit列表
-     * 
-     * @param  unit
-     * @return
-     */
-    public List<Unit> getListByExample(Unit unit);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface UnitManager {
     
 
     
+    /**
+     * 根据example取得Unit列表
+     * 
+     * @param  unit
+     * @return
+     */
+    public List<Unit> getListByExample(Unit unit);
 
 	/**
      * 分页取得Unit列表

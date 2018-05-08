@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.SelfWordsManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.SelfWords;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * SelfWordsManager接口类
+ * @since 2018-5-8
+ * 学生自身单词Manager接口类
  */
 public interface SelfWordsManager {
  
@@ -50,21 +51,7 @@ public interface SelfWordsManager {
     
 
 
-       
-    /**
-     * 取得所有SelfWords
-     * 
-     * @return
-     */
-    public List<SelfWords> getAll();
-    
-	/**
-     * 根据example取得SelfWords列表
-     * 
-     * @param  selfWords
-     * @return
-     */
-    public List<SelfWords> getListByExample(SelfWords selfWords);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface SelfWordsManager {
     
 
     
+    /**
+     * 根据example取得SelfWords列表
+     * 
+     * @param  selfWords
+     * @return
+     */
+    public List<SelfWords> getListByExample(SelfWords selfWords);
 
 	/**
      * 分页取得SelfWords列表

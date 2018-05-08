@@ -1,15 +1,22 @@
+/**
+ * Copyright(c) 2004-2018 bianfeng
+ */
+
+
 package com.goldfish.domain;
 
 import java.io.Serializable;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * UnitWordsStudy Domain 类
+ * @since 2018-5-8
+ * 单元单词学习 Domain 类
  */
 public class UnitWordsStudy  implements Serializable {
 	
-  private static final long serialVersionUID = -1759281942739896165L;
+  private static final long serialVersionUID = 5871653462753605181L;
 	
 	/**  ID  */
 	private Long id; 
@@ -38,8 +45,10 @@ public class UnitWordsStudy  implements Serializable {
 	/**  状态  */
 	private Integer state; 
 	/**  创建时间  */
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date created; 
 	/**  修改时间  */
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date modified; 
 
   	public void setId(Long id) {

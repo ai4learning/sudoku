@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.controller.WordStudyStatisticController.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.controller;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import com.goldfish.service.WordStudyStatisticService;
 import com.goldfish.domain.WordStudyStatistic;
 
 @Controller
-@RequestMapping("//wordStudyStatistic")
+@RequestMapping("/wordStudyStatistic")
 public class WordStudyStatisticController extends BaseController {
 
 //	private final static Log log = LogFactory.getLog(WordStudyStatisticAction.class);

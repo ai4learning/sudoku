@@ -5,10 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.WordStudy;
@@ -18,28 +16,31 @@ import com.goldfish.service.WordStudyService;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- *<p>  WordStudyservice实现</p>
+ * @since 2018-5-8
+ *<p>  单词学习service实现</p>
  *
  */
 @Service("wordStudyService")
 public class WordStudyServiceImpl implements WordStudyService {
 
-	private static final Logger logger = LoggerFactory.getLogger(WordStudyServiceImpl.class);
+	private static final Logger logger = Logger.getLogger(WordStudyServiceImpl.class);
 	
 	@Resource(name="wordStudyManager")
 	private WordStudyManager wordStudyManager;
     
     public CommonResult<WordStudy> addWordStudy(WordStudy wordStudy) {
 		CommonResult<WordStudy> result = new CommonResult<WordStudy>();
-		try {
+		try{
 			
-				wordStudy.setCreated(new Date());
-			 
+			wordStudy.setCreated(new Date());
+			
+			
+			wordStudy.setModified(new Date());
+			
 			result.addDefaultModel(wordStudyManager.addWordStudy(wordStudy));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("添加 WordStudy失败", e);
+			logger.error("添加 单词学习失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -49,12 +50,12 @@ public class WordStudyServiceImpl implements WordStudyService {
 		CommonResult<WordStudy> result = new CommonResult<WordStudy>();
 		try {
 			
-				wordStudy.setModified(new Date());
-			 
+					wordStudy.setModified(new Date());
+					
 			wordStudyManager.updateWordStudy(wordStudy);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("更新 WordStudy失败", e);
+			logger.error("更新 单词学习失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -68,7 +69,7 @@ public class WordStudyServiceImpl implements WordStudyService {
 			wordStudyManager.deleteWordStudy(id);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("删除 WordStudy失败", e);
+			logger.error("删除 单词学习失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -81,7 +82,7 @@ public class WordStudyServiceImpl implements WordStudyService {
 			result.addDefaultModel("wordStudy", wordStudyManager.getWordStudyById(id));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据主键获取 WordStudy失败", e);
+			logger.error("根据主键获取 单词学习失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -90,31 +91,7 @@ public class WordStudyServiceImpl implements WordStudyService {
 
         
 	
-	public CommonResult<List<WordStudy>> getAll() {
-		CommonResult<List<WordStudy>> result = new CommonResult<List<WordStudy>>();
-		try {
-			List<WordStudy> list = wordStudyManager.getAll();
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得所有 WordStudy失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
-	
-	public CommonResult<List<WordStudy>> getListByExample(WordStudy wordStudy) {
-		CommonResult<List<WordStudy>> result = new CommonResult<List<WordStudy>>();
-		try {
-			List<WordStudy> list = wordStudyManager.getListByExample(wordStudy);
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得 WordStudy失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
+
 
 	public CommonResult<WordStudy> getUnique(WordStudy wordStudy) {
 		CommonResult<WordStudy> result = new CommonResult<WordStudy>();
@@ -122,15 +99,25 @@ public class WordStudyServiceImpl implements WordStudyService {
 			result.addDefaultModel(wordStudyManager.getUnique(wordStudy));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据example获取唯一 WordStudy失败", e);
+			logger.error("根据example获取唯一 单词学习失败", e);
 			result.setSuccess(false);
 		}
 		return result;
 	}
 
-	
 
-
+	public CommonResult<List<WordStudy>> getListByExample(WordStudy wordStudy) {
+		CommonResult<List<WordStudy>> result = new CommonResult<List<WordStudy>>();
+		try {
+			List<WordStudy> list = wordStudyManager.getListByExample(wordStudy);
+			result.addDefaultModel("list", list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("取得 单词学习失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
 
 	
 	public CommonResult<List<WordStudy>> getWordStudyByPage(PageQuery pageQuery) {
@@ -145,7 +132,7 @@ public class WordStudyServiceImpl implements WordStudyService {
 			}
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("分页获取 WordStudy失败", e);
+			logger.error("分页获取 单词学习失败", e);
 			result.setSuccess(false);
 		}
 		return result;

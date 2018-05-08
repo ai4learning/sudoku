@@ -1,8 +1,23 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#add_activatecode").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
 
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"   id="add_activatecode">
+	<form class="form-horizontal"  id="form_add_ActivateCode">
 	
 		 <div class="control-group">
 			<label class="control-label" for="activateCode">激活码</label>
@@ -26,8 +41,7 @@
 			<label class="control-label" for="expireTime">超时时间</label>
 			<div class="controls">
 			
-				<input type="text"  name="expireTime" id="expireTime" placeholder="请输入超时时间" maxlength="19"/>
-				
+					<input type="text"  name="expireTime" id="expireTime" class="form-control j_datetime_picker" placeholder="请输入超时时间">
 			</div>
 		</div>
 		
@@ -35,15 +49,15 @@
 			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 			
 				<option value="1">正常</option>
 				<option value="2">超期</option>
 				<option value="3">无效</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -52,7 +66,7 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_ActivateCode">保存</a>
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
@@ -61,26 +75,24 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 activateCode:  {must: true, maxlength:50, ftip:'激活码,最多50个字符'},
-		 lessonId:  {must: true, maxlength:19, ftip:'课程ID,最多19个字符'},
-		 expireTime:  {must: true, maxlength:19, ftip:'超时时间,最多19个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		activateCode:  {must: false, maxlength:50, ftip:'激活码,最多50个字符'},
+		lessonId:  {must: false, maxlength:19, ftip:'课程ID,最多19个字符' ,handler:'int' },
+		expireTime:  {must: false, maxlength:19, ftip:'超时时间,最多19个字符'},
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_add_ActivateCode').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_add_ActivateCode").serialize(),
 			set, 
 			'/activateCode/doAdd.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				queryActivateCodeList(1);
 			}
 		);
 	});
 	
-	//form.friend.init(set);
 }(jQuery);
 </script>

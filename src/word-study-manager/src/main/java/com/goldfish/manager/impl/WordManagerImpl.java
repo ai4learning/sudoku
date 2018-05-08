@@ -10,8 +10,8 @@ import com.goldfish.manager.WordManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * WordManager实现类
+ * @since 2018-5-8
+ * 单词库Manager实现类
  */
  @Component("wordManager")
 public class WordManagerImpl implements WordManager {
@@ -21,7 +21,8 @@ public class WordManagerImpl implements WordManager {
 
 
   public Word addWord(Word word) {
-		return wordDao.addWord(word);
+		int i=wordDao.addWord(word);
+		return word;
     }
     
     public void updateWord(Word word) {
@@ -41,22 +42,17 @@ public class WordManagerImpl implements WordManager {
     
    
 
-   
-    
-    public List<Word> getAll() {
-    	return wordDao.getAll();
-    }
-    	
-    public List<Word> getListByExample(Word word) {
-		return wordDao.getListByExample(word);
-    }
 
-        public Word getUnique(Word word) {
+    	
+   
+   public Word getUnique(Word word) {
 		return wordDao.getUnique(word);
     }
 
     
-    
+ public List<Word> getListByExample(Word word) {
+    return wordDao.getListByExample(word);
+    }
 
     
     public List<Word> getWordByPage(PageQuery pageQuery) {

@@ -1,19 +1,35 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
-
-<div class="manage-content">
-<form class="form-inline">
-
-
-		<label>ID</label>
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
 			
-			<input type="text"  name="id" id="id_search" class="input" placeholder="请输入ID">
+				jQuery("#search_question").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
+
+
+<div class="manage-content"  id="search_question">
+<form class="form-inline" id="searchForm_Question" onsubmit="return false;">
+
+
+		<label for="id">ID</label>
+			
+			<input type="text"  name="id" id="id_search" class="input input-medium" placeholder="请输入ID">
 			
 
 		
-		<label>试题类型</label>
+		<label for="questionType">试题类型</label>
 			
-	
-		<select class="forms_select" name="questionType" id="questionType_search">
+        
+		<select class="forms_select input-medium" name="questionType" id="questionType_search">
 			<option value="">全部</option>
 			
 				<option value="0">英译汉</option>
@@ -22,50 +38,50 @@
 				<option value="4">听写</option>
 		</select>
 	
-	
+    
 
 
 		
-		<label>课程ID</label>
+		<label for="lessonId">课程ID</label>
 			
-			<input type="text"  name="lessonId" id="lessonId_search" class="input" placeholder="请输入课程ID">
-			
-
-		
-		<label>单词ID</label>
-			
-			<input type="text"  name="wordId" id="wordId_search" class="input" placeholder="请输入单词ID">
+			<input type="text"  name="lessonId" id="lessonId_search" class="input input-medium" placeholder="请输入课程ID">
 			
 
 		
-		<label>状态</label>
+		<label for="wordId">单词ID</label>
 			
-	
-		<select class="forms_select" name="state" id="state_search">
+			<input type="text"  name="wordId" id="wordId_search" class="input input-medium" placeholder="请输入单词ID">
+			
+
+		
+		<label for="state">状态</label>
+			
+        
+		<select class="forms_select input-medium" name="state" id="state_search">
 			<option value="">全部</option>
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
 
 		
-		<input type="button" onclick="queryList();" class="btn" value="搜索"  />
+		<input type="button" onclick="queryQuestionList();" class="btn" value="搜索"  />
 
 	</form>
 		
 <br/>
 		 <div class="page_operate">
-			 <button class="btn  btn-primary" type="button" id="add-question">创建 Question</button>
+			 <button class="btn  btn-primary" type="button" id="add-question">创建 试题</button>
 		</div>
 
 
-	<div id="dl"></div>
+	<div id="dl_Question"></div>
 </div>
 <script language="javascript">
-	function queryList(pageNo) {	
+	function queryQuestionList(pageNo) {
 		if (!pageNo) {
 			pageNo = 1;
 		}
@@ -80,47 +96,17 @@
             param['pageSize']=pageSize;
         }
 
-		getOtherParams(param);
-		gUtils.fGetHtml(url, 'dl', param,'数据加载中...');
+		gUtils.fMergeParam(param,"searchForm_Question");
+		gUtils.fGetHtml(url, 'dl_Question', param,'数据加载中...');
 	}
-	queryList();
-	
-
-	function getOtherParams(param){
-   
-	  	var id_search=jQuery("#id_search").val();
-		if(id_search!=null&&id_search!=''){
-				param.id=id_search;
-			}
-			 
-	  	var questionType_search=jQuery("#questionType_search").val();
-		if(questionType_search!=null&&questionType_search!=''){
-				param.questionType=questionType_search;
-			}
-			 
-	  	var lessonId_search=jQuery("#lessonId_search").val();
-		if(lessonId_search!=null&&lessonId_search!=''){
-				param.lessonId=lessonId_search;
-			}
-			 
-	  	var wordId_search=jQuery("#wordId_search").val();
-		if(wordId_search!=null&&wordId_search!=''){
-				param.wordId=wordId_search;
-			}
-			 
-	  	var state_search=jQuery("#state_search").val();
-		if(state_search!=null&&state_search!=''){
-				param.state=state_search;
-			}
-					
-	}
+	queryQuestionList();
 
 
 
 
 void function(j) {
 	jQuery("#add-question").click(function(){
-		gDialog.fCreate({title: '创建 Question', url: '/question/add.action',width:700}).show();
+		gDialog.fCreate({title: '创建 试题', url: '/question/add.action',width:700}).show();
 	});
 	
 }(jQuery);

@@ -5,10 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.User;
@@ -18,28 +16,31 @@ import com.goldfish.service.UserService;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- *<p>  Userservice实现</p>
+ * @since 2018-5-8
+ *<p>  用户service实现</p>
  *
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
 	
 	@Resource(name="userManager")
 	private UserManager userManager;
     
     public CommonResult<User> addUser(User user) {
 		CommonResult<User> result = new CommonResult<User>();
-		try {
+		try{
 			
-				user.setCreated(new Date());
-			 
+			user.setCreated(new Date());
+			
+			
+			user.setModified(new Date());
+			
 			result.addDefaultModel(userManager.addUser(user));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("添加 User失败", e);
+			logger.error("添加 用户失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -49,12 +50,12 @@ public class UserServiceImpl implements UserService {
 		CommonResult<User> result = new CommonResult<User>();
 		try {
 			
-				user.setModified(new Date());
-			 
+					user.setModified(new Date());
+					
 			userManager.updateUser(user);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("更新 User失败", e);
+			logger.error("更新 用户失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -68,7 +69,7 @@ public class UserServiceImpl implements UserService {
 			userManager.deleteUser(id);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("删除 User失败", e);
+			logger.error("删除 用户失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -81,7 +82,7 @@ public class UserServiceImpl implements UserService {
 			result.addDefaultModel("user", userManager.getUserById(id));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据主键获取 User失败", e);
+			logger.error("根据主键获取 用户失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -90,31 +91,7 @@ public class UserServiceImpl implements UserService {
 
         
 	
-	public CommonResult<List<User>> getAll() {
-		CommonResult<List<User>> result = new CommonResult<List<User>>();
-		try {
-			List<User> list = userManager.getAll();
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得所有 User失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
-	
-	public CommonResult<List<User>> getListByExample(User user) {
-		CommonResult<List<User>> result = new CommonResult<List<User>>();
-		try {
-			List<User> list = userManager.getListByExample(user);
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得 User失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
+
 
 	public CommonResult<User> getUnique(User user) {
 		CommonResult<User> result = new CommonResult<User>();
@@ -122,15 +99,25 @@ public class UserServiceImpl implements UserService {
 			result.addDefaultModel(userManager.getUnique(user));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据example获取唯一 User失败", e);
+			logger.error("根据example获取唯一 用户失败", e);
 			result.setSuccess(false);
 		}
 		return result;
 	}
 
-	
 
-
+	public CommonResult<List<User>> getListByExample(User user) {
+		CommonResult<List<User>> result = new CommonResult<List<User>>();
+		try {
+			List<User> list = userManager.getListByExample(user);
+			result.addDefaultModel("list", list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("取得 用户失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
 
 	
 	public CommonResult<List<User>> getUserByPage(PageQuery pageQuery) {
@@ -145,7 +132,7 @@ public class UserServiceImpl implements UserService {
 			}
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("分页获取 User失败", e);
+			logger.error("分页获取 用户失败", e);
 			result.setSuccess(false);
 		}
 		return result;

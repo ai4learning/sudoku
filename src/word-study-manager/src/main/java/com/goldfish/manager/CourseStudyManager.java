@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.CourseStudyManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.CourseStudy;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * CourseStudyManager接口类
+ * @since 2018-5-8
+ * 课程学习Manager接口类
  */
 public interface CourseStudyManager {
  
@@ -50,21 +51,7 @@ public interface CourseStudyManager {
     
 
 
-       
-    /**
-     * 取得所有CourseStudy
-     * 
-     * @return
-     */
-    public List<CourseStudy> getAll();
-    
-	/**
-     * 根据example取得CourseStudy列表
-     * 
-     * @param  courseStudy
-     * @return
-     */
-    public List<CourseStudy> getListByExample(CourseStudy courseStudy);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface CourseStudyManager {
     
 
     
+    /**
+     * 根据example取得CourseStudy列表
+     * 
+     * @param  courseStudy
+     * @return
+     */
+    public List<CourseStudy> getListByExample(CourseStudy courseStudy);
 
 	/**
      * 分页取得CourseStudy列表

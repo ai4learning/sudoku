@@ -10,8 +10,8 @@ import com.goldfish.manager.UnitManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * UnitManager实现类
+ * @since 2018-5-8
+ * 课程单元Manager实现类
  */
  @Component("unitManager")
 public class UnitManagerImpl implements UnitManager {
@@ -21,7 +21,8 @@ public class UnitManagerImpl implements UnitManager {
 
 
   public Unit addUnit(Unit unit) {
-		return unitDao.addUnit(unit);
+		int i=unitDao.addUnit(unit);
+		return unit;
     }
     
     public void updateUnit(Unit unit) {
@@ -41,22 +42,17 @@ public class UnitManagerImpl implements UnitManager {
     
    
 
-   
-    
-    public List<Unit> getAll() {
-    	return unitDao.getAll();
-    }
-    	
-    public List<Unit> getListByExample(Unit unit) {
-		return unitDao.getListByExample(unit);
-    }
 
-        public Unit getUnique(Unit unit) {
+    	
+   
+   public Unit getUnique(Unit unit) {
 		return unitDao.getUnique(unit);
     }
 
     
-    
+ public List<Unit> getListByExample(Unit unit) {
+    return unitDao.getListByExample(unit);
+    }
 
     
     public List<Unit> getUnitByPage(PageQuery pageQuery) {

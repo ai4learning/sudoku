@@ -34,21 +34,21 @@
 			<td>$!item.unit</td>
 			<td>$!item.vocCode</td>
 			<td>
-	
+        
 			
 	
-	</td>
+    </td>
 			<td>$!item.wordId</td>
 			<td>$!item.spelling</td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -71,7 +71,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryUnitWordsList','input')
 		#end
 
 	</div>
@@ -83,18 +83,18 @@
 void function(j) {	
 	j('.JDelete-unitWords').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除UnitWords',info:'您确定要删除UnitWords吗？',url: '/unitWords/doDelete',param:'id='+id};
+		var config={title:'删除单元单词',info:'您确定要删除单元单词吗？',queryList:"queryUnitWordsList",url: '/unitWords/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-unitWords').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改UnitWords', url: '/unitWords/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改单元单词', url: '/unitWords/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-unitWords').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看UnitWords', url: '/unitWords/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看单元单词', url: '/unitWords/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

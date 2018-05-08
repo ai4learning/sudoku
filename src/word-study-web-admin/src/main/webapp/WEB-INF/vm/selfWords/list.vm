@@ -32,35 +32,35 @@
 			<td>$!item.moduleCode</td>
 			<td>$!item.studyId</td>
 			<td>
-	
+        
 			
 				#if($item.type==1)<span class="">复习词库</span> #end	
 			
 				#if($item.type==2)<span class="">错词库</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.studentId</td>
 			<td>$!item.userCode</td>
 			<td>$!item.lessonId</td>
 			<td>$!item.unitNbr</td>
 			<td>$!item.vocCode</td>
 			<td>
-	
+        
 			
 	
-	</td>
+    </td>
 			<td>$!item.wordId</td>
 			<td>$!item.spelling</td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -83,7 +83,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'querySelfWordsList','input')
 		#end
 
 	</div>
@@ -95,18 +95,18 @@
 void function(j) {	
 	j('.JDelete-selfWords').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除SelfWords',info:'您确定要删除SelfWords吗？',url: '/selfWords/doDelete',param:'id='+id};
+		var config={title:'删除学生自身单词',info:'您确定要删除学生自身单词吗？',queryList:"querySelfWordsList",url: '/selfWords/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-selfWords').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改SelfWords', url: '/selfWords/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改学生自身单词', url: '/selfWords/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-selfWords').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看SelfWords', url: '/selfWords/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看学生自身单词', url: '/selfWords/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

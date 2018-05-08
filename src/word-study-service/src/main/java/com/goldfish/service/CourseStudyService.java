@@ -7,8 +7,8 @@ import com.goldfish.domain.CourseStudy;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow CourseStudyservice 接口
+ * @since 2018-5-8
+ * jshow 课程学习service 接口
  *
  */
 public interface CourseStudyService {
@@ -48,20 +48,8 @@ public interface CourseStudyService {
 
      
 
-    /**
-     * 取得所有CourseStudy
-     * 
-     * @return
-     */
-    public CommonResult<List<CourseStudy>> getAll();
-    
-	/**
-     * 根据example取得CourseStudy列表
-     * 
-     * @param  courseStudy
-     * @return
-     */
-    public CommonResult<List<CourseStudy>> getListByExample(CourseStudy courseStudy);
+
+	
     
 	/**
      * 根据example取得唯一的CourseStudy
@@ -71,9 +59,16 @@ public interface CourseStudyService {
      */
     public CommonResult<CourseStudy> getUnique(CourseStudy courseStudy);
     
-    
 
 
+
+    /**
+     * 根据example取得CourseStudy列表
+     * 
+     * @param  courseStudy
+     * @return
+     */
+    public CommonResult<List<CourseStudy>> getListByExample(CourseStudy courseStudy);
     
 
 	/**

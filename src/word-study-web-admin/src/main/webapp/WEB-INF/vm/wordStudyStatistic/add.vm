@@ -1,8 +1,8 @@
-
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"   id="add_wordstudystatistic">
+	<form class="form-horizontal"  id="form_add_WordStudyStatistic">
 	
 		 <div class="control-group">
 			<label class="control-label" for="studentId">学生ID</label>
@@ -26,14 +26,14 @@
 			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -42,7 +42,7 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_WordStudyStatistic">保存</a>
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
@@ -51,25 +51,23 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 studentId:  {must: true, maxlength:10, ftip:'学生ID,最多10个字符'},
-		 count:  {must: true, maxlength:10, ftip:'单词数,最多10个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		studentId:  {must: false, maxlength:10, ftip:'学生ID,最多10个字符' ,handler:'int' },
+		count:  {must: false, maxlength:10, ftip:'单词数,最多10个字符' ,handler:'int' },
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_add_WordStudyStatistic').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_add_WordStudyStatistic").serialize(),
 			set, 
 			'/wordStudyStatistic/doAdd.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				queryWordStudyStatisticList(1);
 			}
 		);
 	});
 	
-	//form.friend.init(set);
 }(jQuery);
 </script>

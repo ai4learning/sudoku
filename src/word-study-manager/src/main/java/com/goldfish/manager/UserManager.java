@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.UserManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.User;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * UserManager接口类
+ * @since 2018-5-8
+ * 用户Manager接口类
  */
 public interface UserManager {
  
@@ -50,21 +51,7 @@ public interface UserManager {
     
 
 
-       
-    /**
-     * 取得所有User
-     * 
-     * @return
-     */
-    public List<User> getAll();
-    
-	/**
-     * 根据example取得User列表
-     * 
-     * @param  user
-     * @return
-     */
-    public List<User> getListByExample(User user);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface UserManager {
     
 
     
+    /**
+     * 根据example取得User列表
+     * 
+     * @param  user
+     * @return
+     */
+    public List<User> getListByExample(User user);
 
 	/**
      * 分页取得User列表

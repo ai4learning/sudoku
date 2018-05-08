@@ -1,8 +1,8 @@
-
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"   id="add_exam">
+	<form class="form-horizontal"  id="form_add_Exam">
 	
 		 <div class="control-group">
 			<label class="control-label" for="userId">用户ID</label>
@@ -53,13 +53,13 @@
 			<label class="control-label" for="testType">测试类型</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="testType" id="testType">
+        
+		<select class="forms_select input-medium" name="testType" id="testType">
 			
 				<option value="1">单元测试；2.自主测试；</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -113,14 +113,14 @@
 			<label class="control-label" for="cashPointType">积分类型</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="cashPointType" id="cashPointType">
+        
+		<select class="forms_select input-medium" name="cashPointType" id="cashPointType">
 			
 				<option value="0">未知</option>
 				<option value="1">金币</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -129,14 +129,14 @@
 			<label class="control-label" for="isPass">是否通过</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="isPass" id="isPass">
+        
+		<select class="forms_select input-medium" name="isPass" id="isPass">
 			
 				<option value="0">未通过</option>
 				<option value="1">通过</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -145,14 +145,14 @@
 			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -161,7 +161,7 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_Exam">保存</a>
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
@@ -170,36 +170,34 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 userId:  {must: true, maxlength:10, ftip:'用户ID,最多10个字符'},
-		 userCode:  {must: true, maxlength:50, ftip:'用户CODE,最多50个字符'},
-		 lessonId:  {must: true, maxlength:10, ftip:'课程ID,最多10个字符'},
-		 unitNbr:  {must: true, maxlength:3, ftip:'课程号,最多3个字符'},
-		 pageId:  {must: true, maxlength:19, ftip:'试卷ID,最多19个字符'},
-		 testType:  {must: true, maxlength:3, ftip:'测试类型,最多3个字符'},
-		 resultScore:  {must: true, maxlength:3, ftip:'得分,最多3个字符'},
-		 standardDuration:  {must: true, maxlength:19, ftip:'考试时长,最多19个字符'},
-		 realDuration:  {must: true, maxlength:19, ftip:'实际用时,最多19个字符'},
-		 errorNbr:  {must: true, maxlength:3, ftip:'错误数,最多3个字符'},
-		 cashPoint:  {must: true, maxlength:10, ftip:'积分,最多10个字符'},
-		 cashPointType:  {must: true, maxlength:3, ftip:'积分类型,最多3个字符'},
-		 isPass:  {must: true, maxlength:1, ftip:'是否通过,最多1个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		userId:  {must: false, maxlength:10, ftip:'用户ID,最多10个字符' ,handler:'int' },
+		userCode:  {must: false, maxlength:50, ftip:'用户CODE,最多50个字符'},
+		lessonId:  {must: false, maxlength:10, ftip:'课程ID,最多10个字符' ,handler:'int' },
+		unitNbr:  {must: false, maxlength:3, ftip:'课程号,最多3个字符' ,handler:'int' },
+		pageId:  {must: false, maxlength:19, ftip:'试卷ID,最多19个字符' ,handler:'int' },
+		testType:  {must: false, maxlength:3, ftip:'测试类型,最多3个字符' ,handler:'int' },
+		resultScore:  {must: false, maxlength:3, ftip:'得分,最多3个字符' ,handler:'int' },
+		standardDuration:  {must: false, maxlength:19, ftip:'考试时长,最多19个字符' ,handler:'int' },
+		realDuration:  {must: false, maxlength:19, ftip:'实际用时,最多19个字符' ,handler:'int' },
+		errorNbr:  {must: false, maxlength:3, ftip:'错误数,最多3个字符' ,handler:'int' },
+		cashPoint:  {must: false, maxlength:10, ftip:'积分,最多10个字符' ,handler:'int' },
+		cashPointType:  {must: false, maxlength:3, ftip:'积分类型,最多3个字符' ,handler:'int' },
+		isPass:  {must: false, maxlength:1, ftip:'是否通过,最多1个字符'},
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_add_Exam').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_add_Exam").serialize(),
 			set, 
 			'/exam/doAdd.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				queryExamList(1);
 			}
 		);
 	});
 	
-	//form.friend.init(set);
 }(jQuery);
 </script>

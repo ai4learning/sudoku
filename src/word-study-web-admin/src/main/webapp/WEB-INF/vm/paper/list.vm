@@ -29,36 +29,36 @@
 			<td>$!item.lessonId</td>
 			<td>$!item.unitNbr</td>
 			<td>
-	
+        
 			
 				#if($item.type==1)<span class="">单元测试</span> #end	
 			
 				#if($item.type==2)<span class="">自主测试</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.testArea==0)<span class="">单元内</span> #end	
 			
 				#if($item.testArea==1)<span class="">课程内</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.questionNbr</td>
 			<td>$!item.questonType</td>
 			<td>$!item.standardDuration</td>
 			<td>$!item.questions</td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -81,7 +81,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryPaperList','input')
 		#end
 
 	</div>
@@ -93,18 +93,18 @@
 void function(j) {	
 	j('.JDelete-paper').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除Paper',info:'您确定要删除Paper吗？',url: '/paper/doDelete',param:'id='+id};
+		var config={title:'删除试卷',info:'您确定要删除试卷吗？',queryList:"queryPaperList",url: '/paper/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-paper').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改Paper', url: '/paper/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改试卷', url: '/paper/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-paper').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看Paper', url: '/paper/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看试卷', url: '/paper/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

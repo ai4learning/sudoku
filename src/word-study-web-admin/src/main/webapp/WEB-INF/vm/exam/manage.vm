@@ -1,88 +1,104 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#search_exam").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
 
-<div class="manage-content">
-<form class="form-inline">
-
-
-		<label>ID</label>
-			
-			<input type="text"  name="id" id="id_search" class="input" placeholder="请输入ID">
-			
-
-		
-		<label>用户ID</label>
-			
-			<input type="text"  name="userId" id="userId_search" class="input" placeholder="请输入用户ID">
-			
-
-		
-		<label>课程ID</label>
-			
-			<input type="text"  name="lessonId" id="lessonId_search" class="input" placeholder="请输入课程ID">
-			
-
-		
-		<label>试卷ID</label>
-			
-			<input type="text"  name="pageId" id="pageId_search" class="input" placeholder="请输入试卷ID">
-			
-
-		
-		<label>测试类型</label>
-			
+	</script>
 	
-		<select class="forms_select" name="testType" id="testType_search">
+    
+
+
+<div class="manage-content"  id="search_exam">
+<form class="form-inline" id="searchForm_Exam" onsubmit="return false;">
+
+
+		<label for="id">ID</label>
+			
+			<input type="text"  name="id" id="id_search" class="input input-medium" placeholder="请输入ID">
+			
+
+		
+		<label for="userId">用户ID</label>
+			
+			<input type="text"  name="userId" id="userId_search" class="input input-medium" placeholder="请输入用户ID">
+			
+
+		
+		<label for="lessonId">课程ID</label>
+			
+			<input type="text"  name="lessonId" id="lessonId_search" class="input input-medium" placeholder="请输入课程ID">
+			
+
+		
+		<label for="pageId">试卷ID</label>
+			
+			<input type="text"  name="pageId" id="pageId_search" class="input input-medium" placeholder="请输入试卷ID">
+			
+
+		
+		<label for="testType">测试类型</label>
+			
+        
+		<select class="forms_select input-medium" name="testType" id="testType_search">
 			<option value="">全部</option>
 			
 				<option value="1">单元测试；2.自主测试；</option>
 		</select>
 	
-	
+    
 
 
 		
-		<label>积分类型</label>
+		<label for="cashPointType">积分类型</label>
 			
-	
-		<select class="forms_select" name="cashPointType" id="cashPointType_search">
+        
+		<select class="forms_select input-medium" name="cashPointType" id="cashPointType_search">
 			<option value="">全部</option>
 			
 				<option value="0">未知</option>
 				<option value="1">金币</option>
 		</select>
 	
-	
+    
 
 
 		
-		<label>状态</label>
+		<label for="state">状态</label>
 			
-	
-		<select class="forms_select" name="state" id="state_search">
+        
+		<select class="forms_select input-medium" name="state" id="state_search">
 			<option value="">全部</option>
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
 
 		
-		<input type="button" onclick="queryList();" class="btn" value="搜索"  />
+		<input type="button" onclick="queryExamList();" class="btn" value="搜索"  />
 
 	</form>
 		
 <br/>
 		 <div class="page_operate">
-			 <button class="btn  btn-primary" type="button" id="add-exam">创建 Exam</button>
+			 <button class="btn  btn-primary" type="button" id="add-exam">创建 考试</button>
 		</div>
 
 
-	<div id="dl"></div>
+	<div id="dl_Exam"></div>
 </div>
 <script language="javascript">
-	function queryList(pageNo) {	
+	function queryExamList(pageNo) {
 		if (!pageNo) {
 			pageNo = 1;
 		}
@@ -97,57 +113,17 @@
             param['pageSize']=pageSize;
         }
 
-		getOtherParams(param);
-		gUtils.fGetHtml(url, 'dl', param,'数据加载中...');
+		gUtils.fMergeParam(param,"searchForm_Exam");
+		gUtils.fGetHtml(url, 'dl_Exam', param,'数据加载中...');
 	}
-	queryList();
-	
-
-	function getOtherParams(param){
-   
-	  	var id_search=jQuery("#id_search").val();
-		if(id_search!=null&&id_search!=''){
-				param.id=id_search;
-			}
-			 
-	  	var userId_search=jQuery("#userId_search").val();
-		if(userId_search!=null&&userId_search!=''){
-				param.userId=userId_search;
-			}
-			 
-	  	var lessonId_search=jQuery("#lessonId_search").val();
-		if(lessonId_search!=null&&lessonId_search!=''){
-				param.lessonId=lessonId_search;
-			}
-			 
-	  	var pageId_search=jQuery("#pageId_search").val();
-		if(pageId_search!=null&&pageId_search!=''){
-				param.pageId=pageId_search;
-			}
-			 
-	  	var testType_search=jQuery("#testType_search").val();
-		if(testType_search!=null&&testType_search!=''){
-				param.testType=testType_search;
-			}
-			 
-	  	var cashPointType_search=jQuery("#cashPointType_search").val();
-		if(cashPointType_search!=null&&cashPointType_search!=''){
-				param.cashPointType=cashPointType_search;
-			}
-			 
-	  	var state_search=jQuery("#state_search").val();
-		if(state_search!=null&&state_search!=''){
-				param.state=state_search;
-			}
-					
-	}
+	queryExamList();
 
 
 
 
 void function(j) {
 	jQuery("#add-exam").click(function(){
-		gDialog.fCreate({title: '创建 Exam', url: '/exam/add.action',width:700}).show();
+		gDialog.fCreate({title: '创建 考试', url: '/exam/add.action',width:700}).show();
 	});
 	
 }(jQuery);

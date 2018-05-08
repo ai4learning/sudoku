@@ -1,8 +1,9 @@
 
 /**
- * Copyright(c) 2013-  www.jd.com
- *
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.dao;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.Exam;
 import java.util.Map;
 /**
  * @author hellosscat
- * @since 2018-5-2
- * Exam Dao接口类
+ * @since 2018-5-8
+ * 考试 Dao接口类
  */
 public interface ExamDao {
     
@@ -23,7 +24,7 @@ public interface ExamDao {
      * @param exam
      * @return
      */
-    public Exam addExam(Exam exam);
+    public int addExam(Exam exam);
     
 	/**
      * 更新Exam
@@ -32,45 +33,29 @@ public interface ExamDao {
      */
     public void updateExam(Exam exam);
     
+    
+    
 
-
-    	
-	 /**
+    /**
      * 根据主键删除Exam
      * 
      * @param id
      */
     public void deleteExam(Long id);
-    
 
-    	/**
+
+	/**
      * 根据主键获取Exam
      * 
      * @param id
      * @return
      */	
     public Exam getExamById(Long id);
+    
 
-   
 
-
-	
+    
     /**
-     * 取得所有Exam
-     * 
-     * @return
-     */
-    public List<Exam> getAll();
-    
-	/**
-     * 根据example取得Exam列表
-     * 
-     * @param  exam
-     * @return
-     */
-    public List<Exam> getListByExample(Exam exam);
-    
-    	/**
      * 根据example取得唯一的Exam
      * 
      * @param exam
@@ -79,24 +64,30 @@ public interface ExamDao {
     public Exam getUnique(Exam exam);
     
 
-    
+
+    /**
+     * 根据example取得Exam列表
+     * 
+     * @param  exam
+     * @return
+     */
+    public List<Exam> getListByExample(Exam exam);
 
     
-
 	/**
      * 分页取得Exam列表
      * 
-     * @param params
+     * @param paramMap
      * @return
      */
-    public List<Exam> getExamByPage(Map<String,Object> params);
+    public List<Exam> getExamByPage(Map<String,Object> paramMap);
 	
 	/**
      * 根据查询条件返回数量
      * 
-     * @param params
+     * @param paramMap
      * @return
      */
-    public int count(Map<String,Object> params);
+    public int count(Map<String,Object> paramMap);
 
 }

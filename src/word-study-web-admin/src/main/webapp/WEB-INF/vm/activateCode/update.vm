@@ -1,13 +1,28 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#update_activatecode").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"  id="update_activatecode">
+	<form class="form-horizontal"  id="form_update_ActivateCode">
 	
 		 <div class="control-group">
 			<label class="control-label" for="id">ID</label>
 			<div class="controls">
 			
-				<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{activateCode.id}"readonly/>
+			<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{activateCode.id}"readonly/>
 			</div>
 		</div>
 		
@@ -15,7 +30,7 @@
 			<label class="control-label" for="activateCode">激活码</label>
 			<div class="controls">
 			
-				<input type="text"  name="activateCode" id="activateCode" placeholder="请输入激活码" maxlength="50" value="$!{activateCode.activateCode}"/>
+			<input type="text"  name="activateCode" id="activateCode" placeholder="请输入激活码" maxlength="50" value="$!{activateCode.activateCode}"/>
 			</div>
 		</div>
 		
@@ -23,7 +38,7 @@
 			<label class="control-label" for="lessonId">课程ID</label>
 			<div class="controls">
 			
-				<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="19" value="$!{activateCode.lessonId}"/>
+			<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="19" value="$!{activateCode.lessonId}"/>
 			</div>
 		</div>
 		
@@ -31,8 +46,9 @@
 			<label class="control-label" for="expireTime">超时时间</label>
 			<div class="controls">
 			
-						<input type="text"  name="expireTime" id="expireTime" placeholder="请输入超时时间" maxlength="19" value="$!dateFormatUtils.format($!activateCode.expireTime)" />
-						
+				<input type="text" class="form-control j_datetime_picker" name="expireTime" id="expireTime" placeholder="请输入超时时间"
+				 maxlength="19" value="$!dateFormatUtils.format($!activateCode.expireTime)" />
+				
 			</div>
 		</div>
 		
@@ -40,15 +56,14 @@
 			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 				<option value="1" #if($activateCode.state==1) selected #end>正常</option>
 				<option value="2" #if($activateCode.state==2) selected #end>超期</option>
 				<option value="3" #if($activateCode.state==3) selected #end>无效</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
@@ -57,8 +72,8 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存修改</a>
-	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-sm btn-primary" id="btn_update_ActivateCode">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
 
@@ -66,23 +81,22 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 id:  {must: true, maxlength:19, ftip:'ID,最多19个字符'},
-		 activateCode:  {must: true, maxlength:50, ftip:'激活码,最多50个字符'},
-		 lessonId:  {must: true, maxlength:19, ftip:'课程ID,最多19个字符'},
-		 expireTime:  {must: true, maxlength:19, ftip:'超时时间,最多19个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
+		activateCode:  {must: false, maxlength:50, ftip:'激活码,最多50个字符'},
+		lessonId:  {must: false, maxlength:19, ftip:'课程ID,最多19个字符' ,handler:'int' },
+		expireTime:  {must: false, maxlength:19, ftip:'超时时间,最多19个字符'},
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_update_ActivateCode').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_update_ActivateCode").serialize(),
 			set, 
 			'/activateCode/doUpdate.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				queryActivateCodeList(1);
 			}
 		);
 	});

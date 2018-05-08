@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.controller.PaperController.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.controller;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import com.goldfish.service.PaperService;
 import com.goldfish.domain.Paper;
 
 @Controller
-@RequestMapping("//paper")
+@RequestMapping("/paper")
 public class PaperController extends BaseController {
 
 //	private final static Log log = LogFactory.getLog(PaperAction.class);

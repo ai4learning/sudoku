@@ -10,8 +10,8 @@ import com.goldfish.manager.QuestionManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * QuestionManager实现类
+ * @since 2018-5-8
+ * 试题Manager实现类
  */
  @Component("questionManager")
 public class QuestionManagerImpl implements QuestionManager {
@@ -21,7 +21,8 @@ public class QuestionManagerImpl implements QuestionManager {
 
 
   public Question addQuestion(Question question) {
-		return questionDao.addQuestion(question);
+		int i=questionDao.addQuestion(question);
+		return question;
     }
     
     public void updateQuestion(Question question) {
@@ -41,22 +42,17 @@ public class QuestionManagerImpl implements QuestionManager {
     
    
 
-   
-    
-    public List<Question> getAll() {
-    	return questionDao.getAll();
-    }
-    	
-    public List<Question> getListByExample(Question question) {
-		return questionDao.getListByExample(question);
-    }
 
-        public Question getUnique(Question question) {
+    	
+   
+   public Question getUnique(Question question) {
 		return questionDao.getUnique(question);
     }
 
     
-    
+ public List<Question> getListByExample(Question question) {
+    return questionDao.getListByExample(question);
+    }
 
     
     public List<Question> getQuestionByPage(PageQuery pageQuery) {

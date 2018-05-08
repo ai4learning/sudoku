@@ -10,8 +10,8 @@ import com.goldfish.manager.PaperManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * PaperManager实现类
+ * @since 2018-5-8
+ * 试卷Manager实现类
  */
  @Component("paperManager")
 public class PaperManagerImpl implements PaperManager {
@@ -21,7 +21,8 @@ public class PaperManagerImpl implements PaperManager {
 
 
   public Paper addPaper(Paper paper) {
-		return paperDao.addPaper(paper);
+		int i=paperDao.addPaper(paper);
+		return paper;
     }
     
     public void updatePaper(Paper paper) {
@@ -41,22 +42,17 @@ public class PaperManagerImpl implements PaperManager {
     
    
 
-   
-    
-    public List<Paper> getAll() {
-    	return paperDao.getAll();
-    }
-    	
-    public List<Paper> getListByExample(Paper paper) {
-		return paperDao.getListByExample(paper);
-    }
 
-        public Paper getUnique(Paper paper) {
+    	
+   
+   public Paper getUnique(Paper paper) {
 		return paperDao.getUnique(paper);
     }
 
     
-    
+ public List<Paper> getListByExample(Paper paper) {
+    return paperDao.getListByExample(paper);
+    }
 
     
     public List<Paper> getPaperByPage(PageQuery pageQuery) {

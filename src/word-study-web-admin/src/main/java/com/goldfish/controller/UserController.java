@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.controller.UserController.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.controller;
 
 import java.util.List;
@@ -25,25 +26,10 @@ import com.goldfish.service.UserService;
 import com.goldfish.domain.User;
 
 @Controller
-@RequestMapping("//user")
+@RequestMapping("/user")
 public class UserController extends BaseController {
 
 //	private final static Log log = LogFactory.getLog(UserAction.class);
-
-	@RequestMapping(value="login",method={RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody String login(User user, ModelMap context) {
-//	public @ResponseBody Map<String,Object> login(User user, ModelMap context) {
-//		CommonResult<User> result = new CommonResult<User>();
-//		result.setSuccess(true);
-//		return result.getReturnMap();
-		return "index/index";
-	}
-//
-//	@RequestMapping(value="doAdd",method={RequestMethod.GET,RequestMethod.POST})
-//	public @ResponseBody Map<String,Object> doAdd(User user, ModelMap context) {
-//		CommonResult<User> result =userService.addUser(user);
-//		return result.getReturnMap();
-//	}
 	
 	@Resource(name="userService")
 	private UserService userService;
@@ -65,23 +51,23 @@ public class UserController extends BaseController {
 	 public @ResponseBody Map<String,Object> doAdd(User user, ModelMap context) {
 	    		CommonResult<User> result =userService.addUser(user);
 				return result.getReturnMap();
-	 }
+	    }
 	 
 	 
 
-	@RequestMapping(value="update",method={RequestMethod.GET,RequestMethod.POST})
-	public String update(User user, ModelMap context) {
-		CommonResult<User> result = userService.getUserById(user.getId());
-		this.toVm(result, context);
-		return "/user/update";
-	}
+		@RequestMapping(value="update",method={RequestMethod.GET,RequestMethod.POST})
+	    public String update(User user, ModelMap context) {
+			CommonResult<User> result = userService.getUserById(user.getId());
+			this.toVm(result, context);
+			return "/user/update";
+	    }
 	    
 		
-	@RequestMapping(value="doUpdate",method={RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody Map<String,Object> doUpdate(User user, ModelMap context) {
-		CommonResult<User> result = userService.updateUser(user);
-		return result.getReturnMap();
-	}
+		@RequestMapping(value="doUpdate",method={RequestMethod.GET,RequestMethod.POST})
+	    public @ResponseBody Map<String,Object> doUpdate(User user, ModelMap context) {
+			CommonResult<User> result = userService.updateUser(user);
+			return result.getReturnMap();
+	    }
 	    
 
 		@RequestMapping(value="view",method={RequestMethod.GET,RequestMethod.POST})

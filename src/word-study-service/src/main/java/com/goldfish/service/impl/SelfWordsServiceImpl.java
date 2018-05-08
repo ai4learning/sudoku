@@ -5,10 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.SelfWords;
@@ -18,28 +16,31 @@ import com.goldfish.service.SelfWordsService;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- *<p>  SelfWordsservice实现</p>
+ * @since 2018-5-8
+ *<p>  学生自身单词service实现</p>
  *
  */
 @Service("selfWordsService")
 public class SelfWordsServiceImpl implements SelfWordsService {
 
-	private static final Logger logger = LoggerFactory.getLogger(SelfWordsServiceImpl.class);
+	private static final Logger logger = Logger.getLogger(SelfWordsServiceImpl.class);
 	
 	@Resource(name="selfWordsManager")
 	private SelfWordsManager selfWordsManager;
     
     public CommonResult<SelfWords> addSelfWords(SelfWords selfWords) {
 		CommonResult<SelfWords> result = new CommonResult<SelfWords>();
-		try {
+		try{
 			
-				selfWords.setCreated(new Date());
-			 
+			selfWords.setCreated(new Date());
+			
+			
+			selfWords.setModified(new Date());
+			
 			result.addDefaultModel(selfWordsManager.addSelfWords(selfWords));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("添加 SelfWords失败", e);
+			logger.error("添加 学生自身单词失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -49,12 +50,12 @@ public class SelfWordsServiceImpl implements SelfWordsService {
 		CommonResult<SelfWords> result = new CommonResult<SelfWords>();
 		try {
 			
-				selfWords.setModified(new Date());
-			 
+					selfWords.setModified(new Date());
+					
 			selfWordsManager.updateSelfWords(selfWords);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("更新 SelfWords失败", e);
+			logger.error("更新 学生自身单词失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -68,7 +69,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
 			selfWordsManager.deleteSelfWords(id);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("删除 SelfWords失败", e);
+			logger.error("删除 学生自身单词失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -81,7 +82,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
 			result.addDefaultModel("selfWords", selfWordsManager.getSelfWordsById(id));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据主键获取 SelfWords失败", e);
+			logger.error("根据主键获取 学生自身单词失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -90,31 +91,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
 
         
 	
-	public CommonResult<List<SelfWords>> getAll() {
-		CommonResult<List<SelfWords>> result = new CommonResult<List<SelfWords>>();
-		try {
-			List<SelfWords> list = selfWordsManager.getAll();
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得所有 SelfWords失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
-	
-	public CommonResult<List<SelfWords>> getListByExample(SelfWords selfWords) {
-		CommonResult<List<SelfWords>> result = new CommonResult<List<SelfWords>>();
-		try {
-			List<SelfWords> list = selfWordsManager.getListByExample(selfWords);
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得 SelfWords失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
+
 
 	public CommonResult<SelfWords> getUnique(SelfWords selfWords) {
 		CommonResult<SelfWords> result = new CommonResult<SelfWords>();
@@ -122,15 +99,25 @@ public class SelfWordsServiceImpl implements SelfWordsService {
 			result.addDefaultModel(selfWordsManager.getUnique(selfWords));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据example获取唯一 SelfWords失败", e);
+			logger.error("根据example获取唯一 学生自身单词失败", e);
 			result.setSuccess(false);
 		}
 		return result;
 	}
 
-	
 
-
+	public CommonResult<List<SelfWords>> getListByExample(SelfWords selfWords) {
+		CommonResult<List<SelfWords>> result = new CommonResult<List<SelfWords>>();
+		try {
+			List<SelfWords> list = selfWordsManager.getListByExample(selfWords);
+			result.addDefaultModel("list", list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("取得 学生自身单词失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
 
 	
 	public CommonResult<List<SelfWords>> getSelfWordsByPage(PageQuery pageQuery) {
@@ -145,7 +132,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
 			}
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("分页获取 SelfWords失败", e);
+			logger.error("分页获取 学生自身单词失败", e);
 			result.setSuccess(false);
 		}
 		return result;

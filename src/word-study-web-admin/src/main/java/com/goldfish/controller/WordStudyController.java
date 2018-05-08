@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.controller.WordStudyController.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.controller;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import com.goldfish.service.WordStudyService;
 import com.goldfish.domain.WordStudy;
 
 @Controller
-@RequestMapping("//wordStudy")
+@RequestMapping("/wordStudy")
 public class WordStudyController extends BaseController {
 
 //	private final static Log log = LogFactory.getLog(WordStudyAction.class);

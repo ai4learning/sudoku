@@ -1,8 +1,9 @@
 
 /**
- * Copyright(c) 2013-  www.jd.com
- *
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.dao;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.CourseStudy;
 import java.util.Map;
 /**
  * @author hellosscat
- * @since 2018-5-2
- * CourseStudy Dao接口类
+ * @since 2018-5-8
+ * 课程学习 Dao接口类
  */
 public interface CourseStudyDao {
     
@@ -23,7 +24,7 @@ public interface CourseStudyDao {
      * @param courseStudy
      * @return
      */
-    public CourseStudy addCourseStudy(CourseStudy courseStudy);
+    public int addCourseStudy(CourseStudy courseStudy);
     
 	/**
      * 更新CourseStudy
@@ -32,45 +33,29 @@ public interface CourseStudyDao {
      */
     public void updateCourseStudy(CourseStudy courseStudy);
     
+    
+    
 
-
-    	
-	 /**
+    /**
      * 根据主键删除CourseStudy
      * 
      * @param id
      */
     public void deleteCourseStudy(Long id);
-    
 
-    	/**
+
+	/**
      * 根据主键获取CourseStudy
      * 
      * @param id
      * @return
      */	
     public CourseStudy getCourseStudyById(Long id);
+    
 
-   
 
-
-	
+    
     /**
-     * 取得所有CourseStudy
-     * 
-     * @return
-     */
-    public List<CourseStudy> getAll();
-    
-	/**
-     * 根据example取得CourseStudy列表
-     * 
-     * @param  courseStudy
-     * @return
-     */
-    public List<CourseStudy> getListByExample(CourseStudy courseStudy);
-    
-    	/**
      * 根据example取得唯一的CourseStudy
      * 
      * @param courseStudy
@@ -79,24 +64,30 @@ public interface CourseStudyDao {
     public CourseStudy getUnique(CourseStudy courseStudy);
     
 
-    
+
+    /**
+     * 根据example取得CourseStudy列表
+     * 
+     * @param  courseStudy
+     * @return
+     */
+    public List<CourseStudy> getListByExample(CourseStudy courseStudy);
 
     
-
 	/**
      * 分页取得CourseStudy列表
      * 
-     * @param params
+     * @param paramMap
      * @return
      */
-    public List<CourseStudy> getCourseStudyByPage(Map<String,Object> params);
+    public List<CourseStudy> getCourseStudyByPage(Map<String,Object> paramMap);
 	
 	/**
      * 根据查询条件返回数量
      * 
-     * @param params
+     * @param paramMap
      * @return
      */
-    public int count(Map<String,Object> params);
+    public int count(Map<String,Object> paramMap);
 
 }

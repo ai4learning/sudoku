@@ -7,8 +7,8 @@ import com.goldfish.domain.UnitWordsStudy;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow UnitWordsStudyservice 接口
+ * @since 2018-5-8
+ * jshow 单元单词学习service 接口
  *
  */
 public interface UnitWordsStudyService {
@@ -48,20 +48,8 @@ public interface UnitWordsStudyService {
 
      
 
-    /**
-     * 取得所有UnitWordsStudy
-     * 
-     * @return
-     */
-    public CommonResult<List<UnitWordsStudy>> getAll();
-    
-	/**
-     * 根据example取得UnitWordsStudy列表
-     * 
-     * @param  unitWordsStudy
-     * @return
-     */
-    public CommonResult<List<UnitWordsStudy>> getListByExample(UnitWordsStudy unitWordsStudy);
+
+	
     
 	/**
      * 根据example取得唯一的UnitWordsStudy
@@ -71,9 +59,16 @@ public interface UnitWordsStudyService {
      */
     public CommonResult<UnitWordsStudy> getUnique(UnitWordsStudy unitWordsStudy);
     
-    
 
 
+
+    /**
+     * 根据example取得UnitWordsStudy列表
+     * 
+     * @param  unitWordsStudy
+     * @return
+     */
+    public CommonResult<List<UnitWordsStudy>> getListByExample(UnitWordsStudy unitWordsStudy);
     
 
 	/**

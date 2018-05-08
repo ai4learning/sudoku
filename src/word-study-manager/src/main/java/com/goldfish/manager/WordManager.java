@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.WordManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.Word;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * WordManager接口类
+ * @since 2018-5-8
+ * 单词库Manager接口类
  */
 public interface WordManager {
  
@@ -50,21 +51,7 @@ public interface WordManager {
     
 
 
-       
-    /**
-     * 取得所有Word
-     * 
-     * @return
-     */
-    public List<Word> getAll();
-    
-	/**
-     * 根据example取得Word列表
-     * 
-     * @param  word
-     * @return
-     */
-    public List<Word> getListByExample(Word word);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface WordManager {
     
 
     
+    /**
+     * 根据example取得Word列表
+     * 
+     * @param  word
+     * @return
+     */
+    public List<Word> getListByExample(Word word);
 
 	/**
      * 分页取得Word列表

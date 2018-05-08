@@ -1,15 +1,22 @@
+/**
+ * Copyright(c) 2004-2018 bianfeng
+ */
+
+
 package com.goldfish.domain;
 
 import java.io.Serializable;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * LoginRecord Domain 类
+ * @since 2018-5-8
+ * 登录 Domain 类
  */
 public class LoginRecord  implements Serializable {
 	
-  private static final long serialVersionUID = 1391534722336855900L;
+  private static final long serialVersionUID = 3403201262748506870L;
 	
 	/**  ID  */
 	private Long id; 
@@ -28,8 +35,10 @@ public class LoginRecord  implements Serializable {
 	/**  状态  */
 	private Integer state; 
 	/**  创建时间  */
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date created; 
 	/**  修改时间  */
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date modified; 
 
   	public void setId(Long id) {

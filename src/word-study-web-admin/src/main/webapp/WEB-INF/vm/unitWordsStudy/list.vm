@@ -34,7 +34,7 @@
 			<td>$!item.lessonId</td>
 			<td>$!item.unitNbr</td>
 			<td>
-	
+        
 			
 				#if($item.currentPhase==1)<span class="">分批学习</span> #end	
 			
@@ -43,38 +43,38 @@
 				#if($item.currentPhase==3)<span class="">单元测试</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.totalReadingTime</td>
 			<td>$!item.totalWritingTime</td>
 			<td>$!item.totalNumber</td>
 			<td>
-	
+        
 			
 				#if($item.isFinished==1)<span class="">未完成</span> #end	
 			
 				#if($item.isFinished==2)<span class="">已完成</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.isTested==1)<span class="">未完成</span> #end	
 			
 				#if($item.isTested==2)<span class="">已完成</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.studyPos</td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -97,7 +97,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryUnitWordsStudyList','input')
 		#end
 
 	</div>
@@ -109,18 +109,18 @@
 void function(j) {	
 	j('.JDelete-unitWordsStudy').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除UnitWordsStudy',info:'您确定要删除UnitWordsStudy吗？',url: '/unitWordsStudy/doDelete',param:'id='+id};
+		var config={title:'删除单元单词学习',info:'您确定要删除单元单词学习吗？',queryList:"queryUnitWordsStudyList",url: '/unitWordsStudy/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-unitWordsStudy').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改UnitWordsStudy', url: '/unitWordsStudy/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改单元单词学习', url: '/unitWordsStudy/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-unitWordsStudy').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看UnitWordsStudy', url: '/unitWordsStudy/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看单元单词学习', url: '/unitWordsStudy/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

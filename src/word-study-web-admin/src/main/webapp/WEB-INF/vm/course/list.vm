@@ -33,28 +33,28 @@
 		   <tr>
 				 			<td>$!item.id</td>
 			<td>
-	
+        
 			
 				#if($item.type==1)<span class="">教材</span> #end	
 			
 				#if($item.type==2)<span class="">错词本</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.moduleCode</td>
 			<td>$!item.bookNumber</td>
 			<td>$!item.bookName</td>
 			<td>
-	
+        
 			
 				#if($item.bookType==1)<span class="">教材</span> #end	
 			
 				#if($item.bookType==2)<span class="">特色</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.orderType==0)<span class="">无</span> #end	
 			
@@ -67,16 +67,16 @@
 				#if($item.orderType==4)<span class="">大学</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.bookState==1)<span class="">有效</span> #end	
 			
 				#if($item.bookState==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.bookPrice</td>
 			<td>$!item.introduce</td>
 			<td>$!item.coverImageUrl</td>
@@ -107,7 +107,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryCourseList','input')
 		#end
 
 	</div>
@@ -119,18 +119,18 @@
 void function(j) {	
 	j('.JDelete-course').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除Course',info:'您确定要删除Course吗？',url: '/course/doDelete',param:'id='+id};
+		var config={title:'删除课程',info:'您确定要删除课程吗？',queryList:"queryCourseList",url: '/course/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-course').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改Course', url: '/course/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改课程', url: '/course/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-course').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看Course', url: '/course/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看课程', url: '/course/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

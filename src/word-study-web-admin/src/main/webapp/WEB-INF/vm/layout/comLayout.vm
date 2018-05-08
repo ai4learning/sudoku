@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE>九宫格单词集训营</TITLE>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    #parse("/WEB-INF/vm/common/cssStatics.vm")
+    #parse("/WEB-INF/vm/common/jsStatics.vm")
+</HEAD>
+
+<body>
+$!{screen_content}
+</body>
+</HTML>

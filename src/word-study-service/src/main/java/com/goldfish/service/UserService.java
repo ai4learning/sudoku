@@ -7,8 +7,8 @@ import com.goldfish.domain.User;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow Userservice 接口
+ * @since 2018-5-8
+ * jshow 用户service 接口
  *
  */
 public interface UserService {
@@ -48,20 +48,8 @@ public interface UserService {
 
      
 
-    /**
-     * 取得所有User
-     * 
-     * @return
-     */
-    public CommonResult<List<User>> getAll();
-    
-	/**
-     * 根据example取得User列表
-     * 
-     * @param  user
-     * @return
-     */
-    public CommonResult<List<User>> getListByExample(User user);
+
+	
     
 	/**
      * 根据example取得唯一的User
@@ -71,9 +59,16 @@ public interface UserService {
      */
     public CommonResult<User> getUnique(User user);
     
-    
 
 
+
+    /**
+     * 根据example取得User列表
+     * 
+     * @param  user
+     * @return
+     */
+    public CommonResult<List<User>> getListByExample(User user);
     
 
 	/**

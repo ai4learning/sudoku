@@ -10,8 +10,8 @@ import com.goldfish.manager.UnitWordsStudyManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * UnitWordsStudyManager实现类
+ * @since 2018-5-8
+ * 单元单词学习Manager实现类
  */
  @Component("unitWordsStudyManager")
 public class UnitWordsStudyManagerImpl implements UnitWordsStudyManager {
@@ -21,7 +21,8 @@ public class UnitWordsStudyManagerImpl implements UnitWordsStudyManager {
 
 
   public UnitWordsStudy addUnitWordsStudy(UnitWordsStudy unitWordsStudy) {
-		return unitWordsStudyDao.addUnitWordsStudy(unitWordsStudy);
+		int i=unitWordsStudyDao.addUnitWordsStudy(unitWordsStudy);
+		return unitWordsStudy;
     }
     
     public void updateUnitWordsStudy(UnitWordsStudy unitWordsStudy) {
@@ -41,22 +42,17 @@ public class UnitWordsStudyManagerImpl implements UnitWordsStudyManager {
     
    
 
-   
-    
-    public List<UnitWordsStudy> getAll() {
-    	return unitWordsStudyDao.getAll();
-    }
-    	
-    public List<UnitWordsStudy> getListByExample(UnitWordsStudy unitWordsStudy) {
-		return unitWordsStudyDao.getListByExample(unitWordsStudy);
-    }
 
-        public UnitWordsStudy getUnique(UnitWordsStudy unitWordsStudy) {
+    	
+   
+   public UnitWordsStudy getUnique(UnitWordsStudy unitWordsStudy) {
 		return unitWordsStudyDao.getUnique(unitWordsStudy);
     }
 
     
-    
+ public List<UnitWordsStudy> getListByExample(UnitWordsStudy unitWordsStudy) {
+    return unitWordsStudyDao.getListByExample(unitWordsStudy);
+    }
 
     
     public List<UnitWordsStudy> getUnitWordsStudyByPage(PageQuery pageQuery) {

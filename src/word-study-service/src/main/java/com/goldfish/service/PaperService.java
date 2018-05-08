@@ -7,8 +7,8 @@ import com.goldfish.domain.Paper;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow Paperservice 接口
+ * @since 2018-5-8
+ * jshow 试卷service 接口
  *
  */
 public interface PaperService {
@@ -48,20 +48,8 @@ public interface PaperService {
 
      
 
-    /**
-     * 取得所有Paper
-     * 
-     * @return
-     */
-    public CommonResult<List<Paper>> getAll();
-    
-	/**
-     * 根据example取得Paper列表
-     * 
-     * @param  paper
-     * @return
-     */
-    public CommonResult<List<Paper>> getListByExample(Paper paper);
+
+	
     
 	/**
      * 根据example取得唯一的Paper
@@ -71,9 +59,16 @@ public interface PaperService {
      */
     public CommonResult<Paper> getUnique(Paper paper);
     
-    
 
 
+
+    /**
+     * 根据example取得Paper列表
+     * 
+     * @param  paper
+     * @return
+     */
+    public CommonResult<List<Paper>> getListByExample(Paper paper);
     
 
 	/**

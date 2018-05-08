@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.controller.LoginRecordController.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.controller;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import com.goldfish.service.LoginRecordService;
 import com.goldfish.domain.LoginRecord;
 
 @Controller
-@RequestMapping("//loginRecord")
+@RequestMapping("/loginRecord")
 public class LoginRecordController extends BaseController {
 
 //	private final static Log log = LogFactory.getLog(LoginRecordAction.class);

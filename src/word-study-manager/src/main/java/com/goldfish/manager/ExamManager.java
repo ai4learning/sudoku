@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.ExamManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.Exam;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * ExamManager接口类
+ * @since 2018-5-8
+ * 考试Manager接口类
  */
 public interface ExamManager {
  
@@ -50,21 +51,7 @@ public interface ExamManager {
     
 
 
-       
-    /**
-     * 取得所有Exam
-     * 
-     * @return
-     */
-    public List<Exam> getAll();
-    
-	/**
-     * 根据example取得Exam列表
-     * 
-     * @param  exam
-     * @return
-     */
-    public List<Exam> getListByExample(Exam exam);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface ExamManager {
     
 
     
+    /**
+     * 根据example取得Exam列表
+     * 
+     * @param  exam
+     * @return
+     */
+    public List<Exam> getListByExample(Exam exam);
 
 	/**
      * 分页取得Exam列表

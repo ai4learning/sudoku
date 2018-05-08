@@ -7,8 +7,8 @@ import com.goldfish.domain.Unit;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow Unitservice 接口
+ * @since 2018-5-8
+ * jshow 课程单元service 接口
  *
  */
 public interface UnitService {
@@ -48,20 +48,8 @@ public interface UnitService {
 
      
 
-    /**
-     * 取得所有Unit
-     * 
-     * @return
-     */
-    public CommonResult<List<Unit>> getAll();
-    
-	/**
-     * 根据example取得Unit列表
-     * 
-     * @param  unit
-     * @return
-     */
-    public CommonResult<List<Unit>> getListByExample(Unit unit);
+
+	
     
 	/**
      * 根据example取得唯一的Unit
@@ -71,9 +59,16 @@ public interface UnitService {
      */
     public CommonResult<Unit> getUnique(Unit unit);
     
-    
 
 
+
+    /**
+     * 根据example取得Unit列表
+     * 
+     * @param  unit
+     * @return
+     */
+    public CommonResult<List<Unit>> getListByExample(Unit unit);
     
 
 	/**

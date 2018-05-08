@@ -5,10 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.UnitWordsStudy;
@@ -18,28 +16,31 @@ import com.goldfish.service.UnitWordsStudyService;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- *<p>  UnitWordsStudyservice实现</p>
+ * @since 2018-5-8
+ *<p>  单元单词学习service实现</p>
  *
  */
 @Service("unitWordsStudyService")
 public class UnitWordsStudyServiceImpl implements UnitWordsStudyService {
 
-	private static final Logger logger = LoggerFactory.getLogger(UnitWordsStudyServiceImpl.class);
+	private static final Logger logger = Logger.getLogger(UnitWordsStudyServiceImpl.class);
 	
 	@Resource(name="unitWordsStudyManager")
 	private UnitWordsStudyManager unitWordsStudyManager;
     
     public CommonResult<UnitWordsStudy> addUnitWordsStudy(UnitWordsStudy unitWordsStudy) {
 		CommonResult<UnitWordsStudy> result = new CommonResult<UnitWordsStudy>();
-		try {
+		try{
 			
-				unitWordsStudy.setCreated(new Date());
-			 
+			unitWordsStudy.setCreated(new Date());
+			
+			
+			unitWordsStudy.setModified(new Date());
+			
 			result.addDefaultModel(unitWordsStudyManager.addUnitWordsStudy(unitWordsStudy));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("添加 UnitWordsStudy失败", e);
+			logger.error("添加 单元单词学习失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -49,12 +50,12 @@ public class UnitWordsStudyServiceImpl implements UnitWordsStudyService {
 		CommonResult<UnitWordsStudy> result = new CommonResult<UnitWordsStudy>();
 		try {
 			
-				unitWordsStudy.setModified(new Date());
-			 
+					unitWordsStudy.setModified(new Date());
+					
 			unitWordsStudyManager.updateUnitWordsStudy(unitWordsStudy);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("更新 UnitWordsStudy失败", e);
+			logger.error("更新 单元单词学习失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -68,7 +69,7 @@ public class UnitWordsStudyServiceImpl implements UnitWordsStudyService {
 			unitWordsStudyManager.deleteUnitWordsStudy(id);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("删除 UnitWordsStudy失败", e);
+			logger.error("删除 单元单词学习失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -81,7 +82,7 @@ public class UnitWordsStudyServiceImpl implements UnitWordsStudyService {
 			result.addDefaultModel("unitWordsStudy", unitWordsStudyManager.getUnitWordsStudyById(id));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据主键获取 UnitWordsStudy失败", e);
+			logger.error("根据主键获取 单元单词学习失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -90,31 +91,7 @@ public class UnitWordsStudyServiceImpl implements UnitWordsStudyService {
 
         
 	
-	public CommonResult<List<UnitWordsStudy>> getAll() {
-		CommonResult<List<UnitWordsStudy>> result = new CommonResult<List<UnitWordsStudy>>();
-		try {
-			List<UnitWordsStudy> list = unitWordsStudyManager.getAll();
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得所有 UnitWordsStudy失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
-	
-	public CommonResult<List<UnitWordsStudy>> getListByExample(UnitWordsStudy unitWordsStudy) {
-		CommonResult<List<UnitWordsStudy>> result = new CommonResult<List<UnitWordsStudy>>();
-		try {
-			List<UnitWordsStudy> list = unitWordsStudyManager.getListByExample(unitWordsStudy);
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得 UnitWordsStudy失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
+
 
 	public CommonResult<UnitWordsStudy> getUnique(UnitWordsStudy unitWordsStudy) {
 		CommonResult<UnitWordsStudy> result = new CommonResult<UnitWordsStudy>();
@@ -122,15 +99,25 @@ public class UnitWordsStudyServiceImpl implements UnitWordsStudyService {
 			result.addDefaultModel(unitWordsStudyManager.getUnique(unitWordsStudy));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据example获取唯一 UnitWordsStudy失败", e);
+			logger.error("根据example获取唯一 单元单词学习失败", e);
 			result.setSuccess(false);
 		}
 		return result;
 	}
 
-	
 
-
+	public CommonResult<List<UnitWordsStudy>> getListByExample(UnitWordsStudy unitWordsStudy) {
+		CommonResult<List<UnitWordsStudy>> result = new CommonResult<List<UnitWordsStudy>>();
+		try {
+			List<UnitWordsStudy> list = unitWordsStudyManager.getListByExample(unitWordsStudy);
+			result.addDefaultModel("list", list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("取得 单元单词学习失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
 
 	
 	public CommonResult<List<UnitWordsStudy>> getUnitWordsStudyByPage(PageQuery pageQuery) {
@@ -145,7 +132,7 @@ public class UnitWordsStudyServiceImpl implements UnitWordsStudyService {
 			}
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("分页获取 UnitWordsStudy失败", e);
+			logger.error("分页获取 单元单词学习失败", e);
 			result.setSuccess(false);
 		}
 		return result;

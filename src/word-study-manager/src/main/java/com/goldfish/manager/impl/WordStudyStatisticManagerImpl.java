@@ -10,8 +10,8 @@ import com.goldfish.manager.WordStudyStatisticManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * WordStudyStatisticManager实现类
+ * @since 2018-5-8
+ * 单词学习统计Manager实现类
  */
  @Component("wordStudyStatisticManager")
 public class WordStudyStatisticManagerImpl implements WordStudyStatisticManager {
@@ -21,7 +21,8 @@ public class WordStudyStatisticManagerImpl implements WordStudyStatisticManager 
 
 
   public WordStudyStatistic addWordStudyStatistic(WordStudyStatistic wordStudyStatistic) {
-		return wordStudyStatisticDao.addWordStudyStatistic(wordStudyStatistic);
+		int i=wordStudyStatisticDao.addWordStudyStatistic(wordStudyStatistic);
+		return wordStudyStatistic;
     }
     
     public void updateWordStudyStatistic(WordStudyStatistic wordStudyStatistic) {
@@ -41,22 +42,17 @@ public class WordStudyStatisticManagerImpl implements WordStudyStatisticManager 
     
    
 
-   
-    
-    public List<WordStudyStatistic> getAll() {
-    	return wordStudyStatisticDao.getAll();
-    }
-    	
-    public List<WordStudyStatistic> getListByExample(WordStudyStatistic wordStudyStatistic) {
-		return wordStudyStatisticDao.getListByExample(wordStudyStatistic);
-    }
 
-        public WordStudyStatistic getUnique(WordStudyStatistic wordStudyStatistic) {
+    	
+   
+   public WordStudyStatistic getUnique(WordStudyStatistic wordStudyStatistic) {
 		return wordStudyStatisticDao.getUnique(wordStudyStatistic);
     }
 
     
-    
+ public List<WordStudyStatistic> getListByExample(WordStudyStatistic wordStudyStatistic) {
+    return wordStudyStatisticDao.getListByExample(wordStudyStatistic);
+    }
 
     
     public List<WordStudyStatistic> getWordStudyStatisticByPage(PageQuery pageQuery) {

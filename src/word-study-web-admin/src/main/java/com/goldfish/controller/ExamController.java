@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.controller.ExamController.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.controller;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import com.goldfish.service.ExamService;
 import com.goldfish.domain.Exam;
 
 @Controller
-@RequestMapping("//exam")
+@RequestMapping("/exam")
 public class ExamController extends BaseController {
 
 //	private final static Log log = LogFactory.getLog(ExamAction.class);

@@ -7,8 +7,8 @@ import com.goldfish.domain.UnitWords;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow UnitWordsservice 接口
+ * @since 2018-5-8
+ * jshow 单元单词service 接口
  *
  */
 public interface UnitWordsService {
@@ -48,20 +48,8 @@ public interface UnitWordsService {
 
      
 
-    /**
-     * 取得所有UnitWords
-     * 
-     * @return
-     */
-    public CommonResult<List<UnitWords>> getAll();
-    
-	/**
-     * 根据example取得UnitWords列表
-     * 
-     * @param  unitWords
-     * @return
-     */
-    public CommonResult<List<UnitWords>> getListByExample(UnitWords unitWords);
+
+	
     
 	/**
      * 根据example取得唯一的UnitWords
@@ -71,9 +59,16 @@ public interface UnitWordsService {
      */
     public CommonResult<UnitWords> getUnique(UnitWords unitWords);
     
-    
 
 
+
+    /**
+     * 根据example取得UnitWords列表
+     * 
+     * @param  unitWords
+     * @return
+     */
+    public CommonResult<List<UnitWords>> getListByExample(UnitWords unitWords);
     
 
 	/**

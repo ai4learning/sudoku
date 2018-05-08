@@ -1,2 +1,0 @@
-#parse("/WEB-INF/vm/layout/head.vm")
-$screen_content

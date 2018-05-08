@@ -1,8 +1,9 @@
 
 /**
- * Copyright(c) 2013-  www.jd.com
- *
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.dao;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.User;
 import java.util.Map;
 /**
  * @author hellosscat
- * @since 2018-5-2
- * User Dao接口类
+ * @since 2018-5-8
+ * 用户 Dao接口类
  */
 public interface UserDao {
     
@@ -23,7 +24,7 @@ public interface UserDao {
      * @param user
      * @return
      */
-    public User addUser(User user);
+    public int addUser(User user);
     
 	/**
      * 更新User
@@ -32,45 +33,29 @@ public interface UserDao {
      */
     public void updateUser(User user);
     
+    
+    
 
-
-    	
-	 /**
+    /**
      * 根据主键删除User
      * 
      * @param id
      */
     public void deleteUser(Long id);
-    
 
-    	/**
+
+	/**
      * 根据主键获取User
      * 
      * @param id
      * @return
      */	
     public User getUserById(Long id);
+    
 
-   
 
-
-	
+    
     /**
-     * 取得所有User
-     * 
-     * @return
-     */
-    public List<User> getAll();
-    
-	/**
-     * 根据example取得User列表
-     * 
-     * @param  user
-     * @return
-     */
-    public List<User> getListByExample(User user);
-    
-    	/**
      * 根据example取得唯一的User
      * 
      * @param user
@@ -79,24 +64,30 @@ public interface UserDao {
     public User getUnique(User user);
     
 
-    
+
+    /**
+     * 根据example取得User列表
+     * 
+     * @param  user
+     * @return
+     */
+    public List<User> getListByExample(User user);
 
     
-
 	/**
      * 分页取得User列表
      * 
-     * @param params
+     * @param paramMap
      * @return
      */
-    public List<User> getUserByPage(Map<String,Object> params);
+    public List<User> getUserByPage(Map<String,Object> paramMap);
 	
 	/**
      * 根据查询条件返回数量
      * 
-     * @param params
+     * @param paramMap
      * @return
      */
-    public int count(Map<String,Object> params);
+    public int count(Map<String,Object> paramMap);
 
 }

@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.controller.SelfWordsStudyController.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.controller;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import com.goldfish.service.SelfWordsStudyService;
 import com.goldfish.domain.SelfWordsStudy;
 
 @Controller
-@RequestMapping("//selfWordsStudy")
+@RequestMapping("/selfWordsStudy")
 public class SelfWordsStudyController extends BaseController {
 
 //	private final static Log log = LogFactory.getLog(SelfWordsStudyAction.class);

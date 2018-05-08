@@ -1,190 +1,205 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#view_exam").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
 
 
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
-	
-		 <div class="control-group">
-			<label class="control-label" for="id">ID</label>
-			<div class="controls">
-			
-							<input type="text"  name="id" id="id" value="$!{exam.id}" readonly/>
+<div class="modal-body auto-height-body" id="view_exam">
+		<form class="form-horizontal"  id="form1">
+    	
+    		 <div class="control-group">
+    			<label class="control-label" for="id">ID</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="id" id="id" value="$!{exam.id}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userId">用户ID</label>
-			<div class="controls">
-			
-							<input type="text"  name="userId" id="userId" value="$!{exam.userId}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="userId">用户ID</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="userId" id="userId" value="$!{exam.userId}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userCode">用户CODE</label>
-			<div class="controls">
-			
-							<input type="text"  name="userCode" id="userCode" value="$!{exam.userCode}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="userCode">用户CODE</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="userCode" id="userCode" value="$!{exam.userCode}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="lessonId">课程ID</label>
-			<div class="controls">
-			
-							<input type="text"  name="lessonId" id="lessonId" value="$!{exam.lessonId}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="lessonId">课程ID</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="lessonId" id="lessonId" value="$!{exam.lessonId}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="unitNbr">课程号</label>
-			<div class="controls">
-			
-							<input type="text"  name="unitNbr" id="unitNbr" value="$!{exam.unitNbr}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="unitNbr">课程号</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="unitNbr" id="unitNbr" value="$!{exam.unitNbr}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="pageId">试卷ID</label>
-			<div class="controls">
-			
-							<input type="text"  name="pageId" id="pageId" value="$!{exam.pageId}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="pageId">试卷ID</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="pageId" id="pageId" value="$!{exam.pageId}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="testType">测试类型</label>
-			<div class="controls">
-			
-	
-		<select class="forms_select" name="testType" id="testType" disabled>
-				<option value="1" #if($exam.testType==1) selected  #end>单元测试；2.自主测试；</option>
+    		 <div class="control-group">
+    			<label class="control-label" for="testType">测试类型</label>
+    			<div class="controls">
+    			
+        
+		<select class="forms_select input-medium form-control" name="testType" id="testType" disabled>
+						<option value="1" #if($exam.testType==1) selected  #end>单元测试；2.自主测试；</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="resultScore">得分</label>
-			<div class="controls">
-			
-							<input type="text"  name="resultScore" id="resultScore" value="$!{exam.resultScore}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="resultScore">得分</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="resultScore" id="resultScore" value="$!{exam.resultScore}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="standardDuration">考试时长</label>
-			<div class="controls">
-			
-							<input type="text"  name="standardDuration" id="standardDuration" value="$!{exam.standardDuration}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="standardDuration">考试时长</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="standardDuration" id="standardDuration" value="$!{exam.standardDuration}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="realDuration">实际用时</label>
-			<div class="controls">
-			
-							<input type="text"  name="realDuration" id="realDuration" value="$!{exam.realDuration}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="realDuration">实际用时</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="realDuration" id="realDuration" value="$!{exam.realDuration}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="errorNbr">错误数</label>
-			<div class="controls">
-			
-							<input type="text"  name="errorNbr" id="errorNbr" value="$!{exam.errorNbr}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="errorNbr">错误数</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="errorNbr" id="errorNbr" value="$!{exam.errorNbr}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="cashPoint">积分</label>
-			<div class="controls">
-			
-							<input type="text"  name="cashPoint" id="cashPoint" value="$!{exam.cashPoint}" readonly/>
+    		 <div class="control-group">
+    			<label class="control-label" for="cashPoint">积分</label>
+    			<div class="controls">
+    			
+					<input type="text"  name="cashPoint" id="cashPoint" value="$!{exam.cashPoint}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="cashPointType">积分类型</label>
-			<div class="controls">
-			
-	
-		<select class="forms_select" name="cashPointType" id="cashPointType" disabled>
-				<option value="0" #if($exam.cashPointType==0) selected  #end>未知</option>
+    		 <div class="control-group">
+    			<label class="control-label" for="cashPointType">积分类型</label>
+    			<div class="controls">
+    			
+        
+		<select class="forms_select input-medium form-control" name="cashPointType" id="cashPointType" disabled>
+						<option value="0" #if($exam.cashPointType==0) selected  #end>未知</option>
 				<option value="1" #if($exam.cashPointType==1) selected  #end>金币</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="isPass">是否通过</label>
-			<div class="controls">
-			
-	
-		<select class="forms_select" name="isPass" id="isPass" disabled>
-				<option value="0" #if($exam.isPass==0) selected  #end>未通过</option>
+    		 <div class="control-group">
+    			<label class="control-label" for="isPass">是否通过</label>
+    			<div class="controls">
+    			
+        
+		<select class="forms_select input-medium form-control" name="isPass" id="isPass" disabled>
+						<option value="0" #if($exam.isPass==0) selected  #end>未通过</option>
 				<option value="1" #if($exam.isPass==1) selected  #end>通过</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="state">状态</label>
-			<div class="controls">
-			
-	
-		<select class="forms_select" name="state" id="state" disabled>
-				<option value="1" #if($exam.state==1) selected  #end>有效</option>
+    		 <div class="control-group">
+    			<label class="control-label" for="state">状态</label>
+    			<div class="controls">
+    			
+        
+		<select class="forms_select input-medium form-control" name="state" id="state" disabled>
+						<option value="1" #if($exam.state==1) selected  #end>有效</option>
 				<option value="2" #if($exam.state==2) selected  #end>无效</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="created">创建时间</label>
-			<div class="controls">
-			
-							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!exam.created)" readonly/>
-						
+    		 <div class="control-group">
+    			<label class="control-label" for="created">创建时间</label>
+    			<div class="controls">
+    			
+						<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!exam.created)" readonly/>
+					
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="modified">修改时间</label>
-			<div class="controls">
-			
-							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!exam.modified)" readonly/>
-						
+    		 <div class="control-group">
+    			<label class="control-label" for="modified">修改时间</label>
+    			<div class="controls">
+    			
+						<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!exam.modified)" readonly/>
+					
 			</div>
 		</div>
 		
 
-	</form>
+    	</form>
 </div>
 <div class="modal-footer">
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>

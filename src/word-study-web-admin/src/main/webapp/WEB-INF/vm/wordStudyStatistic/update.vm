@@ -1,13 +1,13 @@
-
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"  id="update_wordstudystatistic">
+	<form class="form-horizontal"  id="form_update_WordStudyStatistic">
 	
 		 <div class="control-group">
 			<label class="control-label" for="id">ID</label>
 			<div class="controls">
 			
-				<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{wordStudyStatistic.id}"readonly/>
+			<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{wordStudyStatistic.id}"readonly/>
 			</div>
 		</div>
 		
@@ -15,7 +15,7 @@
 			<label class="control-label" for="studentId">学生ID</label>
 			<div class="controls">
 			
-				<input type="text"  name="studentId" id="studentId" placeholder="请输入学生ID" maxlength="10" value="$!{wordStudyStatistic.studentId}"/>
+			<input type="text"  name="studentId" id="studentId" placeholder="请输入学生ID" maxlength="10" value="$!{wordStudyStatistic.studentId}"/>
 			</div>
 		</div>
 		
@@ -23,7 +23,7 @@
 			<label class="control-label" for="count">单词数</label>
 			<div class="controls">
 			
-				<input type="text"  name="count" id="count" placeholder="请输入单词数" maxlength="10" value="$!{wordStudyStatistic.count}"/>
+			<input type="text"  name="count" id="count" placeholder="请输入单词数" maxlength="10" value="$!{wordStudyStatistic.count}"/>
 			</div>
 		</div>
 		
@@ -31,14 +31,13 @@
 			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 				<option value="1" #if($wordStudyStatistic.state==1) selected #end>有效</option>
 				<option value="2" #if($wordStudyStatistic.state==2) selected #end>无效</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
@@ -47,8 +46,8 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存修改</a>
-	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-sm btn-primary" id="btn_update_WordStudyStatistic">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
 
@@ -56,22 +55,21 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 id:  {must: true, maxlength:19, ftip:'ID,最多19个字符'},
-		 studentId:  {must: true, maxlength:10, ftip:'学生ID,最多10个字符'},
-		 count:  {must: true, maxlength:10, ftip:'单词数,最多10个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
+		studentId:  {must: false, maxlength:10, ftip:'学生ID,最多10个字符' ,handler:'int' },
+		count:  {must: false, maxlength:10, ftip:'单词数,最多10个字符' ,handler:'int' },
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_update_WordStudyStatistic').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_update_WordStudyStatistic").serialize(),
 			set, 
 			'/wordStudyStatistic/doUpdate.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				queryWordStudyStatisticList(1);
 			}
 		);
 	});

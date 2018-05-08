@@ -10,8 +10,8 @@ import com.goldfish.manager.SelfWordsStudyManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * SelfWordsStudyManager实现类
+ * @since 2018-5-8
+ * 学生自身单词学习Manager实现类
  */
  @Component("selfWordsStudyManager")
 public class SelfWordsStudyManagerImpl implements SelfWordsStudyManager {
@@ -21,7 +21,8 @@ public class SelfWordsStudyManagerImpl implements SelfWordsStudyManager {
 
 
   public SelfWordsStudy addSelfWordsStudy(SelfWordsStudy selfWordsStudy) {
-		return selfWordsStudyDao.addSelfWordsStudy(selfWordsStudy);
+		int i=selfWordsStudyDao.addSelfWordsStudy(selfWordsStudy);
+		return selfWordsStudy;
     }
     
     public void updateSelfWordsStudy(SelfWordsStudy selfWordsStudy) {
@@ -41,22 +42,17 @@ public class SelfWordsStudyManagerImpl implements SelfWordsStudyManager {
     
    
 
-   
-    
-    public List<SelfWordsStudy> getAll() {
-    	return selfWordsStudyDao.getAll();
-    }
-    	
-    public List<SelfWordsStudy> getListByExample(SelfWordsStudy selfWordsStudy) {
-		return selfWordsStudyDao.getListByExample(selfWordsStudy);
-    }
 
-        public SelfWordsStudy getUnique(SelfWordsStudy selfWordsStudy) {
+    	
+   
+   public SelfWordsStudy getUnique(SelfWordsStudy selfWordsStudy) {
 		return selfWordsStudyDao.getUnique(selfWordsStudy);
     }
 
     
-    
+ public List<SelfWordsStudy> getListByExample(SelfWordsStudy selfWordsStudy) {
+    return selfWordsStudyDao.getListByExample(selfWordsStudy);
+    }
 
     
     public List<SelfWordsStudy> getSelfWordsStudyByPage(PageQuery pageQuery) {

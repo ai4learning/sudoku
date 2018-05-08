@@ -23,14 +23,14 @@
 			<td>$!item.studentId</td>
 			<td>$!item.count</td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -53,7 +53,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryWordStudyStatisticList','input')
 		#end
 
 	</div>
@@ -65,18 +65,18 @@
 void function(j) {	
 	j('.JDelete-wordStudyStatistic').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除WordStudyStatistic',info:'您确定要删除WordStudyStatistic吗？',url: '/wordStudyStatistic/doDelete',param:'id='+id};
+		var config={title:'删除单词学习统计',info:'您确定要删除单词学习统计吗？',queryList:"queryWordStudyStatisticList",url: '/wordStudyStatistic/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-wordStudyStatistic').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改WordStudyStatistic', url: '/wordStudyStatistic/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改单词学习统计', url: '/wordStudyStatistic/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-wordStudyStatistic').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看WordStudyStatistic', url: '/wordStudyStatistic/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看单词学习统计', url: '/wordStudyStatistic/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

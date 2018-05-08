@@ -44,7 +44,7 @@
 			<td>$!item.studentId</td>
 			<td>$!item.userCode</td>
 			<td>
-	
+        
 			
 				#if($item.memoryLevel==1)<span class="">生词</span> #end	
 			
@@ -53,76 +53,76 @@
 				#if($item.memoryLevel==3)<span class="">半生熟</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.reviewTimes</td>
 			<td>$!item.timeLeft</td>
 			<td>$!item.finishReadingTime</td>
 			<td>
-	
+        
 			
 				#if($item.isFstReadSuccess==0)<span class="">否；1.是；</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.readFailTimes</td>
 			<td>$!item.continueReadFailTimes</td>
 			<td>
-	
+        
 			
 				#if($item.isHalfReading==0)<span class="">否</span> #end	
 			
 				#if($item.isHalfReading==1)<span class="">是</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.isFstSpellSuccess==0)<span class="">否</span> #end	
 			
 				#if($item.isFstSpellSuccess==1)<span class="">是</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.spellFailTimes</td>
 			<td>$!item.continueSpellFailTimes</td>
 			<td>
-	
+        
 			
 				#if($item.isHalfSpelling==0)<span class="">否；1.是；</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.isRemember==0)<span class="">否；1.是；</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.isCancelReview==0)<span class="">否；1.是；</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.iscollected==0)<span class="">否；1.是；</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -145,7 +145,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryWordStudyList','input')
 		#end
 
 	</div>
@@ -157,18 +157,18 @@
 void function(j) {	
 	j('.JDelete-wordStudy').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除WordStudy',info:'您确定要删除WordStudy吗？',url: '/wordStudy/doDelete',param:'id='+id};
+		var config={title:'删除单词学习',info:'您确定要删除单词学习吗？',queryList:"queryWordStudyList",url: '/wordStudy/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-wordStudy').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改WordStudy', url: '/wordStudy/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改单词学习', url: '/wordStudy/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-wordStudy').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看WordStudy', url: '/wordStudy/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看单词学习', url: '/wordStudy/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

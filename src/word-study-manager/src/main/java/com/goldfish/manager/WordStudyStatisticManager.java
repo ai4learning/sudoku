@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.WordStudyStatisticManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.WordStudyStatistic;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * WordStudyStatisticManager接口类
+ * @since 2018-5-8
+ * 单词学习统计Manager接口类
  */
 public interface WordStudyStatisticManager {
  
@@ -50,21 +51,7 @@ public interface WordStudyStatisticManager {
     
 
 
-       
-    /**
-     * 取得所有WordStudyStatistic
-     * 
-     * @return
-     */
-    public List<WordStudyStatistic> getAll();
-    
-	/**
-     * 根据example取得WordStudyStatistic列表
-     * 
-     * @param  wordStudyStatistic
-     * @return
-     */
-    public List<WordStudyStatistic> getListByExample(WordStudyStatistic wordStudyStatistic);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface WordStudyStatisticManager {
     
 
     
+    /**
+     * 根据example取得WordStudyStatistic列表
+     * 
+     * @param  wordStudyStatistic
+     * @return
+     */
+    public List<WordStudyStatistic> getListByExample(WordStudyStatistic wordStudyStatistic);
 
 	/**
      * 分页取得WordStudyStatistic列表

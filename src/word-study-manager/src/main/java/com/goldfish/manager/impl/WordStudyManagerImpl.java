@@ -10,8 +10,8 @@ import com.goldfish.manager.WordStudyManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * WordStudyManager实现类
+ * @since 2018-5-8
+ * 单词学习Manager实现类
  */
  @Component("wordStudyManager")
 public class WordStudyManagerImpl implements WordStudyManager {
@@ -21,7 +21,8 @@ public class WordStudyManagerImpl implements WordStudyManager {
 
 
   public WordStudy addWordStudy(WordStudy wordStudy) {
-		return wordStudyDao.addWordStudy(wordStudy);
+		int i=wordStudyDao.addWordStudy(wordStudy);
+		return wordStudy;
     }
     
     public void updateWordStudy(WordStudy wordStudy) {
@@ -41,22 +42,17 @@ public class WordStudyManagerImpl implements WordStudyManager {
     
    
 
-   
-    
-    public List<WordStudy> getAll() {
-    	return wordStudyDao.getAll();
-    }
-    	
-    public List<WordStudy> getListByExample(WordStudy wordStudy) {
-		return wordStudyDao.getListByExample(wordStudy);
-    }
 
-        public WordStudy getUnique(WordStudy wordStudy) {
+    	
+   
+   public WordStudy getUnique(WordStudy wordStudy) {
 		return wordStudyDao.getUnique(wordStudy);
     }
 
     
-    
+ public List<WordStudy> getListByExample(WordStudy wordStudy) {
+    return wordStudyDao.getListByExample(wordStudy);
+    }
 
     
     public List<WordStudy> getWordStudyByPage(PageQuery pageQuery) {

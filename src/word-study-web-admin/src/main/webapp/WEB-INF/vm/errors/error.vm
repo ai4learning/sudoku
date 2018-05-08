@@ -1,16 +1,13 @@
-<div class="breadcrumbs" id="breadcrumbs">
-    <ul class="breadcrumb">
-        <li>
-            <i class="icon-home home-icon"></i>
-            <a href="/index">首页</a>
-        </li>
-        <li class="active">系统异常</li>
-    </ul>
-</div>
-<div class="page-content">
-    <div class="seach-bar">
-    	系统异常，请稍候再试!
-    </div>
-
-	
-</div>
+#if($exception)
+    #if($!exception.class.simpleName=="NoSuchMethodException")
+        $!response.setStatus(404)
+        404! 您请求的内容不存在
+    #else
+			出错了：  $exception.message
+    #end
+#elseif($result)
+		出错了，原因是:$result.message
+#else
+	未知错误！
+#end
+ 

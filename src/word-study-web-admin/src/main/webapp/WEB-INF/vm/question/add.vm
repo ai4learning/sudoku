@@ -1,15 +1,15 @@
-
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"   id="add_question">
+	<form class="form-horizontal"  id="form_add_Question">
 	
 		 <div class="control-group">
 			<label class="control-label" for="questionType">试题类型</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="questionType" id="questionType">
+        
+		<select class="forms_select input-medium" name="questionType" id="questionType">
 			
 				<option value="0">英译汉</option>
 				<option value="1">汉译英</option>
@@ -17,7 +17,7 @@
 				<option value="4">听写</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -98,8 +98,8 @@
 			<label class="control-label" for="level">难易层度</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="level" id="level">
+        
+		<select class="forms_select input-medium" name="level" id="level">
 			
 				<option value="0">未知</option>
 				<option value="1">容易</option>
@@ -107,7 +107,7 @@
 				<option value="3">较难</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -116,14 +116,14 @@
 			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -132,7 +132,7 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_Question">保存</a>
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
@@ -141,33 +141,31 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 questionType:  {must: true, maxlength:3, ftip:'试题类型,最多3个字符'},
-		 lessonId:  {must: true, maxlength:10, ftip:'课程ID,最多10个字符'},
-		 unitNbr:  {must: true, maxlength:3, ftip:'单元号,最多3个字符'},
-		 wordId:  {must: true, maxlength:10, ftip:'单词ID,最多10个字符'},
-		 vocCode:  {must: true, maxlength:50, ftip:'单词CODE,最多50个字符'},
-		 spelling:  {must: true, maxlength:128, ftip:'单词拼写,最多128个字符'},
-		 question:  {must: true, maxlength:255, ftip:'题描述,最多255个字符'},
-		 choices:  {must: true, maxlength:255, ftip:'选项,最多255个字符'},
-		 answerIndex:  {must: true, maxlength:20, ftip:'正确答案,最多20个字符'},
-		 level:  {must: true, maxlength:3, ftip:'难易层度,最多3个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		questionType:  {must: false, maxlength:3, ftip:'试题类型,最多3个字符' ,handler:'int' },
+		lessonId:  {must: false, maxlength:10, ftip:'课程ID,最多10个字符' ,handler:'int' },
+		unitNbr:  {must: false, maxlength:3, ftip:'单元号,最多3个字符' ,handler:'int' },
+		wordId:  {must: false, maxlength:10, ftip:'单词ID,最多10个字符' ,handler:'int' },
+		vocCode:  {must: false, maxlength:50, ftip:'单词CODE,最多50个字符'},
+		spelling:  {must: false, maxlength:128, ftip:'单词拼写,最多128个字符'},
+		question:  {must: false, maxlength:255, ftip:'题描述,最多255个字符'},
+		choices:  {must: false, maxlength:255, ftip:'选项,最多255个字符'},
+		answerIndex:  {must: false, maxlength:20, ftip:'正确答案,最多20个字符'},
+		level:  {must: false, maxlength:3, ftip:'难易层度,最多3个字符' ,handler:'int' },
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_add_Question').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_add_Question").serialize(),
 			set, 
 			'/question/doAdd.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				queryQuestionList(1);
 			}
 		);
 	});
 	
-	//form.friend.init(set);
 }(jQuery);
 </script>

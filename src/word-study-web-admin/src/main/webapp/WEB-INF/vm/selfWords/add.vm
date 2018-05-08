@@ -1,8 +1,8 @@
-
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"   id="add_selfwords">
+	<form class="form-horizontal"  id="form_add_SelfWords">
 	
 		 <div class="control-group">
 			<label class="control-label" for="id">ID</label>
@@ -35,14 +35,14 @@
 			<label class="control-label" for="type">类型</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="type" id="type">
+        
+		<select class="forms_select input-medium" name="type" id="type">
 			
 				<option value="1">复习词库</option>
 				<option value="2">错词库</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -96,12 +96,12 @@
 			<label class="control-label" for="vocIndex">单词索引</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="vocIndex" id="vocIndex">
+        
+		<select class="forms_select input-medium" name="vocIndex" id="vocIndex">
 			
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -128,14 +128,14 @@
 			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -144,7 +144,7 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_SelfWords">保存</a>
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
@@ -153,35 +153,33 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 id:  {must: true, maxlength:19, ftip:'ID,最多19个字符'},
-		 moduleCode:  {must: true, maxlength:50, ftip:'模块CODE,最多50个字符'},
-		 studyId:  {must: true, maxlength:19, ftip:'学生ID,最多19个字符'},
-		 type:  {must: true, maxlength:3, ftip:'类型,最多3个字符'},
-		 studentId:  {must: true, maxlength:19, ftip:'学生ID,最多19个字符'},
-		 userCode:  {must: true, maxlength:50, ftip:'用户CODE,最多50个字符'},
-		 lessonId:  {must: true, maxlength:10, ftip:'课程ID,最多10个字符'},
-		 unitNbr:  {must: true, maxlength:3, ftip:'单元号,最多3个字符'},
-		 vocCode:  {must: true, maxlength:50, ftip:'单词CODE,最多50个字符'},
-		 vocIndex:  {must: true, maxlength:3, ftip:'单词索引,最多3个字符'},
-		 wordId:  {must: true, maxlength:10, ftip:'单词ID,最多10个字符'},
-		 spelling:  {must: true, maxlength:128, ftip:'单词拼写,最多128个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
+		moduleCode:  {must: false, maxlength:50, ftip:'模块CODE,最多50个字符'},
+		studyId:  {must: false, maxlength:19, ftip:'学生ID,最多19个字符' ,handler:'int' },
+		type:  {must: false, maxlength:3, ftip:'类型,最多3个字符' ,handler:'int' },
+		studentId:  {must: false, maxlength:19, ftip:'学生ID,最多19个字符' ,handler:'int' },
+		userCode:  {must: false, maxlength:50, ftip:'用户CODE,最多50个字符'},
+		lessonId:  {must: false, maxlength:10, ftip:'课程ID,最多10个字符' ,handler:'int' },
+		unitNbr:  {must: false, maxlength:3, ftip:'单元号,最多3个字符' ,handler:'int' },
+		vocCode:  {must: false, maxlength:50, ftip:'单词CODE,最多50个字符'},
+		vocIndex:  {must: false, maxlength:3, ftip:'单词索引,最多3个字符' ,handler:'int' },
+		wordId:  {must: false, maxlength:10, ftip:'单词ID,最多10个字符' ,handler:'int' },
+		spelling:  {must: false, maxlength:128, ftip:'单词拼写,最多128个字符'},
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_add_SelfWords').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_add_SelfWords").serialize(),
 			set, 
 			'/selfWords/doAdd.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				querySelfWordsList(1);
 			}
 		);
 	});
 	
-	//form.friend.init(set);
 }(jQuery);
 </script>

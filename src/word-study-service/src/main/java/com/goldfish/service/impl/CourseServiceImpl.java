@@ -5,10 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.Course;
@@ -18,28 +16,31 @@ import com.goldfish.service.CourseService;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- *<p>  Courseservice实现</p>
+ * @since 2018-5-8
+ *<p>  课程service实现</p>
  *
  */
 @Service("courseService")
 public class CourseServiceImpl implements CourseService {
 
-	private static final Logger logger = LoggerFactory.getLogger(CourseServiceImpl.class);
+	private static final Logger logger = Logger.getLogger(CourseServiceImpl.class);
 	
 	@Resource(name="courseManager")
 	private CourseManager courseManager;
     
     public CommonResult<Course> addCourse(Course course) {
 		CommonResult<Course> result = new CommonResult<Course>();
-		try {
+		try{
 			
-				course.setCreated(new Date());
-			 
+			course.setCreated(new Date());
+			
+			
+			course.setModified(new Date());
+			
 			result.addDefaultModel(courseManager.addCourse(course));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("添加 Course失败", e);
+			logger.error("添加 课程失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -49,12 +50,12 @@ public class CourseServiceImpl implements CourseService {
 		CommonResult<Course> result = new CommonResult<Course>();
 		try {
 			
-				course.setModified(new Date());
-			 
+					course.setModified(new Date());
+					
 			courseManager.updateCourse(course);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("更新 Course失败", e);
+			logger.error("更新 课程失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -68,7 +69,7 @@ public class CourseServiceImpl implements CourseService {
 			courseManager.deleteCourse(id);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("删除 Course失败", e);
+			logger.error("删除 课程失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -81,7 +82,7 @@ public class CourseServiceImpl implements CourseService {
 			result.addDefaultModel("course", courseManager.getCourseById(id));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据主键获取 Course失败", e);
+			logger.error("根据主键获取 课程失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -90,31 +91,7 @@ public class CourseServiceImpl implements CourseService {
 
         
 	
-	public CommonResult<List<Course>> getAll() {
-		CommonResult<List<Course>> result = new CommonResult<List<Course>>();
-		try {
-			List<Course> list = courseManager.getAll();
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得所有 Course失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
-	
-	public CommonResult<List<Course>> getListByExample(Course course) {
-		CommonResult<List<Course>> result = new CommonResult<List<Course>>();
-		try {
-			List<Course> list = courseManager.getListByExample(course);
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得 Course失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
+
 
 	public CommonResult<Course> getUnique(Course course) {
 		CommonResult<Course> result = new CommonResult<Course>();
@@ -122,15 +99,25 @@ public class CourseServiceImpl implements CourseService {
 			result.addDefaultModel(courseManager.getUnique(course));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据example获取唯一 Course失败", e);
+			logger.error("根据example获取唯一 课程失败", e);
 			result.setSuccess(false);
 		}
 		return result;
 	}
 
-	
 
-
+	public CommonResult<List<Course>> getListByExample(Course course) {
+		CommonResult<List<Course>> result = new CommonResult<List<Course>>();
+		try {
+			List<Course> list = courseManager.getListByExample(course);
+			result.addDefaultModel("list", list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("取得 课程失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
 
 	
 	public CommonResult<List<Course>> getCourseByPage(PageQuery pageQuery) {
@@ -145,7 +132,7 @@ public class CourseServiceImpl implements CourseService {
 			}
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("分页获取 Course失败", e);
+			logger.error("分页获取 课程失败", e);
 			result.setSuccess(false);
 		}
 		return result;

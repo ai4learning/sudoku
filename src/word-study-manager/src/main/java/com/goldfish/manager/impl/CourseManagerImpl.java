@@ -10,8 +10,8 @@ import com.goldfish.manager.CourseManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * CourseManager实现类
+ * @since 2018-5-8
+ * 课程Manager实现类
  */
  @Component("courseManager")
 public class CourseManagerImpl implements CourseManager {
@@ -21,7 +21,8 @@ public class CourseManagerImpl implements CourseManager {
 
 
   public Course addCourse(Course course) {
-		return courseDao.addCourse(course);
+		int i=courseDao.addCourse(course);
+		return course;
     }
     
     public void updateCourse(Course course) {
@@ -41,22 +42,17 @@ public class CourseManagerImpl implements CourseManager {
     
    
 
-   
-    
-    public List<Course> getAll() {
-    	return courseDao.getAll();
-    }
-    	
-    public List<Course> getListByExample(Course course) {
-		return courseDao.getListByExample(course);
-    }
 
-        public Course getUnique(Course course) {
+    	
+   
+   public Course getUnique(Course course) {
 		return courseDao.getUnique(course);
     }
 
     
-    
+ public List<Course> getListByExample(Course course) {
+    return courseDao.getListByExample(course);
+    }
 
     
     public List<Course> getCourseByPage(PageQuery pageQuery) {

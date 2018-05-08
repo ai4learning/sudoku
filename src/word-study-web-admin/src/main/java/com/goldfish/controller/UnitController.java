@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.controller.UnitController.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.controller;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import com.goldfish.service.UnitService;
 import com.goldfish.domain.Unit;
 
 @Controller
-@RequestMapping("//unit")
+@RequestMapping("/unit")
 public class UnitController extends BaseController {
 
 //	private final static Log log = LogFactory.getLog(UnitAction.class);

@@ -1,8 +1,9 @@
 
 /**
- * Copyright(c) 2013-  www.jd.com
- *
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.dao;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.Course;
 import java.util.Map;
 /**
  * @author hellosscat
- * @since 2018-5-2
- * Course Dao接口类
+ * @since 2018-5-8
+ * 课程 Dao接口类
  */
 public interface CourseDao {
     
@@ -23,7 +24,7 @@ public interface CourseDao {
      * @param course
      * @return
      */
-    public Course addCourse(Course course);
+    public int addCourse(Course course);
     
 	/**
      * 更新Course
@@ -32,45 +33,29 @@ public interface CourseDao {
      */
     public void updateCourse(Course course);
     
+    
+    
 
-
-    	
-	 /**
+    /**
      * 根据主键删除Course
      * 
      * @param id
      */
     public void deleteCourse(Integer id);
-    
 
-    	/**
+
+	/**
      * 根据主键获取Course
      * 
      * @param id
      * @return
      */	
     public Course getCourseById(Integer id);
+    
 
-   
 
-
-	
+    
     /**
-     * 取得所有Course
-     * 
-     * @return
-     */
-    public List<Course> getAll();
-    
-	/**
-     * 根据example取得Course列表
-     * 
-     * @param  course
-     * @return
-     */
-    public List<Course> getListByExample(Course course);
-    
-    	/**
      * 根据example取得唯一的Course
      * 
      * @param course
@@ -79,24 +64,30 @@ public interface CourseDao {
     public Course getUnique(Course course);
     
 
-    
+
+    /**
+     * 根据example取得Course列表
+     * 
+     * @param  course
+     * @return
+     */
+    public List<Course> getListByExample(Course course);
 
     
-
 	/**
      * 分页取得Course列表
      * 
-     * @param params
+     * @param paramMap
      * @return
      */
-    public List<Course> getCourseByPage(Map<String,Object> params);
+    public List<Course> getCourseByPage(Map<String,Object> paramMap);
 	
 	/**
      * 根据查询条件返回数量
      * 
-     * @param params
+     * @param paramMap
      * @return
      */
-    public int count(Map<String,Object> params);
+    public int count(Map<String,Object> paramMap);
 
 }

@@ -10,8 +10,8 @@ import com.goldfish.manager.SelfWordsManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * SelfWordsManager实现类
+ * @since 2018-5-8
+ * 学生自身单词Manager实现类
  */
  @Component("selfWordsManager")
 public class SelfWordsManagerImpl implements SelfWordsManager {
@@ -21,7 +21,8 @@ public class SelfWordsManagerImpl implements SelfWordsManager {
 
 
   public SelfWords addSelfWords(SelfWords selfWords) {
-		return selfWordsDao.addSelfWords(selfWords);
+		int i=selfWordsDao.addSelfWords(selfWords);
+		return selfWords;
     }
     
     public void updateSelfWords(SelfWords selfWords) {
@@ -41,22 +42,17 @@ public class SelfWordsManagerImpl implements SelfWordsManager {
     
    
 
-   
-    
-    public List<SelfWords> getAll() {
-    	return selfWordsDao.getAll();
-    }
-    	
-    public List<SelfWords> getListByExample(SelfWords selfWords) {
-		return selfWordsDao.getListByExample(selfWords);
-    }
 
-        public SelfWords getUnique(SelfWords selfWords) {
+    	
+   
+   public SelfWords getUnique(SelfWords selfWords) {
 		return selfWordsDao.getUnique(selfWords);
     }
 
     
-    
+ public List<SelfWords> getListByExample(SelfWords selfWords) {
+    return selfWordsDao.getListByExample(selfWords);
+    }
 
     
     public List<SelfWords> getSelfWordsByPage(PageQuery pageQuery) {

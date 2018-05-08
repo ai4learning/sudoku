@@ -1,8 +1,8 @@
-
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"   id="add_selfwordsstudy">
+	<form class="form-horizontal"  id="form_add_SelfWordsStudy">
 	
 		 <div class="control-group">
 			<label class="control-label" for="studentId">学生ID</label>
@@ -44,14 +44,14 @@
 			<label class="control-label" for="type">类型</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="type" id="type">
+        
+		<select class="forms_select input-medium" name="type" id="type">
 			
 				<option value="1">复习学习</option>
 				<option value="2">错词学习</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -60,15 +60,15 @@
 			<label class="control-label" for="currentPhase">当前学习阶段</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="currentPhase" id="currentPhase">
+        
+		<select class="forms_select input-medium" name="currentPhase" id="currentPhase">
 			
 				<option value="1">分批学习</option>
 				<option value="2">整体回忆</option>
 				<option value="3">单元测试</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -104,14 +104,14 @@
 			<label class="control-label" for="isFinished">是否学习完成</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="isFinished" id="isFinished">
+        
+		<select class="forms_select input-medium" name="isFinished" id="isFinished">
 			
 				<option value="1">未完成</option>
 				<option value="2">已完成</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -120,14 +120,14 @@
 			<label class="control-label" for="isTested">是否测试完成</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="isTested" id="isTested">
+        
+		<select class="forms_select input-medium" name="isTested" id="isTested">
 			
 				<option value="1">未完成</option>
 				<option value="2">已完成</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -145,14 +145,14 @@
 			<label class="control-label" for="state">状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
@@ -161,7 +161,7 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_SelfWordsStudy">保存</a>
 	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
@@ -170,35 +170,33 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 studentId:  {must: true, maxlength:10, ftip:'学生ID,最多10个字符'},
-		 studentCode:  {must: true, maxlength:50, ftip:'学生CODE,最多50个字符'},
-		 lessonId:  {must: true, maxlength:10, ftip:'课程ID,最多10个字符'},
-		 unitNbr:  {must: true, maxlength:3, ftip:'课程号,最多3个字符'},
-		 type:  {must: true, maxlength:3, ftip:'类型,最多3个字符'},
-		 currentPhase:  {must: true, maxlength:3, ftip:'当前学习阶段,最多3个字符'},
-		 totalReadingTime:  {must: true, maxlength:19, ftip:'总读时间,最多19个字符'},
-		 totalWritingTime:  {must: true, maxlength:19, ftip:'总写时间,最多19个字符'},
-		 totalNumber:  {must: true, maxlength:10, ftip:'总学习单词数,最多10个字符'},
-		 isFinished:  {must: true, maxlength:3, ftip:'是否学习完成,最多3个字符'},
-		 isTested:  {must: true, maxlength:3, ftip:'是否测试完成,最多3个字符'},
-		 studyPos:  {must: true, maxlength:3, ftip:'单词学习位置,最多3个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		studentId:  {must: false, maxlength:10, ftip:'学生ID,最多10个字符' ,handler:'int' },
+		studentCode:  {must: false, maxlength:50, ftip:'学生CODE,最多50个字符'},
+		lessonId:  {must: false, maxlength:10, ftip:'课程ID,最多10个字符' ,handler:'int' },
+		unitNbr:  {must: false, maxlength:3, ftip:'课程号,最多3个字符' ,handler:'int' },
+		type:  {must: false, maxlength:3, ftip:'类型,最多3个字符' ,handler:'int' },
+		currentPhase:  {must: false, maxlength:3, ftip:'当前学习阶段,最多3个字符' ,handler:'int' },
+		totalReadingTime:  {must: false, maxlength:19, ftip:'总读时间,最多19个字符' ,handler:'int' },
+		totalWritingTime:  {must: false, maxlength:19, ftip:'总写时间,最多19个字符' ,handler:'int' },
+		totalNumber:  {must: false, maxlength:10, ftip:'总学习单词数,最多10个字符' ,handler:'int' },
+		isFinished:  {must: false, maxlength:3, ftip:'是否学习完成,最多3个字符' ,handler:'int' },
+		isTested:  {must: false, maxlength:3, ftip:'是否测试完成,最多3个字符' ,handler:'int' },
+		studyPos:  {must: false, maxlength:3, ftip:'单词学习位置,最多3个字符' ,handler:'int' },
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_add_SelfWordsStudy').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_add_SelfWordsStudy").serialize(),
 			set, 
 			'/selfWordsStudy/doAdd.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				querySelfWordsStudyList(1);
 			}
 		);
 	});
 	
-	//form.friend.init(set);
 }(jQuery);
 </script>

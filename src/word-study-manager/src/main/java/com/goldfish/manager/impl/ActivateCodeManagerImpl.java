@@ -10,8 +10,8 @@ import com.goldfish.manager.ActivateCodeManager;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * ActivateCodeManager实现类
+ * @since 2018-5-8
+ * 激活码Manager实现类
  */
  @Component("activateCodeManager")
 public class ActivateCodeManagerImpl implements ActivateCodeManager {
@@ -21,7 +21,8 @@ public class ActivateCodeManagerImpl implements ActivateCodeManager {
 
 
   public ActivateCode addActivateCode(ActivateCode activateCode) {
-		return activateCodeDao.addActivateCode(activateCode);
+		int i=activateCodeDao.addActivateCode(activateCode);
+		return activateCode;
     }
     
     public void updateActivateCode(ActivateCode activateCode) {
@@ -41,22 +42,17 @@ public class ActivateCodeManagerImpl implements ActivateCodeManager {
     
    
 
-   
-    
-    public List<ActivateCode> getAll() {
-    	return activateCodeDao.getAll();
-    }
-    	
-    public List<ActivateCode> getListByExample(ActivateCode activateCode) {
-		return activateCodeDao.getListByExample(activateCode);
-    }
 
-        public ActivateCode getUnique(ActivateCode activateCode) {
+    	
+   
+   public ActivateCode getUnique(ActivateCode activateCode) {
 		return activateCodeDao.getUnique(activateCode);
     }
 
     
-    
+ public List<ActivateCode> getListByExample(ActivateCode activateCode) {
+    return activateCodeDao.getListByExample(activateCode);
+    }
 
     
     public List<ActivateCode> getActivateCodeByPage(PageQuery pageQuery) {

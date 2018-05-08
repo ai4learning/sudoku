@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.WordStudyManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.WordStudy;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * WordStudyManager接口类
+ * @since 2018-5-8
+ * 单词学习Manager接口类
  */
 public interface WordStudyManager {
  
@@ -50,21 +51,7 @@ public interface WordStudyManager {
     
 
 
-       
-    /**
-     * 取得所有WordStudy
-     * 
-     * @return
-     */
-    public List<WordStudy> getAll();
-    
-	/**
-     * 根据example取得WordStudy列表
-     * 
-     * @param  wordStudy
-     * @return
-     */
-    public List<WordStudy> getListByExample(WordStudy wordStudy);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface WordStudyManager {
     
 
     
+    /**
+     * 根据example取得WordStudy列表
+     * 
+     * @param  wordStudy
+     * @return
+     */
+    public List<WordStudy> getListByExample(WordStudy wordStudy);
 
 	/**
      * 分页取得WordStudy列表

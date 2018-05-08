@@ -5,10 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.Exam;
@@ -18,28 +16,31 @@ import com.goldfish.service.ExamService;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- *<p>  Examservice实现</p>
+ * @since 2018-5-8
+ *<p>  考试service实现</p>
  *
  */
 @Service("examService")
 public class ExamServiceImpl implements ExamService {
 
-	private static final Logger logger = LoggerFactory.getLogger(ExamServiceImpl.class);
+	private static final Logger logger = Logger.getLogger(ExamServiceImpl.class);
 	
 	@Resource(name="examManager")
 	private ExamManager examManager;
     
     public CommonResult<Exam> addExam(Exam exam) {
 		CommonResult<Exam> result = new CommonResult<Exam>();
-		try {
+		try{
 			
-				exam.setCreated(new Date());
-			 
+			exam.setCreated(new Date());
+			
+			
+			exam.setModified(new Date());
+			
 			result.addDefaultModel(examManager.addExam(exam));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("添加 Exam失败", e);
+			logger.error("添加 考试失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -49,12 +50,12 @@ public class ExamServiceImpl implements ExamService {
 		CommonResult<Exam> result = new CommonResult<Exam>();
 		try {
 			
-				exam.setModified(new Date());
-			 
+					exam.setModified(new Date());
+					
 			examManager.updateExam(exam);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("更新 Exam失败", e);
+			logger.error("更新 考试失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -68,7 +69,7 @@ public class ExamServiceImpl implements ExamService {
 			examManager.deleteExam(id);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("删除 Exam失败", e);
+			logger.error("删除 考试失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -81,7 +82,7 @@ public class ExamServiceImpl implements ExamService {
 			result.addDefaultModel("exam", examManager.getExamById(id));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据主键获取 Exam失败", e);
+			logger.error("根据主键获取 考试失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -90,31 +91,7 @@ public class ExamServiceImpl implements ExamService {
 
         
 	
-	public CommonResult<List<Exam>> getAll() {
-		CommonResult<List<Exam>> result = new CommonResult<List<Exam>>();
-		try {
-			List<Exam> list = examManager.getAll();
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得所有 Exam失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
-	
-	public CommonResult<List<Exam>> getListByExample(Exam exam) {
-		CommonResult<List<Exam>> result = new CommonResult<List<Exam>>();
-		try {
-			List<Exam> list = examManager.getListByExample(exam);
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得 Exam失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
+
 
 	public CommonResult<Exam> getUnique(Exam exam) {
 		CommonResult<Exam> result = new CommonResult<Exam>();
@@ -122,15 +99,25 @@ public class ExamServiceImpl implements ExamService {
 			result.addDefaultModel(examManager.getUnique(exam));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据example获取唯一 Exam失败", e);
+			logger.error("根据example获取唯一 考试失败", e);
 			result.setSuccess(false);
 		}
 		return result;
 	}
 
-	
 
-
+	public CommonResult<List<Exam>> getListByExample(Exam exam) {
+		CommonResult<List<Exam>> result = new CommonResult<List<Exam>>();
+		try {
+			List<Exam> list = examManager.getListByExample(exam);
+			result.addDefaultModel("list", list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("取得 考试失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
 
 	
 	public CommonResult<List<Exam>> getExamByPage(PageQuery pageQuery) {
@@ -145,7 +132,7 @@ public class ExamServiceImpl implements ExamService {
 			}
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("分页获取 Exam失败", e);
+			logger.error("分页获取 考试失败", e);
 			result.setSuccess(false);
 		}
 		return result;

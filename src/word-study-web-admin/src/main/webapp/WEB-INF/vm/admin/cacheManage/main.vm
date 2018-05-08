@@ -1,0 +1,124 @@
+<div class="row-fluid">
+		<div class="span12">
+			<form id="formCache" class="form-horizontal">
+                <div class="control-group">
+            		<label class="control-label"  for="cacheKey">缓存key</label>
+            		<div class="controls">
+            			<input id="cacheKey" name="cacheKey" placeholder="请输入缓存key" type="text" />
+            		</div>
+                </div>
+                
+                <div class="control-group">
+            		<label class="control-label"  for="cacheContent">缓存内容</label>
+                    <div class="controls">
+                		<textarea id="cacheContent" name="cacheContent" placeholder="请输入缓存内容" rows="10" class="span6"></textarea>
+                	</div>
+                </div>
+                
+                <div class="control-group">
+            		<div class="controls">
+            			<button id="J_getCacheByKey" class="btn"  type="button" >获取缓存内容</button>
+            			
+            			<button  id="J_deleteCacheByKey" class="btn"  type="button">删除缓存内容</button>
+            
+            			<button  id="J_setCacheByKey" class="btn"  type="button">设置缓存内容</button>
+            
+            		</div>
+                </div>
+            </form>
+		</div>
+</div>
+	
+
+<script>
+ void function(j){
+ 
+ 	j("#J_getCacheByKey").click(function(){
+        	var datas=j("#formCache").serialize();
+        	jQuery.ajax({
+                    type:"POST",
+                    url:"/admin/cacheManage/getCacheByKey",
+                    dataType:"json",
+					data:datas,
+                    success:function (data) {
+    					if (data&&data.success) {
+						        message_box.show("获取缓存内容成功",'success');
+								j("#cacheContent").val(data.value);
+        				}else{
+        						var message="执行异常，请联系管理员！";
+            					if(data.message!=null){
+            						message=data.message;
+            					}
+            					gDialog.fAlert(message);
+        				}
+                    },
+                	error : function() {
+            			gDialog.fAlert("请求异常");
+                	}
+               });
+	});
+	
+	
+	 j("#J_deleteCacheByKey").click(function(){
+		  gDialog.fConfirm("缓存提示",'您确认要删除缓存数据吗？',function(rs){
+        		if(!rs){
+        			return ;
+        		}
+        		var datas=j("#formCache").serialize();
+            	jQuery.ajax({
+                        type:"POST",
+                        url:"/admin/cacheManage/deleteCacheByKey",
+                        dataType:"json",
+    					data:datas,
+                        success:function (data) {
+        					if (data&&data.success) {
+        							message_box.show(data.message,'success');
+            				}else{
+            						var message="执行异常，请联系管理员！";
+                					if(data.message!=null){
+                						message=data.message;
+                					}
+                					gDialog.fAlert(message);
+            				}
+                        },
+                    	error : function() {
+                			gDialog.fAlert("请求异常");
+                    	}
+                   });
+			
+		});
+	});
+	
+	
+	 j("#J_setCacheByKey").click(function(){
+		  gDialog.fConfirm("缓存提示",'您确认要设置缓存数据吗，会覆盖之前的正确数据？',function(rs){
+        		if(!rs){
+        			return ;
+        		}
+        		var datas=j("#formCache").serialize();
+            	jQuery.ajax({
+                        type:"POST",
+                        url:"/admin/cacheManage/setCacheByKey",
+                        dataType:"json",
+    					data:datas,
+                        success:function (data) {
+        					if (data&&data.success) {
+        							message_box.show(data.message,'success');
+            				}else{
+            						var message="执行异常，请联系管理员！";
+                					if(data.message!=null){
+                						message=data.message;
+                					}
+                					gDialog.fAlert(message);
+            				}
+                        },
+                    	error : function() {
+                			gDialog.fAlert("请求异常");
+                    	}
+                   });
+			
+		});
+	});
+ 
+ }(jQuery);
+</script>

@@ -1,13 +1,13 @@
-
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body auto-height-body"  id="update_course">
+	<form class="form-horizontal"  id="form_update_Course">
 	
 		 <div class="control-group">
 			<label class="control-label" for="id">ID</label>
 			<div class="controls">
 			
-				<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="10" value="$!{course.id}"readonly/>
+			<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="10" value="$!{course.id}"readonly/>
 			</div>
 		</div>
 		
@@ -15,14 +15,13 @@
 			<label class="control-label" for="type">课程类型</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="type" id="type">
+        
+		<select class="forms_select input-medium" name="type" id="type">
 				<option value="1" #if($course.type==1) selected #end>教材</option>
 				<option value="2" #if($course.type==2) selected #end>错词本</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
@@ -31,7 +30,7 @@
 			<label class="control-label" for="moduleCode">课程CODE</label>
 			<div class="controls">
 			
-				<input type="text"  name="moduleCode" id="moduleCode" placeholder="请输入课程CODE" maxlength="50" value="$!{course.moduleCode}"/>
+			<input type="text"  name="moduleCode" id="moduleCode" placeholder="请输入课程CODE" maxlength="50" value="$!{course.moduleCode}"/>
 			</div>
 		</div>
 		
@@ -39,7 +38,7 @@
 			<label class="control-label" for="bookNumber">课程号</label>
 			<div class="controls">
 			
-				<input type="text"  name="bookNumber" id="bookNumber" placeholder="请输入课程号" maxlength="10" value="$!{course.bookNumber}"/>
+			<input type="text"  name="bookNumber" id="bookNumber" placeholder="请输入课程号" maxlength="10" value="$!{course.bookNumber}"/>
 			</div>
 		</div>
 		
@@ -47,7 +46,7 @@
 			<label class="control-label" for="bookName">课程名</label>
 			<div class="controls">
 			
-				<input type="text"  name="bookName" id="bookName" placeholder="请输入课程名" maxlength="50" value="$!{course.bookName}"/>
+			<input type="text"  name="bookName" id="bookName" placeholder="请输入课程名" maxlength="50" value="$!{course.bookName}"/>
 			</div>
 		</div>
 		
@@ -55,14 +54,13 @@
 			<label class="control-label" for="bookType">课程类型</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="bookType" id="bookType">
+        
+		<select class="forms_select input-medium" name="bookType" id="bookType">
 				<option value="1" #if($course.bookType==1) selected #end>教材</option>
 				<option value="2" #if($course.bookType==2) selected #end>特色</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
@@ -71,17 +69,16 @@
 			<label class="control-label" for="orderType">年级类型</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="orderType" id="orderType">
+        
+		<select class="forms_select input-medium" name="orderType" id="orderType">
 				<option value="0" #if($course.orderType==0) selected #end>无</option>
 				<option value="1" #if($course.orderType==1) selected #end>小学</option>
 				<option value="2" #if($course.orderType==2) selected #end>初中</option>
 				<option value="3" #if($course.orderType==3) selected #end>高中</option>
 				<option value="4" #if($course.orderType==4) selected #end>大学</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
@@ -90,14 +87,13 @@
 			<label class="control-label" for="bookState">课程状态</label>
 			<div class="controls">
 			
-		
-		<select class="forms_select" name="bookState" id="bookState">
+        
+		<select class="forms_select input-medium" name="bookState" id="bookState">
 				<option value="1" #if($course.bookState==1) selected #end>有效</option>
 				<option value="2" #if($course.bookState==2) selected #end>无效</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
@@ -106,7 +102,7 @@
 			<label class="control-label" for="bookPrice">课程定价</label>
 			<div class="controls">
 			
-				<input type="text"  name="bookPrice" id="bookPrice" placeholder="请输入课程定价" maxlength="11" value="$!{course.bookPrice}"/>
+			<input type="text"  name="bookPrice" id="bookPrice" placeholder="请输入课程定价" maxlength="11" value="$!{course.bookPrice}"/>
 			</div>
 		</div>
 		
@@ -114,7 +110,7 @@
 			<label class="control-label" for="introduce">课程简介</label>
 			<div class="controls">
 			
-				<input type="text"  name="introduce" id="introduce" placeholder="请输入课程简介" maxlength="255" value="$!{course.introduce}"/>
+			<input type="text"  name="introduce" id="introduce" placeholder="请输入课程简介" maxlength="255" value="$!{course.introduce}"/>
 			</div>
 		</div>
 		
@@ -122,7 +118,7 @@
 			<label class="control-label" for="coverImageUrl">封面</label>
 			<div class="controls">
 			
-				<input type="text"  name="coverImageUrl" id="coverImageUrl" placeholder="请输入封面" maxlength="255" value="$!{course.coverImageUrl}"/>
+			<input type="text"  name="coverImageUrl" id="coverImageUrl" placeholder="请输入封面" maxlength="255" value="$!{course.coverImageUrl}"/>
 			</div>
 		</div>
 		
@@ -130,7 +126,7 @@
 			<label class="control-label" for="totalUnitNbr">总单元数</label>
 			<div class="controls">
 			
-				<input type="text"  name="totalUnitNbr" id="totalUnitNbr" placeholder="请输入总单元数" maxlength="3" value="$!{course.totalUnitNbr}"/>
+			<input type="text"  name="totalUnitNbr" id="totalUnitNbr" placeholder="请输入总单元数" maxlength="3" value="$!{course.totalUnitNbr}"/>
 			</div>
 		</div>
 		
@@ -138,7 +134,7 @@
 			<label class="control-label" for="totalWords">单词总数</label>
 			<div class="controls">
 			
-				<input type="text"  name="totalWords" id="totalWords" placeholder="请输入单词总数" maxlength="10" value="$!{course.totalWords}"/>
+			<input type="text"  name="totalWords" id="totalWords" placeholder="请输入单词总数" maxlength="10" value="$!{course.totalWords}"/>
 			</div>
 		</div>
 		
@@ -146,7 +142,7 @@
 			<label class="control-label" for="outDate">是否过期</label>
 			<div class="controls">
 			
-				<input type="text"  name="outDate" id="outDate" placeholder="请输入是否过期" maxlength="1" value="$!{course.outDate}"/>
+			<input type="text"  name="outDate" id="outDate" placeholder="请输入是否过期" maxlength="1" value="$!{course.outDate}"/>
 			</div>
 		</div>
 		
@@ -154,7 +150,7 @@
 			<label class="control-label" for="unitType">单元类型</label>
 			<div class="controls">
 			
-				<input type="text"  name="unitType" id="unitType" placeholder="请输入单元类型" maxlength="50" value="$!{course.unitType}"/>
+			<input type="text"  name="unitType" id="unitType" placeholder="请输入单元类型" maxlength="50" value="$!{course.unitType}"/>
 			</div>
 		</div>
 		
@@ -162,7 +158,7 @@
 			<label class="control-label" for="ext">扩展信息</label>
 			<div class="controls">
 			
-				<input type="text"  name="ext" id="ext" placeholder="请输入扩展信息" maxlength="255" value="$!{course.ext}"/>
+			<input type="text"  name="ext" id="ext" placeholder="请输入扩展信息" maxlength="255" value="$!{course.ext}"/>
 			</div>
 		</div>
 		
@@ -170,8 +166,8 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存修改</a>
-	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-sm btn-primary" id="btn_update_Course">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm"  data-dismiss="modal" aria-hidden="true">关闭</a>
 </div>
 
 
@@ -179,34 +175,33 @@
 <script language="javascript">
 void function(j) {
 	var set = {
-		 
-		 id:  {must: true, maxlength:10, ftip:'ID,最多10个字符'},
-		 type:  {must: true, maxlength:3, ftip:'课程类型,最多3个字符'},
-		 moduleCode:  {must: true, maxlength:50, ftip:'课程CODE,最多50个字符'},
-		 bookNumber:  {must: true, maxlength:10, ftip:'课程号,最多10个字符'},
-		 bookName:  {must: true, maxlength:50, ftip:'课程名,最多50个字符'},
-		 bookType:  {must: true, maxlength:3, ftip:'课程类型,最多3个字符'},
-		 orderType:  {must: true, maxlength:3, ftip:'年级类型,最多3个字符'},
-		 bookState:  {must: true, maxlength:3, ftip:'课程状态,最多3个字符'},
-		 bookPrice:  {must: true, maxlength:11, ftip:'课程定价,最多11个字符'},
-		 introduce:  {must: true, maxlength:255, ftip:'课程简介,最多255个字符'},
-		 coverImageUrl:  {must: true, maxlength:255, ftip:'封面,最多255个字符'},
-		 totalUnitNbr:  {must: true, maxlength:3, ftip:'总单元数,最多3个字符'},
-		 totalWords:  {must: true, maxlength:10, ftip:'单词总数,最多10个字符'},
-		 outDate:  {must: true, maxlength:1, ftip:'是否过期,最多1个字符'},
-		 unitType:  {must: true, maxlength:50, ftip:'单元类型,最多50个字符'},
-		 ext:  {must: true, maxlength:255, ftip:'扩展信息,最多255个字符'}
+		 		id:  {must: true, maxlength:10, ftip:'ID,最多10个字符' ,handler:'int' },
+		type:  {must: false, maxlength:3, ftip:'课程类型,最多3个字符' ,handler:'int' },
+		moduleCode:  {must: false, maxlength:50, ftip:'课程CODE,最多50个字符'},
+		bookNumber:  {must: false, maxlength:10, ftip:'课程号,最多10个字符' ,handler:'int' },
+		bookName:  {must: false, maxlength:50, ftip:'课程名,最多50个字符'},
+		bookType:  {must: false, maxlength:3, ftip:'课程类型,最多3个字符' ,handler:'int' },
+		orderType:  {must: false, maxlength:3, ftip:'年级类型,最多3个字符' ,handler:'int' },
+		bookState:  {must: false, maxlength:3, ftip:'课程状态,最多3个字符' ,handler:'int' },
+		bookPrice:  {must: false, maxlength:11, ftip:'课程定价,最多11个字符' ,handler:'int' },
+		introduce:  {must: false, maxlength:255, ftip:'课程简介,最多255个字符'},
+		coverImageUrl:  {must: false, maxlength:255, ftip:'封面,最多255个字符'},
+		totalUnitNbr:  {must: false, maxlength:3, ftip:'总单元数,最多3个字符' ,handler:'int' },
+		totalWords:  {must: false, maxlength:10, ftip:'单词总数,最多10个字符' ,handler:'int' },
+		outDate:  {must: false, maxlength:1, ftip:'是否过期,最多1个字符'},
+		unitType:  {must: false, maxlength:50, ftip:'单元类型,最多50个字符'},
+		ext:  {must: false, maxlength:255, ftip:'扩展信息,最多255个字符'}
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_update_Course').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_update_Course").serialize(),
 			set, 
 			'/course/doUpdate.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				queryCourseList(1);
 			}
 		);
 	});

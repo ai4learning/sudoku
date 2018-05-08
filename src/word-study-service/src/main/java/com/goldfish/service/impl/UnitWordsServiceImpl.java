@@ -5,10 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.UnitWords;
@@ -18,28 +16,31 @@ import com.goldfish.service.UnitWordsService;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- *<p>  UnitWordsservice实现</p>
+ * @since 2018-5-8
+ *<p>  单元单词service实现</p>
  *
  */
 @Service("unitWordsService")
 public class UnitWordsServiceImpl implements UnitWordsService {
 
-	private static final Logger logger = LoggerFactory.getLogger(UnitWordsServiceImpl.class);
+	private static final Logger logger = Logger.getLogger(UnitWordsServiceImpl.class);
 	
 	@Resource(name="unitWordsManager")
 	private UnitWordsManager unitWordsManager;
     
     public CommonResult<UnitWords> addUnitWords(UnitWords unitWords) {
 		CommonResult<UnitWords> result = new CommonResult<UnitWords>();
-		try {
+		try{
 			
-				unitWords.setCreated(new Date());
-			 
+			unitWords.setCreated(new Date());
+			
+			
+			unitWords.setModified(new Date());
+			
 			result.addDefaultModel(unitWordsManager.addUnitWords(unitWords));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("添加 UnitWords失败", e);
+			logger.error("添加 单元单词失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -49,12 +50,12 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 		CommonResult<UnitWords> result = new CommonResult<UnitWords>();
 		try {
 			
-				unitWords.setModified(new Date());
-			 
+					unitWords.setModified(new Date());
+					
 			unitWordsManager.updateUnitWords(unitWords);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("更新 UnitWords失败", e);
+			logger.error("更新 单元单词失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -68,7 +69,7 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 			unitWordsManager.deleteUnitWords(id);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("删除 UnitWords失败", e);
+			logger.error("删除 单元单词失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -81,7 +82,7 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 			result.addDefaultModel("unitWords", unitWordsManager.getUnitWordsById(id));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据主键获取 UnitWords失败", e);
+			logger.error("根据主键获取 单元单词失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -90,31 +91,7 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 
         
 	
-	public CommonResult<List<UnitWords>> getAll() {
-		CommonResult<List<UnitWords>> result = new CommonResult<List<UnitWords>>();
-		try {
-			List<UnitWords> list = unitWordsManager.getAll();
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得所有 UnitWords失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
-	
-	public CommonResult<List<UnitWords>> getListByExample(UnitWords unitWords) {
-		CommonResult<List<UnitWords>> result = new CommonResult<List<UnitWords>>();
-		try {
-			List<UnitWords> list = unitWordsManager.getListByExample(unitWords);
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得 UnitWords失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
+
 
 	public CommonResult<UnitWords> getUnique(UnitWords unitWords) {
 		CommonResult<UnitWords> result = new CommonResult<UnitWords>();
@@ -122,15 +99,25 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 			result.addDefaultModel(unitWordsManager.getUnique(unitWords));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据example获取唯一 UnitWords失败", e);
+			logger.error("根据example获取唯一 单元单词失败", e);
 			result.setSuccess(false);
 		}
 		return result;
 	}
 
-	
 
-
+	public CommonResult<List<UnitWords>> getListByExample(UnitWords unitWords) {
+		CommonResult<List<UnitWords>> result = new CommonResult<List<UnitWords>>();
+		try {
+			List<UnitWords> list = unitWordsManager.getListByExample(unitWords);
+			result.addDefaultModel("list", list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("取得 单元单词失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
 
 	
 	public CommonResult<List<UnitWords>> getUnitWordsByPage(PageQuery pageQuery) {
@@ -145,7 +132,7 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 			}
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("分页获取 UnitWords失败", e);
+			logger.error("分页获取 单元单词失败", e);
 			result.setSuccess(false);
 		}
 		return result;

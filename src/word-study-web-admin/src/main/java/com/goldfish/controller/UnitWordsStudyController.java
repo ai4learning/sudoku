@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.controller.UnitWordsStudyController.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.controller;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import com.goldfish.service.UnitWordsStudyService;
 import com.goldfish.domain.UnitWordsStudy;
 
 @Controller
-@RequestMapping("//unitWordsStudy")
+@RequestMapping("/unitWordsStudy")
 public class UnitWordsStudyController extends BaseController {
 
 //	private final static Log log = LogFactory.getLog(UnitWordsStudyAction.class);

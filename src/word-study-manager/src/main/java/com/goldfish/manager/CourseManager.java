@@ -1,7 +1,8 @@
 /**
- * Copyright(c) 2004-2018 www.jd.com
- * com.goldfish.manager.CourseManager.java
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.manager;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.Course;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * CourseManager接口类
+ * @since 2018-5-8
+ * 课程Manager接口类
  */
 public interface CourseManager {
  
@@ -50,21 +51,7 @@ public interface CourseManager {
     
 
 
-       
-    /**
-     * 取得所有Course
-     * 
-     * @return
-     */
-    public List<Course> getAll();
-    
-	/**
-     * 根据example取得Course列表
-     * 
-     * @param  course
-     * @return
-     */
-    public List<Course> getListByExample(Course course);
+
     
         
 	/**
@@ -77,6 +64,13 @@ public interface CourseManager {
     
 
     
+    /**
+     * 根据example取得Course列表
+     * 
+     * @param  course
+     * @return
+     */
+    public List<Course> getListByExample(Course course);
 
 	/**
      * 分页取得Course列表

@@ -5,10 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.ActivateCode;
@@ -18,28 +16,31 @@ import com.goldfish.service.ActivateCodeService;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- *<p>  ActivateCodeservice实现</p>
+ * @since 2018-5-8
+ *<p>  激活码service实现</p>
  *
  */
 @Service("activateCodeService")
 public class ActivateCodeServiceImpl implements ActivateCodeService {
 
-	private static final Logger logger = LoggerFactory.getLogger(ActivateCodeServiceImpl.class);
+	private static final Logger logger = Logger.getLogger(ActivateCodeServiceImpl.class);
 	
 	@Resource(name="activateCodeManager")
 	private ActivateCodeManager activateCodeManager;
     
     public CommonResult<ActivateCode> addActivateCode(ActivateCode activateCode) {
 		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
-		try {
+		try{
 			
-				activateCode.setCreated(new Date());
-			 
+			activateCode.setCreated(new Date());
+			
+			
+			activateCode.setModified(new Date());
+			
 			result.addDefaultModel(activateCodeManager.addActivateCode(activateCode));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("添加 ActivateCode失败", e);
+			logger.error("添加 激活码失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -49,12 +50,12 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
 		try {
 			
-				activateCode.setModified(new Date());
-			 
+					activateCode.setModified(new Date());
+					
 			activateCodeManager.updateActivateCode(activateCode);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("更新 ActivateCode失败", e);
+			logger.error("更新 激活码失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -68,7 +69,7 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 			activateCodeManager.deleteActivateCode(id);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("删除 ActivateCode失败", e);
+			logger.error("删除 激活码失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -81,7 +82,7 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 			result.addDefaultModel("activateCode", activateCodeManager.getActivateCodeById(id));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据主键获取 ActivateCode失败", e);
+			logger.error("根据主键获取 激活码失败", e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -90,31 +91,7 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 
         
 	
-	public CommonResult<List<ActivateCode>> getAll() {
-		CommonResult<List<ActivateCode>> result = new CommonResult<List<ActivateCode>>();
-		try {
-			List<ActivateCode> list = activateCodeManager.getAll();
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得所有 ActivateCode失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
-	
-	public CommonResult<List<ActivateCode>> getListByExample(ActivateCode activateCode) {
-		CommonResult<List<ActivateCode>> result = new CommonResult<List<ActivateCode>>();
-		try {
-			List<ActivateCode> list = activateCodeManager.getListByExample(activateCode);
-			result.addDefaultModel("list", list);
-			result.setSuccess(true);
-		} catch (Exception e) {
-			logger.error("取得 ActivateCode失败", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
+
 
 	public CommonResult<ActivateCode> getUnique(ActivateCode activateCode) {
 		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
@@ -122,15 +99,25 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 			result.addDefaultModel(activateCodeManager.getUnique(activateCode));
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("根据example获取唯一 ActivateCode失败", e);
+			logger.error("根据example获取唯一 激活码失败", e);
 			result.setSuccess(false);
 		}
 		return result;
 	}
 
-	
 
-
+	public CommonResult<List<ActivateCode>> getListByExample(ActivateCode activateCode) {
+		CommonResult<List<ActivateCode>> result = new CommonResult<List<ActivateCode>>();
+		try {
+			List<ActivateCode> list = activateCodeManager.getListByExample(activateCode);
+			result.addDefaultModel("list", list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("取得 激活码失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
 
 	
 	public CommonResult<List<ActivateCode>> getActivateCodeByPage(PageQuery pageQuery) {
@@ -145,7 +132,7 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 			}
 			result.setSuccess(true);
 		} catch (Exception e) {
-			logger.error("分页获取 ActivateCode失败", e);
+			logger.error("分页获取 激活码失败", e);
 			result.setSuccess(false);
 		}
 		return result;

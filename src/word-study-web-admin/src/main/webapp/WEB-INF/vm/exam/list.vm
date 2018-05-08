@@ -37,44 +37,44 @@
 			<td>$!item.unitNbr</td>
 			<td>$!item.pageId</td>
 			<td>
-	
+        
 			
 				#if($item.testType==1)<span class="">单元测试；2.自主测试；</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.resultScore</td>
 			<td>$!item.standardDuration</td>
 			<td>$!item.realDuration</td>
 			<td>$!item.errorNbr</td>
 			<td>$!item.cashPoint</td>
 			<td>
-	
+        
 			
 				#if($item.cashPointType==0)<span class="">未知</span> #end	
 			
 				#if($item.cashPointType==1)<span class="">金币</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.isPass==0)<span class="">未通过</span> #end	
 			
 				#if($item.isPass==1)<span class="">通过</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -97,7 +97,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryExamList','input')
 		#end
 
 	</div>
@@ -109,18 +109,18 @@
 void function(j) {	
 	j('.JDelete-exam').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除Exam',info:'您确定要删除Exam吗？',url: '/exam/doDelete',param:'id='+id};
+		var config={title:'删除考试',info:'您确定要删除考试吗？',queryList:"queryExamList",url: '/exam/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-exam').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改Exam', url: '/exam/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改考试', url: '/exam/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-exam').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看Exam', url: '/exam/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看考试', url: '/exam/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

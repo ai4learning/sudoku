@@ -1,8 +1,9 @@
 
 /**
- * Copyright(c) 2013-  www.jd.com
- *
+ * Copyright(c) 2004-2018 bianfeng
  */
+
+
  package com.goldfish.dao;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import com.goldfish.domain.UnitWordsStudy;
 import java.util.Map;
 /**
  * @author hellosscat
- * @since 2018-5-2
- * UnitWordsStudy Dao接口类
+ * @since 2018-5-8
+ * 单元单词学习 Dao接口类
  */
 public interface UnitWordsStudyDao {
     
@@ -23,7 +24,7 @@ public interface UnitWordsStudyDao {
      * @param unitWordsStudy
      * @return
      */
-    public UnitWordsStudy addUnitWordsStudy(UnitWordsStudy unitWordsStudy);
+    public int addUnitWordsStudy(UnitWordsStudy unitWordsStudy);
     
 	/**
      * 更新UnitWordsStudy
@@ -32,45 +33,29 @@ public interface UnitWordsStudyDao {
      */
     public void updateUnitWordsStudy(UnitWordsStudy unitWordsStudy);
     
+    
+    
 
-
-    	
-	 /**
+    /**
      * 根据主键删除UnitWordsStudy
      * 
      * @param id
      */
     public void deleteUnitWordsStudy(Long id);
-    
 
-    	/**
+
+	/**
      * 根据主键获取UnitWordsStudy
      * 
      * @param id
      * @return
      */	
     public UnitWordsStudy getUnitWordsStudyById(Long id);
+    
 
-   
 
-
-	
+    
     /**
-     * 取得所有UnitWordsStudy
-     * 
-     * @return
-     */
-    public List<UnitWordsStudy> getAll();
-    
-	/**
-     * 根据example取得UnitWordsStudy列表
-     * 
-     * @param  unitWordsStudy
-     * @return
-     */
-    public List<UnitWordsStudy> getListByExample(UnitWordsStudy unitWordsStudy);
-    
-    	/**
      * 根据example取得唯一的UnitWordsStudy
      * 
      * @param unitWordsStudy
@@ -79,24 +64,30 @@ public interface UnitWordsStudyDao {
     public UnitWordsStudy getUnique(UnitWordsStudy unitWordsStudy);
     
 
-    
+
+    /**
+     * 根据example取得UnitWordsStudy列表
+     * 
+     * @param  unitWordsStudy
+     * @return
+     */
+    public List<UnitWordsStudy> getListByExample(UnitWordsStudy unitWordsStudy);
 
     
-
 	/**
      * 分页取得UnitWordsStudy列表
      * 
-     * @param params
+     * @param paramMap
      * @return
      */
-    public List<UnitWordsStudy> getUnitWordsStudyByPage(Map<String,Object> params);
+    public List<UnitWordsStudy> getUnitWordsStudyByPage(Map<String,Object> paramMap);
 	
 	/**
      * 根据查询条件返回数量
      * 
-     * @param params
+     * @param paramMap
      * @return
      */
-    public int count(Map<String,Object> params);
+    public int count(Map<String,Object> paramMap);
 
 }

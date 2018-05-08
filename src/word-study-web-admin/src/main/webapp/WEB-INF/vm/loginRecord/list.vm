@@ -31,14 +31,14 @@
 			<td>$!item.userCode</td>
 			<td>$!item.userName</td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
@@ -61,8 +61,9 @@
 		</table>
 
 		#if($pageQuery)
-			#parse('/WEB-INF/vm/layout/pageQuery.vm')
+			#showPageQuery($pageQuery,'queryLoginRecordList','input')
 		#end
+
 	</div>
 </div>
 
@@ -72,18 +73,18 @@
 void function(j) {	
 	j('.JDelete-loginRecord').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除LoginRecord',info:'您确定要删除LoginRecord吗？',url: '/loginRecord/doDelete',param:'id='+id};
+		var config={title:'删除登录',info:'您确定要删除登录吗？',queryList:"queryLoginRecordList",url: '/loginRecord/doDelete',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-loginRecord').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改LoginRecord', url: '/loginRecord/update?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '修改登录', url: '/loginRecord/update?id='+id,width:700}).show();
 	});
 
 	j('.JView-loginRecord').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看LoginRecord', url: '/loginRecord/view?id='+id,width:700}).show();
+		gDialog.fCreate({ title: '查看登录', url: '/loginRecord/view?id='+id,width:700}).show();
 	});
 }(jQuery);
 </script>

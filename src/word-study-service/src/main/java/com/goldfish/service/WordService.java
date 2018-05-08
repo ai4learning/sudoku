@@ -7,8 +7,8 @@ import com.goldfish.domain.Word;
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * jshow Wordservice 接口
+ * @since 2018-5-8
+ * jshow 单词库service 接口
  *
  */
 public interface WordService {
@@ -48,20 +48,8 @@ public interface WordService {
 
      
 
-    /**
-     * 取得所有Word
-     * 
-     * @return
-     */
-    public CommonResult<List<Word>> getAll();
-    
-	/**
-     * 根据example取得Word列表
-     * 
-     * @param  word
-     * @return
-     */
-    public CommonResult<List<Word>> getListByExample(Word word);
+
+	
     
 	/**
      * 根据example取得唯一的Word
@@ -71,9 +59,16 @@ public interface WordService {
      */
     public CommonResult<Word> getUnique(Word word);
     
-    
 
 
+
+    /**
+     * 根据example取得Word列表
+     * 
+     * @param  word
+     * @return
+     */
+    public CommonResult<List<Word>> getListByExample(Word word);
     
 
 	/**

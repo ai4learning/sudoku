@@ -1,15 +1,22 @@
+/**
+ * Copyright(c) 2004-2018 bianfeng
+ */
+
+
 package com.goldfish.domain;
 
 import java.io.Serializable;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 /**
  * @author hellosscat
- * @since 2018-5-2
- * Course Domain 类
+ * @since 2018-5-8
+ * 课程 Domain 类
  */
 public class Course  implements Serializable {
 	
-  private static final long serialVersionUID = 8573608387962473452L;
+  private static final long serialVersionUID = -5423909666921649131L;
 	
 	/**  ID  */
 	private Integer id; 
@@ -44,8 +51,10 @@ public class Course  implements Serializable {
 	/**  扩展信息  */
 	private String ext; 
 	/**  创建时间  */
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date created; 
 	/**  修改时间  */
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date modified; 
 
   	public void setId(Integer id) {
