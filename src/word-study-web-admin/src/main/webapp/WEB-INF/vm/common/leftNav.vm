@@ -59,7 +59,7 @@
                 <i class="icon-file-alt"></i>
                 <span class="menu-text">
                     用户管理
-                    <span class="badge badge-primary ">5</span>
+                    #*<span class="badge badge-primary ">5</span>*#
                 </span>
                 <b class="arrow icon-angle-down"></b>
             </a>
@@ -96,7 +96,7 @@
                 <i class="icon-file-alt"></i>
                 <span class="menu-text">
                     资源管理
-                    <span class="badge badge-primary ">5</span>
+                    #*<span class="badge badge-primary ">5</span>*#
                 </span>
                 <b class="arrow icon-angle-down"></b>
             </a>
@@ -134,11 +134,11 @@
         </li>
 
         <li>
-            <a href="#" class="dropdown-toggle" id="j_nav_1" menuname="学生学习">
+            <a href="#" class="dropdown-toggle" id="j_nav_1" menuname="学生学习管理">
                 <i class="icon-file-alt"></i>
                 <span class="menu-text">
-                    学生学习
-                    <span class="badge badge-primary ">5</span>
+                    学生学习管理
+                    #*<span class="badge badge-primary ">5</span>*#
                 </span>
                 <b class="arrow icon-angle-down"></b>
             </a>
@@ -197,7 +197,7 @@
                 <i class="icon-file-alt"></i>
                 <span class="menu-text">
                     考试管理
-                    <span class="badge badge-primary ">5</span>
+                    #*<span class="badge badge-primary ">5</span>*#
                 </span>
                 <b class="arrow icon-angle-down"></b>
             </a>

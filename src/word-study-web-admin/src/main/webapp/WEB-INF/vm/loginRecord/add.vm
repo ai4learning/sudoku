@@ -1,4 +1,4 @@
-#set($layout='/WEB-INF/vm/layout/comLayout.vm')
+#*#set($layout='/WEB-INF/vm/layout/comLayout.vm')*#
 
     
 <div class="modal-body auto-height-body"   id="add_loginrecord">
