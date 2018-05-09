@@ -3,6 +3,8 @@ package com.goldfish.manager.impl;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+
 import com.goldfish.common.PageQuery;
 import com.goldfish.domain.LoginRecord;
 import com.goldfish.dao.LoginRecordDao;
@@ -61,6 +63,11 @@ public class LoginRecordManagerImpl implements LoginRecordManager {
     	
     public int count(PageQuery pageQuery) {
 		return loginRecordDao.count( pageQuery.getParams());
+    }
+
+    @Override
+    public void changeLoginRecordState(Map<String, Object> params) {
+        loginRecordDao.changeState(params);
     }
 
     /******* getter and setter ***/

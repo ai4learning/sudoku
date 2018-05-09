@@ -4,6 +4,7 @@ import java.util.List;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.LoginRecord;
+import com.goldfish.domain.User;
 
 /**
  * @author hellosscat
@@ -86,6 +87,19 @@ public interface LoginRecordService {
      * @return
      */
     public int count(PageQuery pageQuery);
-	
+
+    /**
+     *
+     * @param userName
+     * @param token
+     * @return
+     */
+    public LoginRecord getLoginRecordByToken(String userName, String token) throws Exception;
+
+    /**
+     * 刷新登录记录
+     * @param user
+     */
+    LoginRecord refreshLoginRecord(User user);
 	
 }

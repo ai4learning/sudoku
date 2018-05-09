@@ -3,8 +3,10 @@ package com.goldfish.service.impl;
 
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Date;
+import java.util.*;
+
+import com.goldfish.constant.State;
+import com.goldfish.domain.User;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
@@ -12,6 +14,7 @@ import com.goldfish.common.CommonResult;
 import com.goldfish.domain.LoginRecord;
 import com.goldfish.manager.LoginRecordManager;
 import com.goldfish.service.LoginRecordService;
+import org.springframework.util.CollectionUtils;
 
 
 /**
@@ -140,6 +143,53 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 	
 	public int count(PageQuery pageQuery) {
 		return loginRecordManager.count(pageQuery);
+	}
+
+	@Override
+	public LoginRecord getLoginRecordByToken(String userName, String token) throws Exception {
+		try {
+			// 只查询一条记录,查询条件为userName,token,state
+			PageQuery pageQuery = new PageQuery(1,1);
+			pageQuery.setParam("userName", userName);
+			pageQuery.setParam("studyToken", token);
+			pageQuery.setParam("state", State.VALID.getState());
+			List<LoginRecord> list = loginRecordManager.getLoginRecordByPage(pageQuery);
+
+			if (CollectionUtils.isEmpty(list)) {
+				logger.info("no login record in system");
+				return null;
+			}
+			return list.get(0);
+		} catch (Exception e) {
+			logger.error("根据userName和token获取 LoginRecord失败", e);
+			throw e;
+		}
+	}
+
+	@Override
+	public LoginRecord refreshLoginRecord(User user) {
+		// 1.将原记录职为无效；
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("userName", user.getUserId());
+		params.put("oldState", State.VALID.getState());
+		params.put("newState", State.IN_VALID.getState());
+		loginRecordManager.changeLoginRecordState(params);
+
+		// 2.插入新记录
+		LoginRecord newRecord = new LoginRecord();
+		String uuid = UUID.randomUUID().toString();
+		newRecord.setStudyToken(uuid);
+		newRecord.setUserId(Integer.valueOf(String.valueOf(user.getId())));
+		newRecord.setUserCode(user.getUserCode());
+		newRecord.setUserName(user.getUserId());
+		newRecord.setWordTrainingId("wti_" + uuid);
+		newRecord.setWordTraningCode("wtc_" + uuid);
+		newRecord.setState(State.VALID.getState());
+		Date curr = new Date();
+		newRecord.setCreated(curr);
+		newRecord.setModified(curr);
+		LoginRecord  loginRecord= loginRecordManager.addLoginRecord(newRecord);
+		return loginRecord;
 	}
 
 

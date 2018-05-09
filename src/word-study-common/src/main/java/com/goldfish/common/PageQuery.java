@@ -40,6 +40,14 @@ public class PageQuery {
 	private transient HttpServletRequest request;
 
 
+	public PageQuery(int pageIndex, int pageSize) {
+		this.pageSize = pageSize;
+		this.startIndex = (pageIndex - 1) * pageSize;
+		this.params.put("startIndex",startIndex);
+		this.params.put("pageIndex",pageIndex);
+		this.params.put("pageSize",pageSize);
+	}
+
 
 	public PageQuery() {
 		this(20);
@@ -145,7 +153,9 @@ public class PageQuery {
 		params.put("pageSize", getPageSize());
 	}
 
-
+	public void setParam(String key ,Object value) {
+		this.params.put(key,value);
+	}
 
 	public Map<String, Object> getParams() {
 		return params;

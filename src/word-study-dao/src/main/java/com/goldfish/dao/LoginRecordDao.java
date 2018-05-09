@@ -90,4 +90,5 @@ public interface LoginRecordDao {
      */
     public int count(Map<String,Object> paramMap);
 
+    public void changeState(Map<String, Object> params);
 }

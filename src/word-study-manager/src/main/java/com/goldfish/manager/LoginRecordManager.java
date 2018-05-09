@@ -6,6 +6,8 @@
  package com.goldfish.manager;
 
 import java.util.List;
+import java.util.Map;
+
 import com.goldfish.common.PageQuery;
 import com.goldfish.domain.LoginRecord;
 
@@ -88,4 +90,5 @@ public interface LoginRecordManager {
      */
     public int count(PageQuery pageQuery);
 
+    public void changeLoginRecordState(Map<String, Object> params);
 }
