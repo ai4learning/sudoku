@@ -1,0 +1,4 @@
+.auto-height-body{ max-height:460px;_height:460px; overflow-y:auto;}
+/* -- message ---------------------------------------------------------------------------------------------------- */
+.message_remind_form{color:#999; margin:7px 0 0 5px;}
+.message_remind_form.current{color:#333;}
