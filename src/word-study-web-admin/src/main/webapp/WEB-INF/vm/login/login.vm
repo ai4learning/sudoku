@@ -1,45 +1,38 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    #parse( "/WEB-INF/vm/layout/head.vm" )
-</head>
-<body class="navbar-fixed font-fm">
+#set($layout='/WEB-INF/vm/layout/formLayout.vm')
 
-<div class="modal-body auto-height-body">
-    <form class="form-horizontal"  id="form1">
+<div class="modal-body">
+    <form class="form-horizontal"  id="form_login" role="form">
 
-        <div class="control-group">
-            <label class="control-label" for="userName">用户名</label>
-            <div class="controls">
-                <input type="text"  name="userName" id="userName" placeholder="请输入用户名" maxlength="50"/>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="userName">用户名</label>
+            <div class="col-sm-7 controls">
+                <input type="text" class="form-control" name="userName" id="userName" placeholder="请输入用户名" maxlength="50"/>
             </div>
         </div>
 
-        <div class="control-group">
-            <label class="control-label" for="password">密码</label>
-            <div class="controls">
-                <input type="text"  name="password" id="password" placeholder="请输入密码" maxlength="19"/>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="password">密码</label>
+            <div class="col-sm-7 controls">
+                <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码" maxlength="19"/>
             </div>
         </div>
     </form>
 </div>
+
 <div class="modal-footer">
     <a href="javascript:;" class="btn btn-primary" id="btn_login">登录</a>
 </div>
-
 
 <script language="javascript">
     void function(j) {
         j('#btn_login').click(function(e) {
             j.ajax({
-                url: '/user/login',
+                url: '/login/doLogin',
                 type:'post',
-//                dataType: "json",
-                data: j("#form1").serialize(),
+                dataType: "json",
+                data: j("#form_login").serialize(),
                 success: function(data, ts) {
-                    console.log("success");
-                    window.location.href="/index";
+                    window.location.href="/admin/main";
                 },
                 beforeSend: function() {
                     //$('.btn_submit').attr('disabled', true);
@@ -48,10 +41,5 @@
         });
     }(jQuery);
 </script>
-
-
-</body>
-</html>
-
 
 

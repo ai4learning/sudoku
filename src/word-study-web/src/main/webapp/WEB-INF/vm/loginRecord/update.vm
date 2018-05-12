@@ -1,76 +1,78 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body " id="update_loginrecord">
+	<form class="form-horizontal"  id="form_update_LoginRecord" role="form">
 	
-		 <div class="control-group">
-			<label class="control-label" for="id">ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">ID</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{loginRecord.id}"readonly/>
+			<input type="text" class="form-control"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{loginRecord.id}"readonly/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="wordTrainingId">训练ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="wordTrainingId">训练ID</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="wordTrainingId" id="wordTrainingId" placeholder="请输入训练ID" maxlength="50" value="$!{loginRecord.wordTrainingId}"/>
+			<input type="text" class="form-control"  name="wordTrainingId" id="wordTrainingId" placeholder="请输入训练ID" maxlength="50" value="$!{loginRecord.wordTrainingId}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="wordTraningCode">训练CODE</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="wordTraningCode">训练CODE</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="wordTraningCode" id="wordTraningCode" placeholder="请输入训练CODE" maxlength="50" value="$!{loginRecord.wordTraningCode}"/>
+			<input type="text" class="form-control"  name="wordTraningCode" id="wordTraningCode" placeholder="请输入训练CODE" maxlength="50" value="$!{loginRecord.wordTraningCode}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="studyToken">学习token</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studyToken">学习token</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="studyToken" id="studyToken" placeholder="请输入学习token" maxlength="50" value="$!{loginRecord.studyToken}"/>
+			<input type="text" class="form-control"  name="studyToken" id="studyToken" placeholder="请输入学习token" maxlength="50" value="$!{loginRecord.studyToken}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userId">用户ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userId">用户ID</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="userId" id="userId" placeholder="请输入用户ID" maxlength="10" value="$!{loginRecord.userId}"/>
+			<input type="text" class="form-control"  name="userId" id="userId" placeholder="请输入用户ID" maxlength="10" value="$!{loginRecord.userId}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userCode">用户CODE</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userCode">用户CODE</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="userCode" id="userCode" placeholder="请输入用户CODE" maxlength="50" value="$!{loginRecord.userCode}"/>
+			<input type="text" class="form-control"  name="userCode" id="userCode" placeholder="请输入用户CODE" maxlength="50" value="$!{loginRecord.userCode}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userName">用户名</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userName">用户名</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="userName" id="userName" placeholder="请输入用户名" maxlength="50" value="$!{loginRecord.userName}"/>
+			<input type="text" class="form-control"  name="userName" id="userName" placeholder="请输入用户名" maxlength="50" value="$!{loginRecord.userName}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="state">状态</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-7 controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 				<option value="1" #if($loginRecord.state==1) selected #end>有效</option>
 				<option value="2" #if($loginRecord.state==2) selected #end>无效</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
@@ -79,39 +81,49 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存修改</a>
-	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_update_LoginRecord">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
 </div>
 
 
-
 <script language="javascript">
+
+
+
+
 void function(j) {
 	var set = {
-		 
-		 id:  {must: true, maxlength:19, ftip:'ID,最多19个字符'},
-		 wordTrainingId:  {must: true, maxlength:50, ftip:'训练ID,最多50个字符'},
-		 wordTraningCode:  {must: true, maxlength:50, ftip:'训练CODE,最多50个字符'},
-		 studyToken:  {must: true, maxlength:50, ftip:'学习token,最多50个字符'},
-		 userId:  {must: true, maxlength:10, ftip:'用户ID,最多10个字符'},
-		 userCode:  {must: true, maxlength:50, ftip:'用户CODE,最多50个字符'},
-		 userName:  {must: true, maxlength:50, ftip:'用户名,最多50个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
+		wordTrainingId:  {must: false, maxlength:50, ftip:'训练ID,最多50个字符'},
+		wordTraningCode:  {must: false, maxlength:50, ftip:'训练CODE,最多50个字符'},
+		studyToken:  {must: false, maxlength:50, ftip:'学习token,最多50个字符'},
+		userId:  {must: false, maxlength:10, ftip:'用户ID,最多10个字符' ,handler:'int' },
+		userCode:  {must: false, maxlength:50, ftip:'用户CODE,最多50个字符'},
+		userName:  {must: false, maxlength:50, ftip:'用户名,最多50个字符'},
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_update_LoginRecord').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_update_LoginRecord").serialize(),
 			set, 
 			'/loginRecord/doUpdate.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				backToManage();
 			}
 		);
 	});
-	
+
+
 	//form.friend.init(set);
 }(jQuery);
+
+
+	function backToManage(){
+    		var url='/loginRecord/manage.action';
+    		gUtils.fMakeFullLink(url);
+            window.location=url;
+    };
 </script>

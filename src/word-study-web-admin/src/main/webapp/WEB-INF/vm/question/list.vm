@@ -1,7 +1,7 @@
 
 <div class="row-fluid">
 	<div class="span12">
-		<table class="table table-striped table-hover">
+		<table class="table table-striped table-bordered table-hover table-condensed">
 			<thead>
 				<tr>
  			<th><span>ID</span></th>
@@ -74,9 +74,11 @@
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
-					<button class="btn btn-primary JUpdate-question" type="button" itemid="$!item.id">编辑</button>
-					<button class="btn btn-info JView-question" type="button" itemid="$!item.id">查看</button>
-					<button class="btn btn-warning JDelete-question" type="button" itemid="$!item.id">删除</button>
+					<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+						<button class="btn btn-xs btn-success JUpdate-question" type="button" itemid="$!item.id"><i class="icon-edit bigger-120"></i>编辑</button>
+						<button class="btn btn-xs btn-info JView-question" type="button" itemid="$!item.id"><i class="icon-eye-open bigger-120"></i>查看</button>
+						<button class="btn btn-xs btn-danger JDelete-question" type="button" itemid="$!item.id"> <i class="icon-trash bigger-120"></i>删除</button>
+					</div>
 				</td>
 		  </tr>
 			#end
@@ -101,22 +103,28 @@
 
 
 
+
 <script language="javascript">
 void function(j) {	
 	j('.JDelete-question').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除试题',info:'您确定要删除试题吗？',queryList:"queryQuestionList",url: '/question/doDelete',param:'id='+id};
+		var config={title:'删除试题',info:'您确定要删除试题吗？',"queryList":"queryQuestionList",
+		url: '/question/doDelete.action',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-question').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改试题', url: '/question/update?id='+id,width:700}).show();
+		//gDialog.fCreate({ title: '修改试题', url: '/question/update.action?id='+id,width:700}).show();
+		var url='/question/update.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
 	});
 
 	j('.JView-question').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看试题', url: '/question/view?id='+id,width:700}).show();
+		//gDialog.fCreate({ title: '查看试题', url: '/question/view?id='+id,width:700}).show();
+		var url='/question/view.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
 	});
 }(jQuery);
 </script>

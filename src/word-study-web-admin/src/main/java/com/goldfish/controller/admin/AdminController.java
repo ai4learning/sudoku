@@ -1,6 +1,7 @@
 package com.goldfish.controller.admin;
 
 import com.goldfish.web.base.BaseController;
+import com.goldfish.web.interceptor.servlet.context.LoginContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,8 @@ public class AdminController extends BaseController {
 
 	@RequestMapping("/main")
 	public String main(HttpServletRequest request, ModelMap context){
-            return "admin/main/admin";
+//		context.addAttribute("userId", LoginContext.getLoginContext().getUserName());
+		return "admin/main/admin";
 	}
 
 

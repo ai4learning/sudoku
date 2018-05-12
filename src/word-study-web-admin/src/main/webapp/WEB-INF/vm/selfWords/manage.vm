@@ -16,24 +16,31 @@
     
 
 
-<div class="manage-content"  id="search_selfwords">
-<form class="form-inline" id="searchForm_SelfWords" onsubmit="return false;">
+
+<div class="manage-content" id="search_selfwords">
+
+<form class="form-inline" id="search_form_SelfWords">
 
 
-		<label for="id">ID</label>
-			
-			<input type="text"  name="id" id="id_search" class="input input-medium" placeholder="请输入ID">
-			
-
+		<div class="form-group">
+			<label for="id_search">ID</label>
+				
+				<input type="text"  name="id" id="id_search" class="form-control" placeholder="请输入ID">
+				
+		</div>&nbsp;&nbsp;
 		
-		<label for="studyId">学生ID</label>
-			
-			<input type="text"  name="studyId" id="studyId_search" class="input input-medium" placeholder="请输入学生ID">
-			
 
+		<div class="form-group">
+			<label for="studyId_search">学生ID</label>
+				
+				<input type="text"  name="studyId" id="studyId_search" class="form-control" placeholder="请输入学生ID">
+				
+		</div>&nbsp;&nbsp;
 		
-		<label for="type">类型</label>
-			
+
+		<div class="form-group">
+			<label for="type_search">类型</label>
+				
         
 		<select class="forms_select input-medium" name="type" id="type_search">
 			<option value="">全部</option>
@@ -44,28 +51,36 @@
 	
     
 
-
+		</div>&nbsp;&nbsp;
 		
-		<label for="studentId">学生ID</label>
-			
-			<input type="text"  name="studentId" id="studentId_search" class="input input-medium" placeholder="请输入学生ID">
-			
 
+		<div class="form-group">
+			<label for="studentId_search">学生ID</label>
+				
+				<input type="text"  name="studentId" id="studentId_search" class="form-control" placeholder="请输入学生ID">
+				
+		</div>&nbsp;&nbsp;
 		
-		<label for="lessonId">课程ID</label>
-			
-			<input type="text"  name="lessonId" id="lessonId_search" class="input input-medium" placeholder="请输入课程ID">
-			
 
+		<div class="form-group">
+			<label for="lessonId_search">课程ID</label>
+				
+				<input type="text"  name="lessonId" id="lessonId_search" class="form-control" placeholder="请输入课程ID">
+				
+		</div>&nbsp;&nbsp;
 		
-		<label for="wordId">单词ID</label>
-			
-			<input type="text"  name="wordId" id="wordId_search" class="input input-medium" placeholder="请输入单词ID">
-			
 
+		<div class="form-group">
+			<label for="wordId_search">单词ID</label>
+				
+				<input type="text"  name="wordId" id="wordId_search" class="form-control" placeholder="请输入单词ID">
+				
+		</div>&nbsp;&nbsp;
 		
-		<label for="state">状态</label>
-			
+
+		<div class="form-group">
+			<label for="state_search">状态</label>
+				
         
 		<select class="forms_select input-medium" name="state" id="state_search">
 			<option value="">全部</option>
@@ -76,21 +91,27 @@
 	
     
 
-
+		</div>&nbsp;&nbsp;
 		
-		<input type="button" onclick="querySelfWordsList();" class="btn" value="搜索"  />
-
+		<input type="button" onclick="querySelfWordsList();" class="btn btn-primary" value="搜索"  />
 	</form>
 		
 <br/>
+
+
+
 		 <div class="page_operate">
-			 <button class="btn  btn-primary" type="button" id="add-selfWords">创建 学生自身单词</button>
+			 <button class="btn  btn-primary" type="button" id="add-selfWords">
+				<span class="glyphicon glyphicon-plus"></span> 创建 学生自身单词</button>
 		</div>
 
 
 	<div id="dl_SelfWords"></div>
 </div>
+
+
 <script language="javascript">
+
 	function querySelfWordsList(pageNo) {
 		if (!pageNo) {
 			pageNo = 1;
@@ -106,17 +127,20 @@
             param['pageSize']=pageSize;
         }
 
-		gUtils.fMergeParam(param,"searchForm_SelfWords");
+		gUtils.fMergeParam(param,"search_form_SelfWords");
 		gUtils.fGetHtml(url, 'dl_SelfWords', param,'数据加载中...');
 	}
 	querySelfWordsList();
+	
 
 
 
 
 void function(j) {
 	jQuery("#add-selfWords").click(function(){
-		gDialog.fCreate({title: '创建 学生自身单词', url: '/selfWords/add.action',width:700}).show();
+		var url='/selfWords/add.action';
+		url=gUtils.fMakeFullLink(url);
+		window.location=url;
 	});
 	
 }(jQuery);

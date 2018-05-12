@@ -1,45 +1,80 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
-
-<div class="manage-content">
-<form class="form-inline">
-
-
-		<label>id</label>
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
 			
-			<input type="text"  name="id" id="id_search" class="input" placeholder="请输入id">
-			
+				jQuery("#search_user").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
 
-		
-		<label>账户名</label>
-			
-			<input type="text"  name="userId" id="userId_search" class="input" placeholder="请输入账户名">
-			
-
-		
-		<label>角色</label>
-			
+	</script>
 	
-		<select class="forms_select" name="roleType" id="roleType_search">
+    
+
+
+
+<div class="manage-content" id="search_user">
+
+<form class="form-inline" id="search_form_User">
+
+
+		<div class="form-group">
+			<label for="id_search">id</label>
+				
+				<input type="text"  name="id" id="id_search" class="form-control" placeholder="请输入id">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="userId_search">账户名</label>
+				
+				<input type="text"  name="userId" id="userId_search" class="form-control" placeholder="请输入账户名">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="nikeName_search">别名</label>
+				
+				<input type="text"  name="nikeName" id="nikeName_search" class="form-control" placeholder="请输入别名">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="roleType_search">角色</label>
+				
+        
+		<select class="forms_select input-medium" name="roleType" id="roleType_search">
 			<option value="">全部</option>
 			
 				<option value="1">用户</option>
 				<option value="2">管理员</option>
 		</select>
 	
-	
+    
 
-
+		</div>&nbsp;&nbsp;
 		
-		<label>父ID</label>
-			
-			<input type="text"  name="parentId" id="parentId_search" class="input" placeholder="请输入父ID">
-			
 
+		<div class="form-group">
+			<label for="parentId_search">父ID</label>
+				
+				<input type="text"  name="parentId" id="parentId_search" class="form-control" placeholder="请输入父ID">
+				
+		</div>&nbsp;&nbsp;
 		
-		<label>用户状态</label>
-			
-	
-		<select class="forms_select" name="userState" id="userState_search">
+
+		<div class="form-group">
+			<label for="userState_search">用户状态</label>
+				
+        
+		<select class="forms_select input-medium" name="userState" id="userState_search">
 			<option value="">全部</option>
 			
 				<option value="0">初始状态</option>
@@ -48,38 +83,46 @@
 				<option value="3">不可用</option>
 		</select>
 	
-	
+    
 
-
+		</div>&nbsp;&nbsp;
 		
-		<label>状态</label>
-			
-	
-		<select class="forms_select" name="state" id="state_search">
+
+		<div class="form-group">
+			<label for="state_search">状态</label>
+				
+        
+		<select class="forms_select input-medium" name="state" id="state_search">
 			<option value="">全部</option>
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
-
+		</div>&nbsp;&nbsp;
 		
-		<input type="button" onclick="queryList();" class="btn" value="搜索"  />
-
+		<input type="button" onclick="queryUserList();" class="btn btn-primary" value="搜索"  />
 	</form>
 		
 <br/>
+
+
+
 		 <div class="page_operate">
-			 <button class="btn  btn-primary" type="button" id="add-user">创建 User</button>
+			 <button class="btn  btn-primary" type="button" id="add-user">
+				<span class="glyphicon glyphicon-plus"></span> 创建 用户</button>
 		</div>
 
 
-	<div id="dl"></div>
+	<div id="dl_User"></div>
 </div>
+
+
 <script language="javascript">
-	function queryList(pageNo) {	
+
+	function queryUserList(pageNo) {
 		if (!pageNo) {
 			pageNo = 1;
 		}
@@ -94,52 +137,20 @@
             param['pageSize']=pageSize;
         }
 
-		getOtherParams(param);
-		gUtils.fGetHtml(url, 'dl', param,'数据加载中...');
+		gUtils.fMergeParam(param,"search_form_User");
+		gUtils.fGetHtml(url, 'dl_User', param,'数据加载中...');
 	}
-	queryList();
+	queryUserList();
 	
-
-	function getOtherParams(param){
-   
-	  	var id_search=jQuery("#id_search").val();
-		if(id_search!=null&&id_search!=''){
-				param.id=id_search;
-			}
-			 
-	  	var userId_search=jQuery("#userId_search").val();
-		if(userId_search!=null&&userId_search!=''){
-				param.userId=userId_search;
-			}
-			 
-	  	var roleType_search=jQuery("#roleType_search").val();
-		if(roleType_search!=null&&roleType_search!=''){
-				param.roleType=roleType_search;
-			}
-			 
-	  	var parentId_search=jQuery("#parentId_search").val();
-		if(parentId_search!=null&&parentId_search!=''){
-				param.parentId=parentId_search;
-			}
-			 
-	  	var userState_search=jQuery("#userState_search").val();
-		if(userState_search!=null&&userState_search!=''){
-				param.userState=userState_search;
-			}
-			 
-	  	var state_search=jQuery("#state_search").val();
-		if(state_search!=null&&state_search!=''){
-				param.state=state_search;
-			}
-					
-	}
 
 
 
 
 void function(j) {
 	jQuery("#add-user").click(function(){
-		gDialog.fCreate({title: '创建 User', url: '/user/add.action',width:700}).show();
+		var url='/user/add.action';
+		url=gUtils.fMakeFullLink(url);
+		window.location=url;
 	});
 	
 }(jQuery);

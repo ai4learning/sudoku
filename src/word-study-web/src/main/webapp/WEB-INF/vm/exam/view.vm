@@ -1,184 +1,200 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#view_exam").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
 
 
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body " id="view_exam">
+	<form class="form-horizontal"  id="form1" role="form">
 	
-		 <div class="control-group">
-			<label class="control-label" for="id">ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">ID</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="id" id="id" value="$!{exam.id}" readonly/>
+							<input type="text" class="form-control" name="id" id="id" value="$!{exam.id}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userId">用户ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userId">用户ID</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="userId" id="userId" value="$!{exam.userId}" readonly/>
+							<input type="text" class="form-control" name="userId" id="userId" value="$!{exam.userId}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userCode">用户CODE</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userCode">用户CODE</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="userCode" id="userCode" value="$!{exam.userCode}" readonly/>
+							<input type="text" class="form-control" name="userCode" id="userCode" value="$!{exam.userCode}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="lessonId">课程ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="lessonId">课程ID</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="lessonId" id="lessonId" value="$!{exam.lessonId}" readonly/>
+							<input type="text" class="form-control" name="lessonId" id="lessonId" value="$!{exam.lessonId}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="unitNbr">课程号</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="unitNbr">课程号</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="unitNbr" id="unitNbr" value="$!{exam.unitNbr}" readonly/>
+							<input type="text" class="form-control" name="unitNbr" id="unitNbr" value="$!{exam.unitNbr}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="pageId">试卷ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="pageId">试卷ID</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="pageId" id="pageId" value="$!{exam.pageId}" readonly/>
+							<input type="text" class="form-control" name="pageId" id="pageId" value="$!{exam.pageId}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="testType">测试类型</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="testType">测试类型</label>
+			<div class="col-sm-8 controls">
 			
-	
-		<select class="forms_select" name="testType" id="testType" disabled>
-				<option value="1" #if($exam.testType==1) selected  #end>单元测试；2.自主测试；</option>
+        
+		<select class="forms_select input-medium form-control" name="testType" id="testType" disabled>
+						<option value="1" #if($exam.testType==1) selected  #end>单元测试；2.自主测试；</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="resultScore">得分</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="resultScore">得分</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="resultScore" id="resultScore" value="$!{exam.resultScore}" readonly/>
+							<input type="text" class="form-control" name="resultScore" id="resultScore" value="$!{exam.resultScore}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="standardDuration">考试时长</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="standardDuration">考试时长</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="standardDuration" id="standardDuration" value="$!{exam.standardDuration}" readonly/>
+							<input type="text" class="form-control" name="standardDuration" id="standardDuration" value="$!{exam.standardDuration}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="realDuration">实际用时</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="realDuration">实际用时</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="realDuration" id="realDuration" value="$!{exam.realDuration}" readonly/>
+							<input type="text" class="form-control" name="realDuration" id="realDuration" value="$!{exam.realDuration}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="errorNbr">错误数</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="errorNbr">错误数</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="errorNbr" id="errorNbr" value="$!{exam.errorNbr}" readonly/>
+							<input type="text" class="form-control" name="errorNbr" id="errorNbr" value="$!{exam.errorNbr}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="cashPoint">积分</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="cashPoint">积分</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="cashPoint" id="cashPoint" value="$!{exam.cashPoint}" readonly/>
+							<input type="text" class="form-control" name="cashPoint" id="cashPoint" value="$!{exam.cashPoint}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="cashPointType">积分类型</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="cashPointType">积分类型</label>
+			<div class="col-sm-8 controls">
 			
-	
-		<select class="forms_select" name="cashPointType" id="cashPointType" disabled>
-				<option value="0" #if($exam.cashPointType==0) selected  #end>未知</option>
+        
+		<select class="forms_select input-medium form-control" name="cashPointType" id="cashPointType" disabled>
+						<option value="0" #if($exam.cashPointType==0) selected  #end>未知</option>
 				<option value="1" #if($exam.cashPointType==1) selected  #end>金币</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="isPass">是否通过</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isPass">是否通过</label>
+			<div class="col-sm-8 controls">
 			
-	
-		<select class="forms_select" name="isPass" id="isPass" disabled>
-				<option value="0" #if($exam.isPass==0) selected  #end>未通过</option>
+        
+		<select class="forms_select input-medium form-control" name="isPass" id="isPass" disabled>
+						<option value="0" #if($exam.isPass==0) selected  #end>未通过</option>
 				<option value="1" #if($exam.isPass==1) selected  #end>通过</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="state">状态</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-8 controls">
 			
-	
-		<select class="forms_select" name="state" id="state" disabled>
-				<option value="1" #if($exam.state==1) selected  #end>有效</option>
+        
+		<select class="forms_select input-medium form-control" name="state" id="state" disabled>
+						<option value="1" #if($exam.state==1) selected  #end>有效</option>
 				<option value="2" #if($exam.state==2) selected  #end>无效</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="created">创建时间</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="created">创建时间</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!exam.created)" readonly/>
+					<input type="text"  class="form-control" name="created" id="created" value="$!dateFormatUtils.format($!exam.created)" readonly/>
 						
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="modified">修改时间</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="modified">修改时间</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!exam.modified)" readonly/>
+					<input type="text"  class="form-control" name="modified" id="modified" value="$!dateFormatUtils.format($!exam.modified)" readonly/>
 						
 			</div>
 		</div>
@@ -187,6 +203,17 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
 </div>
 
+
+<script language="javascript">
+
+
+function backToManage(){
+	var url='/exam/manage.action';
+	gUtils.fMakeFullLink(url);
+    window.location=url;
+}
+
+</script>

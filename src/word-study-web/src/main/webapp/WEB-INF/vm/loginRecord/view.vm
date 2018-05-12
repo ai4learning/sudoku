@@ -1,101 +1,117 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#view_loginrecord").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
 
 
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body " id="view_loginrecord">
+	<form class="form-horizontal"  id="form1" role="form">
 	
-		 <div class="control-group">
-			<label class="control-label" for="id">ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">ID</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="id" id="id" value="$!{loginRecord.id}" readonly/>
+							<input type="text" class="form-control" name="id" id="id" value="$!{loginRecord.id}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="wordTrainingId">训练ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="wordTrainingId">训练ID</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="wordTrainingId" id="wordTrainingId" value="$!{loginRecord.wordTrainingId}" readonly/>
+							<input type="text" class="form-control" name="wordTrainingId" id="wordTrainingId" value="$!{loginRecord.wordTrainingId}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="wordTraningCode">训练CODE</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="wordTraningCode">训练CODE</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="wordTraningCode" id="wordTraningCode" value="$!{loginRecord.wordTraningCode}" readonly/>
+							<input type="text" class="form-control" name="wordTraningCode" id="wordTraningCode" value="$!{loginRecord.wordTraningCode}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="studyToken">学习token</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studyToken">学习token</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="studyToken" id="studyToken" value="$!{loginRecord.studyToken}" readonly/>
+							<input type="text" class="form-control" name="studyToken" id="studyToken" value="$!{loginRecord.studyToken}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userId">用户ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userId">用户ID</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="userId" id="userId" value="$!{loginRecord.userId}" readonly/>
+							<input type="text" class="form-control" name="userId" id="userId" value="$!{loginRecord.userId}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userCode">用户CODE</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userCode">用户CODE</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="userCode" id="userCode" value="$!{loginRecord.userCode}" readonly/>
+							<input type="text" class="form-control" name="userCode" id="userCode" value="$!{loginRecord.userCode}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userName">用户名</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userName">用户名</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="userName" id="userName" value="$!{loginRecord.userName}" readonly/>
+							<input type="text" class="form-control" name="userName" id="userName" value="$!{loginRecord.userName}" readonly/>
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="state">状态</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-8 controls">
 			
-	
-		<select class="forms_select" name="state" id="state" disabled>
-				<option value="1" #if($loginRecord.state==1) selected  #end>有效</option>
+        
+		<select class="forms_select input-medium form-control" name="state" id="state" disabled>
+						<option value="1" #if($loginRecord.state==1) selected  #end>有效</option>
 				<option value="2" #if($loginRecord.state==2) selected  #end>无效</option>
 
 		</select>
 	
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="created">创建时间</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="created">创建时间</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="created" id="created" value="$!dateFormatUtils.format($!loginRecord.created)" readonly/>
+					<input type="text"  class="form-control" name="created" id="created" value="$!dateFormatUtils.format($!loginRecord.created)" readonly/>
 						
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="modified">修改时间</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="modified">修改时间</label>
+			<div class="col-sm-8 controls">
 			
-							<input type="text"  name="modified" id="modified" value="$!dateFormatUtils.format($!loginRecord.modified)" readonly/>
+					<input type="text"  class="form-control" name="modified" id="modified" value="$!dateFormatUtils.format($!loginRecord.modified)" readonly/>
 						
 			</div>
 		</div>
@@ -104,6 +120,17 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
 </div>
 
+
+<script language="javascript">
+
+
+function backToManage(){
+	var url='/loginRecord/manage.action';
+	gUtils.fMakeFullLink(url);
+    window.location=url;
+}
+
+</script>

@@ -1,75 +1,89 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body " id="add_wordstudystatistic">
+	<form class="form-horizontal"  id="form_add_WordStudyStatistic" role="form">
 	
-		 <div class="control-group">
-			<label class="control-label" for="studentId">学生ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studentId">学生ID</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="studentId" id="studentId" placeholder="请输入学生ID" maxlength="10"/>
-				
+				<input type="text"  class="form-control" name="studentId" id="studentId" placeholder="请输入学生ID" maxlength="10"/>
+								
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="count">单词数</label>
-			<div class="controls">
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="count">单词数</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="count" id="count" placeholder="请输入单词数" maxlength="10"/>
-				
+				<input type="text"  class="form-control" name="count" id="count" placeholder="请输入单词数" maxlength="10"/>
+								
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="state">状态</label>
-			<div class="controls">
-			
 		
-		<select class="forms_select" name="state" id="state">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="state" id="state">
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
-
+    
+				
 			</div>
 		</div>
+		
 		
 
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存</a>
-	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_WordStudyStatistic">保存</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
 </div>
 
 
 
+
 <script language="javascript">
+
+
 void function(j) {
 	var set = {
-		 
-		 studentId:  {must: true, maxlength:10, ftip:'学生ID,最多10个字符'},
-		 count:  {must: true, maxlength:10, ftip:'单词数,最多10个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		studentId:  {must: false, maxlength:10, ftip:'学生ID,最多10个字符' ,handler:'int' },
+		count:  {must: false, maxlength:10, ftip:'单词数,最多10个字符' ,handler:'int' },
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_add_WordStudyStatistic').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_add_WordStudyStatistic").serialize(),
 			set, 
 			'/wordStudyStatistic/doAdd.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				backToManage();
 			}
 		);
 	});
-	
+
+
 	//form.friend.init(set);
 }(jQuery);
+
+
+	function backToManage(){
+    		var url='/wordStudyStatistic/manage.action';
+    		gUtils.fMakeFullLink(url);
+            window.location=url;
+    };
 </script>

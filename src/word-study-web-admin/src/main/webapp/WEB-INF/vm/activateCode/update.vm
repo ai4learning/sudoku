@@ -1,4 +1,6 @@
 #set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
         
 	<script type="text/javascript">
 		require(['calendar'],function(calendar){
@@ -14,47 +16,48 @@
 	
     
 
+
     
-<div class="modal-body auto-height-body"  id="update_activatecode">
-	<form class="form-horizontal"  id="form_update_ActivateCode">
+<div class="modal-body " id="update_activatecode">
+	<form class="form-horizontal"  id="form_update_ActivateCode" role="form">
 	
-		 <div class="control-group">
-			<label class="control-label" for="id">ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">ID</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{activateCode.id}"readonly/>
+			<input type="text" class="form-control"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{activateCode.id}"readonly/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="activateCode">激活码</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="activateCode">激活码</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="activateCode" id="activateCode" placeholder="请输入激活码" maxlength="50" value="$!{activateCode.activateCode}"/>
+			<input type="text" class="form-control"  name="activateCode" id="activateCode" placeholder="请输入激活码" maxlength="50" value="$!{activateCode.activateCode}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="lessonId">课程ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="lessonId">课程ID</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="19" value="$!{activateCode.lessonId}"/>
+			<input type="text" class="form-control"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="19" value="$!{activateCode.lessonId}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="expireTime">超时时间</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="expireTime">超时时间</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text" class="form-control j_datetime_picker" name="expireTime" id="expireTime" placeholder="请输入超时时间"
-				 maxlength="19" value="$!dateFormatUtils.format($!activateCode.expireTime)" />
+				<input type="text" class="form-control j_datetime_picker" name="expireTime" id="expireTime"
+				 placeholder="请输入超时时间" maxlength="19" value="$!dateFormatUtils.format($!activateCode.expireTime)" />
 				
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="state">状态</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-7 controls">
 			
         
 		<select class="forms_select input-medium" name="state" id="state">
@@ -72,13 +75,16 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-sm btn-primary" id="btn_update_ActivateCode">保存修改</a>
-	<a href="javascript:;" class="btn btn-sm"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_update_ActivateCode">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
 </div>
 
 
-
 <script language="javascript">
+
+
+
+
 void function(j) {
 	var set = {
 		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
@@ -96,11 +102,19 @@ void function(j) {
 			'/activateCode/doUpdate.action', 
 			function() {
 				gDialog.fClose();
-				queryActivateCodeList(1);
+				backToManage();
 			}
 		);
 	});
-	
+
+
 	//form.friend.init(set);
 }(jQuery);
+
+
+	function backToManage(){
+    		var url='/activateCode/manage.action';
+    		gUtils.fMakeFullLink(url);
+            window.location=url;
+    };
 </script>

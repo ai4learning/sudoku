@@ -1,7 +1,7 @@
 
 <div class="row-fluid">
 	<div class="span12">
-		<table class="table table-striped table-hover">
+		<table class="table table-striped table-bordered table-hover table-condensed">
 			<thead>
 				<tr>
  			<th><span>ID</span></th>
@@ -29,20 +29,22 @@
 			<td>$!item.unit</td>
 			<td>$!item.totalWords</td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
-					<button class="btn btn-primary JUpdate-unit" type="button" itemid="$!item.id">编辑</button>
-					<button class="btn btn-info JView-unit" type="button" itemid="$!item.id">查看</button>
-					<button class="btn btn-warning JDelete-unit" type="button" itemid="$!item.id">删除</button>
+					<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+						<button class="btn btn-xs btn-success JUpdate-unit" type="button" itemid="$!item.id"><i class="icon-edit bigger-120"></i>编辑</button>
+						<button class="btn btn-xs btn-info JView-unit" type="button" itemid="$!item.id"><i class="icon-eye-open bigger-120"></i>查看</button>
+						<button class="btn btn-xs btn-danger JDelete-unit" type="button" itemid="$!item.id"> <i class="icon-trash bigger-120"></i>删除</button>
+					</div>
 				</td>
 		  </tr>
 			#end
@@ -59,7 +61,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryUnitList','input')
 		#end
 
 	</div>
@@ -67,22 +69,28 @@
 
 
 
+
 <script language="javascript">
 void function(j) {	
 	j('.JDelete-unit').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除Unit',info:'您确定要删除Unit吗？',url: '/unit/doDelete',param:'id='+id};
+		var config={title:'删除课程单元',info:'您确定要删除课程单元吗？',"queryList":"queryUnitList",
+		url: '/unit/doDelete.action',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-unit').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改Unit', url: '/unit/update?id='+id,width:700}).show();
+		//gDialog.fCreate({ title: '修改课程单元', url: '/unit/update.action?id='+id,width:700}).show();
+		var url='/unit/update.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
 	});
 
 	j('.JView-unit').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看Unit', url: '/unit/view?id='+id,width:700}).show();
+		//gDialog.fCreate({ title: '查看课程单元', url: '/unit/view?id='+id,width:700}).show();
+		var url='/unit/view.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
 	});
 }(jQuery);
 </script>

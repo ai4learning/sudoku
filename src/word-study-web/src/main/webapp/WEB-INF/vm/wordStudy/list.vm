@@ -1,7 +1,7 @@
 
 <div class="row-fluid">
 	<div class="span12">
-		<table class="table table-striped table-hover">
+		<table class="table table-striped table-bordered table-hover table-condensed">
 			<thead>
 				<tr>
  			<th><span>ID</span></th>
@@ -44,7 +44,7 @@
 			<td>$!item.studentId</td>
 			<td>$!item.userCode</td>
 			<td>
-	
+        
 			
 				#if($item.memoryLevel==1)<span class="">生词</span> #end	
 			
@@ -53,82 +53,84 @@
 				#if($item.memoryLevel==3)<span class="">半生熟</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.reviewTimes</td>
 			<td>$!item.timeLeft</td>
 			<td>$!item.finishReadingTime</td>
 			<td>
-	
+        
 			
 				#if($item.isFstReadSuccess==0)<span class="">否；1.是；</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.readFailTimes</td>
 			<td>$!item.continueReadFailTimes</td>
 			<td>
-	
+        
 			
 				#if($item.isHalfReading==0)<span class="">否</span> #end	
 			
 				#if($item.isHalfReading==1)<span class="">是</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.isFstSpellSuccess==0)<span class="">否</span> #end	
 			
 				#if($item.isFstSpellSuccess==1)<span class="">是</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!item.spellFailTimes</td>
 			<td>$!item.continueSpellFailTimes</td>
 			<td>
-	
+        
 			
 				#if($item.isHalfSpelling==0)<span class="">否；1.是；</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.isRemember==0)<span class="">否；1.是；</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.isCancelReview==0)<span class="">否；1.是；</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.iscollected==0)<span class="">否；1.是；</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>
-	
+        
 			
 				#if($item.state==1)<span class="">有效</span> #end	
 			
 				#if($item.state==2)<span class="">无效</span> #end	
 			
 	
-	</td>
+    </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
 
 				<td class="operate">
-					<button class="btn btn-primary JUpdate-wordStudy" type="button" itemid="$!item.id">编辑</button>
-					<button class="btn btn-info JView-wordStudy" type="button" itemid="$!item.id">查看</button>
-					<button class="btn btn-warning JDelete-wordStudy" type="button" itemid="$!item.id">删除</button>
+					<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+						<button class="btn btn-xs btn-success JUpdate-wordStudy" type="button" itemid="$!item.id"><i class="icon-edit bigger-120"></i>编辑</button>
+						<button class="btn btn-xs btn-info JView-wordStudy" type="button" itemid="$!item.id"><i class="icon-eye-open bigger-120"></i>查看</button>
+						<button class="btn btn-xs btn-danger JDelete-wordStudy" type="button" itemid="$!item.id"> <i class="icon-trash bigger-120"></i>删除</button>
+					</div>
 				</td>
 		  </tr>
 			#end
@@ -145,7 +147,7 @@
 		</table>
 
 		#if($pageQuery)
-			#showPageQuery($pageQuery,'queryList','input')
+			#showPageQuery($pageQuery,'queryWordStudyList','input')
 		#end
 
 	</div>
@@ -153,22 +155,28 @@
 
 
 
+
 <script language="javascript">
 void function(j) {	
 	j('.JDelete-wordStudy').click(function() {
 		var id = j(this).attr('itemid');
-		var config={title:'删除WordStudy',info:'您确定要删除WordStudy吗？',url: '/wordStudy/doDelete',param:'id='+id};
+		var config={title:'删除单词学习',info:'您确定要删除单词学习吗？',"queryList":"queryWordStudyList",
+		url: '/wordStudy/doDelete.action',param:'id='+id};
 		gUtils.fConfirmAndRefreshList(config);
 	});
 	
 	j('.JUpdate-wordStudy').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '修改WordStudy', url: '/wordStudy/update?id='+id,width:700}).show();
+		//gDialog.fCreate({ title: '修改单词学习', url: '/wordStudy/update.action?id='+id,width:700}).show();
+		var url='/wordStudy/update.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
 	});
 
 	j('.JView-wordStudy').click(function() {
 		var id = j(this).attr('itemid');
-		gDialog.fCreate({ title: '查看WordStudy', url: '/wordStudy/view?id='+id,width:700}).show();
+		//gDialog.fCreate({ title: '查看单词学习', url: '/wordStudy/view?id='+id,width:700}).show();
+		var url='/wordStudy/view.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
 	});
 }(jQuery);
 </script>

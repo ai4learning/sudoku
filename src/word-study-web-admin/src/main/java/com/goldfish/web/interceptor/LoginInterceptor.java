@@ -11,6 +11,7 @@ import com.goldfish.web.interceptor.servlet.context.LoginContext;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.ServletException;
@@ -29,17 +30,17 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     protected CookieUtils cookieUtils;
     private LoginRecordService loginRecordService;
     private UserService userService;
-    private String noPermissionUrl;
-
     /**
      * 判断session有效时间，单位：秒 1800 为 30 * 60 。30分钟
      */
     private int sessionTimeout = 1800;
+
     /**
      * 写入cookie的时机
      */
     private int rate = 2;
-    private String userLoginUri = "/user/login";
+    private String doLoginUri = "/login/doLogin";
+    private String loginUri = "/login/login";
 
 
     @Override
@@ -63,8 +64,16 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
         log.debug("not login, redirect to login");
-        response.sendRedirect(noPermissionUrl);
+        response.sendRedirect(loginUri);
         return false;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        LoginContext loginContext = LoginContext.getLoginContext();
+        if (loginContext != null && modelAndView != null) {
+            modelAndView.addObject("userId", loginContext.getUserName());
+        }
     }
 
     public void afterCompletion(
@@ -84,7 +93,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             log.debug("no login context info, userName={}, token={}", userCookieValue,tokenCookieValue);
             // 判断是否是用户登录请求，若不是，则返回登录验证失败；
             String requestURI = request.getRequestURI();
-            if (!userLoginUri.equals(requestURI)) {
+            if (!doLoginUri.equals(requestURI)) {
                 return false;
             }
             // 从请求参数中确认是否含有用户名、密码
@@ -214,8 +223,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         this.loginRecordService = loginRecordService;
     }
 
-    public void setNoPermissionUrl(String noPermissionUrl) {
-        this.noPermissionUrl = noPermissionUrl;
+    public void setLoginUri(String loginUri) {
+        this.loginUri = loginUri;
+    }
+
+    public void setDoLoginUri(String doLoginUri) {
+        this.doLoginUri = doLoginUri;
     }
 
     public void setUserService(UserService userService) {

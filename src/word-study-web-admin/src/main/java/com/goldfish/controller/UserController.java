@@ -55,12 +55,12 @@ public class UserController extends BaseController {
 	 
 	 
 
-		@RequestMapping(value="update",method={RequestMethod.GET,RequestMethod.POST})
-	    public String update(User user, ModelMap context) {
-			CommonResult<User> result = userService.getUserById(user.getId());
-			this.toVm(result, context);
-			return "/user/update";
-	    }
+	@RequestMapping(value="update",method={RequestMethod.GET,RequestMethod.POST})
+	public String update(User user, ModelMap context) {
+		CommonResult<User> result = userService.getUserById(user.getId());
+		this.toVm(result, context);
+		return "/user/update";
+	}
 	    
 		
 		@RequestMapping(value="doUpdate",method={RequestMethod.GET,RequestMethod.POST})

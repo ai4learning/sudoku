@@ -1,144 +1,144 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
 
     
-<div class="modal-body auto-height-body">
-	<form class="form-horizontal"  id="form1">
+<div class="modal-body " id="update_user">
+	<form class="form-horizontal"  id="form_update_User" role="form">
 	
-		 <div class="control-group">
-			<label class="control-label" for="id">id</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">id</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="id" id="id" placeholder="请输入id" maxlength="19" value="$!{user.id}"readonly/>
+			<input type="text" class="form-control"  name="id" id="id" placeholder="请输入id" maxlength="19" value="$!{user.id}"readonly/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userId">账户名</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userId">账户名</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="userId" id="userId" placeholder="请输入账户名" maxlength="50" value="$!{user.userId}"/>
+			<input type="text" class="form-control"  name="userId" id="userId" placeholder="请输入账户名" maxlength="50" value="$!{user.userId}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="passwd">密码</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="passwd">密码</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="passwd" id="passwd" placeholder="请输入密码" maxlength="50" value="$!{user.passwd}"/>
+			<input type="text" class="form-control"  name="passwd" id="passwd" placeholder="请输入密码" maxlength="50" value="$!{user.passwd}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userCode">用户code</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userCode">用户code</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="userCode" id="userCode" placeholder="请输入用户code" maxlength="50" value="$!{user.userCode}"/>
+			<input type="text" class="form-control"  name="userCode" id="userCode" placeholder="请输入用户code" maxlength="50" value="$!{user.userCode}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="nikeName">别名</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="nikeName">别名</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="nikeName" id="nikeName" placeholder="请输入别名" maxlength="50" value="$!{user.nikeName}"/>
+			<input type="text" class="form-control"  name="nikeName" id="nikeName" placeholder="请输入别名" maxlength="50" value="$!{user.nikeName}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="roleType">角色</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="roleType">角色</label>
+			<div class="col-sm-7 controls">
 			
-		
-		<select class="forms_select" name="roleType" id="roleType">
+        
+		<select class="forms_select input-medium" name="roleType" id="roleType">
 				<option value="1" #if($user.roleType==1) selected #end>用户</option>
 				<option value="2" #if($user.roleType==2) selected #end>管理员</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="authorityLevel">权限等级</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="authorityLevel">权限等级</label>
+			<div class="col-sm-7 controls">
 			
-		
-		<select class="forms_select" name="authorityLevel" id="authorityLevel">
+        
+		<select class="forms_select input-medium" name="authorityLevel" id="authorityLevel">
 				<option value="1" #if($user.authorityLevel==1) selected #end>默认</option>
 				<option value="2" #if($user.authorityLevel==2) selected #end>其他</option>
+</select>
+		
+    
 
-		</select>
-		
-	
-
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="parentId">父ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="parentId">父ID</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="parentId" id="parentId" placeholder="请输入父ID" maxlength="19" value="$!{user.parentId}"/>
+			<input type="text" class="form-control"  name="parentId" id="parentId" placeholder="请输入父ID" maxlength="19" value="$!{user.parentId}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="activateCode">激活码</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="activateCode">激活码</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="activateCode" id="activateCode" placeholder="请输入激活码" maxlength="50" value="$!{user.activateCode}"/>
+			<input type="text" class="form-control"  name="activateCode" id="activateCode" placeholder="请输入激活码" maxlength="50" value="$!{user.activateCode}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="userState">用户状态</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userState">用户状态</label>
+			<div class="col-sm-7 controls">
 			
-		
-		<select class="forms_select" name="userState" id="userState">
+        
+		<select class="forms_select input-medium" name="userState" id="userState">
 				<option value="0" #if($user.userState==0) selected #end>初始状态</option>
 				<option value="1" #if($user.userState==1) selected #end>正常</option>
 				<option value="2" #if($user.userState==2) selected #end>欠费</option>
 				<option value="3" #if($user.userState==3) selected #end>不可用</option>
+</select>
+		
+    
 
-		</select>
-		
-	
-
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="totalLoginTimes">登录次数</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="totalLoginTimes">登录次数</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="totalLoginTimes" id="totalLoginTimes" placeholder="请输入登录次数" maxlength="19" value="$!{user.totalLoginTimes}"/>
+			<input type="text" class="form-control"  name="totalLoginTimes" id="totalLoginTimes" placeholder="请输入登录次数" maxlength="19" value="$!{user.totalLoginTimes}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="currentClass">当前班级</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="currentClass">当前班级</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="currentClass" id="currentClass" placeholder="请输入当前班级" maxlength="19" value="$!{user.currentClass}"/>
+			<input type="text" class="form-control"  name="currentClass" id="currentClass" placeholder="请输入当前班级" maxlength="19" value="$!{user.currentClass}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="currentTeacher">当前老师</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="currentTeacher">当前老师</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="currentTeacher" id="currentTeacher" placeholder="请输入当前老师" maxlength="19" value="$!{user.currentTeacher}"/>
+			<input type="text" class="form-control"  name="currentTeacher" id="currentTeacher" placeholder="请输入当前老师" maxlength="19" value="$!{user.currentTeacher}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="level">等级</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="level">等级</label>
+			<div class="col-sm-7 controls">
 			
-		
-		<select class="forms_select" name="level" id="level">
+        
+		<select class="forms_select input-medium" name="level" id="level">
 				<option value="1" #if($user.level==1) selected #end>庶人</option>
 				<option value="2" #if($user.level==2) selected #end>童生</option>
 				<option value="3" #if($user.level==3) selected #end>秀才</option>
@@ -147,34 +147,32 @@
 				<option value="6" #if($user.level==6) selected #end>探花</option>
 				<option value="7" #if($user.level==7) selected #end>榜眼</option>
 				<option value="8" #if($user.level==8) selected #end>状元</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="cashPoint">积分</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="cashPoint">积分</label>
+			<div class="col-sm-7 controls">
 			
-				<input type="text"  name="cashPoint" id="cashPoint" placeholder="请输入积分" maxlength="19" value="$!{user.cashPoint}"/>
+			<input type="text" class="form-control"  name="cashPoint" id="cashPoint" placeholder="请输入积分" maxlength="19" value="$!{user.cashPoint}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="state">状态</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-7 controls">
 			
-		
-		<select class="forms_select" name="state" id="state">
+        
+		<select class="forms_select input-medium" name="state" id="state">
 				<option value="1" #if($user.state==1) selected #end>有效</option>
 				<option value="2" #if($user.state==2) selected #end>无效</option>
-
-		</select>
+</select>
 		
-	
+    
 
 			</div>
 		</div>
@@ -183,47 +181,57 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-primary" id="btn_submit">保存修改</a>
-	<a href="javascript:;" class="btn"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_update_User">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
 </div>
 
 
-
 <script language="javascript">
+
+
+
+
 void function(j) {
 	var set = {
-		 
-		 id:  {must: true, maxlength:19, ftip:'id,最多19个字符'},
-		 userId:  {must: true, maxlength:50, ftip:'账户名,最多50个字符'},
-		 passwd:  {must: true, maxlength:50, ftip:'密码,最多50个字符'},
-		 userCode:  {must: true, maxlength:50, ftip:'用户code,最多50个字符'},
-		 nikeName:  {must: true, maxlength:50, ftip:'别名,最多50个字符'},
-		 roleType:  {must: true, maxlength:3, ftip:'角色,最多3个字符'},
-		 authorityLevel:  {must: true, maxlength:3, ftip:'权限等级,最多3个字符'},
-		 parentId:  {must: true, maxlength:19, ftip:'父ID,最多19个字符'},
-		 activateCode:  {must: true, maxlength:50, ftip:'激活码,最多50个字符'},
-		 userState:  {must: true, maxlength:3, ftip:'用户状态,最多3个字符'},
-		 totalLoginTimes:  {must: true, maxlength:19, ftip:'登录次数,最多19个字符'},
-		 currentClass:  {must: true, maxlength:19, ftip:'当前班级,最多19个字符'},
-		 currentTeacher:  {must: true, maxlength:19, ftip:'当前老师,最多19个字符'},
-		 level:  {must: true, maxlength:3, ftip:'等级,最多3个字符'},
-		 cashPoint:  {must: true, maxlength:19, ftip:'积分,最多19个字符'},
-		 state:  {must: true, maxlength:3, ftip:'状态,最多3个字符'}
+		 		id:  {must: true, maxlength:19, ftip:'id,最多19个字符' ,handler:'int' },
+		userId:  {must: true, maxlength:50, ftip:'账户名,最多50个字符'},
+		passwd:  {must: true, maxlength:50, ftip:'密码,最多50个字符'},
+		userCode:  {must: true, maxlength:50, ftip:'用户code,最多50个字符'},
+		nikeName:  {must: false, maxlength:50, ftip:'别名,最多50个字符'},
+		roleType:  {must: false, maxlength:3, ftip:'角色,最多3个字符' ,handler:'int' },
+		authorityLevel:  {must: false, maxlength:3, ftip:'权限等级,最多3个字符' ,handler:'int' },
+		parentId:  {must: false, maxlength:19, ftip:'父ID,最多19个字符' ,handler:'int' },
+		activateCode:  {must: false, maxlength:50, ftip:'激活码,最多50个字符'},
+		userState:  {must: false, maxlength:3, ftip:'用户状态,最多3个字符' ,handler:'int' },
+		totalLoginTimes:  {must: false, maxlength:19, ftip:'登录次数,最多19个字符' ,handler:'int' },
+		currentClass:  {must: false, maxlength:19, ftip:'当前班级,最多19个字符' ,handler:'int' },
+		currentTeacher:  {must: false, maxlength:19, ftip:'当前老师,最多19个字符' ,handler:'int' },
+		level:  {must: false, maxlength:3, ftip:'等级,最多3个字符' ,handler:'int' },
+		cashPoint:  {must: false, maxlength:19, ftip:'积分,最多19个字符' ,handler:'int' },
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
-	j('#btn_submit').click(function(e) {
+	j('#btn_update_User').click(function(e) {
 		gUtils.fSubmitForm(
-			j("#form1").serialize(), 
+			j("#form_update_User").serialize(),
 			set, 
 			'/user/doUpdate.action', 
 			function() {
 				gDialog.fClose();
-				queryList(1);
+				backToManage();
 			}
 		);
 	});
-	
+
+
 	//form.friend.init(set);
 }(jQuery);
+
+
+	function backToManage(){
+    		var url='/user/manage.action';
+    		gUtils.fMakeFullLink(url);
+            window.location=url;
+    };
 </script>

@@ -1,67 +1,70 @@
 #set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
+
     
-<div class="modal-body auto-height-body"  id="update_word">
-	<form class="form-horizontal"  id="form_update_Word">
+<div class="modal-body " id="update_word">
+	<form class="form-horizontal"  id="form_update_Word" role="form">
 	
-		 <div class="control-group">
-			<label class="control-label" for="id">ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">ID</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="10" value="$!{word.id}"readonly/>
+			<input type="text" class="form-control"  name="id" id="id" placeholder="请输入ID" maxlength="10" value="$!{word.id}"readonly/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="spelling">单词拼写</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="spelling">单词拼写</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="spelling" id="spelling" placeholder="请输入单词拼写" maxlength="128" value="$!{word.spelling}"/>
+			<input type="text" class="form-control"  name="spelling" id="spelling" placeholder="请输入单词拼写" maxlength="128" value="$!{word.spelling}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="meaning">释义</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="meaning">释义</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="meaning" id="meaning" placeholder="请输入释义" maxlength="255" value="$!{word.meaning}"/>
+			<input type="text" class="form-control"  name="meaning" id="meaning" placeholder="请输入释义" maxlength="255" value="$!{word.meaning}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="soundMarkUs">美音音标</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="soundMarkUs">美音音标</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="soundMarkUs" id="soundMarkUs" placeholder="请输入美音音标" maxlength="128" value="$!{word.soundMarkUs}"/>
+			<input type="text" class="form-control"  name="soundMarkUs" id="soundMarkUs" placeholder="请输入美音音标" maxlength="128" value="$!{word.soundMarkUs}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="soundMarkUk">国际音标</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="soundMarkUk">国际音标</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="soundMarkUk" id="soundMarkUk" placeholder="请输入国际音标" maxlength="128" value="$!{word.soundMarkUk}"/>
+			<input type="text" class="form-control"  name="soundMarkUk" id="soundMarkUk" placeholder="请输入国际音标" maxlength="128" value="$!{word.soundMarkUk}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="wordType">词性</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="wordType">词性</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="wordType" id="wordType" placeholder="请输入词性" maxlength="50" value="$!{word.wordType}"/>
+			<input type="text" class="form-control"  name="wordType" id="wordType" placeholder="请输入词性" maxlength="50" value="$!{word.wordType}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="mediaUri">读音</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="mediaUri">读音</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="mediaUri" id="mediaUri" placeholder="请输入读音" maxlength="255" value="$!{word.mediaUri}"/>
+			<input type="text" class="form-control"  name="mediaUri" id="mediaUri" placeholder="请输入读音" maxlength="255" value="$!{word.mediaUri}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="state">状态</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-7 controls">
 			
         
 		<select class="forms_select input-medium" name="state" id="state">
@@ -78,13 +81,16 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-sm btn-primary" id="btn_update_Word">保存修改</a>
-	<a href="javascript:;" class="btn btn-sm"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_update_Word">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
 </div>
 
 
-
 <script language="javascript">
+
+
+
+
 void function(j) {
 	var set = {
 		 		id:  {must: true, maxlength:10, ftip:'ID,最多10个字符' ,handler:'int' },
@@ -105,11 +111,19 @@ void function(j) {
 			'/word/doUpdate.action', 
 			function() {
 				gDialog.fClose();
-				queryWordList(1);
+				backToManage();
 			}
 		);
 	});
-	
+
+
 	//form.friend.init(set);
 }(jQuery);
+
+
+	function backToManage(){
+    		var url='/word/manage.action';
+    		gUtils.fMakeFullLink(url);
+            window.location=url;
+    };
 </script>

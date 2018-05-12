@@ -1,51 +1,54 @@
 #set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
+
     
-<div class="modal-body auto-height-body"  id="update_selfwordsstudy">
-	<form class="form-horizontal"  id="form_update_SelfWordsStudy">
+<div class="modal-body " id="update_selfwordsstudy">
+	<form class="form-horizontal"  id="form_update_SelfWordsStudy" role="form">
 	
-		 <div class="control-group">
-			<label class="control-label" for="id">ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">ID</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{selfWordsStudy.id}"readonly/>
+			<input type="text" class="form-control"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{selfWordsStudy.id}"readonly/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="studentId">学生ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studentId">学生ID</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="studentId" id="studentId" placeholder="请输入学生ID" maxlength="10" value="$!{selfWordsStudy.studentId}"/>
+			<input type="text" class="form-control"  name="studentId" id="studentId" placeholder="请输入学生ID" maxlength="10" value="$!{selfWordsStudy.studentId}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="studentCode">学生CODE</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studentCode">学生CODE</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="studentCode" id="studentCode" placeholder="请输入学生CODE" maxlength="50" value="$!{selfWordsStudy.studentCode}"/>
+			<input type="text" class="form-control"  name="studentCode" id="studentCode" placeholder="请输入学生CODE" maxlength="50" value="$!{selfWordsStudy.studentCode}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="lessonId">课程ID</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="lessonId">课程ID</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10" value="$!{selfWordsStudy.lessonId}"/>
+			<input type="text" class="form-control"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10" value="$!{selfWordsStudy.lessonId}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="unitNbr">课程号</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="unitNbr">课程号</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="unitNbr" id="unitNbr" placeholder="请输入课程号" maxlength="3" value="$!{selfWordsStudy.unitNbr}"/>
+			<input type="text" class="form-control"  name="unitNbr" id="unitNbr" placeholder="请输入课程号" maxlength="3" value="$!{selfWordsStudy.unitNbr}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="type">类型</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="type">类型</label>
+			<div class="col-sm-7 controls">
 			
         
 		<select class="forms_select input-medium" name="type" id="type">
@@ -58,9 +61,9 @@
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="currentPhase">当前学习阶段</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="currentPhase">当前学习阶段</label>
+			<div class="col-sm-7 controls">
 			
         
 		<select class="forms_select input-medium" name="currentPhase" id="currentPhase">
@@ -74,33 +77,33 @@
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="totalReadingTime">总读时间</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="totalReadingTime">总读时间</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="totalReadingTime" id="totalReadingTime" placeholder="请输入总读时间" maxlength="19" value="$!{selfWordsStudy.totalReadingTime}"/>
+			<input type="text" class="form-control"  name="totalReadingTime" id="totalReadingTime" placeholder="请输入总读时间" maxlength="19" value="$!{selfWordsStudy.totalReadingTime}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="totalWritingTime">总写时间</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="totalWritingTime">总写时间</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="totalWritingTime" id="totalWritingTime" placeholder="请输入总写时间" maxlength="19" value="$!{selfWordsStudy.totalWritingTime}"/>
+			<input type="text" class="form-control"  name="totalWritingTime" id="totalWritingTime" placeholder="请输入总写时间" maxlength="19" value="$!{selfWordsStudy.totalWritingTime}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="totalNumber">总学习单词数</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="totalNumber">总学习单词数</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="totalNumber" id="totalNumber" placeholder="请输入总学习单词数" maxlength="10" value="$!{selfWordsStudy.totalNumber}"/>
+			<input type="text" class="form-control"  name="totalNumber" id="totalNumber" placeholder="请输入总学习单词数" maxlength="10" value="$!{selfWordsStudy.totalNumber}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="isFinished">是否学习完成</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isFinished">是否学习完成</label>
+			<div class="col-sm-7 controls">
 			
         
 		<select class="forms_select input-medium" name="isFinished" id="isFinished">
@@ -113,9 +116,9 @@
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="isTested">是否测试完成</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isTested">是否测试完成</label>
+			<div class="col-sm-7 controls">
 			
         
 		<select class="forms_select input-medium" name="isTested" id="isTested">
@@ -128,17 +131,17 @@
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="studyPos">单词学习位置</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studyPos">单词学习位置</label>
+			<div class="col-sm-7 controls">
 			
-			<input type="text"  name="studyPos" id="studyPos" placeholder="请输入单词学习位置" maxlength="3" value="$!{selfWordsStudy.studyPos}"/>
+			<input type="text" class="form-control"  name="studyPos" id="studyPos" placeholder="请输入单词学习位置" maxlength="3" value="$!{selfWordsStudy.studyPos}"/>
 			</div>
 		</div>
 		
-		 <div class="control-group">
-			<label class="control-label" for="state">状态</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-7 controls">
 			
         
 		<select class="forms_select input-medium" name="state" id="state">
@@ -155,13 +158,16 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<a href="javascript:;" class="btn btn-sm btn-primary" id="btn_update_SelfWordsStudy">保存修改</a>
-	<a href="javascript:;" class="btn btn-sm"  data-dismiss="modal" aria-hidden="true">关闭</a>
+	<a href="javascript:;" class="btn btn-primary" id="btn_update_SelfWordsStudy">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
 </div>
 
 
-
 <script language="javascript">
+
+
+
+
 void function(j) {
 	var set = {
 		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
@@ -188,11 +194,19 @@ void function(j) {
 			'/selfWordsStudy/doUpdate.action', 
 			function() {
 				gDialog.fClose();
-				querySelfWordsStudyList(1);
+				backToManage();
 			}
 		);
 	});
-	
+
+
 	//form.friend.init(set);
 }(jQuery);
+
+
+	function backToManage(){
+    		var url='/selfWordsStudy/manage.action';
+    		gUtils.fMakeFullLink(url);
+            window.location=url;
+    };
 </script>

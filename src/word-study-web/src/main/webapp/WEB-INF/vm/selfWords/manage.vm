@@ -1,81 +1,118 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
-
-<div class="manage-content">
-<form class="form-inline">
-
-
-		<label>ID</label>
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
 			
-			<input type="text"  name="id" id="id_search" class="input" placeholder="请输入ID">
-			
+				jQuery("#search_selfwords").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
 
-		
-		<label>学生ID</label>
-			
-			<input type="text"  name="studyId" id="studyId_search" class="input" placeholder="请输入学生ID">
-			
-
-		
-		<label>类型</label>
-			
+	</script>
 	
-		<select class="forms_select" name="type" id="type_search">
+    
+
+
+
+<div class="manage-content" id="search_selfwords">
+
+<form class="form-inline" id="search_form_SelfWords">
+
+
+		<div class="form-group">
+			<label for="id_search">ID</label>
+				
+				<input type="text"  name="id" id="id_search" class="form-control" placeholder="请输入ID">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="studyId_search">学生ID</label>
+				
+				<input type="text"  name="studyId" id="studyId_search" class="form-control" placeholder="请输入学生ID">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="type_search">类型</label>
+				
+        
+		<select class="forms_select input-medium" name="type" id="type_search">
 			<option value="">全部</option>
 			
 				<option value="1">复习词库</option>
 				<option value="2">错词库</option>
 		</select>
 	
-	
+    
 
-
+		</div>&nbsp;&nbsp;
 		
-		<label>学生ID</label>
-			
-			<input type="text"  name="studentId" id="studentId_search" class="input" placeholder="请输入学生ID">
-			
 
+		<div class="form-group">
+			<label for="studentId_search">学生ID</label>
+				
+				<input type="text"  name="studentId" id="studentId_search" class="form-control" placeholder="请输入学生ID">
+				
+		</div>&nbsp;&nbsp;
 		
-		<label>课程ID</label>
-			
-			<input type="text"  name="lessonId" id="lessonId_search" class="input" placeholder="请输入课程ID">
-			
 
+		<div class="form-group">
+			<label for="lessonId_search">课程ID</label>
+				
+				<input type="text"  name="lessonId" id="lessonId_search" class="form-control" placeholder="请输入课程ID">
+				
+		</div>&nbsp;&nbsp;
 		
-		<label>单词ID</label>
-			
-			<input type="text"  name="wordId" id="wordId_search" class="input" placeholder="请输入单词ID">
-			
 
+		<div class="form-group">
+			<label for="wordId_search">单词ID</label>
+				
+				<input type="text"  name="wordId" id="wordId_search" class="form-control" placeholder="请输入单词ID">
+				
+		</div>&nbsp;&nbsp;
 		
-		<label>状态</label>
-			
-	
-		<select class="forms_select" name="state" id="state_search">
+
+		<div class="form-group">
+			<label for="state_search">状态</label>
+				
+        
+		<select class="forms_select input-medium" name="state" id="state_search">
 			<option value="">全部</option>
 			
 				<option value="1">有效</option>
 				<option value="2">无效</option>
 		</select>
 	
-	
+    
 
-
+		</div>&nbsp;&nbsp;
 		
-		<input type="button" onclick="queryList();" class="btn" value="搜索"  />
-
+		<input type="button" onclick="querySelfWordsList();" class="btn btn-primary" value="搜索"  />
 	</form>
 		
 <br/>
+
+
+
 		 <div class="page_operate">
-			 <button class="btn  btn-primary" type="button" id="add-selfWords">创建 SelfWords</button>
+			 <button class="btn  btn-primary" type="button" id="add-selfWords">
+				<span class="glyphicon glyphicon-plus"></span> 创建 学生自身单词</button>
 		</div>
 
 
-	<div id="dl"></div>
+	<div id="dl_SelfWords"></div>
 </div>
+
+
 <script language="javascript">
-	function queryList(pageNo) {	
+
+	function querySelfWordsList(pageNo) {
 		if (!pageNo) {
 			pageNo = 1;
 		}
@@ -90,57 +127,20 @@
             param['pageSize']=pageSize;
         }
 
-		getOtherParams(param);
-		gUtils.fGetHtml(url, 'dl', param,'数据加载中...');
+		gUtils.fMergeParam(param,"search_form_SelfWords");
+		gUtils.fGetHtml(url, 'dl_SelfWords', param,'数据加载中...');
 	}
-	queryList();
+	querySelfWordsList();
 	
-
-	function getOtherParams(param){
-   
-	  	var id_search=jQuery("#id_search").val();
-		if(id_search!=null&&id_search!=''){
-				param.id=id_search;
-			}
-			 
-	  	var studyId_search=jQuery("#studyId_search").val();
-		if(studyId_search!=null&&studyId_search!=''){
-				param.studyId=studyId_search;
-			}
-			 
-	  	var type_search=jQuery("#type_search").val();
-		if(type_search!=null&&type_search!=''){
-				param.type=type_search;
-			}
-			 
-	  	var studentId_search=jQuery("#studentId_search").val();
-		if(studentId_search!=null&&studentId_search!=''){
-				param.studentId=studentId_search;
-			}
-			 
-	  	var lessonId_search=jQuery("#lessonId_search").val();
-		if(lessonId_search!=null&&lessonId_search!=''){
-				param.lessonId=lessonId_search;
-			}
-			 
-	  	var wordId_search=jQuery("#wordId_search").val();
-		if(wordId_search!=null&&wordId_search!=''){
-				param.wordId=wordId_search;
-			}
-			 
-	  	var state_search=jQuery("#state_search").val();
-		if(state_search!=null&&state_search!=''){
-				param.state=state_search;
-			}
-					
-	}
 
 
 
 
 void function(j) {
 	jQuery("#add-selfWords").click(function(){
-		gDialog.fCreate({title: '创建 SelfWords', url: '/selfWords/add.action',width:700}).show();
+		var url='/selfWords/add.action';
+		url=gUtils.fMakeFullLink(url);
+		window.location=url;
 	});
 	
 }(jQuery);
