@@ -98,7 +98,15 @@
 								
 			</div>
 		</div>
-		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="meaning">释义</label>
+			<div class="col-sm-7 controls">
+
+				<input type="text"  class="form-control" name="meaning" id="meaning" placeholder="请输入释义" maxlength="255"/>
+
+			</div>
+		</div>
+
 		
 		<div class="form-group">
 			<label class="col-sm-2 control-label" for="state">状态</label>

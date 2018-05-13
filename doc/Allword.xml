@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='Allword' cnname='原始单词' dbTableName='AllWord'>
+    <column dataName='id' columnName='Id' cnname='Id' columnType='INT' canBeNull='false' readonly='false' isPK='true' length='10' jspTag='TEXT' dictName='' comment='Id' />
+    <column dataName='voccode' columnName='vocCode' cnname='vocCode' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='80' jspTag='TEXT' dictName='' comment='vocCode' />
+    <column dataName='spelling' columnName='spelling' cnname='spelling' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='120' jspTag='TEXT' dictName='' comment='spelling' />
+    <column dataName='meaning' columnName='meaning' cnname='meaning' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='120' jspTag='TEXT' dictName='' comment='meaning' />
+    <column dataName='soundmarkus' columnName='soundMarkUs' cnname='soundMarkUs' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='120' jspTag='TEXT' dictName='' comment='soundMarkUs' />
+    <column dataName='soundmarkuk' columnName='soundMarkUk' cnname='soundMarkUk' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='120' jspTag='TEXT' dictName='' comment='soundMarkUk' />
+    <column dataName='unitid' columnName='UnitId' cnname='UnitId' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='120' jspTag='TEXT' dictName='' comment='UnitId' />
+    <column dataName='unitnbr' columnName='unitNbr' cnname='unitNbr' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='120' jspTag='TEXT' dictName='' comment='unitNbr' />
+    <column dataName='lessonnbr' columnName='lessonNbr' cnname='lessonNbr' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='120' jspTag='TEXT' dictName='' comment='lessonNbr' />
+    <column dataName='fstclassid' columnName='fstClassId' cnname='fstClassId' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='120' jspTag='TEXT' dictName='' comment='fstClassId' />
+    <column dataName='vocindex' columnName='vocIndex' cnname='vocIndex' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='120' jspTag='TEXT' dictName='' comment='vocIndex' />
+    <column dataName='iscollected' columnName='isCollected' cnname='isCollected' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='120' jspTag='TEXT' dictName='' comment='isCollected' />
+  </tableDefine>
+  <searchKeys>Id,UnitId,fstClassId</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>Id</orderColumn>
+  </orderColumns>
+  <queryList>Id,vocCode,spelling,meaning,soundMarkUs,soundMarkUk,UnitId,unitNbr,lessonNbr,fstClassId,vocIndex,isCollected</queryList>
+  <addList>Id,vocCode,spelling,meaning,soundMarkUs,soundMarkUk,UnitId,unitNbr,lessonNbr,fstClassId,vocIndex,isCollected</addList>
+  <updateList>Id,vocCode,spelling,meaning,soundMarkUs,soundMarkUk,UnitId,unitNbr,lessonNbr,fstClassId,vocIndex,isCollected</updateList>
+  <viewList>Id,vocCode,spelling,meaning,soundMarkUs,soundMarkUk,UnitId,unitNbr,lessonNbr,fstClassId,vocIndex,isCollected</viewList>
+  <allColumn>Id,vocCode,spelling,meaning,soundMarkUs,soundMarkUk,UnitId,unitNbr,lessonNbr,fstClassId,vocIndex,isCollected</allColumn>
+  <createTime></createTime>
+  <updateTime></updateTime>
+  <dicts />
+</tableModel>

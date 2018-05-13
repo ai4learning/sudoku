@@ -12,11 +12,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 /**
  * @author hellosscat
  * @since 2018-5-8
- * 单元单词 Domain 类
+ * 单元内单词 Domain 类
  */
 public class UnitWords  implements Serializable {
 	
-  private static final long serialVersionUID = 4547125010314861703L;
+  private static final long serialVersionUID = -3095041461388608385L;
 	
 	/**  ID  */
 	private Long id; 
@@ -35,9 +35,11 @@ public class UnitWords  implements Serializable {
 	/**  单词索引号  */
 	private Integer vocIndex; 
 	/**  单词ID  */
-	private Long wordId; 
+	private Integer wordId; 
 	/**  拼写  */
 	private String spelling; 
+	/**  释义  */
+	private String meaning; 
 	/**  状态  */
 	private Integer state; 
 	/**  创建时间  */
@@ -127,11 +129,11 @@ public class UnitWords  implements Serializable {
 	
 	  	
 
-  	public void setWordId(Long wordId) {
+  	public void setWordId(Integer wordId) {
   	  this.wordId=wordId;
   	}
   
-  	public Long getWordId() {
+  	public Integer getWordId() {
   	  return this.wordId;
   	}
 	
@@ -143,6 +145,16 @@ public class UnitWords  implements Serializable {
   
   	public String getSpelling() {
   	  return this.spelling;
+  	}
+	
+	  	
+
+  	public void setMeaning(String meaning) {
+  	  this.meaning=meaning;
+  	}
+  
+  	public String getMeaning() {
+  	  return this.meaning;
   	}
 	
 	  	

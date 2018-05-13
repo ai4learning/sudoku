@@ -70,4 +70,9 @@
 		<property name="mapperInterface" value="com.goldfish.dao.WordStudyStatisticDao"/>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+
+	<bean id="allwordDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.goldfish.dao.AllwordDao"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
 </beans>

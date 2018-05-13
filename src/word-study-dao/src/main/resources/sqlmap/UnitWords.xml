@@ -14,6 +14,7 @@
 		<result property="vocIndex" column="voc_index"/>
 		<result property="wordId" column="word_id"/>
 		<result property="spelling" column="spelling"/>
+		<result property="meaning" column="meaning"/>
 		<result property="state" column="state"/>
 		<result property="created" column="created"/>
 		<result property="modified" column="modified"/>
@@ -27,6 +28,8 @@
     		<where>
     		<if test="id != null"> AND id = #{id}</if>
     		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+    		<if test="unitNbr != null"> AND unit_nbr = #{unitNbr}</if>
+    		<if test="vocCode != null"> AND voc_code = #{vocCode}</if>
     		<if test="fstClassId != null"> AND fst_class_id = #{fstClassId}</if>
     		<if test="wordId != null"> AND word_id = #{wordId}</if>
     		<if test="state != null"> AND state = #{state}</if>
@@ -42,6 +45,8 @@
 		<where>
 		<if test="id != null"> AND id = #{id}</if>
 		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+		<if test="unitNbr != null"> AND unit_nbr = #{unitNbr}</if>
+		<if test="vocCode != null"> AND voc_code = #{vocCode}</if>
 		<if test="fstClassId != null"> AND fst_class_id = #{fstClassId}</if>
 		<if test="wordId != null"> AND word_id = #{wordId}</if>
 		<if test="state != null"> AND state = #{state}</if>
@@ -56,12 +61,12 @@
 	
 
 	<sql id="All-FIELDS">
-		id,unit_code,lesson_id,unit_nbr,fst_class_id,unit,voc_code,voc_index,word_id,spelling,state,created,modified
+		id,unit_code,lesson_id,unit_nbr,fst_class_id,unit,voc_code,voc_index,word_id,spelling,meaning,state,created,modified
 	</sql>
 
 	<insert id="addUnitWords" parameterType="com.goldfish.domain.UnitWords">
-		insert into unit_words (unit_code,lesson_id,unit_nbr,fst_class_id,unit,voc_code,voc_index,word_id,spelling,state,created,modified)
-			values(#{unitCode},#{lessonId},#{unitNbr},#{fstClassId},#{unit},#{vocCode},#{vocIndex},#{wordId},#{spelling},#{state},#{created},#{modified})
+		insert into unit_words (unit_code,lesson_id,unit_nbr,fst_class_id,unit,voc_code,voc_index,word_id,spelling,meaning,state,created,modified)
+			values(#{unitCode},#{lessonId},#{unitNbr},#{fstClassId},#{unit},#{vocCode},#{vocIndex},#{wordId},#{spelling},#{meaning},#{state},#{created},#{modified})
     
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
 		   select last_insert_id() as ID from dual
@@ -82,6 +87,7 @@
 			<if test="vocIndex !=null"> voc_index = #{vocIndex},</if>
 			<if test="wordId !=null"> word_id = #{wordId},</if>
 			<if test="spelling !=null"> spelling = #{spelling},</if>
+			<if test="meaning !=null"> meaning = #{meaning},</if>
 			<if test="state !=null"> state = #{state},</if>
 			<if test="created !=null"> created = #{created},</if>
 			<if test="modified !=null"> modified = #{modified},</if>
@@ -118,7 +124,7 @@
 	
 	<select id="getUnitWordsByPage" resultMap="UnitWords-Map" parameterType="java.util.HashMap">
 		<![CDATA[
-			SELECT  id,unit_code,lesson_id,unit_nbr,fst_class_id,unit,voc_code,voc_index,word_id,spelling,state,modified FROM unit_words 
+			SELECT  id,unit_code,lesson_id,unit_nbr,fst_class_id,unit,voc_code,voc_index,word_id,spelling,meaning,state,modified FROM unit_words
 		]]>
             <include refid="MAP-COMMON-SQL" />
             <include refid="ORDER-SQL" />

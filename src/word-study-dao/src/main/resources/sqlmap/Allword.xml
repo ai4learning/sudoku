@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.goldfish.dao.AllwordDao">
+
+  <resultMap id="Allword-Map" type="com.goldfish.domain.Allword">
+ 		<id property="id" column="Id"/>
+		<result property="voccode" column="vocCode"/>
+		<result property="spelling" column="spelling"/>
+		<result property="meaning" column="meaning"/>
+		<result property="soundmarkus" column="soundMarkUs"/>
+		<result property="soundmarkuk" column="soundMarkUk"/>
+		<result property="unitid" column="UnitId"/>
+		<result property="unitnbr" column="unitNbr"/>
+		<result property="lessonnbr" column="lessonNbr"/>
+		<result property="fstclassid" column="fstClassId"/>
+		<result property="vocindex" column="vocIndex"/>
+		<result property="iscollected" column="isCollected"/>
+
+	</resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+	<sql id="BEAN-COMMON-SQL">
+    	 
+    		<where>
+    		<if test="id != null"> AND Id = #{id}</if>
+    		<if test="unitid != null"> AND UnitId = #{unitid}</if>
+    		<if test="fstclassid != null"> AND fstClassId = #{fstclassid}</if>
+    		
+    		</where>
+    	 
+    	</sql>
+
+
+	<!-- 可以包含bean里面没有的字段-->
+	<sql id="MAP-COMMON-SQL">
+	   
+		<where>
+		<if test="id != null"> AND Id = #{id}</if>
+		<if test="unitid != null"> AND UnitId = #{unitid}</if>
+		<if test="fstclassid != null"> AND fstClassId = #{fstclassid}</if>
+		
+		</where>
+	 	
+	</sql>
+	
+	<sql id="ORDER-SQL">
+	 order by Id desc
+	</sql>
+	
+
+	<sql id="All-FIELDS">
+		Id,vocCode,spelling,meaning,soundMarkUs,soundMarkUk,UnitId,unitNbr,lessonNbr,fstClassId,vocIndex,isCollected
+	</sql>
+
+	<insert id="addAllword" parameterType="com.goldfish.domain.Allword">
+		insert into AllWord (vocCode,spelling,meaning,soundMarkUs,soundMarkUk,UnitId,unitNbr,lessonNbr,fstClassId,vocIndex,isCollected)
+			values(#{voccode},#{spelling},#{meaning},#{soundmarkus},#{soundmarkuk},#{unitid},#{unitnbr},#{lessonnbr},#{fstclassid},#{vocindex},#{iscollected})
+    
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+		   select last_insert_id() as ID from dual
+		</selectKey> 
+   
+	 </insert>
+
+    
+    <update id="updateAllword" parameterType="com.goldfish.domain.Allword" >
+    	update  AllWord 
+	<set>
+			<if test="voccode !=null"> vocCode = #{voccode},</if>
+			<if test="spelling !=null"> spelling = #{spelling},</if>
+			<if test="meaning !=null"> meaning = #{meaning},</if>
+			<if test="soundmarkus !=null"> soundMarkUs = #{soundmarkus},</if>
+			<if test="soundmarkuk !=null"> soundMarkUk = #{soundmarkuk},</if>
+			<if test="unitid !=null"> UnitId = #{unitid},</if>
+			<if test="unitnbr !=null"> unitNbr = #{unitnbr},</if>
+			<if test="lessonnbr !=null"> lessonNbr = #{lessonnbr},</if>
+			<if test="fstclassid !=null"> fstClassId = #{fstclassid},</if>
+			<if test="vocindex !=null"> vocIndex = #{vocindex},</if>
+			<if test="iscollected !=null"> isCollected = #{iscollected},</if>
+
+	</set>
+	 where Id = #{id}
+  	</update>
+  
+	
+
+    
+
+	<delete id="deleteAllword" parameterType="com.goldfish.domain.Allword">
+		DELETE FROM AllWord WHERE Id = #{id}
+	</delete>
+	<select id="getAllwordById" resultMap="Allword-Map" parameterType="java.lang.Integer">
+		SELECT  <include refid="All-FIELDS"/> FROM AllWord	WHERE Id = #{id}
+	</select>  
+    
+
+
+
+	<select id="getUnique" resultMap="Allword-Map" parameterType="com.goldfish.domain.Allword">
+		SELECT   <include refid="All-FIELDS"/> FROM AllWord
+            <include refid="BEAN-COMMON-SQL" /> limit 1
+	</select>
+
+
+	<select id="getListByExample" resultMap="Allword-Map" parameterType="com.goldfish.domain.Allword">
+		SELECT   <include refid="All-FIELDS"/> FROM AllWord
+            <include refid="BEAN-COMMON-SQL" />
+	</select>
+
+	
+	<select id="getAllwordByPage" resultMap="Allword-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  Id,vocCode,spelling,meaning,soundMarkUs,soundMarkUk,UnitId,unitNbr,lessonNbr,fstClassId,vocIndex,isCollected FROM AllWord 
+		]]>
+            <include refid="MAP-COMMON-SQL" />
+            <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM AllWord
+		]]>
+		
+              <include refid="MAP-COMMON-SQL" />
+	</select>
+	
+
+
+</mapper>

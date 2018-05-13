@@ -108,11 +108,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             query.setUserId(userName);
             query.setPasswd(password);
             CommonResult<User> result = userService.getUnique(query);
-            if (!result.isSuccess()) {
+            User user = result.getDefaultModel();
+            if (!result.isSuccess() || user == null) {
                 return false;
             }
             // 用户存在，则添加登录记录，创建LoginContext
-            createLoginContext(response, result.getDefaultModel());
+            createLoginContext(response, user);
             // 写入Cookie
             writeCookie(response);
             return true;

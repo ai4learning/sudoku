@@ -32,6 +32,7 @@
     		<where>
     		<if test="id != null"> AND id = #{id}</if>
     		<if test="userId != null"> AND user_id = #{userId}</if>
+    		<if test="passwd != null"> AND passwd = #{passwd}</if>
     		<if test="nikeName != null"> AND nike_name = #{nikeName}</if>
     		<if test="roleType != null"> AND role_type = #{roleType}</if>
     		<if test="parentId != null"> AND parent_id = #{parentId}</if>

@@ -31,20 +31,27 @@
 		
 
 		<div class="form-group">
-			<label for="lessonId_search">课程ID</label>
+			<label for="lessonId_search">课程号</label>
 				
-				<input type="text"  name="lessonId" id="lessonId_search" class="form-control" placeholder="请输入课程ID">
+				<input type="text"  name="lessonId" id="lessonId_search" class="form-control" placeholder="请输入课程号">
 				
 		</div>&nbsp;&nbsp;
 		
 
 		<div class="form-group">
-			<label for="fstClassId_search">单词归类</label>
+			<label for="unitNbr_search">单元号</label>
 				
-				<input type="text"  name="fstClassId" id="fstClassId_search" class="form-control" placeholder="请输入单词归类">
+				<input type="text"  name="unitNbr" id="unitNbr_search" class="form-control" placeholder="请输入单元号">
 				
 		</div>&nbsp;&nbsp;
-		
+
+		<div class="form-group">
+			<label for="fstClassId_search">单词归类</label>
+
+				<input type="text"  name="fstClassId" id="fstClassId_search" class="form-control" placeholder="请输入单词归类">
+
+		</div>&nbsp;&nbsp;
+
 
 		<div class="form-group">
 			<label for="wordId_search">单词ID</label>

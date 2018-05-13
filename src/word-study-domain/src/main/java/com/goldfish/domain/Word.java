@@ -138,7 +138,15 @@ public class Word  implements Serializable {
   	public java.util.Date getModified() {
   	  return this.modified;
   	}
-	
-	  	
 
+	@Override
+	public int hashCode() {
+		return this.spelling.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Word word = (Word) obj;
+		return this.spelling.equals(word.spelling) && this.meaning.equals(word.meaning);
+	}
 }
