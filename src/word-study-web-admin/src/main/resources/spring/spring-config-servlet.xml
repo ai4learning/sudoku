@@ -169,7 +169,7 @@
                     <bean class="org.apache.commons.lang.time.DateUtils" />
                 </entry>
                 <entry key="dateFormatUtils">
-                    <bean class="com.shareyi.jshow.utils.DateUtils"/>
+                    <bean class="com.goldfish.utils.DateUtils"/>
                 </entry>
             </map>
         </constructor-arg>

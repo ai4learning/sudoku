@@ -5,10 +5,11 @@
 			<thead>
 				<tr>
  			<th><span>ID</span></th>
-			<th><span>单元CODE</span></th>
 			<th><span>课程ID</span></th>
+			<th><span>课程名</span></th>
 			<th><span>单元号</span></th>
 			<th><span>单元名称</span></th>
+			<th><span>单元CODE</span></th>
 			<th><span>单元单词数</span></th>
 			<th><span>状态</span></th>
 			<th><span>修改时间</span></th>
@@ -22,11 +23,12 @@
 	#if($list && $list.size()!=0)
 		    #foreach($item in $list)
 		   <tr>
-				 			<td>$!item.id</td>
-			<td>$!item.moduleCode</td>
-			<td>$!item.lessonId</td>
-			<td>$!item.unitNbr</td>
-			<td>$!item.unit</td>
+			<td>$!item.id</td>
+		   <td>$!item.lessonId</td>
+		   <td>$!item.lessonName</td>
+		   <td>$!item.unitNbr</td>
+		   <td>$!item.unit</td>
+		   <td>$!item.moduleCode</td>
 			<td>$!item.totalWords</td>
 			<td>
         

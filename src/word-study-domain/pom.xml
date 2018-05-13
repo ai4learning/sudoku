@@ -17,12 +17,10 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.shareyi</groupId>
-            <artifactId>jshow-common</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.goldfish</groupId>
+            <artifactId>word-study-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
-
 
         <dependency>
             <groupId>junit</groupId>

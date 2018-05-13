@@ -33,11 +33,7 @@
 			<td>$!item.fstClassId</td>
 			<td>$!item.unit</td>
 			<td>$!item.vocCode</td>
-			<td>
-        
-			
-	
-    </td>
+			<td>$!item.vocIndex</td>
 			<td>$!item.wordId</td>
 			<td>$!item.spelling</td>
 			<td>

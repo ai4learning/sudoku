@@ -66,22 +66,22 @@
 
             <ul class="submenu">
                 <li>
-                    <a href="/user/manage?from=$!{pageFrom}&menuId=j_nav_1_2"
-                       id="j_nav_1_2" parentid="j_nav_1"  menuname="用户管理" class="j_sub_nav">
+                    <a href="/user/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
+                       id="j_nav_1_1" parentid="j_nav_1"  menuname="用户管理" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         用户管理
                     </a>
                 </li>
                 <li>
-                    <a href="/loginRecord/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
-                       id="j_nav_1_1" parentid="j_nav_1"  menuname="登录管理" class="j_sub_nav">
+                    <a href="/loginRecord/manage?from=$!{pageFrom}&menuId=j_nav_1_2"
+                       id="j_nav_1_2" parentid="j_nav_1"  menuname="登录管理" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         登录管理
                     </a>
                 </li>
                 <li>
-                    <a href="/activateCode/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
-                       id="j_nav_1_1" parentid="j_nav_1"  menuname="激活码管理" class="j_sub_nav">
+                    <a href="/activateCode/manage?from=$!{pageFrom}&menuId=j_nav_1_3"
+                       id="j_nav_1_3" parentid="j_nav_1"  menuname="激活码管理" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         激活码管理
                     </a>
@@ -92,7 +92,7 @@
         </li>
 
         <li>
-            <a href="#" class="dropdown-toggle" id="j_nav_1" menuname="资源库">
+            <a href="#" class="dropdown-toggle" id="j_nav_2" menuname="资源库">
                 <i class="icon-file-alt"></i>
                 <span class="menu-text">
                     资源管理
@@ -103,29 +103,29 @@
 
             <ul class="submenu">
                 <li>
-                    <a href="/course/manage?from=$!{pageFrom}&menuId=j_nav_1_2"
-                       id="j_nav_1_2" parentid="j_nav_1"  menuname="课程库" class="j_sub_nav">
+                    <a href="/course/manage?from=$!{pageFrom}&menuId=j_nav_2_1"
+                       id="j_nav_2_1" parentid="j_nav_2"  menuname="课程库" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         课程库
                     </a>
                 </li>
                 <li>
-                    <a href="/unit/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
-                       id="j_nav_1_1" parentid="j_nav_1"  menuname="课程单元库" class="j_sub_nav">
+                    <a href="/unit/manage?from=$!{pageFrom}&menuId=j_nav_2_2"
+                       id="j_nav_2_2" parentid="j_nav_2"  menuname="课程单元库" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         课程单元库
                     </a>
                 </li>
                 <li>
-                    <a href="/unitWords/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
-                       id="j_nav_1_1" parentid="j_nav_1"  menuname="单元内单词" class="j_sub_nav">
+                    <a href="/unitWords/manage?from=$!{pageFrom}&menuId=j_nav_2_3"
+                       id="j_nav_2_3" parentid="j_nav_2"  menuname="单元内单词" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         单元内单词
                     </a>
                 </li>
                 <li>
-                    <a href="/word/manage/?from=$!{pageFrom}&menuId=j_nav_1_1"
-                       id="j_nav_1_1" parentid="j_nav_1"  menuname="单词库" class="j_sub_nav">
+                    <a href="/word/manage?from=$!{pageFrom}&menuId=j_nav_2_4"
+                       id="j_nav_2_4" parentid="j_nav_2"  menuname="单词库" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         单词库
                     </a>
@@ -134,7 +134,7 @@
         </li>
 
         <li>
-            <a href="#" class="dropdown-toggle" id="j_nav_1" menuname="学生学习管理">
+            <a href="#" class="dropdown-toggle" id="j_nav_3" menuname="学生学习管理">
                 <i class="icon-file-alt"></i>
                 <span class="menu-text">
                     学生学习管理
@@ -145,44 +145,44 @@
 
             <ul class="submenu">
                 <li>
-                    <a href="/courseStudy/manage?from=$!{pageFrom}&menuId=j_nav_1_2"
-                       id="j_nav_1_2" parentid="j_nav_1"  menuname="课程学习" class="j_sub_nav">
+                    <a href="/courseStudy/manage?from=$!{pageFrom}&menuId=j_nav_3_1"
+                       id="j_nav_3_1" parentid="j_nav_3"  menuname="课程学习" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         课程学习
                     </a>
                 </li>
                 <li>
-                    <a href="/unitWordsStudy/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
-                       id="j_nav_1_1" parentid="j_nav_1"  menuname="单元单词学习" class="j_sub_nav">
+                    <a href="/unitWordsStudy/manage?from=$!{pageFrom}&menuId=j_nav_3_2"
+                       id="j_nav_3_2" parentid="j_nav_3"  menuname="单元单词学习" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         单元单词学习
                     </a>
                 </li>
                 <li>
-                    <a href="/wordStudy/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
-                       id="j_nav_1_1" parentid="j_nav_1"  menuname="整体单词学习情况" class="j_sub_nav">
+                    <a href="/wordStudy/manage?from=$!{pageFrom}&menuId=j_nav_3_3"
+                       id="j_nav_3_3" parentid="j_nav_3"  menuname="整体单词学习情况" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         整体单词学习情况
                     </a>
                 </li>
                 <li>
-                    <a href="/selfWords/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
-                       id="j_nav_1_1" parentid="j_nav_1"  menuname="个人单词本" class="j_sub_nav">
+                    <a href="/selfWords/manage?from=$!{pageFrom}&menuId=j_nav_3_4"
+                       id="j_nav_3_4" parentid="j_nav_3"  menuname="个人单词本" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         学生个人单词本
                     </a>
                 </li>
                 <li>
-                    <a href="/selfWordsStudy/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
-                       id="j_nav_1_1" parentid="j_nav_1"  menuname="个人单词学习情况" class="j_sub_nav">
+                    <a href="/selfWordsStudy/manage?from=$!{pageFrom}&menuId=j_nav_3_5"
+                       id="j_nav_3_5" parentid="j_nav_3"  menuname="个人单词学习情况" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         个人单词学习情况
                     </a>
                 </li>
 
                 <li>
-                    <a href="/wordStudyStatistic/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
-                       id="j_nav_1_1" parentid="j_nav_1"  menuname="每日单词学习统计" class="j_sub_nav">
+                    <a href="/wordStudyStatistic/manage?from=$!{pageFrom}&menuId=j_nav_3_6"
+                       id="j_nav_3_6" parentid="j_nav_3"  menuname="每日单词学习统计" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         每日单词学习统计
                     </a>
@@ -193,7 +193,7 @@
 
 
         <li>
-            <a href="#" class="dropdown-toggle" id="j_nav_1" menuname="考试管理">
+            <a href="#" class="dropdown-toggle" id="j_nav_4" menuname="考试管理">
                 <i class="icon-file-alt"></i>
                 <span class="menu-text">
                     考试管理
@@ -204,22 +204,22 @@
 
             <ul class="submenu">
                 <li>
-                    <a href="/question/manage?from=$!{pageFrom}&menuId=j_nav_1_2"
-                       id="j_nav_1_2" parentid="j_nav_1"  menuname="试题库" class="j_sub_nav">
+                    <a href="/question/manage?from=$!{pageFrom}&menuId=j_nav_4_1"
+                       id="j_nav_4_1" parentid="j_nav_4"  menuname="试题库" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         试题库
                     </a>
                 </li>
                 <li>
-                    <a href="/paper/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
-                       id="j_nav_1_1" parentid="j_nav_1"  menuname="试卷管理" class="j_sub_nav">
+                    <a href="/paper/manage?from=$!{pageFrom}&menuId=j_nav_4_2"
+                       id="j_nav_4_2" parentid="j_nav_4"  menuname="试卷管理" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         试卷管理
                     </a>
                 </li>
                 <li>
-                    <a href="/exam/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
-                       id="j_nav_1_1" parentid="j_nav_1"  menuname="学生考试管理" class="j_sub_nav">
+                    <a href="/exam/manage?from=$!{pageFrom}&menuId=j_nav_4_3"
+                       id="j_nav_4_3" parentid="j_nav_4"  menuname="学生考试管理" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
                         学生考试管理
                     </a>

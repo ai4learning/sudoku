@@ -3,8 +3,11 @@ package com.goldfish.service.impl;
 
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Date;
+import java.util.*;
+
+import com.goldfish.dao.context.CourseContext;
+import com.goldfish.domain.Course;
+import com.goldfish.manager.CourseManager;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
@@ -27,6 +30,11 @@ public class UnitServiceImpl implements UnitService {
 	
 	@Resource(name="unitManager")
 	private UnitManager unitManager;
+	@Resource(name="courseContext")
+	private CourseContext courseContext;
+
+//	@Resource(name="courseManager")
+//	private CourseManager courseManager;
     
     public CommonResult<Unit> addUnit(Unit unit) {
 		CommonResult<Unit> result = new CommonResult<Unit>();
@@ -127,6 +135,7 @@ public class UnitServiceImpl implements UnitService {
 			if (totalCount > 0) {
 				pageQuery.setTotalCount(totalCount);
 				List<Unit> list = unitManager.getUnitByPage(pageQuery);
+				list = setLessonInfo(result, list);
 				result.addDefaultModel("list", list);
 				result.addModel("pageQuery", pageQuery);
 			}
@@ -137,7 +146,21 @@ public class UnitServiceImpl implements UnitService {
 		}
 		return result;
 	}
-	
+
+	private List<Unit> setLessonInfo(CommonResult<List<Unit>> result, List<Unit> origin) {
+		if (origin == null && origin.size() == 0) {
+			return origin;
+		}
+		List<Unit> target = new ArrayList<Unit>(origin.size());
+		Course query = new Course();
+		for (Unit ele : origin) {
+			ele.setLessonName(courseContext.getName(Integer.valueOf(String.valueOf(ele.getLessonId()))));
+			target.add(ele);
+		}
+		return target;
+	}
+
+
 	public int count(PageQuery pageQuery) {
 		return unitManager.count(pageQuery);
 	}

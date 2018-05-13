@@ -23,7 +23,9 @@ public class Unit  implements Serializable {
 	/**  单元CODE  */
 	private String moduleCode; 
 	/**  课程ID  */
-	private Long lessonId; 
+	private Long lessonId;
+	/**  课程名 **/
+	private String lessonName;
 	/**  单元号  */
 	private Integer unitNbr; 
 	/**  单元名称  */
@@ -126,7 +128,12 @@ public class Unit  implements Serializable {
   	public java.util.Date getModified() {
   	  return this.modified;
   	}
-	
-	  	
 
+	public String getLessonName() {
+		return lessonName;
+	}
+
+	public void setLessonName(String lessonName) {
+		this.lessonName = lessonName;
+	}
 }

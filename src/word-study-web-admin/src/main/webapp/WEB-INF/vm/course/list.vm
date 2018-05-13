@@ -5,21 +5,18 @@
 			<thead>
 				<tr>
  			<th><span>ID</span></th>
-			<th><span>课程类型</span></th>
-			<th><span>课程CODE</span></th>
 			<th><span>课程号</span></th>
 			<th><span>课程名</span></th>
-			<th><span>课程类型</span></th>
+			<th><span>类型</span></th>
 			<th><span>年级类型</span></th>
+			<th><span>课程类型</span></th>
+			<th><span>课程CODE</span></th>
 			<th><span>课程状态</span></th>
 			<th><span>课程定价</span></th>
-			<th><span>课程简介</span></th>
-			<th><span>封面</span></th>
 			<th><span>总单元数</span></th>
 			<th><span>单词总数</span></th>
 			<th><span>是否过期</span></th>
 			<th><span>单元类型</span></th>
-			<th><span>扩展信息</span></th>
 			<th><span>修改时间</span></th>
 
 				<th class="operate">操作</th>
@@ -31,62 +28,35 @@
 	#if($list && $list.size()!=0)
 		    #foreach($item in $list)
 		   <tr>
-				 			<td>$!item.id</td>
+				<td>$!item.id</td>
+               	<td>$!item.bookNumber</td>
+               	<td>$!item.bookName</td>
+			   	<td>
+				   #if($item.type==1)<span class="">教材</span> #end
+				   #if($item.type==2)<span class="">错词本</span> #end
+			   	</td>
+               <td>
+				   #if($item.orderType==0)<span class="">无</span> #end
+				   #if($item.orderType==1)<span class="">小学</span> #end
+				   #if($item.orderType==2)<span class="">初中</span> #end
+				   #if($item.orderType==3)<span class="">高中</span> #end
+				   #if($item.orderType==4)<span class="">大学</span> #end
+               </td>
+				<td>
+				   #if($item.bookType==1)<span class="">教材</span> #end
+				   #if($item.bookType==2)<span class="">特色</span> #end
+				</td>
+				<td>$!item.moduleCode</td>
 			<td>
-        
-			
-				#if($item.type==1)<span class="">教材</span> #end	
-			
-				#if($item.type==2)<span class="">错词本</span> #end	
-			
-	
-    </td>
-			<td>$!item.moduleCode</td>
-			<td>$!item.bookNumber</td>
-			<td>$!item.bookName</td>
-			<td>
-        
-			
-				#if($item.bookType==1)<span class="">教材</span> #end	
-			
-				#if($item.bookType==2)<span class="">特色</span> #end	
-			
-	
-    </td>
-			<td>
-        
-			
-				#if($item.orderType==0)<span class="">无</span> #end	
-			
-				#if($item.orderType==1)<span class="">小学</span> #end	
-			
-				#if($item.orderType==2)<span class="">初中</span> #end	
-			
-				#if($item.orderType==3)<span class="">高中</span> #end	
-			
-				#if($item.orderType==4)<span class="">大学</span> #end	
-			
-	
-    </td>
-			<td>
-        
-			
-				#if($item.bookState==1)<span class="">有效</span> #end	
-			
-				#if($item.bookState==2)<span class="">无效</span> #end	
-			
-	
-    </td>
+				#if($item.bookState==1)<span class="">有效</span> #end
+				#if($item.bookState==2)<span class="">无效</span> #end
+    		</td>
 			<td>$!item.bookPrice</td>
-			<td>$!item.introduce</td>
-			<td>$!item.coverImageUrl</td>
 			<td>$!item.totalUnitNbr</td>
 			<td>$!item.totalWords</td>
 			<td>$!item.outDate</td>
 			<td>$!item.unitType</td>
-			<td>$!item.ext</td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>
-
 				<td class="operate">
 					<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
 						<button class="btn btn-xs btn-success JUpdate-course" type="button" itemid="$!item.id"><i class="icon-edit bigger-120"></i>编辑</button>

@@ -31,8 +31,9 @@
     	 
     		<where>
     		<if test="id != null"> AND id = #{id}</if>
+    		<if test="bookNumber != null"> AND book_number = #{bookNumber}</if>
     		<if test="type != null"> AND type = #{type}</if>
-    		<if test="bookName != null"> AND book_name = #{bookName}</if>
+    		<if test="bookName != null"> AND book_name like concat(#{bookName},"%")</if>
     		<if test="bookType != null"> AND book_type = #{bookType}</if>
     		<if test="orderType != null"> AND order_type = #{orderType}</if>
     		<if test="bookState != null"> AND book_state = #{bookState}</if>
