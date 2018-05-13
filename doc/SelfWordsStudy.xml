@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='SelfWordsStudy' cnname='学生自身单词学习' dbTableName='self_words_study'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='BIGINT' canBeNull='false' readonly='false' isPK='true' length='19' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='studentId' columnName='student_id' cnname='学生ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='学生ID' />
+    <column dataName='studentCode' columnName='student_code' cnname='学生CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='学生CODE' />
+    <column dataName='lessonId' columnName='lesson_id' cnname='课程ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='课程ID' />
+    <column dataName='unitNbr' columnName='unit_nbr' cnname='课程号' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='课程号' />
+    <column dataName='type' columnName='type' cnname='类型' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='selfWordsStudy_type_DICT' comment='类型：1.复习学习，2.错词学习，' />
+    <column dataName='currentPhase' columnName='current_phase' cnname='当前学习阶段' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='selfWordsStudy_currentPhase_DICT' comment='当前学习阶段：1.分批学习，2.整体回忆，3.单元测试，' />
+    <column dataName='totalReadingTime' columnName='total_reading_time' cnname='总读时间' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='总读时间' />
+    <column dataName='totalWritingTime' columnName='total_writing_time' cnname='总写时间' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='总写时间' />
+    <column dataName='totalNumber' columnName='total_number' cnname='总学习单词数' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='总学习单词数' />
+    <column dataName='isFinished' columnName='is_finished' cnname='是否学习完成' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='selfWordsStudy_isFinished_DICT' comment='是否学习完成：1.未完成，2.已完成，' />
+    <column dataName='isTested' columnName='is_tested' cnname='是否测试完成' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='selfWordsStudy_isTested_DICT' comment='是否测试完成：1.未完成，2.已完成，' />
+    <column dataName='studyPos' columnName='study_pos' cnname='单词学习位置' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='单词学习位置' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='selfWordsStudy_state_DICT' comment='状态：1.有效，2.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,student_id,lesson_id,type,state</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,student_id,student_code,lesson_id,unit_nbr,type,current_phase,total_reading_time,total_writing_time,total_number,is_finished,is_tested,study_pos,state,modified</queryList>
+  <addList>id,student_id,student_code,lesson_id,unit_nbr,type,current_phase,total_reading_time,total_writing_time,total_number,is_finished,is_tested,study_pos,state</addList>
+  <updateList>id,student_id,student_code,lesson_id,unit_nbr,type,current_phase,total_reading_time,total_writing_time,total_number,is_finished,is_tested,study_pos,state</updateList>
+  <viewList>id,student_id,student_code,lesson_id,unit_nbr,type,current_phase,total_reading_time,total_writing_time,total_number,is_finished,is_tested,study_pos,state,created,modified</viewList>
+  <allColumn>id,student_id,student_code,lesson_id,unit_nbr,type,current_phase,total_reading_time,total_writing_time,total_number,is_finished,is_tested,study_pos,state,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='selfWordsStudy_currentPhase_DICT' name='current_phase字段的字典项'>
+      <option value='1' cssClass=''>分批学习</option>
+      <option value='2' cssClass=''>整体回忆</option>
+      <option value='3' cssClass=''>单元测试</option>
+    </dict>
+    <dict id='selfWordsStudy_isFinished_DICT' name='is_finished字段的字典项'>
+      <option value='1' cssClass=''>未完成</option>
+      <option value='2' cssClass=''>已完成</option>
+    </dict>
+    <dict id='selfWordsStudy_type_DICT' name='type字段的字典项'>
+      <option value='1' cssClass=''>复习学习</option>
+      <option value='2' cssClass=''>错词学习</option>
+    </dict>
+    <dict id='selfWordsStudy_isTested_DICT' name='is_tested字段的字典项'>
+      <option value='1' cssClass=''>未完成</option>
+      <option value='2' cssClass=''>已完成</option>
+    </dict>
+    <dict id='selfWordsStudy_state_DICT' name='state字段的字典项'>
+      <option value='1' cssClass=''>有效</option>
+      <option value='2' cssClass=''>无效</option>
+    </dict>
+  </dicts>
+</tableModel>

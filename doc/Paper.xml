@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='Paper' cnname='试卷' dbTableName='paper'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='BIGINT' canBeNull='false' readonly='false' isPK='true' length='19' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='lessonId' columnName='lesson_id' cnname='课程ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='课程ID' />
+    <column dataName='unitNbr' columnName='unit_nbr' cnname='单元号' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='单元号' />
+    <column dataName='type' columnName='type' cnname='试卷类型' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='paper_type_DICT' comment='试卷类型：1.单元测试，2.自主测试，' />
+    <column dataName='testArea' columnName='test_area' cnname='测试范围' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='paper_testArea_DICT' comment='测试范围：0.单元内，1.课程内，' />
+    <column dataName='questionNbr' columnName='question_nbr' cnname='题数' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='题数' />
+    <column dataName='questonType' columnName='queston_type' cnname='题目类型' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='20' jspTag='TEXT' dictName='' comment='题目类型' />
+    <column dataName='standardDuration' columnName='standard_duration' cnname='考试时长' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='考试时长' />
+    <column dataName='questions' columnName='questions' cnname='题目' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='255' jspTag='TEXT' dictName='' comment='题目' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='paper_state_DICT' comment='状态：1.有效，2.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,lesson_id,type,queston_type,state</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,lesson_id,unit_nbr,type,test_area,question_nbr,queston_type,standard_duration,questions,state,modified</queryList>
+  <addList>id,lesson_id,unit_nbr,type,test_area,question_nbr,queston_type,standard_duration,questions,state</addList>
+  <updateList>id,lesson_id,unit_nbr,type,test_area,question_nbr,queston_type,standard_duration,questions,state</updateList>
+  <viewList>id,lesson_id,unit_nbr,type,test_area,question_nbr,queston_type,standard_duration,questions,state,created,modified</viewList>
+  <allColumn>id,lesson_id,unit_nbr,type,test_area,question_nbr,queston_type,standard_duration,questions,state,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='paper_type_DICT' name='type字段的字典项'>
+      <option value='1' cssClass=''>单元测试</option>
+      <option value='2' cssClass=''>自主测试</option>
+    </dict>
+    <dict id='paper_testArea_DICT' name='test_area字段的字典项'>
+      <option value='0' cssClass=''>单元内</option>
+      <option value='1' cssClass=''>课程内</option>
+    </dict>
+    <dict id='paper_state_DICT' name='state字段的字典项'>
+      <option value='1' cssClass=''>有效</option>
+      <option value='2' cssClass=''>无效</option>
+    </dict>
+  </dicts>
+</tableModel>

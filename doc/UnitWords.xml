@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='UnitWords' cnname='单元单词' dbTableName='unit_words'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='BIGINT' canBeNull='false' readonly='false' isPK='true' length='19' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='unitCode' columnName='unit_code' cnname='单元CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='单元CODE' />
+    <column dataName='lessonId' columnName='lesson_id' cnname='课程ID' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='课程ID' />
+    <column dataName='unitNbr' columnName='unit_nbr' cnname='单元号' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='单元号' />
+    <column dataName='fstClassId' columnName='fst_class_id' cnname='单词归类' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='单词归类' />
+    <column dataName='unit' columnName='unit' cnname='单元名' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='20' jspTag='TEXT' dictName='' comment='单元名' />
+    <column dataName='vocCode' columnName='voc_code' cnname='单词CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='单词CODE' />
+    <column dataName='vocIndex' columnName='voc_index' cnname='单词索引号' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='SELECT' dictName='unitWords_vocIndex_DICT' comment='单词索引号（单元内）' />
+    <column dataName='wordId' columnName='word_id' cnname='单词ID' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='单词ID' />
+    <column dataName='spelling' columnName='spelling' cnname='拼写' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='128' jspTag='TEXT' dictName='' comment='拼写' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='unitWords_state_DICT' comment='状态：1.有效，2.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,lesson_id,fst_class_id,word_id,state</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,unit_code,lesson_id,unit_nbr,fst_class_id,unit,voc_code,voc_index,word_id,spelling,state,modified</queryList>
+  <addList>id,unit_code,lesson_id,unit_nbr,fst_class_id,unit,voc_code,voc_index,word_id,spelling,state</addList>
+  <updateList>id,unit_code,lesson_id,unit_nbr,fst_class_id,unit,voc_code,voc_index,word_id,spelling,state</updateList>
+  <viewList>id,unit_code,lesson_id,unit_nbr,fst_class_id,unit,voc_code,voc_index,word_id,spelling,state,created,modified</viewList>
+  <allColumn>id,unit_code,lesson_id,unit_nbr,fst_class_id,unit,voc_code,voc_index,word_id,spelling,state,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='unitWords_vocIndex_DICT' name='voc_index字段的字典项' />
+    <dict id='unitWords_state_DICT' name='state字段的字典项'>
+      <option value='1' cssClass=''>有效</option>
+      <option value='2' cssClass=''>无效</option>
+    </dict>
+  </dicts>
+</tableModel>

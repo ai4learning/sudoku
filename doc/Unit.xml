@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='Unit' cnname='课程单元' dbTableName='unit'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='BIGINT' canBeNull='false' readonly='false' isPK='true' length='19' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='moduleCode' columnName='module_code' cnname='单元CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='单元CODE' />
+    <column dataName='lessonId' columnName='lesson_id' cnname='课程ID' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='课程ID' />
+    <column dataName='unitNbr' columnName='unit_nbr' cnname='单元号' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='单元号' />
+    <column dataName='unit' columnName='unit' cnname='单元名称' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='20' jspTag='TEXT' dictName='' comment='单元名称' />
+    <column dataName='totalWords' columnName='total_words' cnname='单元单词数' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='单元单词数' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='unit_state_DICT' comment='状态：1.有效，2.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,lesson_id,state</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,module_code,lesson_id,unit_nbr,unit,total_words,state,modified</queryList>
+  <addList>id,module_code,lesson_id,unit_nbr,unit,total_words,state</addList>
+  <updateList>id,module_code,lesson_id,unit_nbr,unit,total_words,state</updateList>
+  <viewList>id,module_code,lesson_id,unit_nbr,unit,total_words,state,created,modified</viewList>
+  <allColumn>id,module_code,lesson_id,unit_nbr,unit,total_words,state,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='unit_state_DICT' name='state字段的字典项'>
+      <option value='1' cssClass=''>有效</option>
+      <option value='2' cssClass=''>无效</option>
+    </dict>
+  </dicts>
+</tableModel>

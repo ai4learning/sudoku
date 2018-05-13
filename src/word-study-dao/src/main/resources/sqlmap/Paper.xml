@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.goldfish.dao.PaperDao">
+
+  <resultMap id="Paper-Map" type="com.goldfish.domain.Paper">
+ 		<id property="id" column="id"/>
+		<result property="lessonId" column="lesson_id"/>
+		<result property="unitNbr" column="unit_nbr"/>
+		<result property="type" column="type"/>
+		<result property="testArea" column="test_area"/>
+		<result property="questionNbr" column="question_nbr"/>
+		<result property="questonType" column="queston_type"/>
+		<result property="standardDuration" column="standard_duration"/>
+		<result property="questions" column="questions"/>
+		<result property="state" column="state"/>
+		<result property="created" column="created"/>
+		<result property="modified" column="modified"/>
+
+	</resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+	<sql id="BEAN-COMMON-SQL">
+    	 
+    		<where>
+    		<if test="id != null"> AND id = #{id}</if>
+    		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+    		<if test="type != null"> AND type = #{type}</if>
+    		<if test="questonType != null"> AND queston_type = #{questonType}</if>
+    		<if test="state != null"> AND state = #{state}</if>
+    		
+    		</where>
+    	 
+    	</sql>
+
+
+	<!-- 可以包含bean里面没有的字段-->
+	<sql id="MAP-COMMON-SQL">
+	   
+		<where>
+		<if test="id != null"> AND id = #{id}</if>
+		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+		<if test="type != null"> AND type = #{type}</if>
+		<if test="questonType != null"> AND queston_type = #{questonType}</if>
+		<if test="state != null"> AND state = #{state}</if>
+		
+		</where>
+	 	
+	</sql>
+	
+	<sql id="ORDER-SQL">
+	 order by id desc
+	</sql>
+	
+
+	<sql id="All-FIELDS">
+		id,lesson_id,unit_nbr,type,test_area,question_nbr,queston_type,standard_duration,questions,state,created,modified
+	</sql>
+
+	<insert id="addPaper" parameterType="com.goldfish.domain.Paper">
+		insert into paper (lesson_id,unit_nbr,type,test_area,question_nbr,queston_type,standard_duration,questions,state,created,modified)
+			values(#{lessonId},#{unitNbr},#{type},#{testArea},#{questionNbr},#{questonType},#{standardDuration},#{questions},#{state},#{created},#{modified})
+    
+		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+		   select last_insert_id() as ID from dual
+		</selectKey> 
+   
+	 </insert>
+
+    
+    <update id="updatePaper" parameterType="com.goldfish.domain.Paper" >
+    	update  paper 
+	<set>
+			<if test="lessonId !=null"> lesson_id = #{lessonId},</if>
+			<if test="unitNbr !=null"> unit_nbr = #{unitNbr},</if>
+			<if test="type !=null"> type = #{type},</if>
+			<if test="testArea !=null"> test_area = #{testArea},</if>
+			<if test="questionNbr !=null"> question_nbr = #{questionNbr},</if>
+			<if test="questonType !=null"> queston_type = #{questonType},</if>
+			<if test="standardDuration !=null"> standard_duration = #{standardDuration},</if>
+			<if test="questions !=null"> questions = #{questions},</if>
+			<if test="state !=null"> state = #{state},</if>
+			<if test="created !=null"> created = #{created},</if>
+			<if test="modified !=null"> modified = #{modified},</if>
+
+	</set>
+	 where id = #{id}
+  	</update>
+  
+	
+
+    
+
+	<delete id="deletePaper" parameterType="com.goldfish.domain.Paper">
+		DELETE FROM paper WHERE id = #{id}
+	</delete>
+	<select id="getPaperById" resultMap="Paper-Map" parameterType="java.lang.Long">
+		SELECT  <include refid="All-FIELDS"/> FROM paper	WHERE id = #{id}
+	</select>  
+    
+
+
+
+	<select id="getUnique" resultMap="Paper-Map" parameterType="com.goldfish.domain.Paper">
+		SELECT   <include refid="All-FIELDS"/> FROM paper
+            <include refid="BEAN-COMMON-SQL" /> limit 1
+	</select>
+
+
+	<select id="getListByExample" resultMap="Paper-Map" parameterType="com.goldfish.domain.Paper">
+		SELECT   <include refid="All-FIELDS"/> FROM paper
+            <include refid="BEAN-COMMON-SQL" />
+	</select>
+
+	
+	<select id="getPaperByPage" resultMap="Paper-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  id,lesson_id,unit_nbr,type,test_area,question_nbr,queston_type,standard_duration,questions,state,modified FROM paper 
+		]]>
+            <include refid="MAP-COMMON-SQL" />
+            <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM paper
+		]]>
+		
+              <include refid="MAP-COMMON-SQL" />
+	</select>
+	
+
+
+</mapper>

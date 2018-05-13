@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+
+
+       <bean id="l.jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+            <!--<property name="maxActive" value="1000" />-->
+            <property name="maxIdle" value="500" />
+            <!--<property name="maxWait" value="1000" />-->
+            <property name="testOnBorrow" value="true" />
+        </bean>
+
+        <bean id="l.jedis.shardInfo1" class="redis.clients.jedis.JedisShardInfo">
+            <constructor-arg index="0" value="${local.redis.host1}" />
+            <constructor-arg index="1" value="${local.redis.port1}" />
+        </bean>
+        <bean id="l.shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+            <constructor-arg index="0" ref="l.jedisPoolConfig" />
+            <constructor-arg index="1">
+                <list>
+                    <ref bean="l.jedis.shardInfo1" />
+                </list>
+            </constructor-arg>
+        </bean>
+
+        <bean id="redisUtils" class="com.goldfish.dao.redis.impl.LocalRedisUtilsImpl">
+            <property name="shardedJedisPool" ref="l.shardedJedisPool" />
+        </bean>
+
+
+</beans>

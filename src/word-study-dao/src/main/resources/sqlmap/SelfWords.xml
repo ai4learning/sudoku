@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.goldfish.dao.SelfWordsDao">
+
+  <resultMap id="SelfWords-Map" type="com.goldfish.domain.SelfWords">
+ 		<result property="id" column="id"/>
+		<result property="moduleCode" column="module_code"/>
+		<result property="studyId" column="study_id"/>
+		<result property="type" column="type"/>
+		<result property="studentId" column="student_id"/>
+		<result property="userCode" column="user_code"/>
+		<result property="lessonId" column="lesson_id"/>
+		<result property="unitNbr" column="unit_nbr"/>
+		<result property="vocCode" column="voc_code"/>
+		<result property="vocIndex" column="voc_index"/>
+		<result property="wordId" column="word_id"/>
+		<result property="spelling" column="spelling"/>
+		<result property="state" column="state"/>
+		<result property="created" column="created"/>
+		<result property="modified" column="modified"/>
+
+	</resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+	<sql id="BEAN-COMMON-SQL">
+    	 
+    		<where>
+    		<if test="id != null"> AND id = #{id}</if>
+    		<if test="studyId != null"> AND study_id = #{studyId}</if>
+    		<if test="type != null"> AND type = #{type}</if>
+    		<if test="studentId != null"> AND student_id = #{studentId}</if>
+    		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+    		<if test="wordId != null"> AND word_id = #{wordId}</if>
+    		<if test="state != null"> AND state = #{state}</if>
+    		
+    		</where>
+    	 
+    	</sql>
+
+
+	<!-- 可以包含bean里面没有的字段-->
+	<sql id="MAP-COMMON-SQL">
+	   
+		<where>
+		<if test="id != null"> AND id = #{id}</if>
+		<if test="studyId != null"> AND study_id = #{studyId}</if>
+		<if test="type != null"> AND type = #{type}</if>
+		<if test="studentId != null"> AND student_id = #{studentId}</if>
+		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+		<if test="wordId != null"> AND word_id = #{wordId}</if>
+		<if test="state != null"> AND state = #{state}</if>
+		
+		</where>
+	 	
+	</sql>
+	
+	<sql id="ORDER-SQL">
+	 order by id desc
+	</sql>
+	
+
+	<sql id="All-FIELDS">
+		id,module_code,study_id,type,student_id,user_code,lesson_id,unit_nbr,voc_code,voc_index,word_id,spelling,state,created,modified
+	</sql>
+
+	<insert id="addSelfWords" parameterType="com.goldfish.domain.SelfWords">
+		insert into self_words (id,module_code,study_id,type,student_id,user_code,lesson_id,unit_nbr,voc_code,voc_index,word_id,spelling,state,created,modified)
+			values(#{id},#{moduleCode},#{studyId},#{type},#{studentId},#{userCode},#{lessonId},#{unitNbr},#{vocCode},#{vocIndex},#{wordId},#{spelling},#{state},#{created},#{modified})
+    
+		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+		   select last_insert_id() as ID from dual
+		</selectKey> 
+   
+	 </insert>
+
+    
+    <update id="updateSelfWords" parameterType="com.goldfish.domain.SelfWords" >
+    	update  self_words 
+	<set>
+			<if test="moduleCode !=null"> module_code = #{moduleCode},</if>
+			<if test="studyId !=null"> study_id = #{studyId},</if>
+			<if test="type !=null"> type = #{type},</if>
+			<if test="studentId !=null"> student_id = #{studentId},</if>
+			<if test="userCode !=null"> user_code = #{userCode},</if>
+			<if test="lessonId !=null"> lesson_id = #{lessonId},</if>
+			<if test="unitNbr !=null"> unit_nbr = #{unitNbr},</if>
+			<if test="vocCode !=null"> voc_code = #{vocCode},</if>
+			<if test="vocIndex !=null"> voc_index = #{vocIndex},</if>
+			<if test="wordId !=null"> word_id = #{wordId},</if>
+			<if test="spelling !=null"> spelling = #{spelling},</if>
+			<if test="state !=null"> state = #{state},</if>
+			<if test="created !=null"> created = #{created},</if>
+			<if test="modified !=null"> modified = #{modified},</if>
+
+	</set>
+	 where id = #{id}
+  	</update>
+  
+	
+
+    
+
+	<delete id="deleteSelfWords" parameterType="com.goldfish.domain.SelfWords">
+		DELETE FROM self_words WHERE id = #{id}
+	</delete>
+	<select id="getSelfWordsById" resultMap="SelfWords-Map" parameterType="java.lang.Long">
+		SELECT  <include refid="All-FIELDS"/> FROM self_words	WHERE id = #{id}
+	</select>  
+    
+
+
+
+	<select id="getUnique" resultMap="SelfWords-Map" parameterType="com.goldfish.domain.SelfWords">
+		SELECT   <include refid="All-FIELDS"/> FROM self_words
+            <include refid="BEAN-COMMON-SQL" /> limit 1
+	</select>
+
+
+	<select id="getListByExample" resultMap="SelfWords-Map" parameterType="com.goldfish.domain.SelfWords">
+		SELECT   <include refid="All-FIELDS"/> FROM self_words
+            <include refid="BEAN-COMMON-SQL" />
+	</select>
+
+	
+	<select id="getSelfWordsByPage" resultMap="SelfWords-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  id,module_code,study_id,type,student_id,user_code,lesson_id,unit_nbr,voc_code,voc_index,word_id,spelling,state,modified FROM self_words 
+		]]>
+            <include refid="MAP-COMMON-SQL" />
+            <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM self_words
+		]]>
+		
+              <include refid="MAP-COMMON-SQL" />
+	</select>
+	
+
+
+</mapper>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.goldfish.dao.WordStudyStatisticDao">
+
+  <resultMap id="WordStudyStatistic-Map" type="com.goldfish.domain.WordStudyStatistic">
+ 		<id property="id" column="id"/>
+		<result property="studentId" column="student_id"/>
+		<result property="count" column="count"/>
+		<result property="state" column="state"/>
+		<result property="created" column="created"/>
+		<result property="modified" column="modified"/>
+
+	</resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+	<sql id="BEAN-COMMON-SQL">
+    	 
+    		<where>
+    		<if test="id != null"> AND id = #{id}</if>
+    		<if test="studentId != null"> AND student_id = #{studentId}</if>
+    		<if test="state != null"> AND state = #{state}</if>
+    		
+    		</where>
+    	 
+    	</sql>
+
+
+	<!-- 可以包含bean里面没有的字段-->
+	<sql id="MAP-COMMON-SQL">
+	   
+		<where>
+		<if test="id != null"> AND id = #{id}</if>
+		<if test="studentId != null"> AND student_id = #{studentId}</if>
+		<if test="state != null"> AND state = #{state}</if>
+		
+		</where>
+	 	
+	</sql>
+	
+	<sql id="ORDER-SQL">
+	 order by id desc
+	</sql>
+	
+
+	<sql id="All-FIELDS">
+		id,student_id,count,state,created,modified
+	</sql>
+
+	<insert id="addWordStudyStatistic" parameterType="com.goldfish.domain.WordStudyStatistic">
+		insert into word_study_statistic (student_id,count,state,created,modified)
+			values(#{studentId},#{count},#{state},#{created},#{modified})
+    
+		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+		   select last_insert_id() as ID from dual
+		</selectKey> 
+   
+	 </insert>
+
+    
+    <update id="updateWordStudyStatistic" parameterType="com.goldfish.domain.WordStudyStatistic" >
+    	update  word_study_statistic 
+	<set>
+			<if test="studentId !=null"> student_id = #{studentId},</if>
+			<if test="count !=null"> count = #{count},</if>
+			<if test="state !=null"> state = #{state},</if>
+			<if test="created !=null"> created = #{created},</if>
+			<if test="modified !=null"> modified = #{modified},</if>
+
+	</set>
+	 where id = #{id}
+  	</update>
+  
+	
+
+    
+
+	<delete id="deleteWordStudyStatistic" parameterType="com.goldfish.domain.WordStudyStatistic">
+		DELETE FROM word_study_statistic WHERE id = #{id}
+	</delete>
+	<select id="getWordStudyStatisticById" resultMap="WordStudyStatistic-Map" parameterType="java.lang.Long">
+		SELECT  <include refid="All-FIELDS"/> FROM word_study_statistic	WHERE id = #{id}
+	</select>  
+    
+
+
+
+	<select id="getUnique" resultMap="WordStudyStatistic-Map" parameterType="com.goldfish.domain.WordStudyStatistic">
+		SELECT   <include refid="All-FIELDS"/> FROM word_study_statistic
+            <include refid="BEAN-COMMON-SQL" /> limit 1
+	</select>
+
+
+	<select id="getListByExample" resultMap="WordStudyStatistic-Map" parameterType="com.goldfish.domain.WordStudyStatistic">
+		SELECT   <include refid="All-FIELDS"/> FROM word_study_statistic
+            <include refid="BEAN-COMMON-SQL" />
+	</select>
+
+	
+	<select id="getWordStudyStatisticByPage" resultMap="WordStudyStatistic-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  id,student_id,count,state,modified FROM word_study_statistic 
+		]]>
+            <include refid="MAP-COMMON-SQL" />
+            <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM word_study_statistic
+		]]>
+		
+              <include refid="MAP-COMMON-SQL" />
+	</select>
+	
+
+
+</mapper>
