@@ -1,22 +1,14 @@
 
-	<!--struts config start-->
-	<!-- WordStudyStatistic -->
-	<package name="-wordStudyStatistic" namespace="//wordStudyStatistic" extends="jshow-admin">
-		<action name="*" method="{1}" class="com.goldfish.web.action.WordStudyStatisticAction">
-			<result>${path}//wordStudyStatistic/{1}.vm</result>
-		</action>
-	</package>
-	<!--struts config end-->
 	
 
 	<!-- mybatis 配置开始-->
 	
-	<typeAlias type="com.goldfish.domain.WordStudyStatistic" alias="WordStudyStatistic"/>
+	<typeAlias type="com.goldfish.domain.ActivateCode" alias="ActivateCode"/>
 
-	<mapper resource="sqlmap/WordStudyStatistic.xml" />
+	<mapper resource="sqlmap/ActivateCode.xml" />
 	
-	<bean id="wordStudyStatisticDao" class="org.mybatis.spring.mapper.MapperFactoryBean">  
-	   <property name="mapperInterface" value="com.goldfish.dao.WordStudyStatisticDao"/>  
+	<bean id="activateCodeDao" class="org.mybatis.spring.mapper.MapperFactoryBean">  
+	   <property name="mapperInterface" value="com.goldfish.dao.ActivateCodeDao"/>
 	  <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
 	</bean>
 	
@@ -26,19 +18,48 @@
 
 	<!-- ibatis 配置开始-->
 
-	<sqlMap resource="sqlmap//WordStudyStatistic.xml" />
+	<sqlMap resource="sqlmap//ActivateCode.xml" />
 	
-	<bean id="wordStudyStatisticDao" class="com.goldfish.dao.impl.WordStudyStatisticDaoImpl">
+	<bean id="activateCodeDao" class="com.goldfish.dao.impl.ActivateCodeDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<!-- ibatis 配置end-->
 
 
 	
+
+	requirejs:true
+
+
+		
+        
+            <script src="/misc/js/plugin/calendar/calendar.js"></script>
+            <link rel="stylesheet" href="/misc/js/plugin/calendar/calendar.css">
+        
+    
+
+
+
+
+
+
 	<!-- 可选配置项 start -->
-	<bean id="wordStudyStatisticManager" class="com.goldfish.dao.impl.WordStudyStatisticManagerImpl">
+	<bean id="activateCodeManager" class="com.goldfish.dao.impl.ActivateCodeManagerImpl">
 	</bean>
 	
-	<bean id="wordStudyStatisticService" class="com.goldfish.dao.impl.WordStudyStatisticServiceImpl">
+	<bean id="activateCodeService" class="com.goldfish.dao.impl.ActivateCodeServiceImpl">
 	</bean>
 	<!-- 可选配置项 end -->
+
+
+
+
+	<!--struts config start-->
+	<!-- 激活码 -->
+	<package name="-activateCode" namespace="//activateCode" extends="jshow-admin">
+		<action name="*" method="{1}" class="com.goldfish.web.action.ActivateCodeAction">
+			<result>${path}//activateCode/{1}.vm</result>
+		</action>
+	</package>
+	<!--struts config end-->
+	

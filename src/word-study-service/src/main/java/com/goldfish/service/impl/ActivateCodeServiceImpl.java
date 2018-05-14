@@ -5,6 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
@@ -50,7 +52,7 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
 		try {
 			
-					activateCode.setModified(new Date());
+			activateCode.setModified(new Date());
 					
 			activateCodeManager.updateActivateCode(activateCode);
 			result.setSuccess(true);
@@ -76,7 +78,7 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
     }
 
 
-    	public CommonResult<ActivateCode> getActivateCodeById(Long id) {
+	public CommonResult<ActivateCode> getActivateCodeById(Long id) {
 		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
 		try {
 			result.addDefaultModel("activateCode", activateCodeManager.getActivateCodeById(id));
@@ -140,6 +142,21 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 	
 	public int count(PageQuery pageQuery) {
 		return activateCodeManager.count(pageQuery);
+	}
+
+	@Override
+	public CommonResult<ActivateCode> generateActivateCode() {
+		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
+		try {
+			ActivateCode activateCode = new ActivateCode();
+			activateCode.setActivateCode(UUID.randomUUID().toString());
+			result.addDefaultModel("activateCode", activateCode);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("生成激活码异常", e);
+			result.setSuccess(false);
+		}
+		return result;
 	}
 
 

@@ -6,7 +6,7 @@
 				<tr>
  			<th><span>ID</span></th>
 			<th><span>激活码</span></th>
-			<th><span>课程ID</span></th>
+			<th><span>关联课程号</span></th>
 			<th><span>超时时间</span></th>
 			<th><span>状态</span></th>
 			<th><span>修改时间</span></th>
@@ -22,7 +22,7 @@
 		   <tr>
 				 			<td>$!item.id</td>
 			<td>$!item.activateCode</td>
-			<td>$!item.lessonId</td>
+			<td>$!item.lessonIds</td>
 			<td>$!dateFormatUtils.format($!item.expireTime)</td>
 			<td>
         
@@ -32,7 +32,8 @@
 				#if($item.state==2)<span class="">超期</span> #end	
 			
 				#if($item.state==3)<span class="">无效</span> #end	
-			
+				#if($item.state==4)<span class="">已使用</span> #end
+
 	
     </td>
 			<td>$!dateFormatUtils.format($!item.modified)</td>

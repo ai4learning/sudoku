@@ -42,9 +42,7 @@ public class ActivateCodeController extends BaseController {
 
 	
 	@RequestMapping(value="add",method={RequestMethod.GET,RequestMethod.POST})
-    public String add(ActivateCode activateCode, ModelMap context) {
-		CommonResult<ActivateCode> result = activateCodeService.generateActivateCode();
-		this.toVm(result, context);
+    public String add() {
 		return "/activateCode/add";
     }
     

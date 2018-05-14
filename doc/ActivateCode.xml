@@ -3,21 +3,21 @@
   <tableDefine id='ActivateCode' cnname='激活码' dbTableName='activate_code'>
     <column dataName='id' columnName='id' cnname='ID' columnType='BIGINT' canBeNull='false' readonly='false' isPK='true' length='19' jspTag='TEXT' dictName='' comment='ID' />
     <column dataName='activateCode' columnName='activate_code' cnname='激活码' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='激活码' />
-    <column dataName='lessonId' columnName='lesson_id' cnname='课程ID' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='课程ID' />
-    <column dataName='expireTime' columnName='expire_time' cnname='超时时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='超时时间' />
-    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='activateCode_state_DICT' comment='状态：1.正常，2.超期，3.无效，' />
-    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
-    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+    <column dataName='lessonIds' columnName='lesson_ids' cnname='关联课程号' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='255' jspTag='TEXT' dictName='' comment='关联课程号' />
+    <column dataName='expireTime' columnName='expire_time' cnname='超时时间' columnType='DATETIME' canBeNull='false' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='超时时间' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='false' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='activateCode_state_DICT' comment='状态：1.正常，2.超期，3.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='false' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='false' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
   </tableDefine>
-  <searchKeys>id,lesson_id,state</searchKeys>
+  <searchKeys>id,state</searchKeys>
   <orderColumns>
     <orderColumn orderType='desc'>id</orderColumn>
   </orderColumns>
-  <queryList>id,activate_code,lesson_id,expire_time,state,modified</queryList>
-  <addList>id,activate_code,lesson_id,expire_time,state</addList>
-  <updateList>id,activate_code,lesson_id,expire_time,state</updateList>
-  <viewList>id,activate_code,lesson_id,expire_time,state,created,modified</viewList>
-  <allColumn>id,activate_code,lesson_id,expire_time,state,created,modified</allColumn>
+  <queryList>id,activate_code,lesson_ids,expire_time,state,modified</queryList>
+  <addList>id,activate_code,lesson_ids,expire_time,state</addList>
+  <updateList>id,activate_code,lesson_ids,expire_time,state</updateList>
+  <viewList>id,activate_code,lesson_ids,expire_time,state,created,modified</viewList>
+  <allColumn>id,activate_code,lesson_ids,expire_time,state,created,modified</allColumn>
   <createTime>created</createTime>
   <updateTime>modified</updateTime>
   <dicts>

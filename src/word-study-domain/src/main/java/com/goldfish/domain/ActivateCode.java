@@ -16,14 +16,14 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 public class ActivateCode  implements Serializable {
 	
-  private static final long serialVersionUID = 1729692623853672343L;
+  private static final long serialVersionUID = -8750541314246660208L;
 	
 	/**  ID  */
 	private Long id; 
 	/**  激活码  */
 	private String activateCode; 
-	/**  课程ID  */
-	private Long lessonId; 
+	/**  关联课程号  */
+	private String lessonIds; 
 	/**  超时时间  */
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date expireTime; 
@@ -56,12 +56,12 @@ public class ActivateCode  implements Serializable {
 	
 	  	
 
-  	public void setLessonId(Long lessonId) {
-  	  this.lessonId=lessonId;
+  	public void setLessonIds(String lessonIds) {
+  	  this.lessonIds=lessonIds;
   	}
   
-  	public Long getLessonId() {
-  	  return this.lessonId;
+  	public String getLessonIds() {
+  	  return this.lessonIds;
   	}
 	
 	  	

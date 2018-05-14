@@ -86,6 +86,7 @@ public interface ActivateCodeService {
      * @return
      */
     public int count(PageQuery pageQuery);
-	
-	
+
+
+    public CommonResult<ActivateCode> generateActivateCode();
 }

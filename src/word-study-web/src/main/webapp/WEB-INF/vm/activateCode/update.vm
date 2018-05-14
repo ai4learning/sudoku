@@ -38,10 +38,10 @@
 		</div>
 		
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="lessonId">课程ID</label>
+			<label class="col-sm-2 control-label" for="lessonIds">关联课程号</label>
 			<div class="col-sm-7 controls">
 			
-			<input type="text" class="form-control"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="19" value="$!{activateCode.lessonId}"/>
+			<input type="text" class="form-control"  name="lessonIds" id="lessonIds" placeholder="请输入关联课程号" maxlength="255" value="$!{activateCode.lessonIds}"/>
 			</div>
 		</div>
 		
@@ -89,9 +89,9 @@ void function(j) {
 	var set = {
 		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
 		activateCode:  {must: false, maxlength:50, ftip:'激活码,最多50个字符'},
-		lessonId:  {must: false, maxlength:19, ftip:'课程ID,最多19个字符' ,handler:'int' },
-		expireTime:  {must: false, maxlength:19, ftip:'超时时间,最多19个字符'},
-		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
+		lessonIds:  {must: false, maxlength:255, ftip:'关联课程号,最多255个字符'},
+		expireTime:  {must: true, maxlength:19, ftip:'超时时间,最多19个字符'},
+		state:  {must: true, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};
 	
 
