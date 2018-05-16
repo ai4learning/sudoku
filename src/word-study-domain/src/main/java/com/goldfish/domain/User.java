@@ -35,7 +35,13 @@ public class User  implements Serializable {
 	/**  父ID  */
 	private Long parentId; 
 	/**  激活码  */
-	private String activateCode; 
+	private String activateCode;
+	/**
+	 * 关联课程
+	 */
+	private String lessonIds;
+
+
 	/**  用户状态  */
 	private Integer userState; 
 	/**  登录次数  */
@@ -234,7 +240,12 @@ public class User  implements Serializable {
   	public java.util.Date getModified() {
   	  return this.modified;
   	}
-	
-	  	
 
+	public String getLessonIds() {
+		return lessonIds;
+	}
+
+	public void setLessonIds(String lessonIds) {
+		this.lessonIds = lessonIds;
+	}
 }

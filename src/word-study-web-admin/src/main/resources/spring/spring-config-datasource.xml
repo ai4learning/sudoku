@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <bean id="parentDataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="maxActive" value="30" />
+        <property name="maxActive" value="214" />
         <property name="initialSize" value="2" />
         <property name="maxWait" value="30000" />
         <property name="maxIdle" value="30" />

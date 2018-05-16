@@ -13,6 +13,7 @@
 		<result property="authorityLevel" column="authority_level"/>
 		<result property="parentId" column="parent_id"/>
 		<result property="activateCode" column="activate_code"/>
+		<result property="lessonIds" column="lesson_ids"/>
 		<result property="userState" column="user_state"/>
 		<result property="totalLoginTimes" column="total_login_times"/>
 		<result property="currentClass" column="current_class"/>
@@ -66,13 +67,13 @@
 	
 
 	<sql id="All-FIELDS">
-		id,user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,user_state,total_login_times,current_class,current_teacher,level,cash_point,state,created,modified
+		id,user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,lesson_ids,user_state,total_login_times,current_class,current_teacher,level,cash_point,state,created,modified
 	</sql>
 
 	<insert id="addUser" parameterType="com.goldfish.domain.User">
-		insert into user (user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,user_state,total_login_times,current_class,current_teacher,level,cash_point,state,created,modified)
-			values(#{userId},#{passwd},#{userCode},#{nikeName},#{roleType},#{authorityLevel},#{parentId},#{activateCode},#{userState},#{totalLoginTimes},#{currentClass},#{currentTeacher},#{level},#{cashPoint},#{state},#{created},#{modified})
-    
+		insert into user (user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,lesson_ids,user_state,total_login_times,current_class,current_teacher,level,cash_point,state,created,modified)
+			values(#{userId},#{passwd},#{userCode},#{nikeName},#{roleType},#{authorityLevel},#{parentId},#{activateCode},#{lessonIds},#{userState},#{totalLoginTimes},#{currentClass},#{currentTeacher},#{level},#{cashPoint},#{state},#{created},#{modified})
+
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
 		   select last_insert_id() as ID from dual
 		</selectKey> 
@@ -91,6 +92,7 @@
 			<if test="authorityLevel !=null"> authority_level = #{authorityLevel},</if>
 			<if test="parentId !=null"> parent_id = #{parentId},</if>
 			<if test="activateCode !=null"> activate_code = #{activateCode},</if>
+			<if test="lessonIds !=null"> lesson_ids = #{lessonIds},</if>
 			<if test="userState !=null"> user_state = #{userState},</if>
 			<if test="totalLoginTimes !=null"> total_login_times = #{totalLoginTimes},</if>
 			<if test="currentClass !=null"> current_class = #{currentClass},</if>
@@ -133,7 +135,7 @@
 	
 	<select id="getUserByPage" resultMap="User-Map" parameterType="java.util.HashMap">
 		<![CDATA[
-			SELECT  id,user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,user_state,total_login_times,current_class,current_teacher,level,cash_point,state,modified FROM user 
+			SELECT  id,user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,lesson_ids,user_state,total_login_times,current_class,current_teacher,level,cash_point,state,modified FROM user
 		]]>
             <include refid="MAP-COMMON-SQL" />
             <include refid="ORDER-SQL" />

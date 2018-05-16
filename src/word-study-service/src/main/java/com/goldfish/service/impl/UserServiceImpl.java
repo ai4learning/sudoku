@@ -5,6 +5,11 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
+
+import com.goldfish.constant.ActivateCodeState;
+import com.goldfish.domain.ActivateCode;
+import com.goldfish.manager.ActivateCodeManager;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
@@ -27,16 +32,18 @@ public class UserServiceImpl implements UserService {
 	
 	@Resource(name="userManager")
 	private UserManager userManager;
+	@Resource(name="activateCodeManager")
+	private ActivateCodeManager activateCodeManager;
     
     public CommonResult<User> addUser(User user) {
 		CommonResult<User> result = new CommonResult<User>();
-		try{
-			
+		try {
+			// 1.check activateCode
+			if (!activateCodeCheck(user, result)) {
+				return result;
+			}
 			user.setCreated(new Date());
-			
-			
 			user.setModified(new Date());
-			
 			result.addDefaultModel(userManager.addUser(user));
 			result.setSuccess(true);
 		} catch (Exception e) {
@@ -45,13 +52,54 @@ public class UserServiceImpl implements UserService {
 		}
 		return result;
 	}
-	
+
+	private boolean activateCodeCheck(User user, CommonResult<User> result) {
+		String activateCode = user.getActivateCode();
+		if (StringUtils.isNotEmpty(activateCode)) {
+            ActivateCode query = new ActivateCode();
+            query.setActivateCode(activateCode.trim());
+            ActivateCode uniqueCode = activateCodeManager.getUnique(query);
+            if (uniqueCode == null) {
+                result.setMessage("激活码不存在");
+				return false;
+            }
+			if (uniqueCode.getState() == ActivateCodeState.INVALID.getState()) {
+				result.setMessage("激活码无效");
+				return false;
+			}
+			if (uniqueCode.getState() == ActivateCodeState.EXPIRED.getState()) {
+				result.setMessage("激活码超期");
+				return false;
+			}
+			if (uniqueCode.getState() == ActivateCodeState.USED.getState()) {
+				User userQuery = new User();
+				userQuery.setUserId(user.getUserId());
+				userQuery.setActivateCode(activateCode);
+				User unique = userManager.getUnique(userQuery);
+				if (unique == null) {
+					result.setMessage("激活码已使用");
+					return false;
+				}
+			}
+			if (uniqueCode.getState() == ActivateCodeState.NORMAL.getState()) {
+				// 将激活码更改为已使用
+				uniqueCode.setState(ActivateCodeState.USED.getState());
+				activateCodeManager.updateActivateCode(uniqueCode);
+				// 设置课程ID
+			}
+			user.setLessonIds(uniqueCode.getLessonIds());
+		}
+		return true;
+	}
+
 	public CommonResult<User> updateUser(User user) {
 		CommonResult<User> result = new CommonResult<User>();
 		try {
-			
-					user.setModified(new Date());
-					
+			// 1.check activateCode
+			if (!activateCodeCheck(user, result)) {
+				return result;
+			}
+			user.setModified(new Date());
 			userManager.updateUser(user);
 			result.setSuccess(true);
 		} catch (Exception e) {

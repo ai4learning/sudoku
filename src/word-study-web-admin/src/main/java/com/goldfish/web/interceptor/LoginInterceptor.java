@@ -1,6 +1,7 @@
 package com.goldfish.web.interceptor;
 
 import com.goldfish.common.CommonResult;
+import com.goldfish.constant.UserRoleType;
 import com.goldfish.domain.LoginRecord;
 import com.goldfish.domain.User;
 import com.goldfish.service.LoginRecordService;
@@ -107,6 +108,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             User query = new User();
             query.setUserId(userName);
             query.setPasswd(password);
+            query.setRoleType(UserRoleType.ADMIN.getType());
             CommonResult<User> result = userService.getUnique(query);
             User user = result.getDefaultModel();
             if (!result.isSuccess() || user == null) {

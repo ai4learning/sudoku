@@ -13,6 +13,7 @@
 			<th><span>权限等级</span></th>
 			<th><span>父ID</span></th>
 			<th><span>激活码</span></th>
+			<th><span>关联课程</span></th>
 			<th><span>用户状态</span></th>
 			<th><span>登录次数</span></th>
 			<th><span>当前班级</span></th>
@@ -56,6 +57,7 @@
     </td>
 			<td>$!item.parentId</td>
 			<td>$!item.activateCode</td>
+			<td>$!item.lessonIds</td>
 			<td>
         
 			
