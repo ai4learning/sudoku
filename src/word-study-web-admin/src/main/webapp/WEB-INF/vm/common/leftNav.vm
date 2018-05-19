@@ -227,6 +227,27 @@
             </ul>
         </li>
 
+        <li>
+            <a href="#" class="dropdown-toggle" id="j_nav_5" menuname="任务管理">
+                <i class="icon-file-alt"></i>
+                <span class="menu-text">
+                    任务管理
+                    #*<span class="badge badge-primary ">5</span>*#
+                </span>
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/task/manage?from=$!{pageFrom}&menuId=j_nav_5_1"
+                       id="j_nav_5_1" parentid="j_nav_5"  menuname="任务调度" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        任务调度
+                    </a>
+                </li>
+            </ul>
+        </li>
+
 
 ##        <li>
 ##            <a href="#" class="dropdown-toggle">

@@ -27,7 +27,7 @@ public class CourseStudy  implements Serializable {
 	/**  课程ID  */
 	private Integer lessonId; 
 	/**  是当前学习位置  */
-	private String isCurrentPos; 
+	private Integer isCurrentPos;
 	/**  学习位置CODE  */
 	private String studyPositionCode; 
 	/**  位置类型  */
@@ -97,11 +97,11 @@ public class CourseStudy  implements Serializable {
 	
 	  	
 
-  	public void setIsCurrentPos(String isCurrentPos) {
+  	public void setIsCurrentPos(Integer isCurrentPos) {
   	  this.isCurrentPos=isCurrentPos;
   	}
   
-  	public String getIsCurrentPos() {
+  	public Integer getIsCurrentPos() {
   	  return this.isCurrentPos;
   	}
 	

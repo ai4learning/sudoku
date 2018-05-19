@@ -50,18 +50,18 @@
 			<td>
         
 			
-				#if($item.isFinished==1)<span class="">未完成</span> #end	
+				#if($item.isFinished==0)<span class="">未完成</span> #end
 			
-				#if($item.isFinished==2)<span class="">已完成</span> #end	
+				#if($item.isFinished==1)<span class="">已完成</span> #end
 			
 	
     </td>
 			<td>
         
 			
-				#if($item.isTested==1)<span class="">未完成</span> #end	
+				#if($item.isTested==0)<span class="">未完成</span> #end
 			
-				#if($item.isTested==2)<span class="">已完成</span> #end	
+				#if($item.isTested==1)<span class="">已完成</span> #end
 			
 	
     </td>

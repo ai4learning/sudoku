@@ -3,7 +3,7 @@
 		"http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-	<display-name>gamble web app</display-name>
+	<display-name>word study web worker</display-name>
 
 	<!-- Spring字符集过滤器 -->
 	<filter>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.goldfish.dao.TaskDao">
+
+  <resultMap id="Task-Map" type="com.goldfish.domain.Task">
+ 		<id property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="businessId" column="business_id"/>
+		<result property="type" column="type"/>
+		<result property="content" column="content"/>
+		<result property="ext" column="ext"/>
+		<result property="state" column="state"/>
+		<result property="created" column="created"/>
+		<result property="modified" column="modified"/>
+
+	</resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+	<sql id="BEAN-COMMON-SQL">
+    	 
+    		<where>
+    		<if test="id != null"> AND id = #{id}</if>
+    		<if test="userId != null"> AND user_id = #{userId}</if>
+    		<if test="businessId != null"> AND business_id = #{businessId}</if>
+    		<if test="type != null"> AND type = #{type}</if>
+    		<if test="state != null"> AND state = #{state}</if>
+    		AND state != 2
+    		</where>
+    	 
+    	</sql>
+
+
+	<!-- 可以包含bean里面没有的字段-->
+	<sql id="MAP-COMMON-SQL">
+	   
+		<where>
+		<if test="id != null"> AND id = #{id}</if>
+		<if test="userId != null"> AND user_id = #{userId}</if>
+		<if test="businessId != null"> AND business_id = #{businessId}</if>
+		<if test="type != null"> AND type = #{type}</if>
+		<if test="state != null"> AND state = #{state}</if>
+		
+		</where>
+	 	
+	</sql>
+	
+	<sql id="ORDER-SQL">
+	 order by id desc
+	</sql>
+	
+
+	<sql id="All-FIELDS">
+		id,user_id,business_id,type,content,ext,state,created,modified
+	</sql>
+
+	<insert id="addTask" parameterType="com.goldfish.domain.Task">
+		insert into task (user_id,business_id,type,content,ext,state,created,modified)
+			values(#{userId},#{businessId},#{type},#{content},#{ext},#{state},#{created},#{modified})
+    
+		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+		   select last_insert_id() as ID from dual
+		</selectKey> 
+   
+	 </insert>
+
+    
+    <update id="updateTask" parameterType="com.goldfish.domain.Task" >
+    	update  task 
+	<set>
+			<if test="userId !=null"> user_id = #{userId},</if>
+			<if test="businessId !=null"> business_id = #{businessId},</if>
+			<if test="type !=null"> type = #{type},</if>
+			<if test="content !=null"> content = #{content},</if>
+			<if test="ext !=null"> ext = #{ext},</if>
+			<if test="state !=null"> state = #{state},</if>
+			<if test="created !=null"> created = #{created},</if>
+			<if test="modified !=null"> modified = #{modified},</if>
+
+	</set>
+	 where id = #{id}
+  	</update>
+  
+	
+
+    
+
+	<delete id="deleteTask" parameterType="com.goldfish.domain.Task">
+		DELETE FROM task WHERE id = #{id}
+	</delete>
+	<select id="getTaskById" resultMap="Task-Map" parameterType="java.lang.Long">
+		SELECT  <include refid="All-FIELDS"/> FROM task	WHERE id = #{id}
+	</select>  
+    
+
+
+
+	<select id="getUnique" resultMap="Task-Map" parameterType="com.goldfish.domain.Task">
+		SELECT   <include refid="All-FIELDS"/> FROM task
+            <include refid="BEAN-COMMON-SQL" /> limit 1
+	</select>
+
+	<select id="getUniqueValid" resultMap="Task-Map" parameterType="com.goldfish.domain.Task">
+		SELECT   <include refid="All-FIELDS"/> FROM task
+            <include refid="BEAN-COMMON-SQL" /> limit 1
+	</select>
+
+
+	<select id="getListByExample" resultMap="Task-Map" parameterType="com.goldfish.domain.Task">
+		SELECT   <include refid="All-FIELDS"/> FROM task
+            <include refid="BEAN-COMMON-SQL" />
+	</select>
+
+	
+	<select id="getTaskByPage" resultMap="Task-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  id,user_id,business_id,type,content,ext,state,modified FROM task 
+		]]>
+            <include refid="MAP-COMMON-SQL" />
+            <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM task
+		]]>
+		
+              <include refid="MAP-COMMON-SQL" />
+	</select>
+	
+
+
+</mapper>

@@ -23,9 +23,11 @@ public class WordStudy  implements Serializable {
 	/**  单词CODE  */
 	private String vocCode; 
 	/**  用户单词CODE  */
-	private String userVocCode; 
+	private String userVocCode;
+	private Integer wordId;
 	/**  单词拼写  */
-	private String spell; 
+	private String spell;
+	private String meaning;
 	/**  学生ID  */
 	private Integer studentId; 
 	/**  用户CODE  */
@@ -39,27 +41,27 @@ public class WordStudy  implements Serializable {
 	/**  完成阅读时间  */
 	private Long finishReadingTime; 
 	/**  是否第一次就读成功  */
-	private String isFstReadSuccess; 
+	private Integer isFstReadSuccess;
 	/**  读失败次数  */
 	private Integer readFailTimes; 
 	/**  持续读失败次数  */
 	private Integer continueReadFailTimes; 
 	/**  是否半读  */
-	private String isHalfReading; 
+	private Integer isHalfReading;
 	/**  是否第一个就拼写成功  */
-	private String isFstSpellSuccess; 
+	private Integer isFstSpellSuccess;
 	/**  拼写错误次数  */
 	private Integer spellFailTimes; 
 	/**  连续拼写错误次数  */
 	private Integer continueSpellFailTimes; 
 	/**  是否为半写  */
-	private String isHalfSpelling; 
+	private Integer isHalfSpelling;
 	/**  是否记住  */
-	private String isRemember; 
+	private Integer isRemember;
 	/**  是否取消复习  */
-	private String isCancelReview; 
+	private Integer isCancelReview;
 	/**  是否被收藏  */
-	private String iscollected; 
+	private Integer iscollected;
 	/**  状态  */
 	private Integer state; 
 	/**  创建时间  */
@@ -169,11 +171,11 @@ public class WordStudy  implements Serializable {
 	
 	  	
 
-  	public void setIsFstReadSuccess(String isFstReadSuccess) {
+  	public void setIsFstReadSuccess(Integer isFstReadSuccess) {
   	  this.isFstReadSuccess=isFstReadSuccess;
   	}
   
-  	public String getIsFstReadSuccess() {
+  	public Integer getIsFstReadSuccess() {
   	  return this.isFstReadSuccess;
   	}
 	
@@ -199,21 +201,21 @@ public class WordStudy  implements Serializable {
 	
 	  	
 
-  	public void setIsHalfReading(String isHalfReading) {
+  	public void setIsHalfReading(Integer isHalfReading) {
   	  this.isHalfReading=isHalfReading;
   	}
   
-  	public String getIsHalfReading() {
+  	public Integer getIsHalfReading() {
   	  return this.isHalfReading;
   	}
 	
 	  	
 
-  	public void setIsFstSpellSuccess(String isFstSpellSuccess) {
+  	public void setIsFstSpellSuccess(Integer isFstSpellSuccess) {
   	  this.isFstSpellSuccess=isFstSpellSuccess;
   	}
   
-  	public String getIsFstSpellSuccess() {
+  	public Integer getIsFstSpellSuccess() {
   	  return this.isFstSpellSuccess;
   	}
 	
@@ -239,41 +241,41 @@ public class WordStudy  implements Serializable {
 	
 	  	
 
-  	public void setIsHalfSpelling(String isHalfSpelling) {
+  	public void setIsHalfSpelling(Integer isHalfSpelling) {
   	  this.isHalfSpelling=isHalfSpelling;
   	}
   
-  	public String getIsHalfSpelling() {
+  	public Integer getIsHalfSpelling() {
   	  return this.isHalfSpelling;
   	}
 	
 	  	
 
-  	public void setIsRemember(String isRemember) {
+  	public void setIsRemember(Integer isRemember) {
   	  this.isRemember=isRemember;
   	}
   
-  	public String getIsRemember() {
+  	public Integer getIsRemember() {
   	  return this.isRemember;
   	}
 	
 	  	
 
-  	public void setIsCancelReview(String isCancelReview) {
+  	public void setIsCancelReview(Integer isCancelReview) {
   	  this.isCancelReview=isCancelReview;
   	}
   
-  	public String getIsCancelReview() {
+  	public Integer getIsCancelReview() {
   	  return this.isCancelReview;
   	}
 	
 	  	
 
-  	public void setIscollected(String iscollected) {
+  	public void setIscollected(Integer iscollected) {
   	  this.iscollected=iscollected;
   	}
   
-  	public String getIscollected() {
+  	public Integer getIscollected() {
   	  return this.iscollected;
   	}
 	
@@ -306,7 +308,20 @@ public class WordStudy  implements Serializable {
   	public java.util.Date getModified() {
   	  return this.modified;
   	}
-	
-	  	
 
+	public Integer getWordId() {
+		return wordId;
+	}
+
+	public void setWordId(Integer wordId) {
+		this.wordId = wordId;
+	}
+
+	public String getMeaning() {
+		return meaning;
+	}
+
+	public void setMeaning(String meaning) {
+		this.meaning = meaning;
+	}
 }

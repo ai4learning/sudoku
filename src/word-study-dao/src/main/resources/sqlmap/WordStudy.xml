@@ -7,7 +7,9 @@
  		<id property="id" column="id"/>
 		<result property="vocCode" column="voc_code"/>
 		<result property="userVocCode" column="user_voc_code"/>
+		<result property="wordId" column="word_id"/>
 		<result property="spell" column="spell"/>
+		<result property="meaning" column="meaning"/>
 		<result property="studentId" column="student_id"/>
 		<result property="userCode" column="user_code"/>
 		<result property="memoryLevel" column="memory_level"/>
@@ -38,20 +40,26 @@
     		<where>
     		<if test="id != null"> AND id = #{id}</if>
     		<if test="studentId != null"> AND student_id = #{studentId}</if>
+    		<if test="wordId != null"> AND word_id = #{wordId}</if>
+    		<if test="spell != null"> AND spell = #{spell}</if>
+    		<if test="meaning != null"> AND meaning = #{meaning}</if>
     		<if test="state != null"> AND state = #{state}</if>
     		
     		</where>
     	 
-    	</sql>
+	</sql>
 
 
 	<!-- 可以包含bean里面没有的字段-->
 	<sql id="MAP-COMMON-SQL">
 	   
 		<where>
-		<if test="id != null"> AND id = #{id}</if>
-		<if test="studentId != null"> AND student_id = #{studentId}</if>
-		<if test="state != null"> AND state = #{state}</if>
+			<if test="id != null"> AND id = #{id}</if>
+			<if test="studentId != null"> AND student_id = #{studentId}</if>
+			<if test="wordId != null"> AND word_id = #{wordId}</if>
+			<if test="spell != null"> AND spell = #{spell}</if>
+			<if test="meaning != null"> AND meaning = #{meaning}</if>
+			<if test="state != null"> AND state = #{state}</if>
 		
 		</where>
 	 	
@@ -63,11 +71,11 @@
 	
 
 	<sql id="All-FIELDS">
-		id,voc_code,user_voc_code,spell,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified
+		id,voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified
 	</sql>
 
 	<insert id="addWordStudy" parameterType="com.goldfish.domain.WordStudy">
-		insert into word_study (voc_code,user_voc_code,spell,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified)
+		insert into word_study (voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified)
 			values(#{vocCode},#{userVocCode},#{spell},#{studentId},#{userCode},#{memoryLevel},#{reviewTimes},#{timeLeft},#{finishReadingTime},#{isFstReadSuccess},#{readFailTimes},#{continueReadFailTimes},#{isHalfReading},#{isFstSpellSuccess},#{spellFailTimes},#{continueSpellFailTimes},#{isHalfSpelling},#{isRemember},#{isCancelReview},#{iscollected},#{state},#{created},#{modified})
     
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
@@ -82,7 +90,9 @@
 	<set>
 			<if test="vocCode !=null"> voc_code = #{vocCode},</if>
 			<if test="userVocCode !=null"> user_voc_code = #{userVocCode},</if>
+			<if test="wordId !=null"> word_id = #{wordId},</if>
 			<if test="spell !=null"> spell = #{spell},</if>
+			<if test="meaning !=null"> meaning = #{meaning},</if>
 			<if test="studentId !=null"> student_id = #{studentId},</if>
 			<if test="userCode !=null"> user_code = #{userCode},</if>
 			<if test="memoryLevel !=null"> memory_level = #{memoryLevel},</if>
@@ -136,7 +146,7 @@
 	
 	<select id="getWordStudyByPage" resultMap="WordStudy-Map" parameterType="java.util.HashMap">
 		<![CDATA[
-			SELECT  id,voc_code,user_voc_code,spell,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,modified FROM word_study 
+			SELECT  id,voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,modified FROM word_study
 		]]>
             <include refid="MAP-COMMON-SQL" />
             <include refid="ORDER-SQL" />

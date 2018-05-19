@@ -1,0 +1,108 @@
+
+<div class="row-fluid">
+	<div class="span12">
+		<table class="table table-striped table-bordered table-hover table-condensed">
+			<thead>
+				<tr>
+ 			<th><span>ID</span></th>
+			<th><span>用户ID</span></th>
+			<th><span>业务ID</span></th>
+			<th><span>任务类型</span></th>
+			<th><span>任务内容</span></th>
+			<th><span>扩展信息</span></th>
+			<th><span>状态</span></th>
+			<th><span>修改时间</span></th>
+
+				<th class="operate">操作</th>
+				</tr>
+			</thead>
+
+
+			<tbody>
+	#if($list && $list.size()!=0)
+		    #foreach($item in $list)
+		   <tr>
+				 			<td>$!item.id</td>
+			<td>$!item.userId</td>
+			<td>$!item.businessId</td>
+			<td>
+        
+			
+				#if($item.type==1)<span class="">用户学习数据初始化</span> #end	
+			
+				#if($item.type==2)<span class="">生成错词本</span> #end	
+			
+				#if($item.type==3)<span class="">生成复习本</span> #end	
+			
+	
+    </td>
+			<td>$!item.content</td>
+			<td>$!item.ext</td>
+			<td>
+        
+			
+				#if($item.state==0)<span class="">未执行</span> #end
+			
+				#if($item.state==1)<span class="">已执行</span> #end
+			
+				#if($item.state==2)<span class="">删除</span> #end
+			
+	
+    </td>
+			<td>$!dateFormatUtils.format($!item.modified)</td>
+
+				<td class="operate">
+					<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+						<button class="btn btn-xs btn-success JUpdate-task" type="button" itemid="$!item.id"><i class="icon-edit bigger-120"></i>编辑</button>
+						<button class="btn btn-xs btn-info JView-task" type="button" itemid="$!item.id"><i class="icon-eye-open bigger-120"></i>查看</button>
+						<button class="btn btn-xs btn-danger JDelete-task" type="button" itemid="$!item.id"> <i class="icon-trash bigger-120"></i>删除</button>
+					</div>
+				</td>
+		  </tr>
+			#end
+		#else
+		<tr>
+					<td colspan="10" class="message_default">没有记录！</td>
+		</tr>
+		#end
+
+
+			</tbody>
+
+
+		</table>
+
+		#if($pageQuery)
+			#showPageQuery($pageQuery,'queryTaskList','input')
+		#end
+
+	</div>
+</div>
+
+
+
+
+<script language="javascript">
+void function(j) {	
+	j('.JDelete-task').click(function() {
+		var id = j(this).attr('itemid');
+		var config={title:'删除任务表',info:'您确定要删除任务表吗？',"queryList":"queryTaskList",
+		url: '/task/doDelete.action',param:'id='+id};
+		gUtils.fConfirmAndRefreshList(config);
+	});
+	
+	j('.JUpdate-task').click(function() {
+		var id = j(this).attr('itemid');
+		//gDialog.fCreate({ title: '修改任务表', url: '/task/update.action?id='+id,width:700}).show();
+		var url='/task/update.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
+	});
+
+	j('.JView-task').click(function() {
+		var id = j(this).attr('itemid');
+		//gDialog.fCreate({ title: '查看任务表', url: '/task/view?id='+id,width:700}).show();
+		var url='/task/view.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
+	});
+}(jQuery);
+</script>

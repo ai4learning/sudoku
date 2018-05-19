@@ -28,8 +28,6 @@ import com.goldfish.domain.User;
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
-
-//	private final static Log log = LogFactory.getLog(UserAction.class);
 	
 	@Resource(name="userService")
 	private UserService userService;

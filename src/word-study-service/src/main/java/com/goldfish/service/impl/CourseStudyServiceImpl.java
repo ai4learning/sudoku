@@ -5,6 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
+
+import com.goldfish.constant.State;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
@@ -31,12 +33,9 @@ public class CourseStudyServiceImpl implements CourseStudyService {
     public CommonResult<CourseStudy> addCourseStudy(CourseStudy courseStudy) {
 		CommonResult<CourseStudy> result = new CommonResult<CourseStudy>();
 		try{
-			
+
 			courseStudy.setCreated(new Date());
-			
-			
 			courseStudy.setModified(new Date());
-			
 			result.addDefaultModel(courseStudyManager.addCourseStudy(courseStudy));
 			result.setSuccess(true);
 		} catch (Exception e) {

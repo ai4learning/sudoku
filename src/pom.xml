@@ -230,6 +230,12 @@
 
             <!-- worker调度 -->
             <dependency>
+                <groupId>org.opensymphony.quartz</groupId>
+                <artifactId>quartz-all</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.quartz-scheduler</groupId>
                 <artifactId>quartz</artifactId>
                 <version>1.8.6</version>

@@ -92,8 +92,8 @@
 			
         
 		<select class="forms_select input-medium" name="isFinished" id="isFinished">
-				<option value="1" #if($unitWordsStudy.isFinished==1) selected #end>未完成</option>
-				<option value="2" #if($unitWordsStudy.isFinished==2) selected #end>已完成</option>
+				<option value="0" #if($unitWordsStudy.isFinished==0) selected #end>未完成</option>
+				<option value="1" #if($unitWordsStudy.isFinished==1) selected #end>已完成</option>
 </select>
 		
     
@@ -107,8 +107,8 @@
 			
         
 		<select class="forms_select input-medium" name="isTested" id="isTested">
-				<option value="1" #if($unitWordsStudy.isTested==1) selected #end>未完成</option>
-				<option value="2" #if($unitWordsStudy.isTested==2) selected #end>已完成</option>
+				<option value="0" #if($unitWordsStudy.isTested==0) selected #end>未完成</option>
+				<option value="1" #if($unitWordsStudy.isTested==1) selected #end>已完成</option>
 </select>
 		
     

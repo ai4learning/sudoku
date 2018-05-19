@@ -1,0 +1,129 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
+
+    
+<div class="modal-body " id="update_task">
+	<form class="form-horizontal"  id="form_update_Task" role="form">
+	
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">ID</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{task.id}"readonly/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userId">用户ID</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="userId" id="userId" placeholder="请输入用户ID" maxlength="10" value="$!{task.userId}"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="businessId">业务ID</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="businessId" id="businessId" placeholder="请输入业务ID" maxlength="19" value="$!{task.businessId}"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="type">任务类型</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="type" id="type">
+				<option value="0" #if($task.type==0) selected #end>用户学习数据初始化</option>
+				<option value="1" #if($task.type==1) selected #end>生成错词本</option>
+				<option value="2" #if($task.type==2) selected #end>生成复习本</option>
+</select>
+		
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="content">任务内容</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="content" id="content" placeholder="请输入任务内容" maxlength="255" value="$!{task.content}"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="ext">扩展信息</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="ext" id="ext" placeholder="请输入扩展信息" maxlength="255" value="$!{task.ext}"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="state" id="state">
+				<option value="1" #if($task.state==1) selected #end>未执行</option>
+				<option value="2" #if($task.state==2) selected #end>已执行</option>
+				<option value="3" #if($task.state==3) selected #end>删除</option>
+</select>
+		
+    
+
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-primary" id="btn_update_Task">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
+</div>
+
+
+<script language="javascript">
+
+
+
+
+void function(j) {
+	var set = {
+		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
+		userId:  {must: false, maxlength:10, ftip:'用户ID,最多10个字符' ,handler:'int' },
+		businessId:  {must: false, maxlength:19, ftip:'业务ID,最多19个字符' ,handler:'int' },
+		type:  {must: true, maxlength:3, ftip:'类型,最多3个字符' ,handler:'int' },
+		content:  {must: false, maxlength:255, ftip:'任务内容,最多255个字符'},
+		ext:  {must: false, maxlength:255, ftip:'扩展信息,最多255个字符'},
+		state:  {must: true, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
+	};
+	
+
+	j('#btn_update_Task').click(function(e) {
+		gUtils.fSubmitForm(
+			j("#form_update_Task").serialize(),
+			set, 
+			'/task/doUpdate.action', 
+			function() {
+				gDialog.fClose();
+				backToManage();
+			}
+		);
+	});
+
+
+	//form.friend.init(set);
+}(jQuery);
+
+
+	function backToManage(){
+    		var url='/task/manage.action';
+    		gUtils.fMakeFullLink(url);
+            window.location=url;
+    };
+</script>

@@ -6,9 +6,14 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
 
+import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.ActivateCodeState;
+import com.goldfish.constant.FinishState;
+import com.goldfish.constant.TaskType;
 import com.goldfish.domain.ActivateCode;
+import com.goldfish.domain.Task;
 import com.goldfish.manager.ActivateCodeManager;
+import com.goldfish.manager.TaskManager;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
@@ -34,6 +39,8 @@ public class UserServiceImpl implements UserService {
 	private UserManager userManager;
 	@Resource(name="activateCodeManager")
 	private ActivateCodeManager activateCodeManager;
+	@Resource
+	private TaskManager taskManager;
     
     public CommonResult<User> addUser(User user) {
 		CommonResult<User> result = new CommonResult<User>();
@@ -44,13 +51,52 @@ public class UserServiceImpl implements UserService {
 			}
 			user.setCreated(new Date());
 			user.setModified(new Date());
-			result.addDefaultModel(userManager.addUser(user));
+			User newUser = userManager.addUser(user);
+			buildInitUserStudyDataTask(newUser);
+			result.addDefaultModel(newUser);
 			result.setSuccess(true);
 		} catch (Exception e) {
 			logger.error("添加 用户失败", e);
 			result.setSuccess(false);
 		}
 		return result;
+	}
+
+	/**
+	 * 用户
+	 * @param newUser
+	 */
+	private void buildInitUserStudyDataTask(User newUser) {
+		// 已关联课程，则尝试创建任务
+		try {
+			Integer userId = Integer.valueOf(String.valueOf(newUser.getId()));
+			String lessonIds = newUser.getLessonIds();
+			if (StringUtils.isEmpty(lessonIds)) {
+				return;
+			}
+			String[] lessons = lessonIds.trim().split(",|，");
+			Task task = new Task();
+			Task query = new Task();
+			query.setUserId(userId);
+			Date current = new Date();
+			for (String lessonId : lessons) {
+				query.setBusinessId(Long.valueOf(lessonId));
+				Task queridTask = taskManager.getUniqueValid(query);
+				if (queridTask == null) {
+					// 不存在，则插入
+					task.setType(TaskType.INIT_STUDY_DATA.getType());
+					task.setState(FinishState.NOT_COMPLETE.getState());
+					task.setUserId(Integer.valueOf(String.valueOf(newUser.getId())));
+					task.setBusinessId(Long.valueOf(lessonId));
+					task.setCreated(current);
+					task.setModified(current);
+					taskManager.addTask(task);
+				}
+			}
+
+		} catch (Exception e) {
+			LogTypeEnum.DEFAULT.error(e, "创建初始化任务失败");
+		}
 	}
 
 	private boolean activateCodeCheck(User user, CommonResult<User> result) {
@@ -101,6 +147,7 @@ public class UserServiceImpl implements UserService {
 			}
 			user.setModified(new Date());
 			userManager.updateUser(user);
+			buildInitUserStudyDataTask(user);
 			result.setSuccess(true);
 		} catch (Exception e) {
 			logger.error("更新 用户失败", e);

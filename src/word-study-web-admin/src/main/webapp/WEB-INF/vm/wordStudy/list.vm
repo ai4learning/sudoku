@@ -7,7 +7,9 @@
  			<th><span>ID</span></th>
 			<th><span>单词CODE</span></th>
 			<th><span>用户单词CODE</span></th>
+			<th><span>单词ID</span></th>
 			<th><span>单词拼写</span></th>
+			<th><span>单词释义</span></th>
 			<th><span>学生ID</span></th>
 			<th><span>用户CODE</span></th>
 			<th><span>记忆等级</span></th>
@@ -40,16 +42,16 @@
 				 			<td>$!item.id</td>
 			<td>$!item.vocCode</td>
 			<td>$!item.userVocCode</td>
+			<td>$!item.wordId</td>
 			<td>$!item.spell</td>
+			<td>$!item.meaning</td>
 			<td>$!item.studentId</td>
 			<td>$!item.userCode</td>
 			<td>
         
 			
-				#if($item.memoryLevel==1)<span class="">生词</span> #end	
-			
-				#if($item.memoryLevel==2)<span class="">熟词</span> #end	
-			
+				#if($item.memoryLevel==1)<span class="">生词</span> #end
+				#if($item.memoryLevel==2)<span class="">熟词</span> #end
 				#if($item.memoryLevel==3)<span class="">半生熟</span> #end	
 			
 	

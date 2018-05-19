@@ -3,12 +3,12 @@
 
 	<!-- mybatis 配置开始-->
 	
-	<typeAlias type="com.goldfish.domain.User" alias="User"/>
+	<typeAlias type="com.goldfish.domain.Task" alias="Task"/>
 
-	<mapper resource="sqlmap/User.xml" />
+	<mapper resource="sqlmap/Task.xml" />
 	
-	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">  
-	   <property name="mapperInterface" value="com.goldfish.dao.UserDao"/>
+	<bean id="taskDao" class="org.mybatis.spring.mapper.MapperFactoryBean">  
+	   <property name="mapperInterface" value="com.goldfish.dao.TaskDao"/>
 	  <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
 	</bean>
 	
@@ -18,9 +18,9 @@
 
 	<!-- ibatis 配置开始-->
 
-	<sqlMap resource="sqlmap//User.xml" />
+	<sqlMap resource="sqlmap//Task.xml" />
 	
-	<bean id="userDao" class="com.goldfish.dao.impl.UserDaoImpl">
+	<bean id="taskDao" class="com.goldfish.dao.impl.TaskDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<!-- ibatis 配置end-->
@@ -44,10 +44,10 @@
 
 
 	<!-- 可选配置项 start -->
-	<bean id="userManager" class="com.goldfish.dao.impl.UserManagerImpl">
+	<bean id="taskManager" class="com.goldfish.dao.impl.TaskManagerImpl">
 	</bean>
 	
-	<bean id="userService" class="com.goldfish.dao.impl.UserServiceImpl">
+	<bean id="taskService" class="com.goldfish.dao.impl.TaskServiceImpl">
 	</bean>
 	<!-- 可选配置项 end -->
 
@@ -55,10 +55,10 @@
 
 
 	<!--struts config start-->
-	<!-- 用户 -->
-	<package name="-user" namespace="//user" extends="jshow-admin">
-		<action name="*" method="{1}" class="com.goldfish.web.action.UserAction">
-			<result>${path}//user/{1}.vm</result>
+	<!-- 任务表 -->
+	<package name="-task" namespace="//task" extends="jshow-admin">
+		<action name="*" method="{1}" class="com.goldfish.web.action.TaskAction">
+			<result>${path}//task/{1}.vm</result>
 		</action>
 	</package>
 	<!--struts config end-->
