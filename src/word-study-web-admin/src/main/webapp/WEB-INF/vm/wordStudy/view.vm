@@ -138,7 +138,8 @@
 			
         
 		<select class="forms_select input-medium form-control" name="isFstReadSuccess" id="isFstReadSuccess" disabled>
-						<option value="0" #if($wordStudy.isFstReadSuccess==0) selected  #end>否；1.是；</option>
+						<option value="0" #if($wordStudy.isFstReadSuccess==0) selected  #end>否</option>
+						<option value="1" #if($wordStudy.isFstReadSuccess==1) selected  #end>是</option>
 
 		</select>
 	
@@ -221,7 +222,8 @@
 			
         
 		<select class="forms_select input-medium form-control" name="isHalfSpelling" id="isHalfSpelling" disabled>
-						<option value="0" #if($wordStudy.isHalfSpelling==0) selected  #end>否；1.是；</option>
+						<option value="0" #if($wordStudy.isHalfSpelling==0) selected  #end>否</option>
+						<option value="1" #if($wordStudy.isHalfSpelling==1) selected  #end>是</option>
 
 		</select>
 	
@@ -236,7 +238,8 @@
 			
         
 		<select class="forms_select input-medium form-control" name="isRemember" id="isRemember" disabled>
-						<option value="0" #if($wordStudy.isRemember==0) selected  #end>否；1.是；</option>
+						<option value="0" #if($wordStudy.isRemember==0) selected  #end>否</option>
+						<option value="1" #if($wordStudy.isRemember==1) selected  #end>是</option>
 
 		</select>
 	
@@ -251,7 +254,8 @@
 			
         
 		<select class="forms_select input-medium form-control" name="isCancelReview" id="isCancelReview" disabled>
-						<option value="0" #if($wordStudy.isCancelReview==0) selected  #end>否；1.是；</option>
+						<option value="0" #if($wordStudy.isCancelReview==0) selected  #end>否</option>
+						<option value="1" #if($wordStudy.isCancelReview==1) selected  #end>是</option>
 
 		</select>
 	
@@ -266,7 +270,8 @@
 			
         
 		<select class="forms_select input-medium form-control" name="iscollected" id="iscollected" disabled>
-						<option value="0" #if($wordStudy.iscollected==0) selected  #end>否；1.是；</option>
+						<option value="0" #if($wordStudy.iscollected==0) selected  #end>否</option>
+						<option value="1" #if($wordStudy.iscollected==1) selected  #end>是</option>
 
 		</select>
 	

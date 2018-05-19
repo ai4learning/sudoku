@@ -117,8 +117,9 @@
 			
         
 		<select class="forms_select input-medium" name="isFstReadSuccess" id="isFstReadSuccess">
-				<option value="0" #if($wordStudy.isFstReadSuccess==0) selected #end>否；1.是；</option>
-</select>
+				<option value="0" #if($wordStudy.isFstReadSuccess==0) selected #end>否</option>
+				<option value="1" #if($wordStudy.isFstReadSuccess==1) selected #end>是</option>
+		</select>
 		
     
 
@@ -149,7 +150,7 @@
 		<select class="forms_select input-medium" name="isHalfReading" id="isHalfReading">
 				<option value="0" #if($wordStudy.isHalfReading==0) selected #end>否</option>
 				<option value="1" #if($wordStudy.isHalfReading==1) selected #end>是</option>
-</select>
+		</select>
 		
     
 
@@ -164,7 +165,7 @@
 		<select class="forms_select input-medium" name="isFstSpellSuccess" id="isFstSpellSuccess">
 				<option value="0" #if($wordStudy.isFstSpellSuccess==0) selected #end>否</option>
 				<option value="1" #if($wordStudy.isFstSpellSuccess==1) selected #end>是</option>
-</select>
+		</select>
 		
     
 
@@ -193,8 +194,9 @@
 			
         
 		<select class="forms_select input-medium" name="isHalfSpelling" id="isHalfSpelling">
-				<option value="0" #if($wordStudy.isHalfSpelling==0) selected #end>否；1.是；</option>
-</select>
+				<option value="0" #if($wordStudy.isHalfSpelling==0) selected #end>否</option>
+				<option value="1" #if($wordStudy.isHalfSpelling==1) selected #end>是</option>
+		</select>
 		
     
 
@@ -207,8 +209,9 @@
 			
         
 		<select class="forms_select input-medium" name="isRemember" id="isRemember">
-				<option value="0" #if($wordStudy.isRemember==0) selected #end>否；1.是；</option>
-</select>
+				<option value="0" #if($wordStudy.isRemember==0) selected #end>否</option>
+				<option value="1" #if($wordStudy.isRemember==1) selected #end>是</option>
+		</select>
 		
     
 
@@ -221,8 +224,9 @@
 			
         
 		<select class="forms_select input-medium" name="isCancelReview" id="isCancelReview">
-				<option value="0" #if($wordStudy.isCancelReview==0) selected #end>否；1.是；</option>
-</select>
+				<option value="0" #if($wordStudy.isCancelReview==0) selected #end>否</option>
+				<option value="1" #if($wordStudy.isCancelReview==1) selected #end>是</option>
+		</select>
 		
     
 
@@ -235,7 +239,8 @@
 			
         
 		<select class="forms_select input-medium" name="iscollected" id="iscollected">
-				<option value="0" #if($wordStudy.iscollected==0) selected #end>否；1.是；</option>
+				<option value="0" #if($wordStudy.iscollected==0) selected #end>否</option>
+				<option value="1" #if($wordStudy.iscollected==1) selected #end>是</option>
 </select>
 		
     

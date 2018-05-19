@@ -134,10 +134,10 @@
         </li>
 
         <li>
-            <a href="#" class="dropdown-toggle" id="j_nav_3" menuname="学生学习管理">
+            <a href="#" class="dropdown-toggle" id="j_nav_3" menuname="学习管理">
                 <i class="icon-file-alt"></i>
                 <span class="menu-text">
-                    学生学习管理
+                    学习管理
                     #*<span class="badge badge-primary ">5</span>*#
                 </span>
                 <b class="arrow icon-angle-down"></b>
@@ -162,21 +162,21 @@
                     <a href="/wordStudy/manage?from=$!{pageFrom}&menuId=j_nav_3_3"
                        id="j_nav_3_3" parentid="j_nav_3"  menuname="整体单词学习情况" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
-                        整体单词学习情况
+                        单词学习情况
                     </a>
                 </li>
                 <li>
                     <a href="/selfWords/manage?from=$!{pageFrom}&menuId=j_nav_3_4"
-                       id="j_nav_3_4" parentid="j_nav_3"  menuname="个人单词本" class="j_sub_nav">
+                       id="j_nav_3_4" parentid="j_nav_3"  menuname="错题本/复习本" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
-                        学生个人单词本
+                        错题本/复习本
                     </a>
                 </li>
                 <li>
                     <a href="/selfWordsStudy/manage?from=$!{pageFrom}&menuId=j_nav_3_5"
-                       id="j_nav_3_5" parentid="j_nav_3"  menuname="个人单词学习情况" class="j_sub_nav">
+                       id="j_nav_3_5" parentid="j_nav_3"  menuname="错题本/复习本学习" class="j_sub_nav">
                         <i class="icon-double-angle-right"></i>
-                        个人单词学习情况
+                        错题本/复习本学习
                     </a>
                 </li>
 

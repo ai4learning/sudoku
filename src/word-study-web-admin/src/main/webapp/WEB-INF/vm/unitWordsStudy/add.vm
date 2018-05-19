@@ -36,7 +36,7 @@
 		
 		
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="lessonId">课程ID</label>
+			<label class="col-sm-2 control-label" for="lessonId">课程号</label>
 			<div class="col-sm-7 controls">
 			
 				<input type="text"  class="form-control" name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10"/>
@@ -46,7 +46,7 @@
 		
 		
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="unitNbr">课程号</label>
+			<label class="col-sm-2 control-label" for="unitNbr">单元号</label>
 			<div class="col-sm-7 controls">
 			
 				<input type="text"  class="form-control" name="unitNbr" id="unitNbr" placeholder="请输入课程号" maxlength="3"/>
@@ -62,7 +62,7 @@
         
 		<select class="forms_select input-medium" name="currentPhase" id="currentPhase">
 			
-				<option value="1">分批学习</option>
+				<option value="1">强化训练</option>
 				<option value="2">整体回忆</option>
 				<option value="3">单元测试</option>
 		</select>

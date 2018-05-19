@@ -19,11 +19,11 @@
 							<property name="concurrent" value="false" />
 						</bean>
 					</property>
-					<property name="cronExpression" value="0/5 * * * * ?" />
+					<property name="cronExpression" value="0/30 * * * * ?" />
 				</bean>
 			</list>
 		</property>
 		<property name="autoStartup" value="true"/>
-        <property name="startupDelay" value="30"/>
+        <!--<property name="startupDelay" value="30"/>-->
 	</bean>
 </beans>

@@ -76,7 +76,7 @@
 
 	<insert id="addWordStudy" parameterType="com.goldfish.domain.WordStudy">
 		insert into word_study (voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified)
-			values(#{vocCode},#{userVocCode},#{spell},#{studentId},#{userCode},#{memoryLevel},#{reviewTimes},#{timeLeft},#{finishReadingTime},#{isFstReadSuccess},#{readFailTimes},#{continueReadFailTimes},#{isHalfReading},#{isFstSpellSuccess},#{spellFailTimes},#{continueSpellFailTimes},#{isHalfSpelling},#{isRemember},#{isCancelReview},#{iscollected},#{state},#{created},#{modified})
+			values(#{vocCode},#{userVocCode},#{wordId},#{spell},#{meaning},#{studentId},#{userCode},#{memoryLevel},#{reviewTimes},#{timeLeft},#{finishReadingTime},#{isFstReadSuccess},#{readFailTimes},#{continueReadFailTimes},#{isHalfReading},#{isFstSpellSuccess},#{spellFailTimes},#{continueSpellFailTimes},#{isHalfSpelling},#{isRemember},#{isCancelReview},#{iscollected},#{state},#{created},#{modified})
     
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
 		   select last_insert_id() as ID from dual

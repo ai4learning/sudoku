@@ -69,8 +69,8 @@
 		<select class="forms_select input-medium" name="status" id="status_search">
 			<option value="">全部</option>
 			
-				<option value="0">有效</option>
-				<option value="1">无效</option>
+				<option value="1">有效</option>
+				<option value="2">无效</option>
 		</select>
 	
     

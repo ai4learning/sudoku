@@ -39,7 +39,7 @@
 		
 
 		<div class="form-group">
-			<label for="lessonId_search">课程ID</label>
+			<label for="lessonId_search">课程号</label>
 				
 				<input type="text"  name="lessonId" id="lessonId_search" class="form-control" placeholder="请输入课程ID">
 				

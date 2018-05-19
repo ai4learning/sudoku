@@ -6,8 +6,9 @@ package com.goldfish.constant;
 public enum State {
     VALID(1, "有效"),
     IN_VALID(2, "无效"),
+    UNKNOW(-1,"未知"),
     YES(1,"是"),
-    NO(2,"否");
+    NO(0,"否");
 
     private int state;
     private String desc;

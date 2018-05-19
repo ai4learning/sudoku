@@ -95,9 +95,9 @@
 			<td>
         
 			
-				#if($item.status==0)<span class="">有效</span> #end
+				#if($item.status==1)<span class="">有效</span> #end
 			
-				#if($item.status==1)<span class="">无效</span> #end
+				#if($item.status==2)<span class="">无效</span> #end
 			
 	
     </td>

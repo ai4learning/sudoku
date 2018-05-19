@@ -7,8 +7,8 @@
  			<th><span>ID</span></th>
 			<th><span>学生ID</span></th>
 			<th><span>学生CODE</span></th>
-			<th><span>课程ID</span></th>
 			<th><span>课程号</span></th>
+			<th><span>单元号</span></th>
 			<th><span>学习阶段</span></th>
 			<th><span>总读时间</span></th>
 			<th><span>总写时间</span></th>
@@ -36,7 +36,7 @@
 			<td>
         
 			
-				#if($item.currentPhase==1)<span class="">分批学习</span> #end	
+				#if($item.currentPhase==1)<span class="">强化训练</span> #end
 			
 				#if($item.currentPhase==2)<span class="">整体回忆</span> #end	
 			

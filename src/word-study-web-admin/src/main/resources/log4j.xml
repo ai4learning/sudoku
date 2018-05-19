@@ -10,7 +10,7 @@
 	</appender>
     <appender name="DEFAULT_FILE" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="encoding" value="UTF-8" />
-        <param name="file" value="${log.root}/jshow.shareyi.com/default.log" />
+        <param name="file" value="${log.root}/goldfish/admin.log" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d %p - %C[%L] - %m \n" />
         </layout>

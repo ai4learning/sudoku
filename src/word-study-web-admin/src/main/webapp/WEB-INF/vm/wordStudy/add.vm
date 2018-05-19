@@ -128,7 +128,8 @@
         
 		<select class="forms_select input-medium" name="isFstReadSuccess" id="isFstReadSuccess">
 			
-				<option value="0">否；1.是；</option>
+				<option value="0">否</option>
+				<option value="1">是</option>
 		</select>
 	
     
@@ -218,7 +219,8 @@
         
 		<select class="forms_select input-medium" name="isHalfSpelling" id="isHalfSpelling">
 			
-				<option value="0">否；1.是；</option>
+				<option value="0">否</option>
+				<option value="1">是</option>
 		</select>
 	
     
@@ -234,7 +236,8 @@
         
 		<select class="forms_select input-medium" name="isRemember" id="isRemember">
 			
-				<option value="0">否；1.是；</option>
+				<option value="0">否</option>
+				<option value="1">是</option>
 		</select>
 	
     
@@ -249,8 +252,9 @@
 			
         
 		<select class="forms_select input-medium" name="isCancelReview" id="isCancelReview">
-			
-				<option value="0">否；1.是；</option>
+
+            <option value="0">否</option>
+            <option value="1">是</option>
 		</select>
 	
     
@@ -265,8 +269,9 @@
 			
         
 		<select class="forms_select input-medium" name="iscollected" id="iscollected">
-			
-				<option value="0">否；1.是；</option>
+
+            <option value="0">否</option>
+            <option value="1">是</option>
 		</select>
 	
     

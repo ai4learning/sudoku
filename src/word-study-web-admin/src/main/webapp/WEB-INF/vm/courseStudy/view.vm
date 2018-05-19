@@ -201,8 +201,8 @@
 			
         
 		<select class="forms_select input-medium form-control" name="status" id="status" disabled>
-						<option value="0" #if($courseStudy.status==0) selected  #end>有效</option>
-				<option value="1" #if($courseStudy.status==1) selected  #end>无效</option>
+				<option value="1" #if($courseStudy.status==1) selected  #end>有效</option>
+				<option value="2" #if($courseStudy.status==2) selected  #end>无效</option>
 
 		</select>
 	

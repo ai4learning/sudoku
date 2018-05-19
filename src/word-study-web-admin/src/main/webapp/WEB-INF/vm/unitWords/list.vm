@@ -5,15 +5,16 @@
 			<thead>
 				<tr>
  			<th><span>ID</span></th>
-			<th><span>单元CODE</span></th>
-			<th><span>课程ID</span></th>
-			<th><span>单元号</span></th>
-			<th><span>单词归类</span></th>
+			#*<th><span>单元CODE</span></th>*#
+			<th><span>课程号</span></th>
+			#*<th><span>单元号</span></th>*#
 			<th><span>单元名</span></th>
+			#*<th><span>单词归类</span></th>*#
 			<th><span>单词CODE</span></th>
 			<th><span>单词索引号</span></th>
-			<th><span>单词ID</span></th>
 			<th><span>拼写</span></th>
+			<th><span>单词释义</span></th>
+			<th><span>单词ID</span></th>
 			<th><span>状态</span></th>
 			<th><span>修改时间</span></th>
 
@@ -26,16 +27,17 @@
 	#if($list && $list.size()!=0)
 		    #foreach($item in $list)
 		   <tr>
-				 			<td>$!item.id</td>
-			<td>$!item.unitCode</td>
+			<td>$!item.id</td>
+			#*<td>$!item.unitCode</td>*#
 			<td>$!item.lessonId</td>
-			<td>$!item.unitNbr</td>
-			<td>$!item.fstClassId</td>
-			<td>$!item.unit</td>
+			#*<td>$!item.unitNbr</td>*#
+		   	<td>$!item.unit</td>
+		   	#*<td>$!item.fstClassId</td>*#
 			<td>$!item.vocCode</td>
 			<td>$!item.vocIndex</td>
-			<td>$!item.wordId</td>
-			<td>$!item.spelling</td>
+		   	<td>$!item.spelling</td>
+		   	<td>$!item.meaning</td>
+		   	<td>$!item.wordId</td>
 			<td>
         
 			

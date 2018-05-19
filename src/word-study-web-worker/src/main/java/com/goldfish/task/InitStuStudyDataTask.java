@@ -66,7 +66,7 @@ public class InitStuStudyDataTask extends AbstractTask{
      * @return
      */
     private boolean initCourseStudyData(Integer userId, Long lessonId) {
-        LogTypeEnum.DEFAULT.debug("学生课程学习数据处理开始");
+        LogTypeEnum.DEFAULT.debug("学生课程学习数据处理开始,userId={},lessonId={}", userId, lessonId);
         CourseStudy query = new CourseStudy();
         query.setStudentId(userId);
         query.setLessonId(Integer.valueOf(String.valueOf(lessonId)));
@@ -78,12 +78,12 @@ public class InitStuStudyDataTask extends AbstractTask{
         }
         CourseStudy courseStudy = result.getDefaultModel();
         if (courseStudy == null) {
-            LogTypeEnum.DEFAULT.info("课程学习记录不存在，需插入");
+            LogTypeEnum.DEFAULT.info("课程学习记录不存在，需插入,userId={},lessonId={}", userId, lessonId);
             if (!insertCourseStudy(userId, lessonId)) {
                 return false;
             }
         }
-        LogTypeEnum.DEFAULT.info("学生课程学习数据处理完毕");
+        LogTypeEnum.DEFAULT.info("学生课程学习数据处理完毕,userId={},lessonId={}", userId, lessonId);
         return true;
     }
 
@@ -200,16 +200,19 @@ public class InitStuStudyDataTask extends AbstractTask{
             wordStudy.setReviewTimes(0);
             wordStudy.setTimeLeft(-1L);
             wordStudy.setFinishReadingTime(-1L);
-            wordStudy.setIsFstReadSuccess(-1);
-            wordStudy.setIsFstSpellSuccess(-1);
             wordStudy.setReadFailTimes(0);
             wordStudy.setContinueReadFailTimes(0);
             wordStudy.setContinueSpellFailTimes(0);
-            wordStudy.setIsHalfReading(0);
-            wordStudy.setIsHalfSpelling(0);
             wordStudy.setSpellFailTimes(0);
-            wordStudy.setIsRemember(0);
-            wordStudy.setIsCancelReview(0);
+
+            wordStudy.setIsFstReadSuccess(State.UNKNOW.getState());
+            wordStudy.setIsFstSpellSuccess(State.UNKNOW.getState());
+            wordStudy.setIsHalfReading(State.NO.getState());
+            wordStudy.setIsHalfSpelling(State.NO.getState());
+            wordStudy.setIsRemember(State.NO.getState());
+            wordStudy.setIsCancelReview(State.NO.getState());
+            wordStudy.setIscollected(State.NO.getState());
+
             wordStudy.setState(State.VALID.getState());
             wordStudyService.addWordStudy(wordStudy);
         } catch (Exception e) {
