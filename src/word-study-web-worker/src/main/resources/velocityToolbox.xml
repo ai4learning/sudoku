@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox>
+    <tool>
+        <!-- 模板中调用名 -->
+        <key>dateFormatUtils</key>
+        <scope>application</scope>
+        <!-- 类全名 -->
+        <class>com.goldfish.utils.DateUtils</class>
+    </tool>
+</toolbox>

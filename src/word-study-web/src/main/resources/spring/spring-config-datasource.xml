@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="parentDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="maxActive" value="214" />
+        <property name="initialSize" value="2" />
+        <property name="maxWait" value="30000" />
+        <property name="maxIdle" value="30" />
+        <property name="minIdle" value="1" />
+        <property name="testOnBorrow" value="false"></property>
+        <property name="testWhileIdle" value="true"></property>
+        <property name="validationQuery" value="select 1"></property>
+        <property name="timeBetweenEvictionRunsMillis"><value>30000</value></property>
+        <property name="numTestsPerEvictionRun"><value>10</value></property>
+        <property name="minEvictableIdleTimeMillis" value="30000"></property>
+    </bean>
+
+
+    <bean id="dataSource" parent="parentDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="${vip.mysql.wr.jdbc.url}" />
+        <property name="username" value="${vip.mysql.wr.jdbc.username}" />
+        <property name="password" value="${vip.mysql.wr.jdbc.password}" />
+    </bean>
+
+
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+
+    <!-- 启动spring事务注解，事务注解尽在此 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis_configuration.xml" />
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+</beans>

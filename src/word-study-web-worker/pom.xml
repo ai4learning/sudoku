@@ -8,10 +8,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.goldfish</groupId>
-    <artifactId>word-study-web</artifactId>
+    <artifactId>word-study-web-worker</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>word-study-web Maven Webapp</name>
+    <name>word-study-web-worker Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
 
