@@ -5,9 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.*;
 
-import com.goldfish.dao.context.CourseContext;
+import com.goldfish.dao.cache.local.CourseContext;
 import com.goldfish.domain.Course;
-import com.goldfish.manager.CourseManager;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;

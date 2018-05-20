@@ -25,7 +25,7 @@
             </constructor-arg>
         </bean>
 
-        <bean id="redisUtils" class="com.goldfish.dao.redis.impl.LocalRedisUtilsImpl">
+        <bean id="redisUtils" class="com.goldfish.dao.cache.redis.impl.LocalRedisUtilsImpl">
             <property name="shardedJedisPool" ref="l.shardedJedisPool" />
         </bean>
 

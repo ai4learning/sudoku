@@ -6,7 +6,7 @@
   <resultMap id="LoginRecord-Map" type="com.goldfish.domain.LoginRecord">
  		<id property="id" column="id"/>
 		<result property="wordTrainingId" column="word_training_id"/>
-		<result property="wordTraningCode" column="word_traning_code"/>
+		<result property="wordTraningCode" column="word_training_code"/>
 		<result property="studyToken" column="study_token"/>
 		<result property="userId" column="user_id"/>
 		<result property="userCode" column="user_code"/>
@@ -24,6 +24,7 @@
     		<where>
     		<if test="id != null"> AND id = #{id}</if>
     		<if test="wordTrainingId != null"> AND word_training_id = #{wordTrainingId}</if>
+    		<if test="wordTrainingCode != null"> AND word_training_code = #{wordTrainingCode}</if>
     		<if test="userId != null"> AND user_id = #{userId}</if>
     		<if test="userName != null"> AND user_name = #{userName}</if>
     		<if test="state != null"> AND state = #{state}</if>
@@ -39,6 +40,7 @@
 		<where>
 		<if test="id != null"> AND id = #{id}</if>
 		<if test="wordTrainingId != null"> AND word_training_id = #{wordTrainingId}</if>
+		<if test="wordTrainingCode != null"> AND word_training_code = #{wordTrainingCode}</if>
 		<if test="userId != null"> AND user_id = #{userId}</if>
 		<if test="userName != null"> AND user_name = #{userName}</if>
 		<if test="state != null"> AND state = #{state}</if>
@@ -53,11 +55,11 @@
 	
 
 	<sql id="All-FIELDS">
-		id,word_training_id,word_traning_code,study_token,user_id,user_code,user_name,state,created,modified
+		id,word_training_id,word_training_code,study_token,user_id,user_code,user_name,state,created,modified
 	</sql>
 
 	<insert id="addLoginRecord" parameterType="com.goldfish.domain.LoginRecord">
-		insert into login_record (word_training_id,word_traning_code,study_token,user_id,user_code,user_name,state,created,modified)
+		insert into login_record (word_training_id,word_training_code,study_token,user_id,user_code,user_name,state,created,modified)
 			values(#{wordTrainingId},#{wordTraningCode},#{studyToken},#{userId},#{userCode},#{userName},#{state},#{created},#{modified})
     
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
@@ -71,7 +73,7 @@
     	update  login_record 
 	<set>
 			<if test="wordTrainingId !=null"> word_training_id = #{wordTrainingId},</if>
-			<if test="wordTraningCode !=null"> word_traning_code = #{wordTraningCode},</if>
+			<if test="wordTraningCode !=null"> word_training_code = #{wordTraningCode},</if>
 			<if test="studyToken !=null"> study_token = #{studyToken},</if>
 			<if test="userId !=null"> user_id = #{userId},</if>
 			<if test="userCode !=null"> user_code = #{userCode},</if>
@@ -117,7 +119,7 @@
 	
 	<select id="getLoginRecordByPage" resultMap="LoginRecord-Map" parameterType="java.util.HashMap">
 		<![CDATA[
-			SELECT  id,word_training_id,word_traning_code,study_token,user_id,user_code,user_name,state,modified FROM login_record 
+			SELECT  id,word_training_id,word_training_code,study_token,user_id,user_code,user_name,state,modified FROM login_record
 		]]>
             <include refid="MAP-COMMON-SQL" />
             <include refid="ORDER-SQL" />

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import java.util.*;
 
 import com.goldfish.constant.State;
+import com.goldfish.dao.cache.local.LoginRecordContext;
 import com.goldfish.domain.User;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
@@ -30,6 +31,8 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 	
 	@Resource(name="loginRecordManager")
 	private LoginRecordManager loginRecordManager;
+	@Resource
+	private LoginRecordContext loginRecordContext;
     
     public CommonResult<LoginRecord> addLoginRecord(LoginRecord loginRecord) {
 		CommonResult<LoginRecord> result = new CommonResult<LoginRecord>();
@@ -167,6 +170,27 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 	}
 
 	@Override
+	public LoginRecord getLoginRecordByTraining(String trainingId, String trainingCode) throws Exception {
+		try {
+			// 只查询一条记录,查询条件为userName,token,state
+			PageQuery pageQuery = new PageQuery(1,1);
+			pageQuery.setParam("wordTrainingId", trainingId);
+			pageQuery.setParam("wordTrainingCode", trainingCode);
+			pageQuery.setParam("state", State.VALID.getState());
+			List<LoginRecord> list = loginRecordManager.getLoginRecordByPage(pageQuery);
+
+			if (CollectionUtils.isEmpty(list)) {
+				logger.info("no login record in system");
+				return null;
+			}
+			return list.get(0);
+		} catch (Exception e) {
+			logger.error("根据traningId和traningCode获取 LoginRecord失败", e);
+			throw e;
+		}
+	}
+
+	@Override
 	public LoginRecord refreshLoginRecord(User user) {
 		// 1.将原记录职为无效；
 		Map<String,Object> params = new HashMap<String,Object>();
@@ -189,6 +213,8 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 		newRecord.setCreated(curr);
 		newRecord.setModified(curr);
 		LoginRecord  loginRecord= loginRecordManager.addLoginRecord(newRecord);
+		// 写入缓存
+		loginRecordContext.addByTraning(loginRecord.getWordTrainingId(), loginRecord.getWordTraningCode(), loginRecord);
 		return loginRecord;
 	}
 

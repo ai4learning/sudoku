@@ -11,17 +11,17 @@
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
        default-autowire="byName">
 
-<!--       &lt;!&ndash;不用做登录拦截的请求&ndash;&gt;
+       <!--不用做登录拦截的请求-->
        <bean class="com.goldfish.web.interceptor.servlet.context.ExcludeReqstPath">
               <property name="pathSet">
                      <set>
                             <value>/login/login</value>
-&lt;!&ndash;                            <value>/index</value>&ndash;&gt;
+<!--                            <value>/index</value>-->
                      </set>
                </property>
-       </bean>-->
+       </bean>
 
-<!--       &lt;!&ndash;限制cookie任意写入，只允许一下4种cookie写入&ndash;&gt;
+       <!--限制cookie任意写入，只允许一下4种cookie写入-->
        <bean id="cookieUtils" class="com.goldfish.web.interceptor.servlet.CookieUtils">
            <property name="GCookie">
                <util:list>
@@ -43,9 +43,9 @@
                    </bean>
                </util:list>
            </property>
-       </bean>-->
+       </bean>
 
-<!--       &lt;!&ndash;登录拦截&ndash;&gt;
+       <!--登录拦截-->
        <mvc:interceptors>
               <mvc:interceptor>
                      <mvc:mapping path="/**" />
@@ -58,7 +58,7 @@
                             <property name="doLoginUri" value="/login/doLogin" />
                      </bean>
               </mvc:interceptor>
-       </mvc:interceptors>-->
+       </mvc:interceptors>
 
     <mvc:annotation-driven>
         <mvc:message-converters>

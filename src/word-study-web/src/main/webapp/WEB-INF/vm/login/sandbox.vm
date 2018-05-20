@@ -1,0 +1,2654 @@
+    <html>
+	<head>
+		<!-- Xie Le Add start-->
+		<link href="/misc/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="/misc/css/patch.css" rel="stylesheet" media="screen">
+		<link href="/misc/css/docs.min.css" rel="stylesheet" media="screen">
+		<link href="/misc/css/font-awesome.min.css" rel="stylesheet">
+		<link href="/misc/css/mine.css" rel="stylesheet" media="screen">
+		<!-- Xie Le Add end-->
+		<!-- The jquery has moved to the bottom-->
+	</head>
+	
+	<body>
+	 <div tabindex="-1" id="top" class="bs-docs-header">
+      <div class="container">
+          <h1>Ajax API</h1>
+          <h2>九宫格单词集训</h2>
+      </div>
+     </div>
+	 <!-- container -->
+	 <div class="container bs-docs-container">
+		<div class="row">
+			<!--中间内容-->
+			<div role="main" class="col-md-9">
+				<div class="bs-docs-section" style="margin-bottom:0px;">
+	 				<h1 class="page-header" id="getToken">登陆API<a href="#getToken" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h1>
+					<div class="form-horizontal bs-example">
+            		 <form id="formlogin">
+            			<div class="form-group">
+							<div class="col-sm-6" style="margin-left:100px;">
+                    			<input type="button" class="btn btn-success"  value="心跳测试" onclick="ajaxHeartBeat();" style="margin-left:5px; margin-right:5px;" />
+							</div>
+						</div>
+						<hr>
+						<div class="form-group">
+							<div class="col-sm-9 col-left-margin">
+								<span class="text-danger" id="ajaxHeartBeatText"></span>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                             <div class="col-sm-6" style="margin-left:100px;">
+                                 <input type="button" class="btn btn-success"  value="退出" onclick="logout();" style="margin-left:5px; margin-right:5px;" />
+                             </div>
+                         </div>
+                         <hr>
+                         <div class="form-group">
+                             <div class="col-sm-9 col-left-margin">
+                                 <span class="text-danger" id="logoutText"></span>
+                             </div>
+                         </div>
+    				 </form>
+					</div>
+				</div> <!--section end-->
+
+
+
+
+
+
+
+
+				<div class="bs-docs-section" style="margin-bottom:0px;">
+					<h1 class="page-header" id="applyParam">基础接口<a href="#applyParam" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h1>
+					<div class="form-horizontal bs-example">
+						 <div class="form-group">
+							<label class="col-sm-2 control-label"> token： </label>
+							<div class="col-sm-3">
+                    			<input type="text" class="form-control" id="token" />	
+							</div>
+							<label class="col-sm-2 control-label"> areaId： </label>
+							<div class="col-sm-3">
+                    			<input type="text" class="form-control" id="areaId" />			
+							</div>
+					    </div>
+						 <div class="form-group">
+							<label class="col-sm-2 control-label"> sku：  </label>
+							<div class="col-sm-3">
+                    			<input type="text" class="form-control" id="sku" />					
+							</div>
+							<label class="col-sm-2 control-label"> skuNums: </label>
+							<div class="col-sm-3">
+                    			<input type="text"  class="form-control" id="skuNums" />					
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">  area：</label>
+							<div class="col-sm-3">
+                    			<input type="text" class="form-control" id="area" />					
+							</div>
+							<label class="col-sm-2 control-label"> pagNum：  </label>
+							<div class="col-sm-3">
+                    			<input type="text" class="form-control" id="pagNum" />					
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> id： </label>
+							<div class="col-sm-3">
+                    			<input type="text" class="form-control" id="id" />					
+							</div>
+							<label class="col-sm-2 control-label"> type： </label>
+							<div class="col-sm-3">
+                    			<input type="text" id="type" class="form-control" />					
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> del： </label>
+							<div class="col-sm-3">
+                    			<input type="text" id="del" class="form-control" />					
+							</div>
+							
+						</div>
+						<hr>
+						<div id="getProvice" class="form-group">
+							<div class="col-sm-3 col-left-margin" >  
+								<select id="areaSelect" class="form-control">
+                        				<option value="getProvince">getProvince</option>
+                        				<option value="getCity">getCity</option>
+                        				<option value="getCounty">getCounty</option>
+                        				<option value="getTown">getTown</option>
+								    </select>
+							</div>
+							<div class="col-sm-2">
+                    			<input value="确定" class="btn btn-success"  type="button" id="areaButton" onclick="seachArea()" />						
+							</div>
+						</div>
+						<hr>
+						<div class="form-group">
+							<div class="col-sm-9 col-left-margin">
+									<span class="text-danger" id="areaText"></span>
+                            </div>
+						</div>
+						<hr>
+						<div id="getPrice" class="form-group">
+							<div class="col-sm-3 col-left-margin" >
+									<select id="price" class="form-control">
+                        				<option value="getPrice">getPrice</option>
+                        				<option value="getJdPrice">getJdPrice</option>
+                        				<option value="selectBalance">selectBalance</option>
+									</select>
+                            </div>
+							<div class="col-sm-2">
+								<input value="确定" class="btn btn-success" type="button" id="priceButton" onclick="seachPrice()" />
+                            </div>
+                        </div>
+						<hr>
+						<div class="form-group"> 
+							<div class="col-sm-9 col-left-margin">
+								<span class="text-danger" id="priceText"></span>
+                            </div>
+                        </div>
+						<hr>
+						<div id="getPageNum" class="form-group">
+							<div class="col-sm-3 col-left-margin" >
+								<select id="product" class="form-control">
+                    				<option value="getPageNum">getPageNum</option>
+                    				<option value="getSku">getSku</option>
+                    				<option value="getDetail">getDetail</option>
+                    				<option value="skuState">skuState</option>
+                    				<option value="skuImage">skuImage</option>
+                    			</select>
+                            </div>
+							<div class="col-sm-2">
+								<input value="确定" class="btn btn-success"  type="button" id="productButton" onclick="searchProduct()" />
+							</div>
+							
+                        </div>
+						<hr>
+						<div class="form-group"> 
+							<div class="col-sm-9 col-left-margin">
+								<span class="text-danger"  id="productText"></span>
+                            </div>
+                        </div>
+						<hr>
+						<h3 id="getStockById" style="margin-top:0px;">库存</h3>	
+						<hr>
+						<div class="form-group">
+							<div class="col-sm-3 col-left-margin" >
+								<select id="stock" class="form-control">
+									<option value="getStockById">getStockById</option>
+								</select>
+                            </div>
+							<div class="col-sm-2">
+								<input value="确定"  class="btn btn-success" type="button" id="stockButton" onclick="searchStock()" />
+							</div>
+                        </div>
+						<hr>
+						<div class="form-group"> 
+								<div class="col-sm-9 col-left-margin">
+								<span id="stockText" class="text-danger"></span>
+                            </div>
+                         </div>
+						<hr >
+						<div id="getNewStockById" class="form-group">
+							<div class="col-sm-3 col-left-margin" >
+								<select class="form-control">
+									<option value="getNewStockById">getNewStockById</option>			
+								</select>
+                            </div>
+							<div class="col-sm-2">
+								<input value="确定" class="btn btn-success"  type="button" id="newStockButton" onclick="searchNewStock()" />
+							</div>
+                        </div>
+						<hr>
+						<div class="form-group"> 
+							<div class="col-sm-9 col-left-margin">
+								<span id="newStockText" class="text-danger"></span>
+                            </div>
+                        </div>
+						<hr>
+						<h3 class="page-header" id="makeBatchStockQuery">批量库存查询接口[getFiveStockById]</h3>
+						<form id="getFiveStockByIdForm">
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> token:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="token" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须,授权时获取的access token
+								</p>
+                            </div>
+                    </div>
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> skuNums:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="skuNums" value="[{skuId:102194,num:12},{skuId:763570,num:12},{skuId:100338,num:12}]"/>
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须, 格式:[{skuId:102194,num:12},{skuId:763570,num:12},{skuId:100338,num:12}]
+								</p>
+                            </div>
+                    </div>
+					  <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> area:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="area" value="4_48202_48355_0" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">	必须, 格式：4_48202_48355_0
+								</p>
+                            </div>
+							<div class="col-sm-3">
+								<input class="btn btn-success" value="批量库存查询" type="button" onclick="doGetFiveStockById()" />
+							</div>
+                    </div>
+    				<hr />
+    				<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="getFiveStockByIdText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+                    </div> <!--form horizontal-->
+					
+                </div> <!--section end-->
+				
+			   <!--消息推送api-->
+			  <div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h1 class="page-header" id="getMessage">消息推送api</h1>
+				<div class="form-horizontal bs-example">	
+						<div id="" class="form-group">
+							<div class="col-sm-3 col-left-margin" >
+								<select id="message" class="form-control">
+									<option value="get">get</option>
+									<option value="del">del</option>
+								</select>
+                            </div>
+							<div class="col-sm-2">
+								<input value="确定" class="btn btn-success"  type="button" id="messageButton" onclick="searchMessage()" />
+							</div>
+							
+                        </div>
+						<hr>
+						<div class="form-group"> 
+							<div class="col-sm-9 col-left-margin">
+								<span id="messageText" class="text-danger" ></span>
+                            </div>
+                        </div>
+				  </div><!--form-horizontal end -->
+			  </div> <!--section end-->
+			  
+			  	<!-- 订单核对 -->
+			  <div class="bs-docs-section" style="margin-bottom:0px;">
+	 				<h1 class="page-header" id="orderCheck">订单核对<a href="#orderCheck" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h1>
+					<div class="form-horizontal bs-example">
+						<div class="form-group">
+							<div class="col-sm-3 col-left-margin" >
+								<select id="checkOrder" class="form-control">
+                    				<option value="checkNewOrder">checkNewOrder</option>
+                    				<option value="checkDlokOrder">checkDlokOrder</option>
+                    				<option value="checkRefuseOrder">checkRefuseOrder</option>
+                    				<option value="checkUnOpenInvoiceOrder">checkUnOpenInvoiceOrder</option>
+                    				<option value="checkHangUpOrder">checkHangUpOrder</option>
+								</select>
+							</div>
+							
+							<label class="col-sm-1 control-label"> date： </label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" id="date" />				
+							</div>
+							<label class="col-sm-1 control-label"> page： </label>
+							<div class="col-sm-2">  
+								<input type="text" class="form-control"  id="page" />				
+							</div>
+							<div class="col-sm-2">
+								<input value="确定" class="btn btn-success" type="button" id="checkOrderButton" onclick="searchCheckOrder()" />
+                            </div>
+						</div>
+						<hr>
+						<div class="form-group">
+							<div class="col-sm-9 col-left-margin" >
+								<span id="checkOrderText" class="text-danger" ></span>
+                            </div>
+                        </div>
+                    </div><!--form-horizontal end -->
+               </div> <!-- section end -->
+
+				
+				<!-- 礼品卡下单 -->
+				<div class="bs-docs-section" style="margin-bottom:0px;">
+	 				<h1 class="page-header" id="makeOrderByGift">礼品卡<a href="#makeOrderByGift" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h1>
+					<h3>礼品卡下单</h3>
+					<div class="form-horizontal bs-example">
+						<div class="form-group">
+							<div class="col-sm-3 col-left-margin" >
+								<select id="giftcard" class="form-control">
+									<option value="buy">buy</option>
+									<option value="select">select</option>
+									<option value="selectByThirdOrder">selectByThirdOrder</option>
+								</select>
+                            </div>
+							<label class="col-sm-1 control-label"> thirdOrder: </label>
+							<div class="col-sm-2">
+								<input type="text" id="thirdOrder" class="form-control" />
+                            </div>
+							<label class="col-sm-1 control-label"> mobile:</label>
+							<div class="col-sm-2">
+								<input type="text" id="mobile" class="form-control" />
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-1 control-label col-left-margin"> jdOrderId:</label>
+							<div class="col-sm-2 " >
+								<input type="text" class="form-control" id="jdOrderId" />
+                            </div>
+							<div class="col-sm-2 " >
+								<input value="确定" class="btn btn-success" type="button" id="giftcardButton" onclick="searchGiftcard()" />
+                            </div>
+                        </div>
+						<hr >
+						<div class="form-group">
+							<div class="col-sm-9 col-left-margin" >
+								<span id="giftcardText" class="text-danger"></span>
+                            </div>
+                        </div>
+						
+                   </div><!--form-horizontal end -->
+                </div> <!-- section end -->
+				
+				<!-- 礼品卡下单接口 -->
+				<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeOrderInterfaceByGift">礼品卡下单接口<a href="#makeOrderInterfaceByGift" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h3>
+				<div class="form-horizontal bs-example">
+					<form id="buyForm">
+						<div class="form-group">
+							<label class="col-sm-1 control-label col-left-margin"> token：</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" name="token" />
+							</div>
+							<label class="col-sm-1 control-label col-left-margin"> mobile：</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" name="mobile"/>
+							</div>
+							<label class="col-sm-1 control-label col-left-margin"> sku:</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" name="sku"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-1 control-label col-left-margin"> thirdOrder:</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" name="thirdOrder"/>
+							</div>
+							<div class="col-sm-2">
+								<input value="确定" type="button" class="btn btn-success" onclick="buy();" />
+                            </div>
+                        </div>
+						<hr >
+						<div class="form-group">
+							<div class="col-sm-9 col-left-margin" >
+								<span id="buyText" class="text-danger"></span>
+                            </div>
+                        </div>	
+					   
+                    </form>
+				</div><!--form-horizontal end -->
+                </div> <!-- section end -->
+				
+				<!-- 礼品卡短信补发 -->
+				<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeSmsWithGift">礼品卡短信补发<a href="#makeSmsWithGift" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h3>
+				<div class="form-horizontal bs-example">
+					<form id="sendSmsForm">
+						<div class="form-group">
+							<label class="col-sm-1 control-label col-left-margin"> token：</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" name="token" />
+                            </div>
+							<label class="col-sm-1 control-label"> jdOrderId:</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" name="jdOrderId"/>
+                            </div>
+							<label class="col-sm-1 control-label"> mobile:</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" name="mobile"/>
+                            </div>
+							<div class="col-sm-2">
+								<input value="确定" class="btn btn-success" type="button" onclick="sendSms();" />
+							</div>
+                        </div>
+						<hr>
+						<div class="form-group">
+							<div class="col-sm-9 col-left-margin">
+								<span id="sendSmsText" class="text-danger"></span>
+                            </div>
+                        </div>
+						
+                    </form>
+				</div><!--form-horizontal end -->
+                </div> <!-- section end -->
+				
+				<!--检查用户增票资质-->
+				<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h1 class="page-header" id="makeUserCheckInvioce">用户资质<a href="#makeUserCheckInvioce" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h1>
+                <h3>检查用户增票资质</h3>
+				<div class="form-horizontal bs-example">
+					<form id="UserInvoiceForm">    
+						<div class="form-group">
+							<label class="col-sm-1 control-label col-left-margin"> token：</label>
+							<div class="col-sm-2">
+								<input type="text" name="UserInvoiceToken" class="form-control" id="UserInvoiceToken"/>
+                            </div>
+							<div class="col-sm-2">
+								<input value="确定" type="button" class="btn btn-success" onclick="checkUserInvoice();" />
+							</div>
+                        </div>
+						<hr>
+						<div class="form-group">
+							<div class="col-sm-9 col-left-margin">
+								<span id="UserInvoiceText" class="text-danger"></span>
+                            </div>
+                        </div>
+					</form>
+				</div><!--form-horizontal end -->
+                </div> <!-- section end -->
+				 <!--金采用户授信额度查询-->
+			   <div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeJinCaiUserCredictQuery">金采用户授信额度查询<a href="#makeJinCaiUserCredictQuery" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h3>
+				<div class="form-horizontal bs-example">	
+					<form id="UserCreditLimitForm">    		
+					<div class="form-group">
+						<label class="col-sm-1 control-label col-left-margin"> token： </label>
+						<div class="col-sm-2">
+								<input type="text" class="form-control" name="token" id="token"/>
+                        </div>
+						<div class="col-sm-2">
+							<input value="确定" class="btn btn-success" type="button" onclick="UserCreditLimit();" />
+                        </div>
+                    </div>
+					<hr>
+					<div class="form-group">
+						<div class="col-sm-9 col-left-margin">
+							<span id="UserCreditLimitText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+               </div> <!--section end-->
+			    <!-- 商品池服务开始 -->
+				<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h1 class="page-header" id="makeVerifyBy">商品池服务验证<a href="#makeVerifyBy" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h1>
+				<h3  id="makeVerifyByClientId">1.通过client_id查询商品池列表</h3>
+				<div class="form-horizontal bs-example">
+					<form id="getPoolsByClientIdForm">  
+					<div class="form-group">
+						<label class="col-sm-1 control-label col-left-margin"> clientId： </label>
+						<div class="col-sm-2">
+							<input type="text"  class="form-control"  name="clientId" id="clientId"/>
+                        </div>
+						<div class="col-sm-2">
+							<input value="确定" class="btn btn-success" type="button" onclick="getPoolsByClientId();" />
+                        </div>
+                    </div>
+					<hr>
+					<div class="form-group">
+						<div class="col-sm-9 col-left-margin">
+							<span id="getPoolsByClientIdText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+				<h3  id="makeVerifyByClientIdAndPoolId">2.通过clientId和poolId获取商品池商品</h3>
+				<div class="form-horizontal bs-example">
+					 <form id="getSkusByClientIdAndPoolIdForm">  
+					 <div class="form-group">
+						<label class="col-sm-1 control-label col-left-margin"> clientId： </label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" name="clientId" id="clientId"/>
+                        </div>
+						<label class="col-sm-1 control-label"> poolId： </label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" name="poolId" id="poolId"/>
+                        </div>
+						<div class="col-sm-2">
+							<input value="确定" class="btn btn-success" type="button" onclick="getSkusByClientIdAndPoolId();" />
+                        </div>
+                    </div>
+					<hr>
+					<div class="form-group">
+						<div class="col-sm-9 col-left-margin">
+							 <span id="getSkusByClientIdAndPoolIdText" class="text-danger"></span>
+                        </div>
+                    </div>
+ 				</form>
+				</div><!--form-horizontal end -->	
+				<h3  id="makeVerifyByIfExistSkuId">3.判断客户是否可以购买该skuId</h3>
+				<div class="form-horizontal bs-example">
+					 <form id="checkSkuClientCanBuyForm">  
+					<div class="form-group">
+						<label class="col-sm-1 control-label col-left-margin"> clientId： </label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" name="clientId" id="clientId"/>
+                        </div>
+						<label class="col-sm-1 control-label"> skuId： </label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" name="skuId" id="skuId"/>
+                        </div>
+						<div class="col-sm-2">
+							<input value="确定" class="btn btn-success" type="button" onclick="checkSkuClientCanBuy();" />
+                        </div>
+                    </div>
+					<hr>
+					<div class="form-group">
+						<div class="col-sm-9 col-left-margin">
+							 <span id="checkSkuClientCanBuyText" class="text-danger"></span>
+                        </div>
+                    </div>
+            	</form>
+				</div><!--form-horizontal end -->	
+				<h3  id="makeVerifyByIfExistSkuId">4.判断商品是否为大客户商品</h3>
+				<div class="form-horizontal bs-example">
+					<form id="checkIsBigClientSkuForm">  		
+					<div class="form-group">
+						<label class="col-sm-1 control-label col-left-margin"> skuId： </label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" name="skuId" id="skuId"/>
+                        </div>
+						<div class="col-sm-2">
+							<input value="确定" class="btn btn-success" type="button" onclick="checkIsBigClientSku();" />
+                        </div>
+                    </div>
+					<hr>
+					<div class="form-group">
+						<div class="col-sm-9 col-left-margin">
+							<span id="checkIsBigClientSkuText" class="text-danger"></span>
+                        </div>
+                    </div>
+ 				</form>
+				</div><!--form-horizontal end -->	
+				<h3  id="makeVerifyByExistClientId">5.根据商家id判断有哪些商家可以购买该商品</h3>
+				<div class="form-horizontal bs-example">
+                    <form id="getClientIdsBySkuForm">  		
+					<div class="form-group">
+						<label class="col-sm-1 control-label col-left-margin"> skuId： </label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control"   name="skuId" id="skuId"/>
+                        </div>
+						<div class="col-sm-2">
+							<input value="确定" class="btn btn-success"  type="button" onclick="getClientIdsBySku();" />
+                        </div>
+                    </div>
+					<hr>
+					<div class="form-group">
+						<div class="col-sm-9 col-left-margin">
+							 <span id="getClientIdsBySkuText" class="text-danger" ></span>
+                        </div>
+                    </div>
+				</form>
+				</div><!--form-horizontal end -->	
+                </div> <!-- section end -->
+				<!-- 商品池服务 end -->
+				
+			<!-- 实物下单 -->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h1 class="page-header" id="makeOrderByRealProduct">订单api<a href="#makeOrderByRealProduct" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h1>
+				<h3>实物下单</h3>
+				<div class="form-horizontal bs-example">	
+					<form id="submitOrderForm">
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> token:  </label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="token" value="9CpcvXjTdtoqLxEDdvgRY7Qer"/>	
+                            </div>
+							<div class="col-sm-4"> <p class="text-danger">必须	授权时获取的access token </p>	</div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> thirdOrder:  </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="thirdOrder" value="11004577"/>
+                            </div>
+							<div class="col-sm-4">
+								<p class="text-danger">必须	第三方的订单单号</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">  sku: </label>	
+							<div class="col-sm-6">
+								<textarea name="sku" class="form-control" rows="3" cols="80">[{"id":102194,"num":1}]</textarea>
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger">必须	[{"skuId":商品编号, "num":商品数量}] (最高支持100种商品)</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> name:  </label>	
+							<div class="col-sm-4">
+								<input type="text"  class="form-control" name="name" value="商品名称"/>
+                            </div>
+							<div class="col-sm-6">
+									<p class="text-danger">必须	收货人 (中文需要使用urf-8进行UrlEncode编码)</p>
+                            </div>
+                        </div>
+						
+						<div class="form-group">
+							<label class="col-sm-2 control-label">province:   </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="province" value="22"/>
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger">必须	一级地址
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> city:  </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="city" value="1930"/>
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger"> 必须	二级地址
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> county:  </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="county" value="1935"/>
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger"> 必须	三级地址
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> town:  </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="town" value="0" />
+                            </div>
+							<div class="col-sm-6">
+									<p class="text-danger"> 非必须	四级地址  (如果该地区有四级地址，则必须传递四级地址)
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> address:  </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="address" value="ceshidizhi"/>
+                            </div>
+							<div class="col-sm-6">
+									<p class="text-danger"> 必须	详细地址 (中文需要使用urf-8进行UrlEncode编码)
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> zip:  </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control"  name="zip" value="10000"/>
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger"> 非必须	邮编
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">  phone: </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="phone" value=""/>
+                            </div>
+							<div class="col-sm-5">
+									<p class="text-danger"> 必须	座机号 (与mobile其中一个有值即可)
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">  mobile: </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="mobile" value="18910024183"/>
+                            </div>
+							<div class="col-sm-6">
+									<p class="text-danger"> 必须	手机号 （与phone其中一个有值即可）
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> email:  </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="email" value="liuyunfei@jd.com"/>
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger"> 必须  邮箱
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> remark:  </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="remark" />
+                            </div>
+							<div class="col-sm-6">
+									<p class="text-danger"> 非必须	备注（少于100字） (中文需要使用urf-8进行UrlEncode编码)
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> invoiceState：</label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="invoiceState" value="0"/>
+                            </div>
+							<div class="col-sm-6">
+									<p class="text-danger"> 必须	开票类型 (0：预借  1：随货	 2：集中)
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> invoiceType：</label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="invoiceType" id="invoiceType"/>
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger"> 必须	1普通发票  2增票
+									</p>
+                            </div>
+                        </div>
+					<!--add field above-->	
+					<span id="invoiceInfo">
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> invoiceName： </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control"  name="invoiceName" id="invoiceName"/>
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger">   收增票人名
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">  invoicePhone： </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="invoicePhone" id="invoicePhone"/>
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger"> 收增票人电话
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> invoiceProvice：  </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="invoiceProvice" id="invoiceProvice"/>
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger">   收增票人省
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">  invoiceCity： </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="invoiceCity" id="invoiceCity"/> 
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger">  收增票人市
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label ">  invoiceCounty： </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="invoiceCounty" id="invoiceCounty"/>
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger"> 收增票人区、县 
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label ">  invoiceTown： </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="invoiceTown" id="invoiceTown"/> 
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger"> 
+										 收增票人镇
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label ">  invoiceAddress： </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="invoiceAddress" id="invoiceAddress"/> 
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger"> 收增票人地址
+									</p>
+                            </div>
+                        </div>
+                    </span>
+					<div class="form-group">
+							<label class="col-sm-2 control-label"> selectedInvoiceTitle:  </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control"  name="selectedInvoiceTitle" />
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger"> 必须     4个人，5单位
+									</p>
+                            </div>
+                       </div>
+                       <div class="form-group">
+							<label class="col-sm-2 control-label">  companyName: </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control"  name="companyName" />
+                            </div>
+							<div class="col-sm-6">
+									<p class="text-danger"> 必须	发票抬头  (如果selectedInvoiceTitle=5则此字段必须)(中文需要使用urf-8进行UrlEncode编码)
+									</p>
+                            </div>
+                        </div>
+					  <div class="form-group">
+							<label class="col-sm-2 control-label"> invoiceContent:  </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control"  name="invoiceContent" />
+                            </div>
+							<div class="col-sm-6">
+									<p class="text-danger"> 1:明细，3：电脑配件，19:耗材，22：办公用品
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">paymentType:   </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control"  name="paymentType" value="4"/>
+                            </div>
+							<div class="col-sm-6">
+									<p class="text-danger">  submit、submit2默认是12;jdPriceSubmit必填。支付方式 (1：货到付款，2：邮局付款，4：在线支付，5：公司转账，6：银行转账，12：月结， 101：金采支付)
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">isUseBalance:   </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control"  name="isUseBalance" value="0"/>
+                            </div>
+							<div class="col-sm-6">
+									<p class="text-danger"> submit、submit2默认是0;jdPriceSubmit必填。0：不使用余额。1：使用余额。
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"> submitState:  </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="submitState" value="0"/>
+                            </div>
+							<div class="col-sm-6">
+									<p class="text-danger"> submit、submit2默认是0;jdPriceSubmit默认是1。0：预占库存。1：不预先占库存。
+									</p>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<div class="col-sm-12 col-left-margin">
+								<input class="btn btn-success" value="submitOrder(协议价下单)" type="button" onclick="submitOrder()" />
+								<input class="btn btn-info"  value="submitOrder2(京东价下单)" type="button" onclick="submitOrder2()" />
+								<input class="btn btn-primary"  value="jdPriceSubmit(京东价下单)" type="button" onclick="jdPriceSubmit()" />
+                            </div>
+                        </div>
+						<hr >
+						<div class="form-group">
+							<div class="col-sm-9 col-left-margin">
+								<span id="submitOrderText" class="text-danger"></span>
+                            </div>
+                        </div>
+					</form>
+				</div><!--form-horizontal end -->
+				</div> <!--section end-->
+		   <!--确认预占库存订单-->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeConfirmStockOrder">确认预占库存订单<a href="#makeConfirmStockOrder" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h3>
+				<div class="form-horizontal bs-example">	
+					<form id="confirmOccupyForm">
+					<div class="form-group">
+						<label class="col-sm-1 control-label col-left-margin"> jdOrderId: </label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" name="jdOrderId"/>
+                        </div>
+						<label class="col-sm-1 control-label"> token： </label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" name="token" />
+                        </div>
+						<div class="col-sm-2">
+							<input value="确定" class="btn btn-success" type="button" onclick="confirmOccupyStockOrder();" />
+                        </div>
+                    </div>
+					<hr>
+					<div class="form-group">
+						<div class="col-sm-9 col-left-margin">
+							<span id="confirmOccupyText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+			
+			<!-- 取消已确认订单 -->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeCancelConfirmedOrder">取消已确认订单<a href="#makeCancelConfirmedOrder" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h3>
+				<div class="form-horizontal bs-example">	
+					<form id="cancelOrderForm">
+						<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> token: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control"  name="token" />
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">必须	授权时获取的access token</p>
+                            </div>
+                        </div>
+                     <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> jdOrderId:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="jdOrderId" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须	京东订单号</p>
+                            </div>
+							<div class="col-sm-3">
+								<input class="btn btn-success" value="cancelOrder(取消订单)" type="button" onclick="cancelOrder()" />
+							</div>
+                    </div>
+    				<hr />
+    				<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="cancelOrderText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+			
+			<!--取消未确认订单-->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeCancelNotConfirmOrder">取消未确认订单<a href="#makeCancelNotConfirmOrder" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h3>
+				<div class="form-horizontal bs-example">	
+					<form id="cancelOrderForm2">
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> token: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control"  name="token" />
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">必须	授权时获取的access token</p>
+                            </div>
+                        </div>
+                     <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> jdOrderId:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="jdOrderId" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须	京东订单号</p>
+                            </div>
+							<div class="col-sm-3">
+								<input class="btn btn-success" value="cancelOrder2(取消订单)" type="button" onclick="cancelOrder2()" />
+							</div>
+                    </div>
+    				<hr />
+    				<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="cancelOrderText2" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+			<!--订单支付-->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makePayForOrder">订单支付</h3>
+				<div class="form-horizontal bs-example">	
+					<form id="orderDoPayForm">
+					<div class="form-group">
+							<label class="col-sm-1 control-label col-left-margin">  token: </label>	
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="token" />
+                            </div>
+							<div class="col-sm-4">
+									<p class="text-danger"> 必须,授权时获取的access token
+									</p>
+                            </div>
+                      </div>
+					  <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin">skuIds: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="jdOrderId" value="123"/>
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须
+								</p>
+                            </div>
+							<div class="col-sm-3">
+								<input class="btn btn-success" value="订单支付" type="button" onclick="doOrderDoPay()" />
+							</div>
+                    </div>
+    				<hr />
+    				<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="orderDoPayText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+			<!--快退任务进度查询 -->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeBackTaskQuery">快退任务进度查询</h3>
+				<div class="form-horizontal bs-example">	
+				  <form id="kuaiTuiProcessForm">
+					 <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin">token: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="token" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须,授权时获取的access token
+								</p>
+                            </div>
+                    </div>
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin">京东订单号:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="jdOrderId" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须, 京东订单号
+								</p>
+                            </div>
+                    </div>
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> 用户pin:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="pin" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须, 用户pin
+								</p>
+                            </div>
+							<div class="col-sm-3">
+								<input value="快退任务进度查询" class="btn btn-success"  type="button" onclick="kuaiTuiProcess()" />
+							</div>
+                    </div>
+    				<hr />
+    				<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="kuaiTuiProcessText" class="text-danger"></span>
+                        </div>
+                    </div>
+					<hr />
+    				<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<pre id="kuaiTuiProcessText" class="tip-pre text-success">
+orderId　	 订单号　
+cancelCode	10 提交申请; 20 取消处理; 30退款处理; 40 完成
+flows		operatorTime	操作时间
+		operatorRemark	操作日志
+		operatorPerson	操作人
+cancelFlag	取消结果: True-取消成功; False-取消失败
+applyTime	申请时间
+cancelReason	取消原因
+phoneNo		电话
+							</pre>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->	
+			<!-- 商品属性 -->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h1 class="page-header" id="makeProductProperty">商品属性<a href="#makeProductProperty" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h1>
+				<h3  id="makeGetProductName">获取商品名称</h3>
+				<div class="form-horizontal bs-example">
+					<form id="ProductNameForm">    		
+					<div class="form-group">
+						<label class="col-sm-1 control-label col-left-margin"> skuId： </label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" name="skuId" id="skuId"/>
+                        </div>
+						<div class="col-sm-2">
+							<input value="确定" class="btn btn-success" type="button" onclick="getProductName();" />
+                        </div>
+                    </div>
+					<hr>
+					<div class="form-group">
+						<div class="col-sm-9 col-left-margin">
+							  <span id="ProductNameFormText" class="text-danger"></span>
+                        </div>
+                    </div>
+				</form>
+				</div><!--form-horizontal end -->	
+				<h3  id="makeGetProductLimitedArea">获取商品受限区域</h3>
+				<div class="form-horizontal bs-example">
+					<form id="SkuLimitAreaForm">    		
+        				<div class="form-group">
+        						<label class="col-sm-1 control-label col-left-margin"> skuId： </label>
+        						<div class="col-sm-2">
+        							<input type="text" class="form-control" name="skuId" id="skuId"/>
+                                </div>
+        						<div class="col-sm-2">
+        							<input value="确定" class="btn btn-success" type="button" onclick="getSkuLimitArea();" />
+                                </div>
+                            </div>
+        					<hr>
+        					<div class="form-group">
+        						<div class="col-sm-9 col-left-margin">
+        							 <span id="SkuLimitAreaFormText" class="text-danger"></span>
+                                </div>
+                            </div>
+			  		  </form>
+                 </div><!--form-horizontal end -->
+			     <h3  id="makeGetProductLimitedArea">检查商品区域限制接口</h3>
+			     <div class="form-horizontal bs-example">
+					 <form id="CheckSkuAreaLimitForm">
+    				<div class="form-group">
+    				        <label class="col-sm-1 control-label col-left-margin"> token:	 </label>
+        					<div class="col-sm-2">
+        						<input type="text"class="form-control"  name="token" id="token" />
+                            </div>
+    						 <label class="col-sm-1 control-label"> skuIds：	 </label>
+        					<div class="col-sm-2">
+        						<input type="text" class="form-control" name="skuIds" id="skuIds"/>(eg:1,2,3,4)
+                            </div>
+    						 <label class="col-sm-1 control-label"> area：省:	 </label>
+    						 <div class="col-sm-2">
+    							<input type="text" class="form-control"  name="province" id="province"/> 
+                             </div>
+                        </div>
+    					<div class="form-group">
+    						 <label class="col-sm-1 control-label col-left-margin"> 市：	 </label>
+    						 <div class="col-sm-2">
+    							<input type="text" class="form-control"  name="city" id="city"/> 
+                            </div>
+    						<label class="col-sm-1 control-label">县:	 </label>
+    						<div class="col-sm-2">
+    							 <input type="text" class="form-control" name="county" id="county"/>
+                            </div>
+    						<label class="col-sm-1 control-label">  镇：	 </label>
+    						<div class="col-sm-2">
+    							 <input type="text"  class="form-control" name="town" id="town"/>
+                            </div>
+    						<div class="col-sm-2">
+    							<input value="确定" class="btn btn-success" type="button" onclick="checkSkuAreaLimit();" />
+                            </div>
+                        </div>
+						<hr>
+    					<div class="form-group">
+    						<div class="col-sm-9 col-left-margin">
+    							  <span id="CheckSkuAreaLimitFormText" class="text-danger"></span>
+                            </div>
+                        </div>
+					 </form>
+					</div><!--form-horizontal end -->
+             </div><!--section end-->
+			 <!--货到付款查询接口-->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeCashOndeliveryQuery">货到付款查询接口</h3>
+				<div class="form-horizontal bs-example">	
+				<form id="huoDaoFuKuanQueryForm">
+					 <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin">token: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="token" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须,授权时获取的access token
+								</p>
+                            </div>
+                    </div>
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin">skuIds: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="skuIds" value="102194,107702,107164"/>
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须, 格式:102194,107702,107164
+								</p>
+                            </div>
+                    </div>
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin">area: </label>
+    						<div class="col-sm-4">
+								<input type="text" class="form-control" name="province" value="3" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须
+								</p>
+                            </div>
+                    </div>
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin">area: </label>
+    						<div class="col-sm-4">
+								<input type="text" class="form-control" name="city" value="48202" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须
+								</p>
+                            </div>
+                    </div>
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin">area: </label>
+    						<div class="col-sm-4">
+								<input type="text" class="form-control" name="county" value="48355" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须
+								</p>
+                            </div>
+                    </div>
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin">area: </label>
+    						<div class="col-sm-4">
+								<input type="text" class="form-control" name="town" value="0" />
+                            </div>
+							<div class="col-sm-3">
+								<input class="btn btn-success" value="货到付款查询" type="button" onclick="doHuoDaoFuKuanQuery()" />
+							</div>
+                    </div>
+					<hr />
+    				<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="huoDaoFuKuanQueryText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+			
+			<!--货到付款校验-->
+				<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeValidateBy">货到付款校验<a href="#makeUserCheckInvioce" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h3>
+				<h4  id="makeValidateByAddr">地址支持货到付款校验</h4>
+				<div class="form-horizontal bs-example">
+					<form id="AddrCODForm">   
+                    <div class="form-group">
+						<label class="col-sm-1 control-label col-left-margin"> 省：</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" name="provinceId" id="provinceId"/>
+                        </div>
+						<label class="col-sm-1 control-label "> 市：</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" name="cityId" id="cityId"/>
+                        </div>
+						<label class="col-sm-1 control-label "> 县：</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control"  name="countyId" id="countyId"/>
+                        </div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 control-label col-left-margin"> 区：</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control"  name="townId" id="townId"/>
+                        </div>
+						<div class="col-sm-2">
+							<input value="确定" class="btn btn-success" type="button"  onclick="checkCOD();" />
+                        </div>
+                    </div>
+					 <hr >
+					 <div class="form-group">
+						<div class="col-sm-9 col-left-margin">
+							 <span id="CODCheckText" class="text-danger"></span>
+                        </div>
+					</div>
+                  </form>
+                  </div><!--form-horizontal end -->
+				  <h4  id="makeValideByProduct">商品支持货到付款校验</h4>
+				  <div class="form-horizontal bs-example">
+					<form id="SkuCODForm"> 
+					<div class="form-group">
+						<label class="col-sm-1 control-label col-left-margin"> skuId： </label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" name="skuId" id="skuId"/>
+                        </div>
+						<div class="col-sm-2">
+							<input value="确定" class="btn btn-success"  type="button" onclick="checkSkuCOD();" />
+                        </div>
+                    </div>
+					<hr>
+					<div class="form-group">
+						<div class="col-sm-9 col-left-margin">
+							<span id="SkuCODCheckText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>	
+                </div><!--form-horizontal end -->
+                </div> <!-- section end -->
+			
+			 <!-- 赠品附件查询接口-->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeGiftAttachQuery">赠品附件查询接口</h3>
+				<div class="form-horizontal bs-example">	
+				<form id="getSkuGift">
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin">token: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="token" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须,授权时获取的access token
+								</p>
+                            </div>
+                    </div>
+					 <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> skuId:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="skuId" value="102194"/>
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">
+								</p>
+                            </div>
+                    </div>
+					 <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> area:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="province" value="3" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须
+								</p>
+                            </div>
+                    </div>
+					 <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> area:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="city" value="48202" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须
+								</p>
+                            </div>
+                    </div>
+					 <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> area:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="county" value="48355" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须
+								</p>
+                            </div>
+							<div class="col-sm-3">
+								<input class="btn btn-success" value="赠品附件查询" type="button" onclick="getSkuGiftQuery()" />
+                            </div>
+                    </div>
+    				<hr />
+    				<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="getSkuGiftText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+
+			
+			<!--测试-->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h1 class="page-header" id="makeTestForAll">URL测试接口<a href="#makeTestForAll" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h1>
+				<div class="form-horizontal bs-example">	
+					<form id="allTestForm">	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">  提交的路径:</label>
+						<div class="col-sm-4">
+    							<input type="text" class="form-control" id="apiUrl" name="apiUrl" />	
+                         </div>
+						 <div class="col-sm-4">
+    							<p class="text-danger">例如：/order/orderTrack
+								</p>
+                            </div>
+                    </div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">  token:</label>
+						<div class="col-sm-4">
+    							<input type="text" class="form-control" id="apiToken" name="apiToken" />
+                          </div>
+						<div class="col-sm-4">
+    							<p class="text-danger">必须	授权时获取的access token</p>
+                         </div>
+                    </div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">  data:</label>
+						<div class="col-sm-6">
+							<textarea rows="4"  class="form-control" id="apiData" name="apiData" cols="120"></textarea>
+                        </div>
+						<div class="col-sm-4">
+    							<p class="text-danger"> 必须	参数数据，例如：skuid=123&area=10_0_0</p>
+								<input value="所有测试" class="btn btn-success" type="button" onclick="allTestSubmit()" />
+                         </div>
+                    </div>
+					<hr>
+					<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="allText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+			
+			<!--左边导航区域-->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeRealTestUrl">实物相关测试URL</h3>
+				<div class="form-horizontal bs-example">	
+					<div class="form-group">
+						<label class="col-sm-3 control-label"> 查询订单： </label>
+						<div class="col-sm-9">
+							<p class="text-danger tip-p"> /order/selectJdOrder data:jdOrderId=1820899691</p>
+                        </div>
+                     </div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label"> 查询配送接口： </label>
+						<div class="col-sm-9">
+							<p class="text-danger tip-p"> /order/orderTrack data:jdOrderId=1820899691
+							</p>
+                        </div>
+                     </div>
+					 <div class="form-group">
+						<label class="col-sm-3 control-label"> 企业对账接口：新建查询 </label>
+						<div class="col-sm-9">
+							<p class="text-danger tip-p"> /checkOrder/checkNewOrder  data:date=2014-05-07&page=1
+							</p>
+                        </div>
+                     </div>
+					 <div class="form-group">
+						<label class="col-sm-3 control-label"> 企业对账接口：妥投查询 </label>
+						<div class="col-sm-9">
+							<p class="text-danger tip-p"> /checkOrder/checkDlokOrder  data:date=2014-05-07&page=1
+							</p>
+                        </div>
+                     </div>
+					 <div class="form-group">
+						<label class="col-sm-3 control-label"> 企业对账接口：拒收查询 </label>
+						<div class="col-sm-9">
+							<p class="text-danger tip-p"> /checkOrder/checkRefuseOrder  data:date=2014-05-07&page=1
+							</p>
+                        </div>
+                     </div>
+					
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+			
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeUrlForGift">礼品卡相关测试URL</h3>
+				<div class="form-horizontal bs-example">	
+					<div class="form-group">
+						<label class="col-sm-3 control-label"> 礼品卡下单接口： </label>
+						<div class="col-sm-9">
+							<p class="text-danger tip-p"> /giftCard/buy  data:mobile=18001208026&thirdOrder=FN01201409031742533443&sku=[{"price":"300","num":"10"}]
+							</p>
+                        </div>
+                     </div>
+					 <div class="form-group">
+						<label class="col-sm-3 control-label">  京东订单查询： </label>
+						<div class="col-sm-9">
+							<p class="text-danger tip-p"> /giftCard/select  data：jdOrderId=1818333459
+							</p>
+                        </div>
+                     </div>
+					 <div class="form-group">
+						<label class="col-sm-3 control-label"> 反查京东订单信息接口： </label>
+						<div class="col-sm-9">
+							<p class="text-danger tip-p"> /giftCard/selectByThirdOrder  data:thirdOrder=FN01201409031742533443
+							</p>
+                        </div>
+                     </div>
+					 <div class="form-group">
+						<label class="col-sm-3 control-label"> 查询余额： </label>
+						<div class="col-sm-9">
+							<p class="text-danger tip-p"> /price/selectBalance data:无
+							</p>
+                        </div>
+                     </div>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+			
+			<!-- 提交开票申请 -->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h1 class="page-header" id="makeSubmitInvoiceApply">发票</h1>
+ 				<h3 class="page-header" id="makeSubmitInvoiceApply">提交开票申请</h3>
+				<div class="form-horizontal bs-example">	
+				 <form id="submitInvoiceForm">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">token:  </label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" name="token" value="9CpcvXjTdtoqLxEDdvgRY7Qer"/>	
+                        </div>
+						<div class="col-sm-4">
+							<p class="text-danger">必须	授权时获取的access token
+							</p>
+                        </div>
+                    </div>
+					<div class="form-group">
+    						<label class="col-sm-3 control-label">supplierOrder:  </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="supplierOrder" value="11004577"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">必须	子订单号
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label">markId:  </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control"  name="markId" value="1"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">必须	申请发票的唯一id标识
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> settlementId: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="settlementId" value="1"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">必须	结算单号
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> settlementNum: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="settlementNum" />
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">非必须	结算单子订单总数
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> settlementNakedPrice: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="settlementNakedPrice" />
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">非必须	结算单不含税总金额
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label">settlementTaxPrice:  </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="settlementTaxPrice"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">非必须	结算单总税额
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> invoiceType: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="invoiceType" value="1" />
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">  必须	发票类型   1普通 2增值税
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label">invoiceOrg:  </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="invoiceOrg" value="544"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">  必须	开票机构544(代确认)
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> bizInvoiceContent: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="bizInvoiceContent" value="1"/>
+                            </div>
+    						<div class="col-sm-5">
+    							<p class="text-danger">
+									必须	开票内容：    1, 明细 2, 办公用品,3, 电脑配件 4,耗材 5, 食品 
+				6, 礼品 7, IT数码 8, 通讯器材 9, 体育休闲  10, 饰品 11, 家用电器 12, 汽车用品 13, 化妆品 14, 玩具 15, 箱包皮具 
+				16, 服装 17, 劳保用品 18, 图书 19, 资料 20, 教材 21, 音像（需要业务部门确认）  
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> invoiceDate: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="invoiceDate" value="2015-04-11"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">必须	期望开票时间  2015-01-08
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> title: </label>
+    						<div class="col-sm-4">
+    							<input type="text"  class="form-control" name="title" value="联通公司"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">必须	发票抬头（参考使用）
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> billToParty: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="billToParty" value=""/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">非必须	收票单位 （联通填写开票省份）
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> enterpriseTaxpayer: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="enterpriseTaxpayer" />
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">非必须	纳税人识别号（增票必须）
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> billToer: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="billToer" />
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">非必须	收票人 （无)
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> billToContact: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="billToContact"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">非必须	收票人联系方式 （无）
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> billToProvince: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="billToProvince"/> 
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">非必须	收票人地址（省）  （无）
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label">  billToCity:</label>
+    						<div class="col-sm-4">
+    							<input type="text"  class="form-control" name="billToCity"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">非必须	收票人地址（市）  （无）
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label">  billToCounty:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="billToCounty" /> 
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">非必须	收票人地址（区）  （无）
+								</p>
+                            </div>
+                     </div>
+					<div class="form-group">
+    						<label class="col-sm-3 control-label"> billToTown: </label>
+    						<div class="col-sm-4">
+    							<input type="text"  class="form-control" name="billToTown"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">非必须	收票人地址（街道）（无）
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> billToAddress: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="billToAddress"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger"> 非必须	收票人地址（详细地址）（无）
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label">repaymentDate:  </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="repaymentDate"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">非必须	预计还款时间2013-11-18
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> invoiceNum: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="invoiceNum" value="1"/> 
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger"> 必须	当前批次子订单总数
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> invoiceNakedPrice: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="invoiceNakedPrice" value="100"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger"> 必须	当前批次不含税总金额
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> invoiceTaxPrice: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="invoiceTaxPrice" value="10"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">必须	当前批次总税额(参考用)
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> invoicePrice: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="invoicePrice" value="110"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger"> 必须	当前批次含税总金额
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label"> currentBatch: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control"  name="currentBatch" value="1"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">必须	当前批次
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3 control-label">totalBatch:  </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="totalBatch" value="3"/> 
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">必须	总批次
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-4 control-label"> totalBatchInvoiceNakedAmount: </label>
+    						<div class="col-sm-3">
+    							<input type="text" class="form-control" name="totalBatchInvoiceNakedAmount" value="300"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">	必须	总批次开发票金额（不含税）
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-4 control-label">  totalBatchInvoiceTaxAmount:</label>
+    						<div class="col-sm-3">
+    							<input type="text" class="form-control" name="totalBatchInvoiceTaxAmount" value="30"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">必须	总批次开发票税额
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-4 control-label"> totalBatchInvoiceAmount:  </label>
+    						<div class="col-sm-3">
+    							<input type="text" class="form-control" name="totalBatchInvoiceAmount" value="330"/>
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">必须	总批次开发票价税合计
+								</p>
+                            </div>
+                     </div>
+					 <div class="form-group">
+    						<label class="col-sm-3">  </label>
+    						<div class="col-sm-4">
+    							<input  class="btn btn-success" value="submit(提交开票申请)" type="button" onclick="submitInvoice()" />
+                            </div>
+    						<div class="col-sm-4">
+    							<p class="text-danger">
+								</p>
+                            </div>
+                     </div>
+					 <hr>
+					<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="submitInvoiceText" class="text-danger"></span>
+                        </div>
+                    </div>	
+				</form>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+			
+			<!--查询发票信息-->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeQueryInvoiceInfo">查询发票信息</h3>
+				<div class="form-horizontal bs-example">	
+					<form id="selectInvoiceForm">
+					  <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> token:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="token" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须	授权时获取的access token
+								</p>
+                            </div>
+                    </div>
+					 <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> markId: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="markId" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须	  联通申请发票的唯一id标识
+								</p>
+                            </div>
+							<div class="col-sm-3">
+								<input class="btn btn-success"  value="selectInvoice(查询发票信息)" type="button" onclick="selectInvoice()" />
+							</div>
+                    </div>
+					<hr />
+    				<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="selectInvoiceText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+			<!--发票提报取消 -->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeCancelInvoice">取消发票提报</h3>
+				<div class="form-horizontal bs-example">	
+					<form id="cancelInvoiceForm">
+					 <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> token:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="token" />	
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须	授权时获取的access token
+								</p>
+                            </div>
+                    </div>
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> markId:</label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="markId" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须	  联通申请发票的唯一id标识
+								</p>
+                            </div>
+							<div class="col-sm-3">
+								<input class="btn btn-success" value="cancelInvoice(取消发票提报)" type="button" onclick="cancelInvoice()" />
+							</div>
+                    </div>
+    				<hr />
+    				<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="cancelInvoiceText" class="text-danger" ></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+			
+			<!--创建服务单-->
+			<div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h1 class="page-header" id="makeCreateServiceBill">售后</h1>
+ 				<h3 class="page-header" id="makeCreateServiceBill">创建服务单</h3>
+				<div class="form-horizontal bs-example">	
+					<form id="createAfsApplyForm">
+					   <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> token:</label>
+    						<div class="col-sm-4">
+    							<input type="text"  class="form-control" name="token" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须,授权时获取的access token
+								</p>
+                            </div>
+                        </div>
+					 <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin">param: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="param" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须, param
+								</p>
+                            </div>
+							<div class="col-sm-3">
+								<input class="btn btn-success" value="创建服务单" type="button" onclick="createAfsApply()" />
+							</div>
+                     </div>
+    				<hr />
+    				<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="createAfsApplyText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+			</div> <!--section end-->
+			
+		    <div class="bs-docs-section" style="margin-bottom:0px;">
+ 				<h3 class="page-header" id="makeCancelServiceBill">取消服务单</h3>
+				<div class="form-horizontal bs-example">	
+					<form id="auditCancelForm">
+					<div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> token: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="token" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须,授权时获取的access token
+								</p>
+                            </div>
+                     </div>
+                     <div class="form-group">
+    						<label class="col-sm-1 control-label col-left-margin"> param: </label>
+    						<div class="col-sm-4">
+    							<input type="text" class="form-control" name="param" />
+                            </div>
+    						<div class="col-sm-2">
+    							<p class="text-danger">必须, param
+								</p>
+                            </div>
+							<div class="col-sm-3">
+								<input class="btn btn-success" value="取消服务单" type="button" onclick="auditCancel()" />
+							</div>
+                    </div>
+					<hr />
+    				<div class="form-group">
+    					<div class="col-sm-9 col-left-margin">
+    						<span id="auditCancelText" class="text-danger"></span>
+                        </div>
+                    </div>
+					</form>
+				</div><!--form-horizontal end -->
+		    </div> <!--section end-->
+			
+			</div><!-- col-md-9 end --> 
+			<!--右边导航-->
+			<div role="complementary" class="col-md-3">
+				 <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top">
+					<ul class="nav bs-docs-sidenav">	
+						<li><a href="#getToken">授权服务</a></li>
+						<li><a href="#applyParam">基础接口</a>
+							<ul class="nav">
+                                <li> <a   href="#applyParam">地址api</a></li>
+                                <li> <a   href="#applyParam">价格服务</a></li>
+                                <li> <a   href="#applyParam">商品api接口</a></li>
+                                <li> <a   href="#getStockById">库存</a></li>
+                                <!--<li> <a   href="#getNewStockById">库存（新）</a></li>-->
+                                <li> <a   href="#getMessage">消息推送api接口</a></li>
+                            </ul>
+						</li>
+                        <li><a href="#orderCheck">订单核对</a></li>
+                        <li><a href="#makeOrderByGift">礼品卡</a>
+							<ul class="nav">
+								<li><a href="#makeOrderByGift">礼品卡下单</a>
+								<li><a href="#makeOrderInterfaceByGift">礼品卡下单接口</a> </li>
+								<li><a href="#makeSmsWithGift">礼品卡短信补发</a> </li>
+							</ul>
+						</li>
+                        
+                        <li><a href="#makeUserCheckInvioce">用户资质</a> 
+							<ul class="nav">
+								<li><a href="#makeUserCheckInvioce">检查用户增票资质</a> </li>
+								<li><a href="#makeJinCaiUserCredictQuery">金采用户授信额度查询</a></li>
+							</ul>
+						</li>
+							
+						<li><a href="#makeOrderByRealProduct">订单api</a>
+							<ul class="nav">
+								<li><a href="#makeOrderByRealProduct">实物下单</a>
+								<li><a href="#makeConfirmStockOrder">确认预占库存订单</a></li>
+								<li><a href="#makeCancelConfirmedOrder">取消已确认订单 </a></li>
+								<li><a href="#makeCancelNotConfirmOrder">取消未确认订单 </a></li>
+								<li><a href="#makePayForOrder">订单支付   </a></li>
+								<li><a href="#makeBackTaskQuery">快退任务进度查询  </a></li>
+							</ul>
+						</li>
+						<li><a href="#makeProductProperty">商品属性</a>
+							<ul class="nav">
+								<li><a href="#makeProductProperty">获取商品名称 </a></li>
+								<li><a href="#makeProductProperty">获取商品受限区域  </a></li>
+								<li><a href="#makeProductProperty">检查商品区域限制接口 </a></li>
+								<li><a href="#makeCashOndeliveryQuery">货到付款查询接口  </a></li>
+								<li><a href="#makeValidateBy">货到付款校验</a>
+								</li>
+								<li><a href="#makeGiftAttachQuery">赠品附件查询接口 </a></li>	
+							</ul>
+						</li>
+						<li>
+							<a href="#makeVerifyBy">商品池服务验证</a>
+							<ul class="nav">
+                                <li> <a  href="#makeVerifyByClientId">1.通过client_id查询商品池列表</a></li>
+                                <li> <a  href="#makeVerifyByClientIdAndPoolId">2.通过clientId和poolId获取商品池商品</a></li>
+                                <li> <a  href="#makeVerifyByIfExistSkuId">3.判断客户是否可以购买该skuId</a></li>
+                                <li> <a  href="#makeVerifyByIsHeavyClient">4.判断商品是否为大客户商品</a></li>
+                                <li> <a  href="#makeVerifyByExistClientId">5.根据商家id判断有哪些商家可以购买该商品</a></li>
+                            </ul>
+                        </li>
+						<li><a href="#makeTestForAll">URL测试接口 </a>
+							<ul class="nav">
+								<li><a href="#makeRealTestUrl">实物相关测试URL </a></li>
+								<li><a href="#makeUrlForGift">礼品卡相关测试URL </a></li>
+							</ul>
+						</li>
+						
+						<li><a href="#makeSubmitInvoiceApply">发票</a>
+							<ul class="nav">
+								<li><a href="#makeSubmitInvoiceApply">提交开票申请 </a></li>
+								<li><a href="#makeQueryInvoiceInfo">查询发票信息  </a></li>
+								<li><a href="#makeCancelInvoice">取消发票提报  </a></li>
+							</ul>
+						</li>
+						
+						<li class="active"><a href="#makeCreateServiceBill">售后 </a>
+							<ul class="nav">
+								<li><a href="#makeCreateServiceBill">创建服务单  </a></li>
+								<li><a href="#makeCancelServiceBill">取消服务单  </a></li>
+							</ul>
+						</li>
+						
+					</ul>
+					<!--返回顶部-->
+                      <a href="#top" class="back-to-top">返回顶部 </a>
+				 </nav>
+            </div>
+        </div>
+     </div>
+
+	 
+<script type="text/javascript" src="/misc/js/jquery.min.js"></script>
+<script type="text/javascript" src="/misc/js/bootstrap.min.js"></script>
+#*	    <script type="text/javascript" src="/resources/js/docs.min.js"></script>*#
+<script type="text/javascript">
+		
+			$(document).ready(function(){
+			   $("#invoiceInfo").hide();
+				var invoiceType=$("#invoiceType").val();
+				if(invoiceType==2){
+					$("#invoiceInfo").show();
+				}				
+				$("#invoiceType").change(function(){
+					var invoiceType=$("#invoiceType").val();
+					if(invoiceType==2){
+						$("#invoiceInfo").show();
+					}
+					else{
+						$("#invoiceInfo").hide();
+						cleanInvoiceInfo();
+					}
+				});
+			});
+			function cleanInvoiceInfo(){
+			$("#invoiceName").val("");
+			$("#invoicePhone").val("");
+			$("#invoiceProvice").val("");
+			$("#invoiceCity").val("");
+			$("#invoiceCounty").val("");
+			$("#invoiceTown").val("");
+			$("#invoiceAddress").val("");
+			}
+
+
+            function ajaxHeartBeat(){
+                jQuery.ajax({
+                    type:"post",
+                    url:"/api/Ajax/AjaxHeartBeat",
+                    dataType: "json",
+                    success:function (result) {
+                        $("#ajaxHeartBeatText").html(JSON.stringify(result));
+                    },
+                    beforeSend: function() {
+                        //$('.btn_submit').attr('disabled', true);
+                    }
+                });
+            }
+
+            function logout(){
+                jQuery.ajax({
+                    type:"post",
+                    url:"/login/logout",
+                    success:function (result) {
+                        $("#logoutText").html("已退出，重新登陆");
+                    },
+                    beforeSend: function() {
+                        //$('.btn_submit').attr('disabled', true);
+                    }
+                });
+            }
+
+/*            void function(j) {
+                j('#btn_login').click(function(e) {
+                    j.ajax({
+                        url: '/login/doLogin',
+                        type:'POST',
+                        dataType: "json",
+                        data: j("#form_login").serialize(),
+                        success: function(data, ts) {
+                            window.location.href="/admin/main";
+                        },
+                        beforeSend: function() {
+                            //$('.btn_submit').attr('disabled', true);
+                        }
+                    });
+                });
+            }(jQuery);*/
+
+
+			// *********************************************************//
+
+			function getToken(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/sandbox/getToken",
+                    data:$("#formlogin").serialize(),
+                    success:function (result) {
+						$("#tokenText").html(result);
+                    }
+                });
+			}
+			
+			function getAccessToken(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/oauth2/access_token",
+                    data:$("#formlogin").serialize(),
+                    success:function (result) {
+						$("#tokenText").html(result);
+                    }
+                });
+			}
+			
+			function refreshToken(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/oauth2/refresh_token",
+                    data:$("#formlogin").serialize(),
+                    success:function (result) {
+						$("#tokenText").html(result);
+                    }
+                });
+			}
+			
+			function seachArea(){
+				$.ajax({
+                    type:"POST",
+                    url:"/api/area/"+$("#areaSelect").val(),
+					data : "id="+$("#areaId").val()+"&token="+$("#token").val(),
+                    success:function (result) {
+						$('#areaText').text(JSON.stringify(result));
+                    }
+                });
+			}
+			function checkUserInvoice(){
+					jQuery.ajax({
+	                    type:"POST",
+	                    url:"/api/invoice/view",
+						data : "token="+$("#UserInvoiceToken").val(),
+	                    success:function (result) {
+							$("#UserInvoiceText").html(JSON.stringify(result));
+	                    }
+	                });
+			}
+			function checkCOD(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/sandbox/codCheck",
+					data : $("#AddrCODForm").serialize(),
+                    success:function (result) {
+						$("#CODCheckText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function getPoolsByClientId(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/sandbox/getPoolsByClientId",
+					data : $("#getPoolsByClientIdForm").serialize(),
+                    success:function (result) {
+						console.log(result);
+						$("#getPoolsByClientIdText").html(result);
+                    }
+                });
+			}
+			
+			function getSkusByClientIdAndPoolId(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/sandbox/getSkusByClientIdAndPoolId",
+					data : $("#getSkusByClientIdAndPoolIdForm").serialize(),
+                    success:function (result) {
+						$("#getSkusByClientIdAndPoolIdText").html(result);
+                    }
+                });
+			}
+			
+			function checkSkuClientCanBuy(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/sandbox/checkSkuClientCanBuy",
+					data : $("#checkSkuClientCanBuyForm").serialize(),
+                    success:function (result) {
+						console.log(result);
+						$("#checkSkuClientCanBuyText").html(result);
+                    }
+                });
+			}
+			
+			function checkIsBigClientSku(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/sandbox/checkIsBigClientSku",
+					data : $("#checkIsBigClientSkuForm").serialize(),
+                    success:function (result) {
+						$("#checkIsBigClientSkuText").html(result);
+                    }
+                });
+			}
+			
+			function getClientIdsBySku(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/sandbox/getClientIdsBySku",
+					data : $("#getClientIdsBySkuForm").serialize(),
+                    success:function (result) {
+						$("#getClientIdsBySkuText").html(result);
+                    }
+                });
+			}
+				
+			function checkSkuCOD(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/sandbox/skuCODCheck",
+					data : $("#SkuCODForm").serialize(),
+                    success:function (result) {
+						$("#SkuCODCheckText").html(JSON.stringify(result));
+                    }
+                });
+			}			
+			
+			function seachPrice(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/api/price/"+$("#price").val(),
+					data : "sku="+$("#sku").val()+"&token="+$("#token").val(),
+                    success:function (result) {
+						$("#priceText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function searchProduct(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/api/product/"+$("#product").val(),
+					data : "sku="+$("#sku").val()+"&token="+$("#token").val()+"&pageNum="+$("#pagNum").val(),
+                    success:function (result) {
+						$("#productText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function allTestSubmit(){
+				var data = "token="+$("#apiToken").val()
+				if($("#apiData").val() !=""){
+					data =data+"&"+$("#apiData").val()
+				}
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/api"+$("#apiUrl").val(),
+					data : data,
+                    success:function (result) {
+						$("#allText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function searchStock(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/api/stock/"+$("#stock").val(),
+					data : "sku="+$("#sku").val()+"&token="+$("#token").val()+"&area="+$("#area").val(),
+                    success:function (result) {
+						$("#stockText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			function searchNewStock(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/api/stock/getNewStockById",
+					data : "skuNums="+$("#skuNums").val()+"&token="+$("#token").val()+"&area="+$("#area").val(),
+                    success:function (result) {
+						$("#newStockText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function searchMessage(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/api/message/"+$("#message").val(),
+					data : "type="+$("#type").val()+"&token="+$("#token").val()+"&del="+$("#del").val()+"&id="+$("#id").val(),
+                    success:function (result) {
+						$("#messageText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function searchCheckOrder(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/api/checkOrder/"+$("#checkOrder").val(),
+					data : "token="+$("#token").val()+"&date="+$("#date").val()+"&page="+$("#page").val(),
+                    success:function (result) {
+						$("#checkOrderText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function getProductName(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/sandbox/getProductName",
+					data : $("#ProductNameForm").serialize(),
+                    success:function (result) {
+						$("#ProductNameFormText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function getSkuLimitArea(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/sandbox/getProductAreaLimit",
+					data : $("#SkuLimitAreaForm").serialize(),
+                    success:function (result) {
+						$("#SkuLimitAreaFormText").html(result);
+                    }
+                });
+			}
+			
+			//"token="+$("#token").val()+"&skuIds="+$("#skuIds").val()+"&province="+$("#province").val()+"&city="+$("#city").val()+"&county="+$("#county").val(),
+			function checkSkuAreaLimit(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/api/product/checkAreaLimit",
+					data : $("#CheckSkuAreaLimitForm").serialize(),
+                    success:function (result) {
+						$("#CheckSkuAreaLimitFormText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function searchGiftcard(){
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/api/giftCard/"+$("#giftcard").val(),
+					data : "token="+$("#token").val()+"&mobile="+$("#mobile").val()+"&sku="+$("#sku").val()+"&thirdOrder="+$("#thirdOrder").val()+"&jdOrderId="+$("#jdOrderId").val(),
+                    success:function (result) {
+						$("#giftcardText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function buy(){				
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/api/giftCard/buy",
+					data : $("#buyForm").serialize(),
+                    success:function (result) {
+						$("#buyText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function sendSms(){				
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/api/giftCard/sendSms",
+					data : $("#sendSmsForm").serialize(),
+                    success:function (result) {
+						$("#sendSmsText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function UserCreditLimit(){				
+				jQuery.ajax({
+                    type:"POST",
+                    url:"/api/payment/queryCreditLimit",
+					data : $("#UserCreditLimitForm").serialize(),
+                    success:function (result) {
+						$("#UserCreditLimitText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			
+			function submitOrder(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/order/submit",
+                    data:$("#submitOrderForm").serialize(),
+                    success:function (result) {
+						$("#submitOrderText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function submitOrder2(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/order/submit2",
+                    data:$("#submitOrderForm").serialize(),
+                    success:function (result) {
+						$("#submitOrderText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function jdPriceSubmit(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/order/jdPriceSubmit",
+                    data:$("#submitOrderForm").serialize(),
+                    success:function (result) {
+						$("#submitOrderText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function cancelOrder(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/order/cancelJdOrder",
+                    data:$("#cancelOrderForm").serialize(),
+                    success:function (result) {
+						$("#cancelOrderText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function cancelOrder2(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/order/cancel",
+                    data:$("#cancelOrderForm2").serialize(),
+                    success:function (result) {
+						$("#cancelOrderText2").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			/* 确认预占库存的订单*/
+			function confirmOccupyStockOrder(){
+			 	jQuery.ajax({
+                    type:"POST",
+                    url:"/api/order/confirmOrder",
+                    data:$("#confirmOccupyForm").serialize(),
+                    success:function (result) {
+						$("#confirmOccupyText").html(JSON.stringify(result));
+                    }
+                });
+			
+			
+			}
+			
+			function submitInvoice(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/invoice/submit",
+                    data:$("#submitInvoiceForm").serialize(),
+                    success:function (result) {
+						$("#submitInvoiceText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function selectInvoice(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/invoice/select",
+                    data:$("#selectInvoiceForm").serialize(),
+                    success:function (result) {
+						$("#selectInvoiceText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function cancelInvoice(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/invoice/cancel",
+                    data:$("#cancelInvoiceForm").serialize(),
+                    success:function (result) {
+						$("#cancelInvoiceText").html(JSON.stringify(result));
+                    }
+                });
+			}
+				
+			function kuaiTuiProcess(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/kuaiTui/querySteps",
+                    data:$("#kuaiTuiProcessForm").serialize(),
+                    success:function (result) {
+						$("#kuaiTuiProcessText").html(JSON.stringify(result));
+                    }
+                });
+			}	
+			
+			function createAfsApply(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/afterSale/createAfsApply",
+                    data:$("#createAfsApplyForm").serialize(),
+                    success:function (result) {
+						$("#createAfsApplyText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function auditCancel(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/afterSale/auditCancel",
+                    data:$("#auditCancelForm").serialize(),
+                    success:function (result) {
+						$("#auditCancelText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function doGetFiveStockById(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/stock/getFiveStockById",
+                    data:$("#getFiveStockByIdForm").serialize(),
+                    success:function (result) {
+						$("#getFiveStockByIdText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function doHuoDaoFuKuanQuery(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/product/getIsCod",
+                    data:$("#huoDaoFuKuanQueryForm").serialize(),
+                    success:function (result) {
+						$("#huoDaoFuKuanQueryText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function getSkuGiftQuery(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/product/getSkuGift",
+                    data:$("#getSkuGiftForm").serialize(),
+                    success:function (result) {
+						$("#getSkuGiftText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			function doOrderDoPay(){
+				 jQuery.ajax({
+                    type:"POST",
+                    url:"/api/order/doPay",
+                    data:$("#orderDoPayForm").serialize(),
+                    success:function (result) {
+						$("#orderDoPayText").html(JSON.stringify(result));
+                    }
+                });
+			}
+			
+			//add mine thank for Jack Li
+			$('.bs-docs-sidebar li').on('click', function() {
+				$('.bs-docs-sidebar li').removeClass('active');
+				$(this).addClass('active');
+				$(this).addClass('tip-li');
+				
+			});
+		</script>
+	</body>
+</html>

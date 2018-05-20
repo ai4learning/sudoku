@@ -96,6 +96,8 @@ public interface LoginRecordService {
      */
     public LoginRecord getLoginRecordByToken(String userName, String token) throws Exception;
 
+    public LoginRecord getLoginRecordByTraining(String trainingId, String trainingCode) throws Exception;
+
     /**
      * 刷新登录记录
      * @param user
