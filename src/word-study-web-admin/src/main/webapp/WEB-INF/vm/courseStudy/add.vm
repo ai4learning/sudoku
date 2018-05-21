@@ -33,20 +33,30 @@
 								
 			</div>
 		</div>
-		
-		
-		<div class="form-group">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="currentStudyBook">是当前学习教材</label>
+            <div class="col-sm-7 controls">
+
+
+                <select class="forms_select input-medium" name="currentStudyBook" id="currentStudyBook">
+
+                    <option value="0">否</option>
+                    <option value="1">是</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
 			<label class="col-sm-2 control-label" for="isCurrentPos">是当前学习位置</label>
 			<div class="col-sm-7 controls">
 			
         
 		<select class="forms_select input-medium" name="isCurrentPos" id="isCurrentPos">
 			
-				<option value="1">是；2.否；</option>
+				<option value="0">否</option>
+				<option value="1">是</option>
 		</select>
-	
-    
-				
 			</div>
 		</div>
 		
@@ -114,9 +124,9 @@
 			
         
 		<select class="forms_select input-medium" name="studyMode" id="studyMode">
-			
-				<option value="0">逆向学习</option>
-				<option value="1">正向学习</option>
+
+            <option value="0">正向学习</option>
+            <option value="1">逆向学习</option>
 		</select>
 	
     

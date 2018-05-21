@@ -37,18 +37,24 @@
 			<input type="text" class="form-control"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10" value="$!{courseStudy.lessonId}"/>
 			</div>
 		</div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="currentStudyBook">是当前学习教材</label>
+            <div class="col-sm-7 controls">
+                <select class="forms_select input-medium" name="currentStudyBook" id="currentStudyBook">
+                    <option value="0" #if($courseStudy.currentStudyBook==0) selected #end>否</option>
+                    <option value="1" #if($courseStudy.currentStudyBook==1) selected #end>是</option>
+                </select>
+            </div>
+        </div>
 		
 		<div class="form-group">
 			<label class="col-sm-2 control-label" for="isCurrentPos">是当前学习位置</label>
 			<div class="col-sm-7 controls">
-			
-        
-		<select class="forms_select input-medium" name="isCurrentPos" id="isCurrentPos">
-				<option value="1" #if($courseStudy.isCurrentPos==1) selected #end>是；2.否；</option>
-</select>
-		
-    
-
+                <select class="forms_select input-medium" name="isCurrentPos" id="isCurrentPos">
+					<option value="0" #if($courseStudy.isCurrentPos==0) selected #end>否</option>
+					<option value="1" #if($courseStudy.isCurrentPos==1) selected #end>是</option>
+				</select>
 			</div>
 		</div>
 		
@@ -105,9 +111,9 @@
 			
         
 		<select class="forms_select input-medium" name="studyMode" id="studyMode">
-				<option value="0" #if($courseStudy.studyMode==0) selected #end>逆向学习</option>
-				<option value="1" #if($courseStudy.studyMode==1) selected #end>正向学习</option>
-</select>
+			<option value="0" #if($courseStudy.studyMode==0) selected #end>正向学习</option>
+            <option value="1" #if($courseStudy.studyMode==1) selected #end>逆向学习</option>
+        </select>
 		
     
 

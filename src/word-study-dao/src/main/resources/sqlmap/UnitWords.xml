@@ -32,6 +32,7 @@
     		<if test="vocCode != null"> AND voc_code = #{vocCode}</if>
     		<if test="fstClassId != null"> AND fst_class_id = #{fstClassId}</if>
     		<if test="wordId != null"> AND word_id = #{wordId}</if>
+    		<if test="vocCode != null"> AND voc_code = #{vocCode}</if>
     		<if test="state != null"> AND state = #{state}</if>
     		
     		</where>
@@ -49,6 +50,7 @@
 		<if test="vocCode != null"> AND voc_code = #{vocCode}</if>
 		<if test="fstClassId != null"> AND fst_class_id = #{fstClassId}</if>
 		<if test="wordId != null"> AND word_id = #{wordId}</if>
+		<if test="vocCode != null"> AND voc_code = #{vocCode}</if>
 		<if test="state != null"> AND state = #{state}</if>
 		
 		</where>

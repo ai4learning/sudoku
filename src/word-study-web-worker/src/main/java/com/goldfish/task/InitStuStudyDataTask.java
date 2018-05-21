@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 初始化学生学习数据
@@ -139,6 +140,7 @@ public class InitStuStudyDataTask extends AbstractTask{
         courseStudy.setIsFinished(FinishState.NOT_COMPLETE.getState());
         courseStudy.setIsAllFinished(FinishState.NOT_COMPLETE.getState());
 
+        courseStudy.setStudyPositionCode(UUID.randomUUID().toString());
         courseStudy.setPositionType(PositionType.WORD.getType());
         courseStudy.setLessonId(Integer.valueOf(String.valueOf(lessonId)));
         courseStudy.setUnitNbr(0);

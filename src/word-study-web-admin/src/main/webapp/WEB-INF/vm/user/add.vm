@@ -115,7 +115,7 @@
 			
 				<option value="0">初始状态</option>
 				<option value="1">正常</option>
-				<option value="2">欠费</option>
+				<option value="2">已激活</option>
 				<option value="3">不可用</option>
 		</select>
 	

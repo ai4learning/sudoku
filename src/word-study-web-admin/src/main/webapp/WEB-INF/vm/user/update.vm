@@ -107,7 +107,7 @@
 		<select class="forms_select input-medium" name="userState" id="userState">
 				<option value="0" #if($user.userState==0) selected #end>初始状态</option>
 				<option value="1" #if($user.userState==1) selected #end>正常</option>
-				<option value="2" #if($user.userState==2) selected #end>欠费</option>
+				<option value="2" #if($user.userState==2) selected #end>已激活</option>
 				<option value="3" #if($user.userState==3) selected #end>不可用</option>
 </select>
 		

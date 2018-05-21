@@ -25,7 +25,11 @@ public class CourseStudy  implements Serializable {
 	/**  学生CODE  */
 	private String studentCode; 
 	/**  课程ID  */
-	private Integer lessonId; 
+	private Integer lessonId;
+
+	/**  是当前正在学习课程  */
+	private boolean currentStudyBook;
+
 	/**  是当前学习位置  */
 	private Integer isCurrentPos;
 	/**  学习位置CODE  */
@@ -234,7 +238,14 @@ public class CourseStudy  implements Serializable {
   	public java.util.Date getModified() {
   	  return this.modified;
   	}
-	
-	  	
 
+	public boolean isCurrentStudyBook() {
+		return currentStudyBook;
+	}
+
+
+
+	public void setCurrentStudyBook(boolean currentStudyBook) {
+		this.currentStudyBook = currentStudyBook;
+	}
 }

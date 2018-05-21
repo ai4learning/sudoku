@@ -8,6 +8,7 @@
 			<th><span>学生ID</span></th>
 			<th><span>学生CODE</span></th>
 			<th><span>课程ID</span></th>
+			<th><span>是当前学习课程</span></th>
 			<th><span>是当前学习位置</span></th>
 			<th><span>学习位置CODE</span></th>
 			<th><span>位置类型</span></th>
@@ -36,12 +37,18 @@
 			<td>$!item.studentCode</td>
 			<td>$!item.lessonId</td>
 			<td>
-        
-			
-				#if($item.isCurrentPos==1)<span class="">是；2.否；</span> #end	
-			
+				#if($item.currentStudyBook==0)<span class="">否</span> #end
+				#if($item.currentStudyBook==1)<span class="">是</span> #end
 	
-    </td>
+    		</td>
+		   <td>
+
+
+				#if($item.isCurrentPos==0)<span class="">否</span> #end
+				#if($item.isCurrentPos==1)<span class="">是</span> #end
+
+
+    		</td>
 			<td>$!item.studyPositionCode</td>
 			<td>
         
@@ -56,12 +63,12 @@
 			<td>$!item.vocCode</td>
 			<td>$!item.startFrom</td>
 			<td>
-        
-			
-				#if($item.studyMode==0)<span class="">逆向学习</span> #end	
-			
-				#if($item.studyMode==1)<span class="">正向学习</span> #end	
-			
+
+
+				#if($item.studyMode==0)<span class="">正向学习</span> #end
+				#if($item.studyMode==1)<span class="">逆向学习</span> #end
+
+
 	
     </td>
 			<td>$!item.completeWordCount</td>

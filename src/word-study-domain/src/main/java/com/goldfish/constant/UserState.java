@@ -5,7 +5,7 @@ package com.goldfish.constant;
  */
 public enum UserState {
     NORMAL(1, "正常"),
-    ABNORMAL(2, "欠费"),
+    ACTIVATED(2, "已激活"),
     INVALID(3,"不可用");
 
     private int state;

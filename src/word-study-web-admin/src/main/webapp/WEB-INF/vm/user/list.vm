@@ -65,7 +65,7 @@
 			
 				#if($item.userState==1)<span class="">正常</span> #end	
 			
-				#if($item.userState==2)<span class="">欠费</span> #end	
+				#if($item.userState==2)<span class="">已激活</span> #end
 			
 				#if($item.userState==3)<span class="">不可用</span> #end	
 			

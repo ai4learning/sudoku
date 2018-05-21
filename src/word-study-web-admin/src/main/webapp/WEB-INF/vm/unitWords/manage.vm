@@ -59,6 +59,13 @@
 				<input type="text"  name="wordId" id="wordId_search" class="form-control" placeholder="请输入单词ID">
 				
 		</div>&nbsp;&nbsp;
+
+		<div class="form-group">
+			<label for="vocCode_search">vocCode</label>
+
+				<input type="text"  name="vocCode" id="vocCode_search" class="form-control" placeholder="请输入vocCode">
+
+		</div>&nbsp;&nbsp;
 		
 
 		<div class="form-group">

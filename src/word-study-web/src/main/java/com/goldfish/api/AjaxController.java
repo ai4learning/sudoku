@@ -3,6 +3,7 @@ package com.goldfish.api;
 import com.goldfish.common.CommonResult;
 import com.goldfish.dao.cache.local.LoginRecordContext;
 import com.goldfish.domain.LoginRecord;
+import com.goldfish.manager.LoginRecordManager;
 import com.goldfish.web.interceptor.servlet.context.LoginContext;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -20,12 +21,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/api/Ajax")
 public class AjaxController extends AjaxExamController{
-
-    @Resource
-    private LoginRecordContext loginRecordContext;
-
-
-
     /**
      * 用户登录心跳
      * @param context
@@ -37,16 +32,7 @@ public class AjaxController extends AjaxExamController{
     public @ResponseBody
     Map<String,Object> doAjaxHeartBeat(ModelMap context) {
         CommonResult result = new CommonResult();
-
-        LoginContext loginContext = LoginContext.getLoginContext();
-        if (loginContext == null || StringUtils.isEmpty(loginContext.getTrainingId()) ||
-            StringUtils.isEmpty(loginContext.getTrainingCode())) {
-            result.addDefaultModel("UserId", "");
-            return result.getReturnMap();
-        }
-        // 从缓存获取User信息
-        LoginRecord loginRecord = loginRecordContext.getByTraning(loginContext.getTrainingId(),
-                loginContext.getTrainingCode());
+        LoginRecord loginRecord = getLoginRecord();
         if (loginRecord == null) {
             result.addDefaultModel("UserId", "");
             return result.getReturnMap();
@@ -55,13 +41,6 @@ public class AjaxController extends AjaxExamController{
         result.setSuccess(true);
         return result.getReturnMap();
     }
-
-
-
-
-
-
-
 
 //    @RequestMapping(value="view",method={RequestMethod.GET,RequestMethod.POST})
 //    public String view(Course course, ModelMap context) {

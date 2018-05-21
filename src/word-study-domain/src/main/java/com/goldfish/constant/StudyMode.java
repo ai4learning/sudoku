@@ -4,7 +4,7 @@ package com.goldfish.constant;
  * Created by John on 2018/5/19 0019.
  */
 public enum  StudyMode {
-    REVERSE(0,"逆向模式"),FORWARD(1,"正向模式");
+    REVERSE(1,"逆向模式"),FORWARD(0,"正向模式");
 
     private int mode;
     private String desc;

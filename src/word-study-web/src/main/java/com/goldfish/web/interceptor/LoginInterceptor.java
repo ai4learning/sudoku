@@ -116,7 +116,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             User query = new User();
             query.setUserId(userName);
             query.setPasswd(password);
-            query.setUserState(UserState.NORMAL.getState());
             query.setState(State.VALID.getState());
             CommonResult<User> result = userService.getUnique(query);
             User user = result.getDefaultModel();

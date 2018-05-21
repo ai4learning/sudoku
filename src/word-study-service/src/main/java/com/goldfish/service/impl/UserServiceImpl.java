@@ -10,6 +10,7 @@ import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.ActivateCodeState;
 import com.goldfish.constant.FinishState;
 import com.goldfish.constant.TaskType;
+import com.goldfish.constant.UserState;
 import com.goldfish.domain.ActivateCode;
 import com.goldfish.domain.Task;
 import com.goldfish.manager.ActivateCodeManager;
@@ -131,6 +132,7 @@ public class UserServiceImpl implements UserService {
 				// 将激活码更改为已使用
 				uniqueCode.setState(ActivateCodeState.USED.getState());
 				activateCodeManager.updateActivateCode(uniqueCode);
+				user.setUserState(UserState.ACTIVATED.getState());
 				// 设置课程ID
 			}
 			user.setLessonIds(uniqueCode.getLessonIds());

@@ -45,7 +45,7 @@ public class Course  implements Serializable {
 	/**  单词总数  */
 	private Integer totalWords; 
 	/**  是否过期  */
-	private String outDate; 
+	private boolean outDate;
 	/**  单元类型  */
 	private String unitType; 
 	/**  扩展信息  */
@@ -187,17 +187,15 @@ public class Course  implements Serializable {
 	
 	  	
 
-  	public void setOutDate(String outDate) {
+  	public void setOutDate(boolean outDate) {
   	  this.outDate=outDate;
   	}
-  
-  	public String getOutDate() {
-  	  return this.outDate;
-  	}
-	
-	  	
 
-  	public void setUnitType(String unitType) {
+	public boolean isOutDate() {
+		return outDate;
+	}
+
+	public void setUnitType(String unitType) {
   	  this.unitType=unitType;
   	}
   
