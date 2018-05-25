@@ -1,0 +1,99 @@
+// 单词学习
+.page_learning_word {
+  .ant-tabs-vertical.ant-tabs-left > .ant-tabs-content {
+    padding: 0 10px;
+  }
+  
+  .course_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .ant-card {
+      width: 32%;
+      margin: 10px 0 0 0;
+    }
+  }
+
+  .unit_list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .ant-card {
+      width: 20%;
+    }
+  }
+}
+
+// 测试
+.test_paper {
+  .listen2write {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .question {
+      width: 48%;
+      border: none;
+
+      .question_choices {
+        padding-top: 10px;
+      }
+    }
+  }
+
+  .question {
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 20px;
+    
+    .question_name {
+      font-size: 18px;
+      border-bottom: dashed 1px #c3c3c3;
+    }
+
+    .question_choices {
+      .ant-radio-group {
+        display: block;
+
+        .ant-radio-wrapper {
+          display: block;
+          font-size: 20px;
+          height: 40px;
+          line-height: 40px;
+
+          &:hover {
+            background: #f5f5f5;
+          }
+        }
+      }
+    }
+  }
+
+  .actions {
+    text-align: center;
+    padding: 20px;
+  }
+}
+
+.score_modal {
+  text-align: center;
+
+  .score {
+    font-size: 30px;
+    color: #d2191f;
+  }
+
+  .actions {
+    text-align: center;
+
+    .btn-show-wrong {
+      position: relative;
+      left: -30px;
+    }
+
+    .btn-close-page {
+      position: relative;
+      left: 30px;
+    }
+  }
+}
