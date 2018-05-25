@@ -28,7 +28,7 @@ public class CourseStudy  implements Serializable {
 	private Integer lessonId;
 
 	/**  是当前正在学习课程  */
-	private boolean currentStudyBook;
+	private Boolean currentStudyBook;
 
 	/**  是当前学习位置  */
 	private Integer isCurrentPos;
@@ -239,13 +239,13 @@ public class CourseStudy  implements Serializable {
   	  return this.modified;
   	}
 
-	public boolean isCurrentStudyBook() {
+	public Boolean isCurrentStudyBook() {
 		return currentStudyBook;
 	}
 
 
 
-	public void setCurrentStudyBook(boolean currentStudyBook) {
+	public void setCurrentStudyBook(Boolean currentStudyBook) {
 		this.currentStudyBook = currentStudyBook;
 	}
 }

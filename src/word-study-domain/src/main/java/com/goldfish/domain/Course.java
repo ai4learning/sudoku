@@ -232,7 +232,14 @@ public class Course  implements Serializable {
   	public java.util.Date getModified() {
   	  return this.modified;
   	}
-	
-	  	
 
+	@Override
+	public String toString() {
+		return "Course{" +
+				"id=" + id +
+				", type=" + type +
+				", moduleCode='" + moduleCode + '\'' +
+				", bookName='" + bookName + '\'' +
+				'}';
+	}
 }

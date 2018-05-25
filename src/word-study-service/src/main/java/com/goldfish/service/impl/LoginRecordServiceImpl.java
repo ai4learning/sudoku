@@ -207,14 +207,14 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 		newRecord.setUserCode(user.getUserCode());
 		newRecord.setUserName(user.getUserId());
 		newRecord.setWordTrainingId("wti_" + uuid);
-		newRecord.setWordTraningCode("wtc_" + uuid);
+		newRecord.setWordTrainingCode("wtc_" + uuid);
 		newRecord.setState(State.VALID.getState());
 		Date curr = new Date();
 		newRecord.setCreated(curr);
 		newRecord.setModified(curr);
 		LoginRecord  loginRecord= loginRecordManager.addLoginRecord(newRecord);
 		// 写入缓存
-		loginRecordContext.addByTraning(loginRecord.getWordTrainingId(), loginRecord.getWordTraningCode(), loginRecord);
+		loginRecordContext.addByTraning(loginRecord.getWordTrainingId(), loginRecord.getWordTrainingCode(), loginRecord);
 		return loginRecord;
 	}
 

@@ -5,7 +5,7 @@ package com.goldfish.vo;
  */
 public class CourseVO {
 
-    protected Integer Id;
+    protected Integer id;
     protected String moduleCode;
     protected String bookName;
     protected String coverImageUrl;
@@ -13,12 +13,13 @@ public class CourseVO {
     private boolean outDate;
     private String unitType;
 
+//    @JsonProperty(value = "Id")
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        id = id;
     }
 
     public String getModuleCode() {

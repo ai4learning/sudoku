@@ -1,13 +1,7 @@
 package com.goldfish.vo;
 
-import java.util.List;
-
 /**
- * 学生CourseVO
- *
- *      * {
- *     "books":[
- *         {
+ *  *         {
  *             "Id":5,
  *             "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
  *             "bookName":"零基础入门拼读",
@@ -32,25 +26,17 @@ import java.util.List;
  *             "startFrom":1,
  *             "studyMode":1
  *         }
- *     ],
- *     "condition":0,
- *     "totalNbr":0,
- *     "msg":"完成加载",
- *     "userState":2,
- *     "totalLoginTimes":0,
- *     "success":true
- * }
  * Created by John on 2018/5/21 0021.
  */
-public class UserBookVO extends UserVO{
+public class PositonedCourseStudyVO extends CourseStudyVO{
 
-    private List<CourseStudyVO> books;
+    private CurrentPositionVO currentPosition;
 
-    public List<CourseStudyVO> getBooks() {
-        return books;
+    public CurrentPositionVO getCurrentPosition() {
+        return currentPosition;
     }
 
-    public void setBooks(List<CourseStudyVO> books) {
-        this.books = books;
+    public void setCurrentPosition(CurrentPositionVO currentPosition) {
+        this.currentPosition = currentPosition;
     }
 }

@@ -18,7 +18,7 @@ package com.goldfish.vo;
  */
 public class CurrentPositionVO {
 
-    private Long Id;
+    private Long id;
     private String studyPositionCode;
     private Integer positionType;
 
@@ -33,11 +33,11 @@ public class CurrentPositionVO {
     private Integer Status = 0;
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getStudyPositionCode() {

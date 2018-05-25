@@ -23,7 +23,7 @@ public class LoginRecord  implements Serializable {
 	/**  训练ID  */
 	private String wordTrainingId; 
 	/**  训练CODE  */
-	private String wordTraningCode; 
+	private String wordTrainingCode;
 	/**  学习token  */
 	private String studyToken; 
 	/**  用户ID  */
@@ -58,20 +58,16 @@ public class LoginRecord  implements Serializable {
   	public String getWordTrainingId() {
   	  return this.wordTrainingId;
   	}
-	
-	  	
 
-  	public void setWordTraningCode(String wordTraningCode) {
-  	  this.wordTraningCode=wordTraningCode;
-  	}
-  
-  	public String getWordTraningCode() {
-  	  return this.wordTraningCode;
-  	}
-	
-	  	
+	public String getWordTrainingCode() {
+		return wordTrainingCode;
+	}
 
-  	public void setStudyToken(String studyToken) {
+	public void setWordTrainingCode(String wordTrainingCode) {
+		this.wordTrainingCode = wordTrainingCode;
+	}
+
+	public void setStudyToken(String studyToken) {
   	  this.studyToken=studyToken;
   	}
   

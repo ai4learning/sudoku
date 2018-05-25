@@ -659,9 +659,6 @@ public class AjaxReviewBookController extends AjaxCourseController {
 
      {"success":true,"msg":"记忆已经保存","cashPoint":0}
      *
-     * @param orderType
-     * @param start
-     * @param limit
      * @param context
      * @return
      */

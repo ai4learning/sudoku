@@ -51,7 +51,7 @@ public class BaseController {
         }
         LoginRecord query = new LoginRecord();
         query.setWordTrainingId(loginContext.getTrainingId());
-        query.setWordTraningCode(loginContext.getTrainingCode());
+        query.setWordTrainingCode(loginContext.getTrainingCode());
         return loginRecordManager.getUnique(query);
     }
 

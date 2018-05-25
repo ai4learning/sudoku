@@ -217,7 +217,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             loginContext.setUserName(loginRecord.getUserName());
             loginContext.setToken(loginRecord.getStudyToken());
             loginContext.setTrainingId(loginRecord.getWordTrainingId());
-            loginContext.setTrainingCode(loginRecord.getWordTraningCode());
+            loginContext.setTrainingCode(loginRecord.getWordTrainingCode());
 
             // 设置session过期时间
             long curr = System.currentTimeMillis();

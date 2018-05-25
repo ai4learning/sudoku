@@ -6,7 +6,7 @@
   <resultMap id="LoginRecord-Map" type="com.goldfish.domain.LoginRecord">
  		<id property="id" column="id"/>
 		<result property="wordTrainingId" column="word_training_id"/>
-		<result property="wordTraningCode" column="word_training_code"/>
+		<result property="wordTrainingCode" column="word_training_code"/>
 		<result property="studyToken" column="study_token"/>
 		<result property="userId" column="user_id"/>
 		<result property="userCode" column="user_code"/>
@@ -60,7 +60,7 @@
 
 	<insert id="addLoginRecord" parameterType="com.goldfish.domain.LoginRecord">
 		insert into login_record (word_training_id,word_training_code,study_token,user_id,user_code,user_name,state,created,modified)
-			values(#{wordTrainingId},#{wordTraningCode},#{studyToken},#{userId},#{userCode},#{userName},#{state},#{created},#{modified})
+			values(#{wordTrainingId},#{wordTrainingCode},#{studyToken},#{userId},#{userCode},#{userName},#{state},#{created},#{modified})
     
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
 		   select last_insert_id() as ID from dual
@@ -73,7 +73,7 @@
     	update  login_record 
 	<set>
 			<if test="wordTrainingId !=null"> word_training_id = #{wordTrainingId},</if>
-			<if test="wordTraningCode !=null"> word_training_code = #{wordTraningCode},</if>
+			<if test="wordTrainingCode !=null"> word_training_code = #{wordTrainingCode},</if>
 			<if test="studyToken !=null"> study_token = #{studyToken},</if>
 			<if test="userId !=null"> user_id = #{userId},</if>
 			<if test="userCode !=null"> user_code = #{userCode},</if>

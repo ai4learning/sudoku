@@ -29,7 +29,7 @@ public class LoginRecordManagerImpl implements LoginRecordManager {
         loginRecordDao.addLoginRecord(loginRecord);
         // 写入本地缓存
         localCache.addByTraning(loginRecord.getWordTrainingId(),
-                loginRecord.getWordTraningCode(),
+                loginRecord.getWordTrainingCode(),
                 loginRecord);
         return loginRecord;
     }
@@ -51,14 +51,14 @@ public class LoginRecordManagerImpl implements LoginRecordManager {
 
     public LoginRecord getUnique(LoginRecord loginRecord) {
         // 从缓存获取User信息
-        LoginRecord loginInfo = localCache.getByTraning(loginRecord.getWordTrainingId(), loginRecord.getWordTraningCode());
+        LoginRecord loginInfo = localCache.getByTraning(loginRecord.getWordTrainingId(), loginRecord.getWordTrainingCode());
         if (loginInfo != null) {
             return loginInfo;
         }
         loginInfo = loginRecordDao.getUnique(loginRecord);
         // 写入本地缓存
         localCache.addByTraning(loginInfo.getWordTrainingId(),
-                loginInfo.getWordTraningCode(),
+                loginInfo.getWordTrainingCode(),
                 loginInfo);
         return loginInfo;
     }

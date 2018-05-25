@@ -61,7 +61,7 @@
                 <div class="bs-docs-section" style="margin-bottom:0px;">
                     <h1 class="page-header" id="getToken">课程学习API<a href="#getToken" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h1>
                     <form id="form-horizontal">
-					#*心跳API*#
+
                         <div class="form-group">
                             <div class="col-sm-12 col-left-margin">
                                 <b>获取用户课程API:/api/Ajax/AjaxGetUserBook</b>
@@ -73,19 +73,25 @@
                         </div>
                         <hr>
 
-					#*登出API*#
                         <div class="form-group">
-                            <div class="form-group">
-                                <div class="col-sm-12 col-left-margin">
-                                    <b>登出API:/login/logout</b>
-                                    <hr>
-                                    <input type="button" class="btn btn-success"  value="退出" onclick="logout();" style="margin-left:5px; margin-right:5px;" />
-                                    <hr>
-                                    <span class="text-danger" id="logoutText"></span>
-                                </div>
+                            <div class="col-sm-12 col-left-margin">
+                                <b>加载用户课程API:/api/Ajax/AjaxLoadCourse</b>
+								<hr>
+									<label class="col-sm-2 control-label"> moduleCode： </label>
+									<div class="col-sm-3">
+										<input type="text" class="form-control" id="moduleCode" />
+									</div>
+                                <hr>
+                                <input type="button" class="btn btn-success"  value="确定" onclick="AjaxLoadCourse();" style="margin-left:5px; margin-right:5px;" />
+                                <hr>
+                                <span class="text-danger" id="AjaxLoadCourseText"></span>
                             </div>
                         </div>
                         <hr>
+
+
+
+
                     </form>
                 </div>
                 <!--section end-->
@@ -2179,6 +2185,22 @@ phoneNo		电话
                     dataType: "json",
                     success:function (result) {
                         $("#ajaxGetUserBookText").html(JSON.stringify(result));
+                    },
+                    beforeSend: function() {
+                        //$('.btn_submit').attr('disabled', true);
+                    }
+                });
+            }
+
+
+			function AjaxLoadCourse(){
+                jQuery.ajax({
+                    type:"post",
+                    url:"/api/Ajax/AjaxLoadCourse",
+                    data : "moduleCode="+$("#moduleCode").val(),
+                    dataType: "json",
+                    success:function (result) {
+                        $("#AjaxLoadCourseText").html(JSON.stringify(result));
                     },
                     beforeSend: function() {
                         //$('.btn_submit').attr('disabled', true);

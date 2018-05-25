@@ -3,16 +3,13 @@ package com.goldfish.api;
 import com.goldfish.common.CommonResult;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.log.LogTypeEnum;
+import com.goldfish.constant.DifficultLevel;
 import com.goldfish.constant.State;
 import com.goldfish.domain.*;
-import com.goldfish.service.CourseService;
-import com.goldfish.service.CourseStudyService;
-import com.goldfish.service.UnitWordsService;
-import com.goldfish.service.UserService;
-import com.goldfish.vo.CourseStudyVO;
-import com.goldfish.vo.CurrentPositionVO;
-import com.goldfish.vo.UserBookVO;
+import com.goldfish.service.*;
+import com.goldfish.vo.*;
 import com.goldfish.web.base.BaseController;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,9 +28,13 @@ public class AjaxCourseController extends BaseController {
     @Resource
     private CourseStudyService courseStudyService;
     @Resource
+    private UnitWordsStudyService unitWordsStudyService;
+    @Resource
     private UserService userService;
     @Resource
     private CourseService courseService;
+    @Resource
+    private UnitService unitService;
     @Resource
     private UnitWordsService unitWordsService;
 
@@ -84,41 +85,19 @@ public class AjaxCourseController extends BaseController {
     @ResponseBody
     UserBookVO doAjaxGetUserBook(ModelMap context) {
         UserBookVO userBookVO = new UserBookVO();
-
-        // 1.根据登录获取用户信息
-        LoginRecord loginRecord = this.getLoginRecord();
-        if (loginRecord == null) {
-            LogTypeEnum.DEFAULT.error("未获取到用户信息");
-            return userBookVO;
-        }
-        Integer userId = loginRecord.getUserId();
-        User userQuery = new User();
-        userQuery.setId(Long.valueOf(String.valueOf(userId)));
-        userQuery.setState(State.VALID.getState());
-        CommonResult<User> userResult = userService.getUnique(userQuery);
-        if (userResult == null || !userResult.isSuccess()) {
-            LogTypeEnum.DEFAULT.error("未获取到用户信息");
-            return userBookVO;
-        }
-        User user = userResult.getDefaultModel();
+        // 1.装填用户信息
+        User user = this.fillUserInfo(userBookVO);
         if (user == null) {
-            LogTypeEnum.DEFAULT.info("未获取到用户信息");
-            userBookVO.setMsg("未获取到用户信息");
-            userBookVO.setSuccess(true);
             return userBookVO;
         }
-
-        /*** 设置User信息 ****/
-        userBookVO.setUserState(user.getUserState());
-        userBookVO.setTotalLoginTimes(user.getTotalLoginTimes());
 
         // 2.根据用户ID查询用户课程
         PageQuery pageQuery = new PageQuery();
         pageQuery.setPageSize(1000);
-        pageQuery.addQueryParam("studentId", userId);
+        pageQuery.addQueryParam("studentId", user.getId());
         pageQuery.addQueryParam("status", State.VALID.getState());
         CommonResult<List<CourseStudy>> studyCourseResult = courseStudyService.getCourseStudyByPage(pageQuery);
-        if (!studyCourseResult.isSuccess()) {
+        if (studyCourseResult == null || !studyCourseResult.isSuccess()) {
             LogTypeEnum.DEFAULT.error("未获取到学生关联课程");
             return userBookVO;
         }
@@ -134,24 +113,16 @@ public class AjaxCourseController extends BaseController {
         // 3.获取课程和课程学习信息
         List<CourseStudyVO> books = new ArrayList<CourseStudyVO>(studentCourses.size());
         for (CourseStudy studentCourse : studentCourses) {
-            CourseStudyVO bookVO = new CourseStudyVO();
+            PositonedCourseStudyVO bookVO = new PositonedCourseStudyVO();
+
             /*设置课程信息*/
             Course courseQuery = new Course();
             courseQuery.setBookNumber(studentCourse.getLessonId());
             courseQuery.setBookState(State.VALID.getState());
-            CommonResult<Course> courseResult = courseService.getUnique(courseQuery);
-            if (courseResult == null || !courseResult.isSuccess()) {
-                LogTypeEnum.DEFAULT.error("获取到课程信息失败，bookId={}", studentCourse.getLessonId());
-                return userBookVO;
-            }
-            Course course = courseResult.getDefaultModel();
+            Course course = this.getCourseInfo(courseQuery, userBookVO);
             if (course == null) {
-                LogTypeEnum.DEFAULT.error("找不到这门课，bookId={}", studentCourse.getLessonId());
-                userBookVO.setSuccess(true);
-                userBookVO.setMsg("找不到这门课");
                 return userBookVO;
             }
-
             // 设置课程信息
             bookVO.setId(course.getBookNumber());
             bookVO.setModuleCode(course.getModuleCode());
@@ -374,15 +345,164 @@ public class AjaxCourseController extends BaseController {
      * "success":true
      * }
      *
+     * @param moduleCode 课程编号
      * @param context
      * @return
      */
     @RequestMapping(value = "AjaxLoadCourse", method = {RequestMethod.GET, RequestMethod.POST})
     public
     @ResponseBody
-    Map<String, Object> doAjaxLoadCourse(ModelMap context) {
-        CommonResult result = null;
-        return result.getReturnMap();
+    RichUserBookVO doAjaxLoadCourse(String moduleCode, ModelMap context) {
+        RichUserBookVO userBookVO = new RichUserBookVO();
+        // 1.装填用户信息
+        User user = this.fillUserInfo(userBookVO);
+        if (user == null) {
+            return userBookVO;
+        }
+        // 2.根据moduleCode查询课程
+        if (StringUtils.isEmpty(moduleCode)) {
+            LogTypeEnum.DEFAULT.info("moduleCode为空");
+            userBookVO.setMsg("moduleCode为空");
+            return userBookVO;
+        }
+        Course courseQuery = new Course();
+        courseQuery.setModuleCode(moduleCode);
+        courseQuery.setBookState(State.VALID.getState());
+        Course course = this.getCourseInfo(courseQuery, userBookVO);
+        if (course == null) {
+            return userBookVO;
+        }
+        // 3.根据用户ID查询用户课程信息
+        CourseStudy courseStudyQuery = new CourseStudy();
+        courseStudyQuery.setLessonId(course.getBookNumber());
+        courseStudyQuery.setStudentId(Integer.valueOf(String.valueOf(user.getId())));
+        courseStudyQuery.setStatus(State.VALID.getState());
+        courseStudyQuery.setCurrentStudyBook(null);
+        CommonResult<CourseStudy> studyCourseResult = courseStudyService.getUnique(courseStudyQuery);
+        if (studyCourseResult == null || !studyCourseResult.isSuccess()) {
+            LogTypeEnum.DEFAULT.error("未获取到学生关联课程");
+            return userBookVO;
+        }
+        CourseStudy studentCourse = studyCourseResult.getDefaultModel();
+        if (studentCourse == null) {
+            LogTypeEnum.DEFAULT.info("学生关联课程为空");
+            userBookVO.setMsg("学生未关联课程");
+            userBookVO.setSuccess(true);
+            return userBookVO;
+        }
+        /*** 设置Book信息 ***/
+
+        // 3.获取课程和课程学习信息
+        List<RichCourseStudyVO> books = new ArrayList<RichCourseStudyVO>(1);
+        RichCourseStudyVO bookVO = new RichCourseStudyVO();
+        // 设置课程信息
+        bookVO.setId(course.getBookNumber());
+        bookVO.setModuleCode(course.getModuleCode());
+        bookVO.setBookName(course.getBookName());
+        bookVO.setCoverImageUrl(course.getCoverImageUrl());
+        bookVO.setTotalUnitNbr(course.getTotalUnitNbr());
+        bookVO.setOutDate(course.isOutDate());
+        bookVO.setUnitType(course.getUnitType());
+        // 设置课程难易程度
+        bookVO.setDifficultLevel(DifficultLevel.EASY.getLevel());
+
+        // 设置课程学习信息
+        bookVO.setCurrentStudyBook(studentCourse.isCurrentStudyBook());
+        bookVO.setStartFrom(studentCourse.getStartFrom());
+        bookVO.setStudyMode(studentCourse.getStudyMode());
+        // 设置课程完成单词数
+        bookVO.setCompleteWordCount(studentCourse.getCompleteWordCount());
+
+        // 设置每个单元课程学习情况
+        PageQuery pageQuery = new PageQuery();
+        pageQuery.setPageSize(100);
+        pageQuery.addQueryParam("student_id", user.getId());
+        pageQuery.addQueryParam("lesson_id", course.getBookNumber());
+        pageQuery.addQueryParam("state", State.VALID.getState());
+
+        CommonResult<List<UnitWordsStudy>> unitStudyResult = unitWordsStudyService.getUnitWordsStudyByPage(pageQuery);
+        if (unitStudyResult == null || !unitStudyResult.isSuccess()) {
+            LogTypeEnum.DEFAULT.error("查询学生单元学习情况异常，studentId={}, lessonId={}", user.getId(),course.getBookNumber());
+            return userBookVO;
+        }
+        List<UnitWordsStudy> unitsStudy = unitStudyResult.getDefaultModel();
+        if (unitsStudy == null || unitsStudy.isEmpty()) {
+            LogTypeEnum.DEFAULT.error("未找到学生单词学习记录，studentId={}, lessonId={}", user.getId(),course.getBookNumber());
+            return userBookVO;
+        }
+
+        List<CourseUnitStudyVO> courseUnitsStudy = new ArrayList<CourseUnitStudyVO>(unitsStudy.size());
+        bookVO.setCourseUnits(courseUnitsStudy);
+
+        for (UnitWordsStudy unitStudy : unitsStudy) {
+            CourseUnitStudyVO courseUnitStudyVO = new CourseUnitStudyVO();
+            // fill Course info
+            courseUnitStudyVO.setCourseModuleCode(moduleCode);// 课程moduleCode
+            // fill Unit Info
+            Unit unitQuery = new Unit();
+            unitQuery.setLessonId(Long.valueOf(String.valueOf(course.getBookNumber())));
+            unitQuery.setUnitNbr(unitStudy.getUnitNbr());
+            unitQuery.setState(State.VALID.getState());
+            Unit unit = unitService.getUnique(unitQuery).getDefaultModel();
+            courseUnitStudyVO.setId(unit.getId());
+            courseUnitStudyVO.setUnit(unit.getUnit());
+            // fill unit study info
+            courseUnitStudyVO.setIsFinished(unitStudy.getIsFinished());
+            courseUnitStudyVO.setIsTested(unitStudy.getIsTested());
+
+            courseUnitsStudy.add(courseUnitStudyVO);
+        }
+        books.add(bookVO);
+        userBookVO.setBooks(books);
+        userBookVO.setSuccess(true);
+        return userBookVO;
+    }
+
+    private Course getCourseInfo(Course courseQuery, BaseVO baseVO) {
+
+        CommonResult<Course> courseResult = courseService.getUnique(courseQuery);
+        if (courseResult == null || !courseResult.isSuccess()) {
+            LogTypeEnum.DEFAULT.error("获取到课程信息失败，bookInfo={}", courseQuery);
+            return null;
+        }
+        Course course = courseResult.getDefaultModel();
+        if (course == null) {
+            LogTypeEnum.DEFAULT.error("找不到这门课，bookInfo={}", courseQuery);
+            baseVO.setSuccess(true);
+            baseVO.setMsg("找不到这门课");
+            return null;
+        }
+        return course;
+    }
+
+    private User fillUserInfo(UserVO userVO) {
+
+        // 1.根据登录获取用户信息
+        LoginRecord loginRecord = this.getLoginRecord();
+        if (loginRecord == null) {
+            LogTypeEnum.DEFAULT.error("未获取到用户信息");
+            return null;
+        }
+        Integer userId = loginRecord.getUserId();
+        User userQuery = new User();
+        userQuery.setId(Long.valueOf(String.valueOf(userId)));
+        userQuery.setState(State.VALID.getState());
+        CommonResult<User> userResult = userService.getUnique(userQuery);
+        if (userResult == null || !userResult.isSuccess()) {
+            LogTypeEnum.DEFAULT.error("未获取到用户信息");
+            return null;
+        }
+        User user = userResult.getDefaultModel();
+        if (user == null) {
+            LogTypeEnum.DEFAULT.info("未获取到用户信息");
+            userVO.setMsg("未获取到用户信息");
+            userVO.setSuccess(true);
+            return null;
+        }
+        /*** 设置User信息 ****/
+        userVO.setUserState(user.getUserState());
+        userVO.setTotalLoginTimes(user.getTotalLoginTimes());
+        return user;
     }
 
     /**

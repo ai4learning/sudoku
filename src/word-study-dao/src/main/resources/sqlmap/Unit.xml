@@ -23,6 +23,7 @@
     		<where>
     		<if test="id != null"> AND id = #{id}</if>
     		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+    		<if test="unitNbr != null"> AND unit_nbr = #{unitNbr}</if>
     		<if test="state != null"> AND state = #{state}</if>
     		
     		</where>
@@ -36,6 +37,7 @@
 		<where>
 		<if test="id != null"> AND id = #{id}</if>
 		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+		<if test="unitNbr != null"> AND unit_nbr = #{unitNbr}</if>
 		<if test="state != null"> AND state = #{state}</if>
 		
 		</where>
