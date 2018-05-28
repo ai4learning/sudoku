@@ -8,6 +8,44 @@ html, body {
   min-height: 100%;
 }
 
+.ant-btn {
+  &.unstarted {
+    background: #ccc;
+    color: white;
+
+    &:hover {
+      border-color: #ccc;
+    }
+  }
+
+  &.unfinished {
+    background: orange;
+    color: white;
+
+    &:hover {
+      border-color: orange;
+    }
+  }
+
+  &.finished {
+    background: #67B239;
+    color: white;
+
+    &:hover {
+      border-color: #67B239;
+    }
+  }
+
+  &.failed {
+    background: red;
+    color: white;
+
+    &:hover {
+      border-color: red;
+    }
+  }
+}
+
 #app {
   height: 100%;
   background: #eee;

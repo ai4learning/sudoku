@@ -2,7 +2,7 @@
  * 我的课程
  */
 import React, {Component} from 'react'
-import Antd, { Card, Breadcrumb, Button } from 'antd'
+import Antd, { Card, Breadcrumb, Button, Progress } from 'antd'
 import fetch from '@common/fetch'
 
 export default class Course extends Component {
@@ -40,7 +40,13 @@ export default class Course extends Component {
         <div className='course_list' style={{ display: this.state.currentBook ? 'none' : 'flex' }}>
           {
             this.state.books.map(item => {
-              return <Card key={item.bookName} title={item.bookName} hoverable onClick={this.handleBookClick.bind(this, item)}>{item.bookName}</Card>
+              return (
+                <Card key={item.bookName} title={item.bookName} hoverable onClick={this.handleBookClick.bind(this, item)}>
+                  <div>总单元数：{item.totalUnitNbr}</div>
+                  <div>当前学习到：{(item.currentPosition||{}).spelling}</div>
+                  <div>当前进度：<Progress percent={parseInt(((item.currentPosition||{}).unitNbr||0)/item.totalUnitNbr*100)}></Progress></div>
+                </Card>
+              )
             })
           }
         </div>
@@ -49,10 +55,10 @@ export default class Course extends Component {
             this.state.currentBook ? (this.state.currentBook.CourseUnits || []).map(item => {
               return (
                 <Card key={item.Id} title={item.Unit} hoverable>
-                  <Button onClick={this.handleWordLearnClick.bind(this, item)}>单词学习</Button>
-                  <Button onClick={this.handleListenReadClick.bind(this, item)}>听读训练</Button>
-                  <Button onClick={this.handleUnitTestClick.bind(this, item)}>单元测试</Button>
-                  <Button onClick={this.handleWordUseClick.bind(this, item)}>词汇应用</Button>
+                  <Button className={item.IsFinished==2?'finished':item.IsFinished==0?'unfinished':'unstarted'} onClick={this.handleWordLearnClick.bind(this, item)}>单词学习</Button>
+                  <Button disabled={item.IsFinished == -1} className={item.IsFinished==2?'finished':'unstarted'} onClick={this.handleListenReadClick.bind(this, item)}>听读训练</Button>
+                  <Button disabled={item.IsFinished == -1} className={item.IsFinished == -1 ? 'unstarted' : item.IsTested == 1 ? 'finished' : item.IsTested == 2 ? 'unfinished' : 'unstarted'} onClick={this.handleUnitTestClick.bind(this, item)}>单元测试</Button>
+                  {/* <Button className='unfinished'>词汇应用</Button> */}
                 </Card>
               )
             }) : null

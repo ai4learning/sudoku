@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "",
   "scripts": {
-    "dev": "webpack --watch & webpack-dev-server --inline --open --host 0.0.0.0 --port 9966",
+    "dev": "webpack --watch & webpack-dev-server --inline --open --host 0.0.0.0 --port 9988",
     "build": "webpack"
   },
   "author": "",
