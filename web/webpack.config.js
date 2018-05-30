@@ -16,7 +16,7 @@ var content_paths = []
 })
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     app: path.join(__dirname, 'src/index.js'),
   },
@@ -63,27 +63,35 @@ module.exports = {
     historyApiFallback: true,
 
     proxy: [
+      // {
+      //   context: ['/Reading', '/Scripts'].concat(content_paths),
+      //   target: 'http://www.wordtraining.cn',
+      //   changeOrigin: true,
+      //   bypass: function (req, res, proxyOptions) {
+      //     req.headers['Cookie'] = cookie
+      //   }
+      // },
       {
-        context: ['/api', '/Reading', '/Scripts'].concat(content_paths),
+        context: ['/api'],
         target: 'http://www.wordtraining.cn',
         changeOrigin: true,
         bypass: function (req, res, proxyOptions) {
           req.headers['Cookie'] = cookie
         }
       },
-      {
-        context: ['/Account/CheckUserName', '/Account/LoginIn', '/Account/Register'],
-        target: 'http://www.wordtraining.cn',
-        changeOrigin: true
-      },
-      {
-        context: ['/UserCenter/UserCenter', '/UserCenter/Setting', '/UserCenter/UpdatePassword'],
-        target: 'http://www.wordtraining.cn',
-        changeOrigin: true,
-        bypass: function (req, res, proxyOptions) {
-          req.headers['Cookie'] = cookie
-        }
-      },
+      // {
+      //   context: ['/Account/CheckUserName', '/Account/LoginIn', '/Account/Register'],
+      //   target: 'http://www.wordtraining.cn',
+      //   changeOrigin: true
+      // },
+      // {
+      //   context: ['/UserCenter/UserCenter', '/UserCenter/Setting', '/UserCenter/UpdatePassword'],
+      //   target: 'http://www.wordtraining.cn',
+      //   changeOrigin: true,
+      //   bypass: function (req, res, proxyOptions) {
+      //     req.headers['Cookie'] = cookie
+      //   }
+      // },
       {
         context: ['/soundfile'],
         target: 'http://voice.wordtraining.cn',
