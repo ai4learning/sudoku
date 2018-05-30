@@ -14,20 +14,20 @@
 </head>
 <body>
   <div id="app"></div>
-  <audio id="backgroundMusic" memoryaudio="http://voice.wordtraining.cn/soundfile/audio/memory_audio.mp3" preload="auto" src="http://voice.wordtraining.cn/soundfile/audio/memory_audio.mp3">
-    <source src="" type="audio/mpeg">
-    <embed id="backgroundMusicEmbed" src="http://voice.wordtraining.cn/soundfile/audio/memory_audio.mp3" autostart="false" hidden="true">
+  <audio id="backgroundMusic" memoryaudio="/soundfile/audio/memory_audio.mp3" preload="auto" src="/soundfile/audio/memory_audio.mp3">
+    <source src="/soundfile/audio/memory_audio.mp3" type="audio/mpeg">
+    <embed id="backgroundMusicEmbed" src="/soundfile/audio/memory_audio.mp3" autostart="false" hidden="true">
   </audio>
   <audio id="errorAudio" preload="auto">
     <source src="/content/audio/error_audio.mp3" type="audio/mpeg">
     <embed src="/content/audio/error_audio.mp3" autostart="false" hidden="true">
   </audio>
   <div id="privateSetting" show="0" class="radius tab-content-slim hide" style="background: url(/content/img/new_exp_global_bg.png);">
-    <input id="UserId" type="hidden" value="jiaoshi">
+    <!-- <input id="UserId" type="hidden" value="jiaoshi">
     <input id="UserCode" type="hidden" value="f4f18fcf-c36c-49a3-a23e-a751c0743d4b">
     <input id="UserName" type="hidden" value="教师">
     <input id="UserState" type="hidden" value="2">
-    <input id="UserLoginTimes" type="hidden" value="67">
+    <input id="UserLoginTimes" type="hidden" value="67"> -->
     <input id="UserSpellOn" type="hidden" value="true">
     <input id="UserFollowSpeakOn" type="hidden" value="false">
     <input id="UserPointDiscount" type="hidden" value="1.0">
@@ -152,30 +152,30 @@
       </div>
     </form>
   </div>
-  <!-- <script type="text/javascript">
+  <script type="text/javascript">
     document.getElementById("backgroundMusic").volume = 0.1;
-    $(document).ready(function () {
-      function initialSetting() {
-        if (true) {
-          $('#alphaOn_setting').attr('checked', 'checked');
-        }
-        $('#vocRecTime_setting').val(5);
-        $('#vocNbrByGroup_setting').val(5);
-        $('#vocNbrByReview_setting').val(10);
-        if (false) {
-          $('#vocRecTimeCounterOff_setting').attr('checked', 'checked');
-        }
-        $('#vocPromptTime_setting').val(2);
-        $('#senPromptTime_setting').val(5);
+    // $(document).ready(function () {
+    //   function initialSetting() {
+    //     if (true) {
+    //       $('#alphaOn_setting').attr('checked', 'checked');
+    //     }
+    //     $('#vocRecTime_setting').val(5);
+    //     $('#vocNbrByGroup_setting').val(5);
+    //     $('#vocNbrByReview_setting').val(10);
+    //     if (false) {
+    //       $('#vocRecTimeCounterOff_setting').attr('checked', 'checked');
+    //     }
+    //     $('#vocPromptTime_setting').val(2);
+    //     $('#senPromptTime_setting').val(5);
 
-        if (true) {
-          $('#unitReviewOn_setting').attr('checked', 'checked');
-        }
-        $('#reverseOn_setting').val(5);
-      }
-      initialSetting();
-    });
-  </script> -->
+    //     if (true) {
+    //       $('#unitReviewOn_setting').attr('checked', 'checked');
+    //     }
+    //     $('#reverseOn_setting').val(5);
+    //   }
+    //   initialSetting();
+    // });
+  </script>
   <div tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-studyBox" id="unitStudyDialog" style="display: none;z-index: 1002; outline: 0px; height: auto; width: 860px; top: 234px; left: 530px;">
     <div id="studyBox" style="overflow: hidden; width: auto; min-height: 113px; height: auto;" scrolltop="0" scrollleft="0">
       <div class="handler noselect" style="width:100%; overflow:hidden;">
@@ -607,20 +607,20 @@
                                                   <table>
                                                       <tbody>
                                                           <tr>
-                                                              <td id="" class="font18 fontgray"><img src="/content/image/dot_light.png
+                                                              <td id="" class="font16 fontgray"><img src="/content/image/dot_light.png
 " alt="点" title="点" class="dot" /> 记忆夹生词（个）：</td>
-                                                              <td id="halfRememberNbr" class="font18 fontgray">50</td>
+                                                              <td id="halfRememberNbr" class="font16 fontgray">50</td>
                                                               <td style="width: 90px;">&nbsp;</td>
-                                                              <td class="font18 fontgray"><img src="/content/image/dot_light.png
+                                                              <td class="font16 fontgray"><img src="/content/image/dot_light.png
 " alt="点" title="点" class="dot" /> 连续识别错误（个）：</td>
                                                               <td id="continueReadFailNbr" class="f_Red">0</td>
                                                           </tr>
                                                           <tr>
-                                                              <td id="" class="font18 fontgray"><img src="/content/image/dot_light.png
+                                                              <td id="" class="font16 fontgray"><img src="/content/image/dot_light.png
 " alt="点" title="点" class="dot" /> 拼写夹生词（个）：</td>
                                                               <td id="halfWritingNbr" class="f_Red">20</td>
                                                               <td style="width: 90px;">&nbsp;</td>
-                                                              <td class="font18 fontgray"><img src="/content/image/dot_light.png
+                                                              <td class="font16 fontgray"><img src="/content/image/dot_light.png
 " alt="点" title="点" class="dot" /> 连续拼写错误（个）：</td>
                                                               <td id="continueWriteFailNbr" class="f_Red">0</td>
                                                           </tr>

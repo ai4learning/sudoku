@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { Collapse, Radio, Button, Input } from 'antd'
 import ScoreModal from './ScoreModal'
+import {clearSpellingForAudio} from '@common/util'
 
 export default class TestPaper extends Component {
   constructor(props) {
@@ -26,13 +27,6 @@ export default class TestPaper extends Component {
     })
   }
 
-  clearSpellingForAudio(b) {
-    for (var c = RegExp("[\\/?\u2026\u2026\uff1f]"), a = "", e, d = 0; d < b.length; d++)
-      e = b.substr(d, 1),
-        a += e.replace(c, "_");
-    return a
-  }
-
   render() {
     return (
       <div className='test_paper'>
@@ -49,7 +43,7 @@ export default class TestPaper extends Component {
                             <img src="/static/image/listenagin_pre.png" />
                             <span>
                               <audio ref={"dataListen2Ch" + item.vocCode}>
-                                <source type="audio/mpeg" src={"/soundfile/" + item.spelling.substr(0, 1).toUpperCase() + "/" + this.clearSpellingForAudio(item.spelling) + ".mp3"}></source>
+                                <source type="audio/mpeg" src={"/soundfile/" + item.spelling.substr(0, 1).toUpperCase() + "/" + clearSpellingForAudio(item.spelling) + ".mp3"}></source>
                               </audio>
                             </span>
                           </div>

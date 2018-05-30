@@ -21,9 +21,9 @@ export default class Word extends Component {
           <Tabs.TabPane key='test' tab={<span><Icon type='exclamation-circle-o'/>自主测试</span>}>
             <TestSelf></TestSelf>
           </Tabs.TabPane>
-          <Tabs.TabPane key='curve' tab={<span><Icon type='line-chart'/>记忆曲线</span>}>
+          {/* <Tabs.TabPane key='curve' tab={<span><Icon type='line-chart'/>记忆曲线</span>}>
             <MemoryCurve></MemoryCurve>
-          </Tabs.TabPane>
+          </Tabs.TabPane> */}
           <Tabs.TabPane key='report' tab={<span><Icon type='bar-chart'/>学习报告</span>}>
             <Report></Report>
           </Tabs.TabPane>
