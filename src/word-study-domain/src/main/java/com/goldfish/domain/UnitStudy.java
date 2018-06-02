@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @since 2018-5-8
  * 单元单词学习 Domain 类
  */
-public class UnitWordsStudy  implements Serializable {
+public class UnitStudy extends StudyPosition implements Serializable {
 	
   private static final long serialVersionUID = 5871653462753605181L;
 	
@@ -23,10 +23,12 @@ public class UnitWordsStudy  implements Serializable {
 	/**  学生ID  */
 	private Integer studentId; 
 	/**  学生CODE  */
-	private String studentCode; 
+	private String studentCode;
 	/**  课程ID  */
-	private Integer lessonId; 
-	/**  课程号  */
+	private Integer lessonId;
+	/**  课程ModuleCode  */
+	private String lessonCode;
+	/**  单元号  */
 	private Integer unitNbr; 
 	/**  学习阶段  */
 	private Integer currentPhase; 
@@ -35,11 +37,7 @@ public class UnitWordsStudy  implements Serializable {
 	/**  总写时间  */
 	private Long totalWritingTime; 
 	/**  总学习单词数  */
-	private Integer totalNumber; 
-	/**  是否学习完成  */
-	private Integer isFinished; 
-	/**  是否测试完成  */
-	private Integer isTested; 
+	private Integer totalNumber;
 	/**  单词学习位置  */
 	private Integer studyPos; 
 	/**  状态  */
@@ -88,10 +86,16 @@ public class UnitWordsStudy  implements Serializable {
   	public Integer getLessonId() {
   	  return this.lessonId;
   	}
-	
-	  	
 
-  	public void setUnitNbr(Integer unitNbr) {
+	public String getLessonCode() {
+		return lessonCode;
+	}
+
+	public void setLessonCode(String lessonCode) {
+		this.lessonCode = lessonCode;
+	}
+
+	public void setUnitNbr(Integer unitNbr) {
   	  this.unitNbr=unitNbr;
   	}
   
@@ -138,28 +142,6 @@ public class UnitWordsStudy  implements Serializable {
   	public Integer getTotalNumber() {
   	  return this.totalNumber;
   	}
-	
-	  	
-
-  	public void setIsFinished(Integer isFinished) {
-  	  this.isFinished=isFinished;
-  	}
-  
-  	public Integer getIsFinished() {
-  	  return this.isFinished;
-  	}
-	
-	  	
-
-  	public void setIsTested(Integer isTested) {
-  	  this.isTested=isTested;
-  	}
-  
-  	public Integer getIsTested() {
-  	  return this.isTested;
-  	}
-	
-	  	
 
   	public void setStudyPos(Integer studyPos) {
   	  this.studyPos=studyPos;

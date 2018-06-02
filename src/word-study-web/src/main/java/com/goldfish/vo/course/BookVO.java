@@ -1,25 +1,28 @@
-package com.goldfish.vo;
+package com.goldfish.vo.course;
 
 /**
- * Created by John on 2018/5/21 0021.
+ *         "Id":5,
+ *         "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
+ *         "bookName":"零基础入门拼读",
+ *         "coverImageUrl":"",
+ *         "totalUnitNbr":17,
+ *         "outDate":false,
+ * Created by John on 2018/6/2 0002.
  */
-public class CourseVO {
-
+public class BookVO {
     protected Integer id;
     protected String moduleCode;
     protected String bookName;
     protected String coverImageUrl;
     protected Integer totalUnitNbr;
     private boolean outDate;
-    private String unitType;
 
-//    @JsonProperty(value = "Id")
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
-        id = id;
+        this.id = id;
     }
 
     public String getModuleCode() {
@@ -60,13 +63,5 @@ public class CourseVO {
 
     public void setOutDate(boolean outDate) {
         this.outDate = outDate;
-    }
-
-    public String getUnitType() {
-        return unitType;
-    }
-
-    public void setUnitType(String unitType) {
-        this.unitType = unitType;
     }
 }

@@ -22,7 +22,7 @@ public class InitStuStudyDataTask extends AbstractTask{
     @Resource
     private CourseStudyService courseStudyService;
     @Resource
-    private UnitWordsStudyService unitWordsStudyService;
+    private UnitStudyService unitStudyService;
 
     @Resource
     private UnitService unitService;
@@ -136,7 +136,7 @@ public class InitStuStudyDataTask extends AbstractTask{
 
         // 学习位置相关跟踪
         courseStudy.setIsCurrentPos(State.NO.getState());
-        courseStudy.setIsTest(FinishState.NOT_COMPLETE.getState());
+        courseStudy.setIsTested(FinishState.NOT_COMPLETE.getState());
         courseStudy.setIsFinished(FinishState.NOT_COMPLETE.getState());
         courseStudy.setIsAllFinished(FinishState.NOT_COMPLETE.getState());
 
@@ -161,24 +161,24 @@ public class InitStuStudyDataTask extends AbstractTask{
 
     private void insertUnitStudy(Integer userId, Unit unit) {
         try {
-            UnitWordsStudy unitWordsStudy = new UnitWordsStudy();
+            UnitStudy unitStudy = new UnitStudy();
 
-            unitWordsStudy.setStudentId(userId);
+            unitStudy.setStudentId(userId);
 
             // 1.拷贝unit属性
-            unitWordsStudy.setLessonId(Integer.valueOf(String.valueOf(unit.getLessonId())));
-            unitWordsStudy.setUnitNbr(unit.getUnitNbr());
-            unitWordsStudy.setTotalNumber(unit.getTotalWords());
+            unitStudy.setLessonId(Integer.valueOf(String.valueOf(unit.getLessonId())));
+            unitStudy.setUnitNbr(unit.getUnitNbr());
+            unitStudy.setTotalNumber(unit.getTotalWords());
 
             // 2.初始化学习状态
-            unitWordsStudy.setCurrentPhase(StudyPhase.ENHANCE_STUDY.getPhase());
-            unitWordsStudy.setTotalReadingTime(0L);
-            unitWordsStudy.setTotalWritingTime(0L);
-            unitWordsStudy.setIsFinished(FinishState.NOT_COMPLETE.getState());
-            unitWordsStudy.setIsTested(FinishState.NOT_COMPLETE.getState());
-            unitWordsStudy.setStudyPos(0);// 单词index从0开始
-            unitWordsStudy.setState(State.VALID.getState());
-            unitWordsStudyService.addUnitWordsStudy(unitWordsStudy);
+            unitStudy.setCurrentPhase(StudyPhase.ENHANCE_STUDY.getPhase());
+            unitStudy.setTotalReadingTime(0L);
+            unitStudy.setTotalWritingTime(0L);
+            unitStudy.setIsFinished(FinishState.NOT_COMPLETE.getState());
+            unitStudy.setIsTested(FinishState.NOT_COMPLETE.getState());
+            unitStudy.setStudyPos(0);// 单词index从0开始
+            unitStudy.setState(State.VALID.getState());
+            unitStudyService.addUnitWordsStudy(unitStudy);
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e, "单元学习记录插入失败, userId={},lessonId={},unitNbr={}",
                     userId, unit.getLessonId(),unit.getUnitNbr());

@@ -170,13 +170,13 @@
 		</div>
 		
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="isTest">是否测试完成</label>
+			<label class="col-sm-2 control-label" for="isTested">是否测试完成</label>
 			<div class="col-sm-8 controls">
 			
         
-		<select class="forms_select input-medium form-control" name="isTest" id="isTest" disabled>
-						<option value="0" #if($courseStudy.isTest==0) selected  #end>未完成</option>
-				<option value="1" #if($courseStudy.isTest==1) selected  #end>已完成</option>
+		<select class="forms_select input-medium form-control" name="isTested" id="isTested" disabled>
+						<option value="0" #if($courseStudy.isTested==0) selected  #end>未完成</option>
+				<option value="1" #if($courseStudy.isTested==1) selected  #end>已完成</option>
 
 		</select>
 	

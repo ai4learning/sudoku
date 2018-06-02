@@ -9,18 +9,21 @@
 		<result property="studentCode" column="student_code"/>
 		<result property="lessonId" column="lesson_id"/>
 		<result property="currentStudyBook" column="current_study_book"/>
-		<result property="isCurrentPos" column="is_current_pos"/>
-		<result property="studyPositionCode" column="study_position_code"/>
-		<result property="positionType" column="position_type"/>
 		<result property="unitNbr" column="unit_nbr"/>
-		<result property="vocCode" column="voc_code"/>
 		<result property="startFrom" column="start_from"/>
 		<result property="studyMode" column="study_mode"/>
 		<result property="completeWordCount" column="complete_word_count"/>
-		<result property="isFinished" column="is_finished"/>
-		<result property="isTest" column="is_test"/>
+
+		<result property="studyPositionCode" column="study_position_code"/>
+		<result property="positionType" column="position_type"/>
+		<result property="vocCode" column="voc_code"/>
+		<result property="spelling" column="spelling"/>
 		<result property="isAllFinished" column="is_all_finished"/>
+		<result property="isFinished" column="is_finished"/>
+		<result property="isTested" column="is_test"/>
+		<result property="isCurrentPos" column="is_current_pos"/>
 		<result property="status" column="status"/>
+
 		<result property="created" column="created"/>
 		<result property="modified" column="modified"/>
 
@@ -64,12 +67,12 @@
 	
 
 	<sql id="All-FIELDS">
-		id,student_id,student_code,lesson_id,current_study_book,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,created,modified
+		id,student_id,student_code,lesson_id,current_study_book,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,spelling,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,created,modified
 	</sql>
 
 	<insert id="addCourseStudy" parameterType="com.goldfish.domain.CourseStudy">
-		insert into course_study (student_id,student_code,lesson_id,current_study_book,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,created,modified)
-			values(#{studentId},#{studentCode},#{lessonId},#{isCurrentPos},#{studyPositionCode},#{positionType},#{unitNbr},#{vocCode},#{startFrom},#{studyMode},#{completeWordCount},#{isFinished},#{isTest},#{isAllFinished},#{status},#{created},#{modified})
+		insert into course_study (student_id,student_code,lesson_id,current_study_book,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,spelling,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,created,modified)
+			values(#{studentId},#{studentCode},#{lessonId},#{isCurrentPos},#{studyPositionCode},#{positionType},#{unitNbr},#{vocCode},#{spelling},#{startFrom},#{studyMode},#{completeWordCount},#{isFinished},#{isTested},#{isAllFinished},#{status},#{created},#{modified})
     
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
 		   select last_insert_id() as ID from dual
@@ -90,11 +93,12 @@
 			<if test="positionType !=null"> position_type = #{positionType},</if>
 			<if test="unitNbr !=null"> unit_nbr = #{unitNbr},</if>
 			<if test="vocCode !=null"> voc_code = #{vocCode},</if>
+			<if test="spelling !=null"> spelling = #{spelling},</if>
 			<if test="startFrom !=null"> start_from = #{startFrom},</if>
 			<if test="studyMode !=null"> study_mode = #{studyMode},</if>
 			<if test="completeWordCount !=null"> complete_word_count = #{completeWordCount},</if>
 			<if test="isFinished !=null"> is_finished = #{isFinished},</if>
-			<if test="isTest !=null"> is_test = #{isTest},</if>
+			<if test="isTested !=null"> is_test = #{isTested},</if>
 			<if test="isAllFinished !=null"> is_all_finished = #{isAllFinished},</if>
 			<if test="status !=null"> status = #{status},</if>
 			<if test="created !=null"> created = #{created},</if>
@@ -132,7 +136,7 @@
 	
 	<select id="getCourseStudyByPage" resultMap="CourseStudy-Map" parameterType="java.util.HashMap">
 		<![CDATA[
-			SELECT  id,student_id,student_code,lesson_id,current_study_book,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,modified FROM course_study
+			SELECT  id,student_id,student_code,lesson_id,current_study_book,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,spelling,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,modified FROM course_study
 		]]>
             <include refid="MAP-COMMON-SQL" />
             <include refid="ORDER-SQL" />

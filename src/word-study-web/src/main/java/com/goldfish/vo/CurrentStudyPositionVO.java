@@ -16,7 +16,7 @@ package com.goldfish.vo;
  *             },
  * Created by John on 2018/5/21 0021.
  */
-public class CurrentPositionVO {
+public class CurrentStudyPositionVO {
 
     private Long id;
     private String studyPositionCode;

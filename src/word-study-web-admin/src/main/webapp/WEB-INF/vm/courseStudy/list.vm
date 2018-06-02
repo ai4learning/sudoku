@@ -84,9 +84,9 @@
 			<td>
         
 			
-				#if($item.isTest==0)<span class="">未完成</span> #end	
+				#if($item.isTested==0)<span class="">未完成</span> #end
 			
-				#if($item.isTest==1)<span class="">已完成</span> #end	
+				#if($item.isTested==1)<span class="">已完成</span> #end
 			
 	
     </td>

@@ -144,13 +144,13 @@
 		</div>
 		
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="isTest">是否测试完成</label>
+			<label class="col-sm-2 control-label" for="isTested">是否测试完成</label>
 			<div class="col-sm-7 controls">
 			
         
-		<select class="forms_select input-medium" name="isTest" id="isTest">
-				<option value="0" #if($courseStudy.isTest==0) selected #end>未完成</option>
-				<option value="1" #if($courseStudy.isTest==1) selected #end>已完成</option>
+		<select class="forms_select input-medium" name="isTested" id="isTested">
+				<option value="0" #if($courseStudy.isTested==0) selected #end>未完成</option>
+				<option value="1" #if($courseStudy.isTested==1) selected #end>已完成</option>
 </select>
 		
     
@@ -217,7 +217,7 @@ void function(j) {
 		studyMode:  {must: false, maxlength:3, ftip:'学习模式,最多3个字符' ,handler:'int' },
 		completeWordCount:  {must: false, maxlength:10, ftip:'完成单词数统计,最多10个字符' ,handler:'int' },
 		isFinished:  {must: false, maxlength:3, ftip:'是否学习完成,最多3个字符' ,handler:'int' },
-		isTest:  {must: false, maxlength:3, ftip:'是否测试完成,最多3个字符' ,handler:'int' },
+		isTested:  {must: false, maxlength:3, ftip:'是否测试完成,最多3个字符' ,handler:'int' },
 		isAllFinished:  {must: false, maxlength:3, ftip:'全部完成,最多3个字符' ,handler:'int' },
 		status:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
 	};

@@ -16,7 +16,7 @@
         <typeAlias type="com.goldfish.domain.SelfWordsStudy" alias="SelfWordsStudy"/>
         <typeAlias type="com.goldfish.domain.Unit" alias="Unit"/>
         <typeAlias type="com.goldfish.domain.UnitWords" alias="UnitWords"/>
-        <typeAlias type="com.goldfish.domain.UnitWordsStudy" alias="UnitWordsStudy"/>
+        <typeAlias type="com.goldfish.domain.UnitStudy" alias="UnitWordsStudy"/>
         <typeAlias type="com.goldfish.domain.User" alias="User"/>
         <typeAlias type="com.goldfish.domain.Word" alias="Word"/>
         <typeAlias type="com.goldfish.domain.Allword" alias="Allword"/>

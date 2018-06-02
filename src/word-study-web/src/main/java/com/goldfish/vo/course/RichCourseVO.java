@@ -1,11 +1,11 @@
-package com.goldfish.vo;
+package com.goldfish.vo.course;
 
-import java.util.List;
+import com.goldfish.vo.course.CourseVO;
 
 /**
  * Created by John on 2018/5/25 0025.
  */
-public class RichCourseVO extends CourseVO{
+public class RichCourseVO extends CourseVO {
 
     private Integer difficultLevel;
 //    private List<CourseUnitVO> courseUnits;

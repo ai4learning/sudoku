@@ -1,36 +1,34 @@
-/**
- * Copyright(c) 2004-2018 bianfeng
- */
-
-
- package com.goldfish.manager;
+package com.goldfish.service;
 
 import java.util.List;
 import com.goldfish.common.PageQuery;
-import com.goldfish.domain.UnitWordsStudy;
+import com.goldfish.common.CommonResult;
+import com.goldfish.domain.UnitStudy;
 
 /**
  * @author hellosscat
  * @since 2018-5-8
- * 单元单词学习Manager接口类
+ * jshow 单元单词学习service 接口
+ *
  */
-public interface UnitWordsStudyManager {
- 
-   /**
+public interface UnitStudyService {
+   
+    /**
      * 添加并返回设置id的UnitWordsStudy对象
      * 
-     * @param unitWordsStudy
+     * @param unitStudy
      * @return
      */
-    public UnitWordsStudy addUnitWordsStudy(UnitWordsStudy unitWordsStudy);
+    public CommonResult<UnitStudy> addUnitWordsStudy(UnitStudy unitStudy);
     
 	/**
      * 更新UnitWordsStudy
      * 
-     * @param unitWordsStudy
+     * @param unitStudy
      */
-    public void updateUnitWordsStudy(UnitWordsStudy unitWordsStudy);
+    public CommonResult<UnitStudy> updateUnitWordsStudy(UnitStudy unitStudy);
     
+
     
 
 	 /**
@@ -38,39 +36,40 @@ public interface UnitWordsStudyManager {
      * 
      * @param id
      */
-    public void deleteUnitWordsStudy(Long id);
+    public CommonResult<UnitStudy> deleteUnitWordsStudy(Long id);
 
-    	/**
+	/**
      * 根据主键获取UnitWordsStudy
      * 
      * @param id
      * @return
      */	
-    public UnitWordsStudy getUnitWordsStudyById(Long id);
+    public CommonResult<UnitStudy> getUnitWordsStudyById(Long id);
 
+     
+
+
+	
     
-
-
-
-    
-        
 	/**
      * 根据example取得唯一的UnitWordsStudy
      * 
-     * @param unitWordsStudy
+     * @param unitStudy
      * @return
      */
-    public UnitWordsStudy getUnique(UnitWordsStudy unitWordsStudy);
+    public CommonResult<UnitStudy> getUnique(UnitStudy unitStudy);
     
 
-    
+
+
     /**
      * 根据example取得UnitWordsStudy列表
      * 
-     * @param  unitWordsStudy
+     * @param  unitStudy
      * @return
      */
-    public List<UnitWordsStudy> getListByExample(UnitWordsStudy unitWordsStudy);
+    public CommonResult<List<UnitStudy>> getListByExample(UnitStudy unitStudy);
+    
 
 	/**
      * 分页取得UnitWordsStudy列表
@@ -78,7 +77,7 @@ public interface UnitWordsStudyManager {
      * @param pageQuery
      * @return
      */
-    public List<UnitWordsStudy> getUnitWordsStudyByPage(PageQuery pageQuery);
+    public CommonResult<List<UnitStudy>> getUnitWordsStudyByPage(PageQuery pageQuery);
 	
 	/**
      * 根据查询条件返回数量
@@ -87,5 +86,6 @@ public interface UnitWordsStudyManager {
      * @return
      */
     public int count(PageQuery pageQuery);
-
+	
+	
 }

@@ -1,4 +1,4 @@
-package com.goldfish.vo;
+package com.goldfish.vo.user;
 
 import com.goldfish.vo.BaseVO;
 

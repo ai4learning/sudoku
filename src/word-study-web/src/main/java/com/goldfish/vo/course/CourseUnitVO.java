@@ -1,4 +1,4 @@
-package com.goldfish.vo;
+package com.goldfish.vo.course;
 
 /**
  * Created by John on 2018/5/25 0025.

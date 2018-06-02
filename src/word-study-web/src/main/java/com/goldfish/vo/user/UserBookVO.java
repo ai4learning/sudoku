@@ -1,4 +1,6 @@
-package com.goldfish.vo;
+package com.goldfish.vo.user;
+
+import com.goldfish.vo.course.CourseStudyVO;
 
 import java.util.List;
 
@@ -42,7 +44,7 @@ import java.util.List;
  * }
  * Created by John on 2018/5/21 0021.
  */
-public class UserBookVO extends UserVO{
+public class UserBookVO extends UserVO {
 
     private List<CourseStudyVO> books;
 

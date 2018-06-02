@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.goldfish.domain.UnitStudy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 //import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.goldfish.common.CommonResult;
 import com.goldfish.common.PageQuery;
 import com.goldfish.web.base.BaseController;
-import com.goldfish.service.UnitWordsStudyService;
-import com.goldfish.domain.UnitWordsStudy;
+import com.goldfish.service.UnitStudyService;
 
 @Controller
 @RequestMapping("/unitWordsStudy")
@@ -31,8 +31,8 @@ public class UnitWordsStudyController extends BaseController {
 
 //	private final static Log log = LogFactory.getLog(UnitWordsStudyAction.class);
 	
-	@Resource(name="unitWordsStudyService")
-	private UnitWordsStudyService unitWordsStudyService;
+	@Resource(name= "unitStudyService")
+	private UnitStudyService unitStudyService;
 
 
 	@RequestMapping(value="manage",method={RequestMethod.GET,RequestMethod.POST})
@@ -48,39 +48,39 @@ public class UnitWordsStudyController extends BaseController {
     
 	
 	@RequestMapping(value="doAdd",method={RequestMethod.GET,RequestMethod.POST})
-	 public @ResponseBody Map<String,Object> doAdd(UnitWordsStudy unitWordsStudy, ModelMap context) {
-	    		CommonResult<UnitWordsStudy> result =unitWordsStudyService.addUnitWordsStudy(unitWordsStudy);
+	 public @ResponseBody Map<String,Object> doAdd(UnitStudy unitStudy, ModelMap context) {
+	    		CommonResult<UnitStudy> result = unitStudyService.addUnitWordsStudy(unitStudy);
 				return result.getReturnMap();
 	    }
 	 
 	 
 
 		@RequestMapping(value="update",method={RequestMethod.GET,RequestMethod.POST})
-	    public String update(UnitWordsStudy unitWordsStudy, ModelMap context) {
-			CommonResult<UnitWordsStudy> result = unitWordsStudyService.getUnitWordsStudyById(unitWordsStudy.getId());
+	    public String update(UnitStudy unitStudy, ModelMap context) {
+			CommonResult<UnitStudy> result = unitStudyService.getUnitWordsStudyById(unitStudy.getId());
 			this.toVm(result, context);
 			return "/unitWordsStudy/update";
 	    }
 	    
 		
 		@RequestMapping(value="doUpdate",method={RequestMethod.GET,RequestMethod.POST})
-	    public @ResponseBody Map<String,Object> doUpdate(UnitWordsStudy unitWordsStudy, ModelMap context) {
-			CommonResult<UnitWordsStudy> result = unitWordsStudyService.updateUnitWordsStudy(unitWordsStudy);
+	    public @ResponseBody Map<String,Object> doUpdate(UnitStudy unitStudy, ModelMap context) {
+			CommonResult<UnitStudy> result = unitStudyService.updateUnitWordsStudy(unitStudy);
 			return result.getReturnMap();
 	    }
 	    
 
 		@RequestMapping(value="view",method={RequestMethod.GET,RequestMethod.POST})
-		public String view(UnitWordsStudy unitWordsStudy, ModelMap context) {
-			CommonResult<UnitWordsStudy> result = unitWordsStudyService.getUnitWordsStudyById(unitWordsStudy.getId());
+		public String view(UnitStudy unitStudy, ModelMap context) {
+			CommonResult<UnitStudy> result = unitStudyService.getUnitWordsStudyById(unitStudy.getId());
 			this.toVm(result, context);
 			return "/unitWordsStudy/view";
 	    }
 	   
 		
 		@RequestMapping(value="doDelete",method={RequestMethod.GET,RequestMethod.POST})
-	    public @ResponseBody  Map<String,Object>  doDelete(UnitWordsStudy unitWordsStudy) {
-			CommonResult<UnitWordsStudy> result =unitWordsStudyService.deleteUnitWordsStudy(unitWordsStudy.getId());
+	    public @ResponseBody  Map<String,Object>  doDelete(UnitStudy unitStudy) {
+			CommonResult<UnitStudy> result = unitStudyService.deleteUnitWordsStudy(unitStudy.getId());
 			return result.getReturnMap();
 	    }
 	    
@@ -88,7 +88,7 @@ public class UnitWordsStudyController extends BaseController {
 	    public String list(HttpServletRequest request, ModelMap context) {
 			int pageSize = this.getPageSize(request,20,200);
             PageQuery pageQuery=new PageQuery(request,pageSize);
-            CommonResult<List<UnitWordsStudy>> result = unitWordsStudyService.getUnitWordsStudyByPage(pageQuery);
+            CommonResult<List<UnitStudy>> result = unitStudyService.getUnitWordsStudyByPage(pageQuery);
 			this.toVm(result, context);
 			return "/unitWordsStudy/list";
 	    }

@@ -1,4 +1,6 @@
-package com.goldfish.vo;
+package com.goldfish.vo.course;
+
+import com.goldfish.vo.CurrentStudyPositionVO;
 
 /**
  *  *         {
@@ -28,15 +30,15 @@ package com.goldfish.vo;
  *         }
  * Created by John on 2018/5/21 0021.
  */
-public class PositonedCourseStudyVO extends CourseStudyVO{
+public class PositonedCourseStudyVO extends CourseStudyVO {
 
-    private CurrentPositionVO currentPosition;
+    private CurrentStudyPositionVO currentPosition;
 
-    public CurrentPositionVO getCurrentPosition() {
+    public CurrentStudyPositionVO getCurrentPosition() {
         return currentPosition;
     }
 
-    public void setCurrentPosition(CurrentPositionVO currentPosition) {
+    public void setCurrentPosition(CurrentStudyPositionVO currentPosition) {
         this.currentPosition = currentPosition;
     }
 }

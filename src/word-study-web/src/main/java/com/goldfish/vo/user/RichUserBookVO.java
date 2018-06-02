@@ -1,4 +1,7 @@
-package com.goldfish.vo;
+package com.goldfish.vo.user;
+
+import com.goldfish.vo.course.RichCourseStudyVO;
+import com.goldfish.vo.user.UserVO;
 
 import java.util.List;
 

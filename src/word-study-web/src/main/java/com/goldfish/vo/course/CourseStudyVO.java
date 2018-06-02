@@ -1,7 +1,7 @@
-package com.goldfish.vo;
+package com.goldfish.vo.course;
 
 
-public class CourseStudyVO extends CourseVO{
+public class CourseStudyVO extends CourseVO {
     private boolean currentStudyBook;
     private Integer startFrom;
     private Integer studyMode;

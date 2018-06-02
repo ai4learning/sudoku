@@ -1,11 +1,11 @@
-package com.goldfish.vo;
+package com.goldfish.vo.course;
 
 import java.util.List;
 
 /**
  * Created by John on 2018/5/25 0025.
  */
-public class RichCourseStudyVO extends RichCourseVO{
+public class RichCourseStudyVO extends RichCourseVO {
 
     private List<CourseUnitStudyVO> courseUnits;
     private boolean currentStudyBook;
