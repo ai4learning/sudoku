@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link type="text/css" rel="Stylesheet" href="/content/css/om-apusic-studyhome.min.css" />
+  <link rel="Stylesheet" href="/content/css/index.min.css" />
+  <link rel="Stylesheet" href="/content/css/common.min.css" />
+  <link rel="Stylesheet" href="/content/css/Report.min.css" />
+  <link rel="Stylesheet" href="/content/css/popWrongdel.min.css" />
+
+</head>
+<body>
+  <div id="app"></div>
+  <audio id="backgroundMusic" memoryaudio="/soundfile/audio/memory_audio.mp3" preload="auto" src="/soundfile/audio/memory_audio.mp3">
+    <source src="/soundfile/audio/memory_audio.mp3" type="audio/mpeg">
+    <embed id="backgroundMusicEmbed" src="/soundfile/audio/memory_audio.mp3" autostart="false" hidden="true">
+  </audio>
+  <audio id="errorAudio" preload="auto">
+    <source src="/content/audio/error_audio.mp3" type="audio/mpeg">
+    <embed src="/content/audio/error_audio.mp3" autostart="false" hidden="true">
+  </audio>
+  <div id="privateSetting" show="0" class="radius tab-content-slim hide" style="background: url(/content/img/new_exp_global_bg.png);">
+    <!-- <input id="UserId" type="hidden" value="jiaoshi">
+    <input id="UserCode" type="hidden" value="f4f18fcf-c36c-49a3-a23e-a751c0743d4b">
+    <input id="UserName" type="hidden" value="教师">
+    <input id="UserState" type="hidden" value="2">
+    <input id="UserLoginTimes" type="hidden" value="67"> -->
+    <input id="UserSpellOn" type="hidden" value="true">
+    <input id="UserFollowSpeakOn" type="hidden" value="false">
+    <input id="UserPointDiscount" type="hidden" value="1.0">
+    <input id="UserSecond4SpellingLetter" type="hidden" value="1400">
+    <input id="pointForEachReviewVoc" type="hidden" value="0.5">
+    <input id="leftTryTimes" type="hidden" value="-199" style="display: none;">
+    <form>
+      <input id="hfUserID" type="hidden" value="9185">
+      <h3 class="tab-content-title">基本设置</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>自动播放右脑记忆辅助音频（Alpha音乐）</td>
+            <td>
+              <input id="usautoMusic" type="checkbox" checked="checked" style="display:none;">
+              <input type="checkbox" id="alphaOn_setting" checked="checked">
+            </td>
+          </tr>
+          <tr>
+            <td>取消自动复习</td>
+            <td>
+              <input id="usautoReview" type="checkbox" checked="checked" style="display:none;">
+              <input type="checkbox" id="reviewOn_setting" checked="checked">
+            </td>
+          </tr>
+          <tr>
+            <td>不显示单词识别倒计时</td>
+            <td>
+              <input id="usdisplayLeftTime" type="checkbox" checked="checked" style="display:none;">
+              <input type="checkbox" id="vocRecTimeCounterOff_setting" checked="checked">
+            </td>
+          </tr>
+          <tr>
+            <td>单词基础每组单词个数</td>
+            <td>
+              <input id="uscountPerGroup" type="hidden" value="5">
+              <select style="width:58px;" id="vocNbrByGroup_setting">
+                <option value="5">5个</option>
+                <option value="10">10个</option>
+                <option value="15">15个</option>
+                <option value="20">20个</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="tab-content-title">高级设置</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>单词识别倒计时时间</td>
+            <td>
+              <input id="usrecognitionTime" type="hidden" value="5">
+              <select style="width:58px;" id="vocRecTime_setting">
+                <option value="5">5秒</option>
+                <option value="6">6秒</option>
+                <option value="7">7秒</option>
+                <option value="8">8秒</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>最大复习单词数</td>
+            <td>
+              <input id="usmaxReviewCount" type="hidden" value="10">
+              <select style="width:58px;" id="vocNbrByReview_setting">
+                <option selected="" value="10">10个</option>
+                <option value="20">20个</option>
+                <option value="30">30个</option>
+                <option value="40">40个</option>
+                <option value="50">50个</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>正确单词提示秒数</td>
+            <td>
+              <input id="ustipsSeconds" type="hidden" value="2">
+              <select style="width:58px;" id="vocPromptTime_setting">
+                <option value="1">1秒</option>
+                <option selected="selected" value="2">2秒</option>
+                <option value="3">3秒</option>
+                <option value="4">4秒</option>
+                <option value="5">5秒</option>
+              </select>
+            </td>
+          </tr>
+          <!-- <tr>
+                          <td>正确句子提示秒数</td>
+                          <td><select style="width:58px;" id="senPromptTime_setting"><option value="3">3秒</option><option value="4">4秒</option><option value="5">5秒</option><option value="7">7秒</option><option value="10">10秒</option></select></td>
+                      </tr> -->
+        </tbody>
+      </table>
+      <h3 class="tab-content-title">加强型学习（Mt四维学习）</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>达到指定单词数后进行逆向回忆（看词义回忆单词）</td>
+            <td>
+              <input id="usreverseMemoryCount" type="hidden" value="5">
+              <select style="width:69px;" id="reverseOn_setting">
+                <option value="5">5个</option>
+                <option value="10">10个</option>
+                <option value="15">15个</option>
+                <option value="20">20个</option>
+                <option value="10000">不进行</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>单元结束后是否进行整体回忆</td>
+            <td>
+              <input id="usmemoryAllAfterUnit" type="checkbox" style="display:none;">
+              <input type="checkbox" id="unitReviewOn_setting">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style=" padding-top: 10px; margin: 0 auto; width: 150px; ">
+        <input type="button" class="btn-slim radius" id="save_setting" value="保存">
+        <input type="button" id="cancel_setting" class="btn-slim radius" value="取消" style="margin-left:3px;">
+      </div>
+    </form>
+  </div>
+  <script type="text/javascript">
+    document.getElementById("backgroundMusic").volume = 0.1;
+    // $(document).ready(function () {
+    //   function initialSetting() {
+    //     if (true) {
+    //       $('#alphaOn_setting').attr('checked', 'checked');
+    //     }
+    //     $('#vocRecTime_setting').val(5);
+    //     $('#vocNbrByGroup_setting').val(5);
+    //     $('#vocNbrByReview_setting').val(10);
+    //     if (false) {
+    //       $('#vocRecTimeCounterOff_setting').attr('checked', 'checked');
+    //     }
+    //     $('#vocPromptTime_setting').val(2);
+    //     $('#senPromptTime_setting').val(5);
+
+    //     if (true) {
+    //       $('#unitReviewOn_setting').attr('checked', 'checked');
+    //     }
+    //     $('#reverseOn_setting').val(5);
+    //   }
+    //   initialSetting();
+    // });
+  </script>
+  <div tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-studyBox" id="unitStudyDialog" style="display: none;z-index: 1002; outline: 0px; height: auto; width: 860px; top: 234px; left: 530px;">
+    <div id="studyBox" style="overflow: hidden; width: auto; min-height: 113px; height: auto;" scrolltop="0" scrollleft="0">
+      <div class="handler noselect" style="width:100%; overflow:hidden;">
+        <div style="height: 40px; line-height:40px; color:#666;position: relative;	background:#c3c3c3;	border: none;border-radius: 5px 5px 0 0;">
+          <div id="panelTitleInfo" style="margin-left:1em; display: inline-block;">单词提取中...</div>
+          <div id="door_exitUnitStudy" style="float: right; cursor: pointer; margin-right: 16px;margin-top: 10px; width: 22px; height: 22px; background: url(/content/image/study_close_nor.png) 0px 0px no-repeat;"></div>
+        </div>
+        <div class="handler-menubar">
+          <div class="study-theme">
+  
+            <div style="margin-top:10px;">
+              <div id="music_UnitStudy" title="α音乐波" class="alphamusic">
+              </div>
+  
+            </div>
+          </div>
+        </div>
+        <div id="unit_study_slide" class="words-memory" style="height:380px;">
+          <input id="current_module_unit" style="display: none;">
+          <div id="studyProgressDiv" class="study-progress" style="">
+            <div class="progress-word-spell">
+              <label style="margin-right:12px;display:none;" id="vocUnitProgress">
+                总计：
+                <font id="vocSeqUnFinish">0</font>/
+                <font id="totalUnitVocNbr">0</font>&nbsp;&nbsp;
+              </label>
+              <label style="margin-right:12px;display:none;">
+                进度：
+                <font id="vocSeq">0</font>/
+                <font id="totalVocNbr">0</font>
+              </label>
+            </div>
+            <div class="scrollprogress" style="width:100%;position: relative;">
+              <div id="studyScrollProgress" style="width: 0%; background-color: rgb(38, 148, 0); padding: 0px; margin: 0px; height: 2px;position: absolute; top: -58px;"></div>
+            </div>
+          </div>
+          <div id="hiFreShowing" style="position:absolute; height:200px; overflow:hidden; top:160px; left:10px; font-family:arial black; display:block; font-size:100px; color:rgba(100, 100, 100, 0.005);"></div>
+          <div id="singleReadingTime" class="bellReadtime">6</div>
+          <div id="startSection" style="position:absolute; left: 170px;top: 165px;">
+            <div class="radius startsectioncss">
+              <div style="display: table-cell; padding-left:50px; padding-right: 50px;vertical-align: middle; height: inherit; line-height: 30px;text-align: center;">
+                <label id="startInfo">单词正在跑步而来.....,请耐心等待！</label>
+              </div>
+            </div>
+            <div style="margin-top:2em;text-align:center;">
+              <input id="startUnitStudy" type="button" class="btn-keepstudy" style="display: none; width: 100px;" value="开始学习">
+              <input id="cancelUnitStudy" type="button" class="btn-keepstudy" style="display:none; width:100px;" value="退出">
+              <input id="startVocSpeak" type="button" class="btn-keepstudy" style="display:none;width:100px;" value="开始学习">
+              <input id="saveVocSpeak" type="button" class="btn-keepstudy" style="display:none;width:100px;" value="保存退出">
+              <input id="startSentenceSpeak" type="button" class="btn-keepstudy" style="display:none;width:100px;" value="开始学习">
+            </div>
+          </div>
+          <div id="readingSection" style="position:absolute; z-index:100; display:none; left: 170px; top: 133px; width: 65%;">
+            <h1 id="spelling"></h1>
+            <span id="soundMarkUs" class="ipa">[...]</span>
+            <img id="wordAudio_symbol" alt="发音" title="发音" src="/content/img/volume-medium.png" height="20px" style="vertical-align:bottom;margin-left:0.3em; cursor:pointer;">
+            <img id="wordCorrect_symbol" alt="纠错" title="单词纠错" src="/content/img/spell-check.png" height="18px" style="vertical-align:bottom; margin-bottom: 1px; cursor:pointer;display:none;">
+            <img id="wordDel_symbol" alt="收藏" title="收藏这个单词，便于集中学习" src="/content/image/study_collect.png" height="25px" class="word_del">
+            <span id="wordAudio_content">
+              <audio id="">
+                <source src="" type="audio/mpegwordDel_symbol"
+                          <embed id="" src="" autostart=" false" loop="false" hidden="true">
+                              </audio>
+                          </span>
+                          <!-- nextWordAudio_content: 用于预先绑定下一个单词音频的元素 -->
+                          <span id="nextWordAudio_content">
+                              <audio id="">
+                                  <source src="" type="audio/mpeg">
+                                  <embed id="" src="" autostart="false" loop="false" hidden="true">
+                              </audio>
+                          </span>
+                          <div id="explainInfo" style="display:none;" class="studyCard radius">
+                              <div id="" class="translation" style="font-size:20px;display: table;height: inherit;">
+                                  <div id="meaning" style="display: table-cell; vertical-align: middle; height: inherit;
+                  line-height: 25px;font-size: 24px; color: #666;"></div>						<!-- <div id="showEqSentence" class="eqtitle
+" style="cursor:pointer;position: absolute;bottom: 0px;right: 0px;">【例句】</div> -->
+                              </div>
+                              <div class="eqsentence" style="display: none; vertical-align: middle; height: inherit; padding-left:20px;
+                  padding-right: 15px;">
+                                  <span class="eq">
+                                      <p id="enSentence" style="display:inline"></p>
+                                      <img id="sentenceAudio_symbol" alt="volume" src="/content/img/volume-medium.png"
+                                      height="20px" style="vertical-align:bottom;margin-left:0.3em; cursor:pointer;">
+                                      <span id="sentenceAudio_content"></span>
+                                      <p id="chSentence">暂时没有例句</p>
+                                  </span>
+                                  <div id="showTranslation" class="eqtitle" style="cursor:pointer;position: absolute;bottom:
+                  0px;right: 0px;">【释义】</div>
+                              </div>
+                              <div id="wordConfirmArea" style="display:none; position: absolute;bottom: -74px; margin-left:
+                  149px;">
+                                  <span style="margin-right: 10px;">
+                                      <span id="confirm_right_unitStudy" title="记忆正确" style="display:inline-block; width:90px;
+                  height: 32px;cursor:pointer;background-image:url(/content/image/studywordicon.png); background-position: 0
+                  -360px;"></span>
+                                  </span>
+                                  <span style="margin-right: 10px;">
+                                      <span id="confirm_wrong_unitStudy" title="记忆错误" style="display:inline-block; width:90px;
+                  height: 32px;cursor:pointer;background-image:url(/content/image/studywordicon.png); background-position: 0
+                  -480px;"></span>
+                                  </span>
+                                  <span>
+                                      <span class="wordAudio_symbol_big" title="再听一次" style="display:inline-block; width:90px;
+                  height: 32px;cursor:pointer;background-image:url(/content/image/studywordicon.png); background-position: 0
+                  -120px;"></span>
+                                  </span>
+                              </div>
+                              <div id="goNextArea" class="next-words" style="display:none;position: absolute; bottom: -76px;
+                  margin-left: 245px;">
+                                  <div id="go_next" class="gonext" title="下一个单词" style="cursor:pointer; width:90px; height:
+                  32px; background:url(/content/image/studywordicon.png) no-repeat 0 -300px;"></div>
+                              </div>
+                          </div>
+                          <div id="explainCover" style="display:none;" class="studyCard radius">
+                              <div class="eqtitle" style="line-height: 170px; text-align: center;color:rgb(102, 102, 102);
+                  font-size:70px; cursor: default;">
+                                  ?
+                              </div>
+                              <div id="btnOfCover" style="position: absolute; bottom: -74px; margin-left: 0px;">
+                                  <span id="btnTooEasyDiv" style="margin-right: 10px;">
+                                      <span id="btnTooEasy" title="too easy!下一个" style="display:inline-block; width:90px;
+                  height: 32px;cursor:pointer;background-image:url(/content/image/studywordicon.png); background-position: 0
+                  -300px;"></span>
+                                  </span>
+                                  <span style="margin-right: 10px;">
+                                      <span id="btnRemember" title="记得" style="display:inline-block; width:90px; height:
+                  32px;cursor:pointer;background-image:url(/content/image/studywordicon.png); background-position: 0 0;"></span>
+                                  </span>
+                                  <span style="margin-right:10px;">
+                                      <span id="btnForget" title="不记得了" style="display:inline-block; width:90px; height:
+                  32px;cursor:pointer;background-image:url(/content/image/studywordicon.png); background-position: 0 -600px;"></span>
+                                  </span>
+                                  <span>
+                                      <span class="wordAudio_symbol_big" title="再听一次" style="display:inline-block; width:90px;
+                  height: 32px;cursor:pointer;background-image:url(/content/image/studywordicon.png); background-position: 0
+                  -120px;"></span>
+                                  </span>
+                              </div>
+                              <div id="btnOfShaddowCover" style="display:none; position:absolute; width:202px; height:51px;
+                  bottom: -73px; margin-left: 199px; background:#FCFCFC; opacity:0.60;">
+  
+                                  <div id="closeBtnOfShaddowCover" title="关闭强制跟读..." style="float:right; cursor:pointer;font-size:15px;">x</div>
+                                  <div style="text-align: center;font-size: 15px;margin: 51px 0 0 -19px;">请跟读~</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div id="speakSection" isvoc="1" style="display:none;position: absolute; width: 96%; height:78%;
+                  text-align: center;margin: 0 auto;">
+                          <div style="width: 90%; margin: 103px auto 0;">
+                              <h1 id="spelling_speakSection" style="font-size: 46px;"></h1>
+                              <span id="soundMarkUs_speakSection" style="padding-left: 5px; font-size: 27px;font-weight:
+                  bold;color: #049F6E;font-family: &#39;lucida sans unicode&#39;,arial,sans-serif;"></span>
+                              <input type="hidden" id="stardardSpeak_speakSection" value="">
+                          </div>
+                          <div style="margin: 43px auto;width: 410px;height: 40px;">
+                              <div style="float:left; margin-right: 15px;" title="点击不放开进行跟读，快捷键 F">
+                                  <div id="speakMicInSpeakSection" animated="0">
+                                      <div style="width:90px; height:30px; cursor:pointer; background: url(/content/image/mic.png)
+                  no-repeat 50% 50%;"></div>
+                                      <div style="display:none; width:90px; height:30px; cursor:pointer; background: url(/content/image/mic_aminate.gif)
+                  no-repeat 50% 50%;"></div>
+                                  </div>
+                              </div>
+                              <div style="float:left; margin-right: 15px;" title="播放录音，快捷键 J">
+                                  <div id="playRecordInSpeakSection" style="width:90px; height:30px; cursor:pointer;background-image:
+                  url(/content/image/playR_n.png); background-position: 0 -60px; background-repeat: no-repeat;">
+  
+                                  </div>
+                              </div>
+                              <div style="float:left; margin-right: 15px;" title="听系统发音，快捷键 K">
+                                  <div id="audio_word_or_sen_symbol_speakSection" style="width:90px; height:30px; cursor:pointer;background-image:
+                  url(/content/image/listenagin.png);background-position: 0 -60px; background-repeat: no-repeat;">
+                                      <span id="wordAudio_content_speakSection">
+                                          <audio id="">
+                                              <source src="" type="audio/mpeg">
+                                              <embed id="" src="" autostart="false" loop="false" hidden="true">
+                                          </audio>
+                                      </span>
+                                      <span id="sentenceAudio_content_speakSection"></span>
+                                  </div>
+                              </div>
+                              <div id="goNextArea_speakSection" style="/* display:none; */float: left;">
+                                  <div id="go_next_speakSection" class="gonext" title="下一个单词，快捷键 L" style="cursor: pointer;
+                  width: 90px; height: 32px; cursor: pointer; background-image: url(/content/image/studywordicon.png);background-position:
+                  0 -300px; background-repeat: no-repeat;"></div>
+                              </div>
+                          </div>
+                          <div id="analyserDiv" style="margin-top: -20px;">
+                              <canvas id="analyser" width="300" height="100"></canvas>
+                          </div>
+                          <div>
+                              <input id="speakResultInSpeakSection" type="text" style="display:none;">
+                          </div>
+                          <div id="speakScore" style="display:none; position: absolute; top: 50px; left:56px; padding:20px;
+                  font-size: 30px; font-family:Comic Sans MS;font-weight: bold; font-style: italic;">
+  
+                          </div>
+                          <div id="meaning_speakSection" style="display:none; position: absolute; right: 72px; bottom: 0;
+                  width: 355px;height: 98px;color:#666; background-color:#FAFAFA;box-shadow: 0px 0px 10px #D5D5D5; font-size:18px;
+                  border:solid 1px #D5D5D5;overflow: hidden;" class="radius">
+                              <div style="display: table-cell; padding-left:10px; padding-right: 10px;vertical-align: middle;
+                  height: inherit; line-height: 20px;text-align: center;">
+  
+                              </div>
+                          </div>
+                          <div id="showMeaning_speakSection" class="tile-bt-extrasmall" style="position: absolute; bottom:
+                  0;right: 13px; width:46px;"><span class="light-text-o">释义</span></div>
+                          <div id="showtip_speakSection" class="tile-bt-extrasmall" style="position: absolute; bottom:
+                  0;left: 13px; width:56px;"><span class="light-text-o">使用说明</span></div>
+                          <div id="tip_speakSection" style="display:none; position: absolute; left: 72px; bottom: 0; width:390px;height:
+                  60px;color:#999; background-color:#fff; font-size:14px; border:solid 1px #dcdcdc;overflow: hidden;
+" class="radius">
+                              <div style="display: table-cell; padding-left:10px; padding-right: 10px;vertical-align: middle;
+                  height: inherit; line-height: 20px;text-align: left;">
+                                  <!-- 遇到一些同音词时，你可以采用词组的方式进行拼读，例如：sun和son, 你可以用读in the sun的方式来代替读sun. -->
+                                  <ul>
+                                      <li>1. 点击麦克风图标不放开，进行录音</li>
+                                      <li>2. 释放后将播放录音并与系统音频进行对比</li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- <div id="seperateSectionZero" style="position:absolute; display:none; left: 150px;top: 170px;"> -->
+                      <div id="seperateSectionZero" style="position:absolute; display:none; left: 170px;top: 165px;">
+                          <div class="radius seperateSecZeroshadow divshadow">
+                              <div style="display: table-cell; padding-left:60px; vertical-align: middle; height: inherit;
+                  line-height: 30px;">
+                                  <label>
+                                      • 按照您的设置，接下来进行“逆向回忆”
+                                      <br>
+                                      <font style="font-size: 13px; color:gray;font-weight: normal;padding-left: 32px;"></font>
+                                  </label>
+                              </div>
+                          </div>
+                          <div style="margin-top:2em;text-align:center;font-size:16px;">
+                              <input id="btnStartReverse" type="button" class="btn-keepstudy" style="width:100px;
+" value="开始">
+                          </div>
+                      </div>
+                      <!-- <div id="reverseSection" style="position:absolute; display:none; left: 150px; top: 140px;"> -->
+                      <div id="reverseSection" style="position:absolute; z-index:100; display:none; left: 150px; top: 133px;
+                  width: 65%;">
+                          <div style="height:40px; margin-top:-10px;">
+                              <span id="voc_mark_reverse" style="display:none;">
+                                  <h1 id="spelling_reverse"></h1>
+                                  <span id="soundMarkUs_reverse" class="ipa"></span>
+                              </span>
+                              <img id="wordAudio_symbol_reverse" alt="volume" src="/content/img/volume-medium.png
+" height="20px" style="vertical-align:bottom;margin-left:0.3em; cursor:pointer;margin-top: 20px;">
+                          </div>
+                          <div id="explainInfo_reverse" class="studyCard radius">
+                              <div id="explainInfo_reverse_meaning" class="translation" style="font-size:20px;display:
+                  table;height: inherit; padding-left:20px;">
+                                  <div id="meaning_reverse" style="display: table-cell; vertical-align: middle; height:
+                  inherit; line-height: 25px;"></div>
+                                  <div id="showVocabulary_reverse" class="eqtitle" style="cursor:pointer;position: absolute;bottom:
+                  0px;right: 0px;">【忘记了】</div>
+                                  <!-- <div id="showEqSentence_reverse" class="eqtitle" style="cursor:pointer;position:
+                  absolute;bottom: 0px;right: 0px;">【例句】</div> -->
+                              </div>
+                              <div id="explainInfo_reverse_sentence" class="eqsentence" style="display: none; vertical-align:
+                  middle; height: inherit; padding-left:20px;">
+                                  <span class="eq">
+                                      <p id="enSentence_reverse" style="display:inline">There is no example sentence currently.</p>
+                                      <img id="sentenceAudio_symbol_reverse" alt="volume" src="/content/img/volume-medium.png
+" height="20px" style="vertical-align:bottom;margin-left:0.3em; cursor:pointer;">
+                                      <p id="chSentence_reverse">暂时没有例句</p>
+                                  </span>
+                                  <div id="showTranslation_reverse" class="eqtitle" style="cursor:pointer;position: absolute;bottom:
+                  0px;right: 0px;">【释义】</div>
+                              </div>
+                              <div class="next-words" style="position: absolute; bottom: -76px; margin-left: 246px;">
+                                  <div id="go_next_reverse" class="gonext" title="下一个单词" style="cursor:pointer; width:90px;
+                  height:32px; background:url(/content/image/studywordicon.png) no-repeat 0 -300px;"></div>
+                              </div>
+                          </div>
+                      </div>
+                      <div id="seperateSectionOne" style="position:absolute; display:none; left: 170px;top: 160px;
+" class="noselect">
+                          <div class="radius seperateSecZeroshadow divshadow">
+                              <div style="display: table-cell; padding-left:50px; padding-right: 50px;vertical-align: middle;
+                  height: inherit; line-height: 30px;text-align: center;">
+                                  <label style="display:block;">
+                                      回忆刚学的单词，接下来进入
+                                      <font class="font24 f_Red">拼写强化</font>
+                                      阶段<br>
+                                      <font style="font-size: 13px; color:#999; font-weight: normal;">[ 提示：请保持冲刺的速度哦！！！ ]</font>
+                                  </label>
+                              </div>
+                          </div>
+                          <div style="margin-top:2em;text-align:center;font-size:16px;">
+                              <div>
+                                  <input id="toNextStep" type="button" title="与单词识别顺序相同" class="btn-keepstudy
+" style="width:100px;" value="原序拼写">
+                                  <input id="toNextStep_NonOrder" type="button" title="与单词识别顺序不同" class="btn-keepstudy
+" style="width:100px;" value="乱序拼写">
+                              </div>
+                          </div>
+                      </div>
+                      <div id="writingSection" style="position:absolute; display:none; left: 90px;top: 130px;">
+                          <div style="font-size: 16px;font-weight: bold;line-height: 26px; min-height:30px;max-height: 100px;width:
+                  650px; padding-top: 15px;margin-left:45px;overflow: hidden;">
+                              <span id="showWsMeaning" on="1" title="快捷键：ctrl+m">词义提示</span>
+                              <span id="wsMeaning" class="font18 gray-text"></span>
+                              <span id="wordAudio_ws_content" style="display:none;">
+                                  <audio id="">
+                                      <source src="" type="audio/mpeg">
+                                      <embed id="" src="" autostart="false" loop="false" hidden="true">
+                                  </audio>
+                              </span>
+                          </div>
+                          <div style="margin-top: 25px; width: 700px;margin-left: 55px;">
+                              <div>
+                                  <div>
+                                      <input id="wsWriting" type="text" class="input-txt" onpaste="return false">
+                                  </div>
+                                  <table>
+                                      <tr>
+                                          <td>
+                                              <div class="btn-spell-again">
+                                                  <label id="wordAudio_ws_symbol" title="小技巧：鼠标放入文本框中，连续点两下ctrl键，既可发音，也会提示词意。
+" class="btn-listenagin"></label>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <div>
+                                                  <span id="checkWriting" class="btn-next-margin">
+                                                      <img style="display:none;" src="/content/image/word_spellright.png">
+                                                      <img style="display:none;" src="/content/image/word_spellwrong.png">
+                                                  </span>
+                                              </div>
+                                              <div>
+                                                  <input id="wsNext" title="快捷键：回车(Enter)." type="button" class="btn-next">
+                                              </div>
+                                          </td>
+                                      </tr>
+                                  </table>
+  
+                              </div>
+                              <div style="margin-top: 10px;">
+                                  <label id="wsStardardVocShowing" class="word-standers"></label>
+                                  <input type="hidden" id="wsStardardVoc" value="">
+                              </div>
+                          </div>
+                      </div>
+                      <div id="sentenceSection" style="position:absolute; display:none; left: 125px;top: 116px;">
+                          <div style="margin-top: 28px; margin-left: -49px; padding-bottom: 13px; height:30px;">
+                              <span id="tranPrometeSentence" on="1">翻译提示</span>
+                              <span id="ssChSentence" style="font-weight:bold;font-size:16px; display:none;"></span>
+                          </div>
+                          <div>
+                              <span id="sentenceAudio_ss_content"></span>
+                          </div>
+  
+                          <div style="margin-top:2em; margin-left: 35px; width:600px;">
+                              <div style="float: left; margin-left: -71px;margin-bottom: -20px;">
+                              </div>
+                              <div id="ssSentence" style="height:30px;">
+                                  <div id="ssSentencePrompt" style="font-size:20px; color:#AFADAC;font-style:italic; cursor:pointer;">点击下面的单词，将它们拼接成你听到的句子【关闭提示】</div>
+                              </div>
+                              <div style="clear:both;padding-bottom:10px;">
+                                  <hr style="border: solid 2px #05AD78;">
+                                  <div style="float: right; margin: -45px -40px 0px 0px;">
+                                      <span id="checkSentence">
+                                          <img style="display:none;" src="/content/img/right3.png">
+                                          <img style="display:none;" src="/content/img/wrong3.png">
+                                      </span>
+                                  </div>
+                              </div>
+  
+                              <div id="ssChoiceCellsSentence">
+                              </div>
+                              <div style="clear:both;"></div>
+                              <div class="next-words" style="position:absolute; left:630px; top:227px;">
+                                  <div id="ssNext" class="gonext" title="下一个单词" style="cursor:pointer; width:90px; height:32px;
+                  background:url(/content/image/studywordicon.png) no-repeat 0 -300px;"></div>
+                              </div>
+                          </div>
+                      </div>
+                      <div id="seperateSectionTwo" style="position:absolute; display:none; left: 150px;top: 155px;">
+                          <div class="radius seperateSecZeroshadow divshadow">
+                              <div style="display: table-cell; padding-left:60px; vertical-align: middle; height: inherit;
+                  line-height: 30px;">
+                                  <label>
+                                      最后将进行“整体回忆”，再次巩固记忆，加油吧骚年！
+                                      <br>
+                                      <font style="font-size: 13px; color:gray;font-weight: normal;padding-left: 32px;">[ 提示：如果你不需要该环节，可以在设置中取消 ]</font>
+                                  </label>
+                              </div>
+                          </div>
+  
+                          <div style="margin-top:2em;text-align:center;font-size:16px;">
+                              <input id="btnStartUnitReview" type="button" class="btn_green" value="开始">
+                          </div>
+                      </div>
+                      <div id="unitReview" style="display: none; position: absolute; left:35px; width: 826px; height:380px;">
+                          <!-- cardContainer 中的width与height在计算中需要用到，所以要明确写明，不要用百分比  -->
+                          <div id="cardContainer" style="position: absolute; width: 826px; height:385px;">
+                              <div id="cardLeftContainer" style="width:213px;height: 385px;float: left;"></div>
+                              <div id="cardMiddleContainer" style="width:300px;height: 385px;float: left;"></div>
+                              <div id="cardRightContainer" style="width:213px;height: 385px;float: left;"></div>
+                          </div>
+                          <div id="btnDiv_unitReview" class="next-words" style="position: absolute; z-index:3; bottom:
+                  5px;right: 27px;">
+                              <div id="toFini_unitReview" class="gonext1" title="跳过/完成" style="cursor:pointer; width:60px;
+                  height:60px; background:url(/content/img/fini-unit-review.png) no-repeat 0 -150px;"></div>
+                          </div>
+                      </div>
+                      <div id="finishSection" style="position:absolute; display:none; width:827px; margin: 0 auto;">
+                          <div id="staticArea">
+                              <div class="radius s_comp_sum divshadow">
+                                  <table class="tablexj">
+                                      <tr>
+                                          <td>
+                                              <div id="">
+                                                  <table style="margin: 0 auto;">
+                                                      <tbody>
+                                                          <tr>
+                                                              <td colspan="2" align="center"><span class="font20 fontorange">学习小结</span></td>
+                                                          </tr>
+                                                      </tbody>
+                                                  </table>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div id="">
+                                                  <table>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td id="" class="font16 fontgray"><img src="/content/image/dot_light.png
+" alt="点" title="点" class="dot" /> 记忆夹生词（个）：</td>
+                                                              <td id="halfRememberNbr" class="font16 fontgray">50</td>
+                                                              <td style="width: 90px;">&nbsp;</td>
+                                                              <td class="font16 fontgray"><img src="/content/image/dot_light.png
+" alt="点" title="点" class="dot" /> 连续识别错误（个）：</td>
+                                                              <td id="continueReadFailNbr" class="f_Red">0</td>
+                                                          </tr>
+                                                          <tr>
+                                                              <td id="" class="font16 fontgray"><img src="/content/image/dot_light.png
+" alt="点" title="点" class="dot" /> 拼写夹生词（个）：</td>
+                                                              <td id="halfWritingNbr" class="f_Red">20</td>
+                                                              <td style="width: 90px;">&nbsp;</td>
+                                                              <td class="font16 fontgray"><img src="/content/image/dot_light.png
+" alt="点" title="点" class="dot" /> 连续拼写错误（个）：</td>
+                                                              <td id="continueWriteFailNbr" class="f_Red">0</td>
+                                                          </tr>
+                                                      </tbody>
+                                                  </table>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <hr style="height:1px;border:none;border-top:1px dashed #999999;">
+                                              <div>
+                                                  <div id="rewardDiv" flip="0">
+                                                      <table style="margin: 0 auto;" class="font20 fontgray">
+                                                          <tbody>
+                                                              <tr style=" height: 30px;">
+                                                                  <td id="rewardInfo"></td>
+                                                                  <td id="rewardPointNbr" class="f_Red"></td>
+                                                                  <td></td>
+                                                              </tr>
+                                                          </tbody>
+                                                      </table>
+                                                  </div>
+  
+                                              </div>
+                                          </td>
+                                      </tr>
+  
+                                  </table>
+                              </div>
+                              <div id="btnOfUnitFinish" style="display:none;padding-top:5px;width: 585px;margin: 0 auto;">
+                                  <div style="float:left; margin-left: 80px;">
+                                      <input id="toNextUnit" title="保存本单元进度，并进入下一单元" type="button" class="btn-keepstudy
+" style="display: none;visibility:hidden;" value="下个单元">
+                                  </div>
+                                  <div style="float:left; padding-left: 188px;">
+                                      <input id="toUnitTest" title="保存本单元进度，并进入单元测试" type="button" class="btn-keepstudy
+" value="单元测试">
+                                  </div>
+                                  <div style="float:left; padding-left: 12px;">
+                                      <input id="exitUnitStudy" title="保存本单元进度，并进退出学习" type="button" class="btn-keepstudy
+" value="保存退出">
+                                  </div>
+                              </div>
+                          </div>
+                          <div id="dynamicAfterFinish" style="text-align:center;">
+                              <div class="radius" style="width: 554px;margin: 80px auto 0px auto;color:#666; height: 170px;
+                  background-color:#FAFAFA;font-weight:bold;font-size:20px; overflow: hidden;">
+                                  <label id="msgOfFinish" style="line-height:170px;"></label>
+                              </div>
+                              <div id="btnOfFinish" style="margin:2em;"></div>
+                          </div>
+                      </div>
+                      <div id="wordCorrectZone" class="radius" style="display:none; position:absolute; z-index:1010; width:
+                  191px; padding: 10px;background-color: rgb(252, 252, 252);border: 1px solid rgb(204, 204, 204);">
+                          <div style="padding-bottom: 8px; font-weight: bold;font-size: 16px;">纠错该单词</div>
+                          <div>
+                              <div>
+                                  <table style="width:239px;">
+                                      <tbody>
+                                          <tr>
+                                              <td style="width:20px;"><input id="spell_wordCorrectZone" type="checkbox"></td>
+                                              <td>拼写有误</td>
+                                              <td style="width:20px;"><input id="mark_wordCorrectZone" type="checkbox"></td>
+                                              <td>音标有误</td>
+                                          </tr>
+                                          <tr>
+                                              <td style="width:20px;"><input id="pronun_wordCorrectZone" type="checkbox"></td>
+                                              <td>发音有误</td>
+                                              <td style="width:20px;"><input id="meaning_wordCorrectZone" type="checkbox"></td>
+                                              <td>解释有误</td>
+                                          </tr>
+                                          <tr>
+                                              <td style="width:20px;"><input id="other_wordCorrectZone" type="checkbox"></td>
+                                              <td>其它错误</td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                              <div>
+                                  <textarea id="detail_wordCorrectZone" style="margin-top: 8px; width: 183px;"></textarea>
+                              </div>
+                              <div style="text-align: center; margin-top:6px;">
+                                  <input id="submitWordCorrectZone" type="button" value="提交"><input id="cancelWordCorrectZone
+" type="button" value="取消">
+                              </div>
+                          </div>
+                      </div>
+                      <div id="wordDeleteZone" class="radius" style="display:none; position:absolute; z-index:1010; width:
+                  200px; padding: 10px;background-color: rgb(252, 252, 252);border: 1px solid rgb(220, 220, 220);">
+                          <div style="padding-bottom: 8px; font-weight: bold;font-size: 14px; color: #999;">确定该单词以后不需要复习了？</div>
+                          <div>
+                              <div style="text-align: center; margin-top:6px;">
+                                  <input id="confirmDeleteWord" type="button" value="确定" class="btn-suredel
+"><input id="cancelDeleteWord" type="button" value="取消" class="btn-wordcancle">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div id="cofirmExitDiv" style="position: absolute; z-index: 100; width: 94%; height: 380px; top: 130px;left:
+                  43px; background-color: white; text-align: center; display: none;">
+                      <div style="width: 100%;">
+                          <div id="reportDiv" class="radius studysum reportDivshadow">
+  
+                              <table width="436">
+                                  <tbody>
+                                      <tr>
+                                          <td width="164" height="57" id="report_total_text"><img src="/content/image/dot.png
+" alt="点" title="点" align="middle" class="dot" /> 单词总数（个）：</td>
+                                          <td width="39" id="report_total">50</td>
+                                          <td width="158"><img src="/content/image/dot.png" alt="点" title="点" class="dot" /> 本次学习（个）：</td>
+                                          <td width="50" class="font_red20" id="report_finish" align="left">0</td>
+                                          <td width="1">&nbsp;</td>
+                                      </tr>
+                                      <tr>
+                                          <td id="report_unFinished_text"><img src="/content/image/dot.png" alt="点
+" title="点" class="dot" /> 未完成数（个）：</td>
+                                          <td id="report_unFinished" class="font_red20">50</td>
+                                          <td colspan="3" align="left">
+                                              <div id="reportDiv2" style="visibility: visible;">
+                                                  <table class="table_nq" cellpadding="0" cellspacing="0">
+                                                      <tbody>
+                                                          <tr>
+                                                              <td id="report_reward_text"><img src="/content/image/dot.png
+" alt="点" title="点" class="dot" /> 保存后奖励金币：</td>
+                                                              <td id="report_getcoins" class="font_red20">0</td>
+                                                              <td>&nbsp;<img src="/content/image/coins0.png"></td>
+                                                          </tr>
+                                                      </tbody>
+                                                  </table>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td colspan="4" align="center">
+                                              <hr style="height:1px;border:none;border-top:1px dashed #999999;">
+                                              <div id="reportDiv3" style="visibility: visible; text-align: center;">
+                                                  <span style="color: #999;">继续学习可得更多金币~~~	</span>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+  
+  
+                          </div>
+                      </div>
+                      <div style="width: 100%; margin-top: 20px;">
+                          <div>
+                              <div class="cofirmExitBtn">
+                                  <input id="btnConfirmExit" type="button" class="btn-keepstudy" value="保存退出">
+                                  <input id="btnCancelExit" type="button" class="btn-keepstudy" value="继续学习">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div id="autoSaveDiv" style="display:none; position:absolute;z-index:1100; width:94%;height:412px; top:50px;
+                  background-color:white; text-align:center;">
+                      <div id="autoSaveImageDiv1" style="height:128px; margin:50px 0px 40px 0px;">
+                          <img id="autoSaveImage" src="/content/image/clock.png" alt="是否退出">
+                          <div style="margin:10px 0px 10px 0px">
+                              <span id="autoSaveImageInfo">数据保存中...</span>
+                          </div>
+                      </div>
+                      <div style="margin:0px 0px 40px 0px;">
+                          <span id="autoSaveInfo" class="radius rest30 divshadow">
+                              你已连续学习至少<span class="font36 f_Red">30</span>分钟了，建议休息一下...
+                          </span>
+                      </div>
+                      <div>
+                          <button id="btnExitAutoSave" type="button" class="btn-keepstudy">休息一下</button>
+                      </div>
+                  </div>
+                  <div class="bottom-menubar study-info-tj">
+                      <div id="readingSectionStatics" class="study-info" style="display:none;">
+                          <label>记忆时间</label> <input id="readingTime" name="studyTime" type="text" value="0:0:0
+" style="width:70px; text-align:center;">
+                          <label>识错次数</label> <input id="readingFailTimes" type="text" value="0" style="width:20px; text-align:center;" />
+                          <label>当前生词数</label> <input id="unRememberNbr" type="text" value="0" style="width:20px; text-align:center;">
+                          <label>识别总次数</label> <input id="totalReadingTry" type="text" value="0" style="width:20px; text-align:center;">
+                      </div>
+                      <div id="writingSectionStatics" class="study-info" style="display:none;">
+                          <label>拼写时间</label> <input id="writingTime" name="studyTime" type="text" value="0:0:0
+" style="width:70px; text-align:center;">
+                          <label>当前生词数</label> <input id="errorWritingVocNbr" type="text" value="0" style="width:20px;
+                  text-align:center;">
+                          <label>拼写总次数</label> <input id="totalWritingTry" type="text" value="0" style="width:20px; text-align:center;">
+                      </div>
+                      <div id="sentenceSectionStatics" class="study-info" style="display:none;">
+                          <label>学习时间</label> <input id="sentenceTime" name="studyTime" type="text" value="0:0:0
+" style="width:70px; text-align:center;">
+                          <label>待修正</label> <input id="errorSentenceNbr" type="text" value="0" style="width:20px; text-align:center;">
+                          <label>拼写总次数</label> <input id="totalSentenceTry" type="text" value="0" style="width:20px; text-align:center;">
+                      </div>
+                  </div>
+                  <div style="width:100%; height: 15px; position: relative; background:#c3c3c3; border-radius: 0 0 5px 5px
+                  ;"></div>
+              </div>
+  
+          </div>
+      </div>
+
+
+  <script type="text/javascript" src="/content/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/content/js/operamasks.min.js"></script>
+  <script type="text/javascript" src="/content/js/enUtils.min.js"></script>
+  <script type="text/javascript" src="/content/js/Word.min.js"></script>
+  <script type="text/javascript" src="/content/js/Common.min.js"></script>
+  <script type="text/javascript" src="/content/js/store.min.js"></script>
+  <script type="text/javascript" src="/content/js/index.min.js"></script>
+  <script type="text/javascript" src="/content/js/meml.min.js"></script>
+  <!-- <script type="text/javascript" src="/content/js/react.production.min.js"></script> -->
+  <!-- <script type="text/javascript" src="/content/js/react-dom.production.min.js"></script> -->
+  <!-- <script type="text/javascript" src="/content/js/antd.min.js"></script> -->
+  <script type="text/javascript" src="/dist/vendor.js"></script>
+  <script type="text/javascript" src="/dist/app.js"></script>
+</body>
+</html>
