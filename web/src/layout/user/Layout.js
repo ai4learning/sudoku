@@ -10,7 +10,7 @@ export default class Layout extends Component {
   render() {
     return (
       <div className='layout'>
-        <Header></Header>
+        <Header {...this.props}></Header>
         <div className='content'>
           {this.props.children || ''}
         </div>

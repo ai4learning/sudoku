@@ -7,7 +7,7 @@ export default class Header extends Component {
     super(props)
 
     this.state = {
-      current: window.decodeURI(window.location.pathname)
+      current: this.props.location.pathname
     }
   }
 

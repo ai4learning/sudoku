@@ -12,6 +12,6 @@ export default class Home extends Component {
   }
 
   componentWillMount() {
-    location.href = '/user'
+    this.props.router.push('/user')
   }
 }
