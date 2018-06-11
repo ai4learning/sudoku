@@ -16,7 +16,7 @@ var content_paths = []
 })
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     app: path.join(__dirname, 'src/index.js'),
   },

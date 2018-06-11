@@ -1,4 +1,5 @@
 import reqwest from 'reqwest'
+import { Modal } from 'antd'
 
 const requesting = {}
 
@@ -20,10 +21,16 @@ export default function fetch(options) {
       if(result.success) {
         resolve(result)
       } else {
+        Modal.error({
+          title: (<p dangerouslySetInnerHTML={{ __html: result.message || '服务器开小差啦，请稍后重试~' }}></p>)
+        })
         reject(result)
       }
     }).fail(err => {
-      console.error(err)
+      console.error('error: ', err)
+      Modal.error({
+        title: '未知错误，请稍后重试~'
+      })
       reject(err)
     }).always(() => {
       requesting[uid] = false
