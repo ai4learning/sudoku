@@ -1,5 +1,7 @@
 package com.goldfish.vo.course;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  *         "Id":5,
  *         "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
@@ -10,6 +12,7 @@ package com.goldfish.vo.course;
  * Created by John on 2018/6/2 0002.
  */
 public class BookVO {
+    @JSONField( name="Id")
     protected Integer id;
     protected String moduleCode;
     protected String bookName;

@@ -80,4 +80,9 @@
 		<property name="mapperInterface" value="com.goldfish.dao.TaskDao"/>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+
+	<bean id="allexamDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.goldfish.dao.AllexamDao"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
 </beans>

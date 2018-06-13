@@ -137,6 +137,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         }
         if (loginRecord == null) {
             log.info("系统中不存在该登录记录， userName={}, token={}", loginContext.getUserName(), loginContext.getToken());
+            cookieUtils.invalidate(request,response);
             return false;
         }
         // 4.判断session是否超期

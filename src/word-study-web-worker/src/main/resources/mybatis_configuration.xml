@@ -23,6 +23,7 @@
         <typeAlias type="com.goldfish.domain.WordStudy" alias="WordStudy"/>
         <typeAlias type="com.goldfish.domain.WordStudyStatistic" alias="WordStudyStatistic"/>
         <typeAlias type="com.goldfish.domain.Task" alias="Task"/>
+        <typeAlias type="com.goldfish.domain.Allexam" alias="Allexam"/>
 
 
     </typeAliases>
@@ -47,6 +48,7 @@
          <mapper resource="sqlmap/WordStudy.xml"/>
          <mapper resource="sqlmap/WordStudyStatistic.xml"/>
          <mapper resource="sqlmap/Task.xml"/>
+         <mapper resource="sqlmap/Allexam.xml"/>
      </mappers>
 	
 

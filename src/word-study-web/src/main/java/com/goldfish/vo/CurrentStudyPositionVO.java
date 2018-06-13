@@ -1,5 +1,7 @@
 package com.goldfish.vo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  *  *             "currentPosition":{
  *                 "Id":514981,
@@ -11,13 +13,13 @@ package com.goldfish.vo;
  *                 "isFinished":0,
  *                 "spelling":"three",
  *                 "isAllFinished":true,
- *                 "IsTested":0,
+ *                 "isTested":0,
  *                 "Status":0
  *             },
  * Created by John on 2018/5/21 0021.
  */
 public class CurrentStudyPositionVO {
-
+    @JSONField( name="Id")
     private Long id;
     private String studyPositionCode;
     private Integer positionType;
@@ -27,9 +29,12 @@ public class CurrentStudyPositionVO {
 
     private Integer unitNbr;
     private boolean isCurrentPos;
+    @JSONField( name="isFinished")
     private Integer isFinished = 0;
+    @JSONField( name="isAllFinished")
     private boolean isAllFinished;
-    private Integer IsTested = 0;
+    @JSONField( name="isTested")
+    private Integer isTested = 0;
     private Integer Status = 0;
 
     public Long getId() {
@@ -105,11 +110,11 @@ public class CurrentStudyPositionVO {
     }
 
     public Integer getIsTested() {
-        return IsTested;
+        return isTested;
     }
 
     public void setIsTested(Integer isTested) {
-        IsTested = isTested;
+        this.isTested = isTested;
     }
 
     public Integer getStatus() {

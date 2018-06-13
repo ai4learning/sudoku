@@ -1,5 +1,7 @@
 package com.goldfish.vo.unit;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  *             "Id":1490,
  *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121b400b0",
@@ -15,8 +17,8 @@ package com.goldfish.vo.unit;
  *             "isCollected":false
  * Created by John on 2018/6/2 0002.
  */
-public class UnitWordStudyVO {
-
+public class UnitStudyVO {
+    @JSONField( name="Id")
     private Long id;
     private String vocCode;
     private Integer vocIndex;
@@ -24,7 +26,7 @@ public class UnitWordStudyVO {
     private String meaning;
     private String soundMarkUs;
     private String soundMarkUk;
-
+    @JSONField( name="UnitId")
     private Integer unitId;
     private Integer unitNbr;
     private Integer lessonNbr;

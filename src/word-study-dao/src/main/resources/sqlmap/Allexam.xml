@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.goldfish.dao.AllexamDao">
+
+  <resultMap id="Allexam-Map" type="com.goldfish.domain.Allexam">
+ 		<id property="id" column="Id"/>
+		<result property="type" column="type"/>
+		<result property="answerindex" column="answerIndex"/>
+		<result property="choices" column="choices"/>
+		<result property="spelling" column="spelling"/>
+		<result property="voccode" column="vocCode"/>
+		<result property="question" column="question"/>
+
+	</resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+	<sql id="BEAN-COMMON-SQL">
+    	 
+    		<where>
+    		<if test="id != null"> AND Id = #{id}</if>
+    		<if test="type != null"> AND type = #{type}</if>
+    		
+    		</where>
+    	 
+    	</sql>
+
+
+	<!-- 可以包含bean里面没有的字段-->
+	<sql id="MAP-COMMON-SQL">
+	   
+		<where>
+		<if test="id != null"> AND Id = #{id}</if>
+		<if test="type != null"> AND type = #{type}</if>
+		
+		</where>
+	 	
+	</sql>
+	
+	<sql id="ORDER-SQL">
+	 order by Id desc
+	</sql>
+	
+
+	<sql id="All-FIELDS">
+		Id,type,answerIndex,choices,spelling,vocCode,question
+	</sql>
+
+	<insert id="addAllexam" parameterType="com.goldfish.domain.Allexam">
+		insert into AllExam (type,answerIndex,choices,spelling,vocCode,question)
+			values(#{type},#{answerindex},#{choices},#{spelling},#{voccode},#{question})
+    
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+		   select last_insert_id() as ID from dual
+		</selectKey> 
+   
+	 </insert>
+
+    
+    <update id="updateAllexam" parameterType="com.goldfish.domain.Allexam" >
+    	update  AllExam 
+	<set>
+			<if test="type !=null"> type = #{type},</if>
+			<if test="answerindex !=null"> answerIndex = #{answerindex},</if>
+			<if test="choices !=null"> choices = #{choices},</if>
+			<if test="spelling !=null"> spelling = #{spelling},</if>
+			<if test="voccode !=null"> vocCode = #{voccode},</if>
+			<if test="question !=null"> question = #{question},</if>
+
+	</set>
+	 where Id = #{id}
+  	</update>
+  
+	
+
+    
+
+	<delete id="deleteAllexam" parameterType="com.goldfish.domain.Allexam">
+		DELETE FROM AllExam WHERE Id = #{id}
+	</delete>
+	<select id="getAllexamById" resultMap="Allexam-Map" parameterType="java.lang.Integer">
+		SELECT  <include refid="All-FIELDS"/> FROM AllExam	WHERE Id = #{id}
+	</select>  
+    
+
+
+
+	<select id="getUnique" resultMap="Allexam-Map" parameterType="com.goldfish.domain.Allexam">
+		SELECT   <include refid="All-FIELDS"/> FROM AllExam
+            <include refid="BEAN-COMMON-SQL" /> limit 1
+	</select>
+
+
+	<select id="getListByExample" resultMap="Allexam-Map" parameterType="com.goldfish.domain.Allexam">
+		SELECT   <include refid="All-FIELDS"/> FROM AllExam
+            <include refid="BEAN-COMMON-SQL" />
+	</select>
+
+	
+	<select id="getAllexamByPage" resultMap="Allexam-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  Id,type,answerIndex,choices,spelling,vocCode,question FROM AllExam 
+		]]>
+            <include refid="MAP-COMMON-SQL" />
+            <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM AllExam
+		]]>
+		
+              <include refid="MAP-COMMON-SQL" />
+	</select>
+	
+
+
+</mapper>
