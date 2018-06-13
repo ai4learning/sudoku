@@ -4,6 +4,7 @@ import com.goldfish.common.CommonResult;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.DifficultLevel;
+import com.goldfish.constant.FinishState;
 import com.goldfish.constant.PositionType;
 import com.goldfish.constant.State;
 import com.goldfish.domain.*;
@@ -11,7 +12,9 @@ import com.goldfish.service.*;
 import com.goldfish.vo.*;
 import com.goldfish.vo.course.*;
 import com.goldfish.vo.unit.RichUnitStudyVO;
-import com.goldfish.vo.unit.UnitWordStudyVO;
+import com.goldfish.vo.unit.SaveUnitStudyVO;
+import com.goldfish.vo.unit.UnitStudyVO;
+import com.goldfish.vo.unit.WordStudyDto;
 import com.goldfish.vo.user.RichUserBookVO;
 import com.goldfish.vo.user.UserBookVO;
 import com.goldfish.vo.user.UserVO;
@@ -1068,7 +1071,7 @@ public class AjaxCourseController extends BaseController {
                 return richUnitStudyVO;
             }
 
-            // 1.填充课本情况
+            // 3.填充课本情况
              /*设置课程信息*/
             Course courseQuery = new Course();
             courseQuery.setBookNumber(unitStudy.getLessonId());
@@ -1087,7 +1090,7 @@ public class AjaxCourseController extends BaseController {
             bookStudyVO.setTotalUnitNbr(course.getTotalUnitNbr());
             bookStudyVO.setOutDate(course.isOutDate());
 
-            // 3.根据用户ID查询用户课程信息
+            // 4.根据用户ID查询用户课程信息
 
             CourseStudy courseStudy = this.getCourseStudy(loginRecord.getUserId(), course.getBookNumber(), richUnitStudyVO);
             if (courseStudy == null) {
@@ -1096,7 +1099,7 @@ public class AjaxCourseController extends BaseController {
             bookStudyVO.setStartFrom(courseStudy.getStartFrom());
             bookStudyVO.setStudyMode(courseStudy.getStudyMode());
 
-            // 2.填充学习位置
+            // 5.填充学习位置
             /*设置当前单元内学习位置信息*/
             CurrentStudyPositionVO currentPositionVO = this.getCouseStudyPositionVo(PositionType.UNIT_STUDY_POSTION, null, unitStudy, richUnitStudyVO);
             if (currentPositionVO == null) {
@@ -1104,7 +1107,7 @@ public class AjaxCourseController extends BaseController {
             }
             richUnitStudyVO.setStudyPos(currentPositionVO);
 
-            /** 3.填充单元内单词 **/
+            /** 6.填充单元内单词 **/
             // 3.1查询单元内单词
             PageQuery pageQuery = new PageQuery();
             pageQuery.setPageSize(1000000);
@@ -1125,43 +1128,41 @@ public class AjaxCourseController extends BaseController {
             }
 
             // 遍历，封装单元内单词学习情况
-            List<UnitWordStudyVO> wordStudyVOs = new ArrayList<UnitWordStudyVO>(unitWords.size());
+            List<UnitStudyVO> wordStudyVOs = new ArrayList<UnitStudyVO>(unitWords.size());
             richUnitStudyVO.setData(wordStudyVOs);
             for (UnitWords unitWord : unitWords) {
-                UnitWordStudyVO unitWordStudyVO = new UnitWordStudyVO();
-                wordStudyVOs.add(unitWordStudyVO);
+                UnitStudyVO unitStudyVO = new UnitStudyVO();
+                wordStudyVOs.add(unitStudyVO);
 
                 // 通过unitWord获取
-                unitWordStudyVO.setId(unitWord.getId());
-                unitWordStudyVO.setVocCode(unitWord.getVocCode());
-                unitWordStudyVO.setSpelling(unitWord.getSpelling());
-                unitWordStudyVO.setMeaning(unitWord.getMeaning());
-                unitWordStudyVO.setUnitId(0);
-                unitWordStudyVO.setUnitNbr(unitWord.getUnitNbr());
-                unitWordStudyVO.setLessonNbr(Integer.valueOf(String.valueOf(unitWord.getLessonId())));
-                unitWordStudyVO.setFstClassId(unitWord.getFstClassId());
-                unitWordStudyVO.setVocIndex(unitWord.getVocIndex());
+                unitStudyVO.setId(unitWord.getId());
+                unitStudyVO.setVocCode(unitWord.getVocCode());
+                unitStudyVO.setSpelling(unitWord.getSpelling());
+                unitStudyVO.setMeaning(unitWord.getMeaning());
+                unitStudyVO.setUnitId(0);
+                unitStudyVO.setUnitNbr(unitWord.getUnitNbr());
+                unitStudyVO.setLessonNbr(Integer.valueOf(String.valueOf(unitWord.getLessonId())));
+                unitStudyVO.setFstClassId(unitWord.getFstClassId());
+                unitStudyVO.setVocIndex(unitWord.getVocIndex());
 
                 // 通过word查询音标信息
                 Word wordQuery = new Word();
                 wordQuery.setId(unitWord.getWordId());
                 wordQuery.setState(State.VALID.getState());
                 Word word = wordService.getUnique(wordQuery).getDefaultModel();
-                unitWordStudyVO.setSoundMarkUs(word.getSoundMarkUs());
-                unitWordStudyVO.setSoundMarkUk(word.getSoundMarkUk());
+                unitStudyVO.setSoundMarkUs(word.getSoundMarkUs());
+                unitStudyVO.setSoundMarkUk(word.getSoundMarkUk());
 
                 // 查询是否被收藏
                 WordStudy wordStudyQuery = new WordStudy();
                 wordStudyQuery.setStudentId(loginRecord.getUserId());
                 wordStudyQuery.setWordId(unitWord.getWordId());
                 WordStudy wordStudy = wordStudyService.getUnique(wordStudyQuery).getDefaultModel();
-                unitWordStudyVO.setIsCollected(wordStudy.getIscollected() == 1);
+                unitStudyVO.setIsCollected(wordStudy.getIscollected() == 1);
             }
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e, "获取单元学习信息失败");
         }
-
-
         return richUnitStudyVO;
     }
 
@@ -1829,10 +1830,74 @@ public class AjaxCourseController extends BaseController {
     @RequestMapping(value = "AjaxInterruptSaveUnit", method = {RequestMethod.GET, RequestMethod.POST})
     public
     @ResponseBody
-    Map<String, Object> doAjaxInterruptSaveUnit(String moduleCode, String extra, Integer unitNbr, String vocCode,
-                                                String studyToken, Long totalReadingTime, Long totalWritingTime,
-                                                String vocDataAfterReview, Integer totalnum, ModelMap context) {
-        CommonResult result = null;
-        return result.getReturnMap();
+    SaveUnitStudyVO doAjaxInterruptSaveUnit(String moduleCode,
+                                            String extra,
+                                            Integer unitNbr,
+                                            String studyToken,
+                                            Integer isContinue,
+                                            Long seconds4SpellingLetter,
+                                            Long totalReadingTime,
+                                            Long totalWritingTime,
+                                            List<WordStudyDto> vocDataAfterReview,
+                                            Integer totalWordsNbr,
+                                            ModelMap context) {
+        SaveUnitStudyVO saveUnitStudyVO = new SaveUnitStudyVO();
+
+        String trainingId = LoginContext.getLoginContext().getTrainingId();
+        String trainingCode = LoginContext.getLoginContext().getTrainingCode();
+        try {
+            LoginRecord loginRecord = loginRecordService.getLoginRecordByTraining(trainingId, trainingCode);
+
+
+            // 1.保存单元学习记录
+            UnitStudy unitStudyQuery = new UnitStudy();
+            unitStudyQuery.setStudentId(loginRecord.getUserId());
+            unitStudyQuery.setLessonCode(moduleCode);
+            unitStudyQuery.setUnitNbr(unitNbr);
+            unitStudyQuery.setState(State.VALID.getState());
+            CommonResult<UnitStudy> unitStudyResult = unitStudyService.getUnique(unitStudyQuery);
+            if (unitStudyResult == null || !unitStudyResult.isSuccess()) {
+                LogTypeEnum.DEFAULT.error("查询单元学习失败");
+                saveUnitStudyVO.setMsg("查询单元学习失败");
+                return saveUnitStudyVO;
+            }
+            UnitStudy unitStudy = unitStudyResult.getDefaultModel();
+            if (unitStudy == null) {
+                LogTypeEnum.DEFAULT.error("学生单元学习不存在");
+                saveUnitStudyVO.setMsg("学生单元学习不存在");
+                saveUnitStudyVO.setSuccess(true);
+                return saveUnitStudyVO;
+            }
+
+            // 更新学习时间等字段
+            unitStudy.setTotalReadingTime(totalReadingTime);
+            unitStudy.setTotalWritingTime(totalWritingTime);
+            unitStudy.setTotalNumber(totalWordsNbr);
+            if ("finish".equals(extra)) {
+                unitStudy.setIsFinished(FinishState.COMPLETE.getState());
+            }
+//            unitStudy
+            CommonResult<UnitStudy> updateUnitStudyResult = unitStudyService.updateUnitWordsStudy(unitStudy);
+            if (updateUnitStudyResult == null || !updateUnitStudyResult.isSuccess()) {
+                LogTypeEnum.DEFAULT.error("更新学生单元学习失败");
+                saveUnitStudyVO.setMsg("更新学生单元学习失败");
+                return saveUnitStudyVO;
+            }
+            // 2.保存每个单词的学习情况
+            for (WordStudyDto wordStudyDto:vocDataAfterReview) {
+                WordStudy updateWordStudy = new WordStudy();
+//                updateWordStudy.set
+
+
+//                wordStudyService.updateWordStudy();
+            }
+
+
+
+        } catch (Exception e) {
+            LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
+            saveUnitStudyVO.setMsg("保存单元学习异常");
+        }
+        return saveUnitStudyVO;
     }
 }

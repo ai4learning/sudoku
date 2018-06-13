@@ -3,7 +3,6 @@ package com.goldfish.vo.unit;
 import com.goldfish.vo.BaseVO;
 import com.goldfish.vo.CurrentStudyPositionVO;
 import com.goldfish.vo.course.BookStudyVO;
-import com.goldfish.vo.unit.UnitWordStudyVO;
 
 import java.util.List;
 
@@ -479,7 +478,7 @@ import java.util.List;
 public class RichUnitStudyVO extends BaseVO {
 
     private String studyToken;
-    private List<UnitWordStudyVO> data;
+    private List<UnitStudyVO> data;
     private BookStudyVO bookInfo;
     private CurrentStudyPositionVO studyPos;
 
@@ -491,11 +490,11 @@ public class RichUnitStudyVO extends BaseVO {
         this.studyToken = studyToken;
     }
 
-    public List<UnitWordStudyVO> getData() {
+    public List<UnitStudyVO> getData() {
         return data;
     }
 
-    public void setData(List<UnitWordStudyVO> data) {
+    public void setData(List<UnitStudyVO> data) {
         this.data = data;
     }
 
