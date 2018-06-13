@@ -9,6 +9,7 @@ import Collect from './collect/Collect'
 export default class Word extends Component {
   constructor(props) {
     super(props)
+    document.title = '单词学习'
   }
 
   render() {

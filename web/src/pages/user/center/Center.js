@@ -6,6 +6,7 @@ import ChangePwd from './components/ChangePwd'
 export default class Center extends Component {
   constructor(props) {
     super(props)
+    document.title = '用户中心'
   }
 
   render() {

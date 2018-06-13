@@ -4,7 +4,8 @@
   "main": "",
   "scripts": {
     "dev": "webpack --watch & webpack-dev-server --inline --open --host 0.0.0.0 --port 9988",
-    "build": "webpack && ./deployment.sh ../src/word-study-web/src/main/webapp/"
+    "build": "webpack",
+    "deploy": "./deployment.sh ../src/word-study-web/src/main/webapp/"
   },
   "author": "",
   "license": "ISC",

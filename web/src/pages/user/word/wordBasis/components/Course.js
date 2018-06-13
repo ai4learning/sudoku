@@ -127,7 +127,7 @@ export default class Course extends Component {
   }
 
   handleUnitTestClick(item) {
-    window.open('/user/test/unit?moduleCode=' + item.moduleCode + '&unitNbr=' + item.unitNbr)
+    window.open('/#/user/test/unit?moduleCode=' + item.moduleCode + '&unitNbr=' + item.unitNbr)
   }
 
   handleWordUseClick(item) {

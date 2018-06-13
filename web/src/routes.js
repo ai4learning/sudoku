@@ -5,6 +5,7 @@ import UserLayout from './layout/user/Layout'
 import AdminLayout from './layout/admin/Layout'
 import Home from './pages/Home'
 import Word from './pages/user/word/Word'
+import Login from './pages/user/login/Login'
 import Center from './pages/user/center/Center'
 import Rank from './pages/user/rank/Rank'
 import UnitTest from './pages/user/test/unit/UnitTest'
@@ -15,6 +16,7 @@ export default (
     <Route path='/' component={App}>
       <Route path='user' component={UserLayout}>
         <IndexRoute component={Word}></IndexRoute>
+        <Route path='login' component={Login}></Route>
         <Route path='word' component={Word}></Route>
         <Route path='center' component={Center}></Route>
         <Route path='rank' component={Rank}></Route>

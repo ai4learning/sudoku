@@ -195,7 +195,7 @@ export default class Report extends Component {
               pagination={false}
               dataSource={this.state.testData}
               columns={columns}
-              footer={() => { return <div style={{textAlign: 'right'}}><a href='/user/test/results' target='_blank'>更多...</a></div>}}
+              footer={() => { return <div style={{textAlign: 'right'}}><a href='/#/user/test/results'>更多...</a></div>}}
               >
             </Table>
           </Card>

@@ -85,7 +85,7 @@ class TestSelfForm extends Component {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if(err) return
-      window.open('/user/test/self?testArea='+values.testArea+'&questionTypes='+values.questionTypes.join(',')+'&questionNbr='+values.questionNbr)
+      window.open('/#/user/test/self?testArea='+values.testArea+'&questionTypes='+values.questionTypes.join(',')+'&questionNbr='+values.questionNbr)
     })
   }
 }

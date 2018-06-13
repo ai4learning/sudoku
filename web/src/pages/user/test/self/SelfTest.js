@@ -4,10 +4,12 @@ import Panel from '@components/Panel'
 import fetch from '@common/fetch'
 import {formatTime, getQueryString} from '@common/util'
 import TestPaper from '../components/TestPaper'
+import { get } from 'https';
 
 export default class SelfTest extends Component {
   constructor(props) {
     super(props)
+    document.title = '自主测试'
 
     this.state = {
       isReady: false,
@@ -34,12 +36,11 @@ export default class SelfTest extends Component {
     }
 
     this.timer = null
-    this.testArea = getQueryString('testArea')
   }
 
   componentWillMount() {
     fetch({
-      url: '/api/Ajax/GetExam' + location.search,
+      url: '/api/Ajax/GetExam' + this.props.location.search,
       method: 'get',
       type: 'json'
     }).then(result => {

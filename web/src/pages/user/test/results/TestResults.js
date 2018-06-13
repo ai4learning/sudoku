@@ -7,6 +7,7 @@ import {formatTime} from '@common/util'
 export default class TestResults extends Component {
   constructor(props) {
     super(props)
+    document.title = '测试结果'
 
     this.state = {
       list: [],

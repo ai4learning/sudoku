@@ -8,6 +8,7 @@ import TestPaper from '../components/TestPaper'
 export default class UnitTest extends Component {
   constructor(props) {
     super(props)
+    document.title = '单元测试'
     
     this.state = {
       isReady: false,
@@ -23,7 +24,7 @@ export default class UnitTest extends Component {
 
   componentWillMount() {
     fetch({
-      url: '/api/Ajax/GetUnitExam' + location.search,
+      url: '/api/Ajax/GetUnitExam' + this.props.location.search,
       method: 'get',
       type: 'json'
     }).then(result => {

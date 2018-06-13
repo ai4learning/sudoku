@@ -108,6 +108,6 @@ export default class Wrong extends Component {
   }
 
   handleTodayClick() {
-    window.open('/user/test/self?testArea=2&questionNbr=10&questionTypes=0,1,2,3')
+    window.open('/#/user/test/self?testArea=2&questionNbr=10&questionTypes=0,1,2,3')
   }
 }
