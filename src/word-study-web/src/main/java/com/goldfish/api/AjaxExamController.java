@@ -1,12 +1,16 @@
 package com.goldfish.api;
 
 import com.goldfish.common.CommonResult;
+import com.goldfish.domain.Paper;
+import com.goldfish.service.PaperService;
+import com.goldfish.service.QuestionService;
 import com.goldfish.web.base.BaseController;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.Base64;
 import java.util.Map;
 
@@ -14,6 +18,11 @@ import java.util.Map;
  * Created by John on 2018/5/20 0020.
  */
 public class AjaxExamController extends AjaxErrorBookController{
+
+    @Resource
+    private PaperService paperService;
+    @Resource
+    private QuestionService questionService;
 
     /**
      * 生成自主测试试卷
@@ -1261,12 +1270,29 @@ public class AjaxExamController extends AjaxErrorBookController{
     }
      *
      */
-    @RequestMapping(value="GetUnitExam",method={RequestMethod.GET,RequestMethod.POST})
-    public @ResponseBody
-    Map<String,Object> doGetUnitExam(String moduleCode, Integer unitNbr, ModelMap context) {
-        CommonResult result = null;
-        return result.getReturnMap();
-    }
+//    @RequestMapping(value="GetUnitExam",method={RequestMethod.GET,RequestMethod.POST})
+//    public @ResponseBody
+//    VO doGetUnitExam(String moduleCode, Integer unitNbr, ModelMap context) {
+////        VO vo = null;
+////        quyer.setmodule
+////                query.setunit;
+//        Paper papaer = paperService.getUnique(query)
+//                    papget.getquestions.
+//
+//                            qustins.split(",");
+//
+//        for (qusitins)
+//            questionService.getQuestionById(id);
+//
+//
+//        vo.set
+//                vo.set
+//
+//
+//
+//
+//        return vo;
+//    }
 
     /**
      * 保存测试结果

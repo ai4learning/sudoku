@@ -16,7 +16,7 @@
               <property name="pathSet">
                      <set>
                             <value>/login/login</value>
-<!--                            <value>/index</value>-->
+                            <value>/login/logout</value>
                      </set>
                </property>
        </bean>
@@ -54,7 +54,7 @@
                             <property name="loginRecordService" ref="loginRecordService" />
                             <property name="sessionTimeout" value="1800" />
                             <property name="rate" value="2" />
-                            <property name="loginUri" value="/login/login" />
+                            <property name="loginUri" value="/login/logout" />
                             <property name="doLoginUri" value="/login/doLogin" />
                      </bean>
               </mvc:interceptor>
@@ -95,6 +95,23 @@
         </property>
     </bean>
 
+    <!-- json支持 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="cacheSeconds" value="0" />
+        <property name="messageConverters">
+            <list>
+                <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                            <value>application/json</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
 
     <!-- velocity视图配置 -->
     <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">

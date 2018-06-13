@@ -1,9 +1,12 @@
 package com.goldfish.vo.course;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * Created by John on 2018/5/25 0025.
  */
 public class CourseUnitVO {
+    @JSONField( name="Id")
     private Long id;
     private String courseModuleCode;
     private String unit;

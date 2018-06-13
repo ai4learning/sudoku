@@ -22,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * 登录拦截
@@ -90,10 +91,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                            HttpServletResponse response) {
 
         // 学生端换成trainingid和trainingcode
-
-//        String userCookieValue = cookieUtils.getCookieValue(request,
-//                LoginContext.USER_KEY);
-//        String tokenCookieValue = cookieUtils.getCookieValue(request, LoginContext.USER_TOKEN);
         String trainingId = cookieUtils.getCookieValue(request, LoginContext.TRAINING_ID);
         String trainingCode = cookieUtils.getCookieValue(request, LoginContext.TRAINING_CODE);
 
@@ -129,7 +126,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
         // 2.从请求中解析出LoginConext
-//        LoginContext loginContext = instanceLoginContext(request, userCookieValue, tokenCookieValue);
         LoginContext loginContext = instanceLoginContext(request, trainingId, trainingCode);
 
         // 2.从LoginRecord判断请求是否合法
@@ -142,6 +138,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         }
         if (loginRecord == null) {
             log.info("系统中不存在该登录记录，trainingId={}, trainingCode={}", loginContext.getUserName(), loginContext.getToken());
+            cookieUtils.invalidate(request, response);
             return false;
         }
         // 4.判断session是否超期
@@ -166,22 +163,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
-//    /**
-//     * 从请求参数中创建LoginContext
-//     * @param request
-//     * @param userCookieValue
-//     * @param tokenCookieValue
-//     */
-//    private LoginContext instanceLoginContext(HttpServletRequest request, String userCookieValue, String tokenCookieValue) {
-//        LoginContext loginContext = LoginContext.getLoginContext();
-//        if (loginContext == null) {
-//            loginContext = LoginContext.parse(LoginContext.USER_KEY, userCookieValue);
-//            loginContext.setToken(LoginContext.parse(LoginContext.USER_TOKEN, tokenCookieValue).getToken());
-//            LoginContext.setLoginContext(loginContext);
-//        }
-//        return loginContext;
-//    }
-//
     /**
      * 从请求参数中创建LoginContext
      * @param request
@@ -235,11 +216,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
      */
     private void writeCookie(HttpServletResponse response) {
         LoginContext context = LoginContext.getLoginContext();
-//        cookieUtils.setCookie(response, LoginContext.USER_KEY,
-//                context.toCookieValue(LoginContext.USER_KEY));
-//
-//        cookieUtils.setCookie(response, LoginContext.USER_TOKEN,
-//                context.toCookieValue(LoginContext.USER_TOKEN));
 
         cookieUtils.setCookie(response, LoginContext.TRAINING_ID,
                 context.toCookieValue(LoginContext.TRAINING_ID));
