@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='Allexam' cnname='Allexam' dbTableName='AllExam'>
+    <column dataName='id' columnName='Id' cnname='Id' columnType='INT' canBeNull='false' readonly='false' isPK='true' length='10' jspTag='TEXT' dictName='' comment='Id' />
+    <column dataName='type' columnName='type' cnname='type' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='80' jspTag='TEXT' dictName='' comment='type' />
+    <column dataName='answerindex' columnName='answerIndex' cnname='answerIndex' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='80' jspTag='TEXT' dictName='' comment='answerIndex' />
+    <column dataName='choices' columnName='choices' cnname='choices' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='160' jspTag='TEXT' dictName='' comment='choices' />
+    <column dataName='spelling' columnName='spelling' cnname='spelling' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='80' jspTag='TEXT' dictName='' comment='spelling' />
+    <column dataName='voccode' columnName='vocCode' cnname='vocCode' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='80' jspTag='TEXT' dictName='' comment='vocCode' />
+    <column dataName='question' columnName='question' cnname='question' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='80' jspTag='TEXT' dictName='' comment='question' />
+  </tableDefine>
+  <searchKeys>Id,type</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>Id</orderColumn>
+  </orderColumns>
+  <queryList>Id,type,answerIndex,choices,spelling,vocCode,question</queryList>
+  <addList>Id,type,answerIndex,choices,spelling,vocCode,question</addList>
+  <updateList>Id,type,answerIndex,choices,spelling,vocCode,question</updateList>
+  <viewList>Id,type,answerIndex,choices,spelling,vocCode,question</viewList>
+  <allColumn>Id,type,answerIndex,choices,spelling,vocCode,question</allColumn>
+  <createTime></createTime>
+  <updateTime></updateTime>
+  <dicts />
+</tableModel>
