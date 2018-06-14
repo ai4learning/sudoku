@@ -5,10 +5,7 @@ import com.goldfish.domain.Paper;
 import com.goldfish.domain.Question;
 import com.goldfish.service.PaperService;
 import com.goldfish.service.QuestionService;
-import com.goldfish.vo.exam.ChoicesVO;
-import com.goldfish.vo.exam.DataVO;
-import com.goldfish.vo.exam.QuestionVO;
-import com.goldfish.vo.exam.UnitExamVO;
+import com.goldfish.vo.exam.*;
 import com.goldfish.domain.Paper;
 import com.goldfish.service.PaperService;
 import com.goldfish.service.QuestionService;
@@ -753,9 +750,9 @@ public class AjaxExamController extends AjaxErrorBookController{
      */
     @RequestMapping(value="GetExam",method={RequestMethod.GET,RequestMethod.POST})
     public @ResponseBody
-    Map<String,Object> doGetExam(Integer testArea, Integer questionNbr, String questionTypes,ModelMap context) {
-        CommonResult result = null;
-        return result.getReturnMap();
+    ExamVO doGetExam(Integer testArea, Integer questionNbr, String questionTypes, ModelMap context) {
+        //CommonResult result = null;
+        return null;
     }
 
     /**
