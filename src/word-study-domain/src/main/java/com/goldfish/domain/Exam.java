@@ -25,7 +25,9 @@ public class Exam  implements Serializable {
 	/**  用户CODE  */
 	private String userCode; 
 	/**  课程ID  */
-	private Integer lessonId; 
+	private Integer lessonId;
+
+	private String moduleCode;
 	/**  课程号  */
 	private Integer unitNbr; 
 	/**  试卷ID  */
@@ -222,7 +224,12 @@ public class Exam  implements Serializable {
   	public java.util.Date getModified() {
   	  return this.modified;
   	}
-	
-	  	
 
+	public String getModuleCode() {
+		return moduleCode;
+	}
+
+	public void setModuleCode(String moduleCode) {
+		this.moduleCode = moduleCode;
+	}
 }
