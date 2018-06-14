@@ -39,24 +39,18 @@ module.exports = {
       }
     ]
   },
+  externals: {
+    "react": 'React',
+    "react-dom": "ReactDOM",
+    "antd": "antd",
+    "bizcharts": "BizCharts",
+    "@antv/data-set": "DataSet"
+  },
   resolve: {
     alias: {
       '@src': path.join(__dirname, 'src'),
       '@components': path.join(__dirname, 'src/components/'),
       '@common': path.join(__dirname, 'src/common/')
-    }
-  },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /node_modules/,
-          chunks: "initial",
-          name: "vendor",
-          priority: 10,
-          enforce: true
-        }
-      }
     }
   },
   devServer: {
@@ -72,13 +66,18 @@ module.exports = {
       //     req.headers['Cookie'] = cookie
       //   }
       // },
+      // {
+      //   context: ['/api'],
+      //   target: 'http://www.wordtraining.cn',
+      //   changeOrigin: true,
+      //   bypass: function (req, res, proxyOptions) {
+      //     req.headers['Cookie'] = cookie
+      //   }
+      // },
       {
-        context: ['/api'],
-        target: 'http://www.wordtraining.cn',
-        changeOrigin: true,
-        bypass: function (req, res, proxyOptions) {
-          req.headers['Cookie'] = cookie
-        }
+        context: ['/api', '/login'],
+        target: 'http://localhost:8080',
+        changeOrigin: true
       },
       // {
       //   context: ['/Account/CheckUserName', '/Account/LoginIn', '/Account/Register'],
