@@ -412,23 +412,7 @@ public class AjaxCourseController extends BaseController {
     }
 
     private User fillUserInfo(UserVO userVO) {
-
-        // 1.根据登录获取用户信息
-        LoginRecord loginRecord = this.getLoginRecord();
-        if (loginRecord == null) {
-            LogTypeEnum.DEFAULT.error("未获取到用户信息");
-            return null;
-        }
-        Integer userId = loginRecord.getUserId();
-        User userQuery = new User();
-        userQuery.setId(Long.valueOf(String.valueOf(userId)));
-        userQuery.setState(State.VALID.getState());
-        CommonResult<User> userResult = userService.getUnique(userQuery);
-        if (userResult == null || !userResult.isSuccess()) {
-            LogTypeEnum.DEFAULT.error("未获取到用户信息");
-            return null;
-        }
-        User user = userResult.getDefaultModel();
+        User user = getUserInfo();
         if (user == null) {
             LogTypeEnum.DEFAULT.info("未获取到用户信息");
             userVO.setMsg("未获取到用户信息");

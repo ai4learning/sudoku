@@ -21,7 +21,9 @@ public class Paper  implements Serializable {
 	/**  ID  */
 	private Long id; 
 	/**  课程ID  */
-	private Integer lessonId; 
+	private Integer lessonId;
+
+	private String moduleCode;
 	/**  单元号  */
 	private Integer unitNbr; 
 	/**  试卷类型  */
@@ -162,7 +164,13 @@ public class Paper  implements Serializable {
   	public java.util.Date getModified() {
   	  return this.modified;
   	}
-	
-	  	
 
+
+	public String getModuleCode() {
+		return moduleCode;
+	}
+
+	public void setModuleCode(String moduleCode) {
+		this.moduleCode = moduleCode;
+	}
 }

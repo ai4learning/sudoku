@@ -1,21 +1,17 @@
 package com.goldfish.api;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.goldfish.common.CommonResult;
 import com.goldfish.common.log.LogTypeEnum;
-import com.goldfish.constant.ExamConstant;
-import com.goldfish.domain.Exam;
-import com.goldfish.domain.Paper;
-import com.goldfish.domain.Question;
+import com.goldfish.constant.QuestionTypes;
+import com.goldfish.constant.TestArea;
+import com.goldfish.domain.*;
 import com.goldfish.service.*;
 import com.goldfish.vo.BasicVO;
 import com.goldfish.vo.exam.*;
 import com.goldfish.domain.Paper;
 import com.goldfish.service.PaperService;
 import com.goldfish.service.QuestionService;
-import com.goldfish.web.base.BaseController;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,9 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by John on 2018/5/20 0020.
@@ -38,6 +32,8 @@ public class AjaxExamController extends AjaxErrorBookController{
     private QuestionService questionService;
     @Resource
     private ExamService examService;
+    @Resource
+    private WordStudyService wordStudyService;
 
     /**
      * 生成自主测试试卷
@@ -761,7 +757,74 @@ public class AjaxExamController extends AjaxErrorBookController{
     public @ResponseBody
     ExamVO doGetExam(Integer testArea, Integer questionNbr, String questionTypes, ModelMap context) {
         ExamVO examVO = new ExamVO();
+        List<QuestionVO> ecList = new ArrayList<>(questionNbr);
+        List<QuestionVO> ceList = new ArrayList<>(questionNbr);
+        List<QuestionVO> lcList = new ArrayList<>(questionNbr);
+        List<Listen2WriteVO> lwList = new ArrayList<>(questionNbr);
+        // 1.装填用户信息
+        User user = this.getUserInfo();
+        if (user == null) {
+            return examVO;
+        }
+        //2.根据用户信息和testArea查询单词列表
+        WordStudy wordStudyQuery = new WordStudy();
+        TestArea testArea1 = TestArea.getTestArea(testArea);
+        wordStudyQuery.setMemoryLevel(testArea1.getCorrespondingMemoryLevel().getLevel());
+        wordStudyQuery.setStudentId(user.getId().intValue());  //TODO 到底是什么ID
+        wordStudyQuery.setUserCode(user.getUserCode());
+        List<WordStudy> wordStudyList = wordStudyService.getListByExample(wordStudyQuery).getDefaultModel();
+        //3.根据questionTypes和questionNbr出题
+        //testArea=0&questionNbr=10&questionTypes=0,1,2
+        String[] questionTypesArray = questionTypes.split(",");
+        int questionNbrCount = questionNbr * questionTypesArray.length;
+        int questionTypeCount = 0;
+        for (WordStudy wordStudy : wordStudyList)
+        {
+            if (questionTypeCount >= questionNbrCount)
+                break;
+            Question questionQuery = new Question();
+            QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber
+                    (Integer.valueOf(questionTypesArray[questionTypeCount/questionNbr]));
+            questionQuery.setQuestionType(qt.getNumber());
+            questionQuery.setWordId(wordStudy.getWordId());
+            Question question = questionService.getUnique(questionQuery).getDefaultModel();
+            if (qt.equals(QuestionTypes.LISTEN2WRITE))
+            {
+                Listen2WriteVO vo = new Listen2WriteVO();
+                vo.setAnswerIndex(question.getAnswerIndex());
+                vo.setQuestion(question.getQuestion());
+                vo.setSpelling(question.getSpelling());
+                vo.setVocCode(question.getVocCode());
+                lwList.add(vo);
+            }
+            else
+            {
+                ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
+                QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
+                        ,question.getVocCode(),question.getQuestion(),choicesVO);
+                if (qt.equals(QuestionTypes.EN2CH))
+                {
 
+                    ecList.add(questionVO);
+                }
+                else if (qt.equals(QuestionTypes.CH2EN))
+                {
+                    ceList.add(questionVO);
+                }
+                else if (qt.equals(QuestionTypes.LISTEN2CH))
+                {
+                    lcList.add(questionVO);
+                }
+            }
+            questionTypeCount++;
+        }
+        examVO.setDataEn2Ch(ecList);
+        examVO.setDataCh2En(ceList);
+        examVO.setDataListen2Ch(lcList);
+        examVO.setDataListen2Write(lwList);
+        examVO.setCondition(0); //TODO 这是什么
+        examVO.setMsg("success");
+        examVO.setSuccess(true);
         return examVO;
     }
 
@@ -1300,7 +1363,7 @@ public class AjaxExamController extends AjaxErrorBookController{
     UnitExamVO doGetUnitExam(String moduleCode, Integer unitNbr, ModelMap context) {
         Paper paperCondition = new Paper();
         paperCondition.setUnitNbr(unitNbr);
-        //paper.setModuleCode(moduleCode);
+        paperCondition.setModuleCode(moduleCode);
         Paper paperResult = paperService.getUnique(paperCondition).getDefaultModel();
         JSONObject questionsJson = JSON.parseObject(paperResult.getQuestions());
 
@@ -1308,10 +1371,10 @@ public class AjaxExamController extends AjaxErrorBookController{
         dataVO.setMsg("");
         dataVO.setSuccess(true);
         dataVO.setCondition(0);
-        if (questionsJson.containsKey(ExamConstant.EN2CH))
+        if (questionsJson.containsKey(QuestionTypes.EN2CH.getForShort()))
         {
             List<QuestionVO> questionVOList = new ArrayList<>();
-            for (String questionId : questionsJson.getJSONArray(ExamConstant.EN2CH).toJavaList(String.class))
+            for (String questionId : questionsJson.getJSONArray(QuestionTypes.EN2CH.getForShort()).toJavaList(String.class))
             {
                 Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
                 ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
@@ -1322,10 +1385,10 @@ public class AjaxExamController extends AjaxErrorBookController{
             dataVO.setDataEn2Ch(questionVOList);
         }
 
-        if (questionsJson.containsKey(ExamConstant.CH2EN))
+        if (questionsJson.containsKey(QuestionTypes.CH2EN.getForShort()))
         {
             List<QuestionVO> questionVOList = new ArrayList<>();
-            for (String questionId : questionsJson.getJSONArray(ExamConstant.CH2EN).toJavaList(String.class))
+            for (String questionId : questionsJson.getJSONArray(QuestionTypes.CH2EN.getForShort()).toJavaList(String.class))
             {
                 Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
                 ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
@@ -1336,10 +1399,10 @@ public class AjaxExamController extends AjaxErrorBookController{
             dataVO.setDataCh2En(questionVOList);
         }
 
-        if (questionsJson.containsKey(ExamConstant.LISTEN2CH))
+        if (questionsJson.containsKey(QuestionTypes.LISTEN2CH.getForShort()))
         {
             List<QuestionVO> questionVOList = new ArrayList<>();
-            for (String questionId : questionsJson.getJSONArray(ExamConstant.LISTEN2CH).toJavaList(String.class))
+            for (String questionId : questionsJson.getJSONArray(QuestionTypes.LISTEN2CH.getForShort()).toJavaList(String.class))
             {
                 Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
                 ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
@@ -1400,6 +1463,7 @@ public class AjaxExamController extends AjaxErrorBookController{
         }catch (Exception e)
         {
             LogTypeEnum.EXCEPTION.error("学生关联课程为空");
+            LogTypeEnum.EXCEPTION.error(e.toString());
             basicVO.setSuccess(false);
             basicVO.setMsg("记忆保存失败");
         }
