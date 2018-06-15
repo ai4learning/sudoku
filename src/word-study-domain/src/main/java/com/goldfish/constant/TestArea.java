@@ -21,4 +21,21 @@ public enum TestArea {
     public String getDesc() {
         return desc;
     }
+
+    public static TestArea getTestArea(int number)
+    {
+        if (number == 0)
+            return  NEW_WORD;
+        else
+            return FAMILIAR_WORD;
+    }
+
+    public MemoryLevel getCorrespondingMemoryLevel()
+    {
+        if (number == 0)
+            return MemoryLevel.NEW_WORD;
+        if (number == 1)
+            return MemoryLevel.FAMILIAR_WORD;
+        return MemoryLevel.NEW_WORD;
+    }
 }

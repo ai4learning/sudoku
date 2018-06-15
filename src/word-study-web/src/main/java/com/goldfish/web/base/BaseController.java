@@ -1,8 +1,12 @@
 package com.goldfish.web.base;
 
 import com.goldfish.common.CommonResult;
+import com.goldfish.common.log.LogTypeEnum;
+import com.goldfish.constant.State;
 import com.goldfish.domain.LoginRecord;
+import com.goldfish.domain.User;
 import com.goldfish.manager.LoginRecordManager;
+import com.goldfish.service.UserService;
 import com.goldfish.web.interceptor.servlet.context.LoginContext;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.ui.ModelMap;
@@ -17,7 +21,8 @@ public class BaseController {
 
     @Resource
     private LoginRecordManager loginRecordManager;
-
+    @Resource
+    private UserService userService;
 
     public void toVm(CommonResult result, ModelMap context) {
         this.toVm(result, context, null);
@@ -55,5 +60,23 @@ public class BaseController {
         return loginRecordManager.getUnique(query);
     }
 
-
+    protected User getUserInfo()
+    {
+        // 1.根据登录获取用户信息
+        LoginRecord loginRecord = this.getLoginRecord();
+        if (loginRecord == null) {
+            LogTypeEnum.DEFAULT.error("未获取到用户信息");
+            return null;
+        }
+        Integer userId = loginRecord.getUserId();
+        User userQuery = new User();
+        userQuery.setId(Long.valueOf(String.valueOf(userId)));
+        userQuery.setState(State.VALID.getState());
+        CommonResult<User> userResult = userService.getUnique(userQuery);
+        if (userResult == null || !userResult.isSuccess()) {
+            LogTypeEnum.DEFAULT.error("未获取到用户信息");
+            return null;
+        }
+        return userResult.getDefaultModel();
+    }
 }

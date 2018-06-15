@@ -6,9 +6,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.goldfish.common.CommonResult;
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.ExamConstant;
-import com.goldfish.domain.Exam;
-import com.goldfish.domain.Paper;
-import com.goldfish.domain.Question;
+import com.goldfish.constant.QuestionTypes;
+import com.goldfish.constant.TestArea;
+import com.goldfish.domain.*;
 import com.goldfish.service.*;
 import com.goldfish.vo.BasicVO;
 import com.goldfish.vo.exam.*;
@@ -38,6 +38,8 @@ public class AjaxExamController extends AjaxErrorBookController{
     private QuestionService questionService;
     @Resource
     private ExamService examService;
+    @Resource
+    private WordStudyService wordStudyService;
 
     /**
      * 生成自主测试试卷
@@ -761,7 +763,74 @@ public class AjaxExamController extends AjaxErrorBookController{
     public @ResponseBody
     ExamVO doGetExam(Integer testArea, Integer questionNbr, String questionTypes, ModelMap context) {
         ExamVO examVO = new ExamVO();
+        List<QuestionVO> ecList = new ArrayList<>(questionNbr);
+        List<QuestionVO> ceList = new ArrayList<>(questionNbr);
+        List<QuestionVO> lcList = new ArrayList<>(questionNbr);
+        List<Listen2WriteVO> lwList = new ArrayList<>(questionNbr);
+        // 1.装填用户信息
+        User user = this.getUserInfo();
+        if (user == null) {
+            return examVO;
+        }
+        //2.根据用户信息和testArea查询单词列表
+        WordStudy wordStudyQuery = new WordStudy();
+        TestArea testArea1 = TestArea.getTestArea(testArea);
+        wordStudyQuery.setMemoryLevel(testArea1.getCorrespondingMemoryLevel().getLevel());
+        wordStudyQuery.setStudentId(user.getId().intValue());  //TODO 到底是什么ID
+        wordStudyQuery.setUserCode(user.getUserCode());
+        List<WordStudy> wordStudyList = wordStudyService.getListByExample(wordStudyQuery).getDefaultModel();
+        //3.根据questionTypes和questionNbr出题
+        //testArea=0&questionNbr=10&questionTypes=0,1,2
+        String[] questionTypesArray = questionTypes.split(",");
+        int questionNbrCount = questionNbr * questionTypesArray.length;
+        int questionTypeCount = 0;
+        for (WordStudy wordStudy : wordStudyList)
+        {
+            if (questionTypeCount >= questionNbrCount)
+                break;
+            Question questionQuery = new Question();
+            QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber
+                    (Integer.valueOf(questionTypesArray[questionTypeCount/questionNbr]));
+            questionQuery.setQuestionType(qt.getNumber());
+            questionQuery.setWordId(wordStudy.getWordId());
+            Question question = questionService.getUnique(questionQuery).getDefaultModel();
+            if (qt.equals(QuestionTypes.LISTEN2WRITE))
+            {
+                Listen2WriteVO vo = new Listen2WriteVO();
+                vo.setAnswerIndex(question.getAnswerIndex());
+                vo.setQuestion(question.getQuestion());
+                vo.setSpelling(question.getSpelling());
+                vo.setVocCode(question.getVocCode());
+                lwList.add(vo);
+            }
+            else
+            {
+                ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
+                QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
+                        ,question.getVocCode(),question.getQuestion(),choicesVO);
+                if (qt.equals(QuestionTypes.EN2CH))
+                {
 
+                    ecList.add(questionVO);
+                }
+                else if (qt.equals(QuestionTypes.CH2EN))
+                {
+                    ceList.add(questionVO);
+                }
+                else if (qt.equals(QuestionTypes.LISTEN2CH))
+                {
+                    lcList.add(questionVO);
+                }
+            }
+            questionTypeCount++;
+        }
+        examVO.setDataEn2Ch(ecList);
+        examVO.setDataCh2En(ceList);
+        examVO.setDataListen2Ch(lcList);
+        examVO.setDataListen2Write(lwList);
+        examVO.setCondition(0); //TODO 这是什么
+        examVO.setMsg("success");
+        examVO.setSuccess(true);
         return examVO;
     }
 
@@ -1400,6 +1469,7 @@ public class AjaxExamController extends AjaxErrorBookController{
         }catch (Exception e)
         {
             LogTypeEnum.EXCEPTION.error("学生关联课程为空");
+            LogTypeEnum.EXCEPTION.error(e.toString());
             basicVO.setSuccess(false);
             basicVO.setMsg("记忆保存失败");
         }
