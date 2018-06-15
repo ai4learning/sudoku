@@ -1363,7 +1363,7 @@ public class AjaxExamController extends AjaxErrorBookController{
     UnitExamVO doGetUnitExam(String moduleCode, Integer unitNbr, ModelMap context) {
         Paper paperCondition = new Paper();
         paperCondition.setUnitNbr(unitNbr);
-        //paper.setModuleCode(moduleCode);
+        paperCondition.setModuleCode(moduleCode);
         Paper paperResult = paperService.getUnique(paperCondition).getDefaultModel();
         JSONObject questionsJson = JSON.parseObject(paperResult.getQuestions());
 
