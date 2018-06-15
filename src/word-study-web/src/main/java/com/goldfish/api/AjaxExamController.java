@@ -1,6 +1,17 @@
 package com.goldfish.api;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.goldfish.common.CommonResult;
+import com.goldfish.common.log.LogTypeEnum;
+import com.goldfish.constant.ExamConstant;
+import com.goldfish.domain.Exam;
+import com.goldfish.domain.Paper;
+import com.goldfish.domain.Question;
+import com.goldfish.service.*;
+import com.goldfish.vo.BasicVO;
+import com.goldfish.vo.exam.*;
 import com.goldfish.domain.Paper;
 import com.goldfish.service.PaperService;
 import com.goldfish.service.QuestionService;
@@ -11,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,6 +36,8 @@ public class AjaxExamController extends AjaxErrorBookController{
     private PaperService paperService;
     @Resource
     private QuestionService questionService;
+    @Resource
+    private ExamService examService;
 
     /**
      * 生成自主测试试卷
@@ -744,9 +759,10 @@ public class AjaxExamController extends AjaxErrorBookController{
      */
     @RequestMapping(value="GetExam",method={RequestMethod.GET,RequestMethod.POST})
     public @ResponseBody
-    Map<String,Object> doGetExam(Integer testArea, Integer questionNbr, String questionTypes,ModelMap context) {
-        CommonResult result = null;
-        return result.getReturnMap();
+    ExamVO doGetExam(Integer testArea, Integer questionNbr, String questionTypes, ModelMap context) {
+        ExamVO examVO = new ExamVO();
+
+        return examVO;
     }
 
     /**
@@ -1270,29 +1286,77 @@ public class AjaxExamController extends AjaxErrorBookController{
     }
      *
      */
-//    @RequestMapping(value="GetUnitExam",method={RequestMethod.GET,RequestMethod.POST})
-//    public @ResponseBody
-//    VO doGetUnitExam(String moduleCode, Integer unitNbr, ModelMap context) {
-////        VO vo = null;
-////        quyer.setmodule
-////                query.setunit;
-//        Paper papaer = paperService.getUnique(query)
-//                    papget.getquestions.
-//
-//                            qustins.split(",");
-//
-//        for (qusitins)
-//            questionService.getQuestionById(id);
-//
-//
-//        vo.set
-//                vo.set
-//
-//
-//
-//
-//        return vo;
-//    }
+
+    /**
+     * /**
+     * {
+     "ec": [1, 2, 3, 4, 5],
+     "ce": [1, 2, 3, 4, 5],
+     "lc": [1, 2, 3, 4, 5]
+     }
+     */
+    @RequestMapping(value="GetUnitExam",method={RequestMethod.GET,RequestMethod.POST})
+    public @ResponseBody
+    UnitExamVO doGetUnitExam(String moduleCode, Integer unitNbr, ModelMap context) {
+        Paper paperCondition = new Paper();
+        paperCondition.setUnitNbr(unitNbr);
+        //paper.setModuleCode(moduleCode);
+        Paper paperResult = paperService.getUnique(paperCondition).getDefaultModel();
+        JSONObject questionsJson = JSON.parseObject(paperResult.getQuestions());
+
+        DataVO dataVO = new DataVO();
+        dataVO.setMsg("");
+        dataVO.setSuccess(true);
+        dataVO.setCondition(0);
+        if (questionsJson.containsKey(ExamConstant.EN2CH))
+        {
+            List<QuestionVO> questionVOList = new ArrayList<>();
+            for (String questionId : questionsJson.getJSONArray(ExamConstant.EN2CH).toJavaList(String.class))
+            {
+                Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
+                ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
+                QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
+                        ,question.getVocCode(),question.getQuestion(),choicesVO);
+                questionVOList.add(questionVO);
+            }
+            dataVO.setDataEn2Ch(questionVOList);
+        }
+
+        if (questionsJson.containsKey(ExamConstant.CH2EN))
+        {
+            List<QuestionVO> questionVOList = new ArrayList<>();
+            for (String questionId : questionsJson.getJSONArray(ExamConstant.CH2EN).toJavaList(String.class))
+            {
+                Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
+                ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
+                QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
+                        ,question.getVocCode(),question.getQuestion(),choicesVO);
+                questionVOList.add(questionVO);
+            }
+            dataVO.setDataCh2En(questionVOList);
+        }
+
+        if (questionsJson.containsKey(ExamConstant.LISTEN2CH))
+        {
+            List<QuestionVO> questionVOList = new ArrayList<>();
+            for (String questionId : questionsJson.getJSONArray(ExamConstant.LISTEN2CH).toJavaList(String.class))
+            {
+                Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
+                ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
+                QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
+                        ,question.getVocCode(),question.getQuestion(),choicesVO);
+                questionVOList.add(questionVO);
+            }
+            dataVO.setDataListen2Ch(questionVOList);
+        }
+
+        UnitExamVO unitExamVO = new UnitExamVO();
+        unitExamVO.setSuccess(true);
+        unitExamVO.setCondition(0);
+        unitExamVO.setTotalNbr(0);
+        unitExamVO.setData(dataVO);
+        return unitExamVO;
+    }
 
     /**
      * 保存测试结果
@@ -1303,7 +1367,7 @@ public class AjaxExamController extends AjaxErrorBookController{
      * @param realDuration 117
      * @param standardDuration 240
      * @param errorNbr 0
-     * @param CashPoint 10
+     * @param cashPoint 10
      * @param cashPointType 4  6 （当为强化训练时，cashType为6）
      * @param context
      * @return
@@ -1312,17 +1376,33 @@ public class AjaxExamController extends AjaxErrorBookController{
      */
     @RequestMapping(value="AjaxSaveMutiTest",method={RequestMethod.GET,RequestMethod.POST})
     public @ResponseBody
-    Map<String,Object> doAjaxSaveMutiTest(String moduleCode, Integer resultScore,
-                                          Integer testType, Integer unitNbr,
-                                          Long realDuration, Long standardDuration,
-                                          Integer errorNbr,
-                                          Long CashPoint, Integer cashPointType, ModelMap context) {
-        CommonResult result = null;
-        return result.getReturnMap();
+    BasicVO doAjaxSaveMutiTest(String moduleCode, Integer resultScore,
+                               Integer testType, Integer unitNbr,
+                               Long realDuration, Long standardDuration,
+                               Integer errorNbr,
+                               int cashPoint, Integer cashPointType, ModelMap context) {
+        Exam examQuery = new Exam();
+        examQuery.setModuleCode(moduleCode);
+        examQuery.setResultScore(resultScore);
+        examQuery.setTestType(testType);
+        examQuery.setUnitNbr(unitNbr);
+        examQuery.setRealDuration(realDuration);
+        examQuery.setStandardDuration(standardDuration);
+        examQuery.setErrorNbr(errorNbr);
+        examQuery.setCashPoint(cashPoint);
+        examQuery.setCashPointType(cashPointType);
+
+        BasicVO basicVO = new BasicVO();
+        try {
+            examService.addExam(examQuery);
+            basicVO.setSuccess(true);
+            basicVO.setMsg("记忆已经保存");
+        }catch (Exception e)
+        {
+            LogTypeEnum.EXCEPTION.error("学生关联课程为空");
+            basicVO.setSuccess(false);
+            basicVO.setMsg("记忆保存失败");
+        }
+        return basicVO;
     }
-
-
-
-
-
 }

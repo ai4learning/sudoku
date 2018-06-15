@@ -1,5 +1,5 @@
 venv/
-.idea/goldfish-learning.iml
+.idea/*
 *.iml
 *.xml
 node_modules

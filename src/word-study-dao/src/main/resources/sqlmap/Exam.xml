@@ -8,6 +8,7 @@
 		<result property="userId" column="user_id"/>
 		<result property="userCode" column="user_code"/>
 		<result property="lessonId" column="lesson_id"/>
+	  	<result property="moduleCode" column="module_code"/>
 		<result property="unitNbr" column="unit_nbr"/>
 		<result property="pageId" column="page_id"/>
 		<result property="testType" column="test_type"/>
@@ -32,6 +33,7 @@
     		<if test="id != null"> AND id = #{id}</if>
     		<if test="userId != null"> AND user_id = #{userId}</if>
     		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+    		<if test="moduleCode != null"> AND module_code = #{moduleCode}</if>
     		<if test="pageId != null"> AND page_id = #{pageId}</if>
     		<if test="testType != null"> AND test_type = #{testType}</if>
     		<if test="cashPointType != null"> AND cash_point_type = #{cashPointType}</if>
@@ -49,6 +51,7 @@
 		<if test="id != null"> AND id = #{id}</if>
 		<if test="userId != null"> AND user_id = #{userId}</if>
 		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+		<if test="moduleCode != null"> AND module_code = #{moduleCode}</if>
 		<if test="pageId != null"> AND page_id = #{pageId}</if>
 		<if test="testType != null"> AND test_type = #{testType}</if>
 		<if test="cashPointType != null"> AND cash_point_type = #{cashPointType}</if>
@@ -64,12 +67,12 @@
 	
 
 	<sql id="All-FIELDS">
-		id,user_id,user_code,lesson_id,unit_nbr,page_id,test_type,result_score,standard_duration,real_duration,error_nbr,cash_point,cash_point_type,is_pass,state,created,modified
+		id,user_id,user_code,lesson_id,module_code,unit_nbr,page_id,test_type,result_score,standard_duration,real_duration,error_nbr,cash_point,cash_point_type,is_pass,state,created,modified
 	</sql>
 
 	<insert id="addExam" parameterType="com.goldfish.domain.Exam">
-		insert into exam (user_id,user_code,lesson_id,unit_nbr,page_id,test_type,result_score,standard_duration,real_duration,error_nbr,cash_point,cash_point_type,is_pass,state,created,modified)
-			values(#{userId},#{userCode},#{lessonId},#{unitNbr},#{pageId},#{testType},#{resultScore},#{standardDuration},#{realDuration},#{errorNbr},#{cashPoint},#{cashPointType},#{isPass},#{state},#{created},#{modified})
+		insert into exam (user_id,user_code,lesson_id,module_code,unit_nbr,page_id,test_type,result_score,standard_duration,real_duration,error_nbr,cash_point,cash_point_type,is_pass,state,created,modified)
+			values(#{userId},#{userCode},#{lessonId},#{moduleCode},#{unitNbr},#{pageId},#{testType},#{resultScore},#{standardDuration},#{realDuration},#{errorNbr},#{cashPoint},#{cashPointType},#{isPass},#{state},#{created},#{modified})
     
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
 		   select last_insert_id() as ID from dual
@@ -84,6 +87,7 @@
 			<if test="userId !=null"> user_id = #{userId},</if>
 			<if test="userCode !=null"> user_code = #{userCode},</if>
 			<if test="lessonId !=null"> lesson_id = #{lessonId},</if>
+			<if test="moduleCode != null"> module_code = #{moduleCode},</if>
 			<if test="unitNbr !=null"> unit_nbr = #{unitNbr},</if>
 			<if test="pageId !=null"> page_id = #{pageId},</if>
 			<if test="testType !=null"> test_type = #{testType},</if>
@@ -130,7 +134,7 @@
 	
 	<select id="getExamByPage" resultMap="Exam-Map" parameterType="java.util.HashMap">
 		<![CDATA[
-			SELECT  id,user_id,user_code,lesson_id,unit_nbr,page_id,test_type,result_score,standard_duration,real_duration,error_nbr,cash_point,cash_point_type,is_pass,state,modified FROM exam 
+			SELECT  id,user_id,user_code,lesson_id,module_code,unit_nbr,page_id,test_type,result_score,standard_duration,real_duration,error_nbr,cash_point,cash_point_type,is_pass,state,modified FROM exam
 		]]>
             <include refid="MAP-COMMON-SQL" />
             <include refid="ORDER-SQL" />
