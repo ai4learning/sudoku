@@ -1,0 +1,87 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
+<div class="modal-body " id="view_allexam">
+	<form class="form-horizontal"  id="form1" role="form">
+	
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">Id</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="id" id="id" value="$!{allexam.id}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="type">type</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="type" id="type" value="$!{allexam.type}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="answerindex">answerIndex</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="answerindex" id="answerindex" value="$!{allexam.answerindex}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="choices">choices</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="choices" id="choices" value="$!{allexam.choices}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="spelling">spelling</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="spelling" id="spelling" value="$!{allexam.spelling}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="voccode">vocCode</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="voccode" id="voccode" value="$!{allexam.voccode}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="question">question</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="question" id="question" value="$!{allexam.question}" readonly/>
+				
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
+</div>
+
+
+<script language="javascript">
+
+
+function backToManage(){
+	var url='/allexam/manage.action';
+	gUtils.fMakeFullLink(url);
+    window.location=url;
+}
+
+</script>

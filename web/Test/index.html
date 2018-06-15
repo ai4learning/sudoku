@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>九宫格 . 集训赢—自主测试</title>
+  <link rel="Stylesheet" href="/content/css/test.css">
+</head>
+
+<body>
+  <div class="test-info-toptitle">
+    <div class="test-info-toptitle-detail">
+      <span id="spantextArea">测试</span>
+      - （计划测试
+      <span id="questioncount">10</span>题）
+    </div>
+  </div>
+  <div class="main-content">
+    <div id="testPaper">
+      <div id="dataFromListenToChDiv" style="display: none;">
+        <label class="ques-title">【听单词选词义】</label>
+        <div id="dataFromListenToCh" class="question-area"></div>
+      </div>
+      <div id="dataFromEnToChDiv">
+        <label class="ques-title1">【英译汉】</label>
+        <div id="dataFromEnToCh" class="question-area">
+        </div>
+      </div>
+      <div id="dataFromChToEnDiv" style="display: none;">
+        <label class="ques-title">【汉译英】</label>
+        <div id="dataFromChToEn" class="question-area"></div>
+      </div>
+      <div id="dataFromListenToWriteDiv" style="display: none;">
+        <label class="ques-title">【听写】(提示:回车或Tab键切换下一个；Ctrl键发音；点击三次查看中文)</label>
+        <div id="dataFromListenToWrite" class="question-area"></div>
+      </div>
+    </div>
+    <div>
+      <div class="operation-bar">
+        <div id="btnPaperHandOn">
+          <span class="btn-orange-left"></span>
+          <input class="btn_red" type="button" value="交 卷">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="overlay_loading" style="display: none;">
+    <div id="overlay" style="background-color:#000;opacity: 0.65;width: 100%; height: 100%;  position: fixed; left: 0px; top: 0px; z-index: 1001;">
+      <div class="loading0" style="margin-top:100px; margin-left:35%;">
+        <img src="/content/image/loading1.gif" alt="正在加载">
+      </div>
+    </div>
+  </div>
+  <div id="resultArea" style="display:none;position:absolute;text-align:center;z-index: 1001;top:200px; left:0px; width:600px; height:370px;background:white;border-radius: 6px;">
+    <label class="ques-title">&nbsp;&nbsp;&nbsp;测试结果</label>
+    <div style="font-size:30px; font-weight:bold; padding:10px;color:#333;">
+      本次测试
+      <label style="font-size:42px; color:#d2191f;" id="resultPoint">0</label>
+      分！ 获得
+      <label style="font-size:30px; color:#d2191f;" id="resultCoin">0</label>
+      <img src="/content/image/coin2.png" alt="" title="">
+    </div>
+    <div>
+      <img id="waitResult">
+      <img style="display:none; position:absolute;" id="goldpoint">
+      <audio id="Coindrop" preload="auto">
+        <source src="/soundfile/audio/Coindrop.mp3" type="audio/mpeg">
+        <embed src="/soundfile/audio/Coindrop.mp3" autostart="false" hidden="true"> </audio>
+      <img class="resultimg" id="resultImage">
+      <div id="remark100" class="font14_9 remark1">学界巅峰！地球人已经无法阻止你成神的脚步了！</div>
+      <div id="remark" class="font14_9 remark">学界巅峰！地球人已经无法阻止你成神的脚步了！</div>
+    </div>
+    <div id="adviceContent"></div>
+    <div id="buttonsAfterResult" style="position:absolute; bottom:20px; left:185px; z-index:10000;">
+      <input type="button" id="btnBackToCheck" class="btn_red" style="margin-right:0.5em; display:none;" value="查看错误">
+      <input type="button" id="btnClose" class="btn_red" style="margin-right:0.5em; display:none;" value="关闭页面">
+    </div>
+  </div>
+  <div>
+    <div id="erorr_info" style="display:none; margin:0 auto; text-align:center; padding:80px; width: 554px;color:#666; line-height:30px; color:red; background-color:#ffedd8;font-weight:bold;font-size:20px; border:solid 1px #D5D5D5;overflow: hidden;"
+      class="radius"></div>
+    <div>
+      <div class="operation-bar">
+        <div id="btnPaperExit" style="display:none;">
+          <span class="btn-orange-left"></span>
+          <input type="button" class="btn_red" value="关闭页面">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="clock" style="left: 1390px;">00:01:00</div>
+  <input id="testTarget" type="hidden" value="0">
+  <input id="questionNbr" type="hidden" value="10">
+  <input id="questionTypes" type="hidden" value="0">
+  <input id="chance" type="hidden" value="2">
+  <input id="audioUrl" type="hidden" value="/">
+  <script type="text/javascript" src="/content/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/content/js/question.js"></script>
+  <script type="text/javascript" src="/content/js/enUtils.min.js"></script>
+  <script type="text/javascript" src="/content/js/selftest.min.js"></script>
+  <script type="text/javascript">
+    $(".question-area").each(
+      function () {
+        var count = $(this).find("table").size();
+        for (var i = 1; i <= count; i++)
+          if (i % 2 == 0)
+            $(this).find("table").eq(i - 1).after(
+              "<div class='clear'></div>");
+      });
+    function checkChance() {
+      if (document.getElementById("chance").value == 0) {
+        alert("将使用了最后一次测试机会！");
+      }
+    }
+    checkChance();
+  </script>
+</body>
+
+</html>

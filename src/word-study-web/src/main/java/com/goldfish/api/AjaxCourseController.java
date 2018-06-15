@@ -3,18 +3,12 @@ package com.goldfish.api;
 import com.goldfish.common.CommonResult;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.log.LogTypeEnum;
-import com.goldfish.constant.DifficultLevel;
-import com.goldfish.constant.FinishState;
-import com.goldfish.constant.PositionType;
-import com.goldfish.constant.State;
+import com.goldfish.constant.*;
 import com.goldfish.domain.*;
 import com.goldfish.service.*;
 import com.goldfish.vo.*;
 import com.goldfish.vo.course.*;
-import com.goldfish.vo.unit.RichUnitStudyVO;
-import com.goldfish.vo.unit.SaveUnitStudyVO;
-import com.goldfish.vo.unit.UnitStudyVO;
-import com.goldfish.vo.unit.WordStudyDto;
+import com.goldfish.vo.unit.*;
 import com.goldfish.vo.user.RichUserBookVO;
 import com.goldfish.vo.user.UserBookVO;
 import com.goldfish.vo.user.UserVO;
@@ -155,7 +149,8 @@ public class AjaxCourseController extends BaseController {
             bookVO.setStartFrom(studentCourse.getStartFrom());
             bookVO.setStudyMode(studentCourse.getStudyMode());
             /*设置当前学习位置信息*/
-            CurrentStudyPositionVO currentPositionVO = this.getCouseStudyPositionVo(PositionType.COURSE_STUDY_POSITION, studentCourse, null, userBookVO);
+            CurrentStudyPositionVO currentPositionVO =
+                    this.getCouseStudyPositionVo(PositionType.COURSE_STUDY_POSITION, studentCourse, null, userBookVO);
             if (currentPositionVO == null) {
                 return userBookVO;
             }
@@ -213,7 +208,6 @@ public class AjaxCourseController extends BaseController {
     }
 
 
-
     /**
      * 载入用户课程
      * <p>
@@ -247,126 +241,6 @@ public class AjaxCourseController extends BaseController {
      * "IsFinished":2,
      * "IsTested":1,
      * "unitNbr":2
-     * },
-     * {
-     * "Id":40,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit3",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":3
-     * },
-     * {
-     * "Id":41,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit4",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":4
-     * },
-     * {
-     * "Id":42,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit5",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":5
-     * },
-     * {
-     * "Id":43,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit6",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":6
-     * },
-     * {
-     * "Id":44,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit7",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":7
-     * },
-     * {
-     * "Id":45,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit8",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":8
-     * },
-     * {
-     * "Id":46,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit9",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":9
-     * },
-     * {
-     * "Id":47,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit10",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":10
-     * },
-     * {
-     * "Id":48,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit11",
-     * "IsFinished":2,
-     * "IsTested":2,
-     * "unitNbr":11
-     * },
-     * {
-     * "Id":49,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit12",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":12
-     * },
-     * {
-     * "Id":50,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit13",
-     * "IsFinished":2,
-     * "IsTested":-1,
-     * "unitNbr":13
-     * },
-     * {
-     * "Id":51,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit14",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":14
-     * },
-     * {
-     * "Id":52,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit15",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":15
-     * },
-     * {
-     * "Id":53,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit16",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":16
-     * },
-     * {
-     * "Id":54,
-     * "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
-     * "Unit":"Unit17",
-     * "IsFinished":2,
-     * "IsTested":1,
-     * "unitNbr":17
      * }
      * ],
      * "outDate":false,
@@ -413,7 +287,8 @@ public class AjaxCourseController extends BaseController {
         }
         // 3.根据用户ID查询用户课程信息
 
-        CourseStudy studentCourse = this.getCourseStudy(Integer.valueOf(String.valueOf(user.getId())), course.getBookNumber(), userBookVO);
+        CourseStudy studentCourse =
+                this.getCourseStudy(Integer.valueOf(String.valueOf(user.getId())), course.getBookNumber(), userBookVO);
         if (studentCourse == null) {
             return userBookVO;
         }
@@ -450,12 +325,14 @@ public class AjaxCourseController extends BaseController {
 
         CommonResult<List<UnitStudy>> unitStudyResult = unitStudyService.getUnitWordsStudyByPage(pageQuery);
         if (unitStudyResult == null || !unitStudyResult.isSuccess()) {
-            LogTypeEnum.DEFAULT.error("查询学生单元学习情况异常，studentId={}, lessonId={}", user.getId(),course.getBookNumber());
+            LogTypeEnum.DEFAULT.error("查询学生单元学习情况异常，studentId={}, lessonId={}",
+                    user.getId(), course.getBookNumber());
             return userBookVO;
         }
         List<UnitStudy> unitsStudy = unitStudyResult.getDefaultModel();
         if (unitsStudy == null || unitsStudy.isEmpty()) {
-            LogTypeEnum.DEFAULT.error("未找到学生单词学习记录，studentId={}, lessonId={}", user.getId(),course.getBookNumber());
+            LogTypeEnum.DEFAULT.error("未找到学生单词学习记录，studentId={}, lessonId={}",
+                    user.getId(), course.getBookNumber());
             return userBookVO;
         }
 
@@ -488,6 +365,7 @@ public class AjaxCourseController extends BaseController {
 
     /**
      * 获取课程学习
+     *
      * @param studentId
      * @param lessonId
      * @param baseVO
@@ -579,412 +457,6 @@ public class AjaxCourseController extends BaseController {
      *             "fstClassId":8,
      *             "vocIndex":1,
      *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1462,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad812189008f",
-     *             "spelling":"kick",
-     *             "meaning":"踢;反冲",
-     *             "soundMarkUs":"[kɪk]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":2,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1463,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121890090",
-     *             "spelling":"sick",
-     *             "meaning":"有病的;恶心的",
-     *             "soundMarkUs":"[sɪk]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":3,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1464,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad81218a0092",
-     *             "spelling":"thick",
-     *             "meaning":"厚的;浓密的;粗的",
-     *             "soundMarkUs":"[θɪk]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":4,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1465,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad81218b0093",
-     *             "spelling":"it",
-     *             "meaning":"它",
-     *             "soundMarkUs":"[ɪt]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":5,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1466,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad81218b0094",
-     *             "spelling":"sit",
-     *             "meaning":"坐",
-     *             "soundMarkUs":"[sɪt]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":6,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1467,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad81218c0095",
-     *             "spelling":"six",
-     *             "meaning":"六",
-     *             "soundMarkUs":"[sɪks]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":7,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1468,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad81218c0096",
-     *             "spelling":"fix",
-     *             "meaning":"修理;固定",
-     *             "soundMarkUs":"[fɪks]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":8,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1469,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad81218d0097",
-     *             "spelling":"mix",
-     *             "meaning":"混合;搅拌",
-     *             "soundMarkUs":"[mɪks]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":9,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1470,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad81218d0099",
-     *             "spelling":"with",
-     *             "meaning":"和....",
-     *             "soundMarkUs":"[wɪð]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":10,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1471,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad81218e009a",
-     *             "spelling":"him",
-     *             "meaning":"他",
-     *             "soundMarkUs":"[hɪm]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":11,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1472,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad81218f009d",
-     *             "spelling":"give",
-     *             "meaning":"给出",
-     *             "soundMarkUs":"[ɡɪv]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":12,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1473,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad812190009e",
-     *             "spelling":"dig",
-     *             "meaning":"挖掘",
-     *             "soundMarkUs":"[dɪɡ]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":13,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1474,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad812190009f",
-     *             "spelling":"pig",
-     *             "meaning":"猪",
-     *             "soundMarkUs":"[pɪɡ]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":14,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1475,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121ac00a0",
-     *             "spelling":"pin",
-     *             "meaning":"大头针",
-     *             "soundMarkUs":"[pɪn]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":15,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1476,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121ac00a1",
-     *             "spelling":"inn",
-     *             "meaning":"旅馆;客栈",
-     *             "soundMarkUs":"[ɪn]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":16,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1477,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121ad00a2",
-     *             "spelling":"ink",
-     *             "meaning":"墨水",
-     *             "soundMarkUs":"[ɪŋk]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":17,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1478,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121ad00a3",
-     *             "spelling":"pink",
-     *             "meaning":"粉红色的",
-     *             "soundMarkUs":"[pɪŋk]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":18,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1479,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121ae00a4",
-     *             "spelling":"link",
-     *             "meaning":"联系;链接",
-     *             "soundMarkUs":"[lɪŋk]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":19,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1480,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121ae00a5",
-     *             "spelling":"think",
-     *             "meaning":"思考;认为",
-     *             "soundMarkUs":"[θɪŋk]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":20,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1481,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121ae00a6",
-     *             "spelling":"bill",
-     *             "meaning":"账单",
-     *             "soundMarkUs":"[bɪl]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":21,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1482,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121af00a7",
-     *             "spelling":"hill",
-     *             "meaning":"小山",
-     *             "soundMarkUs":"[hɪl]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":22,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1483,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121af00a8",
-     *             "spelling":"kill",
-     *             "meaning":"杀死",
-     *             "soundMarkUs":"[kɪl]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":23,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1484,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121b000a9",
-     *             "spelling":"pill",
-     *             "meaning":"药片;药丸",
-     *             "soundMarkUs":"[pɪl]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":24,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1485,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121b000aa",
-     *             "spelling":"still",
-     *             "meaning":"静止的;仍然",
-     *             "soundMarkUs":"[stɪl]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":25,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1486,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121b100ab",
-     *             "spelling":"will",
-     *             "meaning":"将要;决心;遗产",
-     *             "soundMarkUs":"[wɪl]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":26,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1487,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121b100ac",
-     *             "spelling":"milk",
-     *             "meaning":"牛奶;挤牛奶",
-     *             "soundMarkUs":"[mɪlk]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":27,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1488,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121b300ae",
-     *             "spelling":"film",
-     *             "meaning":"电影;拍电影",
-     *             "soundMarkUs":"[fɪlm]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":28,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1489,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121b300af",
-     *             "spelling":"kiss",
-     *             "meaning":"吻",
-     *             "soundMarkUs":"[kɪs]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":29,
-     *             "isCollected":false
-     *         },
-     *         {
-     *             "Id":1490,
-     *             "vocCode":"8a108cb7-42aa-d911-0142-ad8121b400b0",
-     *             "spelling":"Miss",
-     *             "meaning":"小姐;女士",
-     *             "soundMarkUs":"[mɪs]",
-     *             "soundMarkUk":"",
-     *             "UnitId":0,
-     *             "unitNbr":3,
-     *             "lessonNbr":5,
-     *             "fstClassId":8,
-     *             "vocIndex":30,
-     *             "isCollected":false
      *         }
      *     ],
      *     "success":true,
@@ -1016,7 +488,8 @@ public class AjaxCourseController extends BaseController {
      *     },
      *     "totalNbr":0
      * }
-     * @param unit unitNbr
+     *
+     * @param unit       unitNbr
      * @param moduleCode 课程moduleCode
      * @param context
      * @return
@@ -1085,7 +558,8 @@ public class AjaxCourseController extends BaseController {
 
             // 5.填充学习位置
             /*设置当前单元内学习位置信息*/
-            CurrentStudyPositionVO currentPositionVO = this.getCouseStudyPositionVo(PositionType.UNIT_STUDY_POSTION, null, unitStudy, richUnitStudyVO);
+            CurrentStudyPositionVO currentPositionVO =
+                    this.getCouseStudyPositionVo(PositionType.UNIT_STUDY_POSTION, null, unitStudy, richUnitStudyVO);
             if (currentPositionVO == null) {
                 return richUnitStudyVO;
             }
@@ -1153,661 +627,6 @@ public class AjaxCourseController extends BaseController {
 
     /**
      * 保存课程单元学习
-     * {
-     * "success":false,
-     * "msg":"没有记录需要提交",
-     * "isFinished":2,
-     * "latestStudyPosition":"{"Id":0,"studyPositionCode":null,"studytoken":null,"moduleCode":null,"positionType":null,"remark":null,"vocCode":null,"totalReadingTime":null,"totalWritingTime":null,"userCode":null,"unitNbr":null,"wordCount":null,"isContinue":null,"seconds4SpellingLetter":null,"isCurrentPos":false,"isFinished":2,"spelling":null,"isAllFinished":false,"createtime":null,"IsTested":0,"Status":0}"
-     * }
-     * <p>
-     * moduleCode:8a108cb7-42ad-314f-0142-ad33a0a70001
-     * extra:finish
-     * unitNbr:1
-     * studytoken:007c3778-11b1-4edb-ba5f-d550bc11516d
-     * isContinue:0
-     * seconds4SpellingLetter:1000
-     * totalReadingTime:86
-     * totalWritingTime:99
-     * vocDataAfterReview:[
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":4.375,
-     * "isFstReadSuccess":false,
-     * "readFailTimes":3,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120300028"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0.5,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120310029"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":false,
-     * "spellFailTimes":1,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":true,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad812031002a"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":false,
-     * "spellFailTimes":1,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":true,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad812032002b"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120350030"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":1.5,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120380034"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0.5,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120380035"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120410036"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":2,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120420038"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0.5,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120420039"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":1.5,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad812043003a"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad812043003b"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad81208d003c"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad81208d003d"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad81208e003e"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":1.5,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad81208e003f"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad81208f0040"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120900042"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120900043"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120910044"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":1.5,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120930047"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad812094004a"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad81209d004b"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad81209d004c"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad81209e004e"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":1.5,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad81209f004f"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120d20051"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120d30052"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120d30053"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120d40054"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":2.5,
-     * "isFstReadSuccess":false,
-     * "readFailTimes":1,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120d50055"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120d50056"
-     * },
-     * {
-     * "memoryLevel":null,
-     * "reviewTimes":null,
-     * "timeLeft":null,
-     * "userVocCode":null,
-     * "userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b",
-     * "finishReadingTime":0,
-     * "isFstReadSuccess":true,
-     * "readFailTimes":0,
-     * "continueReadFailTimes":0,
-     * "isHalfReading":false,
-     * "isFstSpellSuccess":true,
-     * "spellFailTimes":0,
-     * "continueSpellFailTimes":0,
-     * "isHalfSpelling":false,
-     * "isRemember":true,
-     * "isCancelReview":false,
-     * "vocCode":"8a108cb7-42aa-d911-0142-ad8120d60057"
-     * }
-     * ]
-     * totalWordsNbr:33
-     * <p>
-     * 响应报文
-     * <p>
-     * {
-     * "success":true,
-     * "msg":"提交成功",
-     * "latestStudyPosition":"[{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120300028","finishReadingTime":4.375,"isFstReadSuccess":false,"readFailTimes":3,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120310029","finishReadingTime":0.5,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad812031002a","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":false,"spellFailTimes":1,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":true,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad812032002b","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":false,"spellFailTimes":1,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":true,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120350030","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120380034","finishReadingTime":1.5,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120380035","finishReadingTime":0.5,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120410036","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120420038","finishReadingTime":2.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120420039","finishReadingTime":0.5,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad812043003a","finishReadingTime":1.5,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad812043003b","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad81208d003c","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad81208d003d","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad81208e003e","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad81208e003f","finishReadingTime":1.5,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad81208f0040","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120900042","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120900043","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120910044","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120930047","finishReadingTime":1.5,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad812094004a","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad81209d004b","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad81209d004c","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad81209e004e","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad81209f004f","finishReadingTime":1.5,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120d20051","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120d30052","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120d30053","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120d40054","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120d50055","finishReadingTime":2.5,"isFstReadSuccess":false,"readFailTimes":1,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120d50056","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null},{"Id":0,"userVocCode":null,"studyToken":null,"userCode":"f4f18fcf-c36c-49a3-a23e-a751c0743d4b","vocCode":"8a108cb7-42aa-d911-0142-ad8120d60057","finishReadingTime":0.0,"isFstReadSuccess":true,"readFailTimes":0,"continueReadFailTimes":0,"isFstSpellSuccess":true,"spellFailTimes":0,"continueSpellFailTimes":0,"isHalfReading":false,"isHalfSpelling":false,"remark":null,"startTime":null,"lastReviewTime":"0001-01-01T00:00:00","lastComputeTime":null,"IsRemember":true,"IsCancelReview":false,"ceatetime":null,"reviewTimes":null,"memoryLevel":null,"timeLeft":null,"Status":null}]",
-     * "cashPoint":1
-     * }
-     *
      * @param context
      * @return
      */
@@ -1868,7 +687,7 @@ public class AjaxCourseController extends BaseController {
                 return saveUnitStudyVO;
             }
             // 2.保存每个单词的学习情况
-            for (WordStudyDto wordStudyDto:vocDataAfterReview) {
+            for (WordStudyDto wordStudyDto : vocDataAfterReview) {
                 WordStudy updateWordStudy = new WordStudy();
 //                updateWordStudy.set
 
@@ -1877,11 +696,120 @@ public class AjaxCourseController extends BaseController {
             }
 
 
-
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
             saveUnitStudyVO.setMsg("保存单元学习异常");
         }
         return saveUnitStudyVO;
     }
+
+
+
+
+    @RequestMapping(value = "AjaxFinishSaveUnit", method = {RequestMethod.GET, RequestMethod.POST})
+    public
+    @ResponseBody
+    SaveFinishUnitStudyVO doAjaxFinishSaveUnit(String moduleCode,
+                                            String extra,
+                                            Integer unitNbr,
+                                            String studyToken,
+                                            Integer isContinue,
+                                            Long seconds4SpellingLetter,
+                                            Long totalReadingTime,
+                                            Long totalWritingTime,
+                                            List<WordStudyDto> vocDataAfterReview,
+                                            Integer totalWordsNbr,
+                                            ModelMap context) {
+
+        SaveFinishUnitStudyVO saveFinishUnitStudyVO = new SaveFinishUnitStudyVO();
+
+        String trainingId = LoginContext.getLoginContext().getTrainingId();
+        String trainingCode = LoginContext.getLoginContext().getTrainingCode();
+        try {
+            LoginRecord loginRecord = loginRecordService.getLoginRecordByTraining(trainingId, trainingCode);
+            // 1.保存单元学习记录
+            UnitStudy unitStudy = getUnitStudy(loginRecord.getUserId(), moduleCode, unitNbr, saveFinishUnitStudyVO);
+            if (unitStudy == null) {
+                return saveFinishUnitStudyVO;
+            }
+            // a.更新学习时间等字段
+            unitStudy.setTotalReadingTime(totalReadingTime);
+            unitStudy.setTotalWritingTime(totalWritingTime);
+            unitStudy.setTotalNumber(totalWordsNbr);
+            if ("finish".equals(extra)) {
+                /**  是否学习完成  */
+                unitStudy.setIsFinished(FinishState.COMPLETE.getState());
+                // 单元学习完毕，则到单元测试阶段
+                unitStudy.setCurrentPhase(StudyPhase.UNIT_TEST.getPhase());
+            }
+            /**  位置类型  */
+            unitStudy.setPositionType(1);// 1表示单词
+            /**  当前保存，则为当前学习位置，当前写是，同时更新该学生该课程其他单元为false  */
+            unitStudy.setIsCurrentPos(1);// 当前保存，则为当前位置
+
+//            unitStudyService.updateUnitWordsStudy()
+
+
+
+
+
+
+            // b.更新学习位置信息
+            /**  单词学习位置  */
+//            unitStudy.setStudyPos();
+//            /**  学习位置CODE  */
+//            unitStudy.setStudyPositionCode();
+//            /**  单词CODE  */
+//            unitStudy.setVocCode();
+//            /**  单词  */
+//            unitStudy.setSpelling();
+
+            CommonResult<UnitStudy> updateUnitStudyResult = unitStudyService.updateUnitWordsStudy(unitStudy);
+            if (updateUnitStudyResult == null || !updateUnitStudyResult.isSuccess()) {
+                LogTypeEnum.DEFAULT.error("更新学生单元学习失败");
+                saveFinishUnitStudyVO.setMsg("更新学生单元学习失败");
+                return saveFinishUnitStudyVO;
+            }
+            // 2.保存每个单词的学习情况
+            for (WordStudyDto wordStudyDto : vocDataAfterReview) {
+                WordStudy updateWordStudy = new WordStudy();
+//                updateWordStudy.set
+
+
+//                wordStudyService.updateWordStudy();
+            }
+
+
+        } catch (Exception e) {
+            LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
+            saveFinishUnitStudyVO.setMsg("保存单元学习异常");
+        }
+        return saveFinishUnitStudyVO;
+    }
+
+    private UnitStudy getUnitStudy(Integer studentId, String moduleCode, Integer unitNbr, BasicVO vo) {
+        UnitStudy unitStudyQuery = new UnitStudy();
+        unitStudyQuery.setStudentId(studentId);
+        unitStudyQuery.setLessonCode(moduleCode);
+        unitStudyQuery.setUnitNbr(unitNbr);
+        unitStudyQuery.setState(State.VALID.getState());
+        CommonResult<UnitStudy> unitStudyResult = unitStudyService.getUnique(unitStudyQuery);
+        if (unitStudyResult == null || !unitStudyResult.isSuccess()) {
+            LogTypeEnum.DEFAULT.error("查询单元学习失败");
+            vo.setMsg("查询单元学习失败");
+            return null;
+        }
+        UnitStudy unitStudy = unitStudyResult.getDefaultModel();
+        if (unitStudy == null) {
+            LogTypeEnum.DEFAULT.error("学生单元学习不存在");
+            vo.setMsg("学生单元学习不存在");
+            vo.setSuccess(true);
+            return null;
+        }
+        return unitStudy;
+    }
+
+
+
+
 }

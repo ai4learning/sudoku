@@ -63,6 +63,11 @@ public class UnitStudyManagerImpl implements UnitStudyManager {
 		return unitWordsStudyDao.count( pageQuery.getParams());
     }
 
+    @Override
+    public void updateNotCurStudyPosition(UnitStudy unitStudy) {
+        unitWordsStudyDao.updateNotCurStudyPosition(unitStudy);
+    }
+
     /******* getter and setter ***/
     
 	public UnitWordsStudyDao getUnitWordsStudyDao() {

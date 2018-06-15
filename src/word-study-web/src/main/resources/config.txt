@@ -3,12 +3,12 @@
 
 	<!-- mybatis 配置开始-->
 	
-	<typeAlias type="com.goldfish.domain.Task" alias="Task"/>
+	<typeAlias type="com.goldfish.domain.Allexam" alias="Allexam"/>
 
-	<mapper resource="sqlmap/Task.xml" />
+	<mapper resource="sqlmap/Allexam.xml" />
 	
-	<bean id="taskDao" class="org.mybatis.spring.mapper.MapperFactoryBean">  
-	   <property name="mapperInterface" value="com.goldfish.dao.TaskDao"/>
+	<bean id="allexamDao" class="org.mybatis.spring.mapper.MapperFactoryBean">  
+	   <property name="mapperInterface" value="com.goldfish.dao.AllexamDao"/>
 	  <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
 	</bean>
 	
@@ -18,9 +18,9 @@
 
 	<!-- ibatis 配置开始-->
 
-	<sqlMap resource="sqlmap//Task.xml" />
+	<sqlMap resource="sqlmap//Allexam.xml" />
 	
-	<bean id="taskDao" class="com.goldfish.dao.impl.TaskDaoImpl">
+	<bean id="allexamDao" class="com.goldfish.dao.impl.AllexamDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<!-- ibatis 配置end-->
@@ -32,22 +32,16 @@
 
 
 		
-        
-            <script src="/misc/js/plugin/calendar/calendar.js"></script>
-            <link rel="stylesheet" href="/misc/js/plugin/calendar/calendar.css">
-        
-    
-
 
 
 
 
 
 	<!-- 可选配置项 start -->
-	<bean id="taskManager" class="com.goldfish.dao.impl.TaskManagerImpl">
+	<bean id="allexamManager" class="com.goldfish.dao.impl.AllexamManagerImpl">
 	</bean>
 	
-	<bean id="taskService" class="com.goldfish.dao.impl.TaskServiceImpl">
+	<bean id="allexamService" class="com.goldfish.dao.impl.AllexamServiceImpl">
 	</bean>
 	<!-- 可选配置项 end -->
 
@@ -55,10 +49,10 @@
 
 
 	<!--struts config start-->
-	<!-- 任务表 -->
-	<package name="-task" namespace="//task" extends="jshow-admin">
-		<action name="*" method="{1}" class="com.goldfish.web.action.TaskAction">
-			<result>${path}//task/{1}.vm</result>
+	<!-- Allexam -->
+	<package name="-allexam" namespace="//allexam" extends="jshow-admin">
+		<action name="*" method="{1}" class="com.goldfish.web.action.AllexamAction">
+			<result>${path}//allexam/{1}.vm</result>
 		</action>
 	</package>
 	<!--struts config end-->

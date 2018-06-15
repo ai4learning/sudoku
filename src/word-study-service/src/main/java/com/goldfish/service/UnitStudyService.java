@@ -12,6 +12,11 @@ import com.goldfish.domain.UnitStudy;
  *
  */
 public interface UnitStudyService {
+
+
+
+
+
    
     /**
      * 添加并返回设置id的UnitWordsStudy对象
@@ -27,6 +32,13 @@ public interface UnitStudyService {
      * @param unitStudy
      */
     public CommonResult<UnitStudy> updateUnitWordsStudy(UnitStudy unitStudy);
+
+    /**
+     * 更新UnitWordsStudy
+     *
+     * @param unitStudy
+     */
+    public boolean setNotCurrentPosition(UnitStudy unitStudy);
     
 
     
