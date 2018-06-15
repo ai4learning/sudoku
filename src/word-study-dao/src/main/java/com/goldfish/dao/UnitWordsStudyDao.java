@@ -19,8 +19,7 @@ import java.util.Map;
 public interface UnitWordsStudyDao {
     
     
-    
-    	/**
+    /**
      * 添加并返回设置id的UnitWordsStudy对象
      * 
      * @param unitStudy
@@ -34,6 +33,12 @@ public interface UnitWordsStudyDao {
      * @param unitStudy
      */
     public void updateUnitWordsStudy(UnitStudy unitStudy);
+
+    /**
+     * 更新用户非当前单元学习位置为false
+     * @param unitStudy
+     */
+    public void updateNotCurStudyPosition(UnitStudy unitStudy);
     
     
     
@@ -91,5 +96,7 @@ public interface UnitWordsStudyDao {
      * @return
      */
     public int count(Map<String,Object> paramMap);
+
+
 
 }

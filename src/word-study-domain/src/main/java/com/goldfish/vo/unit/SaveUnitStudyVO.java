@@ -10,7 +10,7 @@ import java.util.List;
 public class SaveUnitStudyVO extends BasicVO {
 
     private List<WordStudyVO> latestStudyPosition;
-    private Integer cashPoint = 1;
+    private Integer isFinished;
 
     public List<WordStudyVO> getLatestStudyPosition() {
         return latestStudyPosition;
@@ -20,11 +20,11 @@ public class SaveUnitStudyVO extends BasicVO {
         this.latestStudyPosition = latestStudyPosition;
     }
 
-    public Integer getCashPoint() {
-        return cashPoint;
+    public Integer getIsFinished() {
+        return isFinished;
     }
 
-    public void setCashPoint(Integer cashPoint) {
-        this.cashPoint = cashPoint;
+    public void setIsFinished(Integer isFinished) {
+        this.isFinished = isFinished;
     }
 }

@@ -88,4 +88,10 @@ public interface UnitStudyManager {
      */
     public int count(PageQuery pageQuery);
 
+    /**
+     * 更新用户非当前单元学习位置为false
+     * @param unitStudy
+     */
+    public void updateNotCurStudyPosition(UnitStudy unitStudy);
+
 }

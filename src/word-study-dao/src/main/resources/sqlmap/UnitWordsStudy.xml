@@ -112,9 +112,17 @@
 	</set>
 	 where id = #{id}
   	</update>
-  
-	
 
+
+	<update id="updateNotCurStudyPosition" parameterType="com.goldfish.domain.UnitStudy" >
+		update  unit_words_study SET is_current_pos = 0
+		<where>
+			<if test="studentId != null"> AND student_id = #{studentId}</if>
+			<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+			<if test="lessonCode != null"> AND lesson_code = #{lessonCode}</if>
+			<if test="unitNbr != null"> AND unit_nbr != #{unitNbr}</if>
+		</where>
+	</update>
     
 
 	<delete id="deleteUnitWordsStudy" parameterType="com.goldfish.domain.UnitStudy">
