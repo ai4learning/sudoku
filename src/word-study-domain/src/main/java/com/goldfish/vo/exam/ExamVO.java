@@ -125,4 +125,17 @@ public class ExamVO {
     public void setCondition(int condition) {
         this.condition = condition;
     }
+
+    @Override
+    public String toString() {
+        return "ExamVO{" +
+                "dataEn2Ch=" + dataEn2Ch +
+                ", dataCh2En=" + dataCh2En +
+                ", dataListen2Ch=" + dataListen2Ch +
+                ", dataListen2Write=" + dataListen2Write +
+                ", msg='" + msg + '\'' +
+                ", success=" + success +
+                ", condition=" + condition +
+                '}';
+    }
 }
