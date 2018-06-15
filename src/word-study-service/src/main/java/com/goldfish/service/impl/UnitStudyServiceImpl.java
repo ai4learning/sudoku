@@ -88,11 +88,12 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		}
 		return result;
 	}
-	
 
-        
-	
 
+	@Override
+	public boolean setNotCurrentPosition(UnitStudy unitStudy) {
+		return false;
+	}
 
 	public CommonResult<UnitStudy> getUnique(UnitStudy unitStudy) {
 		CommonResult<UnitStudy> result = new CommonResult<UnitStudy>();
