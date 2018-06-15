@@ -1,11 +1,8 @@
 package com.goldfish.api;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.goldfish.common.CommonResult;
 import com.goldfish.common.log.LogTypeEnum;
-import com.goldfish.constant.ExamConstant;
 import com.goldfish.constant.QuestionTypes;
 import com.goldfish.constant.TestArea;
 import com.goldfish.domain.*;
@@ -15,7 +12,6 @@ import com.goldfish.vo.exam.*;
 import com.goldfish.domain.Paper;
 import com.goldfish.service.PaperService;
 import com.goldfish.service.QuestionService;
-import com.goldfish.web.base.BaseController;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,9 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by John on 2018/5/20 0020.
@@ -1377,10 +1371,10 @@ public class AjaxExamController extends AjaxErrorBookController{
         dataVO.setMsg("");
         dataVO.setSuccess(true);
         dataVO.setCondition(0);
-        if (questionsJson.containsKey(ExamConstant.EN2CH))
+        if (questionsJson.containsKey(QuestionTypes.EN2CH.getForShort()))
         {
             List<QuestionVO> questionVOList = new ArrayList<>();
-            for (String questionId : questionsJson.getJSONArray(ExamConstant.EN2CH).toJavaList(String.class))
+            for (String questionId : questionsJson.getJSONArray(QuestionTypes.EN2CH.getForShort()).toJavaList(String.class))
             {
                 Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
                 ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
@@ -1391,10 +1385,10 @@ public class AjaxExamController extends AjaxErrorBookController{
             dataVO.setDataEn2Ch(questionVOList);
         }
 
-        if (questionsJson.containsKey(ExamConstant.CH2EN))
+        if (questionsJson.containsKey(QuestionTypes.CH2EN.getForShort()))
         {
             List<QuestionVO> questionVOList = new ArrayList<>();
-            for (String questionId : questionsJson.getJSONArray(ExamConstant.CH2EN).toJavaList(String.class))
+            for (String questionId : questionsJson.getJSONArray(QuestionTypes.CH2EN.getForShort()).toJavaList(String.class))
             {
                 Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
                 ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
@@ -1405,10 +1399,10 @@ public class AjaxExamController extends AjaxErrorBookController{
             dataVO.setDataCh2En(questionVOList);
         }
 
-        if (questionsJson.containsKey(ExamConstant.LISTEN2CH))
+        if (questionsJson.containsKey(QuestionTypes.LISTEN2CH.getForShort()))
         {
             List<QuestionVO> questionVOList = new ArrayList<>();
-            for (String questionId : questionsJson.getJSONArray(ExamConstant.LISTEN2CH).toJavaList(String.class))
+            for (String questionId : questionsJson.getJSONArray(QuestionTypes.LISTEN2CH.getForShort()).toJavaList(String.class))
             {
                 Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
                 ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
