@@ -1,5 +1,6 @@
 package com.goldfish.vo.unit;
 
+import com.alibaba.fastjson.JSON;
 import com.goldfish.vo.BasicVO;
 
 import java.util.List;
@@ -9,15 +10,15 @@ import java.util.List;
  */
 public class SaveFinishUnitStudyVO extends BasicVO {
 
-    private List<WordStudyVO> latestStudyPosition;
+    private String latestStudyPosition;
     private Integer cashPoint = 1;
 
-    public List<WordStudyVO> getLatestStudyPosition() {
+    public String getLatestStudyPosition() {
         return latestStudyPosition;
     }
 
     public void setLatestStudyPosition(List<WordStudyVO> latestStudyPosition) {
-        this.latestStudyPosition = latestStudyPosition;
+        this.latestStudyPosition = JSON.toJSONString(latestStudyPosition);
     }
 
     public Integer getCashPoint() {

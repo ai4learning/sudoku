@@ -92,6 +92,6 @@ public interface UnitStudyManager {
      * 更新用户非当前单元学习位置为false
      * @param unitStudy
      */
-    public void updateNotCurStudyPosition(UnitStudy unitStudy);
+    public void otherUnitNotCurStudyPosition(UnitStudy unitStudy);
 
 }

@@ -64,7 +64,7 @@ public class UnitStudyManagerImpl implements UnitStudyManager {
     }
 
     @Override
-    public void updateNotCurStudyPosition(UnitStudy unitStudy) {
+    public void otherUnitNotCurStudyPosition(UnitStudy unitStudy) {
         unitWordsStudyDao.updateNotCurStudyPosition(unitStudy);
     }
 

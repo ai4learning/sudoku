@@ -17,10 +17,13 @@ public enum State {
     private String desc;
     private Boolean result;
     private static Map<Integer,State> map = new HashMap<Integer,State>();
+    private static final Map<Boolean,Integer> BOOL_INT = new HashMap<Boolean,Integer>();
 
     static {
         map.put(1, State.YES);
         map.put(0, State.NO);
+        BOOL_INT.put(Boolean.TRUE, 1);
+        BOOL_INT.put(Boolean.FALSE, 0);
     }
 
     State(int state, String desc) {
@@ -44,5 +47,9 @@ public enum State {
 
     public static Map<Integer, State> getMap() {
         return map;
+    }
+
+    public static Map<Boolean, Integer> getBoolInt() {
+        return BOOL_INT;
     }
 }

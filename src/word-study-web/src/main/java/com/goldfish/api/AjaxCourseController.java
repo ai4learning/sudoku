@@ -666,52 +666,22 @@ public class AjaxCourseController extends BaseController {
         String trainingCode = LoginContext.getLoginContext().getTrainingCode();
         try {
             LoginRecord loginRecord = loginRecordService.getLoginRecordByTraining(trainingId, trainingCode);
-
-
-            // 1.保存单元学习记录
-            UnitStudy unitStudyQuery = new UnitStudy();
-            unitStudyQuery.setStudentId(loginRecord.getUserId());
-            unitStudyQuery.setLessonCode(moduleCode);
-            unitStudyQuery.setUnitNbr(unitNbr);
-            unitStudyQuery.setState(State.VALID.getState());
-            CommonResult<UnitStudy> unitStudyResult = unitStudyService.getUnique(unitStudyQuery);
-            if (unitStudyResult == null || !unitStudyResult.isSuccess()) {
-                LogTypeEnum.DEFAULT.error("查询单元学习失败");
-                saveUnitStudyVO.setMsg("查询单元学习失败");
+            if (loginRecord == null) {
                 return saveUnitStudyVO;
             }
-            UnitStudy unitStudy = unitStudyResult.getDefaultModel();
-            if (unitStudy == null) {
-                LogTypeEnum.DEFAULT.error("学生单元学习不存在");
-                saveUnitStudyVO.setMsg("学生单元学习不存在");
-                saveUnitStudyVO.setSuccess(true);
-                return saveUnitStudyVO;
-            }
-
-            // 更新学习时间等字段
-            unitStudy.setTotalReadingTime(totalReadingTime);
-            unitStudy.setTotalWritingTime(totalWritingTime);
-            unitStudy.setTotalNumber(totalWordsNbr);
-            if ("finish".equals(extra)) {
-                unitStudy.setIsFinished(FinishState.COMPLETE.getState());
-            }
-//            unitStudy
-            CommonResult<UnitStudy> updateUnitStudyResult = unitStudyService.updateUnitWordsStudy(unitStudy);
-            if (updateUnitStudyResult == null || !updateUnitStudyResult.isSuccess()) {
-                LogTypeEnum.DEFAULT.error("更新学生单元学习失败");
-                saveUnitStudyVO.setMsg("更新学生单元学习失败");
-                return saveUnitStudyVO;
-            }
-            // 2.保存每个单词的学习情况
-            for (WordStudyDto wordStudyDto : vocDataAfterReview) {
-                WordStudy updateWordStudy = new WordStudy();
-//                updateWordStudy.set
-
-
-//                wordStudyService.updateWordStudy();
-            }
-
-
+            saveUnitStudyVO = unitStudyService.doAjaxInterruptSaveUnit(
+                    loginRecord.getUserId(),
+                    saveUnitStudyVO,
+                    moduleCode,
+                    extra,
+                    unitNbr,
+                    studyToken,
+                    isContinue,
+                    seconds4SpellingLetter,
+                    totalReadingTime,
+                    totalWritingTime,
+                    vocDataAfterReview,
+                    totalWordsNbr);
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
             saveUnitStudyVO.setMsg("保存单元学习异常");
@@ -738,92 +708,36 @@ public class AjaxCourseController extends BaseController {
                                             ModelMap context) {
 
         SaveFinishUnitStudyVO saveFinishUnitStudyVO = new SaveFinishUnitStudyVO();
-
         String trainingId = LoginContext.getLoginContext().getTrainingId();
         String trainingCode = LoginContext.getLoginContext().getTrainingCode();
         try {
+            // 获取用户登录信息
             LoginRecord loginRecord = loginRecordService.getLoginRecordByTraining(trainingId, trainingCode);
-            // 1.保存单元学习记录
-            UnitStudy unitStudy = getUnitStudy(loginRecord.getUserId(), moduleCode, unitNbr, saveFinishUnitStudyVO);
-            if (unitStudy == null) {
+            if (loginRecord == null) {
                 return saveFinishUnitStudyVO;
             }
-            // a.更新学习时间等字段
-            unitStudy.setTotalReadingTime(totalReadingTime);
-            unitStudy.setTotalWritingTime(totalWritingTime);
-            unitStudy.setTotalNumber(totalWordsNbr);
-            if ("finish".equals(extra)) {
-                /**  是否学习完成  */
-                unitStudy.setIsFinished(FinishState.COMPLETE.getState());
-                // 单元学习完毕，则到单元测试阶段
-                unitStudy.setCurrentPhase(StudyPhase.UNIT_TEST.getPhase());
-            }
-            /**  位置类型  */
-            unitStudy.setPositionType(1);// 1表示单词
-            /**  当前保存，则为当前学习位置，当前写是，同时更新该学生该课程其他单元为false  */
-            unitStudy.setIsCurrentPos(1);// 当前保存，则为当前位置
-
-//            unitStudyService.updateUnitWordsStudy()
-
-
-
-
-
-
-            // b.更新学习位置信息
-            /**  单词学习位置  */
-//            unitStudy.setStudyPos();
-//            /**  学习位置CODE  */
-//            unitStudy.setStudyPositionCode();
-//            /**  单词CODE  */
-//            unitStudy.setVocCode();
-//            /**  单词  */
-//            unitStudy.setSpelling();
-
-            CommonResult<UnitStudy> updateUnitStudyResult = unitStudyService.updateUnitWordsStudy(unitStudy);
-            if (updateUnitStudyResult == null || !updateUnitStudyResult.isSuccess()) {
-                LogTypeEnum.DEFAULT.error("更新学生单元学习失败");
-                saveFinishUnitStudyVO.setMsg("更新学生单元学习失败");
-                return saveFinishUnitStudyVO;
-            }
-            // 2.保存每个单词的学习情况
-            for (WordStudyDto wordStudyDto : vocDataAfterReview) {
-                WordStudy updateWordStudy = new WordStudy();
-//                updateWordStudy.set
-
-
-//                wordStudyService.updateWordStudy();
-            }
-
+            saveFinishUnitStudyVO = unitStudyService.doAjaxFinishSaveUnit(
+                    loginRecord.getUserId(),
+                    saveFinishUnitStudyVO,
+                    moduleCode,
+                    extra,
+                    unitNbr,
+                    studyToken,
+                    isContinue,
+                    seconds4SpellingLetter,
+                    totalReadingTime,
+                    totalWritingTime,
+                    vocDataAfterReview,
+                    totalWordsNbr);
 
         } catch (Exception e) {
-            LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
-            saveFinishUnitStudyVO.setMsg("保存单元学习异常");
+            LogTypeEnum.DEFAULT.error(e, "保存完成单元学习异常");
+            saveFinishUnitStudyVO.setMsg("保存完成单元学习异常");
         }
         return saveFinishUnitStudyVO;
     }
 
-    private UnitStudy getUnitStudy(Integer studentId, String moduleCode, Integer unitNbr, BasicVO vo) {
-        UnitStudy unitStudyQuery = new UnitStudy();
-        unitStudyQuery.setStudentId(studentId);
-        unitStudyQuery.setLessonCode(moduleCode);
-        unitStudyQuery.setUnitNbr(unitNbr);
-        unitStudyQuery.setState(State.VALID.getState());
-        CommonResult<UnitStudy> unitStudyResult = unitStudyService.getUnique(unitStudyQuery);
-        if (unitStudyResult == null || !unitStudyResult.isSuccess()) {
-            LogTypeEnum.DEFAULT.error("查询单元学习失败");
-            vo.setMsg("查询单元学习失败");
-            return null;
-        }
-        UnitStudy unitStudy = unitStudyResult.getDefaultModel();
-        if (unitStudy == null) {
-            LogTypeEnum.DEFAULT.error("学生单元学习不存在");
-            vo.setMsg("学生单元学习不存在");
-            vo.setSuccess(true);
-            return null;
-        }
-        return unitStudy;
-    }
+
 
 
 

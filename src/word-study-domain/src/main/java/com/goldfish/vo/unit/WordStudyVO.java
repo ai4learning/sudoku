@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class WordStudyVO extends WordStudyDto{
     @JSONField( name="Id")
-    private Integer id;
+    private Integer id = 0;
     private String studyToken;
     private String remark;
     private Long startTime;
