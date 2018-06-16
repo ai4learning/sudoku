@@ -21,7 +21,9 @@ public class Question  implements Serializable {
 	/**  ID  */
 	private Long id; 
 	/**  试题类型  */
-	private Integer questionType; 
+	private Integer questionType;
+
+	private String type;
 	/**  课程ID  */
 	private Integer lessonId; 
 	/**  单元号  */
@@ -186,7 +188,12 @@ public class Question  implements Serializable {
   	public java.util.Date getModified() {
   	  return this.modified;
   	}
-	
-	  	
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 }

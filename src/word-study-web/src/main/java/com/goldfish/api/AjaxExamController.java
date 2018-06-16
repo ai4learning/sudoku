@@ -797,9 +797,15 @@ public class AjaxExamController extends AjaxErrorBookController{
             Question questionQuery = new Question();
             QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber
                     (Integer.valueOf(questionTypesArray[questionTypeCount/questionNbr]));
-            questionQuery.setQuestionType(qt.getNumber());
+            questionQuery.setType(qt.getFullName());
             questionQuery.setWordId(wordStudy.getWordId());
             Question question = questionService.getUnique(questionQuery).getDefaultModel();
+            if(question == null)
+            {
+                //如果没查到，说明这个单词没有对应的题，就下一个单词
+                continue;
+            }
+
             if (qt.equals(QuestionTypes.LISTEN2WRITE))
             {
                 Listen2WriteVO vo = new Listen2WriteVO();
@@ -1479,7 +1485,7 @@ public class AjaxExamController extends AjaxErrorBookController{
     private List<QuestionVO> getVoFromQuestions(Question questionQuery,QuestionTypes questionType)
     {
         List<QuestionVO> questionVOList = new ArrayList<>(UNIT_EXAM_QUESTION_NUMBER);
-        questionQuery.setQuestionType(questionType.getNumber());
+        questionQuery.setType(questionType.getFullName());
         List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
         Collections.shuffle(questionList);
 

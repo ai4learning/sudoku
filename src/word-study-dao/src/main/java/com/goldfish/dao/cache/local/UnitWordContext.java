@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component("courseContext")
+@Component
 public class UnitWordContext {
 
     private Map<String, UnitWords> context = new HashMap<String, UnitWords>(512);
