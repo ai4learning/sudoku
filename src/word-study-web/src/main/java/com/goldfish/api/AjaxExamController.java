@@ -782,65 +782,76 @@ public class AjaxExamController extends AjaxErrorBookController{
         WordStudy wordStudyQuery = new WordStudy();
         TestArea testArea1 = TestArea.getTestArea(testArea);
         wordStudyQuery.setMemoryLevel(testArea1.getCorrespondingMemoryLevel().getLevel());
-        wordStudyQuery.setStudentId(user.getId().intValue());  //TODO 到底是什么ID
+        wordStudyQuery.setStudentId(user.getId().intValue());
         wordStudyQuery.setUserCode(user.getUserCode());
         List<WordStudy> wordStudyList = wordStudyService.getListByExample(wordStudyQuery).getDefaultModel();
+        Collections.shuffle(wordStudyList);
         //3.根据questionTypes和questionNbr出题
         //testArea=0&questionNbr=10&questionTypes=0,1,2
         String[] questionTypesArray = questionTypes.split(",");
-        int questionNbrCount = questionNbr * questionTypesArray.length;
-        int questionTypeCount = 0;
-        for (WordStudy wordStudy : wordStudyList)
+        for (String str : questionTypesArray)
         {
-            if (questionTypeCount >= questionNbrCount)
-                break;
             Question questionQuery = new Question();
-            QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber
-                    (Integer.valueOf(questionTypesArray[questionTypeCount/questionNbr]));
+            QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber(Integer.valueOf(str));
             questionQuery.setType(qt.getFullName());
-            questionQuery.setWordId(wordStudy.getWordId());
-            Question question = questionService.getUnique(questionQuery).getDefaultModel();
-            if(question == null)
+            List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
+            Collections.shuffle(questionList);
+            List nowList = ecList;
+            //获取当前是在往哪个List中写
+            if (qt.equals(QuestionTypes.EN2CH))
+                nowList = ecList;
+            else if(qt.equals(QuestionTypes.CH2EN))
+                nowList = ceList;
+            else if(qt.equals(QuestionTypes.LISTEN2CH))
+                nowList = lcList;
+            else if(qt.equals(QuestionTypes.LISTEN2WRITE))
+                nowList = lwList;
+            for (Question question : questionList)
             {
-                //如果没查到，说明这个单词没有对应的题，就下一个单词
-                continue;
-            }
-
-            if (qt.equals(QuestionTypes.LISTEN2WRITE))
-            {
-                Listen2WriteVO vo = new Listen2WriteVO();
-                vo.setAnswerIndex(question.getAnswerIndex());
-                vo.setQuestion(question.getQuestion());
-                vo.setSpelling(question.getSpelling());
-                vo.setVocCode(question.getVocCode());
-                lwList.add(vo);
-            }
-            else
-            {
-                ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
-                QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
-                        ,question.getVocCode(),question.getQuestion(),choicesVO,question.getId());
-                if (qt.equals(QuestionTypes.EN2CH))
+                //如果写够了就break
+                if (nowList.size() >= questionNbr)
+                    break;
+                for (WordStudy wordStudy : wordStudyList)
                 {
-
-                    ecList.add(questionVO);
-                }
-                else if (qt.equals(QuestionTypes.CH2EN))
-                {
-                    ceList.add(questionVO);
-                }
-                else if (qt.equals(QuestionTypes.LISTEN2CH))
-                {
-                    lcList.add(questionVO);
+                    if (question.getWordId().equals(wordStudy.getWordId()))
+                    {
+                        if (qt.equals(QuestionTypes.LISTEN2WRITE) && lwList.size()<questionNbr)
+                        {
+                            Listen2WriteVO vo = new Listen2WriteVO();
+                            vo.setAnswerIndex(question.getAnswerIndex());
+                            vo.setQuestion(question.getQuestion());
+                            vo.setSpelling(question.getSpelling());
+                            vo.setVocCode(question.getVocCode());
+                            lwList.add(vo);
+                        }
+                        else
+                        {
+                            ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
+                            QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
+                                    ,question.getVocCode(),question.getQuestion(),choicesVO,question.getId());
+                            if (qt.equals(QuestionTypes.EN2CH) && ecList.size()<questionNbr)
+                            {
+                                ecList.add(questionVO);
+                            }
+                            else if (qt.equals(QuestionTypes.CH2EN) && ceList.size()<questionNbr)
+                            {
+                                ceList.add(questionVO);
+                            }
+                            else if (qt.equals(QuestionTypes.LISTEN2CH) && lcList.size()<questionNbr)
+                            {
+                                lcList.add(questionVO);
+                            }
+                        }
+                        break;
+                    }
                 }
             }
-            questionTypeCount++;
         }
         examVO.setDataEn2Ch(ecList);
         examVO.setDataCh2En(ceList);
         examVO.setDataListen2Ch(lcList);
         examVO.setDataListen2Write(lwList);
-        examVO.setCondition(0); //TODO 这是什么
+        examVO.setCondition(0);
         examVO.setMsg("success");
         examVO.setSuccess(true);
         return examVO;
