@@ -173,4 +173,23 @@ public class Paper  implements Serializable {
 	public void setModuleCode(String moduleCode) {
 		this.moduleCode = moduleCode;
 	}
+
+	@Override
+	public String toString() {
+		return "Paper{" +
+				"id=" + id +
+				", lessonId=" + lessonId +
+				", moduleCode='" + moduleCode + '\'' +
+				", unitNbr=" + unitNbr +
+				", type=" + type +
+				", testArea=" + testArea +
+				", questionNbr=" + questionNbr +
+				", questonType='" + questonType + '\'' +
+				", standardDuration=" + standardDuration +
+				", questions='" + questions + '\'' +
+				", state=" + state +
+				", created=" + created +
+				", modified=" + modified +
+				'}';
+	}
 }

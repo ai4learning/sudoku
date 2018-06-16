@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.QuestionTypes;
+import com.goldfish.constant.State;
 import com.goldfish.constant.TestArea;
 import com.goldfish.dao.cache.local.CourseContext;
 import com.goldfish.domain.*;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -773,6 +775,7 @@ public class AjaxExamController extends AjaxErrorBookController{
         // 1.装填用户信息
         User user = this.getUserInfo();
         if (user == null) {
+            examVO.setCondition(-1);
             return examVO;
         }
         //2.根据用户信息和testArea查询单词列表
@@ -810,7 +813,7 @@ public class AjaxExamController extends AjaxErrorBookController{
             {
                 ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
                 QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
-                        ,question.getVocCode(),question.getQuestion(),choicesVO);
+                        ,question.getVocCode(),question.getQuestion(),choicesVO,question.getId());
                 if (qt.equals(QuestionTypes.EN2CH))
                 {
 
@@ -1398,7 +1401,8 @@ public class AjaxExamController extends AjaxErrorBookController{
             dataVO.setDataEn2Ch(getVoFromQuestions(questionQuery,QuestionTypes.EN2CH));
             dataVO.setDataCh2En(getVoFromQuestions(questionQuery,QuestionTypes.CH2EN));
             dataVO.setDataListen2Ch(getVoFromQuestions(questionQuery,QuestionTypes.LISTEN2CH));
-            // TODO 持久化paper
+            // 持久化paper
+            paperService.addPaper(generatePaper(moduleCode,unitNbr,dataVO));
         }
         UnitExamVO unitExamVO = new UnitExamVO();
         unitExamVO.setSuccess(true);
@@ -1466,7 +1470,7 @@ public class AjaxExamController extends AjaxErrorBookController{
             Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
             ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
             QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
-                    ,question.getVocCode(),question.getQuestion(),choicesVO);
+                    ,question.getVocCode(),question.getQuestion(),choicesVO,Long.valueOf(questionId));
             questionVOList.add(questionVO);
         }
         return questionVOList;
@@ -1483,8 +1487,41 @@ public class AjaxExamController extends AjaxErrorBookController{
         for (int index = 0;index <= questionLimit; index++) {
             Question q = questionList.get(index);
             questionVOList.add(new QuestionVO(q.getAnswerIndex(), q.getSpelling(), q.getVocCode(), q.getQuestion()
-                    , new ChoicesVO(q.getChoices())));
+                    , new ChoicesVO(q.getChoices()), q.getId()));
         }
         return questionVOList;
+    }
+
+    private Paper generatePaper(String moduleCode, Integer unitNbr, DataVO dataVO)
+    {
+        Paper paper = new Paper();
+        paper.setState(State.VALID.getState());
+        paper.setUnitNbr(unitNbr);
+        paper.setModuleCode(moduleCode);
+        paper.setLessonId(courseContext.getLessonIdByCode(moduleCode));
+        paper.setCreated(new Date());
+        paper.setQuestionNbr(getDataVOQuestionNbr(dataVO));
+        JSONObject questions = new JSONObject();
+        questions.put(QuestionTypes.EN2CH.getForShort(),generateQuestionIdList(dataVO.getDataEn2Ch()));
+        questions.put(QuestionTypes.CH2EN.getForShort(),generateQuestionIdList(dataVO.getDataCh2En()));
+        questions.put(QuestionTypes.LISTEN2CH.getForShort(),generateQuestionIdList(dataVO.getDataListen2Ch()));
+        paper.setQuestions(questions.toJSONString());
+        LogTypeEnum.DEFAULT.info(paper.toString());
+        return paper;
+    }
+
+    private int getDataVOQuestionNbr(DataVO dataVO)
+    {
+        return dataVO.getDataCh2En().size()+dataVO.getDataEn2Ch().size()+dataVO.getDataListen2Ch().size();
+    }
+
+    private List<Long> generateQuestionIdList(List<QuestionVO> questionVOList)
+    {
+        List<Long> list = new ArrayList<>();
+        for (QuestionVO questionVO : questionVOList)
+        {
+            list.add(questionVO.getQuestionId());
+        }
+        return list;
     }
 }
