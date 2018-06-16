@@ -10,6 +10,7 @@ import com.goldfish.domain.Course;
 import com.goldfish.domain.CourseStudy;
 import com.goldfish.domain.Word;
 import com.goldfish.manager.*;
+import com.goldfish.vo.BaseVO;
 import com.goldfish.vo.error.ErrorBookInfo;
 import com.goldfish.vo.error.ErrorBookVO;
 import com.goldfish.vo.error.ErrorWordsVO;
@@ -256,10 +257,20 @@ public class SelfWordsServiceImpl implements SelfWordsService {
             errorWordsVO.setSuccess(true);
             return errorWordsVO;
         }
-
         // 组装VO返回
         fillErrorWordsVO(studyToken, errorWordsVO, errorWords, errorWords.size());
         return errorWordsVO;
+    }
+
+    @Override
+    public BaseVO countErrorWordsByConditon(Integer userId, String studyToken, String orderType) {
+        BaseVO vo = new BaseVO();
+        ErrorWordsVO errorWordsVO = this.getErrorWordsByConditon(userId, studyToken, orderType, 0, UN_LIMIT);
+        vo.setTotalNbr(errorWordsVO.getTotalNbr());
+        vo.setSuccess(errorWordsVO.isSuccess());
+        vo.setMsg(errorWordsVO.getMsg());
+        vo.setCondition(errorWordsVO.getCondition());
+        return vo;
     }
 
 

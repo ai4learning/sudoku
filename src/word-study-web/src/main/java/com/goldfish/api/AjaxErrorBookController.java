@@ -3,6 +3,7 @@ package com.goldfish.api;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.LoginRecord;
 import com.goldfish.service.SelfWordsService;
+import com.goldfish.vo.BaseVO;
 import com.goldfish.vo.error.ErrorBookVO;
 import com.goldfish.vo.error.ErrorWordsVO;
 import org.springframework.ui.ModelMap;
@@ -131,9 +132,17 @@ public class AjaxErrorBookController extends AjaxReviewBookController {
     @RequestMapping(value = "GetErrorBookCount", method = {RequestMethod.GET, RequestMethod.POST})
     public
     @ResponseBody
-    Map<String, Object> doGetErrorBookCount(String orderType, ModelMap context) {
-        CommonResult result = null;
-        return result.getReturnMap();
+    BaseVO doGetErrorBookCount(String orderType, ModelMap context) {
+        LoginRecord loginRecord = this.getLoginRecord();
+        if (loginRecord == null) {
+            BaseVO vo = new BaseVO();
+            vo.setMsg("未登录");
+            vo.setCondition(-1);
+            return vo;
+        }
+        return errorWordsService.countErrorWordsByConditon(
+                loginRecord.getUserId(),loginRecord.getStudyToken(),
+                orderType);
     }
 
     /**

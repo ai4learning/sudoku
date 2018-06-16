@@ -4,6 +4,7 @@ import java.util.List;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.SelfWords;
+import com.goldfish.vo.BaseVO;
 import com.goldfish.vo.error.ErrorBookVO;
 import com.goldfish.vo.error.ErrorWordsVO;
 
@@ -93,4 +94,6 @@ public interface SelfWordsService {
     ErrorBookVO getErrorUnit(Integer userId, String studyToken, String moduleCode, Integer unitNbr);
 
     ErrorWordsVO getErrorWordsByConditon(Integer userId, String studyToken, String orderType, Integer start, Integer limit);
+
+    BaseVO countErrorWordsByConditon(Integer userId, String studyToken, String orderType);
 }
