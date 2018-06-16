@@ -62,7 +62,7 @@
 	</sql>
 
 	<insert id="addPaper" parameterType="com.goldfish.domain.Paper">
-		insert into paper (lesson_id,unit_nbr,type,test_area,question_nbr,queston_type,standard_duration,questions,state,created,modified)
+		insert into paper (lesson_id,module_code,unit_nbr,type,test_area,question_nbr,queston_type,standard_duration,questions,state,created,modified)
 			values(#{lessonId},#{moduleCode},#{unitNbr},#{type},#{testArea},#{questionNbr},#{questonType},#{standardDuration},#{questions},#{state},#{created},#{modified})
     
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">

@@ -13,6 +13,11 @@ package com.goldfish.vo.exam;
                  },
  */
 public class ChoicesVO {
+    private static final String regexA = "'A': '";
+    private static final String regexB = "'B': '";
+    private static final String regexC = "'C': '";
+    private static final String regexD = "'D': '";
+
     private String a;
     private String b;
     private String c;
@@ -26,10 +31,13 @@ public class ChoicesVO {
     //{'A': '海报,招贴画', 'B': 'adj.不愿意的，乐意的', 'C': '悲伤，悲痛', 'D': '黑板'}
     public ChoicesVO(String choices)
     {
-        a = choices.replace("'A': '","").split("', 'B'")[0];
-        b = choices.split("'B': '")[1].split("', 'C'")[0];
-        c = choices.split("'C': '")[1].split("', 'D'")[0];
-        d = choices.split("'D': '")[1].split("'")[0];
+        a = choices.replace("{'A': '","").split("', 'B'")[0];
+        if(choices.contains(regexB))
+            b = choices.split(regexB)[1].split("', 'C'")[0];
+        if(choices.contains(regexC))
+            c = choices.split(regexC)[1].split("', 'D'")[0];
+        if(choices.contains(regexD))
+            d = choices.split(regexD)[1].split("'")[0];
     }
 
     public String getA() {
