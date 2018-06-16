@@ -782,9 +782,10 @@ public class AjaxExamController extends AjaxErrorBookController{
         WordStudy wordStudyQuery = new WordStudy();
         TestArea testArea1 = TestArea.getTestArea(testArea);
         wordStudyQuery.setMemoryLevel(testArea1.getCorrespondingMemoryLevel().getLevel());
-        wordStudyQuery.setStudentId(user.getId().intValue());  //TODO 到底是什么ID
+        wordStudyQuery.setStudentId(user.getId().intValue());
         wordStudyQuery.setUserCode(user.getUserCode());
         List<WordStudy> wordStudyList = wordStudyService.getListByExample(wordStudyQuery).getDefaultModel();
+        Collections.shuffle(wordStudyList);
         //3.根据questionTypes和questionNbr出题
         //testArea=0&questionNbr=10&questionTypes=0,1,2
         String[] questionTypesArray = questionTypes.split(",");
@@ -794,8 +795,22 @@ public class AjaxExamController extends AjaxErrorBookController{
             QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber(Integer.valueOf(str));
             questionQuery.setType(qt.getFullName());
             List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
+            Collections.shuffle(questionList);
+            List nowList = ecList;
+            //获取当前是在往哪个List中写
+            if (qt.equals(QuestionTypes.EN2CH))
+                nowList = ecList;
+            else if(qt.equals(QuestionTypes.CH2EN))
+                nowList = ceList;
+            else if(qt.equals(QuestionTypes.LISTEN2CH))
+                nowList = lcList;
+            else if(qt.equals(QuestionTypes.LISTEN2WRITE))
+                nowList = lwList;
             for (Question question : questionList)
             {
+                //如果写够了就break
+                if (nowList.size() >= questionNbr)
+                    break;
                 for (WordStudy wordStudy : wordStudyList)
                 {
                     if (question.getWordId().equals(wordStudy.getWordId()))
@@ -827,6 +842,7 @@ public class AjaxExamController extends AjaxErrorBookController{
                                 lcList.add(questionVO);
                             }
                         }
+                        break;
                     }
                 }
             }
@@ -835,7 +851,7 @@ public class AjaxExamController extends AjaxErrorBookController{
         examVO.setDataCh2En(ceList);
         examVO.setDataListen2Ch(lcList);
         examVO.setDataListen2Write(lwList);
-        examVO.setCondition(0); //TODO 这是什么
+        examVO.setCondition(0);
         examVO.setMsg("success");
         examVO.setSuccess(true);
         return examVO;

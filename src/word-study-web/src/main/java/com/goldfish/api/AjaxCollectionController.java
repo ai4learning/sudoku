@@ -1,15 +1,34 @@
 package com.goldfish.api;
 
+import com.goldfish.domain.SelfWords;
+import com.goldfish.domain.User;
+import com.goldfish.domain.Word;
+import com.goldfish.service.SelfWordsService;
+import com.goldfish.service.WordService;
+import com.goldfish.vo.BasicVO;
 import com.goldfish.web.base.BaseController;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
 
 /**
  * Created by Administrator on 2018/6/16 0016.
  * 收藏模块
  */
 public class AjaxCollectionController extends BaseController {
+
+    private static final String memorySuccess = "记忆已经保存";
+    private static final String memoryFail = "记忆已经保存";
+    private static final String loadSuccess = "记忆已经保存";
+    private static final String loadFail = "记忆已经保存";
+
+    @Resource
+    private SelfWordsService selfWordsService;
+    @Resource
+    private WordService wordService;
 
     /**
      * /api/Ajax/AjaxPostCollect 收藏单词
@@ -24,8 +43,24 @@ public class AjaxCollectionController extends BaseController {
      }
      */
     @RequestMapping(value="AjaxPostCollect",method={RequestMethod.GET,RequestMethod.POST})
-    public @ResponseBody Object doAjaxPostCollect()
+    public @ResponseBody Object doAjaxPostCollect(String vocCode, ModelMap context)
     {
+        BasicVO vo = new BasicVO();
+        // 1.装填用户信息
+        User user = this.getUserInfo();
+        if (user == null) {
+            vo.setSuccess(false);
+            vo.setMsg("记忆保存失败");
+            return vo;
+        }
+        // 2.使用vocCode查询单词
+        Word word = new Word();
+
+        // 3.使用SelfWord保存收藏
+        SelfWords selfWords = new SelfWords();
+        selfWords.setVocCode(vocCode);
+        selfWords.setStudentId(user.getId());
+        selfWords.setUserCode(user.getUserCode());
         return null;
     }
 
@@ -66,7 +101,7 @@ public class AjaxCollectionController extends BaseController {
      }
      */
     @RequestMapping(value="GetVocabulary",method={RequestMethod.GET,RequestMethod.POST})
-    public @ResponseBody Object doGetVocabulary()
+    public @ResponseBody Object doGetVocabulary(String orderType, ModelMap context)
     {
         return null;
     }
@@ -88,7 +123,7 @@ public class AjaxCollectionController extends BaseController {
      }
      */
     @RequestMapping(value="GetVocabularyCount",method={RequestMethod.GET,RequestMethod.POST})
-    public @ResponseBody Object doGetVocabularyCount()
+    public @ResponseBody Object doGetVocabularyCount(String orderType, ModelMap context)
     {
         return null;
     }
