@@ -37,8 +37,6 @@ public class AjaxCourseController extends BaseController {
     @Resource
     private UserService userService;
     @Resource
-    private LoginRecordService loginRecordService;
-    @Resource
     private CourseService courseService;
     @Resource
     private UnitService unitService;
@@ -411,19 +409,7 @@ public class AjaxCourseController extends BaseController {
         return course;
     }
 
-    private User fillUserInfo(UserVO userVO) {
-        User user = getUserInfo();
-        if (user == null) {
-            LogTypeEnum.DEFAULT.info("未获取到用户信息");
-            userVO.setMsg("未获取到用户信息");
-            userVO.setSuccess(true);
-            return null;
-        }
-        /*** 设置User信息 ****/
-        userVO.setUserState(user.getUserState());
-        userVO.setTotalLoginTimes(user.getTotalLoginTimes());
-        return user;
-    }
+
 
     /**
      * 获取学生单元学习数据

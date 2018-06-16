@@ -1,6 +1,7 @@
 package com.goldfish.vo.unit;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.goldfish.vo.word.UnitWordVO;
 
 /**
  *             "Id":1490,
@@ -17,93 +18,11 @@ import com.alibaba.fastjson.annotation.JSONField;
  *             "isCollected":false
  * Created by John on 2018/6/2 0002.
  */
-public class UnitStudyVO {
-    @JSONField( name="Id")
-    private Long id;
-    private String vocCode;
-    private Integer vocIndex;
-    private String spelling;
-    private String meaning;
-    private String soundMarkUs;
-    private String soundMarkUk;
-    @JSONField( name="UnitId")
-    private Integer unitId;
-    private Integer unitNbr;
+public class UnitStudyVO extends UnitWordVO{
+
     private Integer lessonNbr;
     private Integer fstClassId;
-    private boolean isCollected;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getVocCode() {
-        return vocCode;
-    }
-
-    public void setVocCode(String vocCode) {
-        this.vocCode = vocCode;
-    }
-
-    public Integer getVocIndex() {
-        return vocIndex;
-    }
-
-    public void setVocIndex(Integer vocIndex) {
-        this.vocIndex = vocIndex;
-    }
-
-    public String getSpelling() {
-        return spelling;
-    }
-
-    public void setSpelling(String spelling) {
-        this.spelling = spelling;
-    }
-
-    public String getMeaning() {
-        return meaning;
-    }
-
-    public void setMeaning(String meaning) {
-        this.meaning = meaning;
-    }
-
-    public String getSoundMarkUs() {
-        return soundMarkUs;
-    }
-
-    public void setSoundMarkUs(String soundMarkUs) {
-        this.soundMarkUs = soundMarkUs;
-    }
-
-    public String getSoundMarkUk() {
-        return soundMarkUk;
-    }
-
-    public void setSoundMarkUk(String soundMarkUk) {
-        this.soundMarkUk = soundMarkUk;
-    }
-
-    public Integer getUnitId() {
-        return unitId;
-    }
-
-    public void setUnitId(Integer unitId) {
-        this.unitId = unitId;
-    }
-
-    public Integer getUnitNbr() {
-        return unitNbr;
-    }
-
-    public void setUnitNbr(Integer unitNbr) {
-        this.unitNbr = unitNbr;
-    }
+    private String soundMarkUk;
 
     public Integer getLessonNbr() {
         return lessonNbr;
@@ -121,11 +40,11 @@ public class UnitStudyVO {
         this.fstClassId = fstClassId;
     }
 
-    public boolean isCollected() {
-        return isCollected;
+    public String getSoundMarkUk() {
+        return soundMarkUk;
     }
 
-    public void setIsCollected(boolean isCollected) {
-        this.isCollected = isCollected;
+    public void setSoundMarkUk(String soundMarkUk) {
+        this.soundMarkUk = soundMarkUk;
     }
 }
