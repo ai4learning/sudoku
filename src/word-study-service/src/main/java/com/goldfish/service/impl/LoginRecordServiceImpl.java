@@ -176,7 +176,7 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 			PageQuery pageQuery = new PageQuery(0,1);
 			pageQuery.setParam("wordTrainingId", trainingId);
 			pageQuery.setParam("wordTrainingCode", trainingCode);
-			pageQuery.setParam("state", State.VALID.getState());
+//			pageQuery.setParam("state", State.VALID.getState());
 			List<LoginRecord> list = loginRecordManager.getLoginRecordByPage(pageQuery);
 
 			if (CollectionUtils.isEmpty(list)) {
