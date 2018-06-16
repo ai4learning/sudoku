@@ -1,4 +1,5 @@
 import reqwest from 'reqwest'
+import React from 'react'
 import { Modal } from 'antd'
 
 const requesting = {}
@@ -21,9 +22,19 @@ export default function fetch(options) {
       if(result.success) {
         resolve(result)
       } else {
-        Modal.error({
-          title: (<p dangerouslySetInnerHTML={{ __html: result.message || '服务器开小差啦，请稍后重试~' }}></p>)
-        })
+        if(result.condition == -1) {
+          Modal.info({
+            title: '您还未登录，快去登录吧',
+            okText: '确定',
+            onOk: () => {
+              location.href = "/#/user/login?redirect="+encodeURIComponent(location.href)
+            }
+          })
+        } else {
+          Modal.error({
+            title: (<p dangerouslySetInnerHTML={{ __html: result.message || '服务器开小差啦，请稍后重试~' }}></p>)
+          })
+        }
         reject(result)
       }
     }).fail(err => {
