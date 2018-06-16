@@ -1452,20 +1452,31 @@ public class AjaxExamController extends AjaxErrorBookController{
                                Long realDuration, Long standardDuration,
                                Integer errorNbr,
                                Integer cashPoint, Integer cashPointType, ModelMap context) {
-        Exam examQuery = new Exam();
-        examQuery.setModuleCode(moduleCode);
-        examQuery.setResultScore(resultScore);
-        examQuery.setTestType(testType);
-        examQuery.setUnitNbr(unitNbr);
-        examQuery.setRealDuration(realDuration);
-        examQuery.setStandardDuration(standardDuration);
-        examQuery.setErrorNbr(errorNbr);
-        examQuery.setCashPoint(cashPoint);
-        examQuery.setCashPointType(cashPointType);
-
         BasicVO basicVO = new BasicVO();
+        // 1.装填用户信息
+        User user = this.getUserInfo();
+        if (user == null) {
+            LogTypeEnum.EXCEPTION.error("没有取到用户信息");
+            basicVO.setSuccess(false);
+            basicVO.setMsg("记忆保存失败");
+            return basicVO;
+        }
+        
+        Exam exam = new Exam();
+        exam.setUserCode(user.getUserCode());
+        exam.setUserId(user.getId().intValue());
+        exam.setModuleCode(moduleCode);
+        exam.setResultScore(resultScore);
+        exam.setTestType(testType);
+        exam.setUnitNbr(unitNbr);
+        exam.setRealDuration(realDuration);
+        exam.setStandardDuration(standardDuration);
+        exam.setErrorNbr(errorNbr);
+        exam.setCashPoint(cashPoint);
+        exam.setCashPointType(cashPointType);
+        
         try {
-            examService.addExam(examQuery);
+            examService.addExam(exam);
             basicVO.setSuccess(true);
             basicVO.setMsg("记忆已经保存");
         }catch (Exception e)
