@@ -22,7 +22,7 @@ public class LastStudyPositonVO {
     private Integer unitNbr;
     private Integer wordCount;
     private Boolean isContinue;
-    private Integer seconds4SpellingLetter;
+    private Long seconds4SpellingLetter;
     private Boolean isCurrentPos;
     private Integer isFinished;
     private String spelling;
@@ -137,11 +137,11 @@ public class LastStudyPositonVO {
         this.isContinue = isContinue;
     }
 
-    public Integer getSeconds4SpellingLetter() {
+    public Long getSeconds4SpellingLetter() {
         return seconds4SpellingLetter;
     }
 
-    public void setSeconds4SpellingLetter(Integer seconds4SpellingLetter) {
+    public void setSeconds4SpellingLetter(Long seconds4SpellingLetter) {
         this.seconds4SpellingLetter = seconds4SpellingLetter;
     }
 

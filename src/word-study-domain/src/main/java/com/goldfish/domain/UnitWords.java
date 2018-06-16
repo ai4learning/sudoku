@@ -186,7 +186,15 @@ public class UnitWords  implements Serializable {
   	public java.util.Date getModified() {
   	  return this.modified;
   	}
-	
-	  	
 
+	@Override
+	public int hashCode() {
+		return this.wordId;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		final UnitWords unitWord = (UnitWords) obj;
+		return this.wordId.equals(unitWord.getWordId()) && this.vocCode.equals(unitWord.getVocCode());
+	}
 }

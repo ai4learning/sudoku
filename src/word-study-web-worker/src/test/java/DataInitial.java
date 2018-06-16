@@ -1,9 +1,11 @@
+import com.goldfish.common.PageQuery;
+import com.goldfish.common.log.LogTypeEnum;
+import com.goldfish.constant.State;
 import com.goldfish.dao.AllwordDao;
+import com.goldfish.dao.QuestionDao;
 import com.goldfish.dao.UnitWordsDao;
 import com.goldfish.dao.WordDao;
-import com.goldfish.domain.Allword;
-import com.goldfish.domain.UnitWords;
-import com.goldfish.domain.Word;
+import com.goldfish.domain.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -26,9 +28,10 @@ public class DataInitial {
     private UnitWordsDao unitWordsDao;
     @Resource
     private WordDao wordDao;
-
     @Resource
     private AllwordDao allwordDao;
+    @Resource
+    private QuestionDao questionDao;
 
     @Test
     public void deleteSameWordsInWord() {
@@ -145,4 +148,39 @@ public class DataInitial {
             }
         }
     }
+
+    @Test
+    public void initQuestionLessonUnitRelation() {
+
+        Map<String,Object> paramMap = new HashMap<String,Object>();
+        paramMap.put("startIndex",0);
+        paramMap.put("pageSize", 1000000000);
+        List<Question> questions = questionDao.getQuestionByPage(paramMap);
+        for (Question question : questions) {
+            String vocCode = question.getVocCode();
+
+            UnitWords query = new UnitWords();
+            query.setVocCode(vocCode);
+            query.setState(State.VALID.getState());
+            UnitWords unique = unitWordsDao.getUnique(query);
+            if (unique == null) {
+                System.out.println("UnitWord不存在，vocCode= " +  vocCode + ",spell= " + question.getSpelling());
+                continue;
+            }
+
+            question.setLessonId(Integer.valueOf(String.valueOf(unique.getLessonId())));
+            question.setUnitNbr(unique.getUnitNbr());
+            question.setWordId(unique.getWordId());
+            questionDao.updateQuestion(question);
+            System.out.println("questid= "+question.getId()+" ,建立课程单元关联成功");
+        }
+
+
+
+
+    }
+
+
+
+
 }

@@ -7,13 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
-import com.alibaba.fastjson.JSON;
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.FinishState;
 import com.goldfish.constant.State;
 import com.goldfish.constant.StudyPhase;
+import com.goldfish.constant.WordLibType;
+import com.goldfish.dao.cache.local.CourseContext;
+import com.goldfish.dao.cache.local.UnitWordContext;
+import com.goldfish.domain.SelfWords;
 import com.goldfish.domain.UnitStudy;
+import com.goldfish.domain.UnitWords;
 import com.goldfish.domain.WordStudy;
+import com.goldfish.manager.SelfWordsManager;
 import com.goldfish.manager.WordStudyManager;
 import com.goldfish.vo.BasicVO;
 import com.goldfish.vo.unit.*;
@@ -40,6 +45,14 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 	private UnitStudyManager unitStudyManager;
 	@Resource
 	private WordStudyManager wordStudyManager;
+	@Resource
+	private SelfWordsManager selfWordsManager;
+	@Resource
+	private CourseContext courseContext;
+	@Resource
+	private UnitWordContext unitWordContext;
+
+
 
 	@Override
 	public SaveUnitStudyVO doAjaxInterruptSaveUnit(Integer userId, SaveUnitStudyVO saveUnitStudyVO, String moduleCode, String extra, Integer unitNbr, String studyToken, Integer isContinue, Long seconds4SpellingLetter, Long totalReadingTime, Long totalWritingTime, List<WordStudyDto> vocDataAfterReview, Integer totalWordsNbr) {
@@ -73,25 +86,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			// 2.保存每个单词的学习情况
 			WordStudy lastStudyWord = null;
 			for (WordStudyDto dto : vocDataAfterReview) {
-				WordStudy wordStudy = new WordStudy();
-				wordStudy.setMemoryLevel(dto.getMemoryLevel());
-				wordStudy.setTimeLeft(dto.getTimeLeft());
-				wordStudy.setUserVocCode(dto.getUserVocCode());
-				wordStudy.setUserCode(dto.getUserCode());
-				wordStudy.setFinishReadingTime(Long.valueOf(String.valueOf(dto.getFinishReadingTime() * 1000)));
-				wordStudy.setIsFstReadSuccess(State.getBoolInt().get(dto.isFstReadSuccess()));
-				wordStudy.setReadFailTimes(dto.getReadFailTimes());
-				wordStudy.setContinueReadFailTimes(dto.getContinueReadFailTimes());
-				wordStudy.setIsHalfReading(State.getBoolInt().get(dto.isHalfReading()));
-				wordStudy.setIsFstSpellSuccess(State.getBoolInt().get(dto.isFstSpellSuccess()));
-				wordStudy.setSpellFailTimes(dto.getSpellFailTimes());
-				wordStudy.setContinueSpellFailTimes(dto.getContinueSpellFailTimes());
-				wordStudy.setIsHalfSpelling(State.getBoolInt().get(dto.isHalfSpelling()));
-				wordStudy.setIsRemember(State.getBoolInt().get(dto.isRemember()));
-				wordStudy.setIsCancelReview(State.getBoolInt().get(dto.isCancelReview()));
-				wordStudy.setVocCode(dto.getVocCode());
-				wordStudy.setModified(new Date());
-				wordStudyManager.updateWordStudy(wordStudy);
+				WordStudy wordStudy = updateWordStudy(dto);
+				doErrorWord(userId, moduleCode, unitNbr, dto);
 				lastStudyWord = wordStudy;
 			}
 
@@ -108,7 +104,7 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			unitStudyManager.updateUnitWordsStudy(unitStudy);
 			// 更新其他单元为非当前学习单元
 			unitStudyManager.otherUnitNotCurStudyPosition(unitStudy);
-			saveUnitStudyVO.setLatestStudyPosition(fillLastPostion(unitStudy, studyToken, lastStudyWord));
+			saveUnitStudyVO.setLatestStudyPosition(fillLastPostion(unitStudy, studyToken, lastStudyWord, seconds4SpellingLetter));
 		} catch (Exception e) {
 			LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
 			saveUnitStudyVO.setMsg("保存单元学习异常");
@@ -118,7 +114,30 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 
 	}
 
-	private LastStudyPositonVO fillLastPostion(UnitStudy unitStudy, String studyToken, WordStudy lastStudyWord) {
+	private WordStudy updateWordStudy(WordStudyDto dto) {
+		WordStudy wordStudy = new WordStudy();
+		wordStudy.setMemoryLevel(dto.getMemoryLevel());
+		wordStudy.setTimeLeft(dto.getTimeLeft());
+		wordStudy.setUserVocCode(dto.getUserVocCode());
+		wordStudy.setUserCode(dto.getUserCode());
+		wordStudy.setFinishReadingTime(Long.valueOf(String.valueOf(dto.getFinishReadingTime() * 1000)));
+		wordStudy.setIsFstReadSuccess(State.getBoolInt().get(dto.isFstReadSuccess()));
+		wordStudy.setReadFailTimes(dto.getReadFailTimes());
+		wordStudy.setContinueReadFailTimes(dto.getContinueReadFailTimes());
+		wordStudy.setIsHalfReading(State.getBoolInt().get(dto.isHalfReading()));
+		wordStudy.setIsFstSpellSuccess(State.getBoolInt().get(dto.isFstSpellSuccess()));
+		wordStudy.setSpellFailTimes(dto.getSpellFailTimes());
+		wordStudy.setContinueSpellFailTimes(dto.getContinueSpellFailTimes());
+		wordStudy.setIsHalfSpelling(State.getBoolInt().get(dto.isHalfSpelling()));
+		wordStudy.setIsRemember(State.getBoolInt().get(dto.isRemember()));
+		wordStudy.setIsCancelReview(State.getBoolInt().get(dto.isCancelReview()));
+		wordStudy.setVocCode(dto.getVocCode());
+		wordStudy.setModified(new Date());
+		wordStudyManager.updateWordStudy(wordStudy);
+		return wordStudy;
+	}
+
+	private LastStudyPositonVO fillLastPostion(UnitStudy unitStudy, String studyToken, WordStudy lastStudyWord, Long seconds4SpellingLetter) {
 		LastStudyPositonVO vo = new LastStudyPositonVO();
 		vo.setId(unitStudy.getId());
 		vo.setStudyPositionCode(unitStudy.getStudyPositionCode());
@@ -133,11 +152,11 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		vo.setUnitNbr(unitStudy.getUnitNbr());
 		vo.setWordCount(unitStudy.getTotalNumber());
 		vo.setIsContinue(false);
-		vo.setSeconds4SpellingLetter(null);
+		vo.setSeconds4SpellingLetter(seconds4SpellingLetter);
 		vo.setIsCurrentPos(unitStudy.getIsCurrentPos() == 1);
-		vo.setIsFinished(unitStudy.getIsFinished()+1);// 1-->2; 0-->1
+		vo.setIsFinished(unitStudy.getIsFinished() + 1);// 1-->2; 0-->1
 		vo.setSpelling(unitStudy.getSpelling());
-		vo.setIsAllFinished(unitStudy.getIsAllFinished()==1);
+		vo.setIsAllFinished(unitStudy.getIsAllFinished() == 1);
 		vo.setCreatetime(unitStudy.getCreated());
 		vo.setIsTested(unitStudy.getIsTested());
 		vo.setStatus(unitStudy.getStatus());
@@ -179,25 +198,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			// 2.保存每个单词的学习情况
 			WordStudy lastStudyWord = null;
 			for (WordStudyDto dto : vocDataAfterReview) {
-				WordStudy wordStudy = new WordStudy();
-				wordStudy.setMemoryLevel(dto.getMemoryLevel());
-				wordStudy.setTimeLeft(dto.getTimeLeft());
-				wordStudy.setUserVocCode(dto.getUserVocCode());
-				wordStudy.setUserCode(dto.getUserCode());
-				wordStudy.setFinishReadingTime(Long.valueOf(String.valueOf(dto.getFinishReadingTime() * 1000)));
-				wordStudy.setIsFstReadSuccess(State.getBoolInt().get(dto.isFstReadSuccess()));
-				wordStudy.setReadFailTimes(dto.getReadFailTimes());
-				wordStudy.setContinueReadFailTimes(dto.getContinueReadFailTimes());
-				wordStudy.setIsHalfReading(State.getBoolInt().get(dto.isHalfReading()));
-				wordStudy.setIsFstSpellSuccess(State.getBoolInt().get(dto.isFstSpellSuccess()));
-				wordStudy.setSpellFailTimes(dto.getSpellFailTimes());
-				wordStudy.setContinueSpellFailTimes(dto.getContinueSpellFailTimes());
-				wordStudy.setIsHalfSpelling(State.getBoolInt().get(dto.isHalfSpelling()));
-				wordStudy.setIsRemember(State.getBoolInt().get(dto.isRemember()));
-				wordStudy.setIsCancelReview(State.getBoolInt().get(dto.isCancelReview()));
-				wordStudy.setVocCode(dto.getVocCode());
-				wordStudy.setModified(new Date());
-				wordStudyManager.updateWordStudy(wordStudy);
+				WordStudy wordStudy = updateWordStudy(dto);
+				doErrorWord(studentId, moduleCode, unitNbr, dto);
 				lastStudyWord = wordStudy;
 			}
 
@@ -220,6 +222,35 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		}
 		saveFinishUnitStudyVO.setLatestStudyPosition(fillLastPostion(vocDataAfterReview));
 		return saveFinishUnitStudyVO;
+	}
+
+	private void doErrorWord(Integer studentId, String moduleCode, Integer unitNbr, WordStudyDto dto) {
+
+		// 若为错词，则添加到错词本
+		Integer readFailTimes = dto.getReadFailTimes();
+		Integer spellFailTimes = dto.getSpellFailTimes();
+		Integer continueReadFailTimes = dto.getContinueReadFailTimes();
+		Integer continueSpellFailTimes = dto.getContinueSpellFailTimes();
+		if (readFailTimes > 0 || spellFailTimes > 0 || continueReadFailTimes > 0 || continueSpellFailTimes > 0) {
+			LogTypeEnum.DEFAULT.info("add to error book, vocCode={},userId={}", dto.getVocCode(), studentId);
+			SelfWords errWord = new SelfWords();
+			errWord.setModuleCode(moduleCode);
+			errWord.setStudentId(Long.valueOf(String.valueOf(studentId)));
+			errWord.setUserCode(dto.getUserCode());
+			errWord.setType(WordLibType.ERROR_BOOK.getType());
+			errWord.setLessonId(courseContext.getLessonIdByCode(moduleCode));
+			errWord.setUnitNbr(unitNbr);
+
+			errWord.setVocCode(dto.getVocCode());
+			UnitWords unitWord = unitWordContext.getUnitWord(dto.getVocCode());
+			errWord.setWordId(unitWord.getWordId());
+			errWord.setSpelling(unitWord.getSpelling());
+			errWord.setState(State.VALID.getState());
+			Date current = new Date();
+			errWord.setCreated(current);
+			errWord.setModified(current);
+			selfWordsManager.addSelfWords(errWord);
+		}
 	}
 
 	private List<WordStudyVO> fillLastPostion(List<WordStudyDto> src) {
@@ -336,12 +367,6 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			result.setSuccess(false);
 		}
 		return result;
-	}
-
-
-	@Override
-	public boolean setNotCurrentPosition(UnitStudy unitStudy) {
-		return false;
 	}
 
 	public CommonResult<UnitStudy> getUnique(UnitStudy unitStudy) {
