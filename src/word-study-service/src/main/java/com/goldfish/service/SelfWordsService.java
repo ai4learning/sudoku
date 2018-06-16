@@ -7,6 +7,8 @@ import com.goldfish.domain.SelfWords;
 import com.goldfish.vo.BaseVO;
 import com.goldfish.vo.error.ErrorBookVO;
 import com.goldfish.vo.error.ErrorWordsVO;
+import com.goldfish.vo.unit.SaveUnitStudyVO;
+import com.goldfish.vo.unit.WordStudyDto;
 
 /**
  * @author hellosscat
@@ -96,4 +98,5 @@ public interface SelfWordsService {
     ErrorWordsVO getErrorWordsByConditon(Integer userId, String studyToken, String orderType, Integer start, Integer limit);
 
     BaseVO countErrorWordsByConditon(Integer userId, String studyToken, String orderType);
+
 }

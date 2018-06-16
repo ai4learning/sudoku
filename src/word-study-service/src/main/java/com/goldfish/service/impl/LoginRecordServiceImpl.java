@@ -152,7 +152,7 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 	public LoginRecord getLoginRecordByToken(String userName, String token) throws Exception {
 		try {
 			// 只查询一条记录,查询条件为userName,token,state
-			PageQuery pageQuery = new PageQuery(1,1);
+			PageQuery pageQuery = new PageQuery(0,1);
 			pageQuery.setParam("userName", userName);
 			pageQuery.setParam("studyToken", token);
 			pageQuery.setParam("state", State.VALID.getState());
@@ -173,7 +173,7 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 	public LoginRecord getLoginRecordByTraining(String trainingId, String trainingCode) throws Exception {
 		try {
 			// 只查询一条记录,查询条件为userName,token,state
-			PageQuery pageQuery = new PageQuery(1,1);
+			PageQuery pageQuery = new PageQuery(0,1);
 			pageQuery.setParam("wordTrainingId", trainingId);
 			pageQuery.setParam("wordTrainingCode", trainingCode);
 			pageQuery.setParam("state", State.VALID.getState());

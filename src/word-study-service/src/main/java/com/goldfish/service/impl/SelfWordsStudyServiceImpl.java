@@ -5,6 +5,14 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
+
+import com.goldfish.common.log.LogTypeEnum;
+import com.goldfish.constant.FinishState;
+import com.goldfish.constant.StudyPhase;
+import com.goldfish.domain.UnitStudy;
+import com.goldfish.domain.WordStudy;
+import com.goldfish.vo.unit.SaveUnitStudyVO;
+import com.goldfish.vo.unit.WordStudyDto;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
@@ -140,6 +148,70 @@ public class SelfWordsStudyServiceImpl implements SelfWordsStudyService {
 	
 	public int count(PageQuery pageQuery) {
 		return selfWordsStudyManager.count(pageQuery);
+	}
+
+	@Override
+	public SaveUnitStudyVO saveErrorStudy(Integer userId, String moduleCode, String extra, Integer unitNbr,
+  			String vocCode, String studytoken, Long totalReadingTime, Long totalWritingTime,
+								  List<WordStudyDto> vocDataAfterReview) {
+		return null;
+
+
+//		// 1.保存单元学习记录
+//		UnitStudy unitStudy = getUnitStudy(userId, moduleCode, unitNbr, saveUnitStudyVO);
+//		if (unitStudy == null) {
+//			return saveUnitStudyVO;
+//		}
+//		try{
+//			// a.更新学习时间等字段
+//			unitStudy.setTotalReadingTime(totalReadingTime);
+//			unitStudy.setTotalWritingTime(totalWritingTime);
+//			unitStudy.setTotalNumber(totalWordsNbr);
+//			if ("finish".equals(extra)) {
+//				/**  是否学习完成  */
+//				unitStudy.setIsFinished(FinishState.COMPLETE.getState());
+//				// 单元学习完毕，则到单元测试阶段
+//				unitStudy.setCurrentPhase(StudyPhase.UNIT_TEST.getPhase());
+//			}
+//			/**  位置类型  */
+//			unitStudy.setPositionType(1);// 1表示单词
+//			/**  当前保存，则为当前学习位置，当前写是，同时更新该学生该课程其他单元为false  */
+//			unitStudy.setIsCurrentPos(1);// 当前保存，则为当前位置
+//
+//			CommonResult<UnitStudy> updateUnitStudyResult = this.updateUnitWordsStudy(unitStudy);
+//			if (updateUnitStudyResult == null || !updateUnitStudyResult.isSuccess()) {
+//				LogTypeEnum.DEFAULT.error("更新学生单元学习失败");
+//				saveUnitStudyVO.setMsg("更新学生单元学习失败");
+//				return saveUnitStudyVO;
+//			}
+//			// 2.保存每个单词的学习情况
+//			WordStudy lastStudyWord = null;
+//			for (WordStudyDto dto : vocDataAfterReview) {
+//				WordStudy wordStudy = updateWordStudy(dto);
+//				doErrorWord(userId, moduleCode, unitNbr, dto);
+//				lastStudyWord = wordStudy;
+//			}
+//
+//			// b.更新学习位置信息
+//			/**  单词学习位置  */
+////            unitStudy.setStudyPos(lastStudyWord.);
+//			/**  学习位置CODE  */
+//			unitStudy.setStudyPositionCode(studyToken);
+//			/**  单词CODE  */
+//			unitStudy.setVocCode(lastStudyWord.getVocCode());
+//			/**  单词  */
+//			unitStudy.setSpelling(lastStudyWord.getSpell());
+//			// 更新当前单元学习情况
+//			unitStudyManager.updateUnitWordsStudy(unitStudy);
+//			// 更新其他单元为非当前学习单元
+//			unitStudyManager.otherUnitNotCurStudyPosition(unitStudy);
+//			saveUnitStudyVO.setLatestStudyPosition(fillLastPostion(unitStudy, studyToken, lastStudyWord, seconds4SpellingLetter));
+//		} catch (Exception e) {
+//			LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
+//			saveUnitStudyVO.setMsg("保存单元学习异常");
+//		}
+//
+//		return saveUnitStudyVO;
 	}
 
 
