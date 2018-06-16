@@ -1440,7 +1440,7 @@ public class AjaxExamController extends AjaxErrorBookController{
                                Integer testType, Integer unitNbr,
                                Long realDuration, Long standardDuration,
                                Integer errorNbr,
-                               int cashPoint, Integer cashPointType, ModelMap context) {
+                               Integer cashPoint, Integer cashPointType, ModelMap context) {
         Exam examQuery = new Exam();
         examQuery.setModuleCode(moduleCode);
         examQuery.setResultScore(resultScore);
