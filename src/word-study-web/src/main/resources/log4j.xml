@@ -50,7 +50,19 @@
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="DEFAULT_FILE" />
     </logger>
-	
+
+    <logger name="com.goldfish.dao.SelfWordsDao" additivity="false">
+        <level value="TRACE" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DEFAULT_FILE" />
+    </logger>
+
+    <logger name="com.goldfish.dao.SelfWordsStudyDao" additivity="false">
+        <level value="TRACE" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DEFAULT_FILE" />
+    </logger>
+
 	<root>
 		<priority value="${log.level}" />
 		<appender-ref ref="DEFAULT_FILE" />

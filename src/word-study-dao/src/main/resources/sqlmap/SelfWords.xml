@@ -145,7 +145,7 @@
 			<if test="wordId != null"> AND word_id = #{wordId}</if>
 			<if test="state != null"> AND state = #{state}</if>
 			<if test="lessonIds != null"> AND lesson_id in
-				<foreach item="lessonId" index="index" collection="list" open="(" separator="," close=")">
+				<foreach item="lessonId" index="index" collection="lessonIds" open="(" separator="," close=")">
 					#{lessonId}
 				</foreach>
 			</if>
