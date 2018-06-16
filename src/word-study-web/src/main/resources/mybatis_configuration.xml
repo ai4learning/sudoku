@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE configuration PUBLIC "http://mybatis.org/dtd/mybatis-3-config.dtd" "mybatis-3-config.dtd" >
  <configuration>
-   
-   	<!-- 别名 -->
+
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <!-- 别名 -->
 	<typeAliases>
 
         <typeAlias type="com.goldfish.domain.ActivateCode" alias="ActivateCode"/>

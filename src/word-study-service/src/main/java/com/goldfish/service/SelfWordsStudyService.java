@@ -4,6 +4,8 @@ import java.util.List;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.SelfWordsStudy;
+import com.goldfish.vo.unit.SaveUnitStudyVO;
+import com.goldfish.vo.unit.WordStudyDto;
 
 /**
  * @author hellosscat
@@ -86,6 +88,8 @@ public interface SelfWordsStudyService {
      * @return
      */
     public int count(PageQuery pageQuery);
-	
-	
+
+
+    SaveUnitStudyVO saveErrorStudy(Integer userId, String moduleCode, String extra, Integer unitNbr, String vocCode, String studytoken, Long totalReadingTime, Long totalWritingTime, List<WordStudyDto> vocDataAfterReview);
+
 }

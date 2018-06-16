@@ -3,15 +3,19 @@ package com.goldfish.api;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.LoginRecord;
 import com.goldfish.service.SelfWordsService;
+import com.goldfish.service.SelfWordsStudyService;
 import com.goldfish.vo.BaseVO;
 import com.goldfish.vo.error.ErrorBookVO;
 import com.goldfish.vo.error.ErrorWordsVO;
+import com.goldfish.vo.unit.SaveUnitStudyVO;
+import com.goldfish.vo.unit.WordStudyDto;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,13 +23,13 @@ import java.util.Map;
  */
 public class AjaxErrorBookController extends AjaxReviewBookController {
 
+    @Resource(name="selfWordsStudyService")
+    private SelfWordsStudyService errorWordsStudyService;
+
     @Resource(name="selfWordsService")
     private SelfWordsService errorWordsService;
 
     /**
-     * TODO:错词单词学习
-     *
-     *
      * {
          "data":[
              {
@@ -141,7 +145,7 @@ public class AjaxErrorBookController extends AjaxReviewBookController {
             return vo;
         }
         return errorWordsService.countErrorWordsByConditon(
-                loginRecord.getUserId(),loginRecord.getStudyToken(),
+                loginRecord.getUserId(), loginRecord.getStudyToken(),
                 orderType);
     }
 
@@ -176,13 +180,32 @@ public class AjaxErrorBookController extends AjaxReviewBookController {
     @RequestMapping(value = "AjaxErrorStudySave", method = {RequestMethod.GET, RequestMethod.POST})
     public
     @ResponseBody
-    Map<String, Object> doAjaxErrorStudySave(String moduleCode, String extra,
-                                             Integer unitNbr, String vocCode,
+    SaveUnitStudyVO doAjaxErrorStudySave(String moduleCode,
+                                             String extra,
+                                             Integer unitNbr,
+                                             String vocCode,
                                              String studytoken,
-                                             Long totalReadingTime, Long totalWritingTime,
-                                             String vocDataAfterReview, ModelMap context) {
-        CommonResult result = null;
-        return result.getReturnMap();
+                                             Long totalReadingTime,
+                                             Long totalWritingTime,
+                                             List<WordStudyDto> vocDataAfterReview,
+                                             ModelMap context) {
+        LoginRecord loginRecord = this.getLoginRecord();
+        if (loginRecord == null) {
+            SaveUnitStudyVO vo = new SaveUnitStudyVO();
+            vo.setMsg("未登录");
+            return vo;
+        }
+
+        return errorWordsStudyService.saveErrorStudy(
+                                        loginRecord.getUserId(),
+                                        moduleCode,
+                                        extra,
+                                        unitNbr,
+                                        vocCode,
+                                        studytoken,
+                                        totalReadingTime,
+                                        totalWritingTime,
+                                        vocDataAfterReview);
     }
 
 

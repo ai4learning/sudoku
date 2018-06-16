@@ -40,11 +40,11 @@ public class PageQuery {
 	private transient HttpServletRequest request;
 
 
-	public PageQuery(int pageIndex, int pageSize) {
+	public PageQuery(int startIndex, int pageSize) {
 		this.pageSize = pageSize;
-		this.startIndex = (pageIndex - 1) * pageSize;
+		this.startIndex = startIndex;
 		this.params.put("startIndex",startIndex);
-		this.params.put("pageIndex",pageIndex);
+		this.params.put("pageIndex",this.startIndex / this.pageSize + 1);
 		this.params.put("pageSize",pageSize);
 	}
 

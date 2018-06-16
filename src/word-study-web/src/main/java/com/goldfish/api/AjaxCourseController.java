@@ -102,8 +102,7 @@ public class AjaxCourseController extends BaseController {
         }
 
         // 2.根据用户ID查询用户课程
-        PageQuery pageQuery = new PageQuery();
-        pageQuery.setPageSize(1000);
+        PageQuery pageQuery = new PageQuery(0, 100000);
         pageQuery.addQueryParam("studentId", user.getId());
         pageQuery.addQueryParam("status", State.VALID.getState());
         CommonResult<List<CourseStudy>> studyCourseResult = courseStudyService.getCourseStudyByPage(pageQuery);
@@ -315,8 +314,7 @@ public class AjaxCourseController extends BaseController {
         bookVO.setCompleteWordCount(studentCourse.getCompleteWordCount());
 
         // 设置每个单元课程学习情况
-        PageQuery pageQuery = new PageQuery();
-        pageQuery.setPageSize(100);
+        PageQuery pageQuery = new PageQuery(0, 1000000);
         pageQuery.addQueryParam("student_id", user.getId());
         pageQuery.addQueryParam("lesson_id", course.getBookNumber());
         pageQuery.addQueryParam("state", State.VALID.getState());
@@ -553,8 +551,7 @@ public class AjaxCourseController extends BaseController {
 
             /** 6.填充单元内单词 **/
             // 3.1查询单元内单词
-            PageQuery pageQuery = new PageQuery();
-            pageQuery.setPageSize(1000000);
+            PageQuery pageQuery = new PageQuery(0, 1000000);
             pageQuery.setParam("lessonId", course.getBookNumber());
             pageQuery.setParam("unitNbr", unitStudy.getUnitNbr());
             pageQuery.setParam("state", State.VALID.getState());

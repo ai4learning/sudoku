@@ -14,6 +14,8 @@ import com.goldfish.vo.BaseVO;
 import com.goldfish.vo.error.ErrorBookInfo;
 import com.goldfish.vo.error.ErrorBookVO;
 import com.goldfish.vo.error.ErrorWordsVO;
+import com.goldfish.vo.unit.SaveUnitStudyVO;
+import com.goldfish.vo.unit.WordStudyDto;
 import com.goldfish.vo.word.UnitWordVO;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
@@ -161,9 +163,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
     public ErrorBookVO getErrorUnit(Integer userId, String studyToken, String moduleCode, Integer unitNbr) {
         ErrorBookVO errorBookVO = new ErrorBookVO();
 
-        PageQuery pageQuery = new PageQuery();
-        pageQuery.setStartIndex(0);
-        pageQuery.setPageSize(UN_LIMIT);
+        PageQuery pageQuery = new PageQuery(0, UN_LIMIT);
         List<SelfWords> errorWords = this.getSelfWordsByPage(pageQuery).getDefaultModel();
 
         long totalCount = pageQuery.getTotalCount();
@@ -217,9 +217,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
         List<Integer> lessonIds = new ArrayList<Integer>();
 
         // 1.查询用户课程信息
-        PageQuery courseQuery = new PageQuery();
-        courseQuery.setStartIndex(0);
-        courseQuery.setPageCount(UN_LIMIT);
+        PageQuery courseQuery = new PageQuery(0, UN_LIMIT);
         courseQuery.addQueryParam("studentId", userId);
         List<CourseStudy> courseStudies =
                 courseStudyManager.getCourseStudyByPage(courseQuery);
@@ -246,9 +244,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
             return errorWordsVO;
         }
 
-        PageQuery pageQuery = new PageQuery();
-        pageQuery.setStartIndex(start);
-        pageQuery.setPageSize(limit);
+        PageQuery pageQuery = new PageQuery(start,limit);
         pageQuery.addQueryParam("lessonIds", lessonIds);
         List<SelfWords> errorWords = selfWordsManager.inQuerySelfWords(pageQuery);
         if (errorWords == null || errorWords.isEmpty()) {
