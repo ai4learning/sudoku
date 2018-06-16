@@ -2,23 +2,24 @@ package com.goldfish.service.impl;
 
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Date;
+import java.util.*;
 
 import com.goldfish.common.log.LogTypeEnum;
+import com.goldfish.constant.State;
+import com.goldfish.domain.Course;
+import com.goldfish.domain.CourseStudy;
 import com.goldfish.domain.Word;
-import com.goldfish.manager.WordManager;
-import com.goldfish.manager.WordStudyManager;
+import com.goldfish.manager.*;
+import com.goldfish.vo.BaseVO;
 import com.goldfish.vo.error.ErrorBookInfo;
 import com.goldfish.vo.error.ErrorBookVO;
+import com.goldfish.vo.error.ErrorWordsVO;
 import com.goldfish.vo.word.UnitWordVO;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.SelfWords;
-import com.goldfish.manager.SelfWordsManager;
 import com.goldfish.service.SelfWordsService;
 
 
@@ -41,6 +42,10 @@ public class SelfWordsServiceImpl implements SelfWordsService {
     private WordStudyManager wordStudyManager;
     @Resource
     private WordManager wordManager;
+    @Resource
+    private CourseManager courseManager;
+    @Resource
+    private CourseStudyManager courseStudyManager;
 
     public CommonResult<SelfWords> addSelfWords(SelfWords selfWords) {
         CommonResult<SelfWords> result = new CommonResult<SelfWords>();
@@ -151,50 +156,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
         return selfWordsManager.count(pageQuery);
     }
 
-    /**
-     *      * {
-         "data":[
-             {
-                 "Id":1516,
-                 "vocCode":"8a108cb7-42aa-d911-0142-ad8121f500d4",
-                 "spelling":"dame",
-                 "soundMark":"",
-                 "meaning":"夫人（女爵）",
-                 "soundMarkUs":"[deɪm]",
-                 "UnitId":0,
-                 "unitNbr":1,
-                 "vocIndex":0,
-                 "isCollected":false
-             },
-             {
-                 "Id":1518,
-                 "vocCode":"8a108cb7-42aa-d911-0142-ad8121f500d6",
-                 "spelling":"game",
-                 "soundMark":"",
-                 "meaning":"游戏;赌博",
-                 "soundMarkUs":"[ɡeɪm]",
-                 "UnitId":0,
-                 "unitNbr":1,
-                 "vocIndex":1,
-                 "isCollected":false
-             }
-         ],
-         "success":true,
-         "condition":0,
-         "msg":"搞定！",
-         "studytoken":"7b4db6fd-316c-4dc3-8ea8-47e0f560ebce",
-         "bookInfo":{
-             "Id":0,
-             "moduleCode":"00000000-0000-0000-0000-000000000000",
-             "bookName":"错词强化学...",
-             "totalUnitNbr":0,
-             "outDate":false,
-             "startFrom":0,
-             "studyMode":0
-         },
-         "totalNbr":0
-     }
-     */
+
     @Override
     public ErrorBookVO getErrorUnit(Integer userId, String studyToken, String moduleCode, Integer unitNbr) {
         ErrorBookVO errorBookVO = new ErrorBookVO();
@@ -211,6 +173,13 @@ public class SelfWordsServiceImpl implements SelfWordsService {
             errorBookVO.setMsg("错词本为空");
             return errorBookVO;
         }
+        fillErrorWordsVO(studyToken, errorBookVO, errorWords, totalCount);
+        // 填充bookInfo
+        errorBookVO.setBookInfo(ERROR_BOOK_INFO);
+        return errorBookVO;
+    }
+
+    private void fillErrorWordsVO(String studyToken, ErrorWordsVO errorBookVO, List<SelfWords> errorWords, long totalCount) {
         errorBookVO.setTotalNbr(Integer.valueOf(String.valueOf(totalCount)));
         // 填充错词
         List<UnitWordVO> unitWordVOs = new ArrayList<UnitWordVO>(errorWords.size());
@@ -231,12 +200,77 @@ public class SelfWordsServiceImpl implements SelfWordsService {
         }
         errorBookVO.setData(unitWordVOs);
 
-        // 填充bookInfo
-        errorBookVO.setBookInfo(ERROR_BOOK_INFO);
         errorBookVO.setStudytoken(studyToken);
         errorBookVO.setMsg("搞定！");
         errorBookVO.setSuccess(true);
-        return errorBookVO;
+    }
+
+    @Override
+    public ErrorWordsVO getErrorWordsByConditon(Integer userId, String studyToken,
+                                                String orderType, Integer start, Integer limit) {
+        ErrorWordsVO errorWordsVO = new ErrorWordsVO();
+        String[] orderTypes = orderType.split(",");
+        Set<Integer> orderSet = new HashSet<Integer>(16);
+        for (String order : orderTypes) {
+            orderSet.add(Integer.valueOf(order));
+        }
+        List<Integer> lessonIds = new ArrayList<Integer>();
+
+        // 1.查询用户课程信息
+        PageQuery courseQuery = new PageQuery();
+        courseQuery.setStartIndex(0);
+        courseQuery.setPageCount(UN_LIMIT);
+        courseQuery.addQueryParam("studentId", userId);
+        List<CourseStudy> courseStudies =
+                courseStudyManager.getCourseStudyByPage(courseQuery);
+        if (courseStudies == null || courseStudies.isEmpty()) {
+            LogTypeEnum.DEFAULT.info("未找到相应学习课程，studengId={}", userId);
+            errorWordsVO.setMsg("错词本为空");
+            errorWordsVO.setSuccess(true);
+            return errorWordsVO;
+        }
+        for (CourseStudy courseStudy : courseStudies) {
+            Course query = new Course();
+            query.setBookNumber(courseStudy.getLessonId());
+            query.setBookState(State.VALID.getState());
+            Course course = courseManager.getUnique(query);
+            if (orderSet.contains(course.getOrderType())) {
+                lessonIds.add(course.getBookNumber());
+            }
+        }
+        // 不存在需要搜索的课程
+        if (lessonIds.isEmpty()) {
+            LogTypeEnum.DEFAULT.info("指定课程下没有找到满足条件的课程");
+            errorWordsVO.setMsg("错词本为空");
+            errorWordsVO.setSuccess(true);
+            return errorWordsVO;
+        }
+
+        PageQuery pageQuery = new PageQuery();
+        pageQuery.setStartIndex(start);
+        pageQuery.setPageSize(limit);
+        pageQuery.addQueryParam("lessonIds", lessonIds);
+        List<SelfWords> errorWords = selfWordsManager.inQuerySelfWords(pageQuery);
+        if (errorWords == null || errorWords.isEmpty()) {
+            LogTypeEnum.DEFAULT.info("未找到错词");
+            errorWordsVO.setMsg("错词本为空");
+            errorWordsVO.setSuccess(true);
+            return errorWordsVO;
+        }
+        // 组装VO返回
+        fillErrorWordsVO(studyToken, errorWordsVO, errorWords, errorWords.size());
+        return errorWordsVO;
+    }
+
+    @Override
+    public BaseVO countErrorWordsByConditon(Integer userId, String studyToken, String orderType) {
+        BaseVO vo = new BaseVO();
+        ErrorWordsVO errorWordsVO = this.getErrorWordsByConditon(userId, studyToken, orderType, 0, UN_LIMIT);
+        vo.setTotalNbr(errorWordsVO.getTotalNbr());
+        vo.setSuccess(errorWordsVO.isSuccess());
+        vo.setMsg(errorWordsVO.getMsg());
+        vo.setCondition(errorWordsVO.getCondition());
+        return vo;
     }
 
 

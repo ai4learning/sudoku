@@ -81,6 +81,15 @@ public interface SelfWordsDao {
      * @return
      */
     public List<SelfWords> getSelfWordsByPage(Map<String,Object> paramMap);
+
+    /**
+     * in查询
+     * @param paramMap
+     * @return
+     */
+    public List<SelfWords> inQuerySelfWords(Map<String,Object> paramMap);
+
+
 	
 	/**
      * 根据查询条件返回数量

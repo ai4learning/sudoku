@@ -132,6 +132,28 @@
             <include refid="ORDER-SQL" />
 		LIMIT #{startIndex},#{pageSize}
 	</select>
+
+	<select id="inQuerySelfWords" resultMap="SelfWords-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  id,module_code,study_id,type,student_id,user_code,lesson_id,unit_nbr,voc_code,voc_index,word_id,spelling,state,modified FROM self_words
+		]]>
+		<where>
+			<if test="id != null"> AND id = #{id}</if>
+			<if test="studyId != null"> AND study_id = #{studyId}</if>
+			<if test="type != null"> AND type = #{type}</if>
+			<if test="studentId != null"> AND student_id = #{studentId}</if>
+			<if test="wordId != null"> AND word_id = #{wordId}</if>
+			<if test="state != null"> AND state = #{state}</if>
+			<if test="lessonIds != null"> AND lesson_id in
+				<foreach item="lessonId" index="index" collection="list" open="(" separator="," close=")">
+					#{lessonId}
+				</foreach>
+			</if>
+		</where>
+		<include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+
 	
 	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
 		<![CDATA[

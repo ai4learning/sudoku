@@ -3,9 +3,9 @@ package com.goldfish.api;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.LoginRecord;
 import com.goldfish.service.SelfWordsService;
+import com.goldfish.vo.BaseVO;
 import com.goldfish.vo.error.ErrorBookVO;
-import com.goldfish.web.base.BaseController;
-import com.goldfish.web.interceptor.servlet.context.LoginContext;
+import com.goldfish.vo.error.ErrorWordsVO;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,8 +19,8 @@ import java.util.Map;
  */
 public class AjaxErrorBookController extends AjaxReviewBookController {
 
-    @Resource
-    private SelfWordsService selfWordsService;
+    @Resource(name="selfWordsService")
+    private SelfWordsService errorWordsService;
 
     /**
      * TODO:错词单词学习
@@ -84,9 +84,12 @@ public class AjaxErrorBookController extends AjaxReviewBookController {
 
         LoginRecord loginRecord = this.getLoginRecord();
         if (loginRecord == null) {
-            return null;
+            ErrorBookVO errorBookVO = new ErrorBookVO();
+            errorBookVO.setCondition(-1);
+            errorBookVO.setMsg("未登录");
+            return errorBookVO;
         }
-        return selfWordsService.getErrorUnit(loginRecord.getUserId(), loginRecord.getStudyToken(), moduleCode, unit);
+        return errorWordsService.getErrorUnit(loginRecord.getUserId(), loginRecord.getStudyToken(), moduleCode, unit);
     }
 
     /**
@@ -106,9 +109,17 @@ public class AjaxErrorBookController extends AjaxReviewBookController {
     @RequestMapping(value = "AjaxGetErrorBook", method = {RequestMethod.GET, RequestMethod.POST})
     public
     @ResponseBody
-    Map<String, Object> doAjaxGetErrorBook(String orderType, Integer start, Integer limit, ModelMap context) {
-        CommonResult result = null;
-        return result.getReturnMap();
+    ErrorWordsVO doAjaxGetErrorBook(String orderType, Integer start, Integer limit, ModelMap context) {
+        LoginRecord loginRecord = this.getLoginRecord();
+        if (loginRecord == null) {
+            ErrorWordsVO vo = new ErrorBookVO();
+            vo.setMsg("未登录");
+            vo.setCondition(-1);
+            return vo;
+        }
+        return errorWordsService.getErrorWordsByConditon(
+                loginRecord.getUserId(),loginRecord.getStudyToken(),
+                orderType,start,limit);
     }
 
     /**
@@ -121,9 +132,17 @@ public class AjaxErrorBookController extends AjaxReviewBookController {
     @RequestMapping(value = "GetErrorBookCount", method = {RequestMethod.GET, RequestMethod.POST})
     public
     @ResponseBody
-    Map<String, Object> doGetErrorBookCount(String orderType, ModelMap context) {
-        CommonResult result = null;
-        return result.getReturnMap();
+    BaseVO doGetErrorBookCount(String orderType, ModelMap context) {
+        LoginRecord loginRecord = this.getLoginRecord();
+        if (loginRecord == null) {
+            BaseVO vo = new BaseVO();
+            vo.setMsg("未登录");
+            vo.setCondition(-1);
+            return vo;
+        }
+        return errorWordsService.countErrorWordsByConditon(
+                loginRecord.getUserId(),loginRecord.getStudyToken(),
+                orderType);
     }
 
     /**
