@@ -38,7 +38,7 @@ export default class TestPaper extends Component {
                   {
                     this.state.dataListen2Ch.map((item, index) => {
                       return (
-                        <div key={item.question} className='question' style={{ display: this.state.showWrong && item.answer == item.answerIndex ? 'none' : 'block' }}>
+                        <div key={item.question} className='question' style={{ display: this.state.showWrong && (item.answer||'').toUpperCase() == item.answerIndex.toUpperCase() ? 'none' : 'block' }}>
                           <div className='question_name' onClick={this.handleAudioClick.bind(this, 'dataListen2Ch', item)}>
                             <img src="/static/image/listenagin_pre.png" />
                             <span>
@@ -53,7 +53,7 @@ export default class TestPaper extends Component {
                                 Object.keys(item.choices).map(value => {
                                   return (
                                     <Radio value={value} key={value}>
-                                      <span style={{ color: this.state.showWrong && value == item.answerIndex && item.answer != item.answerIndex ? 'red' : 'inhret' }}>{item.choices[value]}</span>
+                                      <span style={{ color: this.state.showWrong && value.toUpperCase() == item.answerIndex.toUpperCase() && (item.answer || '').toUpperCase() != item.answerIndex.toUpperCase() ? 'red' : 'inherit' }}>{item.choices[value]}</span>
                                     </Radio>
                                   )
                                 })
@@ -74,7 +74,7 @@ export default class TestPaper extends Component {
                   {
                     this.state.dataEn2Ch.map((item, index) => {
                       return (
-                        <div key={item.question} className='question' style={{ display: this.state.showWrong && item.answer == item.answerIndex ? 'none' : 'block' }}>
+                        <div key={item.question} className='question' style={{ display: this.state.showWrong && (item.answer || '').toUpperCase() == item.answerIndex.toUpperCase() ? 'none' : 'block' }}>
                           <div className='question_name'>{item.question}</div>
                           <div className='question_choices'>
                             <Radio.Group onChange={this.handleRadioChange.bind(this, 'dataEn2Ch', index)}>
@@ -82,7 +82,7 @@ export default class TestPaper extends Component {
                                 Object.keys(item.choices).map(value => {
                                   return (
                                     <Radio value={value} key={value}>
-                                      <span style={{ color: this.state.showWrong && value == item.answerIndex && item.answer != item.answerIndex ? 'red' : 'inhret' }}>{item.choices[value]}</span>
+                                      <span style={{ color: this.state.showWrong && value.toUpperCase() == item.answerIndex.toUpperCase() && (item.answer || '').toUpperCase() != item.answerIndex.toUpperCase() ? 'red' : 'inherit' }}>{item.choices[value]}</span>
                                     </Radio>
                                   )
                                 })
@@ -103,7 +103,7 @@ export default class TestPaper extends Component {
                   {
                     this.state.dataCh2En.map((item, index) => {
                       return (
-                        <div key={item.question} className='question' style={{ display: this.state.showWrong && item.answer == item.answerIndex ? 'none' : 'block' }}>
+                        <div key={item.question} className='question' style={{ display: this.state.showWrong && (item.answer || '').toUpperCase() == item.answerIndex.toUpperCase() ? 'none' : 'block' }}>
                           <div className='question_name'>{item.question}</div>
                           <div className='question_choices'>
                             <Radio.Group onChange={this.handleRadioChange.bind(this, 'dataCh2En', index)}>
@@ -111,7 +111,7 @@ export default class TestPaper extends Component {
                                 Object.keys(item.choices).map(value => {
                                   return (
                                     <Radio value={value} key={value}>
-                                      <span style={{ color: this.state.showWrong && value == item.answerIndex && item.answer != item.answerIndex ? 'red' : 'inhret' }}>{item.choices[value]}</span>
+                                      <span style={{ color: this.state.showWrong && value.toUpperCase() == item.answerIndex.toUpperCase() && (item.answer || '').toUpperCase() != item.answerIndex.toUpperCase() ? 'red' : 'inherit' }}>{item.choices[value]}</span>
                                     </Radio>
                                   )
                                 })
@@ -137,7 +137,7 @@ export default class TestPaper extends Component {
                             <img src="/content/image/listenagin_pre.png" />
                             <span>
                               <audio ref={"dataListen2Write" + item.vocCode}>
-                                <source type="audio/mpeg" src={"/soundfile/" + item.spelling.substr(0, 1).toUpperCase() + "/" + this.clearSpellingForAudio(item.spelling) + ".mp3"}></source>
+                                <source type="audio/mpeg" src={"/soundfile/" + item.spelling.substr(0, 1).toUpperCase() + "/" + clearSpellingForAudio(item.spelling) + ".mp3"}></source>
                               </audio>
                             </span>
                             <span>{item.question}</span>
@@ -194,17 +194,17 @@ export default class TestPaper extends Component {
     let total = (this.state.dataCh2En || []).length + (this.state.dataEn2Ch || []).length + (this.state.dataListen2Ch || []).length + (this.state.dataListen2Write || []).length
     let rightCount = 0
     this.state.dataCh2En.forEach(item => {
-      if (item.answer == item.answerIndex) {
+      if ((item.answer || '').toUpperCase() == item.answerIndex.toUpperCase()) {
         rightCount++
       }
     })
     this.state.dataEn2Ch.forEach(item => {
-      if (item.answer == item.answerIndex) {
+      if ((item.answer || '').toUpperCase() == item.answerIndex.toUpperCase()) {
         rightCount++
       }
     })
     this.state.dataListen2Ch.forEach(item => {
-      if (item.answer == item.answerIndex) {
+      if ((item.answer || '').toUpperCase() == item.answerIndex.toUpperCase()) {
         rightCount++
       }
     })

@@ -36,6 +36,7 @@ export default class SelfTest extends Component {
     }
 
     this.timer = null
+    this.testArea = this.props.location.query.testArea
   }
 
   componentWillMount() {
@@ -74,6 +75,7 @@ export default class SelfTest extends Component {
     fetch({
       url: '/api/Ajax/AjaxSaveMutiTest',
       method: 'post',
+      type: 'json',
       data: {
         resultScore: score,
         testType: (this.map[this.testArea]||{}).type || 5,

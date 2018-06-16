@@ -59,6 +59,7 @@ export default class UnitTest extends Component {
     fetch({
       url: '/api/Ajax/AjaxSaveMutiTest',
       method: 'post',
+      type: 'json',
       data: {
         moduleCode: getQueryString('moduleCode'),
         unitNbr: getQueryString('unitNbr'),
