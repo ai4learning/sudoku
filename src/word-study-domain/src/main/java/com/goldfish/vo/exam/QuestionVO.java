@@ -24,18 +24,20 @@ public class QuestionVO {
     private String vocCode;
     private String question;
     private ChoicesVO choices;
+    private long questionId;
 
     public QuestionVO()
     {
     }
 
-    public QuestionVO(String answerIndexString, String spellingString, String vocCodeSting, String questionString, ChoicesVO choicesVO)
+    public QuestionVO(String answerIndexString, String spellingString, String vocCodeSting, String questionString, ChoicesVO choicesVO, long id)
     {
         answerIndex = answerIndexString;
         spelling = spellingString;
         vocCode = vocCodeSting;
         question = questionString;
         choices = choicesVO;
+        questionId = id;
     }
 
     public String getAnswerIndex() {
@@ -76,5 +78,13 @@ public class QuestionVO {
 
     public void setChoices(ChoicesVO choices) {
         this.choices = choices;
+    }
+
+    public long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(long questionId) {
+        this.questionId = questionId;
     }
 }

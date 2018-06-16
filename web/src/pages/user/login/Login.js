@@ -48,11 +48,12 @@ class LoginForm extends Component {
       fetch({
         url: '/login/doLogin',
         method: 'post',
+        type: 'json',
         data: values
       }).then(() => {
         router.push(redirect || '/user')
-      }).catch(() => {
-        
+      }).catch((e) => {
+        console.log(e)
       })
     })
     

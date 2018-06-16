@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.QuestionTypes;
+import com.goldfish.constant.State;
 import com.goldfish.constant.TestArea;
+import com.goldfish.dao.cache.local.CourseContext;
 import com.goldfish.domain.*;
 import com.goldfish.service.*;
 import com.goldfish.vo.BasicVO;
@@ -19,12 +21,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by John on 2018/5/20 0020.
  */
 public class AjaxExamController extends AjaxErrorBookController{
+
+    /**
+     * 单元测试每种题型都是10个题目
+     */
+    private static final int UNIT_EXAM_QUESTION_NUMBER=10;
 
     @Resource
     private PaperService paperService;
@@ -34,6 +43,8 @@ public class AjaxExamController extends AjaxErrorBookController{
     private ExamService examService;
     @Resource
     private WordStudyService wordStudyService;
+    @Resource
+    private CourseContext courseContext;
 
     /**
      * 生成自主测试试卷
@@ -764,6 +775,7 @@ public class AjaxExamController extends AjaxErrorBookController{
         // 1.装填用户信息
         User user = this.getUserInfo();
         if (user == null) {
+            examVO.setCondition(-1);
             return examVO;
         }
         //2.根据用户信息和testArea查询单词列表
@@ -801,7 +813,7 @@ public class AjaxExamController extends AjaxErrorBookController{
             {
                 ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
                 QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
-                        ,question.getVocCode(),question.getQuestion(),choicesVO);
+                        ,question.getVocCode(),question.getQuestion(),choicesVO,question.getId());
                 if (qt.equals(QuestionTypes.EN2CH))
                 {
 
@@ -1365,54 +1377,33 @@ public class AjaxExamController extends AjaxErrorBookController{
         paperCondition.setUnitNbr(unitNbr);
         paperCondition.setModuleCode(moduleCode);
         Paper paperResult = paperService.getUnique(paperCondition).getDefaultModel();
-        JSONObject questionsJson = JSON.parseObject(paperResult.getQuestions());
-
         DataVO dataVO = new DataVO();
         dataVO.setMsg("");
         dataVO.setSuccess(true);
         dataVO.setCondition(0);
-        if (questionsJson.containsKey(QuestionTypes.EN2CH.getForShort()))
-        {
-            List<QuestionVO> questionVOList = new ArrayList<>();
-            for (String questionId : questionsJson.getJSONArray(QuestionTypes.EN2CH.getForShort()).toJavaList(String.class))
-            {
-                Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
-                ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
-                QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
-                        ,question.getVocCode(),question.getQuestion(),choicesVO);
-                questionVOList.add(questionVO);
+        if (paperResult != null) {
+            JSONObject questionsJson = JSON.parseObject(paperResult.getQuestions());
+            if (questionsJson.containsKey(QuestionTypes.EN2CH.getForShort())) {
+                dataVO.setDataEn2Ch(getQuestionVOfromPaper(questionsJson, QuestionTypes.EN2CH.getForShort()));
             }
-            dataVO.setDataEn2Ch(questionVOList);
-        }
-
-        if (questionsJson.containsKey(QuestionTypes.CH2EN.getForShort()))
-        {
-            List<QuestionVO> questionVOList = new ArrayList<>();
-            for (String questionId : questionsJson.getJSONArray(QuestionTypes.CH2EN.getForShort()).toJavaList(String.class))
-            {
-                Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
-                ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
-                QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
-                        ,question.getVocCode(),question.getQuestion(),choicesVO);
-                questionVOList.add(questionVO);
+            if (questionsJson.containsKey(QuestionTypes.CH2EN.getForShort())) {
+                dataVO.setDataCh2En(getQuestionVOfromPaper(questionsJson, QuestionTypes.CH2EN.getForShort()));
             }
-            dataVO.setDataCh2En(questionVOList);
-        }
-
-        if (questionsJson.containsKey(QuestionTypes.LISTEN2CH.getForShort()))
-        {
-            List<QuestionVO> questionVOList = new ArrayList<>();
-            for (String questionId : questionsJson.getJSONArray(QuestionTypes.LISTEN2CH.getForShort()).toJavaList(String.class))
-            {
-                Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
-                ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
-                QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
-                        ,question.getVocCode(),question.getQuestion(),choicesVO);
-                questionVOList.add(questionVO);
+            if (questionsJson.containsKey(QuestionTypes.LISTEN2CH.getForShort())) {
+                dataVO.setDataListen2Ch(getQuestionVOfromPaper(questionsJson, QuestionTypes.LISTEN2CH.getForShort()));
             }
-            dataVO.setDataListen2Ch(questionVOList);
         }
-
+        else
+        {
+            Question questionQuery = new Question();
+            questionQuery.setUnitNbr(unitNbr);
+            questionQuery.setLessonId(courseContext.getLessonIdByCode(moduleCode));
+            dataVO.setDataEn2Ch(getVoFromQuestions(questionQuery,QuestionTypes.EN2CH));
+            dataVO.setDataCh2En(getVoFromQuestions(questionQuery,QuestionTypes.CH2EN));
+            dataVO.setDataListen2Ch(getVoFromQuestions(questionQuery,QuestionTypes.LISTEN2CH));
+            // 持久化paper
+            paperService.addPaper(generatePaper(moduleCode,unitNbr,dataVO));
+        }
         UnitExamVO unitExamVO = new UnitExamVO();
         unitExamVO.setSuccess(true);
         unitExamVO.setCondition(0);
@@ -1468,5 +1459,69 @@ public class AjaxExamController extends AjaxErrorBookController{
             basicVO.setMsg("记忆保存失败");
         }
         return basicVO;
+    }
+
+
+    private List<QuestionVO> getQuestionVOfromPaper(JSONObject questionsJson,String questionTypeShort)
+    {
+        List<QuestionVO> questionVOList = new ArrayList<>();
+        for (String questionId : questionsJson.getJSONArray(questionTypeShort).toJavaList(String.class))
+        {
+            Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
+            ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
+            QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
+                    ,question.getVocCode(),question.getQuestion(),choicesVO,Long.valueOf(questionId));
+            questionVOList.add(questionVO);
+        }
+        return questionVOList;
+    }
+    
+    private List<QuestionVO> getVoFromQuestions(Question questionQuery,QuestionTypes questionType)
+    {
+        List<QuestionVO> questionVOList = new ArrayList<>(UNIT_EXAM_QUESTION_NUMBER);
+        questionQuery.setQuestionType(questionType.getNumber());
+        List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
+        Collections.shuffle(questionList);
+
+        int questionLimit = questionList.size() <= UNIT_EXAM_QUESTION_NUMBER ? questionList.size() : UNIT_EXAM_QUESTION_NUMBER;
+        for (int index = 0;index <= questionLimit; index++) {
+            Question q = questionList.get(index);
+            questionVOList.add(new QuestionVO(q.getAnswerIndex(), q.getSpelling(), q.getVocCode(), q.getQuestion()
+                    , new ChoicesVO(q.getChoices()), q.getId()));
+        }
+        return questionVOList;
+    }
+
+    private Paper generatePaper(String moduleCode, Integer unitNbr, DataVO dataVO)
+    {
+        Paper paper = new Paper();
+        paper.setState(State.VALID.getState());
+        paper.setUnitNbr(unitNbr);
+        paper.setModuleCode(moduleCode);
+        paper.setLessonId(courseContext.getLessonIdByCode(moduleCode));
+        paper.setCreated(new Date());
+        paper.setQuestionNbr(getDataVOQuestionNbr(dataVO));
+        JSONObject questions = new JSONObject();
+        questions.put(QuestionTypes.EN2CH.getForShort(),generateQuestionIdList(dataVO.getDataEn2Ch()));
+        questions.put(QuestionTypes.CH2EN.getForShort(),generateQuestionIdList(dataVO.getDataCh2En()));
+        questions.put(QuestionTypes.LISTEN2CH.getForShort(),generateQuestionIdList(dataVO.getDataListen2Ch()));
+        paper.setQuestions(questions.toJSONString());
+        LogTypeEnum.DEFAULT.info(paper.toString());
+        return paper;
+    }
+
+    private int getDataVOQuestionNbr(DataVO dataVO)
+    {
+        return dataVO.getDataCh2En().size()+dataVO.getDataEn2Ch().size()+dataVO.getDataListen2Ch().size();
+    }
+
+    private List<Long> generateQuestionIdList(List<QuestionVO> questionVOList)
+    {
+        List<Long> list = new ArrayList<>();
+        for (QuestionVO questionVO : questionVOList)
+        {
+            list.add(questionVO.getQuestionId());
+        }
+        return list;
     }
 }
