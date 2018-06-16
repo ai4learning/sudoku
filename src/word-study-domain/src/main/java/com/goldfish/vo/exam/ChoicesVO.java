@@ -4,6 +4,8 @@ package com.goldfish.vo.exam;
  * Created by Administrator on 2018/6/13 0013.
  */
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * "choices":{
                      "A":"在…上方prep.",
@@ -18,9 +20,13 @@ public class ChoicesVO {
     private static final String regexC = "'C': '";
     private static final String regexD = "'D': '";
 
+    @JSONField(name="A")
     private String a;
+    @JSONField(name="B")
     private String b;
+    @JSONField(name="C")
     private String c;
+    @JSONField(name="D")
     private String d;
 
     public ChoicesVO()
