@@ -4,6 +4,7 @@ import java.util.List;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.SelfWords;
+import com.goldfish.vo.error.ErrorBookVO;
 
 /**
  * @author hellosscat
@@ -86,6 +87,7 @@ public interface SelfWordsService {
      * @return
      */
     public int count(PageQuery pageQuery);
-	
-	
+
+
+    ErrorBookVO getErrorUnit(Integer userId, String studyToken, String moduleCode, Integer unitNbr);
 }

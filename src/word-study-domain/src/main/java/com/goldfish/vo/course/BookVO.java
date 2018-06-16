@@ -9,6 +9,8 @@ import com.alibaba.fastjson.annotation.JSONField;
  *         "coverImageUrl":"",
  *         "totalUnitNbr":17,
  *         "outDate":false,
+ *
+ *
  * Created by John on 2018/6/2 0002.
  */
 public class BookVO {

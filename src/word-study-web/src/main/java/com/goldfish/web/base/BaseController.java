@@ -6,7 +6,9 @@ import com.goldfish.constant.State;
 import com.goldfish.domain.LoginRecord;
 import com.goldfish.domain.User;
 import com.goldfish.manager.LoginRecordManager;
+import com.goldfish.service.LoginRecordService;
 import com.goldfish.service.UserService;
+import com.goldfish.vo.user.UserVO;
 import com.goldfish.web.interceptor.servlet.context.LoginContext;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.ui.ModelMap;
@@ -18,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
  * Created by wangyong on 2015/10/9.
  */
 public class BaseController {
+
+    @Resource
+    protected LoginRecordService loginRecordService;
 
     @Resource
     private LoginRecordManager loginRecordManager;
@@ -48,22 +53,39 @@ public class BaseController {
         return pageSize;
     }
 
+    protected User fillUserInfo(UserVO userVO) {
+        User user = getUserInfo();
+        if (user == null) {
+            LogTypeEnum.DEFAULT.info("未获取到用户信息");
+            userVO.setMsg("未获取到用户信息");
+            userVO.setSuccess(true);
+            return null;
+        }
+        /*** 设置User信息 ****/
+        userVO.setUserState(user.getUserState());
+        userVO.setTotalLoginTimes(user.getTotalLoginTimes());
+        return user;
+    }
+
     protected LoginRecord getLoginRecord() {
         LoginContext loginContext = LoginContext.getLoginContext();
         if (loginContext == null || org.apache.commons.lang3.StringUtils.isEmpty(loginContext.getTrainingId()) ||
                 org.apache.commons.lang3.StringUtils.isEmpty(loginContext.getTrainingCode())) {
             return null;
         }
-        LoginRecord query = new LoginRecord();
-        query.setWordTrainingId(loginContext.getTrainingId());
-        query.setWordTrainingCode(loginContext.getTrainingCode());
-        return loginRecordManager.getUnique(query);
+        try {
+            // 获取用户登录信息
+            return loginRecordService.getLoginRecordByTraining(loginContext.getTrainingId(), loginContext.getTrainingCode());
+        } catch (Exception e) {
+            LogTypeEnum.DEFAULT.error(e, "获取登录信息失败");
+            return null;
+        }
     }
 
     protected User getUserInfo()
     {
         // 1.根据登录获取用户信息
-        LoginRecord loginRecord = this.getLoginRecord();
+        LoginRecord loginRecord = getLoginRecord();
         if (loginRecord == null) {
             LogTypeEnum.DEFAULT.error("未获取到用户信息");
             return null;

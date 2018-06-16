@@ -3,6 +3,7 @@ package com.goldfish.vo.course;
 import com.goldfish.vo.course.CourseVO;
 
 /**
+ *
  * Created by John on 2018/5/25 0025.
  */
 public class RichCourseVO extends CourseVO {
