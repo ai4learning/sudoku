@@ -1,10 +1,11 @@
 package com.goldfish.api;
 
-import com.goldfish.domain.SelfWords;
+import com.goldfish.common.log.LogTypeEnum;
+import com.goldfish.domain.Exam;
 import com.goldfish.domain.User;
-import com.goldfish.domain.Word;
-import com.goldfish.service.SelfWordsService;
-import com.goldfish.service.WordService;
+import com.goldfish.domain.WordStudy;
+import com.goldfish.service.WordStudyService;
+import com.goldfish.vo.BaseVO;
 import com.goldfish.vo.BasicVO;
 import com.goldfish.web.base.BaseController;
 import org.springframework.ui.ModelMap;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/6/16 0016.
@@ -20,15 +22,13 @@ import javax.annotation.Resource;
  */
 public class AjaxCollectionController extends BaseController {
 
-    private static final String memorySuccess = "记忆已经保存";
-    private static final String memoryFail = "记忆已经保存";
-    private static final String loadSuccess = "记忆已经保存";
-    private static final String loadFail = "记忆已经保存";
+    private static final String MEMORY_SUCCESS = "记忆已经保存";
+    private static final String MEMORY_FAIL = "记忆保存失败";
+    private static final String LOAD_SUCCESS = "完成加载";
+    private static final String LOAD_FAIL = "加载失败";
 
     @Resource
-    private SelfWordsService selfWordsService;
-    @Resource
-    private WordService wordService;
+    private WordStudyService wordStudyService;
 
     /**
      * /api/Ajax/AjaxPostCollect 收藏单词
@@ -43,25 +43,35 @@ public class AjaxCollectionController extends BaseController {
      }
      */
     @RequestMapping(value="AjaxPostCollect",method={RequestMethod.GET,RequestMethod.POST})
-    public @ResponseBody Object doAjaxPostCollect(String vocCode, ModelMap context)
+    public @ResponseBody BasicVO doAjaxPostCollect(String vocCode, ModelMap context)
     {
         BasicVO vo = new BasicVO();
         // 1.装填用户信息
         User user = this.getUserInfo();
         if (user == null) {
             vo.setSuccess(false);
-            vo.setMsg("记忆保存失败");
+            vo.setMsg(MEMORY_FAIL);
             return vo;
         }
         // 2.使用vocCode查询单词
-        Word word = new Word();
-
-        // 3.使用SelfWord保存收藏
-        SelfWords selfWords = new SelfWords();
-        selfWords.setVocCode(vocCode);
-        selfWords.setStudentId(user.getId());
-        selfWords.setUserCode(user.getUserCode());
-        return null;
+        WordStudy wordStudyQuery = new WordStudy();
+        wordStudyQuery.setUserCode(user.getUserCode());
+        wordStudyQuery.setStudentId(user.getId().intValue());
+        wordStudyQuery.setVocCode(vocCode);
+        wordStudyQuery.setIscollected(1);
+        try {
+            wordStudyService.updateWordStudy(wordStudyQuery);
+            vo.setSuccess(true);
+            vo.setMsg(MEMORY_SUCCESS);
+            return vo;
+        }
+        catch (Exception e)
+        {
+            LogTypeEnum.DEFAULT.error(e.toString());
+            vo.setSuccess(false);
+            vo.setMsg(MEMORY_FAIL);
+            return vo;
+        }
     }
 
     /**
@@ -123,8 +133,34 @@ public class AjaxCollectionController extends BaseController {
      }
      */
     @RequestMapping(value="GetVocabularyCount",method={RequestMethod.GET,RequestMethod.POST})
-    public @ResponseBody Object doGetVocabularyCount(String orderType, ModelMap context)
-    {
-        return null;
+    public @ResponseBody
+    BaseVO doGetVocabularyCount(String orderType, ModelMap context) {
+        BaseVO vo = new BaseVO();
+        // 1.装填用户信息
+        User user = this.getUserInfo();
+        if (user == null) {
+            vo.setSuccess(false);
+            vo.setMsg(LOAD_FAIL);
+            vo.setCondition(-1);
+            vo.setTotalNbr(0);
+            return vo;
+        }
+        vo.setCondition(1);
+        WordStudy wordStudyQuery = new WordStudy();
+        wordStudyQuery.setIscollected(1);
+        wordStudyQuery.setUserCode(user.getUserCode());
+        wordStudyQuery.setStudentId(user.getId().intValue());
+        try {
+            List<WordStudy> wordStudyList = wordStudyService.getListByExample(wordStudyQuery).getDefaultModel();
+            vo.setTotalNbr(wordStudyList.size());
+            vo.setMsg(LOAD_SUCCESS);
+            vo.setSuccess(true);
+        } catch (Exception e) {
+            LogTypeEnum.DEFAULT.error(e.toString());
+            vo.setTotalNbr(0);
+            vo.setMsg(LOAD_FAIL);
+            vo.setSuccess(false);
+        }
+        return vo;
     }
 }
