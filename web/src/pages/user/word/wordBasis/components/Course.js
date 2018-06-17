@@ -64,7 +64,7 @@ export default class Course extends Component {
             this.state.currentBook ? (this.state.currentBook.CourseUnits || []).map((item,index) => {
               return (
                 <div key={item.Id} className='unit_item'>
-                  <Card title={item.Unit} hoverable>
+                  <Card title={item.Unit||'Unit'+(index+1)} hoverable>
                     <div className='unit_item_body'>
                       <div>
                         <div>
