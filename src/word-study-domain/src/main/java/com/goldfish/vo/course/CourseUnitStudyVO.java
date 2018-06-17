@@ -1,5 +1,6 @@
 package com.goldfish.vo.course;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.goldfish.vo.course.CourseUnitVO;
 
 /**
@@ -7,7 +8,9 @@ import com.goldfish.vo.course.CourseUnitVO;
  */
 public class CourseUnitStudyVO extends CourseUnitVO {
 
+    @JSONField(name="IsFinished")
     private Integer isFinished;
+    @JSONField(name="IsTested")
     private Integer isTested;
 
     public Integer getIsFinished() {

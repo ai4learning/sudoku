@@ -1,5 +1,7 @@
 package com.goldfish.vo.course;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.List;
 
 /**
@@ -7,6 +9,7 @@ import java.util.List;
  */
 public class RichCourseStudyVO extends RichCourseVO {
 
+    @JSONField(name="CourseUnits")
     private List<CourseUnitStudyVO> courseUnits;
     private boolean currentStudyBook;
     private Integer startFrom;
