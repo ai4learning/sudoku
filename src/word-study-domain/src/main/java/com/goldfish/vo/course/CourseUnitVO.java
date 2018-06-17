@@ -8,8 +8,11 @@ import com.alibaba.fastjson.annotation.JSONField;
 public class CourseUnitVO {
     @JSONField( name="Id")
     private Long id;
+    @JSONField( name="moduleCode")
     private String courseModuleCode;
+    @JSONField( name="unit")
     private String unit;
+    private int unitNbr;
 
     public Long getId() {
         return id;
@@ -33,5 +36,13 @@ public class CourseUnitVO {
 
     public void setCourseModuleCode(String courseModuleCode) {
         this.courseModuleCode = courseModuleCode;
+    }
+
+    public int getUnitNbr() {
+        return unitNbr;
+    }
+
+    public void setUnitNbr(int unitNbr) {
+        this.unitNbr = unitNbr;
     }
 }
