@@ -345,6 +345,8 @@ public class AjaxCourseController extends BaseController {
             unitQuery.setUnitNbr(unitStudy.getUnitNbr());
             unitQuery.setState(State.VALID.getState());
             Unit unit = unitService.getUnique(unitQuery).getDefaultModel();
+            if (unit == null)
+                continue;
             courseUnitStudyVO.setId(unit.getId());
             courseUnitStudyVO.setUnit(unit.getUnit());
             // fill unit study info
