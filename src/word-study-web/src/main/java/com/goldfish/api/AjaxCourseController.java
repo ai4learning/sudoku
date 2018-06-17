@@ -190,7 +190,7 @@ public class AjaxCourseController extends BaseController {
         UnitWords unitWords = unitWordsResult.getDefaultModel();
         if (unitWords == null) {
             LogTypeEnum.DEFAULT.info("未找到单元内单词，vocCode={}", studyPosition.getVocCode());
-            baseVO.setSuccess(true);
+            baseVO.setSuccess(false);
             baseVO.setMsg("未找到单元内单词");
             return null;
         }
@@ -574,6 +574,7 @@ public class AjaxCourseController extends BaseController {
             // 遍历，封装单元内单词学习情况
             List<UnitStudyVO> wordStudyVOs = new ArrayList<UnitStudyVO>(unitWords.size());
             richUnitStudyVO.setData(wordStudyVOs);
+            richUnitStudyVO.setSuccess(true);
             for (UnitWords unitWord : unitWords) {
                 UnitStudyVO unitStudyVO = new UnitStudyVO();
                 wordStudyVOs.add(unitStudyVO);
