@@ -314,12 +314,12 @@ public class AjaxCourseController extends BaseController {
         bookVO.setCompleteWordCount(studentCourse.getCompleteWordCount());
 
         // 设置每个单元课程学习情况
-        PageQuery pageQuery = new PageQuery(0, 1000000);
-        pageQuery.addQueryParam("student_id", user.getId());
-        pageQuery.addQueryParam("lesson_id", course.getBookNumber());
-        pageQuery.addQueryParam("state", State.VALID.getState());
+        UnitStudy unitStudyQuery = new UnitStudy();
+        unitStudyQuery.setStudentId(user.getId().intValue());
+        unitStudyQuery.setLessonId(course.getBookNumber());
+        unitStudyQuery.setState(State.VALID.getState());
 
-        CommonResult<List<UnitStudy>> unitStudyResult = unitStudyService.getUnitWordsStudyByPage(pageQuery);
+        CommonResult<List<UnitStudy>> unitStudyResult = unitStudyService.getListByExample(unitStudyQuery);
         if (unitStudyResult == null || !unitStudyResult.isSuccess()) {
             LogTypeEnum.DEFAULT.error("查询学生单元学习情况异常，studentId={}, lessonId={}",
                     user.getId(), course.getBookNumber());
