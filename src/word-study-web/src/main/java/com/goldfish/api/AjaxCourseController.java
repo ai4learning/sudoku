@@ -1,5 +1,6 @@
 package com.goldfish.api;
 
+import com.alibaba.fastjson.JSON;
 import com.goldfish.common.CommonResult;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.log.LogTypeEnum;
@@ -677,7 +678,6 @@ public class AjaxCourseController extends BaseController {
                                             List<WordStudyDto> vocDataAfterReview,
                                             Integer totalWordsNbr,
                                             ModelMap context) {
-
         SaveFinishUnitStudyVO saveFinishUnitStudyVO = new SaveFinishUnitStudyVO();
         String trainingId = LoginContext.getLoginContext().getTrainingId();
         String trainingCode = LoginContext.getLoginContext().getTrainingCode();
