@@ -105,9 +105,11 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			// 更新其他单元为非当前学习单元
 			unitStudyManager.otherUnitNotCurStudyPosition(unitStudy);
 			saveUnitStudyVO.setLatestStudyPosition(fillLastPostion(unitStudy, studyToken, lastStudyWord, seconds4SpellingLetter));
+			saveUnitStudyVO.setSuccess(true);
 		} catch (Exception e) {
 			LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
 			saveUnitStudyVO.setMsg("保存单元学习异常");
+			saveUnitStudyVO.setSuccess(false);
 		}
 
 		return saveUnitStudyVO;
@@ -216,9 +218,11 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			unitStudyManager.updateUnitWordsStudy(unitStudy);
 			// 更新其他单元为非当前学习单元
 			unitStudyManager.otherUnitNotCurStudyPosition(unitStudy);
+			saveFinishUnitStudyVO.setSuccess(true);
 		} catch (Exception e) {
 			LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
 			saveFinishUnitStudyVO.setMsg("保存单元学习异常");
+			saveFinishUnitStudyVO.setSuccess(false);
 		}
 		saveFinishUnitStudyVO.setLatestStudyPosition(fillLastPostion(vocDataAfterReview));
 		return saveFinishUnitStudyVO;
