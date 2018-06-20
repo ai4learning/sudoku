@@ -1,6 +1,7 @@
 package com.goldfish.api;
 
 import com.goldfish.common.log.LogTypeEnum;
+import com.goldfish.constant.State;
 import com.goldfish.domain.*;
 import com.goldfish.service.UnitWordsService;
 import com.goldfish.service.WordService;
@@ -65,9 +66,9 @@ public class AjaxCollectionController extends BaseController {
         }
         // 2.使用vocCode查询单词
         WordStudy wordStudyQuery = new WordStudy();
-        wordStudyQuery.setUserCode(user.getUserCode());
         wordStudyQuery.setStudentId(user.getId().intValue());
         wordStudyQuery.setVocCode(vocCode);
+        wordStudyQuery.setState(State.VALID.getState());
 
         WordStudy ws = wordStudyService.getUnique(wordStudyQuery).getDefaultModel();
         ws.setIscollected(1);

@@ -1,5 +1,6 @@
 package com.goldfish.api;
 
+import com.goldfish.service.WordStudyService;
 import com.goldfish.vo.Statistics.MonthVocStudyResultVO;
 import com.goldfish.vo.Statistics.TestResultVO;
 import com.goldfish.vo.Statistics.VocStudyResultVO;
@@ -8,6 +9,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
 
 /**
  * Created by Administrator on 2018/6/20 0020.
@@ -24,6 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/api/Ajax")
 public class AjaxStatisticsController {
+
+    @Resource
+    private WordStudyService wordStudyService;
     /**
      * /api/Ajax/AjaxGetVocStudyResult
      最近一周所学单词

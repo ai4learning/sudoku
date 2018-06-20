@@ -120,7 +120,7 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		wordStudy.setTimeLeft(dto.getTimeLeft());
 		wordStudy.setUserVocCode(dto.getUserVocCode());
 		wordStudy.setUserCode(dto.getUserCode());
-		wordStudy.setFinishReadingTime(Long.valueOf(String.valueOf(dto.getFinishReadingTime() * 1000)));
+		wordStudy.setFinishReadingTime((long) (int) (dto.getFinishReadingTime() * 1000));
 		wordStudy.setIsFstReadSuccess(State.getBoolInt().get(dto.isFstReadSuccess()));
 		wordStudy.setReadFailTimes(dto.getReadFailTimes());
 		wordStudy.setContinueReadFailTimes(dto.getContinueReadFailTimes());
