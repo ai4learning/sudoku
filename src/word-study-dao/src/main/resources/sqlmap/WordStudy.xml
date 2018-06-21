@@ -45,7 +45,8 @@
     		<if test="spell != null"> AND spell = #{spell}</if>
     		<if test="meaning != null"> AND meaning = #{meaning}</if>
     		<if test="state != null"> AND state = #{state}</if>
-    		
+    		<if test="iscollected != null"> AND isCollected = #{iscollected}</if>
+
     		</where>
     	 
 	</sql>
