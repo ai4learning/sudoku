@@ -3,6 +3,7 @@ package com.goldfish.api;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.goldfish.common.log.LogTypeEnum;
+import com.goldfish.constant.IsTested;
 import com.goldfish.constant.QuestionTypes;
 import com.goldfish.constant.State;
 import com.goldfish.constant.TestArea;
@@ -45,6 +46,8 @@ public class AjaxExamController extends AjaxErrorBookController{
     private WordStudyService wordStudyService;
     @Resource
     private CourseContext courseContext;
+    @Resource
+    private UnitStudyService unitStudyService;
 
     /**
      * 生成自主测试试卷
@@ -1486,7 +1489,23 @@ public class AjaxExamController extends AjaxErrorBookController{
             basicVO.setSuccess(false);
             basicVO.setMsg("记忆保存失败");
         }
+
+        if(testType == 1)
+            saveUnitExamIsTest(user,moduleCode,resultScore,unitNbr);
+
         return basicVO;
+    }
+
+    private void saveUnitExamIsTest(User user, String moduleCode,Integer resultScore,Integer unitNbr)
+    {
+        UnitStudy unitStudyQuery = new UnitStudy();
+        unitStudyQuery.setStudentId(user.getId().intValue());
+        unitStudyQuery.setState(State.VALID.getState());
+        unitStudyQuery.setUnitNbr(unitNbr);
+        unitStudyQuery.setLessonCode(moduleCode);
+        UnitStudy us = unitStudyService.getUnique(unitStudyQuery).getDefaultModel();
+        us.setIsTested(IsTested.getIsTestedByScore(resultScore).getCode());
+        unitStudyService.updateUnitWordsStudy(us);
     }
 
 

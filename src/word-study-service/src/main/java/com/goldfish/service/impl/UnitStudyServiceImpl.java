@@ -71,6 +71,7 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 				unitStudy.setIsFinished(FinishState.COMPLETE.getState());
 				// 单元学习完毕，则到单元测试阶段
 				unitStudy.setCurrentPhase(StudyPhase.UNIT_TEST.getPhase());
+				saveUnitStudyVO.setIsFinished(2);
 			}
 			/**  位置类型  */
 			unitStudy.setPositionType(1);// 1表示单词
@@ -84,7 +85,7 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 				return saveUnitStudyVO;
 			}
 			// 2.保存每个单词的学习情况
-			WordStudy lastStudyWord = null;
+			WordStudy lastStudyWord = new WordStudy();
 			for (WordStudyDto dto : vocDataAfterReview) {
 				WordStudy wordStudy = updateWordStudy(dto);
 				doErrorWord(userId, moduleCode, unitNbr, dto);

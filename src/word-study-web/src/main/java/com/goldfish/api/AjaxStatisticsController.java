@@ -1,5 +1,6 @@
 package com.goldfish.api;
 
+import com.goldfish.service.ExamService;
 import com.goldfish.service.WordStudyService;
 import com.goldfish.vo.Statistics.MonthVocStudyResultVO;
 import com.goldfish.vo.Statistics.TestResultVO;
@@ -30,6 +31,8 @@ public class AjaxStatisticsController {
 
     @Resource
     private WordStudyService wordStudyService;
+    @Resource
+    private ExamService examService;
     /**
      * /api/Ajax/AjaxGetVocStudyResult
      最近一周所学单词
@@ -114,6 +117,8 @@ public class AjaxStatisticsController {
     @RequestMapping(value = "AjaxGettestResult", method = {RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody
     TestResultVO doAjaxGettestResult(ModelMap context) {
+
+
         return null;
     }
 
