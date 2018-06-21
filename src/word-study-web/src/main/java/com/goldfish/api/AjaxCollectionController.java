@@ -149,8 +149,11 @@ public class AjaxCollectionController extends BaseController {
             UnitWords unitWords = unitWordsService.getUnique(unitWordsQuery).getDefaultModel();
             unitWordVO.setVocIndex(unitWords.getVocIndex());
             unitWordVO.setUnitId(unitWords.getUnitNbr());
+            unitWordVOList.add(unitWordVO);
         }
         vocabularyVO.setWordList(unitWordVOList);
+        vocabularyVO.setSuccess(true);
+        vocabularyVO.setMsg(LOAD_SUCCESS);
         return vocabularyVO;
     }
 
@@ -185,9 +188,6 @@ public class AjaxCollectionController extends BaseController {
         vo.setTotalNbr(wordStudyList.size());
         vo.setMsg(LOAD_SUCCESS);
         vo.setSuccess(true);
-        vo.setTotalNbr(0);
-        vo.setMsg(LOAD_FAIL);
-        vo.setSuccess(false);
         return vo;
     }
 
