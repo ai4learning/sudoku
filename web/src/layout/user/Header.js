@@ -1,13 +1,41 @@
 import React, {Component} from 'react'
-import Antd, {Menu} from 'antd'
+import Antd, {Menu, Avatar, Icon, Dropdown} from 'antd'
 import {Link} from 'react-router'
+import fetch from '@common/fetch'
 
 export default class Header extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      current: this.props.location.pathname
+      current: this.props.location.pathname,
+      userInfo: {}
+    }
+  }
+
+  componentWillMount() {
+    this.getUserInfo()
+  }
+
+  getUserInfo() {
+    fetch({
+      url: '/api/Ajax/AjaxGetUserInfo',
+      method: 'POST',
+      type: 'json',
+      noTip: true
+    }).then(data => {
+      this.setState({
+        userInfo: data
+      })
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      current: nextProps.location.pathname
+    })
+    if(nextProps.location.pathname == '/user/login' || nextProps.location.pathname == '/user') {
+      this.getUserInfo()
     }
   }
 
@@ -17,7 +45,38 @@ export default class Header extends Component {
     })
   }
 
+  handleLogout() {
+    fetch({
+      url: '/login/logout',
+      method: 'post',
+      type: 'json',
+      noTip: true
+    }).then(() => {
+      this.setState({
+        userInfo: {}
+      })
+      location.href = '/#/user/login'
+    }).catch(() => {
+      this.setState({
+        userInfo: {}
+      })
+      location.href = '/#/user/login'
+    })
+  }
+
   render() {
+    const menu = (
+      <Menu>
+        <Menu.Item key='user-center'>
+          <a href='/#/user/center'>个人中心</a>
+        </Menu.Item>
+        <Menu.Divider></Menu.Divider>
+        <Menu.Item key='logout'>
+          <a href='javascript:;' onClick={this.handleLogout.bind(this)}>退出</a>
+        </Menu.Item>
+      </Menu>
+    )
+
     return (
       <div className='header'>
         <div className='header_container'>
@@ -36,6 +95,19 @@ export default class Header extends Component {
               <Menu.Item key='user' key='/user/center'><Link to='/user/center'>用户中心</Link></Menu.Item>
               <Menu.Item key='rank' key='/user/rank'><Link to='/user/rank'>排行榜</Link></Menu.Item>
             </Menu>
+          </div>
+          <div className='header_user'>
+            {
+              this.state.userInfo.userId ?
+                <Dropdown overlay={menu} trigger={['click']}>
+                  <div>
+                    <Avatar icon='user'></Avatar>
+                    <span className='header_user_name'>{this.state.userInfo.userId}</span>
+                    <Icon type='down'></Icon>
+                  </div>
+                </Dropdown>
+              : null
+            }
           </div>
         </div>
       </div>

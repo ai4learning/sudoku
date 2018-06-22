@@ -10,6 +10,19 @@ class LoginForm extends Component {
     super(props)
   }
 
+  componentWillMount() {
+    fetch({
+      url: '/api/Ajax/AjaxGetUserInfo',
+      method: 'post',
+      type: 'json',
+      noTip: true
+    }).then(data => {
+      if(data.success && data.userId) {
+        location.href = '/#/user'
+      }
+    })
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form
 

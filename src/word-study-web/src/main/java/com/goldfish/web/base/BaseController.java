@@ -64,6 +64,8 @@ public class BaseController {
         /*** 设置User信息 ****/
         userVO.setUserState(user.getUserState());
         userVO.setTotalLoginTimes(user.getTotalLoginTimes());
+        userVO.setNickName(user.getNikeName());
+        userVO.setUserId(user.getUserId());
         return user;
     }
 

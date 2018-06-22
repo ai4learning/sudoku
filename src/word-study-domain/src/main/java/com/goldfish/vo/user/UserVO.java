@@ -9,6 +9,16 @@ public class UserVO extends BaseVO{
 
     protected Integer userState = 2;
     protected Long totalLoginTimes = 0L;
+    protected String userId;
+    protected String nickName;
+
+    public String getUserId() { return userId; }
+
+    public void setUserId(String userId) { this.userId = userId; }
+
+    public String getNickName() { return nickName; }
+
+    public void setNickName(String nickName) { this.nickName = nickName; }
 
     public Integer getUserState() {
         return userState;
