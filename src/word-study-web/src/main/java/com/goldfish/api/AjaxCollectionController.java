@@ -1,6 +1,7 @@
 package com.goldfish.api;
 
 import com.goldfish.common.log.LogTypeEnum;
+import com.goldfish.constant.CommonConstant;
 import com.goldfish.constant.State;
 import com.goldfish.domain.*;
 import com.goldfish.service.UnitWordsService;
@@ -29,11 +30,6 @@ import java.util.List;
 @RequestMapping("/api/Ajax")
 public class AjaxCollectionController extends BaseController {
 
-    private static final String MEMORY_SUCCESS = "记忆已经保存";
-    private static final String MEMORY_FAIL = "记忆保存失败";
-    private static final String LOAD_SUCCESS = "完成加载";
-    private static final String LOAD_FAIL = "加载失败";
-
     @Resource
     private WordStudyService wordStudyService;
     @Resource
@@ -61,7 +57,7 @@ public class AjaxCollectionController extends BaseController {
         User user = this.getUserInfo();
         if (user == null) {
             vo.setSuccess(false);
-            vo.setMsg(MEMORY_FAIL);
+            vo.setMsg(CommonConstant.MEMORY_FAIL);
             return vo;
         }
         // 2.使用vocCode查询单词
@@ -75,12 +71,12 @@ public class AjaxCollectionController extends BaseController {
         try {
             wordStudyService.updateWordStudy(ws);
             vo.setSuccess(true);
-            vo.setMsg(MEMORY_SUCCESS);
+            vo.setMsg(CommonConstant.MEMORY_SUCCESS);
             return vo;
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e.toString());
             vo.setSuccess(false);
-            vo.setMsg(MEMORY_FAIL);
+            vo.setMsg(CommonConstant.MEMORY_FAIL);
             return vo;
         }
     }
@@ -127,7 +123,7 @@ public class AjaxCollectionController extends BaseController {
         VocabularyVO vocabularyVO = new VocabularyVO();
         List<WordStudy> wordStudyList = getWordStudyList();
         if (wordStudyList == null) {
-            vocabularyVO.setMsg(LOAD_FAIL);
+            vocabularyVO.setMsg(CommonConstant.LOAD_FAIL);
             vocabularyVO.setSuccess(false);
             vocabularyVO.setWordList(null);
             return vocabularyVO;
@@ -153,7 +149,7 @@ public class AjaxCollectionController extends BaseController {
         }
         vocabularyVO.setWordList(unitWordVOList);
         vocabularyVO.setSuccess(true);
-        vocabularyVO.setMsg(LOAD_SUCCESS);
+        vocabularyVO.setMsg(CommonConstant.LOAD_SUCCESS);
         return vocabularyVO;
     }
 
@@ -181,12 +177,12 @@ public class AjaxCollectionController extends BaseController {
         if (wordStudyList == null) {
             vo.setSuccess(false);
             vo.setCondition(-1);
-            vo.setMsg(LOAD_FAIL);
+            vo.setMsg(CommonConstant.LOAD_FAIL);
             vo.setTotalNbr(0);
             return vo;
         }
         vo.setTotalNbr(wordStudyList.size());
-        vo.setMsg(LOAD_SUCCESS);
+        vo.setMsg(CommonConstant.LOAD_SUCCESS);
         vo.setSuccess(true);
         return vo;
     }

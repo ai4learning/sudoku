@@ -90,4 +90,12 @@ public interface ExamDao {
      */
     public int count(Map<String,Object> paramMap);
 
+    /**
+     * 查询该用户最近15天的考试结果
+     *
+     * @param  exam 查询条件
+     * @return List<Exam> 结果
+     */
+    public List<Exam> getListByUserRecent(Map<String,Object> paramMap);
+
 }

@@ -5,6 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
@@ -140,6 +142,31 @@ public class ExamServiceImpl implements ExamService {
 	
 	public int count(PageQuery pageQuery) {
 		return examManager.count(pageQuery);
+	}
+
+	/**
+	 * 查询该用户最近15天的考试结果
+	 *
+	 * @param  pageQuery 查询条件
+	 * @return List<Exam> 结果
+	 */
+	public CommonResult<List<Exam>> getListByUserRecent(PageQuery pageQuery)
+	{
+		CommonResult<List<Exam>> result = new CommonResult<List<Exam>>();
+		try {
+			int totalCount = this.count(pageQuery);
+			if (totalCount > 0) {
+				pageQuery.setTotalCount(totalCount);
+				List<Exam> list = examManager.getListByUserRecent(pageQuery);
+				result.addDefaultModel("list", list);
+				result.addModel("pageQuery", pageQuery);
+			}
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("分页获取 考试失败", e);
+			result.setSuccess(false);
+		}
+		return result;
 	}
 
 
