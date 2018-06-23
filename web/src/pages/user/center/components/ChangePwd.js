@@ -97,9 +97,11 @@ export default class ChangePwd extends Component {
 
   render() {
     return (
-      <Panel title='修改密码'>
-        <WrappedChangePwdForm></WrappedChangePwdForm>
-      </Panel>
+      <div className='page_change_pwd'>
+        <Panel title='修改密码'>
+          <WrappedChangePwdForm></WrappedChangePwdForm>
+        </Panel>
+      </div>
     )
   }
 }

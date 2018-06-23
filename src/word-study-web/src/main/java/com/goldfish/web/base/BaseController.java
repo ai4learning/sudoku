@@ -58,7 +58,7 @@ public class BaseController {
         if (user == null) {
             LogTypeEnum.DEFAULT.info("未获取到用户信息");
             userVO.setMsg("未获取到用户信息");
-            userVO.setSuccess(true);
+            userVO.setSuccess(false);
             return null;
         }
         /*** 设置User信息 ****/
@@ -66,6 +66,8 @@ public class BaseController {
         userVO.setTotalLoginTimes(user.getTotalLoginTimes());
         userVO.setNickName(user.getNikeName());
         userVO.setUserId(user.getUserId());
+        userVO.setCreated(user.getCreated());
+        userVO.setModified(user.getModified());
         return user;
     }
 

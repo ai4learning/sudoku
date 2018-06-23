@@ -8,7 +8,7 @@ export default class Rank extends Component {
 
   render() {
     return (
-      <div>排行榜</div>
+      <div style={{padding: '15px'}}>comming soon...</div>
     )
   }
 }
