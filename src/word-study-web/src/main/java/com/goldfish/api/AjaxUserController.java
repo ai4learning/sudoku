@@ -1,6 +1,7 @@
 package com.goldfish.api;
 
 import com.goldfish.domain.User;
+import com.goldfish.service.UserService;
 import com.goldfish.vo.user.LoginVO;
 import com.goldfish.vo.user.UserVO;
 import com.goldfish.web.base.BaseController;
@@ -8,7 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.rmi.runtime.Log;
+
+import javax.annotation.Resource;
 
 /**
  * Created by wcf on 2018/6/21.
@@ -16,15 +18,22 @@ import sun.rmi.runtime.Log;
 @Controller
 @RequestMapping("/api/Ajax")
 public class AjaxUserController extends BaseController {
+    @Resource
+    private UserService userService;
+
     @RequestMapping(value = "AjaxGetUserInfo", method = {RequestMethod.GET, RequestMethod.POST})
     public
     @ResponseBody
     UserVO doAjaxGetUserInfo() {
         UserVO userVO = new UserVO();
-        this.fillUserInfo(userVO);
-        userVO.setSuccess(true);
-        userVO.setMsg("成功");
-        return userVO;
+        User user = this.fillUserInfo(userVO);
+        if(user == null) {
+            return userVO;
+        } else {
+            userVO.setSuccess(true);
+            userVO.setMsg("成功");
+            return userVO;
+        }
     }
 
     @RequestMapping(value = "AjaxUpdatePassword", method = {RequestMethod.GET, RequestMethod.POST})
@@ -36,6 +45,7 @@ public class AjaxUserController extends BaseController {
         if(user.getPasswd().equals(txtOldPassword)) {
             if(txtComPassword.equals(txtNewPassword)) {
                 user.setPasswd(txtNewPassword);
+                userService.updateUser(user);
                 loginVO.setSuccess(true);
                 loginVO.setMsg("修改密码成功~");
             } else {
