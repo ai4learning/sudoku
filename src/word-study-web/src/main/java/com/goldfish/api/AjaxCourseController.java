@@ -629,7 +629,7 @@ public class AjaxCourseController extends BaseController {
                                             Long seconds4SpellingLetter,
                                             Long totalReadingTime,
                                             Long totalWritingTime,
-                                            List<WordStudyDto> vocDataAfterReview,
+                                            String vocDataAfterReview,
                                             Integer totalWordsNbr,
                                             ModelMap context) {
         SaveUnitStudyVO saveUnitStudyVO = new SaveUnitStudyVO();
@@ -652,7 +652,7 @@ public class AjaxCourseController extends BaseController {
                     seconds4SpellingLetter,
                     totalReadingTime,
                     totalWritingTime,
-                    vocDataAfterReview,
+                    JSON.parseArray(vocDataAfterReview, WordStudyDto.class),
                     totalWordsNbr);
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
@@ -675,7 +675,7 @@ public class AjaxCourseController extends BaseController {
                                             Long seconds4SpellingLetter,
                                             Long totalReadingTime,
                                             Long totalWritingTime,
-                                            List<WordStudyDto> vocDataAfterReview,
+                                            String vocDataAfterReview,
                                             Integer totalWordsNbr,
                                             ModelMap context) {
         SaveFinishUnitStudyVO saveFinishUnitStudyVO = new SaveFinishUnitStudyVO();
@@ -698,7 +698,7 @@ public class AjaxCourseController extends BaseController {
                     seconds4SpellingLetter,
                     totalReadingTime,
                     totalWritingTime,
-                    vocDataAfterReview,
+                    JSON.parseArray(vocDataAfterReview, WordStudyDto.class),
                     totalWordsNbr);
 
         } catch (Exception e) {

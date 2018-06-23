@@ -1,6 +1,8 @@
 package com.goldfish.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.Exam;
@@ -86,6 +88,12 @@ public interface ExamService {
      * @return
      */
     public int count(PageQuery pageQuery);
-	
-	
+
+    /**
+     * 查询该用户最近15天的考试结果
+     *
+     * @param  exam 查询条件
+     * @return List<Exam> 结果
+     */
+    public CommonResult<List<Exam>> getListByUserRecent(PageQuery pageQuery);
 }

@@ -23,7 +23,7 @@ export default function fetch(options) {
         resolve(result)
       } else {
         if(result.condition == -1) {
-          Modal.info({
+          !options.noTip && Modal.info({
             title: '您还未登录，快去登录吧',
             okText: '确定',
             onOk: () => {
@@ -31,8 +31,8 @@ export default function fetch(options) {
             }
           })
         } else {
-          Modal.error({
-            title: (<p dangerouslySetInnerHTML={{ __html: result.message || '服务器开小差啦，请稍后重试~' }}></p>)
+          !options.noTip && Modal.error({
+            title: (<p dangerouslySetInnerHTML={{ __html: result.msg || '服务器开小差啦，请稍后重试~' }}></p>)
           })
         }
         reject(result)

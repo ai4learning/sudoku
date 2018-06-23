@@ -54,4 +54,10 @@ public class CommonConstant {
 
 
     public static  final  String REQUEST_USER_KEY="user_key";
+
+
+	public static final String MEMORY_SUCCESS = "记忆已经保存";
+	public static final String MEMORY_FAIL = "记忆保存失败";
+	public static final String LOAD_SUCCESS = "完成加载";
+	public static final String LOAD_FAIL = "加载失败";
 }

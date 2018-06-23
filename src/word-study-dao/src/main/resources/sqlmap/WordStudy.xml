@@ -40,11 +40,13 @@
     		<where>
     		<if test="id != null"> AND id = #{id}</if>
     		<if test="studentId != null"> AND student_id = #{studentId}</if>
+    		<if test="vocCode != null"> AND voc_code = #{vocCode}</if>
     		<if test="wordId != null"> AND word_id = #{wordId}</if>
     		<if test="spell != null"> AND spell = #{spell}</if>
     		<if test="meaning != null"> AND meaning = #{meaning}</if>
     		<if test="state != null"> AND state = #{state}</if>
-    		
+    		<if test="iscollected != null"> AND isCollected = #{iscollected}</if>
+
     		</where>
     	 
 	</sql>
@@ -160,7 +162,19 @@
 		
               <include refid="MAP-COMMON-SQL" />
 	</select>
-	
 
+	<select id="countWeek" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM word_study
+		]]>
+
+		<where>
+			<if test="id != null"> AND id = #{id}</if>
+			<if test="studentId != null"> AND student_id = #{studentId}</if>
+			<if test="state != null"> AND state = #{state}</if>
+			<if test="isStudy != null"> AND is_study = #{isStudy}</if>
+			<if test="modified != null"> AND modified  #{modified}</if>
+		</where>
+	</select>
 
 </mapper>

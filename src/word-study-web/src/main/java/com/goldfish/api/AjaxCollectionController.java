@@ -1,6 +1,8 @@
 package com.goldfish.api;
 
 import com.goldfish.common.log.LogTypeEnum;
+import com.goldfish.constant.CommonConstant;
+import com.goldfish.constant.State;
 import com.goldfish.domain.*;
 import com.goldfish.service.UnitWordsService;
 import com.goldfish.service.WordService;
@@ -27,11 +29,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/api/Ajax")
 public class AjaxCollectionController extends BaseController {
-
-    private static final String MEMORY_SUCCESS = "记忆已经保存";
-    private static final String MEMORY_FAIL = "记忆保存失败";
-    private static final String LOAD_SUCCESS = "完成加载";
-    private static final String LOAD_FAIL = "加载失败";
 
     @Resource
     private WordStudyService wordStudyService;
@@ -60,26 +57,26 @@ public class AjaxCollectionController extends BaseController {
         User user = this.getUserInfo();
         if (user == null) {
             vo.setSuccess(false);
-            vo.setMsg(MEMORY_FAIL);
+            vo.setMsg(CommonConstant.MEMORY_FAIL);
             return vo;
         }
         // 2.使用vocCode查询单词
         WordStudy wordStudyQuery = new WordStudy();
-        wordStudyQuery.setUserCode(user.getUserCode());
         wordStudyQuery.setStudentId(user.getId().intValue());
         wordStudyQuery.setVocCode(vocCode);
+        wordStudyQuery.setState(State.VALID.getState());
 
         WordStudy ws = wordStudyService.getUnique(wordStudyQuery).getDefaultModel();
         ws.setIscollected(1);
         try {
             wordStudyService.updateWordStudy(ws);
             vo.setSuccess(true);
-            vo.setMsg(MEMORY_SUCCESS);
+            vo.setMsg(CommonConstant.MEMORY_SUCCESS);
             return vo;
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e.toString());
             vo.setSuccess(false);
-            vo.setMsg(MEMORY_FAIL);
+            vo.setMsg(CommonConstant.MEMORY_FAIL);
             return vo;
         }
     }
@@ -126,7 +123,7 @@ public class AjaxCollectionController extends BaseController {
         VocabularyVO vocabularyVO = new VocabularyVO();
         List<WordStudy> wordStudyList = getWordStudyList();
         if (wordStudyList == null) {
-            vocabularyVO.setMsg(LOAD_FAIL);
+            vocabularyVO.setMsg(CommonConstant.LOAD_FAIL);
             vocabularyVO.setSuccess(false);
             vocabularyVO.setWordList(null);
             return vocabularyVO;
@@ -148,8 +145,11 @@ public class AjaxCollectionController extends BaseController {
             UnitWords unitWords = unitWordsService.getUnique(unitWordsQuery).getDefaultModel();
             unitWordVO.setVocIndex(unitWords.getVocIndex());
             unitWordVO.setUnitId(unitWords.getUnitNbr());
+            unitWordVOList.add(unitWordVO);
         }
         vocabularyVO.setWordList(unitWordVOList);
+        vocabularyVO.setSuccess(true);
+        vocabularyVO.setMsg(CommonConstant.LOAD_SUCCESS);
         return vocabularyVO;
     }
 
@@ -177,16 +177,13 @@ public class AjaxCollectionController extends BaseController {
         if (wordStudyList == null) {
             vo.setSuccess(false);
             vo.setCondition(-1);
-            vo.setMsg(LOAD_FAIL);
+            vo.setMsg(CommonConstant.LOAD_FAIL);
             vo.setTotalNbr(0);
             return vo;
         }
         vo.setTotalNbr(wordStudyList.size());
-        vo.setMsg(LOAD_SUCCESS);
+        vo.setMsg(CommonConstant.LOAD_SUCCESS);
         vo.setSuccess(true);
-        vo.setTotalNbr(0);
-        vo.setMsg(LOAD_FAIL);
-        vo.setSuccess(false);
         return vo;
     }
 

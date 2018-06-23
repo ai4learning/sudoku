@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Form, Input, Button} from 'antd'
+import {Form, Input, Button, Modal} from 'antd'
 import Panel from '@components/Panel'
 import fetch from '@common/fetch'
 
@@ -63,6 +63,19 @@ class ChangePwdForm extends Component {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if(err) return
+      fetch({
+        url: '/api/Ajax/AjaxUpdatePassword',
+        method: 'POST',
+        type: 'json',
+        data: values
+      }).then(() => {
+        Modal.success({
+          title: '修改密码成功~',
+          onOk: () => {
+            location.href = '/'
+          }
+        })
+      })
     })
   }
 

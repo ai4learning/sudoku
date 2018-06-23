@@ -67,6 +67,7 @@ html, body {
     .header_container {
       width: 1200px;
       margin: 0 auto;
+      position: relative;
     }
 
     .header_logo {
@@ -80,6 +81,25 @@ html, body {
 
       .header_logo_img {
         width: 100px;
+      }
+    }
+
+    .header_user {
+      position: absolute;
+      right: 20px;
+      top: 0;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      color: white;
+      cursor: pointer;
+
+      .ant-avatar.ant-avatar-icon {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .header_user_name {
+        padding: 4px;
       }
     }
   }
