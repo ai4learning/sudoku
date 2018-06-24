@@ -15,6 +15,7 @@ import com.goldfish.vo.exam.*;
 import com.goldfish.domain.Paper;
 import com.goldfish.service.PaperService;
 import com.goldfish.service.QuestionService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -1490,7 +1491,7 @@ public class AjaxExamController extends AjaxErrorBookController{
             basicVO.setMsg("记忆保存失败");
         }
 
-        if(testType == 1)
+        if(testType == 1 && !StringUtils.isEmpty(moduleCode) && unitNbr!=null)
             saveUnitExamIsTest(user,moduleCode,resultScore,unitNbr);
 
         return basicVO;
