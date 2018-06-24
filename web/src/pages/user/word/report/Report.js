@@ -102,7 +102,14 @@ export default class Report extends Component {
       {
         title: '课本',
         dataIndex: 'bookName',
-        key: 'bookName'
+        key: 'bookName',
+        render: (text) => {
+          if(!text || text == 'null') {
+            return '-'
+          } else {
+            return text
+          }
+        }
       },
       {
         title: '测试类型',
@@ -122,7 +129,7 @@ export default class Report extends Component {
         dataIndex: 'unitNbr',
         key: 'unitNbr',
         render: (text) => {
-          if(!text || text == 0) {
+          if(!text || text == 0 || text == 'null') {
             return '-'
           }
           return text
