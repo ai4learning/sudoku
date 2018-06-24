@@ -6,6 +6,8 @@
 package com.goldfish.domain;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -69,7 +71,12 @@ public class WordStudy  implements Serializable {
 	private java.util.Date created; 
 	/**  更新时间  */
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private java.util.Date modified; 
+	private java.util.Date modified;
+    /**
+     * 学习时间
+     */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private java.util.Date studied;
 
   	public void setId(Long id) {
   	  this.id=id;
@@ -324,4 +331,12 @@ public class WordStudy  implements Serializable {
 	public void setMeaning(String meaning) {
 		this.meaning = meaning;
 	}
+
+    public Date getStudied() {
+        return studied;
+    }
+
+    public void setStudied(Date studied) {
+        this.studied = studied;
+    }
 }

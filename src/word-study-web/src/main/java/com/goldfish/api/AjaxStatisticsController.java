@@ -85,7 +85,6 @@ public class AjaxStatisticsController extends BaseController {
         Date date = new Date();
         for (int i=0;i<Calendar.DAY_OF_WEEK;i++)
         {
-            date = DateFormatUtils.getNextDay(date);
             String dateString = sdf.format(date);
             pageQuery.addQueryParam("date", dateString);
             int count = wordStudyService.countDay(pageQuery);
@@ -93,6 +92,8 @@ public class AjaxStatisticsController extends BaseController {
             vocCountVO.setDate(dateString);
             vocCountVO.setVoccount(count);
             vocCountVOList.add(vocCountVO);
+
+            date = DateFormatUtils.getNextDay(date);
         }
         vo.setVocCountVOList(vocCountVOList);
         vo.setMsg(CommonConstant.LOAD_SUCCESS);

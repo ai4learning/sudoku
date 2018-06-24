@@ -87,7 +87,7 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			// 2.保存每个单词的学习情况
 			WordStudy lastStudyWord = new WordStudy();
 			for (WordStudyDto dto : vocDataAfterReview) {
-				WordStudy wordStudy = updateWordStudy(dto);
+				WordStudy wordStudy = updateWordStudy(dto,userId);
 				doErrorWord(userId, moduleCode, unitNbr, dto);
 				lastStudyWord = wordStudy;
 			}
@@ -117,8 +117,12 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 
 	}
 
-	private WordStudy updateWordStudy(WordStudyDto dto) {
-		WordStudy wordStudy = new WordStudy();
+	private WordStudy updateWordStudy(WordStudyDto dto,Integer userId) {
+	    WordStudy wordStudyQuery = new WordStudy();
+	    wordStudyQuery.setVocCode(dto.getVocCode());
+	    wordStudyQuery.setStudentId(userId);
+        wordStudyQuery.setState(State.VALID.getState());
+		WordStudy wordStudy = wordStudyManager.getUnique(wordStudyQuery);
 		wordStudy.setMemoryLevel(dto.getMemoryLevel());
 		wordStudy.setTimeLeft(dto.getTimeLeft());
 		wordStudy.setUserVocCode(dto.getUserVocCode());
@@ -136,6 +140,7 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		wordStudy.setIsCancelReview(State.getBoolInt().get(dto.isCancelReview()));
 		wordStudy.setVocCode(dto.getVocCode());
 		wordStudy.setModified(new Date());
+		wordStudy.setStudied(new Date());
 		wordStudyManager.updateWordStudy(wordStudy);
 		return wordStudy;
 	}
@@ -201,7 +206,7 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			// 2.保存每个单词的学习情况
 			WordStudy lastStudyWord = null;
 			for (WordStudyDto dto : vocDataAfterReview) {
-				WordStudy wordStudy = updateWordStudy(dto);
+				WordStudy wordStudy = updateWordStudy(dto,studentId);
 				doErrorWord(studentId, moduleCode, unitNbr, dto);
 				lastStudyWord = wordStudy;
 			}
