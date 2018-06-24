@@ -30,6 +30,7 @@
 		<result property="state" column="state"/>
 		<result property="created" column="created"/>
 		<result property="modified" column="modified"/>
+		<result property="studied" column="studied"/>
 
 	</resultMap>
 
@@ -73,12 +74,12 @@
 	
 
 	<sql id="All-FIELDS">
-		id,voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified
+		id,voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified,studied
 	</sql>
 
 	<insert id="addWordStudy" parameterType="com.goldfish.domain.WordStudy">
-		insert into word_study (voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified)
-			values(#{vocCode},#{userVocCode},#{wordId},#{spell},#{meaning},#{studentId},#{userCode},#{memoryLevel},#{reviewTimes},#{timeLeft},#{finishReadingTime},#{isFstReadSuccess},#{readFailTimes},#{continueReadFailTimes},#{isHalfReading},#{isFstSpellSuccess},#{spellFailTimes},#{continueSpellFailTimes},#{isHalfSpelling},#{isRemember},#{isCancelReview},#{iscollected},#{state},#{created},#{modified})
+		insert into word_study (voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified,studied)
+			values(#{vocCode},#{userVocCode},#{wordId},#{spell},#{meaning},#{studentId},#{userCode},#{memoryLevel},#{reviewTimes},#{timeLeft},#{finishReadingTime},#{isFstReadSuccess},#{readFailTimes},#{continueReadFailTimes},#{isHalfReading},#{isFstSpellSuccess},#{spellFailTimes},#{continueSpellFailTimes},#{isHalfSpelling},#{isRemember},#{isCancelReview},#{iscollected},#{state},#{created},#{modified},#{studied})
     
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
 		   select last_insert_id() as ID from dual
@@ -115,6 +116,7 @@
 			<if test="state !=null"> state = #{state},</if>
 			<if test="created !=null"> created = #{created},</if>
 			<if test="modified !=null"> modified = #{modified},</if>
+			<if test="studied !=null"> studied = #{studied},</if>
 
 	</set>
 	 where id = #{id}
@@ -148,7 +150,7 @@
 	
 	<select id="getWordStudyByPage" resultMap="WordStudy-Map" parameterType="java.util.HashMap">
 		<![CDATA[
-			SELECT  id,voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,modified FROM word_study
+			SELECT  id,voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,modified,studied FROM word_study
 		]]>
             <include refid="MAP-COMMON-SQL" />
             <include refid="ORDER-SQL" />
@@ -163,17 +165,16 @@
               <include refid="MAP-COMMON-SQL" />
 	</select>
 
-	<select id="countWeek" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+	<select id="countDay" resultType="java.lang.Integer" parameterType="java.util.HashMap">
 		<![CDATA[
 			SELECT COUNT(1) FROM word_study
 		]]>
 
 		<where>
-			<if test="id != null"> AND id = #{id}</if>
 			<if test="studentId != null"> AND student_id = #{studentId}</if>
 			<if test="state != null"> AND state = #{state}</if>
-			<if test="isStudy != null"> AND is_study = #{isStudy}</if>
-			<if test="modified != null"> AND modified  #{modified}</if>
+			<if test="date != null"> AND TO_DAYS(#{date})=TO_DAYS(studied)</if>
+
 		</where>
 	</select>
 

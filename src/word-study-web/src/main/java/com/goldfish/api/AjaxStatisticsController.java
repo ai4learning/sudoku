@@ -1,7 +1,9 @@
 package com.goldfish.api;
 
+import com.goldfish.common.DateFormatUtils;
 import com.goldfish.common.PageQuery;
 import com.goldfish.constant.CommonConstant;
+import com.goldfish.constant.State;
 import com.goldfish.domain.Exam;
 import com.goldfish.domain.User;
 import com.goldfish.service.ExamService;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -66,7 +69,36 @@ public class AjaxStatisticsController extends BaseController {
     @RequestMapping(value = "AjaxGetVocStudyResult", method = {RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody
     VocStudyResultVO doAjaxGetVocStudyResult(ModelMap context) {
-        return null;
+        VocStudyResultVO vo = new VocStudyResultVO();
+        User user = this.getUserInfo();
+        if (user == null) {
+            vo.setMsg(CommonConstant.LOAD_FAIL);
+            vo.setSuccess(false);
+            return vo;
+        }
+
+        List<VocCountVO> vocCountVOList = new ArrayList<>(Calendar.DAY_OF_WEEK);
+        PageQuery pageQuery = new PageQuery();
+        pageQuery.addQueryParam("studentId",user.getId().intValue());
+        pageQuery.addQueryParam("state", State.VALID.getState());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        for (int i=0;i<Calendar.DAY_OF_WEEK;i++)
+        {
+            String dateString = sdf.format(date);
+            pageQuery.addQueryParam("date", dateString);
+            int count = wordStudyService.countDay(pageQuery);
+            VocCountVO vocCountVO = new VocCountVO();
+            vocCountVO.setDate(dateString);
+            vocCountVO.setVoccount(count);
+            vocCountVOList.add(vocCountVO);
+
+            date = DateFormatUtils.getNextDay(date);
+        }
+        vo.setVocCountVOList(vocCountVOList);
+        vo.setMsg(CommonConstant.LOAD_SUCCESS);
+        vo.setSuccess(true);
+        return vo;
     }
 
 

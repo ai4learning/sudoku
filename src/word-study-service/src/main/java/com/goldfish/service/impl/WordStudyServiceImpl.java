@@ -142,6 +142,9 @@ public class WordStudyServiceImpl implements WordStudyService {
 		return wordStudyManager.count(pageQuery);
 	}
 
+    public int countDay(PageQuery pageQuery){
+        return wordStudyManager.countDay(pageQuery);
+    }
 
 	/******* getter and setter ***/
 	public WordStudyManager getWordStudyManager() {

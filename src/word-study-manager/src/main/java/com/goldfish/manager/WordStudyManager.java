@@ -88,4 +88,12 @@ public interface WordStudyManager {
      */
     public int count(PageQuery pageQuery);
 
+    /**
+     * 根据查询条件返回数量
+     *
+     * @param pageQuery
+     * @return
+     */
+    public int countDay(PageQuery pageQuery);
+
 }
