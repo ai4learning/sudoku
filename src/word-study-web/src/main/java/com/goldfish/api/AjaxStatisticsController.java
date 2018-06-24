@@ -4,8 +4,10 @@ import com.goldfish.common.DateFormatUtils;
 import com.goldfish.common.PageQuery;
 import com.goldfish.constant.CommonConstant;
 import com.goldfish.constant.State;
+import com.goldfish.domain.Course;
 import com.goldfish.domain.Exam;
 import com.goldfish.domain.User;
+import com.goldfish.service.CourseService;
 import com.goldfish.service.ExamService;
 import com.goldfish.service.UnitStudyService;
 import com.goldfish.service.WordStudyService;
@@ -46,6 +48,8 @@ public class AjaxStatisticsController extends BaseController {
     private ExamService examService;
     @Resource
     private UnitStudyService unitStudyService;
+    @Resource
+    private CourseService courseService;
 
     /**
      * /api/Ajax/AjaxGetVocStudyResult
@@ -247,8 +251,16 @@ public class AjaxStatisticsController extends BaseController {
             basicTestResultVO.setRealDuration(exam.getRealDuration().intValue());
             basicTestResultVO.setResultScore(exam.getResultScore());
             basicTestResultVO.setTestType(exam.getTestType());
-            basicTestResultVO.setUnitNbr(String.valueOf(exam.getUnitNbr()));
-            basicTestResultVO.setBookName(null);  //TODO
+            basicTestResultVO.setUnitNbr(exam.getUnitNbr()==null? null: String.valueOf(exam.getUnitNbr()));
+            if (exam.getModuleCode() == null)
+                basicTestResultVO.setBookName(null);
+            else {
+                Course courseQuery = new Course();
+                courseQuery.setModuleCode(exam.getModuleCode());
+                Course course = courseService.getUnique(courseQuery).getDefaultModel();
+                basicTestResultVO.setBookName(course.getBookName());
+            }
+
             basicTestResultVOList.add(basicTestResultVO);
         }
         testResultVO.setBasicTestResultVOList(basicTestResultVOList);
