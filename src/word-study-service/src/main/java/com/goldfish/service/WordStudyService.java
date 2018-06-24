@@ -86,6 +86,6 @@ public interface WordStudyService {
      * @return
      */
     public int count(PageQuery pageQuery);
-	
-	
+
+    public int countDay(PageQuery pageQuery);
 }

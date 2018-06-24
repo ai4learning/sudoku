@@ -90,5 +90,5 @@ public interface WordStudyDao {
      */
     public int count(Map<String,Object> paramMap);
 
-    public int countWeek(Map<String,Object> paramMap);
+    public int countDay(Map<String,Object> paramMap);
 }

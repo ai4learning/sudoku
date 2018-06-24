@@ -63,6 +63,10 @@ public class WordStudyManagerImpl implements WordStudyManager {
 		return wordStudyDao.count( pageQuery.getParams());
     }
 
+    public int countDay(PageQuery pageQuery) {
+        return wordStudyDao.countDay( pageQuery.getParams());
+    }
+
     /******* getter and setter ***/
     
 	public WordStudyDao getWordStudyDao() {

@@ -163,17 +163,16 @@
               <include refid="MAP-COMMON-SQL" />
 	</select>
 
-	<select id="countWeek" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+	<select id="countDay" resultType="java.lang.Integer" parameterType="java.util.HashMap">
 		<![CDATA[
 			SELECT COUNT(1) FROM word_study
 		]]>
 
 		<where>
-			<if test="id != null"> AND id = #{id}</if>
 			<if test="studentId != null"> AND student_id = #{studentId}</if>
 			<if test="state != null"> AND state = #{state}</if>
-			<if test="isStudy != null"> AND is_study = #{isStudy}</if>
-			<if test="modified != null"> AND modified  #{modified}</if>
+			<if test="date != null"> AND TO_DAYS(#{date})=TO_DAYS(modified)</if>
+
 		</where>
 	</select>
 
