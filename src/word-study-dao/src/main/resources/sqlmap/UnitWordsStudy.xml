@@ -163,7 +163,21 @@
 		
               <include refid="MAP-COMMON-SQL" />
 	</select>
-	
 
+	<select id="sumReading" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT IFNULL(SUM(total_reading_time),0) FROM unit_words_study
+		]]>
+
+		<include refid="MAP-COMMON-SQL" />	AND MONTH(CURDATE())=MONTH(modified) AND YEAR(CURDATE())=YEAR(modified)
+	</select>
+
+	<select id="sumWriting" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT IFNULL(SUM(total_writing_time),0) FROM unit_words_study
+		]]>
+
+		<include refid="MAP-COMMON-SQL" /> AND MONTH(CURDATE())=MONTH(modified) AND YEAR(CURDATE())=YEAR(modified)
+	</select>
 
 </mapper>

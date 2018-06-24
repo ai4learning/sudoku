@@ -5,11 +5,9 @@ import com.goldfish.constant.CommonConstant;
 import com.goldfish.domain.Exam;
 import com.goldfish.domain.User;
 import com.goldfish.service.ExamService;
+import com.goldfish.service.UnitStudyService;
 import com.goldfish.service.WordStudyService;
-import com.goldfish.vo.Statistics.BasicTestResultVO;
-import com.goldfish.vo.Statistics.MonthVocStudyResultVO;
-import com.goldfish.vo.Statistics.TestResultVO;
-import com.goldfish.vo.Statistics.VocStudyResultVO;
+import com.goldfish.vo.Statistics.*;
 import com.goldfish.web.base.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,6 +41,8 @@ public class AjaxStatisticsController extends BaseController {
     private WordStudyService wordStudyService;
     @Resource
     private ExamService examService;
+    @Resource
+    private UnitStudyService unitStudyService;
 
     /**
      * /api/Ajax/AjaxGetVocStudyResult
@@ -88,7 +90,28 @@ public class AjaxStatisticsController extends BaseController {
     @RequestMapping(value = "AjaxGetMonthVocStudyResult", method = {RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody
     MonthVocStudyResultVO doAjaxGetMonthVocStudyResult(ModelMap context) {
-        return null;
+        MonthVocStudyResultVO vo = new MonthVocStudyResultVO();
+        User user = this.getUserInfo();
+        if (user == null) {
+            vo.setMsg(CommonConstant.LOAD_FAIL);
+            vo.setSuccess(false);
+            return vo;
+        }
+        MonthReadSpellVO monthReadSpellVO = new MonthReadSpellVO();
+        List<MonthReadSpellVO> monthReadSpellVOList = new ArrayList<>(1);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        Date date = new Date();
+        monthReadSpellVO.setDate(sdf.format(date));
+
+        PageQuery pageQuery = new PageQuery();
+        pageQuery.addQueryParam("studentId",user.getId().intValue());
+        monthReadSpellVO.setTotalReadTimes(unitStudyService.sumReading(pageQuery));
+        monthReadSpellVO.setTotalSpellTimes(unitStudyService.sumWriting(pageQuery));
+        monthReadSpellVOList.add(monthReadSpellVO);
+        vo.setMonthReadSpellVOList(monthReadSpellVOList);
+        vo.setMsg(CommonConstant.LOAD_SUCCESS);
+        vo.setSuccess(true);
+        return vo;
     }
 
 

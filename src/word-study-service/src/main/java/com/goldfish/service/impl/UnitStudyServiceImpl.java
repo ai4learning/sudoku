@@ -435,4 +435,13 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		this.unitStudyManager = unitStudyManager;
 	}
 
+	public int sumReading(PageQuery pageQuery){
+		return unitStudyManager.sumReading(pageQuery);
+	}
+
+	public int sumWriting(PageQuery pageQuery)
+	{
+		return unitStudyManager.sumWriting(pageQuery);
+	}
+
 }

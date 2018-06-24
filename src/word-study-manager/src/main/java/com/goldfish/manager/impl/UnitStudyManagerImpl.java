@@ -77,4 +77,12 @@ public class UnitStudyManagerImpl implements UnitStudyManager {
 	public void setUnitWordsStudyDao(UnitWordsStudyDao unitWordsStudyDao) {
 		this.unitWordsStudyDao = unitWordsStudyDao;
 	}
+
+    public int sumReading(PageQuery pageQuery) {
+        return unitWordsStudyDao.sumReading( pageQuery.getParams());
+    }
+
+    public int sumWriting(PageQuery pageQuery) {
+        return unitWordsStudyDao.sumWriting( pageQuery.getParams());
+    }
 }

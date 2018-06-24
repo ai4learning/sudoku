@@ -151,7 +151,7 @@
 
 	<select id="getListByUserRecent" resultMap="Exam-Map" parameterType="java.util.HashMap">
 		SELECT   <include refid="All-FIELDS"/> FROM exam
-		<include refid="BEAN-COMMON-SQL" /> AND <![CDATA[ TO_DAYS(NOW())-TO_DAYS(created) <= #{limit}     ]]>   ORDER BY created DESC
+		<include refid="MAP-COMMON-SQL" /> AND <![CDATA[ TO_DAYS(NOW())-TO_DAYS(created) <= #{limit}     ]]>   ORDER BY created DESC
 	</select>
 
 </mapper>

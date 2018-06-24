@@ -116,4 +116,8 @@ public interface UnitStudyService {
                                             Long totalWritingTime,
                                             List<WordStudyDto> vocDataAfterReview,
                                             Integer totalWordsNbr);
+
+    public int sumReading(PageQuery pageQuery);
+
+    public int sumWriting(PageQuery pageQuery);
 }

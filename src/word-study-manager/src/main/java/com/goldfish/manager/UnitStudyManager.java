@@ -94,4 +94,8 @@ public interface UnitStudyManager {
      */
     public void otherUnitNotCurStudyPosition(UnitStudy unitStudy);
 
+    public int sumReading(PageQuery pageQuery);
+
+    public int sumWriting(PageQuery pageQuery);
+
 }

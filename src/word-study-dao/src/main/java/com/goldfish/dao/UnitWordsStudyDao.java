@@ -97,6 +97,20 @@ public interface UnitWordsStudyDao {
      */
     public int count(Map<String,Object> paramMap);
 
+    /**
+     * 根据查询条件返回数量
+     *
+     * @param paramMap
+     * @return
+     */
+    public int sumReading(Map<String,Object> paramMap);
 
+    /**
+     * 根据查询条件返回数量
+     *
+     * @param paramMap
+     * @return
+     */
+    public int sumWriting(Map<String,Object> paramMap);
 
 }
