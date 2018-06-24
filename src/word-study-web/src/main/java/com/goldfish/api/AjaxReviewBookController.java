@@ -591,6 +591,25 @@ public class AjaxReviewBookController extends AjaxCourseController {
         return result.getReturnMap();
     }
 
+    @RequestMapping(value="AjaxGetReviewCount",method={RequestMethod.GET,RequestMethod.POST})
+    public @ResponseBody
+    Map<String,Object> doAjaxGetReviewCount(ModelMap context) {
+     CommonResult result = new CommonResult();
+
+//     {
+//      "success": true,
+//             "condition": 0,
+//             "msg": "完成加载",
+//             "studytoken": "00000000-0000-0000-0000-000000000000",
+//             "totalNbr": 28
+//     }
+     result.setSuccess(true);
+
+
+
+     return result.getReturnMap();
+    }
+
     /**
      * 保存单词复习记录
      *
