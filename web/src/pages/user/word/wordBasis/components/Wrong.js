@@ -52,7 +52,7 @@ export default class Wrong extends Component {
             this.state.list.map(item => {
               return (
                 <div className='wrong_item' key={item.Id}>
-                  <div className='wrong_item_body' ref={'item'+item.vocCode} onClick={this.handleItemClick.bind(this, item)}>
+                  <div className='wrong_item_body' ref={'item'+item.Id} onClick={this.handleItemClick.bind(this, item)}>
                     <div className='wrong_item_en'>
                       <p>{item.spelling}</p>
                       <p>{item.soundMarkUs}</p>
@@ -64,7 +64,7 @@ export default class Wrong extends Component {
                   <div className='wrong_item_sound'>
                     <img src="/static/image/volume-small-green.png" onClick={this.handleAudioClick.bind(this, item)}/>
                     <span>
-                      <audio ref={'audio'+item.vocCode}>
+                      <audio ref={'audio'+item.Id}>
                         <source type="audio/mpeg" src={"/soundfile/" + item.spelling.substr(0, 1).toUpperCase() + "/" + clearSpellingForAudio(item.spelling) + ".mp3"}></source>
                       </audio>
                     </span>
@@ -86,7 +86,7 @@ export default class Wrong extends Component {
   }
 
   handleItemClick(item) {
-    let itemObj = this.refs['item'+item.vocCode]
+    let itemObj = this.refs['item'+item.Id]
     if(hasClass(itemObj, 'flippy')) {
       removeClass(itemObj, 'flippy')
     } else {
@@ -96,7 +96,7 @@ export default class Wrong extends Component {
   }
 
   handleAudioClick(item) {
-    this.refs['audio'+item.vocCode].play()
+    this.refs['audio'+item.Id].play()
   }
 
   handlePageChange(page, pageSize) {

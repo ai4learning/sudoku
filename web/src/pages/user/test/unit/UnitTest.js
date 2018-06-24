@@ -61,8 +61,8 @@ export default class UnitTest extends Component {
       method: 'post',
       type: 'json',
       data: {
-        moduleCode: getQueryString('moduleCode'),
-        unitNbr: getQueryString('unitNbr'),
+        moduleCode: this.props.location.query.moduleCode,
+        unitNbr: this.props.location.query.unitNbr,
         resultScore: score,
         testType: 1,
         realDuration: this.state.usedTime
