@@ -4,6 +4,7 @@ import com.goldfish.common.CommonResult;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.*;
+import com.goldfish.dao.cache.local.CourseContext;
 import com.goldfish.domain.*;
 import com.goldfish.service.*;
 import org.springframework.stereotype.Component;
@@ -17,13 +18,13 @@ import java.util.UUID;
  * Created by John on 2018/5/19 0019.
  */
 @Component("initStuStudyDataTask")
-public class InitStuStudyDataTask extends AbstractTask{
-
+public class InitStuStudyDataTask extends AbstractTask {
     @Resource
     private CourseStudyService courseStudyService;
     @Resource
     private UnitStudyService unitStudyService;
-
+    @Resource
+    private CourseContext courseContext;
     @Resource
     private UnitService unitService;
     @Resource
@@ -34,6 +35,7 @@ public class InitStuStudyDataTask extends AbstractTask{
 
     /**
      * 执行任务
+     *
      * @param task
      */
     protected boolean execute(Task task) {
@@ -62,6 +64,7 @@ public class InitStuStudyDataTask extends AbstractTask{
 
     /**
      * 初始化学生课程学习数据
+     *
      * @param userId
      * @param lessonId
      * @return
@@ -74,7 +77,7 @@ public class InitStuStudyDataTask extends AbstractTask{
         query.setStatus(State.VALID.getState());
         CommonResult<CourseStudy> result = courseStudyService.getUnique(query);
         if (!result.isSuccess()) {
-            LogTypeEnum.DEFAULT.error("查询学生课程学习失败，msg={}",result.getMessage());
+            LogTypeEnum.DEFAULT.error("查询学生课程学习失败，msg={}", result.getMessage());
             return false;
         }
         CourseStudy courseStudy = result.getDefaultModel();
@@ -153,7 +156,7 @@ public class InitStuStudyDataTask extends AbstractTask{
         CommonResult<CourseStudy> insertResult = courseStudyService.addCourseStudy(courseStudy);
 
         if (!insertResult.isSuccess()) {
-            LogTypeEnum.DEFAULT.error("课程学习记录插入数据失败，userId={},lessonId={}", userId,lessonId);
+            LogTypeEnum.DEFAULT.error("课程学习记录插入数据失败，userId={},lessonId={}", userId, lessonId);
             return false;
         }
         return true;
@@ -167,6 +170,8 @@ public class InitStuStudyDataTask extends AbstractTask{
 
             // 1.拷贝unit属性
             unitStudy.setLessonId(Integer.valueOf(String.valueOf(unit.getLessonId())));
+            unitStudy.setLessonCode(courseContext.getModuleCodeByLessonId(Integer.valueOf(String.valueOf(unit.getLessonId()))));
+
             unitStudy.setUnitNbr(unit.getUnitNbr());
             unitStudy.setTotalNumber(unit.getTotalWords());
             unitStudy.setLessonCode(unit.getModuleCode());
@@ -175,14 +180,14 @@ public class InitStuStudyDataTask extends AbstractTask{
             unitStudy.setCurrentPhase(StudyPhase.ENHANCE_STUDY.getPhase());
             unitStudy.setTotalReadingTime(0L);
             unitStudy.setTotalWritingTime(0L);
-            unitStudy.setIsFinished(FinishState.NOT_COMPLETE.getState());
+            unitStudy.setIsFinished(FinishState.NOT_START.getState());
             unitStudy.setIsTested(FinishState.NOT_COMPLETE.getState());
             unitStudy.setStudyPos(0);// 单词index从0开始
             unitStudy.setState(State.VALID.getState());
             unitStudyService.addUnitWordsStudy(unitStudy);
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e, "单元学习记录插入失败, userId={},lessonId={},unitNbr={}",
-                    userId, unit.getLessonId(),unit.getUnitNbr());
+                    userId, unit.getLessonId(), unit.getUnitNbr());
         }
     }
 

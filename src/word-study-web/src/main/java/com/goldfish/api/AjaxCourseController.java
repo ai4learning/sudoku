@@ -352,8 +352,8 @@ public class AjaxCourseController extends BaseController {
             courseUnitStudyVO.setUnit(unit.getUnit());
             courseUnitStudyVO.setUnitNbr(unit.getUnitNbr());
             // fill unit study info
-            courseUnitStudyVO.setIsFinished(unitStudy.getIsFinished());
-            courseUnitStudyVO.setIsTested(unitStudy.getIsTested());
+            courseUnitStudyVO.setIsFinished(StateConvert.convertFinishStateDB2VO(unitStudy.getIsFinished()));
+            courseUnitStudyVO.setIsTested(StateConvert.convertTestStateDB2VO(unitStudy.getIsTested()));
 
             courseUnitsStudy.add(courseUnitStudyVO);
         }
