@@ -14,10 +14,8 @@ import com.goldfish.constant.StudyPhase;
 import com.goldfish.constant.WordLibType;
 import com.goldfish.dao.cache.local.CourseContext;
 import com.goldfish.dao.cache.local.UnitWordContext;
-import com.goldfish.domain.SelfWords;
-import com.goldfish.domain.UnitStudy;
-import com.goldfish.domain.UnitWords;
-import com.goldfish.domain.WordStudy;
+import com.goldfish.domain.*;
+import com.goldfish.manager.CourseStudyManager;
 import com.goldfish.manager.SelfWordsManager;
 import com.goldfish.manager.WordStudyManager;
 import com.goldfish.vo.BasicVO;
@@ -51,6 +49,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 	private CourseContext courseContext;
 	@Resource
 	private UnitWordContext unitWordContext;
+	@Resource
+    private CourseStudyManager courseStudyManager;
 
 
 
@@ -107,6 +107,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			unitStudyManager.otherUnitNotCurStudyPosition(unitStudy);
 			saveUnitStudyVO.setLatestStudyPosition(fillLastPostion(unitStudy, studyToken, lastStudyWord, seconds4SpellingLetter));
 			saveUnitStudyVO.setSuccess(true);
+
+			saveCourseStudySchedule(userId,unitStudy.getLessonId(),unitNbr,lastStudyWord.getVocCode(),lastStudyWord.getSpell());
 		} catch (Exception e) {
 			LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
 			saveUnitStudyVO.setMsg("保存单元学习异常");
@@ -204,7 +206,7 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 				return saveFinishUnitStudyVO;
 			}
 			// 2.保存每个单词的学习情况
-			WordStudy lastStudyWord = null;
+			WordStudy lastStudyWord = new WordStudy();
 			for (WordStudyDto dto : vocDataAfterReview) {
 				WordStudy wordStudy = updateWordStudy(dto,studentId);
 				doErrorWord(studentId, moduleCode, unitNbr, dto);
@@ -225,6 +227,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			// 更新其他单元为非当前学习单元
 			unitStudyManager.otherUnitNotCurStudyPosition(unitStudy);
 			saveFinishUnitStudyVO.setSuccess(true);
+
+            saveCourseStudySchedule(studentId,unitStudy.getLessonId(),unitNbr,lastStudyWord.getVocCode(),lastStudyWord.getSpell());
 		} catch (Exception e) {
 			LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
 			saveFinishUnitStudyVO.setMsg("保存单元学习异常");
@@ -453,4 +457,18 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		return unitStudyManager.sumWriting(pageQuery);
 	}
 
+    /**
+     * 保存课程学习进度
+     */
+    private void saveCourseStudySchedule(int studentID,int lessonID,int unitNbr,String vocCode,String spelling)
+    {
+        CourseStudy courseStudyQuery = new CourseStudy();
+        courseStudyQuery.setStudentId(studentID);
+        courseStudyQuery.setLessonId(lessonID);
+        CourseStudy courseStudy = courseStudyManager.getUnique(courseStudyQuery);
+        courseStudy.setUnitNbr(unitNbr);
+        courseStudy.setVocCode(vocCode);
+        courseStudy.setSpelling(spelling);
+        courseStudyManager.updateCourseStudy(courseStudy);
+    }
 }

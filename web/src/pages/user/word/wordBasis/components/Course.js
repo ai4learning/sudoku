@@ -15,6 +15,10 @@ export default class Course extends Component {
   }
 
   componentWillMount() {
+    this.getUserBook()
+  }
+
+  getUserBook() {
     fetch({
       url: '/api/Ajax/AjaxGetUserBook',
       method: 'post',
@@ -116,6 +120,7 @@ export default class Course extends Component {
     this.setState({
       currentBook: null
     })
+    this.getUserBook()
   }
 
   handleWordLearnClick(item) {

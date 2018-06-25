@@ -21,9 +21,9 @@ export default class WordBasis extends Component {
             <Tabs.TabPane tab={<span><Icon type='calendar'/>我的错词本</span>} key='wrong'>
               <Wrong></Wrong>
             </Tabs.TabPane>
-            <Tabs.TabPane tab={<span><Icon type='file-text'/>智能复习</span>} key='review'>
+            {/* <Tabs.TabPane tab={<span><Icon type='file-text'/>智能复习</span>} key='review'>
               <Review></Review>
-            </Tabs.TabPane>
+            </Tabs.TabPane> */}
           </Tabs>
         </Panel>
       </div>
