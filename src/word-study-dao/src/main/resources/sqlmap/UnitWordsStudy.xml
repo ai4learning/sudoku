@@ -149,7 +149,7 @@
 	
 	<select id="getUnitWordsStudyByPage" resultMap="UnitWordsStudy-Map" parameterType="java.util.HashMap">
 		<![CDATA[
-			SELECT  id,student_id,student_code,lesson_id,lesson_code,unit_nbr,current_phase,total_reading_time,total_writing_time,total_number,is_finished,is_tested,study_pos,state,study_position_code,position_type,voc_code,spelling,is_all_finished,is_current_pos,status,modified FROM unit_words_study
+			SELECT  id,student_id,student_code,lesson_id,lesson_code,unit_nbr,current_phase,total_reading_time,total_writing_time,total_number,is_finished,is_tested,study_pos,state,study_position_code,position_type,voc_code,spelling,is_all_finished,is_current_pos,status,state,modified FROM unit_words_study
 		]]>
             <include refid="MAP-COMMON-SQL" />
             <include refid="ORDER-SQL" />
