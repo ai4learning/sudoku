@@ -13,6 +13,7 @@ import com.goldfish.service.UnitStudyService;
 import com.goldfish.service.WordStudyService;
 import com.goldfish.vo.Statistics.*;
 import com.goldfish.web.base.BaseController;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -252,7 +253,7 @@ public class AjaxStatisticsController extends BaseController {
             basicTestResultVO.setResultScore(exam.getResultScore());
             basicTestResultVO.setTestType(exam.getTestType());
             basicTestResultVO.setUnitNbr(exam.getUnitNbr()==null? null: String.valueOf(exam.getUnitNbr()));
-            if (exam.getModuleCode() == null)
+            if (StringUtils.isEmpty(exam.getModuleCode()))
                 basicTestResultVO.setBookName(null);
             else {
                 Course courseQuery = new Course();
