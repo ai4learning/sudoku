@@ -1,5 +1,6 @@
 package com.goldfish.manager.impl;
 
+import com.goldfish.domain.SelfWords;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.List;

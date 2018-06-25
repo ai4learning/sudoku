@@ -81,7 +81,7 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			CommonResult<UnitStudy> updateUnitStudyResult = this.updateUnitWordsStudy(unitStudy);
 			if (updateUnitStudyResult == null || !updateUnitStudyResult.isSuccess()) {
 				LogTypeEnum.DEFAULT.error("更新学生单元学习失败");
-				saveUnitStudyVO.setMsg("更新学生单元学习失败");
+				saveUnitStudyVO.setMsg("更新单元学习失败");
 				return saveUnitStudyVO;
 			}
 			// 2.保存每个单词的学习情况
@@ -117,7 +117,7 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 
 	}
 
-	private WordStudy updateWordStudy(WordStudyDto dto,Integer userId) {
+	protected WordStudy updateWordStudy(WordStudyDto dto,Integer userId) {
 	    WordStudy wordStudyQuery = new WordStudy();
 	    wordStudyQuery.setVocCode(dto.getVocCode());
 	    wordStudyQuery.setStudentId(userId);
@@ -234,32 +234,36 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		return saveFinishUnitStudyVO;
 	}
 
-	private void doErrorWord(Integer studentId, String moduleCode, Integer unitNbr, WordStudyDto dto) {
+	protected void doErrorWord(Integer studentId, String moduleCode, Integer unitNbr, WordStudyDto dto) {
 
-		// 若为错词，则添加到错词本
-		Integer readFailTimes = dto.getReadFailTimes();
-		Integer spellFailTimes = dto.getSpellFailTimes();
-		Integer continueReadFailTimes = dto.getContinueReadFailTimes();
-		Integer continueSpellFailTimes = dto.getContinueSpellFailTimes();
-		if (readFailTimes > 0 || spellFailTimes > 0 || continueReadFailTimes > 0 || continueSpellFailTimes > 0) {
-			LogTypeEnum.DEFAULT.info("add to error book, vocCode={},userId={}", dto.getVocCode(), studentId);
-			SelfWords errWord = new SelfWords();
-			errWord.setModuleCode(moduleCode);
-			errWord.setStudentId(Long.valueOf(String.valueOf(studentId)));
-			errWord.setUserCode(dto.getUserCode());
-			errWord.setType(WordLibType.ERROR_BOOK.getType());
-			errWord.setLessonId(courseContext.getLessonIdByCode(moduleCode));
-			errWord.setUnitNbr(unitNbr);
+		try {
+			// 若为错词，则添加到错词本
+			Integer readFailTimes = dto.getReadFailTimes();
+			Integer spellFailTimes = dto.getSpellFailTimes();
+			Integer continueReadFailTimes = dto.getContinueReadFailTimes();
+			Integer continueSpellFailTimes = dto.getContinueSpellFailTimes();
+			if (readFailTimes > 0 || spellFailTimes > 0 || continueReadFailTimes > 0 || continueSpellFailTimes > 0) {
+                LogTypeEnum.DEFAULT.info("add to error book, vocCode={},userId={}", dto.getVocCode(), studentId);
+                SelfWords errWord = new SelfWords();
+                errWord.setModuleCode(moduleCode);
+                errWord.setStudentId(Long.valueOf(String.valueOf(studentId)));
+                errWord.setUserCode(dto.getUserCode());
+                errWord.setType(WordLibType.ERROR_BOOK.getType());
+                errWord.setLessonId(courseContext.getLessonIdByCode(moduleCode));
+                errWord.setUnitNbr(unitNbr);
 
-			errWord.setVocCode(dto.getVocCode());
-			UnitWords unitWord = unitWordContext.getUnitWord(dto.getVocCode());
-			errWord.setWordId(unitWord.getWordId());
-			errWord.setSpelling(unitWord.getSpelling());
-			errWord.setState(State.VALID.getState());
-			Date current = new Date();
-			errWord.setCreated(current);
-			errWord.setModified(current);
-			selfWordsManager.addSelfWords(errWord);
+                errWord.setVocCode(dto.getVocCode());
+                UnitWords unitWord = unitWordContext.getUnitWord(dto.getVocCode());
+                errWord.setWordId(unitWord.getWordId());
+                errWord.setSpelling(unitWord.getSpelling());
+                errWord.setState(State.VALID.getState());
+                Date current = new Date();
+                errWord.setCreated(current);
+                errWord.setModified(current);
+                selfWordsManager.addSelfWords(errWord);
+            }
+		} catch (Exception e) {
+			LogTypeEnum.DEFAULT.error(e, "插入错词本异常");
 		}
 	}
 

@@ -1,5 +1,6 @@
 package com.goldfish.api;
 
+import com.alibaba.fastjson.JSON;
 import com.goldfish.common.CommonResult;
 import com.goldfish.domain.LoginRecord;
 import com.goldfish.service.SelfWordsService;
@@ -187,7 +188,7 @@ public class AjaxErrorBookController extends AjaxReviewBookController {
                                              String studytoken,
                                              Long totalReadingTime,
                                              Long totalWritingTime,
-                                             List<WordStudyDto> vocDataAfterReview,
+                                             String vocDataAfterReview,
                                              ModelMap context) {
         LoginRecord loginRecord = this.getLoginRecord();
         if (loginRecord == null) {
@@ -195,6 +196,8 @@ public class AjaxErrorBookController extends AjaxReviewBookController {
             vo.setMsg("未登录");
             return vo;
         }
+
+
 
         return errorWordsStudyService.saveErrorStudy(
                                         loginRecord.getUserId(),
@@ -205,7 +208,7 @@ public class AjaxErrorBookController extends AjaxReviewBookController {
                                         studytoken,
                                         totalReadingTime,
                                         totalWritingTime,
-                                        vocDataAfterReview);
+                JSON.parseArray(vocDataAfterReview, WordStudyDto.class));
     }
 
 

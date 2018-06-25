@@ -83,4 +83,6 @@ public interface SelfWordsManager {
     public int count(PageQuery pageQuery);
 
     List<SelfWords> inQuerySelfWords(PageQuery pageQuery);
+
+    void deleteByVocCode(String vocCode, Integer type, Integer userId);
 }

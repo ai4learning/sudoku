@@ -36,6 +36,15 @@ public class SelfWordsManagerImpl implements SelfWordsManager {
         selfWordsDao.deleteSelfWords(id);
     }
 
+    @Override
+    public void deleteByVocCode(String vocCode, Integer type, Integer userId) {
+        SelfWords query = new SelfWords();
+        query.setVocCode(vocCode);
+        query.setStudentId(Long.valueOf(String.valueOf(userId)));
+        query.setType(type);
+        selfWordsDao.delete(query);
+    }
+
 
     public SelfWords getSelfWordsById(Long id) {
         return selfWordsDao.getSelfWordsById(id);
