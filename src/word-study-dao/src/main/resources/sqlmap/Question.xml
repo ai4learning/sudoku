@@ -33,7 +33,8 @@
     		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
     		<if test="wordId != null"> AND word_id = #{wordId}</if>
     		<if test="state != null"> AND state = #{state}</if>
-    		
+    		<if test="unitNbr != null"> AND unit_nbr = #{unitNbr}</if>
+
     		</where>
     	 
     	</sql>
@@ -49,7 +50,8 @@
 		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
 		<if test="wordId != null"> AND word_id = #{wordId}</if>
 		<if test="state != null"> AND state = #{state}</if>
-		
+		<if test="unitNbr != null"> AND unit_nbr = #{unitNbr}</if>
+
 		</where>
 	 	
 	</sql>
