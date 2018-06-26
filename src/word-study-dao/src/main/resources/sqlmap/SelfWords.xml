@@ -105,6 +105,11 @@
 	<delete id="deleteSelfWords" parameterType="com.goldfish.domain.SelfWords">
 		DELETE FROM self_words WHERE id = #{id}
 	</delete>
+
+	<delete id="delete" parameterType="com.goldfish.domain.SelfWords">
+		DELETE FROM self_words WHERE study_id = #{studyId} AND voc_code = #{vocCode} AND type = #{type}
+	</delete>
+
 	<select id="getSelfWordsById" resultMap="SelfWords-Map" parameterType="java.lang.Long">
 		SELECT  <include refid="All-FIELDS"/> FROM self_words	WHERE id = #{id}
 	</select>  

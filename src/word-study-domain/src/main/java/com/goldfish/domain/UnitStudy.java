@@ -39,9 +39,10 @@ public class UnitStudy extends StudyPosition implements Serializable {
 	/**  总学习单词数  */
 	private Integer totalNumber;
 	/**  单词学习位置  */
-	private Integer studyPos; 
+	private Integer studyPos;
 	/**  状态  */
-	private Integer state; 
+	private Integer state;
+
 	/**  创建时间  */
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date created; 
@@ -180,7 +181,4 @@ public class UnitStudy extends StudyPosition implements Serializable {
   	public java.util.Date getModified() {
   	  return this.modified;
   	}
-	
-	  	
-
 }

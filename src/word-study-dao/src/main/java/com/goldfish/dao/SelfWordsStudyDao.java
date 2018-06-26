@@ -7,6 +7,8 @@
  package com.goldfish.dao;
 
 import java.util.List;
+
+import com.goldfish.domain.SelfWords;
 import com.goldfish.domain.SelfWordsStudy;
 import java.util.Map;
 /**
@@ -89,5 +91,4 @@ public interface SelfWordsStudyDao {
      * @return
      */
     public int count(Map<String,Object> paramMap);
-
 }

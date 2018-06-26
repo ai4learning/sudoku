@@ -138,6 +138,7 @@ public class InitStuStudyDataTask extends AbstractTask {
         courseStudy.setStudentId(userId);
 
         // 学习位置相关跟踪
+        courseStudy.setCurrentStudyBook(false);
         courseStudy.setIsCurrentPos(State.NO.getState());
         courseStudy.setIsTested(FinishState.NOT_COMPLETE.getState());
         courseStudy.setIsFinished(FinishState.NOT_COMPLETE.getState());
@@ -174,9 +175,9 @@ public class InitStuStudyDataTask extends AbstractTask {
 
             unitStudy.setUnitNbr(unit.getUnitNbr());
             unitStudy.setTotalNumber(unit.getTotalWords());
-            unitStudy.setLessonCode(unit.getModuleCode());
 
             // 2.初始化学习状态
+            unitStudy.setIsCurrentPos(State.NO.getState());
             unitStudy.setCurrentPhase(StudyPhase.ENHANCE_STUDY.getPhase());
             unitStudy.setTotalReadingTime(0L);
             unitStudy.setTotalWritingTime(0L);
@@ -184,6 +185,7 @@ public class InitStuStudyDataTask extends AbstractTask {
             unitStudy.setIsTested(FinishState.NOT_COMPLETE.getState());
             unitStudy.setStudyPos(0);// 单词index从0开始
             unitStudy.setState(State.VALID.getState());
+            unitStudy.setStatus(State.VALID.getState());
             unitStudyService.addUnitWordsStudy(unitStudy);
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e, "单元学习记录插入失败, userId={},lessonId={},unitNbr={}",

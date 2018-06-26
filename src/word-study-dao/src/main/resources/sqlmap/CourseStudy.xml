@@ -72,7 +72,7 @@
 
 	<insert id="addCourseStudy" parameterType="com.goldfish.domain.CourseStudy">
 		insert into course_study (student_id,student_code,lesson_id,current_study_book,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,spelling,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,created,modified)
-			values(#{studentId},#{studentCode},#{lessonId},#{isCurrentPos},#{studyPositionCode},#{positionType},#{unitNbr},#{vocCode},#{spelling},#{startFrom},#{studyMode},#{completeWordCount},#{isFinished},#{isTested},#{isAllFinished},#{status},#{created},#{modified})
+			values(#{studentId},#{studentCode},#{lessonId},#{currentStudyBook},#{isCurrentPos},#{studyPositionCode},#{positionType},#{unitNbr},#{vocCode},#{spelling},#{startFrom},#{studyMode},#{completeWordCount},#{isFinished},#{isTested},#{isAllFinished},#{status},#{created},#{modified})
     
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
 		   select last_insert_id() as ID from dual

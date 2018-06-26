@@ -43,6 +43,8 @@ public interface SelfWordsDao {
      */
     public void deleteSelfWords(Long id);
 
+    void delete(SelfWords query);
+
 
 	/**
      * 根据主键获取SelfWords

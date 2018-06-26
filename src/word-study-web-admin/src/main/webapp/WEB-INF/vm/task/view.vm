@@ -52,7 +52,7 @@
 			
         
 		<select class="forms_select input-medium form-control" name="type" id="type" disabled>
-						<option value="1" #if($task.type==1) selected  #end>用户学习数据初始化</option>
+				<option value="1" #if($task.type==1) selected  #end>用户学习数据初始化</option>
 				<option value="2" #if($task.type==2) selected  #end>生成错词本</option>
 				<option value="3" #if($task.type==3) selected  #end>生成复习本</option>
 
@@ -87,7 +87,7 @@
 			
         
 		<select class="forms_select input-medium form-control" name="state" id="state" disabled>
-				<option value="0" #if($task.state==-) selected  #end>未执行</option>
+				<option value="0" #if($task.state==0) selected  #end>未执行</option>
 				<option value="1" #if($task.state==1) selected  #end>已执行</option>
 				<option value="2" #if($task.state==2) selected  #end>删除</option>
 
