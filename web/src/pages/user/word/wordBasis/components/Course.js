@@ -54,7 +54,7 @@ export default class Course extends Component {
                     <div style={{display: 'flex'}}>
                       <div>当前进度：</div>
                       <div style={{flex: 1}}>
-                        <Progress percent={parseInt(((item.currentPosition||{}).unitNbr||0)/item.totalUnitNbr*100)}></Progress>
+                        <Progress percent={parseInt((item.finishedUnitNbr||0)/item.totalUnitNbr*100)}></Progress>
                       </div>
                     </div>
                   </Card>
