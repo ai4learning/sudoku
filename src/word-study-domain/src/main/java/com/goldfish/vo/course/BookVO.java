@@ -20,6 +20,7 @@ public class BookVO {
     protected String bookName;
     protected String coverImageUrl;
     protected Integer totalUnitNbr;
+    protected Integer finishedUnitNbr;
     private boolean outDate;
 
     public Integer getId() {
@@ -68,5 +69,13 @@ public class BookVO {
 
     public void setOutDate(boolean outDate) {
         this.outDate = outDate;
+    }
+
+    public Integer getFinishedUnitNbr() {
+        return finishedUnitNbr;
+    }
+
+    public void setFinishedUnitNbr(Integer finishedUnitNbr) {
+        this.finishedUnitNbr = finishedUnitNbr;
     }
 }

@@ -3,10 +3,7 @@ package com.goldfish.api;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.goldfish.common.log.LogTypeEnum;
-import com.goldfish.constant.IsTested;
-import com.goldfish.constant.QuestionTypes;
-import com.goldfish.constant.State;
-import com.goldfish.constant.TestArea;
+import com.goldfish.constant.*;
 import com.goldfish.dao.cache.local.CourseContext;
 import com.goldfish.domain.*;
 import com.goldfish.service.*;
@@ -1507,7 +1504,11 @@ public class AjaxExamController extends AjaxErrorBookController{
         UnitStudy us = unitStudyService.getUnique(unitStudyQuery).getDefaultModel();
         if (us !=null)
         {
-            us.setIsTested(IsTested.getIsTestedByScore(resultScore).getCode());
+            IsTested isTested = IsTested.getIsTestedByScore(resultScore);
+            us.setIsTested(isTested.getCode());
+            if ((isTested.equals(IsTested.FULL_MARKS) || isTested.equals(IsTested.PASS))
+                    && us.getIsFinished()== FinishState.COMPLETE.getState())
+                us.setIsAllFinished(FinishState.COMPLETE.getState());
             unitStudyService.updateUnitWordsStudy(us);
         }
     }
