@@ -175,9 +175,9 @@ public class InitStuStudyDataTask extends AbstractTask {
 
             unitStudy.setUnitNbr(unit.getUnitNbr());
             unitStudy.setTotalNumber(unit.getTotalWords());
-            unitStudy.setLessonCode(unit.getModuleCode());
 
             // 2.初始化学习状态
+            unitStudy.setIsCurrentPos(State.NO.getState());
             unitStudy.setCurrentPhase(StudyPhase.ENHANCE_STUDY.getPhase());
             unitStudy.setTotalReadingTime(0L);
             unitStudy.setTotalWritingTime(0L);
