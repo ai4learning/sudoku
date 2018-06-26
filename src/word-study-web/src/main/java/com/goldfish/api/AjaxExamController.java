@@ -1505,8 +1505,11 @@ public class AjaxExamController extends AjaxErrorBookController{
         unitStudyQuery.setUnitNbr(unitNbr);
         unitStudyQuery.setLessonCode(moduleCode);
         UnitStudy us = unitStudyService.getUnique(unitStudyQuery).getDefaultModel();
-        us.setIsTested(IsTested.getIsTestedByScore(resultScore).getCode());
-        unitStudyService.updateUnitWordsStudy(us);
+        if (us !=null)
+        {
+            us.setIsTested(IsTested.getIsTestedByScore(resultScore).getCode());
+            unitStudyService.updateUnitWordsStudy(us);
+        }
     }
 
 
