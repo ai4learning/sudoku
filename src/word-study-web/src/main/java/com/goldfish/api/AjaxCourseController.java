@@ -141,6 +141,7 @@ public class AjaxCourseController extends BaseController {
             bookVO.setTotalUnitNbr(course.getTotalUnitNbr());
             bookVO.setOutDate(course.isOutDate());
             bookVO.setUnitType(course.getUnitType());
+            bookVO.setFinishedUnitNbr(getFinishedUnit(user.getId().intValue(),studentCourse.getLessonId()));
 
             // 设置课程学习信息
             bookVO.setCurrentStudyBook(studentCourse.isCurrentStudyBook());
@@ -708,9 +709,13 @@ public class AjaxCourseController extends BaseController {
         return saveFinishUnitStudyVO;
     }
 
-
-
-
-
-
+    private int getFinishedUnit(int studentId,int lessonId)
+    {
+        PageQuery pageQuery = new PageQuery();
+        pageQuery.addQueryParam("studentId",studentId);
+        pageQuery.addQueryParam("lessonId",lessonId);
+        pageQuery.addQueryParam("isAllFinished",FinishState.COMPLETE.getState());
+        pageQuery.addQueryParam("state",State.VALID.getState());
+        return unitStudyService.count(pageQuery);
+    }
 }
