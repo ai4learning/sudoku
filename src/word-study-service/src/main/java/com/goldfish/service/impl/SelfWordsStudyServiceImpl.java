@@ -11,6 +11,7 @@ import com.goldfish.constant.FinishState;
 import com.goldfish.constant.State;
 import com.goldfish.constant.StudyPhase;
 import com.goldfish.constant.WordLibType;
+import com.goldfish.domain.SelfWords;
 import com.goldfish.domain.UnitStudy;
 import com.goldfish.domain.WordStudy;
 import com.goldfish.manager.SelfWordsManager;
@@ -186,8 +187,18 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 			for (WordStudyDto dto : vocDataAfterReview) {
 				this.updateWordStudy(dto, userId);
 				// 确定是否需要删除错词
-				if (needDelete && dto.isRemember()) {
-					selfWordsManager.deleteByVocCode(dto.getVocCode(), WordLibType.ERROR_BOOK.getType(),userId);
+				if (dto.isRemember()) {
+					if (needDelete) {
+						selfWordsManager.deleteByVocCode(dto.getVocCode(), WordLibType.ERROR_BOOK.getType(), userId);
+					} else {
+						// 更新错词状态为已学习
+						SelfWords errWord = new SelfWords();
+						errWord.setType(WordLibType.ERROR_BOOK.getType());
+						errWord.setVocCode(dto.getVocCode());
+						errWord.setStudentId(Long.valueOf(String.valueOf(userId)));
+						errWord.setState(State.STUDYED.getState());
+						selfWordsManager.updateSelfWords(errWord);
+					}
 				}
 			}
 			saveUnitStudyVO.setSuccess(true);

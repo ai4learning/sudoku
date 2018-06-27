@@ -9,6 +9,7 @@ import java.util.Map;
 public enum State {
     VALID(1, "有效"),
     IN_VALID(2, "无效"),
+    STUDYED(3, "已学习"),
     UNKNOW(-1,"未知"),
     YES(1,"是",Boolean.TRUE),
     NO(0,"否", Boolean.FALSE);

@@ -76,6 +76,7 @@ public class AjaxErrorBookController extends AjaxReviewBookController {
      */
 
     /**
+     * 用于单词学习
      * @param moduleCode 00000000-0000-0000-0000-000000000000
      * @param unit       1
      * @param context

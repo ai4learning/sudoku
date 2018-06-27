@@ -6,6 +6,7 @@ import java.util.*;
 
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.State;
+import com.goldfish.constant.WordLibType;
 import com.goldfish.domain.Course;
 import com.goldfish.domain.CourseStudy;
 import com.goldfish.domain.Word;
@@ -14,8 +15,6 @@ import com.goldfish.vo.BaseVO;
 import com.goldfish.vo.error.ErrorBookInfo;
 import com.goldfish.vo.error.ErrorBookVO;
 import com.goldfish.vo.error.ErrorWordsVO;
-import com.goldfish.vo.unit.SaveUnitStudyVO;
-import com.goldfish.vo.unit.WordStudyDto;
 import com.goldfish.vo.word.UnitWordVO;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
@@ -41,8 +40,6 @@ public class SelfWordsServiceImpl implements SelfWordsService {
     @Resource(name = "selfWordsManager")
     private SelfWordsManager selfWordsManager;
     @Resource
-    private WordStudyManager wordStudyManager;
-    @Resource
     private WordManager wordManager;
     @Resource
     private CourseManager courseManager;
@@ -52,12 +49,8 @@ public class SelfWordsServiceImpl implements SelfWordsService {
     public CommonResult<SelfWords> addSelfWords(SelfWords selfWords) {
         CommonResult<SelfWords> result = new CommonResult<SelfWords>();
         try {
-
             selfWords.setCreated(new Date());
-
-
             selfWords.setModified(new Date());
-
             result.addDefaultModel(selfWordsManager.addSelfWords(selfWords));
             result.setSuccess(true);
         } catch (Exception e) {
@@ -164,6 +157,10 @@ public class SelfWordsServiceImpl implements SelfWordsService {
         ErrorBookVO errorBookVO = new ErrorBookVO();
 
         PageQuery pageQuery = new PageQuery(0, UN_LIMIT);
+        // 增加错词状态查询，已学习状态单词就不需再学习了
+        pageQuery.addQueryParam("studentId", userId);
+        pageQuery.addQueryParam("type", WordLibType.ERROR_BOOK.getType());
+        pageQuery.addQueryParam("state", State.VALID.getState());
         List<SelfWords> errorWords = this.getSelfWordsByPage(pageQuery).getDefaultModel();
 
         long totalCount = pageQuery.getTotalCount();
@@ -245,6 +242,8 @@ public class SelfWordsServiceImpl implements SelfWordsService {
         }
 
         PageQuery pageQuery = new PageQuery(start,limit);
+        pageQuery.addQueryParam("studentId", userId);
+        pageQuery.addQueryParam("type", WordLibType.ERROR_BOOK.getType());
         pageQuery.addQueryParam("lessonIds", lessonIds);
         List<SelfWords> errorWords = selfWordsManager.inQuerySelfWords(pageQuery);
         if (errorWords == null || errorWords.isEmpty()) {
@@ -267,18 +266,6 @@ public class SelfWordsServiceImpl implements SelfWordsService {
         vo.setMsg(errorWordsVO.getMsg());
         vo.setCondition(errorWordsVO.getCondition());
         return vo;
-    }
-
-
-    /*******
-     * getter and setter
-     ***/
-    public SelfWordsManager getSelfWordsManager() {
-        return selfWordsManager;
-    }
-
-    public void setSelfWordsManager(SelfWordsManager selfWordsManager) {
-        this.selfWordsManager = selfWordsManager;
     }
 
 }
