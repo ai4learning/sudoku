@@ -122,6 +122,8 @@ public class AjaxErrorBookController extends AjaxReviewBookController {
             vo.setCondition(-1);
             return vo;
         }
+        // 注意处理start 这里start以上不太对，是pageIndex意思，从0开始
+        start = start * limit;
         return errorWordsService.getErrorWordsByConditon(
                 loginRecord.getUserId(),loginRecord.getStudyToken(),
                 orderType,start,limit);

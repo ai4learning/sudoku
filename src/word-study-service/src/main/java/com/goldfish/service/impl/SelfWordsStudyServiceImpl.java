@@ -62,9 +62,7 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 	public CommonResult<SelfWordsStudy> updateSelfWordsStudy(SelfWordsStudy selfWordsStudy) {
 		CommonResult<SelfWordsStudy> result = new CommonResult<SelfWordsStudy>();
 		try {
-			
-					selfWordsStudy.setModified(new Date());
-					
+			selfWordsStudy.setModified(new Date());
 			selfWordsStudyManager.updateSelfWordsStudy(selfWordsStudy);
 			result.setSuccess(true);
 		} catch (Exception e) {
@@ -194,8 +192,8 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 			}
 			saveUnitStudyVO.setSuccess(true);
 		} catch (Exception e) {
-			LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
-			saveUnitStudyVO.setMsg("保存单元学习异常");
+			LogTypeEnum.DEFAULT.error(e, "保存错词学习异常");
+			saveUnitStudyVO.setMsg("保存错词学习异常");
 		}
 		return saveUnitStudyVO;
 	}
@@ -214,11 +212,14 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 			return null;
 		}
 		SelfWordsStudy errWordStudy = errStudyResult.getDefaultModel();
+		// 不存在，则插入
 		if (errWordStudy == null) {
-			LogTypeEnum.DEFAULT.error("学生错词学习不存在");
-			vo.setMsg("还没有错词学习记录");
-			vo.setSuccess(true);
-			return null;
+			errWordStudy = errWordStudyQuery;
+			errWordStudy.setCurrentPhase(StudyPhase.ENHANCE_STUDY.getPhase());
+			Date cur = new Date();
+			errWordStudy.setCreated(cur);
+			errWordStudy.setModified(cur);
+			selfWordsStudyManager.addSelfWordsStudy(errWordStudy);
 		}
 		return errWordStudy;
 	}
