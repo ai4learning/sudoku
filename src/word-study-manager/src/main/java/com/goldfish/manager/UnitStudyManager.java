@@ -98,4 +98,5 @@ public interface UnitStudyManager {
 
     public int sumWriting(PageQuery pageQuery);
 
+ void deleteUnitWordsStudyByCondition(UnitStudy unitStudy);
 }

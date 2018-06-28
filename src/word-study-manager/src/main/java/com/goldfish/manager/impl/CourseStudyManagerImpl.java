@@ -63,6 +63,11 @@ public class CourseStudyManagerImpl implements CourseStudyManager {
 		return courseStudyDao.count( pageQuery.getParams());
     }
 
+    @Override
+    public void deleteCourseStudyByCondition(CourseStudy courseStudy) {
+        courseStudyDao.deleteCourseStudyByCondition(courseStudy);
+    }
+
     /******* getter and setter ***/
     
 	public CourseStudyDao getCourseStudyDao() {

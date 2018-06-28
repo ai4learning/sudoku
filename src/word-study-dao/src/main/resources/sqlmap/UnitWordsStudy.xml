@@ -129,6 +129,18 @@
 	<delete id="deleteUnitWordsStudy" parameterType="com.goldfish.domain.UnitStudy">
 		DELETE FROM unit_words_study WHERE id = #{id}
 	</delete>
+	<delete id="deleteUnitWordsStudyByCondition" parameterType="com.goldfish.domain.UnitStudy">
+		DELETE FROM unit_words_study
+		<where>
+			<if test="studentId != null"> AND student_id = #{studentId}</if>
+			<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+			<if test="lessonCode != null"> AND lesson_code = #{lessonCode}</if>
+			<if test="unitNbr != null"> AND unit_nbr != #{unitNbr}</if>
+		</where>
+	</delete>
+
+
+
 	<select id="getUnitWordsStudyById" resultMap="UnitWordsStudy-Map" parameterType="java.lang.Long">
 		SELECT  <include refid="All-FIELDS"/> FROM unit_words_study	WHERE id = #{id}
 	</select>  

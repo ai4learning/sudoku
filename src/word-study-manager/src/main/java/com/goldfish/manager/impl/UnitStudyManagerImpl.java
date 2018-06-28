@@ -85,4 +85,9 @@ public class UnitStudyManagerImpl implements UnitStudyManager {
     public int sumWriting(PageQuery pageQuery) {
         return unitWordsStudyDao.sumWriting( pageQuery.getParams());
     }
+
+    @Override
+    public void deleteUnitWordsStudyByCondition(UnitStudy unitStudy) {
+        unitWordsStudyDao.deleteUnitWordsStudyByCondition(unitStudy);
+    }
 }

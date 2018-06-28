@@ -90,4 +90,5 @@ public interface CourseStudyDao {
      */
     public int count(Map<String,Object> paramMap);
 
+    void deleteCourseStudyByCondition(CourseStudy courseStudy);
 }

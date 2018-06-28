@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                      http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
        default-autowire="byName">
@@ -10,6 +9,8 @@
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false" autowire="no">
 		<property name="triggers">
 			<list>
+
+				<!--初始化学生学习数据-->
 				<bean class="org.springframework.scheduling.quartz.CronTriggerBean">
 					<property name="jobDetail">
                         <!-- 定义调用的任务类及执行方法 -->
@@ -21,6 +22,20 @@
 					</property>
 					<property name="cronExpression" value="0/30 * * * * ?" />
 				</bean>
+
+				<!--删除学生学习数据-->
+				<bean class="org.springframework.scheduling.quartz.CronTriggerBean">
+					<property name="jobDetail">
+						<!-- 定义调用的任务类及执行方法 -->
+						<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+							<property name="targetObject" ref="delStuStudyDataTask" />
+							<property name="targetMethod" value="doTask" />
+							<property name="concurrent" value="false" />
+						</bean>
+					</property>
+					<property name="cronExpression" value="0/30 * * * * ?" />
+				</bean>
+
 			</list>
 		</property>
 		<property name="autoStartup" value="true"/>

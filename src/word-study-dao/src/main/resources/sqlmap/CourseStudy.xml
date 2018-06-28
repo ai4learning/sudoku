@@ -115,6 +115,17 @@
 	<delete id="deleteCourseStudy" parameterType="com.goldfish.domain.CourseStudy">
 		DELETE FROM course_study WHERE id = #{id}
 	</delete>
+
+	<delete id="deleteCourseStudyByCondition" parameterType="com.goldfish.domain.CourseStudy">
+		DELETE FROM course_study
+		<where>
+			<if test="studentId != null"> AND student_id = #{studentId}</if>
+			<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+		</where>
+	</delete>
+
+
+
 	<select id="getCourseStudyById" resultMap="CourseStudy-Map" parameterType="java.lang.Long">
 		SELECT  <include refid="All-FIELDS"/> FROM course_study	WHERE id = #{id}
 	</select>  
