@@ -193,11 +193,11 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 					} else {
 						// 更新错词状态为已学习
 						SelfWords errWord = new SelfWords();
-						errWord.setType(WordLibType.ERROR_BOOK.getType());
-						errWord.setVocCode(dto.getVocCode());
 						errWord.setStudentId(Long.valueOf(String.valueOf(userId)));
+						errWord.setVocCode(dto.getVocCode());
+						errWord.setType(WordLibType.ERROR_BOOK.getType());
 						errWord.setState(State.STUDYED.getState());
-						selfWordsManager.updateSelfWords(errWord);
+						selfWordsManager.updateSelfWordsByVocCode(errWord);
 					}
 				}
 			}

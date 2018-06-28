@@ -38,7 +38,7 @@ public class InitStuStudyDataTask extends AbstractTask {
      *
      * @param task
      */
-    protected boolean execute(Task task) {
+    protected boolean doExecute(Task task) {
         Integer userId = task.getUserId();
         Long lessonId = task.getBusinessId();
 
@@ -49,8 +49,8 @@ public class InitStuStudyDataTask extends AbstractTask {
             return false;
         }
 
-        // 2.初始化学生单元单词学习记录
-        if (!initUnitWordStudy(userId, lessonId)) {
+        // 2.初始化学生单元学习记录
+        if (!initUnitStudy(userId, lessonId)) {
             return false;
         }
 
@@ -91,7 +91,7 @@ public class InitStuStudyDataTask extends AbstractTask {
         return true;
     }
 
-    private boolean initUnitWordStudy(Integer userId, Long lessonId) {
+    private boolean initUnitStudy(Integer userId, Long lessonId) {
         PageQuery pageQuery = new PageQuery();
         pageQuery.setPageSize(100000000);
         pageQuery.put("lessonId", lessonId);
@@ -183,6 +183,7 @@ public class InitStuStudyDataTask extends AbstractTask {
             unitStudy.setTotalWritingTime(0L);
             unitStudy.setIsFinished(FinishState.NOT_START.getState());
             unitStudy.setIsTested(FinishState.NOT_COMPLETE.getState());
+            unitStudy.setIsAllFinished(FinishState.NOT_COMPLETE.getState());
             unitStudy.setStudyPos(0);// 单词index从0开始
             unitStudy.setState(State.VALID.getState());
             unitStudy.setStatus(State.VALID.getState());

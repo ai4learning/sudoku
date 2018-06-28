@@ -244,6 +244,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
         PageQuery pageQuery = new PageQuery(start,limit);
         pageQuery.addQueryParam("studentId", userId);
         pageQuery.addQueryParam("type", WordLibType.ERROR_BOOK.getType());
+        pageQuery.addQueryParam("state", State.VALID.getState());
         pageQuery.addQueryParam("lessonIds", lessonIds);
         List<SelfWords> errorWords = selfWordsManager.inQuerySelfWords(pageQuery);
         if (errorWords == null || errorWords.isEmpty()) {

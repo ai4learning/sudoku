@@ -36,10 +36,11 @@
 			
         
 		<select class="forms_select input-medium" name="type" id="type">
-				<option value="0" #if($task.type==0) selected #end>用户学习数据初始化</option>
-				<option value="1" #if($task.type==1) selected #end>生成错词本</option>
-				<option value="2" #if($task.type==2) selected #end>生成复习本</option>
-</select>
+				<option value="1" #if($task.type==1) selected #end>用户学习数据初始化</option>
+				<option value="2" #if($task.type==2) selected #end>生成错词本</option>
+				<option value="3" #if($task.type==3) selected #end>生成复习本</option>
+				<option value="4" #if($task.type==4) selected #end>删除用户学习数据</option>
+		</select>
 		
     
 

@@ -31,6 +31,11 @@ public class SelfWordsManagerImpl implements SelfWordsManager {
         selfWordsDao.updateSelfWords(selfWords);
     }
 
+    @Override
+    public void updateSelfWordsByVocCode(SelfWords selfWords) {
+        selfWordsDao.updateSelfWordsByVocCode(selfWords);
+    }
+
 
     public void deleteSelfWords(Long id) {
         selfWordsDao.deleteSelfWords(id);

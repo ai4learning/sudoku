@@ -93,10 +93,30 @@
 			<if test="state !=null"> state = #{state},</if>
 			<if test="created !=null"> created = #{created},</if>
 			<if test="modified !=null"> modified = #{modified},</if>
-
 	</set>
 	 where id = #{id}
   	</update>
+
+	<update id="updateSelfWordsByVocCode" parameterType="com.goldfish.domain.SelfWords" >
+		update  self_words
+		<set>
+			<if test="moduleCode !=null"> module_code = #{moduleCode},</if>
+			<if test="studyId !=null"> study_id = #{studyId},</if>
+			<if test="type !=null"> type = #{type},</if>
+			<if test="studentId !=null"> student_id = #{studentId},</if>
+			<if test="userCode !=null"> user_code = #{userCode},</if>
+			<if test="lessonId !=null"> lesson_id = #{lessonId},</if>
+			<if test="unitNbr !=null"> unit_nbr = #{unitNbr},</if>
+			<if test="vocCode !=null"> voc_code = #{vocCode},</if>
+			<if test="vocIndex !=null"> voc_index = #{vocIndex},</if>
+			<if test="wordId !=null"> word_id = #{wordId},</if>
+			<if test="spelling !=null"> spelling = #{spelling},</if>
+			<if test="state !=null"> state = #{state},</if>
+			<if test="created !=null"> created = #{created},</if>
+			<if test="modified !=null"> modified = #{modified},</if>
+		</set>
+		where student_id = #{studentId} AND voc_code = #{vocCode} AND type = #{type}
+	</update>
   
 	
 
