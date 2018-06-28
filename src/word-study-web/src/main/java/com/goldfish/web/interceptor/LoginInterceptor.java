@@ -117,6 +117,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             CommonResult<User> result = userService.getUnique(query);
             User user = result.getDefaultModel();
             if (!result.isSuccess() || user == null) {
+
                 return false;
             }
             // 用户存在，则添加登录记录，创建LoginContext

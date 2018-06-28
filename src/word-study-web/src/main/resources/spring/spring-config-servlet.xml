@@ -52,7 +52,7 @@
                      <bean class="com.goldfish.web.interceptor.LoginInterceptor">
                             <property name="cookieUtils" ref="cookieUtils" />
                             <property name="loginRecordService" ref="loginRecordService" />
-                            <property name="sessionTimeout" value="1800" />
+                            <property name="sessionTimeout" value="18000" />
                             <property name="rate" value="2" />
                             <property name="loginUri" value="/login/logout" />
                             <property name="doLoginUri" value="/login/doLogin" />
