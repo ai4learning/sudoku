@@ -81,7 +81,7 @@ export default class Header extends Component {
       <div className='header'>
         <div className='header_container'>
           <a href='/' className='header_logo'>
-            <img className='header_logo_img' src='../../static/image/logo_v4.png'/>
+            {/* <img className='header_logo_img' src='../../static/image/logo_v4.png'/> */}
             九宫格单词训练营
           </a>
           <div className='header_menu'>
