@@ -88,4 +88,5 @@ public interface CourseStudyManager {
      */
     public int count(PageQuery pageQuery);
 
+ void deleteCourseStudyByCondition(CourseStudy courseStudy);
 }

@@ -113,4 +113,5 @@ public interface UnitWordsStudyDao {
      */
     public int sumWriting(Map<String,Object> paramMap);
 
+    void deleteUnitWordsStudyByCondition(UnitStudy unitStudy);
 }
