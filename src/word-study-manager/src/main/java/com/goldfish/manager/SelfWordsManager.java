@@ -32,6 +32,8 @@ public interface SelfWordsManager {
      */
     public void updateSelfWords(SelfWords selfWords);
 
+    public void updateSelfWordsByVocCode(SelfWords selfWords);
+
 
     /**
      * 根据主键删除SelfWords

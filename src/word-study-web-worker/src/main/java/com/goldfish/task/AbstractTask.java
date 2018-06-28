@@ -22,7 +22,6 @@ import java.util.List;
 public abstract class AbstractTask {
     @Resource(name="taskService")
     private TaskService taskService;
-    private AnnotatedType taskType;
 
     /**
      * 处理任务
@@ -43,6 +42,22 @@ public abstract class AbstractTask {
      * 批量执行任务
      */
     private void execute() {
+        // 1.获取待执行任务
+        List<Task> tasks = getUnExecuteTasks();
+        if (tasks == null) return;
+        //2.执行任务
+        _doTask(tasks);
+    }
+
+    protected void _doTask(List<Task> tasks) {
+        for (Task task : tasks) {
+            if (doExecute(task)) {
+                completeTask(task);
+            }
+        }
+    }
+
+    private List<Task> getUnExecuteTasks() {
         // 1.批量获取待执行任务
         PageQuery pageQuery = new PageQuery();
         pageQuery.setPageSize(getPageSize());
@@ -51,26 +66,23 @@ public abstract class AbstractTask {
         CommonResult<List<Task>> result = taskService.getTaskByPage(pageQuery);
         if (!result.isSuccess()) {
             LogTypeEnum.DEFAULT.error("定时任务[{}]，批量获取待执行任务失败，msg={}",getName(),result.getMessage());
-            return;
+            return null;
         }
         List<Task> tasks = result.getDefaultModel();
 
         if (tasks == null || tasks.isEmpty()) {
             LogTypeEnum.DEFAULT.info("定时任务[{}],没有任务需要执行");
-            return;
+            return null;
         }
+        return tasks;
+    }
 
-        //2.执行任务
-        for (Task task : tasks) {
-            if (execute(task)) {
-                // 执行成功后更新任务状态
-                task.setState(FinishState.COMPLETE.getState());
-                CommonResult<Task> updateTaskResult = taskService.updateTask(task);
-                if (!updateTaskResult.isSuccess()) {
-                    LogTypeEnum.DEFAULT.error("定时任务[{}]，更新任务状态为完成失败，msg={}", getName(),updateTaskResult.getMessage());
-                }
-
-            }
+    private void completeTask(Task task) {
+        // 执行成功后更新任务状态
+        task.setState(FinishState.COMPLETE.getState());
+        CommonResult<Task> updateTaskResult = taskService.updateTask(task);
+        if (!updateTaskResult.isSuccess()) {
+            LogTypeEnum.DEFAULT.error("定时任务[{}]，更新任务状态为完成失败，msg={}", getName(), updateTaskResult.getMessage());
         }
     }
 
@@ -78,7 +90,7 @@ public abstract class AbstractTask {
      * 执行任务
      * @param task
      */
-    protected abstract boolean execute(Task task);
+    protected abstract boolean doExecute(Task task);
 
     /**
      * 任务名称

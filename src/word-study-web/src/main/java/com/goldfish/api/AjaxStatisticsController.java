@@ -259,9 +259,10 @@ public class AjaxStatisticsController extends BaseController {
                 Course courseQuery = new Course();
                 courseQuery.setModuleCode(exam.getModuleCode());
                 Course course = courseService.getUnique(courseQuery).getDefaultModel();
-                basicTestResultVO.setBookName(course.getBookName());
+                if (course != null) {
+                    basicTestResultVO.setBookName(course.getBookName());
+                }
             }
-
             basicTestResultVOList.add(basicTestResultVO);
         }
         testResultVO.setBasicTestResultVOList(basicTestResultVOList);
