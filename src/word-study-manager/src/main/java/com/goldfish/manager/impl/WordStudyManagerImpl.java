@@ -78,6 +78,6 @@ public class WordStudyManagerImpl implements WordStudyManager {
 	}
 
     public List<WordStudy> getStudiedWords(WordStudy wordStudy){
-	    return  wordStudyDao.getListByExample(wordStudy);
+	    return  wordStudyDao.getStudiedWords(wordStudy);
     }
 }
