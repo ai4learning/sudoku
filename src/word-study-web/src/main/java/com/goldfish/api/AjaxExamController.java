@@ -785,7 +785,7 @@ public class AjaxExamController extends AjaxErrorBookController{
         wordStudyQuery.setMemoryLevel(testArea1.getCorrespondingMemoryLevel().getLevel());
         wordStudyQuery.setStudentId(user.getId().intValue());
         wordStudyQuery.setUserCode(user.getUserCode());
-        List<WordStudy> wordStudyList = wordStudyService.getListByExample(wordStudyQuery).getDefaultModel();
+        List<WordStudy> wordStudyList = wordStudyService.getStudiedWords(wordStudyQuery).getDefaultModel();
         Collections.shuffle(wordStudyList);
         //3.根据questionTypes和questionNbr出题
         //testArea=0&questionNbr=10&questionTypes=0,1,2

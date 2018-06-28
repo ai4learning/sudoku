@@ -178,4 +178,9 @@
 		</where>
 	</select>
 
+    <select id="getStudiedWords" resultMap="WordStudy-Map" parameterType="com.goldfish.domain.WordStudy">
+        SELECT   <include refid="All-FIELDS"/> FROM word_study
+        <include refid="BEAN-COMMON-SQL" /> AND studied != '1970-01-01 00:00:00'
+    </select>
+
 </mapper>

@@ -155,4 +155,17 @@ public class WordStudyServiceImpl implements WordStudyService {
 		this.wordStudyManager = wordStudyManager;
 	}
 
+    public CommonResult<List<WordStudy>> getStudiedWords(WordStudy wordStudy)
+    {
+        CommonResult<List<WordStudy>> result = new CommonResult<List<WordStudy>>();
+        try {
+            List<WordStudy> list = wordStudyManager.getStudiedWords(wordStudy);
+            result.addDefaultModel("list", list);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            logger.error("取得 单词学习失败", e);
+            result.setSuccess(false);
+        }
+        return result;
+    }
 }
