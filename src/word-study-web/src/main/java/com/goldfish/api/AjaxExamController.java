@@ -786,6 +786,8 @@ public class AjaxExamController extends AjaxErrorBookController{
         wordStudyQuery.setStudentId(user.getId().intValue());
         wordStudyQuery.setUserCode(user.getUserCode());
         List<WordStudy> wordStudyList = wordStudyService.getStudiedWords(wordStudyQuery).getDefaultModel();
+        if (wordStudyList == null)
+            return examVO;
         Collections.shuffle(wordStudyList);
         //3.根据questionTypes和questionNbr出题
         //testArea=0&questionNbr=10&questionTypes=0,1,2
@@ -796,6 +798,8 @@ public class AjaxExamController extends AjaxErrorBookController{
             QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber(Integer.valueOf(str));
             questionQuery.setType(qt.getFullName());
             List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
+            if (questionList == null)
+                continue;
             Collections.shuffle(questionList);
             List nowList = ecList;
             //获取当前是在往哪个List中写
@@ -1520,6 +1524,8 @@ public class AjaxExamController extends AjaxErrorBookController{
         for (String questionId : questionsJson.getJSONArray(questionTypeShort).toJavaList(String.class))
         {
             Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
+            if (question == null)
+                continue;
             ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
             QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
                     ,question.getVocCode(),question.getQuestion(),choicesVO,Long.valueOf(questionId));
@@ -1533,6 +1539,8 @@ public class AjaxExamController extends AjaxErrorBookController{
         List<QuestionVO> questionVOList = new ArrayList<>(UNIT_EXAM_QUESTION_NUMBER);
         questionQuery.setType(questionType.getFullName());
         List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
+        if (questionList == null)
+            return questionVOList;
         Collections.shuffle(questionList);
 
         int questionLimit = questionList.size() <= UNIT_EXAM_QUESTION_NUMBER ? questionList.size() : UNIT_EXAM_QUESTION_NUMBER;

@@ -240,8 +240,8 @@ public class AjaxStatisticsController extends BaseController {
 
         List<Exam> examList = examService.getListByUserRecent(pageQuery).getDefaultModel();
         if (examList == null) {
-            testResultVO.setMsg(CommonConstant.LOAD_FAIL);
-            testResultVO.setSuccess(false);
+            testResultVO.setMsg(CommonConstant.LOAD_SUCCESS);
+            testResultVO.setSuccess(true);
             return testResultVO;
         }
         List<BasicTestResultVO> basicTestResultVOList = new ArrayList<>();
