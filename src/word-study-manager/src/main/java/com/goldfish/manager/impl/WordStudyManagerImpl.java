@@ -76,4 +76,8 @@ public class WordStudyManagerImpl implements WordStudyManager {
 	public void setWordStudyDao(WordStudyDao wordStudyDao) {
 		this.wordStudyDao = wordStudyDao;
 	}
+
+    public List<WordStudy> getStudiedWords(WordStudy wordStudy){
+	    return  wordStudyDao.getListByExample(wordStudy);
+    }
 }
