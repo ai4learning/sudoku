@@ -799,7 +799,7 @@ public class AjaxExamController extends AjaxErrorBookController{
             questionQuery.setType(qt.getFullName());
             List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
             if (questionList == null)
-                return examVO;
+                continue;
             Collections.shuffle(questionList);
             List nowList = ecList;
             //获取当前是在往哪个List中写
