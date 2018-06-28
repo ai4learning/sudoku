@@ -24,7 +24,7 @@ export default function fetch(options) {
       } else {
         if(result.condition == -1) {
           !options.noTip && Modal.info({
-            title: '您还未登录，快去登录吧',
+            title: '您还未登录或密码错误',
             okText: '确定',
             onOk: () => {
               location.href = "/#/user/login?redirect="+encodeURIComponent(location.href)
