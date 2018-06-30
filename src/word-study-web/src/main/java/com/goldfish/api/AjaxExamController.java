@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by John on 2018/5/20 0020.
@@ -1544,10 +1541,17 @@ public class AjaxExamController extends AjaxErrorBookController{
         Collections.shuffle(questionList);
 
         int questionLimit = questionList.size() <= UNIT_EXAM_QUESTION_NUMBER ? questionList.size() : UNIT_EXAM_QUESTION_NUMBER;
-        for (int index = 0;index < questionLimit; index++) {
-            Question q = questionList.get(index);
-            questionVOList.add(new QuestionVO(q.getAnswerIndex(), q.getSpelling(), q.getVocCode(), q.getQuestion()
-                    , new ChoicesVO(q.getChoices()), q.getId()));
+        //使用HashSet来去重
+        HashSet<String> vocCodeSet = new HashSet<>(questionLimit);
+        for (Question q : questionList){
+            if (!vocCodeSet.contains(q.getVocCode())) {
+                vocCodeSet.add(q.getVocCode());
+                questionVOList.add(new QuestionVO(q.getAnswerIndex(), q.getSpelling(), q.getVocCode(), q.getQuestion()
+                        , new ChoicesVO(q.getChoices()), q.getId()));
+            }
+
+            if (vocCodeSet.size() >= questionLimit)
+                break;
         }
         return questionVOList;
     }
