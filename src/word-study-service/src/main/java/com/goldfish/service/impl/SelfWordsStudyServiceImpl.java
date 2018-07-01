@@ -1,7 +1,5 @@
 package com.goldfish.service.impl;
 
-
-
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
@@ -12,8 +10,6 @@ import com.goldfish.constant.State;
 import com.goldfish.constant.StudyPhase;
 import com.goldfish.constant.WordLibType;
 import com.goldfish.domain.SelfWords;
-import com.goldfish.domain.UnitStudy;
-import com.goldfish.domain.WordStudy;
 import com.goldfish.manager.SelfWordsManager;
 import com.goldfish.vo.unit.SaveUnitStudyVO;
 import com.goldfish.vo.unit.WordStudyDto;
@@ -233,16 +229,6 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 			selfWordsStudyManager.addSelfWordsStudy(errWordStudy);
 		}
 		return errWordStudy;
-	}
-
-
-	/******* getter and setter ***/
-	public SelfWordsStudyManager getSelfWordsStudyManager() {
-		return selfWordsStudyManager;
-	}
-
-	public void setSelfWordsStudyManager(SelfWordsStudyManager selfWordsStudyManager) {
-		this.selfWordsStudyManager = selfWordsStudyManager;
 	}
 
 }

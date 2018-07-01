@@ -142,8 +142,9 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		wordStudy.setIsRemember(State.getBoolInt().get(dto.isRemember()));
 		wordStudy.setIsCancelReview(State.getBoolInt().get(dto.isCancelReview()));
 		wordStudy.setVocCode(dto.getVocCode());
-		wordStudy.setModified(new Date());
-		wordStudy.setStudied(new Date());
+		Date cur = new Date();
+		wordStudy.setModified(cur);
+		wordStudy.setStudied(cur);
 		wordStudyManager.updateWordStudy(wordStudy);
 		return wordStudy;
 	}
