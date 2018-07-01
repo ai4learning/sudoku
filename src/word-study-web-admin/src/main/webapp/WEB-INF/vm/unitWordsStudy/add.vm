@@ -110,6 +110,7 @@
         
 		<select class="forms_select input-medium" name="isFinished" id="isFinished">
 			
+				<option value="-1">未开始</option>
 				<option value="0">未完成</option>
 				<option value="1">已完成</option>
 		</select>
@@ -127,6 +128,7 @@
         
 		<select class="forms_select input-medium" name="isTested" id="isTested">
 			
+				<option value="-1">未通过</option>
 				<option value="0">未完成</option>
 				<option value="1">已完成</option>
 		</select>

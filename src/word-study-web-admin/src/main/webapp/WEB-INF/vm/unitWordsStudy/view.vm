@@ -114,6 +114,7 @@
 			
         
 		<select class="forms_select input-medium form-control" name="isFinished" id="isFinished" disabled>
+				<option value="-1" #if($unitWordsStudy.isFinished==-1) selected  #end>未开始</option>
 				<option value="0" #if($unitWordsStudy.isFinished==0) selected  #end>未完成</option>
 				<option value="1" #if($unitWordsStudy.isFinished==1) selected  #end>已完成</option>
 
@@ -130,6 +131,7 @@
 			
         
 		<select class="forms_select input-medium form-control" name="isTested" id="isTested" disabled>
+				<option value="-1" #if($unitWordsStudy.isTested==0) selected  #end>未通过</option>
 				<option value="0" #if($unitWordsStudy.isTested==0) selected  #end>未完成</option>
 				<option value="1" #if($unitWordsStudy.isTested==1) selected  #end>已完成</option>
 
