@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.goldfish.common.CommonResult;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.log.LogTypeEnum;
+import com.goldfish.concurrent.threadpool.ThreadConstant;
+import com.goldfish.concurrent.threadpool.ThreadPoolContext;
 import com.goldfish.constant.*;
 import com.goldfish.domain.*;
 import com.goldfish.service.*;
@@ -12,10 +14,10 @@ import com.goldfish.vo.course.*;
 import com.goldfish.vo.unit.*;
 import com.goldfish.vo.user.RichUserBookVO;
 import com.goldfish.vo.user.UserBookVO;
-import com.goldfish.vo.user.UserVO;
 import com.goldfish.web.base.BaseController;
 import com.goldfish.web.interceptor.servlet.context.LoginContext;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,12 +27,12 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.*;
 
 /**
  * Created by John on 2018/5/20 0020.
  */
-public class AjaxCourseController extends BaseController {
-
+public class AjaxCourseController extends BaseController implements DisposableBean  {
     @Resource
     private CourseStudyService courseStudyService;
     @Resource
@@ -47,6 +49,7 @@ public class AjaxCourseController extends BaseController {
     private WordStudyService wordStudyService;
     @Resource
     private WordService wordService;
+    private ThreadPoolExecutor threadPool = ThreadPoolContext.getThreadPool(ThreadConstant.Course_Learning, false);
 
 
     /**
@@ -606,6 +609,18 @@ public class AjaxCourseController extends BaseController {
                 wordStudyQuery.setWordId(unitWord.getWordId());
                 WordStudy wordStudy = wordStudyService.getUnique(wordStudyQuery).getDefaultModel();
                 unitStudyVO.setIsCollected(wordStudy.getIscollected() == 1);
+
+                // 更新单元学习状态
+                threadPool.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (unitStudy.getIsFinished() == FinishState.NOT_START.getState()) {
+                            // 单元学习状态为开始，则更新为未完成
+                            unitStudy.setIsFinished(FinishState.NOT_COMPLETE.getState());
+                            unitStudyService.updateUnitWordsStudy(unitStudy);
+                        }
+                    }
+                });
             }
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e, "获取单元学习信息失败");
@@ -717,5 +732,12 @@ public class AjaxCourseController extends BaseController {
         pageQuery.addQueryParam("isAllFinished",FinishState.COMPLETE.getState());
         pageQuery.addQueryParam("state",State.VALID.getState());
         return unitStudyService.count(pageQuery);
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        if (threadPool != null && !threadPool.isShutdown()) {
+            threadPool.shutdown();
+        }
     }
 }

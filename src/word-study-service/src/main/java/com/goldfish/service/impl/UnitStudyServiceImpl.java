@@ -69,6 +69,9 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			if ("finish".equals(extra)) {
 				/**  是否学习完成  */
 				unitStudy.setIsFinished(FinishState.COMPLETE.getState());
+				if (unitStudy.getIsTested() == FinishState.COMPLETE.getState()) {
+					unitStudy.setIsAllFinished(FinishState.COMPLETE.getState());
+				}
 				// 单元学习完毕，则到单元测试阶段
 				unitStudy.setCurrentPhase(StudyPhase.UNIT_TEST.getPhase());
 				saveUnitStudyVO.setIsFinished(2);
@@ -114,9 +117,7 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			saveUnitStudyVO.setMsg("保存单元学习异常");
 			saveUnitStudyVO.setSuccess(false);
 		}
-
 		return saveUnitStudyVO;
-
 	}
 
 	protected WordStudy updateWordStudy(WordStudyDto dto,Integer userId) {
@@ -191,6 +192,11 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			if ("finish".equals(extra)) {
 				/**  是否学习完成  */
 				unitStudy.setIsFinished(FinishState.COMPLETE.getState());
+				if (unitStudy.getIsTested() == FinishState.COMPLETE.getState()) {
+
+				}
+
+
 				// 单元学习完毕，则到单元测试阶段
 				unitStudy.setCurrentPhase(StudyPhase.UNIT_TEST.getPhase());
 			}
