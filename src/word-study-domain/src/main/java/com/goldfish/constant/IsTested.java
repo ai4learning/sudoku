@@ -30,9 +30,9 @@ public enum IsTested {
     }
 
     public static IsTested getIsTestedByScore(int score) {
-        if (score >= 0 && score < 60)
+        if (score >= 0 && score < 90)
             return FAIL;
-        else if (score >= 60 && score < 100)
+        else if (score >= 90 && score < 100)
             return PASS;
         else if (score == 100)
             return FULL_MARKS;
