@@ -1,10 +1,7 @@
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.State;
-import com.goldfish.dao.AllwordDao;
-import com.goldfish.dao.QuestionDao;
-import com.goldfish.dao.UnitWordsDao;
-import com.goldfish.dao.WordDao;
+import com.goldfish.dao.*;
 import com.goldfish.domain.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +23,8 @@ import java.util.Map;
 public class DataInitial {
     @Resource
     private UnitWordsDao unitWordsDao;
+    @Resource
+    private WordStudyDao wordStudyDao;
     @Resource
     private WordDao wordDao;
     @Resource
@@ -108,6 +107,41 @@ public class DataInitial {
             System.out.println("ID=" + unitWord.getId() + ",spelling="+unitWord.getSpelling()+",wordId=" + unitWord.getWordId() + "" +
                     ",wordspelling="+ first.getSpelling() + ",meaning="+ first.getMeaning());
         }
+    }
+
+    @Test
+    public void fillFillWordStudy() {
+        Map<String,Object> paramMap = new HashMap<String,Object>();
+        paramMap.put("startIndex",0);
+        paramMap.put("pageSize", 250510);
+
+        List<WordStudy> wordStudyByPage = wordStudyDao.getWordStudyByPage(paramMap);
+        for (WordStudy wordStudy : wordStudyByPage) {
+            UnitWords query = new UnitWords();
+            query.setVocCode(wordStudy.getVocCode());
+            UnitWords unitWords = unitWordsDao.getUnique(query);
+            if (unitWords != null) {
+                wordStudy.setLessonId(Integer.valueOf(String.valueOf(unitWords.getLessonId())));
+                wordStudy.setUnitNbr(unitWords.getUnitNbr());
+                wordStudyDao.updateWordStudy(wordStudy);
+                System.out.println(wordStudy.getVocCode());
+            } else {
+                System.out.println(wordStudy.getVocCode() + "不存在！");
+            }
+        }
+
+
+
+
+//        List<UnitWords> unitWordsByPage = unitWordsDao.getUnitWordsByPage(paramMap);
+//        for (UnitWords unitWords : unitWordsByPage) {
+//            WordStudy wordStudy = new WordStudy();
+//            wordStudy.setVocCode(unitWords.getVocCode());
+//            wordStudy.setLessonId(Integer.valueOf(String.valueOf(unitWords.getLessonId())));
+//            wordStudy.setUnitNbr(unitWords.getUnitNbr());
+//            wordStudyDao.updateWordStudy(wordStudy);
+//            System.out.println(wordStudy.getVocCode());
+//        }
     }
 
     @Test

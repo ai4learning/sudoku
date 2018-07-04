@@ -127,7 +127,6 @@ public class AjaxCourseController extends BaseController implements DisposableBe
         List<CourseStudyVO> books = new ArrayList<CourseStudyVO>(studentCourses.size());
         for (CourseStudy studentCourse : studentCourses) {
             PositonedCourseStudyVO bookVO = new PositonedCourseStudyVO();
-
             /*设置课程信息*/
             Course courseQuery = new Course();
             courseQuery.setBookNumber(studentCourse.getLessonId());
@@ -550,10 +549,12 @@ public class AjaxCourseController extends BaseController implements DisposableBe
 
             // 5.填充学习位置
             /*设置当前单元内学习位置信息*/
-            CurrentStudyPositionVO currentPositionVO =
-                    this.getCouseStudyPositionVo(PositionType.UNIT_STUDY_POSTION, null, unitStudy, richUnitStudyVO);
-            if (currentPositionVO == null) {
-                return richUnitStudyVO;
+            CurrentStudyPositionVO currentPositionVO = new CurrentStudyPositionVO();
+            if (unitStudy.getIsAllFinished() != FinishState.COMPLETE.getState()) {
+                currentPositionVO = this.getCouseStudyPositionVo(PositionType.UNIT_STUDY_POSTION, null, unitStudy, richUnitStudyVO);
+                if (currentPositionVO == null) {
+                    return richUnitStudyVO;
+                }
             }
             richUnitStudyVO.setStudyPos(currentPositionVO);
 

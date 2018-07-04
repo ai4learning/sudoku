@@ -11,6 +11,8 @@
 		<result property="spell" column="spell"/>
 		<result property="meaning" column="meaning"/>
 		<result property="studentId" column="student_id"/>
+		<result property="lessonId" column="lesson_id"/>
+		<result property="unitNbr" column="unit_nbr"/>
 		<result property="userCode" column="user_code"/>
 		<result property="memoryLevel" column="memory_level"/>
 		<result property="reviewTimes" column="review_times"/>
@@ -41,6 +43,9 @@
     		<where>
     		<if test="id != null"> AND id = #{id}</if>
     		<if test="studentId != null"> AND student_id = #{studentId}</if>
+    		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+    		<if test="unitNbr != null"> AND unit_nbr = #{unitNbr}</if>
+    		<if test="isRemember != null"> AND is_remember = #{isRemember}</if>
     		<if test="vocCode != null"> AND voc_code = #{vocCode}</if>
     		<if test="wordId != null"> AND word_id = #{wordId}</if>
     		<if test="spell != null"> AND spell = #{spell}</if>
@@ -59,11 +64,13 @@
 		<where>
 			<if test="id != null"> AND id = #{id}</if>
 			<if test="studentId != null"> AND student_id = #{studentId}</if>
+			<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+			<if test="unitNbr != null"> AND unit_nbr = #{unitNbr}</if>
+			<if test="isRemember != null"> AND is_remember = #{isRemember}</if>
 			<if test="wordId != null"> AND word_id = #{wordId}</if>
 			<if test="spell != null"> AND spell = #{spell}</if>
 			<if test="meaning != null"> AND meaning = #{meaning}</if>
 			<if test="state != null"> AND state = #{state}</if>
-		
 		</where>
 	 	
 	</sql>
@@ -74,12 +81,12 @@
 	
 
 	<sql id="All-FIELDS">
-		id,voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified,studied
+		id,student_id,lesson_id,unit_nbr,voc_code,user_voc_code,word_id,spell,meaning,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified,studied
 	</sql>
 
 	<insert id="addWordStudy" parameterType="com.goldfish.domain.WordStudy">
-		insert into word_study (voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified,studied)
-			values(#{vocCode},#{userVocCode},#{wordId},#{spell},#{meaning},#{studentId},#{userCode},#{memoryLevel},#{reviewTimes},#{timeLeft},#{finishReadingTime},#{isFstReadSuccess},#{readFailTimes},#{continueReadFailTimes},#{isHalfReading},#{isFstSpellSuccess},#{spellFailTimes},#{continueSpellFailTimes},#{isHalfSpelling},#{isRemember},#{isCancelReview},#{iscollected},#{state},#{created},#{modified},#{studied})
+		insert into word_study (student_id,lesson_id,unit_nbr,voc_code,user_voc_code,word_id,spell,meaning,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified,studied)
+			values(#{studentId},#{lessonId},#{unitNbr},#{vocCode},#{userVocCode},#{wordId},#{spell},#{meaning},#{userCode},#{memoryLevel},#{reviewTimes},#{timeLeft},#{finishReadingTime},#{isFstReadSuccess},#{readFailTimes},#{continueReadFailTimes},#{isHalfReading},#{isFstSpellSuccess},#{spellFailTimes},#{continueSpellFailTimes},#{isHalfSpelling},#{isRemember},#{isCancelReview},#{iscollected},#{state},#{created},#{modified},#{studied})
     
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
 		   select last_insert_id() as ID from dual
@@ -91,12 +98,14 @@
     <update id="updateWordStudy" parameterType="com.goldfish.domain.WordStudy" >
     	update  word_study 
 	<set>
+			<if test="studentId !=null"> student_id = #{studentId},</if>
+			<if test="lessonId !=null"> lesson_id = #{lessonId},</if>
+			<if test="unitNbr !=null"> unit_nbr = #{unitNbr},</if>
 			<if test="vocCode !=null"> voc_code = #{vocCode},</if>
 			<if test="userVocCode !=null"> user_voc_code = #{userVocCode},</if>
 			<if test="wordId !=null"> word_id = #{wordId},</if>
 			<if test="spell !=null"> spell = #{spell},</if>
 			<if test="meaning !=null"> meaning = #{meaning},</if>
-			<if test="studentId !=null"> student_id = #{studentId},</if>
 			<if test="userCode !=null"> user_code = #{userCode},</if>
 			<if test="memoryLevel !=null"> memory_level = #{memoryLevel},</if>
 			<if test="reviewTimes !=null"> review_times = #{reviewTimes},</if>
@@ -119,12 +128,11 @@
 			<if test="studied !=null"> studied = #{studied},</if>
 
 	</set>
-	 where id = #{id}
+	<where>
+		<if test="id != null"> AND id = #{id}</if>
+		<if test="vocCode != null"> AND voc_code = #{vocCode}</if>
+	</where>
   	</update>
-  
-	
-
-    
 
 	<delete id="deleteWordStudy" parameterType="com.goldfish.domain.WordStudy">
 		DELETE FROM word_study WHERE id = #{id}
@@ -150,7 +158,7 @@
 	
 	<select id="getWordStudyByPage" resultMap="WordStudy-Map" parameterType="java.util.HashMap">
 		<![CDATA[
-			SELECT  id,voc_code,user_voc_code,word_id,spell,meaning,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,modified,studied FROM word_study
+			SELECT  id,student_id,lesson_id,unit_nbr,voc_code,user_voc_code,word_id,spell,meaning,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,modified,studied FROM word_study
 		]]>
             <include refid="MAP-COMMON-SQL" />
             <include refid="ORDER-SQL" />

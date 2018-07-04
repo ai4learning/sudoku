@@ -62,20 +62,43 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			return saveUnitStudyVO;
 		}
 		try{
-			// a.更新学习时间等字段
-			unitStudy.setTotalReadingTime(totalReadingTime);
-			unitStudy.setTotalWritingTime(totalWritingTime);
-			unitStudy.setTotalNumber(totalWordsNbr);
-			if ("finish".equals(extra)) {
+			// 1.保存每个单词的学习情况
+			WordStudy lastStudyWord = new WordStudy();
+			for (WordStudyDto dto : vocDataAfterReview) {
+				WordStudy wordStudy = updateWordStudy(dto,userId);
+				doErrorWord(userId, moduleCode, unitNbr, dto);
+				lastStudyWord = wordStudy;
+			}
+			// 2.更新单元学习
+			unitStudy.setStudyPositionCode(studyToken);
+			// 1.校验是否存在未记住的单词
+			WordStudy queryWord = new WordStudy();
+			queryWord.setStudentId(userId);
+			queryWord.setLessonId(unitStudy.getLessonId());
+			queryWord.setUnitNbr(unitNbr);
+			queryWord.setIsRemember(State.NO.getState());
+			queryWord.setState(State.VALID.getState());
+			WordStudy notRememberWord = wordStudyManager.getUnique(queryWord);
+			// 全部学习完毕
+			if (notRememberWord == null) {
 				/**  是否学习完成  */
 				unitStudy.setIsFinished(FinishState.COMPLETE.getState());
-				if (unitStudy.getIsTested() == FinishState.COMPLETE.getState()) {
+				if (unitStudy.getIsTested() >= FinishState.COMPLETE.getState()) {
 					unitStudy.setIsAllFinished(FinishState.COMPLETE.getState());
 				}
 				// 单元学习完毕，则到单元测试阶段
 				unitStudy.setCurrentPhase(StudyPhase.UNIT_TEST.getPhase());
-				saveUnitStudyVO.setIsFinished(2);
 			}
+			// 更新当前待学习单词
+			else {
+				unitStudy.setVocCode(notRememberWord.getVocCode());
+				unitStudy.setSpelling(notRememberWord.getSpell());
+			}
+			// a.更新学习时间等字段
+			unitStudy.setTotalReadingTime(totalReadingTime);
+			unitStudy.setTotalWritingTime(totalWritingTime);
+			unitStudy.setTotalNumber(totalWordsNbr);
+
 			/**  位置类型  */
 			unitStudy.setPositionType(1);// 1表示单词
 			/**  当前保存，则为当前学习位置，当前写是，同时更新该学生该课程其他单元为false  */
@@ -84,33 +107,13 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			CommonResult<UnitStudy> updateUnitStudyResult = this.updateUnitWordsStudy(unitStudy);
 			if (updateUnitStudyResult == null || !updateUnitStudyResult.isSuccess()) {
 				LogTypeEnum.DEFAULT.error("更新学生单元学习失败");
-				saveUnitStudyVO.setMsg("更新单元学习失败");
+				saveUnitStudyVO.setMsg("更新学生单元学习失败");
 				return saveUnitStudyVO;
 			}
-			// 2.保存每个单词的学习情况
-			WordStudy lastStudyWord = new WordStudy();
-			for (WordStudyDto dto : vocDataAfterReview) {
-				WordStudy wordStudy = updateWordStudy(dto,userId);
-				doErrorWord(userId, moduleCode, unitNbr, dto);
-				lastStudyWord = wordStudy;
-			}
-
-			// b.更新学习位置信息
-			/**  单词学习位置  */
-//            unitStudy.setStudyPos(lastStudyWord.);
-			/**  学习位置CODE  */
-			unitStudy.setStudyPositionCode(studyToken);
-			/**  单词CODE  */
-			unitStudy.setVocCode(lastStudyWord.getVocCode());
-			/**  单词  */
-			unitStudy.setSpelling(lastStudyWord.getSpell());
-			// 更新当前单元学习情况
-			unitStudyManager.updateUnitWordsStudy(unitStudy);
 			// 更新其他单元为非当前学习单元
 			unitStudyManager.otherUnitNotCurStudyPosition(unitStudy);
 			saveUnitStudyVO.setLatestStudyPosition(fillLastPostion(unitStudy, studyToken, lastStudyWord, seconds4SpellingLetter));
 			saveUnitStudyVO.setSuccess(true);
-
 			saveCourseStudySchedule(userId,unitStudy.getLessonId(),unitNbr,lastStudyWord.getVocCode(),lastStudyWord.getSpell());
 		} catch (Exception e) {
 			LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");
@@ -186,21 +189,43 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 			return saveFinishUnitStudyVO;
 		}
 		try{
+			// 1.保存每个单词的学习情况
+			WordStudy lastStudyWord = null;
+			for (WordStudyDto dto : vocDataAfterReview) {
+				WordStudy wordStudy = updateWordStudy(dto,studentId);
+				doErrorWord(studentId, moduleCode, unitNbr, dto);
+				lastStudyWord = wordStudy;
+			}
+			// 2.更新单元学习
+			unitStudy.setStudyPositionCode(studyToken);
+			// 1.校验是否存在未记住的单词
+			WordStudy queryWord = new WordStudy();
+			queryWord.setStudentId(studentId);
+			queryWord.setLessonId(unitStudy.getLessonId());
+			queryWord.setUnitNbr(unitNbr);
+			queryWord.setIsRemember(State.NO.getState());
+			queryWord.setState(State.VALID.getState());
+			WordStudy notRememberWord = wordStudyManager.getUnique(queryWord);
+			// 全部学习完毕
+			if (notRememberWord == null) {
+				/**  是否学习完成  */
+				unitStudy.setIsFinished(FinishState.COMPLETE.getState());
+				if (unitStudy.getIsTested() >= FinishState.COMPLETE.getState()) {
+					unitStudy.setIsAllFinished(FinishState.COMPLETE.getState());
+				}
+				// 单元学习完毕，则到单元测试阶段
+				unitStudy.setCurrentPhase(StudyPhase.UNIT_TEST.getPhase());
+			}
+			// 更新当前待学习单词
+			else {
+				unitStudy.setVocCode(notRememberWord.getVocCode());
+				unitStudy.setSpelling(notRememberWord.getSpell());
+			}
 			// a.更新学习时间等字段
 			unitStudy.setTotalReadingTime(totalReadingTime);
 			unitStudy.setTotalWritingTime(totalWritingTime);
 			unitStudy.setTotalNumber(totalWordsNbr);
-			if ("finish".equals(extra)) {
-				/**  是否学习完成  */
-				unitStudy.setIsFinished(FinishState.COMPLETE.getState());
-				if (unitStudy.getIsTested() == FinishState.COMPLETE.getState()) {
 
-				}
-
-
-				// 单元学习完毕，则到单元测试阶段
-				unitStudy.setCurrentPhase(StudyPhase.UNIT_TEST.getPhase());
-			}
 			/**  位置类型  */
 			unitStudy.setPositionType(1);// 1表示单词
 			/**  当前保存，则为当前学习位置，当前写是，同时更新该学生该课程其他单元为false  */
@@ -212,29 +237,9 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 				saveFinishUnitStudyVO.setMsg("更新学生单元学习失败");
 				return saveFinishUnitStudyVO;
 			}
-			// 2.保存每个单词的学习情况
-			WordStudy lastStudyWord = new WordStudy();
-			for (WordStudyDto dto : vocDataAfterReview) {
-				WordStudy wordStudy = updateWordStudy(dto,studentId);
-				doErrorWord(studentId, moduleCode, unitNbr, dto);
-				lastStudyWord = wordStudy;
-			}
-
-			// b.更新学习位置信息
-			/**  单词学习位置  */
-//            unitStudy.setStudyPos(lastStudyWord.);
-            /**  学习位置CODE  */
-            unitStudy.setStudyPositionCode(studyToken);
-            /**  单词CODE  */
-            unitStudy.setVocCode(lastStudyWord.getVocCode());
-            /**  单词  */
-            unitStudy.setSpelling(lastStudyWord.getSpell());
-			// 更新当前单元学习情况
-			unitStudyManager.updateUnitWordsStudy(unitStudy);
 			// 更新其他单元为非当前学习单元
 			unitStudyManager.otherUnitNotCurStudyPosition(unitStudy);
 			saveFinishUnitStudyVO.setSuccess(true);
-
             saveCourseStudySchedule(studentId,unitStudy.getLessonId(),unitNbr,lastStudyWord.getVocCode(),lastStudyWord.getSpell());
 		} catch (Exception e) {
 			LogTypeEnum.DEFAULT.error(e, "保存单元学习异常");

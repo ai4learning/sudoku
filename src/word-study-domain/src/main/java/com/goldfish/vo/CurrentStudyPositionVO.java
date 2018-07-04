@@ -20,7 +20,7 @@ import com.alibaba.fastjson.annotation.JSONField;
  */
 public class CurrentStudyPositionVO {
     @JSONField( name="Id")
-    private Long id;
+    private Long id = 0L;
     private String studyPositionCode;
     private Integer positionType;
 
@@ -32,7 +32,7 @@ public class CurrentStudyPositionVO {
     @JSONField( name="isFinished")
     private Integer isFinished = 0;
     @JSONField( name="isAllFinished")
-    private boolean isAllFinished;
+    private boolean isAllFinished = false;
     @JSONField( name="isTested")
     private Integer isTested = 0;
     private Integer Status = 0;

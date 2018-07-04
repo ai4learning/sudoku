@@ -199,6 +199,8 @@ public class InitStuStudyDataTask extends AbstractTask {
             WordStudy wordStudy = new WordStudy();
 
             wordStudy.setStudentId(userId);
+            wordStudy.setLessonId(Integer.valueOf(String.valueOf(unitWord.getLessonId())));
+            wordStudy.setUnitNbr(unitWord.getUnitNbr());
 
             // 1.拷贝unitword属性
             wordStudy.setVocCode(unitWord.getVocCode());

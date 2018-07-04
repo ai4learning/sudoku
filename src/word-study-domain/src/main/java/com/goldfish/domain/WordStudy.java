@@ -21,17 +21,19 @@ public class WordStudy  implements Serializable {
   private static final long serialVersionUID = -7262870976609136018L;
 	
 	/**  ID  */
-	private Long id; 
+	private Long id;
+	/**  学生ID  */
+	private Integer studentId;
+	private Integer lessonId;
+	private Integer unitNbr;
 	/**  单词CODE  */
-	private String vocCode; 
+	private String vocCode;
 	/**  用户单词CODE  */
 	private String userVocCode;
 	private Integer wordId;
 	/**  单词拼写  */
 	private String spell;
 	private String meaning;
-	/**  学生ID  */
-	private Integer studentId; 
 	/**  用户CODE  */
 	private String userCode; 
 	/**  记忆等级  */
@@ -339,4 +341,20 @@ public class WordStudy  implements Serializable {
     public void setStudied(Date studied) {
         this.studied = studied;
     }
+
+	public Integer getLessonId() {
+		return lessonId;
+	}
+
+	public void setLessonId(Integer lessonId) {
+		this.lessonId = lessonId;
+	}
+
+	public Integer getUnitNbr() {
+		return unitNbr;
+	}
+
+	public void setUnitNbr(Integer unitNbr) {
+		this.unitNbr = unitNbr;
+	}
 }
