@@ -20,22 +20,26 @@ public class UnitManagerImpl implements UnitManager {
 	private UnitDao unitDao;
 
 
+  @Override
   public Unit addUnit(Unit unit) {
 		int i=unitDao.addUnit(unit);
 		return unit;
     }
     
+    @Override
     public void updateUnit(Unit unit) {
 		unitDao.updateUnit(unit);
     }
     
 
     
+    @Override
     public void deleteUnit(Long id) {
 		unitDao.deleteUnit(id);
     }
 
 
+    @Override
     public Unit getUnitById(Long id) {
 		return unitDao.getUnitById(id);
     }
@@ -45,20 +49,24 @@ public class UnitManagerImpl implements UnitManager {
 
     	
    
+   @Override
    public Unit getUnique(Unit unit) {
 		return unitDao.getUnique(unit);
     }
 
     
+ @Override
  public List<Unit> getListByExample(Unit unit) {
     return unitDao.getListByExample(unit);
     }
 
     
+    @Override
     public List<Unit> getUnitByPage(PageQuery pageQuery) {
 		return unitDao.getUnitByPage( pageQuery.getParams());
     }
     	
+    @Override
     public int count(PageQuery pageQuery) {
 		return unitDao.count( pageQuery.getParams());
     }

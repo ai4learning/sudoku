@@ -38,6 +38,7 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 	@Resource(name="selfWordsManager")
 	private SelfWordsManager selfWordsManager;
     
+    @Override
     public CommonResult<SelfWordsStudy> addSelfWordsStudy(SelfWordsStudy selfWordsStudy) {
 		CommonResult<SelfWordsStudy> result = new CommonResult<SelfWordsStudy>();
 		try{
@@ -56,7 +57,8 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 		return result;
 	}
 	
-	public CommonResult<SelfWordsStudy> updateSelfWordsStudy(SelfWordsStudy selfWordsStudy) {
+	@Override
+    public CommonResult<SelfWordsStudy> updateSelfWordsStudy(SelfWordsStudy selfWordsStudy) {
 		CommonResult<SelfWordsStudy> result = new CommonResult<SelfWordsStudy>();
 		try {
 			selfWordsStudy.setModified(new Date());
@@ -71,7 +73,8 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 	
    
 
-	public CommonResult<SelfWordsStudy> deleteSelfWordsStudy(Long id) {
+	@Override
+    public CommonResult<SelfWordsStudy> deleteSelfWordsStudy(Long id) {
 		CommonResult<SelfWordsStudy> result = new CommonResult<SelfWordsStudy>();
 		try {
 			selfWordsStudyManager.deleteSelfWordsStudy(id);
@@ -84,7 +87,8 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
     }
 
 
-    	public CommonResult<SelfWordsStudy> getSelfWordsStudyById(Long id) {
+    	@Override
+        public CommonResult<SelfWordsStudy> getSelfWordsStudyById(Long id) {
 		CommonResult<SelfWordsStudy> result = new CommonResult<SelfWordsStudy>();
 		try {
 			result.addDefaultModel("selfWordsStudy", selfWordsStudyManager.getSelfWordsStudyById(id));
@@ -101,7 +105,8 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 	
 
 
-	public CommonResult<SelfWordsStudy> getUnique(SelfWordsStudy selfWordsStudy) {
+	@Override
+    public CommonResult<SelfWordsStudy> getUnique(SelfWordsStudy selfWordsStudy) {
 		CommonResult<SelfWordsStudy> result = new CommonResult<SelfWordsStudy>();
 		try {
 			result.addDefaultModel(selfWordsStudyManager.getUnique(selfWordsStudy));
@@ -114,7 +119,8 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 	}
 
 
-	public CommonResult<List<SelfWordsStudy>> getListByExample(SelfWordsStudy selfWordsStudy) {
+	@Override
+    public CommonResult<List<SelfWordsStudy>> getListByExample(SelfWordsStudy selfWordsStudy) {
 		CommonResult<List<SelfWordsStudy>> result = new CommonResult<List<SelfWordsStudy>>();
 		try {
 			List<SelfWordsStudy> list = selfWordsStudyManager.getListByExample(selfWordsStudy);
@@ -128,7 +134,8 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 	}
 
 	
-	public CommonResult<List<SelfWordsStudy>> getSelfWordsStudyByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<SelfWordsStudy>> getSelfWordsStudyByPage(PageQuery pageQuery) {
 		CommonResult<List<SelfWordsStudy>> result = new CommonResult<List<SelfWordsStudy>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -146,7 +153,8 @@ public class SelfWordsStudyServiceImpl extends UnitStudyServiceImpl implements S
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return selfWordsStudyManager.count(pageQuery);
 	}
 

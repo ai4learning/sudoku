@@ -20,22 +20,26 @@ public class AllexamManagerImpl implements AllexamManager {
 	private AllexamDao allexamDao;
 
 
+  @Override
   public Allexam addAllexam(Allexam allexam) {
 		int i=allexamDao.addAllexam(allexam);
 		return allexam;
     }
     
+    @Override
     public void updateAllexam(Allexam allexam) {
 		allexamDao.updateAllexam(allexam);
     }
     
 
     
+    @Override
     public void deleteAllexam(Integer id) {
 		allexamDao.deleteAllexam(id);
     }
 
 
+    @Override
     public Allexam getAllexamById(Integer id) {
 		return allexamDao.getAllexamById(id);
     }
@@ -45,20 +49,24 @@ public class AllexamManagerImpl implements AllexamManager {
 
     	
    
+   @Override
    public Allexam getUnique(Allexam allexam) {
 		return allexamDao.getUnique(allexam);
     }
 
     
+ @Override
  public List<Allexam> getListByExample(Allexam allexam) {
     return allexamDao.getListByExample(allexam);
     }
 
     
+    @Override
     public List<Allexam> getAllexamByPage(PageQuery pageQuery) {
 		return allexamDao.getAllexamByPage( pageQuery.getParams());
     }
     	
+    @Override
     public int count(PageQuery pageQuery) {
 		return allexamDao.count( pageQuery.getParams());
     }

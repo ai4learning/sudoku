@@ -349,8 +349,9 @@ public class AjaxCourseController extends BaseController implements DisposableBe
             unitQuery.setUnitNbr(unitStudy.getUnitNbr());
             unitQuery.setState(State.VALID.getState());
             Unit unit = unitService.getUnique(unitQuery).getDefaultModel();
-            if (unit == null)
+            if (unit == null) {
                 continue;
+            }
             courseUnitStudyVO.setId(unit.getId());
             courseUnitStudyVO.setUnit(unit.getUnit());
             courseUnitStudyVO.setUnitNbr(unit.getUnitNbr());

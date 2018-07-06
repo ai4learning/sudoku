@@ -46,6 +46,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
     @Resource
     private CourseStudyManager courseStudyManager;
 
+    @Override
     public CommonResult<SelfWords> addSelfWords(SelfWords selfWords) {
         CommonResult<SelfWords> result = new CommonResult<SelfWords>();
         try {
@@ -60,6 +61,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
         return result;
     }
 
+    @Override
     public CommonResult<SelfWords> updateSelfWords(SelfWords selfWords) {
         CommonResult<SelfWords> result = new CommonResult<SelfWords>();
         try {
@@ -76,6 +78,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
     }
 
 
+    @Override
     public CommonResult<SelfWords> deleteSelfWords(Long id) {
         CommonResult<SelfWords> result = new CommonResult<SelfWords>();
         try {
@@ -89,6 +92,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
     }
 
 
+    @Override
     public CommonResult<SelfWords> getSelfWordsById(Long id) {
         CommonResult<SelfWords> result = new CommonResult<SelfWords>();
         try {
@@ -102,6 +106,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
     }
 
 
+    @Override
     public CommonResult<SelfWords> getUnique(SelfWords selfWords) {
         CommonResult<SelfWords> result = new CommonResult<SelfWords>();
         try {
@@ -115,6 +120,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
     }
 
 
+    @Override
     public CommonResult<List<SelfWords>> getListByExample(SelfWords selfWords) {
         CommonResult<List<SelfWords>> result = new CommonResult<List<SelfWords>>();
         try {
@@ -129,6 +135,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
     }
 
 
+    @Override
     public CommonResult<List<SelfWords>> getSelfWordsByPage(PageQuery pageQuery) {
         CommonResult<List<SelfWords>> result = new CommonResult<List<SelfWords>>();
         try {
@@ -147,6 +154,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
         return result;
     }
 
+    @Override
     public int count(PageQuery pageQuery) {
         return selfWordsManager.count(pageQuery);
     }

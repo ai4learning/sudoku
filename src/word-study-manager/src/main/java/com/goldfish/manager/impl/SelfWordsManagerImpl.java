@@ -22,11 +22,13 @@ public class SelfWordsManagerImpl implements SelfWordsManager {
     private SelfWordsDao selfWordsDao;
 
 
+    @Override
     public SelfWords addSelfWords(SelfWords selfWords) {
         int i = selfWordsDao.addSelfWords(selfWords);
         return selfWords;
     }
 
+    @Override
     public void updateSelfWords(SelfWords selfWords) {
         selfWordsDao.updateSelfWords(selfWords);
     }
@@ -37,6 +39,7 @@ public class SelfWordsManagerImpl implements SelfWordsManager {
     }
 
 
+    @Override
     public void deleteSelfWords(Long id) {
         selfWordsDao.deleteSelfWords(id);
     }
@@ -51,25 +54,30 @@ public class SelfWordsManagerImpl implements SelfWordsManager {
     }
 
 
+    @Override
     public SelfWords getSelfWordsById(Long id) {
         return selfWordsDao.getSelfWordsById(id);
     }
 
 
+    @Override
     public SelfWords getUnique(SelfWords selfWords) {
         return selfWordsDao.getUnique(selfWords);
     }
 
 
+    @Override
     public List<SelfWords> getListByExample(SelfWords selfWords) {
         return selfWordsDao.getListByExample(selfWords);
     }
 
 
+    @Override
     public List<SelfWords> getSelfWordsByPage(PageQuery pageQuery) {
         return selfWordsDao.getSelfWordsByPage(pageQuery.getParams());
     }
 
+    @Override
     public int count(PageQuery pageQuery) {
         return selfWordsDao.count(pageQuery.getParams());
     }

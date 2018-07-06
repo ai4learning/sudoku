@@ -96,11 +96,13 @@ public class UnitStudy extends StudyPosition implements Serializable {
 		this.lessonCode = lessonCode;
 	}
 
-	public void setUnitNbr(Integer unitNbr) {
+	@Override
+    public void setUnitNbr(Integer unitNbr) {
   	  this.unitNbr=unitNbr;
   	}
   
-  	public Integer getUnitNbr() {
+  	@Override
+    public Integer getUnitNbr() {
   	  return this.unitNbr;
   	}
 	

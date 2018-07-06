@@ -274,8 +274,9 @@ public class LogHelper {
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
             return sw.toString();
-        } else
+        } else {
             return null;
+        }
     }
 
     public static Log getLog(LogTypeEnum type) {

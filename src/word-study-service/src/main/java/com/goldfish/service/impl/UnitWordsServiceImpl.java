@@ -28,6 +28,7 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 	@Resource(name="unitWordsManager")
 	private UnitWordsManager unitWordsManager;
     
+    @Override
     public CommonResult<UnitWords> addUnitWords(UnitWords unitWords) {
 		CommonResult<UnitWords> result = new CommonResult<UnitWords>();
 		try{
@@ -46,7 +47,8 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 		return result;
 	}
 	
-	public CommonResult<UnitWords> updateUnitWords(UnitWords unitWords) {
+	@Override
+    public CommonResult<UnitWords> updateUnitWords(UnitWords unitWords) {
 		CommonResult<UnitWords> result = new CommonResult<UnitWords>();
 		try {
 			
@@ -63,7 +65,8 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 	
    
 
-	public CommonResult<UnitWords> deleteUnitWords(Long id) {
+	@Override
+    public CommonResult<UnitWords> deleteUnitWords(Long id) {
 		CommonResult<UnitWords> result = new CommonResult<UnitWords>();
 		try {
 			unitWordsManager.deleteUnitWords(id);
@@ -76,7 +79,8 @@ public class UnitWordsServiceImpl implements UnitWordsService {
     }
 
 
-    	public CommonResult<UnitWords> getUnitWordsById(Long id) {
+    	@Override
+        public CommonResult<UnitWords> getUnitWordsById(Long id) {
 		CommonResult<UnitWords> result = new CommonResult<UnitWords>();
 		try {
 			result.addDefaultModel("unitWords", unitWordsManager.getUnitWordsById(id));
@@ -93,7 +97,8 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 	
 
 
-	public CommonResult<UnitWords> getUnique(UnitWords unitWords) {
+	@Override
+    public CommonResult<UnitWords> getUnique(UnitWords unitWords) {
 		CommonResult<UnitWords> result = new CommonResult<UnitWords>();
 		try {
 			result.addDefaultModel(unitWordsManager.getUnique(unitWords));
@@ -106,7 +111,8 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 	}
 
 
-	public CommonResult<List<UnitWords>> getListByExample(UnitWords unitWords) {
+	@Override
+    public CommonResult<List<UnitWords>> getListByExample(UnitWords unitWords) {
 		CommonResult<List<UnitWords>> result = new CommonResult<List<UnitWords>>();
 		try {
 			List<UnitWords> list = unitWordsManager.getListByExample(unitWords);
@@ -120,7 +126,8 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 	}
 
 	
-	public CommonResult<List<UnitWords>> getUnitWordsByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<UnitWords>> getUnitWordsByPage(PageQuery pageQuery) {
 		CommonResult<List<UnitWords>> result = new CommonResult<List<UnitWords>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -138,7 +145,8 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return unitWordsManager.count(pageQuery);
 	}
 

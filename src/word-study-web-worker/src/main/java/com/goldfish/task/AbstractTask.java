@@ -44,7 +44,9 @@ public abstract class AbstractTask {
     private void execute() {
         // 1.获取待执行任务
         List<Task> tasks = getUnExecuteTasks();
-        if (tasks == null) return;
+        if (tasks == null) {
+            return;
+        }
         //2.执行任务
         _doTask(tasks);
     }

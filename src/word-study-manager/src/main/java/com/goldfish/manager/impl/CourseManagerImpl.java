@@ -20,22 +20,26 @@ public class CourseManagerImpl implements CourseManager {
 	private CourseDao courseDao;
 
 
+  @Override
   public Course addCourse(Course course) {
 		int i=courseDao.addCourse(course);
 		return course;
     }
     
+    @Override
     public void updateCourse(Course course) {
 		courseDao.updateCourse(course);
     }
     
 
     
+    @Override
     public void deleteCourse(Integer id) {
 		courseDao.deleteCourse(id);
     }
 
 
+    @Override
     public Course getCourseById(Integer id) {
 		return courseDao.getCourseById(id);
     }
@@ -45,20 +49,24 @@ public class CourseManagerImpl implements CourseManager {
 
     	
    
+   @Override
    public Course getUnique(Course course) {
 		return courseDao.getUnique(course);
     }
 
     
+ @Override
  public List<Course> getListByExample(Course course) {
     return courseDao.getListByExample(course);
     }
 
     
+    @Override
     public List<Course> getCourseByPage(PageQuery pageQuery) {
 		return courseDao.getCourseByPage( pageQuery.getParams());
     }
     	
+    @Override
     public int count(PageQuery pageQuery) {
 		return courseDao.count( pageQuery.getParams());
     }

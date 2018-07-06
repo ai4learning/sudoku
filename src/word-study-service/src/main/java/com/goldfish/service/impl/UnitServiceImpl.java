@@ -35,6 +35,7 @@ public class UnitServiceImpl implements UnitService {
 //	@Resource(name="courseManager")
 //	private CourseManager courseManager;
     
+    @Override
     public CommonResult<Unit> addUnit(Unit unit) {
 		CommonResult<Unit> result = new CommonResult<Unit>();
 		try{
@@ -53,7 +54,8 @@ public class UnitServiceImpl implements UnitService {
 		return result;
 	}
 	
-	public CommonResult<Unit> updateUnit(Unit unit) {
+	@Override
+    public CommonResult<Unit> updateUnit(Unit unit) {
 		CommonResult<Unit> result = new CommonResult<Unit>();
 		try {
 			
@@ -70,7 +72,8 @@ public class UnitServiceImpl implements UnitService {
 	
    
 
-	public CommonResult<Unit> deleteUnit(Long id) {
+	@Override
+    public CommonResult<Unit> deleteUnit(Long id) {
 		CommonResult<Unit> result = new CommonResult<Unit>();
 		try {
 			unitManager.deleteUnit(id);
@@ -83,7 +86,8 @@ public class UnitServiceImpl implements UnitService {
     }
 
 
-    	public CommonResult<Unit> getUnitById(Long id) {
+    	@Override
+        public CommonResult<Unit> getUnitById(Long id) {
 		CommonResult<Unit> result = new CommonResult<Unit>();
 		try {
 			result.addDefaultModel("unit", unitManager.getUnitById(id));
@@ -100,7 +104,8 @@ public class UnitServiceImpl implements UnitService {
 	
 
 
-	public CommonResult<Unit> getUnique(Unit unit) {
+	@Override
+    public CommonResult<Unit> getUnique(Unit unit) {
 		CommonResult<Unit> result = new CommonResult<Unit>();
 		try {
 			result.addDefaultModel(unitManager.getUnique(unit));
@@ -113,7 +118,8 @@ public class UnitServiceImpl implements UnitService {
 	}
 
 
-	public CommonResult<List<Unit>> getListByExample(Unit unit) {
+	@Override
+    public CommonResult<List<Unit>> getListByExample(Unit unit) {
 		CommonResult<List<Unit>> result = new CommonResult<List<Unit>>();
 		try {
 			List<Unit> list = unitManager.getListByExample(unit);
@@ -127,7 +133,8 @@ public class UnitServiceImpl implements UnitService {
 	}
 
 	
-	public CommonResult<List<Unit>> getUnitByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<Unit>> getUnitByPage(PageQuery pageQuery) {
 		CommonResult<List<Unit>> result = new CommonResult<List<Unit>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -160,7 +167,8 @@ public class UnitServiceImpl implements UnitService {
 	}
 
 
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return unitManager.count(pageQuery);
 	}
 

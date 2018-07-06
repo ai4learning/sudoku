@@ -38,6 +38,7 @@ public class InitStuStudyDataTask extends AbstractTask {
      *
      * @param task
      */
+    @Override
     protected boolean doExecute(Task task) {
         Integer userId = task.getUserId();
         Long lessonId = task.getBusinessId();

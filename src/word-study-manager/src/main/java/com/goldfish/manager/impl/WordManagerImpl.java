@@ -20,22 +20,26 @@ public class WordManagerImpl implements WordManager {
 	private WordDao wordDao;
 
 
+  @Override
   public Word addWord(Word word) {
 		int i=wordDao.addWord(word);
 		return word;
     }
     
+    @Override
     public void updateWord(Word word) {
 		wordDao.updateWord(word);
     }
     
 
     
+    @Override
     public void deleteWord(Integer id) {
 		wordDao.deleteWord(id);
     }
 
 
+    @Override
     public Word getWordById(Integer id) {
 		return wordDao.getWordById(id);
     }
@@ -45,20 +49,24 @@ public class WordManagerImpl implements WordManager {
 
     	
    
+   @Override
    public Word getUnique(Word word) {
 		return wordDao.getUnique(word);
     }
 
     
+ @Override
  public List<Word> getListByExample(Word word) {
     return wordDao.getListByExample(word);
     }
 
     
+    @Override
     public List<Word> getWordByPage(PageQuery pageQuery) {
 		return wordDao.getWordByPage( pageQuery.getParams());
     }
     	
+    @Override
     public int count(PageQuery pageQuery) {
 		return wordDao.count( pageQuery.getParams());
     }

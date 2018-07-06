@@ -28,6 +28,7 @@ public class WordServiceImpl implements WordService {
 	@Resource(name="wordManager")
 	private WordManager wordManager;
     
+    @Override
     public CommonResult<Word> addWord(Word word) {
 		CommonResult<Word> result = new CommonResult<Word>();
 		try{
@@ -46,7 +47,8 @@ public class WordServiceImpl implements WordService {
 		return result;
 	}
 	
-	public CommonResult<Word> updateWord(Word word) {
+	@Override
+    public CommonResult<Word> updateWord(Word word) {
 		CommonResult<Word> result = new CommonResult<Word>();
 		try {
 			
@@ -63,7 +65,8 @@ public class WordServiceImpl implements WordService {
 	
    
 
-	public CommonResult<Word> deleteWord(Integer id) {
+	@Override
+    public CommonResult<Word> deleteWord(Integer id) {
 		CommonResult<Word> result = new CommonResult<Word>();
 		try {
 			wordManager.deleteWord(id);
@@ -76,7 +79,8 @@ public class WordServiceImpl implements WordService {
     }
 
 
-    	public CommonResult<Word> getWordById(Integer id) {
+    	@Override
+        public CommonResult<Word> getWordById(Integer id) {
 		CommonResult<Word> result = new CommonResult<Word>();
 		try {
 			result.addDefaultModel("word", wordManager.getWordById(id));
@@ -93,7 +97,8 @@ public class WordServiceImpl implements WordService {
 	
 
 
-	public CommonResult<Word> getUnique(Word word) {
+	@Override
+    public CommonResult<Word> getUnique(Word word) {
 		CommonResult<Word> result = new CommonResult<Word>();
 		try {
 			result.addDefaultModel(wordManager.getUnique(word));
@@ -106,7 +111,8 @@ public class WordServiceImpl implements WordService {
 	}
 
 
-	public CommonResult<List<Word>> getListByExample(Word word) {
+	@Override
+    public CommonResult<List<Word>> getListByExample(Word word) {
 		CommonResult<List<Word>> result = new CommonResult<List<Word>>();
 		try {
 			List<Word> list = wordManager.getListByExample(word);
@@ -120,7 +126,8 @@ public class WordServiceImpl implements WordService {
 	}
 
 	
-	public CommonResult<List<Word>> getWordByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<Word>> getWordByPage(PageQuery pageQuery) {
 		CommonResult<List<Word>> result = new CommonResult<List<Word>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -138,7 +145,8 @@ public class WordServiceImpl implements WordService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return wordManager.count(pageQuery);
 	}
 

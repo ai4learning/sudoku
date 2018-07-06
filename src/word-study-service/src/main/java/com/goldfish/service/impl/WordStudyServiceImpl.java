@@ -28,6 +28,7 @@ public class WordStudyServiceImpl implements WordStudyService {
 	@Resource(name="wordStudyManager")
 	private WordStudyManager wordStudyManager;
     
+    @Override
     public CommonResult<WordStudy> addWordStudy(WordStudy wordStudy) {
 		CommonResult<WordStudy> result = new CommonResult<WordStudy>();
 		try{
@@ -46,7 +47,8 @@ public class WordStudyServiceImpl implements WordStudyService {
 		return result;
 	}
 	
-	public CommonResult<WordStudy> updateWordStudy(WordStudy wordStudy) {
+	@Override
+    public CommonResult<WordStudy> updateWordStudy(WordStudy wordStudy) {
 		CommonResult<WordStudy> result = new CommonResult<WordStudy>();
 		try {
 			
@@ -63,7 +65,8 @@ public class WordStudyServiceImpl implements WordStudyService {
 	
    
 
-	public CommonResult<WordStudy> deleteWordStudy(Long id) {
+	@Override
+    public CommonResult<WordStudy> deleteWordStudy(Long id) {
 		CommonResult<WordStudy> result = new CommonResult<WordStudy>();
 		try {
 			wordStudyManager.deleteWordStudy(id);
@@ -76,7 +79,8 @@ public class WordStudyServiceImpl implements WordStudyService {
     }
 
 
-    	public CommonResult<WordStudy> getWordStudyById(Long id) {
+    	@Override
+        public CommonResult<WordStudy> getWordStudyById(Long id) {
 		CommonResult<WordStudy> result = new CommonResult<WordStudy>();
 		try {
 			result.addDefaultModel("wordStudy", wordStudyManager.getWordStudyById(id));
@@ -93,7 +97,8 @@ public class WordStudyServiceImpl implements WordStudyService {
 	
 
 
-	public CommonResult<WordStudy> getUnique(WordStudy wordStudy) {
+	@Override
+    public CommonResult<WordStudy> getUnique(WordStudy wordStudy) {
 		CommonResult<WordStudy> result = new CommonResult<WordStudy>();
 		try {
 			result.addDefaultModel(wordStudyManager.getUnique(wordStudy));
@@ -106,7 +111,8 @@ public class WordStudyServiceImpl implements WordStudyService {
 	}
 
 
-	public CommonResult<List<WordStudy>> getListByExample(WordStudy wordStudy) {
+	@Override
+    public CommonResult<List<WordStudy>> getListByExample(WordStudy wordStudy) {
 		CommonResult<List<WordStudy>> result = new CommonResult<List<WordStudy>>();
 		try {
 			List<WordStudy> list = wordStudyManager.getListByExample(wordStudy);
@@ -120,7 +126,8 @@ public class WordStudyServiceImpl implements WordStudyService {
 	}
 
 	
-	public CommonResult<List<WordStudy>> getWordStudyByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<WordStudy>> getWordStudyByPage(PageQuery pageQuery) {
 		CommonResult<List<WordStudy>> result = new CommonResult<List<WordStudy>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -138,10 +145,12 @@ public class WordStudyServiceImpl implements WordStudyService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return wordStudyManager.count(pageQuery);
 	}
 
+    @Override
     public int countDay(PageQuery pageQuery){
         return wordStudyManager.countDay(pageQuery);
     }
@@ -155,6 +164,7 @@ public class WordStudyServiceImpl implements WordStudyService {
 		this.wordStudyManager = wordStudyManager;
 	}
 
+    @Override
     public CommonResult<List<WordStudy>> getStudiedWords(WordStudy wordStudy)
     {
         CommonResult<List<WordStudy>> result = new CommonResult<List<WordStudy>>();

@@ -80,6 +80,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         }
     }
 
+    @Override
     public void afterCompletion(
             HttpServletRequest request, HttpServletResponse response,
             Object handler, Exception ex)

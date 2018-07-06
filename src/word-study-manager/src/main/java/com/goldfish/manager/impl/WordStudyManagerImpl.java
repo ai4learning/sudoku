@@ -20,22 +20,26 @@ public class WordStudyManagerImpl implements WordStudyManager {
 	private WordStudyDao wordStudyDao;
 
 
+  @Override
   public WordStudy addWordStudy(WordStudy wordStudy) {
 		int i=wordStudyDao.addWordStudy(wordStudy);
 		return wordStudy;
     }
     
+    @Override
     public void updateWordStudy(WordStudy wordStudy) {
 		wordStudyDao.updateWordStudy(wordStudy);
     }
     
 
     
+    @Override
     public void deleteWordStudy(Long id) {
 		wordStudyDao.deleteWordStudy(id);
     }
 
 
+    @Override
     public WordStudy getWordStudyById(Long id) {
 		return wordStudyDao.getWordStudyById(id);
     }
@@ -45,24 +49,29 @@ public class WordStudyManagerImpl implements WordStudyManager {
 
     	
    
+   @Override
    public WordStudy getUnique(WordStudy wordStudy) {
 		return wordStudyDao.getUnique(wordStudy);
     }
 
     
+ @Override
  public List<WordStudy> getListByExample(WordStudy wordStudy) {
     return wordStudyDao.getListByExample(wordStudy);
     }
 
     
+    @Override
     public List<WordStudy> getWordStudyByPage(PageQuery pageQuery) {
 		return wordStudyDao.getWordStudyByPage( pageQuery.getParams());
     }
     	
+    @Override
     public int count(PageQuery pageQuery) {
 		return wordStudyDao.count( pageQuery.getParams());
     }
 
+    @Override
     public int countDay(PageQuery pageQuery) {
         return wordStudyDao.countDay( pageQuery.getParams());
     }
@@ -77,6 +86,7 @@ public class WordStudyManagerImpl implements WordStudyManager {
 		this.wordStudyDao = wordStudyDao;
 	}
 
+    @Override
     public List<WordStudy> getStudiedWords(WordStudy wordStudy){
 	    return  wordStudyDao.getStudiedWords(wordStudy);
     }

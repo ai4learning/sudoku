@@ -25,6 +25,7 @@ public class LoginRecordManagerImpl implements LoginRecordManager {
     private LoginRecordContext localCache;
 
 
+    @Override
     public LoginRecord addLoginRecord(LoginRecord loginRecord) {
         loginRecordDao.addLoginRecord(loginRecord);
         // 写入本地缓存
@@ -34,21 +35,25 @@ public class LoginRecordManagerImpl implements LoginRecordManager {
         return loginRecord;
     }
 
+    @Override
     public void updateLoginRecord(LoginRecord loginRecord) {
         loginRecordDao.updateLoginRecord(loginRecord);
     }
 
 
+    @Override
     public void deleteLoginRecord(Long id) {
         loginRecordDao.deleteLoginRecord(id);
     }
 
 
+    @Override
     public LoginRecord getLoginRecordById(Long id) {
         return loginRecordDao.getLoginRecordById(id);
     }
 
 
+    @Override
     public LoginRecord getUnique(LoginRecord loginRecord) {
         // 从缓存获取User信息
         LoginRecord loginInfo = localCache.getByTraning(loginRecord.getWordTrainingId(), loginRecord.getWordTrainingCode());
@@ -64,15 +69,18 @@ public class LoginRecordManagerImpl implements LoginRecordManager {
     }
 
 
+    @Override
     public List<LoginRecord> getListByExample(LoginRecord loginRecord) {
         return loginRecordDao.getListByExample(loginRecord);
     }
 
 
+    @Override
     public List<LoginRecord> getLoginRecordByPage(PageQuery pageQuery) {
         return loginRecordDao.getLoginRecordByPage(pageQuery.getParams());
     }
 
+    @Override
     public int count(PageQuery pageQuery) {
         return loginRecordDao.count(pageQuery.getParams());
     }

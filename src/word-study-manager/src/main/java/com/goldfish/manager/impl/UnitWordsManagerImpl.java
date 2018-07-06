@@ -20,22 +20,26 @@ public class UnitWordsManagerImpl implements UnitWordsManager {
 	private UnitWordsDao unitWordsDao;
 
 
+  @Override
   public UnitWords addUnitWords(UnitWords unitWords) {
 		int i=unitWordsDao.addUnitWords(unitWords);
 		return unitWords;
     }
     
+    @Override
     public void updateUnitWords(UnitWords unitWords) {
 		unitWordsDao.updateUnitWords(unitWords);
     }
     
 
     
+    @Override
     public void deleteUnitWords(Long id) {
 		unitWordsDao.deleteUnitWords(id);
     }
 
 
+    @Override
     public UnitWords getUnitWordsById(Long id) {
 		return unitWordsDao.getUnitWordsById(id);
     }
@@ -45,20 +49,24 @@ public class UnitWordsManagerImpl implements UnitWordsManager {
 
     	
    
+   @Override
    public UnitWords getUnique(UnitWords unitWords) {
 		return unitWordsDao.getUnique(unitWords);
     }
 
     
+ @Override
  public List<UnitWords> getListByExample(UnitWords unitWords) {
     return unitWordsDao.getListByExample(unitWords);
     }
 
     
+    @Override
     public List<UnitWords> getUnitWordsByPage(PageQuery pageQuery) {
 		return unitWordsDao.getUnitWordsByPage( pageQuery.getParams());
     }
     	
+    @Override
     public int count(PageQuery pageQuery) {
 		return unitWordsDao.count( pageQuery.getParams());
     }

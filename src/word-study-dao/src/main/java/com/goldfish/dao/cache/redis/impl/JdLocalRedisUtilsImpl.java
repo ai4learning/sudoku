@@ -38,6 +38,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param o   存储元素
      * @return true:新增成功、false:新增失败
      */
+    @Override
     public boolean addToListHead(String key, Object o) {
         ShardedJedis jedis = null;
         try {
@@ -62,6 +63,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param clazz 存储数据的类类型
      * @return 如果返回空则失败或元素不存在
      */
+    @Override
     public Object getFromListTail(String key, Class<?> clazz) {
         ShardedJedis jedis = null;
         try {
@@ -87,6 +89,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param clazz  类类型
      * @return
      */
+    @Override
     public <T> List<T> getListInfo(String key, Class<T> clazz){
         ShardedJedis jedis = null;
         try {
@@ -114,6 +117,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param key
      * @return 大于或等于0成功，小于0失败
      */
+    @Override
     public long getListSize(String key){
         ShardedJedis jedis = null;
         try {
@@ -136,6 +140,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param key
      * @return true:存在，false:不存在，如果抛出异常则默认不存在
      */
+    @Override
     public boolean checkKeyExists(String key) {
         ShardedJedis jedis = null;
         try {
@@ -158,6 +163,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param o   被存储的对象
      * @return true：成功，false:失败
      */
+    @Override
     public boolean setObject(String key, Object o) {
         ShardedJedis jedis = null;
         try {
@@ -182,6 +188,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param seconds    有效期，秒
      * @return   true:保存成功，false:保存失败
      */
+    @Override
     public boolean setObjectByExpire(String key, Object object, int seconds) {
         ShardedJedis jedis = null;
         try {
@@ -206,7 +213,8 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param seconds
      * @return
      */
-    public boolean expire(String key,int seconds){
+    @Override
+    public boolean expire(String key, int seconds){
         ShardedJedis jedis = null;
         try {
             jedis = shardedJedisPool.getResource();
@@ -226,6 +234,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param clazz 类类型
      * @return 如果为空则无数据或抛出异常
      */
+    @Override
     public <T> T getObject(String key, Class<T> clazz) {
         ShardedJedis jedis = null;
         try {
@@ -252,6 +261,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param value 存储的值
      * @return true:设置成功，false；设置失败
      */
+    @Override
     public boolean setString(String key, String value) {
         ShardedJedis jedis = null;
         try {
@@ -276,6 +286,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param seconds 有效期秒
      * @return true:设置成功，false；设置失败
      */
+    @Override
     public boolean setStringByExpire(String key, String value, int seconds) {
         ShardedJedis jedis = null;
         try {
@@ -298,6 +309,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param key  存储key
      * @return  如果返回空，则未获取到数据或抛出异常
      */
+    @Override
     public String getString(String key) {
         ShardedJedis jedis = null;
         try {
@@ -318,6 +330,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param key
      * @return  如果返回小于0则执行失败
      */
+    @Override
     public long deleteByKey(String key) {
         ShardedJedis jedis = null;
         try {
@@ -343,7 +356,8 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param object
      * @return 如果返回数据小于0则为失败
      */
-    public Long addToSortSet(String key,double score, Object object) {
+    @Override
+    public Long addToSortSet(String key, double score, Object object) {
         ShardedJedis jedis = null;
         try {
             jedis = shardedJedisPool.getResource();
@@ -351,7 +365,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
             return jedis.zadd(key, score, json);
         } catch (Exception e) {
 //            log.info("addToSortSet,添加元素至List失败", e);
-            return -1l;
+            return -1L;
         } finally {
             if(jedis != null){
                 shardedJedisPool.returnResource(jedis);
@@ -366,7 +380,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
             jedis = shardedJedisPool.getResource();
             return jedis.zadd(key,skuMap);
         } catch (Exception e) {
-            return -1l;
+            return -1L;
         } finally {
             if(jedis != null){
                 shardedJedisPool.returnResource(jedis);
@@ -375,6 +389,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
 
     }
 
+    @Override
     public Long addToSet(String key, Object object) {
         ShardedJedis jedis = null;
         try {
@@ -383,7 +398,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
             return jedis.sadd(key,json);
         } catch (Exception e) {
 //            log.info("addToSet,添加元素至List失败", e);
-            return -1l;
+            return -1L;
         } finally {
             if(jedis != null){
                 shardedJedisPool.returnResource(jedis);
@@ -399,6 +414,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param <T>
      * @return
      */
+    @Override
     public <T> List<T> getSortSetInfo(String key, Class<T> clazz) {
         ShardedJedis jedis = null;
         try {
@@ -430,6 +446,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param <T>
      * @return
      */
+    @Override
     public <T> List<T> getSetInfo(String key, Class<T> clazz) {
         ShardedJedis jedis = null;
         try {
@@ -460,7 +477,8 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param index   下标
      * @return   如果返回为空则无数据或抛出异常
      */
-    public <T> T getFromSortSetByIndex(String key,Class<T> clazz,long index) {
+    @Override
+    public <T> T getFromSortSetByIndex(String key, Class<T> clazz, long index) {
         ShardedJedis jedis = null;
         try {
             jedis = shardedJedisPool.getResource();
@@ -491,6 +509,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param o      需要删除的对象
      * @return   true:删除成功，false:删除失败
      */
+    @Override
     public boolean delFromSortSet(String key, Object o)  {
         ShardedJedis jedis = null;
         try {
@@ -515,7 +534,8 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param end    结束分数
      * @return
      */
-    public boolean delFromSortSetByScore(String key,long start,long end){
+    @Override
+    public boolean delFromSortSetByScore(String key, long start, long end){
         ShardedJedis jedis = null;
         try {
             jedis = shardedJedisPool.getResource();
@@ -536,6 +556,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param key   存储key
      * @return   大于等于0成功，小于0失败
      */
+    @Override
     public long getSortSetSize(String key)  {
         ShardedJedis jedis = null;
         try {
@@ -557,6 +578,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @param key
      * @return  如果大于0自增成功，如果小于0自增失败
      */
+    @Override
     public long incrString(String key)  {
         ShardedJedis jedis = null;
         try {
@@ -580,13 +602,14 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
      * @return
      * @throws Exception
      */
+    @Override
     public long expireAt(String key, long unixTime){
         ShardedJedis jedis = null;
         try {
             jedis = shardedJedisPool.getResource();
             return jedis.expireAt(key, unixTime);
         } catch (Exception e) {
-            return 0l;
+            return 0L;
         }finally {
             if(jedis != null){
                 shardedJedisPool.returnResource(jedis);
@@ -594,6 +617,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
         }
     }
 
+    @Override
     public long ttl(String key) {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -602,7 +626,8 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
         this.shardedJedisPool = shardedJedisPool;
     }
 
-	public boolean setHset(String tableName, String key, String value) {
+	@Override
+    public boolean setHset(String tableName, String key, String value) {
 		ShardedJedis jedis = null;
         try {
             jedis = shardedJedisPool.getResource();
@@ -618,7 +643,8 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
         }
 	}
 
-	public boolean setMset(String tableName, Map<String, String> map) {
+	@Override
+    public boolean setMset(String tableName, Map<String, String> map) {
 		ShardedJedis jedis = null;
         try {
             jedis = shardedJedisPool.getResource();
@@ -634,7 +660,8 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
         }
 	}
 
-	public String getHsetValue(String tableName, String key) {
+	@Override
+    public String getHsetValue(String tableName, String key) {
 		ShardedJedis jedis = null;
         try {
             jedis = shardedJedisPool.getResource();
@@ -649,7 +676,8 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
         }
 	}
 
-	public Set<String> getHkeys(String tableName) {
+	@Override
+    public Set<String> getHkeys(String tableName) {
 		ShardedJedis jedis = null;
         try {
             jedis = shardedJedisPool.getResource();
@@ -664,7 +692,8 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
         }
 	}
 
-	public boolean hdel(String tableName, String... keys) {
+	@Override
+    public boolean hdel(String tableName, String... keys) {
 		ShardedJedis jedis = null;
         try {
             jedis = shardedJedisPool.getResource();
@@ -680,6 +709,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
         }
 	}
 
+    @Override
     public Long zcard(String key){
         ShardedJedis jedis = null;
         try {
@@ -687,7 +717,7 @@ public class JdLocalRedisUtilsImpl implements JdRedisUtils {
             return jedis.zcard(key);
         } catch (Exception e) {
 //            log.info("getString,获取字符串失败", e);
-            return -1l;
+            return -1L;
         }finally {
             if(jedis != null){
                 shardedJedisPool.returnResource(jedis);

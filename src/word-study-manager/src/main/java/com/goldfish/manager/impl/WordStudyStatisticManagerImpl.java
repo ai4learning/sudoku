@@ -20,22 +20,26 @@ public class WordStudyStatisticManagerImpl implements WordStudyStatisticManager 
 	private WordStudyStatisticDao wordStudyStatisticDao;
 
 
+  @Override
   public WordStudyStatistic addWordStudyStatistic(WordStudyStatistic wordStudyStatistic) {
 		int i=wordStudyStatisticDao.addWordStudyStatistic(wordStudyStatistic);
 		return wordStudyStatistic;
     }
     
+    @Override
     public void updateWordStudyStatistic(WordStudyStatistic wordStudyStatistic) {
 		wordStudyStatisticDao.updateWordStudyStatistic(wordStudyStatistic);
     }
     
 
     
+    @Override
     public void deleteWordStudyStatistic(Long id) {
 		wordStudyStatisticDao.deleteWordStudyStatistic(id);
     }
 
 
+    @Override
     public WordStudyStatistic getWordStudyStatisticById(Long id) {
 		return wordStudyStatisticDao.getWordStudyStatisticById(id);
     }
@@ -45,20 +49,24 @@ public class WordStudyStatisticManagerImpl implements WordStudyStatisticManager 
 
     	
    
+   @Override
    public WordStudyStatistic getUnique(WordStudyStatistic wordStudyStatistic) {
 		return wordStudyStatisticDao.getUnique(wordStudyStatistic);
     }
 
     
+ @Override
  public List<WordStudyStatistic> getListByExample(WordStudyStatistic wordStudyStatistic) {
     return wordStudyStatisticDao.getListByExample(wordStudyStatistic);
     }
 
     
+    @Override
     public List<WordStudyStatistic> getWordStudyStatisticByPage(PageQuery pageQuery) {
 		return wordStudyStatisticDao.getWordStudyStatisticByPage( pageQuery.getParams());
     }
     	
+    @Override
     public int count(PageQuery pageQuery) {
 		return wordStudyStatisticDao.count( pageQuery.getParams());
     }

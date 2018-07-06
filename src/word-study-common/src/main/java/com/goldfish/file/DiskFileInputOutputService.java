@@ -165,6 +165,7 @@ public class DiskFileInputOutputService implements FileInputOutputService {
      * @param fileGroup
      * @return
      */
+    @Override
     public boolean deleteFile(String fileId, String fileGroup) {
         if(StringUtils.isEmpty(fileId) || StringUtils.isEmpty(fileGroup)){
             return false;
@@ -185,6 +186,7 @@ public class DiskFileInputOutputService implements FileInputOutputService {
      * @param fileGroup
      * @return
      */
+    @Override
     public boolean fileExist(String fileId, String fileGroup) {
         if(StringUtils.isEmpty(fileId) || StringUtils.isEmpty(fileGroup)){
             return false;

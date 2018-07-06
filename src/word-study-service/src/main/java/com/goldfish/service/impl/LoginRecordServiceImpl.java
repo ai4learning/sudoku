@@ -34,6 +34,7 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 	@Resource
 	private LoginRecordContext loginRecordContext;
     
+    @Override
     public CommonResult<LoginRecord> addLoginRecord(LoginRecord loginRecord) {
 		CommonResult<LoginRecord> result = new CommonResult<LoginRecord>();
 		try{
@@ -52,7 +53,8 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 		return result;
 	}
 	
-	public CommonResult<LoginRecord> updateLoginRecord(LoginRecord loginRecord) {
+	@Override
+    public CommonResult<LoginRecord> updateLoginRecord(LoginRecord loginRecord) {
 		CommonResult<LoginRecord> result = new CommonResult<LoginRecord>();
 		try {
 			
@@ -69,7 +71,8 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 	
    
 
-	public CommonResult<LoginRecord> deleteLoginRecord(Long id) {
+	@Override
+    public CommonResult<LoginRecord> deleteLoginRecord(Long id) {
 		CommonResult<LoginRecord> result = new CommonResult<LoginRecord>();
 		try {
 			loginRecordManager.deleteLoginRecord(id);
@@ -82,7 +85,8 @@ public class LoginRecordServiceImpl implements LoginRecordService {
     }
 
 
-    	public CommonResult<LoginRecord> getLoginRecordById(Long id) {
+    	@Override
+        public CommonResult<LoginRecord> getLoginRecordById(Long id) {
 		CommonResult<LoginRecord> result = new CommonResult<LoginRecord>();
 		try {
 			result.addDefaultModel("loginRecord", loginRecordManager.getLoginRecordById(id));
@@ -99,7 +103,8 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 	
 
 
-	public CommonResult<LoginRecord> getUnique(LoginRecord loginRecord) {
+	@Override
+    public CommonResult<LoginRecord> getUnique(LoginRecord loginRecord) {
 		CommonResult<LoginRecord> result = new CommonResult<LoginRecord>();
 		try {
 			result.addDefaultModel(loginRecordManager.getUnique(loginRecord));
@@ -112,7 +117,8 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 	}
 
 
-	public CommonResult<List<LoginRecord>> getListByExample(LoginRecord loginRecord) {
+	@Override
+    public CommonResult<List<LoginRecord>> getListByExample(LoginRecord loginRecord) {
 		CommonResult<List<LoginRecord>> result = new CommonResult<List<LoginRecord>>();
 		try {
 			List<LoginRecord> list = loginRecordManager.getListByExample(loginRecord);
@@ -126,7 +132,8 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 	}
 
 	
-	public CommonResult<List<LoginRecord>> getLoginRecordByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<LoginRecord>> getLoginRecordByPage(PageQuery pageQuery) {
 		CommonResult<List<LoginRecord>> result = new CommonResult<List<LoginRecord>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -144,7 +151,8 @@ public class LoginRecordServiceImpl implements LoginRecordService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return loginRecordManager.count(pageQuery);
 	}
 

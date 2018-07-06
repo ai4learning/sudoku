@@ -20,22 +20,26 @@ public class UnitStudyManagerImpl implements UnitStudyManager {
 	private UnitWordsStudyDao unitWordsStudyDao;
 
 
+  @Override
   public UnitStudy addUnitWordsStudy(UnitStudy unitStudy) {
 		int i=unitWordsStudyDao.addUnitWordsStudy(unitStudy);
 		return unitStudy;
     }
     
+    @Override
     public void updateUnitWordsStudy(UnitStudy unitStudy) {
 		unitWordsStudyDao.updateUnitWordsStudy(unitStudy);
     }
     
 
     
+    @Override
     public void deleteUnitWordsStudy(Long id) {
 		unitWordsStudyDao.deleteUnitWordsStudy(id);
     }
 
 
+    @Override
     public UnitStudy getUnitWordsStudyById(Long id) {
 		return unitWordsStudyDao.getUnitWordsStudyById(id);
     }
@@ -45,20 +49,24 @@ public class UnitStudyManagerImpl implements UnitStudyManager {
 
     	
    
+   @Override
    public UnitStudy getUnique(UnitStudy unitStudy) {
 		return unitWordsStudyDao.getUnique(unitStudy);
     }
 
     
+ @Override
  public List<UnitStudy> getListByExample(UnitStudy unitStudy) {
     return unitWordsStudyDao.getListByExample(unitStudy);
     }
 
     
+    @Override
     public List<UnitStudy> getUnitWordsStudyByPage(PageQuery pageQuery) {
 		return unitWordsStudyDao.getUnitWordsStudyByPage( pageQuery.getParams());
     }
     	
+    @Override
     public int count(PageQuery pageQuery) {
 		return unitWordsStudyDao.count( pageQuery.getParams());
     }
@@ -78,10 +86,12 @@ public class UnitStudyManagerImpl implements UnitStudyManager {
 		this.unitWordsStudyDao = unitWordsStudyDao;
 	}
 
+    @Override
     public int sumReading(PageQuery pageQuery) {
         return unitWordsStudyDao.sumReading( pageQuery.getParams());
     }
 
+    @Override
     public int sumWriting(PageQuery pageQuery) {
         return unitWordsStudyDao.sumWriting( pageQuery.getParams());
     }

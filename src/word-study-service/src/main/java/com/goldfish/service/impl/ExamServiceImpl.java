@@ -30,6 +30,7 @@ public class ExamServiceImpl implements ExamService {
 	@Resource(name="examManager")
 	private ExamManager examManager;
     
+    @Override
     public CommonResult<Exam> addExam(Exam exam) {
 		CommonResult<Exam> result = new CommonResult<Exam>();
 		try{
@@ -48,7 +49,8 @@ public class ExamServiceImpl implements ExamService {
 		return result;
 	}
 	
-	public CommonResult<Exam> updateExam(Exam exam) {
+	@Override
+    public CommonResult<Exam> updateExam(Exam exam) {
 		CommonResult<Exam> result = new CommonResult<Exam>();
 		try {
 			
@@ -65,7 +67,8 @@ public class ExamServiceImpl implements ExamService {
 	
    
 
-	public CommonResult<Exam> deleteExam(Long id) {
+	@Override
+    public CommonResult<Exam> deleteExam(Long id) {
 		CommonResult<Exam> result = new CommonResult<Exam>();
 		try {
 			examManager.deleteExam(id);
@@ -78,7 +81,8 @@ public class ExamServiceImpl implements ExamService {
     }
 
 
-    	public CommonResult<Exam> getExamById(Long id) {
+    	@Override
+        public CommonResult<Exam> getExamById(Long id) {
 		CommonResult<Exam> result = new CommonResult<Exam>();
 		try {
 			result.addDefaultModel("exam", examManager.getExamById(id));
@@ -95,7 +99,8 @@ public class ExamServiceImpl implements ExamService {
 	
 
 
-	public CommonResult<Exam> getUnique(Exam exam) {
+	@Override
+    public CommonResult<Exam> getUnique(Exam exam) {
 		CommonResult<Exam> result = new CommonResult<Exam>();
 		try {
 			result.addDefaultModel(examManager.getUnique(exam));
@@ -108,7 +113,8 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 
-	public CommonResult<List<Exam>> getListByExample(Exam exam) {
+	@Override
+    public CommonResult<List<Exam>> getListByExample(Exam exam) {
 		CommonResult<List<Exam>> result = new CommonResult<List<Exam>>();
 		try {
 			List<Exam> list = examManager.getListByExample(exam);
@@ -122,7 +128,8 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	
-	public CommonResult<List<Exam>> getExamByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<Exam>> getExamByPage(PageQuery pageQuery) {
 		CommonResult<List<Exam>> result = new CommonResult<List<Exam>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -140,7 +147,8 @@ public class ExamServiceImpl implements ExamService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return examManager.count(pageQuery);
 	}
 
@@ -150,7 +158,8 @@ public class ExamServiceImpl implements ExamService {
 	 * @param  pageQuery 查询条件
 	 * @return List<Exam> 结果
 	 */
-	public CommonResult<List<Exam>> getListByUserRecent(PageQuery pageQuery)
+	@Override
+    public CommonResult<List<Exam>> getListByUserRecent(PageQuery pageQuery)
 	{
 		CommonResult<List<Exam>> result = new CommonResult<List<Exam>>();
 		try {

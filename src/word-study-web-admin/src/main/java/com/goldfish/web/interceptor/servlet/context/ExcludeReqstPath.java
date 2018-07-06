@@ -16,6 +16,6 @@ public class ExcludeReqstPath {
     }
 
     public void setPathSet(Set<String> pathSet) {
-        this.pathSet = pathSet;
+        ExcludeReqstPath.pathSet = pathSet;
     }
 }

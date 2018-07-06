@@ -30,6 +30,7 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 	@Resource(name="activateCodeManager")
 	private ActivateCodeManager activateCodeManager;
     
+    @Override
     public CommonResult<ActivateCode> addActivateCode(ActivateCode activateCode) {
 		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
 		try{
@@ -48,7 +49,8 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 		return result;
 	}
 	
-	public CommonResult<ActivateCode> updateActivateCode(ActivateCode activateCode) {
+	@Override
+    public CommonResult<ActivateCode> updateActivateCode(ActivateCode activateCode) {
 		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
 		try {
 			
@@ -65,7 +67,8 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 	
    
 
-	public CommonResult<ActivateCode> deleteActivateCode(Long id) {
+	@Override
+    public CommonResult<ActivateCode> deleteActivateCode(Long id) {
 		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
 		try {
 			activateCodeManager.deleteActivateCode(id);
@@ -78,7 +81,8 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
     }
 
 
-	public CommonResult<ActivateCode> getActivateCodeById(Long id) {
+	@Override
+    public CommonResult<ActivateCode> getActivateCodeById(Long id) {
 		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
 		try {
 			result.addDefaultModel("activateCode", activateCodeManager.getActivateCodeById(id));
@@ -95,7 +99,8 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 	
 
 
-	public CommonResult<ActivateCode> getUnique(ActivateCode activateCode) {
+	@Override
+    public CommonResult<ActivateCode> getUnique(ActivateCode activateCode) {
 		CommonResult<ActivateCode> result = new CommonResult<ActivateCode>();
 		try {
 			result.addDefaultModel(activateCodeManager.getUnique(activateCode));
@@ -108,7 +113,8 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 	}
 
 
-	public CommonResult<List<ActivateCode>> getListByExample(ActivateCode activateCode) {
+	@Override
+    public CommonResult<List<ActivateCode>> getListByExample(ActivateCode activateCode) {
 		CommonResult<List<ActivateCode>> result = new CommonResult<List<ActivateCode>>();
 		try {
 			List<ActivateCode> list = activateCodeManager.getListByExample(activateCode);
@@ -122,7 +128,8 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 	}
 
 	
-	public CommonResult<List<ActivateCode>> getActivateCodeByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<ActivateCode>> getActivateCodeByPage(PageQuery pageQuery) {
 		CommonResult<List<ActivateCode>> result = new CommonResult<List<ActivateCode>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -140,7 +147,8 @@ public class ActivateCodeServiceImpl implements ActivateCodeService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return activateCodeManager.count(pageQuery);
 	}
 

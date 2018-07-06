@@ -28,6 +28,7 @@ public class AllexamServiceImpl implements AllexamService {
 	@Resource(name="allexamManager")
 	private AllexamManager allexamManager;
     
+    @Override
     public CommonResult<Allexam> addAllexam(Allexam allexam) {
 		CommonResult<Allexam> result = new CommonResult<Allexam>();
 		try{
@@ -42,7 +43,8 @@ public class AllexamServiceImpl implements AllexamService {
 		return result;
 	}
 	
-	public CommonResult<Allexam> updateAllexam(Allexam allexam) {
+	@Override
+    public CommonResult<Allexam> updateAllexam(Allexam allexam) {
 		CommonResult<Allexam> result = new CommonResult<Allexam>();
 		try {
 			
@@ -57,7 +59,8 @@ public class AllexamServiceImpl implements AllexamService {
 	
    
 
-	public CommonResult<Allexam> deleteAllexam(Integer id) {
+	@Override
+    public CommonResult<Allexam> deleteAllexam(Integer id) {
 		CommonResult<Allexam> result = new CommonResult<Allexam>();
 		try {
 			allexamManager.deleteAllexam(id);
@@ -70,7 +73,8 @@ public class AllexamServiceImpl implements AllexamService {
     }
 
 
-    	public CommonResult<Allexam> getAllexamById(Integer id) {
+    	@Override
+        public CommonResult<Allexam> getAllexamById(Integer id) {
 		CommonResult<Allexam> result = new CommonResult<Allexam>();
 		try {
 			result.addDefaultModel("allexam", allexamManager.getAllexamById(id));
@@ -87,7 +91,8 @@ public class AllexamServiceImpl implements AllexamService {
 	
 
 
-	public CommonResult<Allexam> getUnique(Allexam allexam) {
+	@Override
+    public CommonResult<Allexam> getUnique(Allexam allexam) {
 		CommonResult<Allexam> result = new CommonResult<Allexam>();
 		try {
 			result.addDefaultModel(allexamManager.getUnique(allexam));
@@ -100,7 +105,8 @@ public class AllexamServiceImpl implements AllexamService {
 	}
 
 
-	public CommonResult<List<Allexam>> getListByExample(Allexam allexam) {
+	@Override
+    public CommonResult<List<Allexam>> getListByExample(Allexam allexam) {
 		CommonResult<List<Allexam>> result = new CommonResult<List<Allexam>>();
 		try {
 			List<Allexam> list = allexamManager.getListByExample(allexam);
@@ -114,7 +120,8 @@ public class AllexamServiceImpl implements AllexamService {
 	}
 
 	
-	public CommonResult<List<Allexam>> getAllexamByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<Allexam>> getAllexamByPage(PageQuery pageQuery) {
 		CommonResult<List<Allexam>> result = new CommonResult<List<Allexam>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -132,7 +139,8 @@ public class AllexamServiceImpl implements AllexamService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return allexamManager.count(pageQuery);
 	}
 

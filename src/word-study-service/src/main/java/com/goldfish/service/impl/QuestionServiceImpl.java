@@ -28,6 +28,7 @@ public class QuestionServiceImpl implements QuestionService {
 	@Resource(name="questionManager")
 	private QuestionManager questionManager;
     
+    @Override
     public CommonResult<Question> addQuestion(Question question) {
 		CommonResult<Question> result = new CommonResult<Question>();
 		try{
@@ -46,7 +47,8 @@ public class QuestionServiceImpl implements QuestionService {
 		return result;
 	}
 	
-	public CommonResult<Question> updateQuestion(Question question) {
+	@Override
+    public CommonResult<Question> updateQuestion(Question question) {
 		CommonResult<Question> result = new CommonResult<Question>();
 		try {
 			
@@ -63,7 +65,8 @@ public class QuestionServiceImpl implements QuestionService {
 	
    
 
-	public CommonResult<Question> deleteQuestion(Long id) {
+	@Override
+    public CommonResult<Question> deleteQuestion(Long id) {
 		CommonResult<Question> result = new CommonResult<Question>();
 		try {
 			questionManager.deleteQuestion(id);
@@ -76,7 +79,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
 
-    	public CommonResult<Question> getQuestionById(Long id) {
+    	@Override
+        public CommonResult<Question> getQuestionById(Long id) {
 		CommonResult<Question> result = new CommonResult<Question>();
 		try {
 			result.addDefaultModel("question", questionManager.getQuestionById(id));
@@ -93,7 +97,8 @@ public class QuestionServiceImpl implements QuestionService {
 	
 
 
-	public CommonResult<Question> getUnique(Question question) {
+	@Override
+    public CommonResult<Question> getUnique(Question question) {
 		CommonResult<Question> result = new CommonResult<Question>();
 		try {
 			result.addDefaultModel(questionManager.getUnique(question));
@@ -106,7 +111,8 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 
-	public CommonResult<List<Question>> getListByExample(Question question) {
+	@Override
+    public CommonResult<List<Question>> getListByExample(Question question) {
 		CommonResult<List<Question>> result = new CommonResult<List<Question>>();
 		try {
 			List<Question> list = questionManager.getListByExample(question);
@@ -120,7 +126,8 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	
-	public CommonResult<List<Question>> getQuestionByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<Question>> getQuestionByPage(PageQuery pageQuery) {
 		CommonResult<List<Question>> result = new CommonResult<List<Question>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -138,7 +145,8 @@ public class QuestionServiceImpl implements QuestionService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return questionManager.count(pageQuery);
 	}
 

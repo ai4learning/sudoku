@@ -28,6 +28,7 @@ public class WordStudyStatisticServiceImpl implements WordStudyStatisticService 
 	@Resource(name="wordStudyStatisticManager")
 	private WordStudyStatisticManager wordStudyStatisticManager;
     
+    @Override
     public CommonResult<WordStudyStatistic> addWordStudyStatistic(WordStudyStatistic wordStudyStatistic) {
 		CommonResult<WordStudyStatistic> result = new CommonResult<WordStudyStatistic>();
 		try{
@@ -46,7 +47,8 @@ public class WordStudyStatisticServiceImpl implements WordStudyStatisticService 
 		return result;
 	}
 	
-	public CommonResult<WordStudyStatistic> updateWordStudyStatistic(WordStudyStatistic wordStudyStatistic) {
+	@Override
+    public CommonResult<WordStudyStatistic> updateWordStudyStatistic(WordStudyStatistic wordStudyStatistic) {
 		CommonResult<WordStudyStatistic> result = new CommonResult<WordStudyStatistic>();
 		try {
 			
@@ -63,7 +65,8 @@ public class WordStudyStatisticServiceImpl implements WordStudyStatisticService 
 	
    
 
-	public CommonResult<WordStudyStatistic> deleteWordStudyStatistic(Long id) {
+	@Override
+    public CommonResult<WordStudyStatistic> deleteWordStudyStatistic(Long id) {
 		CommonResult<WordStudyStatistic> result = new CommonResult<WordStudyStatistic>();
 		try {
 			wordStudyStatisticManager.deleteWordStudyStatistic(id);
@@ -76,7 +79,8 @@ public class WordStudyStatisticServiceImpl implements WordStudyStatisticService 
     }
 
 
-    	public CommonResult<WordStudyStatistic> getWordStudyStatisticById(Long id) {
+    	@Override
+        public CommonResult<WordStudyStatistic> getWordStudyStatisticById(Long id) {
 		CommonResult<WordStudyStatistic> result = new CommonResult<WordStudyStatistic>();
 		try {
 			result.addDefaultModel("wordStudyStatistic", wordStudyStatisticManager.getWordStudyStatisticById(id));
@@ -93,7 +97,8 @@ public class WordStudyStatisticServiceImpl implements WordStudyStatisticService 
 	
 
 
-	public CommonResult<WordStudyStatistic> getUnique(WordStudyStatistic wordStudyStatistic) {
+	@Override
+    public CommonResult<WordStudyStatistic> getUnique(WordStudyStatistic wordStudyStatistic) {
 		CommonResult<WordStudyStatistic> result = new CommonResult<WordStudyStatistic>();
 		try {
 			result.addDefaultModel(wordStudyStatisticManager.getUnique(wordStudyStatistic));
@@ -106,7 +111,8 @@ public class WordStudyStatisticServiceImpl implements WordStudyStatisticService 
 	}
 
 
-	public CommonResult<List<WordStudyStatistic>> getListByExample(WordStudyStatistic wordStudyStatistic) {
+	@Override
+    public CommonResult<List<WordStudyStatistic>> getListByExample(WordStudyStatistic wordStudyStatistic) {
 		CommonResult<List<WordStudyStatistic>> result = new CommonResult<List<WordStudyStatistic>>();
 		try {
 			List<WordStudyStatistic> list = wordStudyStatisticManager.getListByExample(wordStudyStatistic);
@@ -120,7 +126,8 @@ public class WordStudyStatisticServiceImpl implements WordStudyStatisticService 
 	}
 
 	
-	public CommonResult<List<WordStudyStatistic>> getWordStudyStatisticByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<WordStudyStatistic>> getWordStudyStatisticByPage(PageQuery pageQuery) {
 		CommonResult<List<WordStudyStatistic>> result = new CommonResult<List<WordStudyStatistic>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -138,7 +145,8 @@ public class WordStudyStatisticServiceImpl implements WordStudyStatisticService 
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return wordStudyStatisticManager.count(pageQuery);
 	}
 

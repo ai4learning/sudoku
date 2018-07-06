@@ -20,22 +20,26 @@ public class QuestionManagerImpl implements QuestionManager {
 	private QuestionDao questionDao;
 
 
+  @Override
   public Question addQuestion(Question question) {
 		int i=questionDao.addQuestion(question);
 		return question;
     }
     
+    @Override
     public void updateQuestion(Question question) {
 		questionDao.updateQuestion(question);
     }
     
 
     
+    @Override
     public void deleteQuestion(Long id) {
 		questionDao.deleteQuestion(id);
     }
 
 
+    @Override
     public Question getQuestionById(Long id) {
 		return questionDao.getQuestionById(id);
     }
@@ -45,20 +49,24 @@ public class QuestionManagerImpl implements QuestionManager {
 
     	
    
+   @Override
    public Question getUnique(Question question) {
 		return questionDao.getUnique(question);
     }
 
     
+ @Override
  public List<Question> getListByExample(Question question) {
     return questionDao.getListByExample(question);
     }
 
     
+    @Override
     public List<Question> getQuestionByPage(PageQuery pageQuery) {
 		return questionDao.getQuestionByPage( pageQuery.getParams());
     }
     	
+    @Override
     public int count(PageQuery pageQuery) {
 		return questionDao.count( pageQuery.getParams());
     }

@@ -20,22 +20,26 @@ public class UserManagerImpl implements UserManager {
 	private UserDao userDao;
 
 
+  @Override
   public User addUser(User user) {
 		int i=userDao.addUser(user);
 		return user;
     }
     
+    @Override
     public void updateUser(User user) {
 		userDao.updateUser(user);
     }
     
 
     
+    @Override
     public void deleteUser(Long id) {
 		userDao.deleteUser(id);
     }
 
 
+    @Override
     public User getUserById(Long id) {
 		return userDao.getUserById(id);
     }
@@ -45,20 +49,24 @@ public class UserManagerImpl implements UserManager {
 
     	
    
+   @Override
    public User getUnique(User user) {
 		return userDao.getUnique(user);
     }
 
     
+ @Override
  public List<User> getListByExample(User user) {
     return userDao.getListByExample(user);
     }
 
     
+    @Override
     public List<User> getUserByPage(PageQuery pageQuery) {
 		return userDao.getUserByPage( pageQuery.getParams());
     }
     	
+    @Override
     public int count(PageQuery pageQuery) {
 		return userDao.count( pageQuery.getParams());
     }

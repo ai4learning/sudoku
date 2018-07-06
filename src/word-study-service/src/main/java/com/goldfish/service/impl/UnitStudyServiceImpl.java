@@ -340,7 +340,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		return unitStudy;
 	}
 
-	public CommonResult<UnitStudy> addUnitWordsStudy(UnitStudy unitStudy) {
+	@Override
+    public CommonResult<UnitStudy> addUnitWordsStudy(UnitStudy unitStudy) {
 		CommonResult<UnitStudy> result = new CommonResult<UnitStudy>();
 		try{
 			
@@ -358,7 +359,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		return result;
 	}
 	
-	public CommonResult<UnitStudy> updateUnitWordsStudy(UnitStudy unitStudy) {
+	@Override
+    public CommonResult<UnitStudy> updateUnitWordsStudy(UnitStudy unitStudy) {
 		CommonResult<UnitStudy> result = new CommonResult<UnitStudy>();
 		try {
 			
@@ -374,7 +376,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 	}
 
 
-	public CommonResult<UnitStudy> deleteUnitWordsStudy(Long id) {
+	@Override
+    public CommonResult<UnitStudy> deleteUnitWordsStudy(Long id) {
 		CommonResult<UnitStudy> result = new CommonResult<UnitStudy>();
 		try {
 			unitStudyManager.deleteUnitWordsStudy(id);
@@ -387,7 +390,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
     }
 
 
-    	public CommonResult<UnitStudy> getUnitWordsStudyById(Long id) {
+    	@Override
+        public CommonResult<UnitStudy> getUnitWordsStudyById(Long id) {
 		CommonResult<UnitStudy> result = new CommonResult<UnitStudy>();
 		try {
 			result.addDefaultModel("unitWordsStudy", unitStudyManager.getUnitWordsStudyById(id));
@@ -399,7 +403,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		return result;
 	}
 
-	public CommonResult<UnitStudy> getUnique(UnitStudy unitStudy) {
+	@Override
+    public CommonResult<UnitStudy> getUnique(UnitStudy unitStudy) {
 		CommonResult<UnitStudy> result = new CommonResult<UnitStudy>();
 		try {
 			result.addDefaultModel(unitStudyManager.getUnique(unitStudy));
@@ -412,7 +417,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 	}
 
 
-	public CommonResult<List<UnitStudy>> getListByExample(UnitStudy unitStudy) {
+	@Override
+    public CommonResult<List<UnitStudy>> getListByExample(UnitStudy unitStudy) {
 		CommonResult<List<UnitStudy>> result = new CommonResult<List<UnitStudy>>();
 		try {
 			List<UnitStudy> list = unitStudyManager.getListByExample(unitStudy);
@@ -426,7 +432,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 	}
 
 	
-	public CommonResult<List<UnitStudy>> getUnitWordsStudyByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<UnitStudy>> getUnitWordsStudyByPage(PageQuery pageQuery) {
 		CommonResult<List<UnitStudy>> result = new CommonResult<List<UnitStudy>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -444,7 +451,8 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return unitStudyManager.count(pageQuery);
 	}
 
@@ -460,11 +468,13 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		this.unitStudyManager = unitStudyManager;
 	}
 
-	public int sumReading(PageQuery pageQuery){
+	@Override
+    public int sumReading(PageQuery pageQuery){
 		return unitStudyManager.sumReading(pageQuery);
 	}
 
-	public int sumWriting(PageQuery pageQuery)
+	@Override
+    public int sumWriting(PageQuery pageQuery)
 	{
 		return unitStudyManager.sumWriting(pageQuery);
 	}

@@ -28,6 +28,7 @@ public class TaskServiceImpl implements TaskService {
 	@Resource(name="taskManager")
 	private TaskManager taskManager;
     
+    @Override
     public CommonResult<Task> addTask(Task task) {
 		CommonResult<Task> result = new CommonResult<Task>();
 		try{
@@ -46,7 +47,8 @@ public class TaskServiceImpl implements TaskService {
 		return result;
 	}
 	
-	public CommonResult<Task> updateTask(Task task) {
+	@Override
+    public CommonResult<Task> updateTask(Task task) {
 		CommonResult<Task> result = new CommonResult<Task>();
 		try {
 			task.setModified(new Date());
@@ -61,7 +63,8 @@ public class TaskServiceImpl implements TaskService {
 	
    
 
-	public CommonResult<Task> deleteTask(Long id) {
+	@Override
+    public CommonResult<Task> deleteTask(Long id) {
 		CommonResult<Task> result = new CommonResult<Task>();
 		try {
 			taskManager.deleteTask(id);
@@ -74,7 +77,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
 
-    	public CommonResult<Task> getTaskById(Long id) {
+    	@Override
+        public CommonResult<Task> getTaskById(Long id) {
 		CommonResult<Task> result = new CommonResult<Task>();
 		try {
 			result.addDefaultModel("task", taskManager.getTaskById(id));
@@ -91,7 +95,8 @@ public class TaskServiceImpl implements TaskService {
 	
 
 
-	public CommonResult<Task> getUnique(Task task) {
+	@Override
+    public CommonResult<Task> getUnique(Task task) {
 		CommonResult<Task> result = new CommonResult<Task>();
 		try {
 			result.addDefaultModel(taskManager.getUnique(task));
@@ -104,7 +109,8 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 
-	public CommonResult<List<Task>> getListByExample(Task task) {
+	@Override
+    public CommonResult<List<Task>> getListByExample(Task task) {
 		CommonResult<List<Task>> result = new CommonResult<List<Task>>();
 		try {
 			List<Task> list = taskManager.getListByExample(task);
@@ -118,7 +124,8 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	
-	public CommonResult<List<Task>> getTaskByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<Task>> getTaskByPage(PageQuery pageQuery) {
 		CommonResult<List<Task>> result = new CommonResult<List<Task>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -136,7 +143,8 @@ public class TaskServiceImpl implements TaskService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return taskManager.count(pageQuery);
 	}
 

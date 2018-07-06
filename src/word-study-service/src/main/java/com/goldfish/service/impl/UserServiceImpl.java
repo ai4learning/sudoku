@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
 	@Resource
 	private TaskManager taskManager;
     
+    @Override
     public CommonResult<User> addUser(User user) {
 		CommonResult<User> result = new CommonResult<User>();
 		try {
@@ -140,7 +141,8 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
-	public CommonResult<User> updateUser(User user) {
+	@Override
+    public CommonResult<User> updateUser(User user) {
 		CommonResult<User> result = new CommonResult<User>();
 		try {
 			// 1.check activateCode
@@ -198,7 +200,8 @@ public class UserServiceImpl implements UserService {
         }
 	}
 
-	public CommonResult<User> deleteUser(Long id) {
+	@Override
+    public CommonResult<User> deleteUser(Long id) {
 		CommonResult<User> result = new CommonResult<User>();
 		try {
 			userManager.deleteUser(id);
@@ -211,7 +214,8 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    	public CommonResult<User> getUserById(Long id) {
+    	@Override
+        public CommonResult<User> getUserById(Long id) {
 		CommonResult<User> result = new CommonResult<User>();
 		try {
 			result.addDefaultModel("user", userManager.getUserById(id));
@@ -228,7 +232,8 @@ public class UserServiceImpl implements UserService {
 	
 
 
-	public CommonResult<User> getUnique(User user) {
+	@Override
+    public CommonResult<User> getUnique(User user) {
 		CommonResult<User> result = new CommonResult<User>();
 		try {
 			result.addDefaultModel(userManager.getUnique(user));
@@ -241,7 +246,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-	public CommonResult<List<User>> getListByExample(User user) {
+	@Override
+    public CommonResult<List<User>> getListByExample(User user) {
 		CommonResult<List<User>> result = new CommonResult<List<User>>();
 		try {
 			List<User> list = userManager.getListByExample(user);
@@ -255,7 +261,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	
-	public CommonResult<List<User>> getUserByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<User>> getUserByPage(PageQuery pageQuery) {
 		CommonResult<List<User>> result = new CommonResult<List<User>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -273,7 +280,8 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return userManager.count(pageQuery);
 	}
 

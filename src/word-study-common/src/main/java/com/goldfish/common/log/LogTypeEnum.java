@@ -299,8 +299,9 @@ public enum LogTypeEnum {
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
 			return sw.toString();
-		} else
-			return null;
+		} else {
+            return null;
+        }
 	}
 
 }

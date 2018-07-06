@@ -122,8 +122,12 @@ public class PageQuery {
 			cpn = "1";
 		}
 		currentPageNo = Integer.parseInt(cpn);
-		if (currentPageNo < 1) currentPageNo = 1;
-		if (currentPageNo > pageCount) currentPageNo = pageCount;
+		if (currentPageNo < 1) {
+            currentPageNo = 1;
+        }
+		if (currentPageNo > pageCount) {
+            currentPageNo = pageCount;
+        }
 		return currentPageNo;
 	}
 

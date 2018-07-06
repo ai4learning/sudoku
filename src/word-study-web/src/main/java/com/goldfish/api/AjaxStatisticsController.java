@@ -253,9 +253,9 @@ public class AjaxStatisticsController extends BaseController {
             basicTestResultVO.setResultScore(exam.getResultScore());
             basicTestResultVO.setTestType(exam.getTestType());
             basicTestResultVO.setUnitNbr(exam.getUnitNbr()==null? null: String.valueOf(exam.getUnitNbr()));
-            if (StringUtils.isEmpty(exam.getModuleCode()))
+            if (StringUtils.isEmpty(exam.getModuleCode())) {
                 basicTestResultVO.setBookName(null);
-            else {
+            } else {
                 Course courseQuery = new Course();
                 courseQuery.setModuleCode(exam.getModuleCode());
                 Course course = courseService.getUnique(courseQuery).getDefaultModel();

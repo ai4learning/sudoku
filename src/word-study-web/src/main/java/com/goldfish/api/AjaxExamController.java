@@ -783,8 +783,9 @@ public class AjaxExamController extends AjaxErrorBookController{
         wordStudyQuery.setStudentId(user.getId().intValue());
         wordStudyQuery.setUserCode(user.getUserCode());
         List<WordStudy> wordStudyList = wordStudyService.getStudiedWords(wordStudyQuery).getDefaultModel();
-        if (wordStudyList == null)
+        if (wordStudyList == null) {
             return examVO;
+        }
         Collections.shuffle(wordStudyList);
         //3.根据questionTypes和questionNbr出题
         //testArea=0&questionNbr=10&questionTypes=0,1,2
@@ -795,24 +796,27 @@ public class AjaxExamController extends AjaxErrorBookController{
             QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber(Integer.valueOf(str));
             questionQuery.setType(qt.getFullName());
             List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
-            if (questionList == null)
+            if (questionList == null) {
                 continue;
+            }
             Collections.shuffle(questionList);
             List nowList = ecList;
             //获取当前是在往哪个List中写
-            if (qt.equals(QuestionTypes.EN2CH))
+            if (qt.equals(QuestionTypes.EN2CH)) {
                 nowList = ecList;
-            else if(qt.equals(QuestionTypes.CH2EN))
+            } else if(qt.equals(QuestionTypes.CH2EN)) {
                 nowList = ceList;
-            else if(qt.equals(QuestionTypes.LISTEN2CH))
+            } else if(qt.equals(QuestionTypes.LISTEN2CH)) {
                 nowList = lcList;
-            else if(qt.equals(QuestionTypes.LISTEN2WRITE))
+            } else if(qt.equals(QuestionTypes.LISTEN2WRITE)) {
                 nowList = lwList;
+            }
             for (Question question : questionList)
             {
                 //如果写够了就break
-                if (nowList.size() >= questionNbr)
+                if (nowList.size() >= questionNbr) {
                     break;
+                }
                 for (WordStudy wordStudy : wordStudyList)
                 {
                     if (question.getWordId().equals(wordStudy.getWordId()))
@@ -1489,8 +1493,9 @@ public class AjaxExamController extends AjaxErrorBookController{
             basicVO.setMsg("记忆保存失败");
         }
 
-        if(testType == 1 && !StringUtils.isEmpty(moduleCode) && unitNbr!=null)
-            saveUnitExamIsTest(user,moduleCode,resultScore,unitNbr);
+        if(testType == 1 && !StringUtils.isEmpty(moduleCode) && unitNbr!=null) {
+            saveUnitExamIsTest(user, moduleCode, resultScore, unitNbr);
+        }
 
         return basicVO;
     }
@@ -1508,8 +1513,9 @@ public class AjaxExamController extends AjaxErrorBookController{
             IsTested isTested = IsTested.getIsTestedByScore(resultScore);
             us.setIsTested(isTested.getCode());
             if ((isTested.equals(IsTested.FULL_MARKS) || isTested.equals(IsTested.PASS))
-                    && us.getIsFinished()== FinishState.COMPLETE.getState())
+                    && us.getIsFinished()== FinishState.COMPLETE.getState()) {
                 us.setIsAllFinished(FinishState.COMPLETE.getState());
+            }
             unitStudyService.updateUnitWordsStudy(us);
         }
     }
@@ -1521,8 +1527,9 @@ public class AjaxExamController extends AjaxErrorBookController{
         for (String questionId : questionsJson.getJSONArray(questionTypeShort).toJavaList(String.class))
         {
             Question question = questionService.getQuestionById(Long.valueOf(questionId)).getDefaultModel();
-            if (question == null)
+            if (question == null) {
                 continue;
+            }
             ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
             QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
                     ,question.getVocCode(),question.getQuestion(),choicesVO,Long.valueOf(questionId));
@@ -1536,8 +1543,9 @@ public class AjaxExamController extends AjaxErrorBookController{
         List<QuestionVO> questionVOList = new ArrayList<>(UNIT_EXAM_QUESTION_NUMBER);
         questionQuery.setType(questionType.getFullName());
         List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
-        if (questionList == null)
+        if (questionList == null) {
             return questionVOList;
+        }
         Collections.shuffle(questionList);
 
         int questionLimit = questionList.size() <= UNIT_EXAM_QUESTION_NUMBER ? questionList.size() : UNIT_EXAM_QUESTION_NUMBER;
@@ -1550,8 +1558,9 @@ public class AjaxExamController extends AjaxErrorBookController{
                         , new ChoicesVO(q.getChoices()), q.getId()));
             }
 
-            if (vocCodeSet.size() >= questionLimit)
+            if (vocCodeSet.size() >= questionLimit) {
                 break;
+            }
         }
         return questionVOList;
     }

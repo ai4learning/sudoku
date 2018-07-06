@@ -28,6 +28,7 @@ public class PaperServiceImpl implements PaperService {
 	@Resource(name="paperManager")
 	private PaperManager paperManager;
     
+    @Override
     public CommonResult<Paper> addPaper(Paper paper) {
 		CommonResult<Paper> result = new CommonResult<Paper>();
 		try{
@@ -46,7 +47,8 @@ public class PaperServiceImpl implements PaperService {
 		return result;
 	}
 	
-	public CommonResult<Paper> updatePaper(Paper paper) {
+	@Override
+    public CommonResult<Paper> updatePaper(Paper paper) {
 		CommonResult<Paper> result = new CommonResult<Paper>();
 		try {
 			
@@ -63,7 +65,8 @@ public class PaperServiceImpl implements PaperService {
 	
    
 
-	public CommonResult<Paper> deletePaper(Long id) {
+	@Override
+    public CommonResult<Paper> deletePaper(Long id) {
 		CommonResult<Paper> result = new CommonResult<Paper>();
 		try {
 			paperManager.deletePaper(id);
@@ -76,7 +79,8 @@ public class PaperServiceImpl implements PaperService {
     }
 
 
-    	public CommonResult<Paper> getPaperById(Long id) {
+    	@Override
+        public CommonResult<Paper> getPaperById(Long id) {
 		CommonResult<Paper> result = new CommonResult<Paper>();
 		try {
 			result.addDefaultModel("paper", paperManager.getPaperById(id));
@@ -93,7 +97,8 @@ public class PaperServiceImpl implements PaperService {
 	
 
 
-	public CommonResult<Paper> getUnique(Paper paper) {
+	@Override
+    public CommonResult<Paper> getUnique(Paper paper) {
 		CommonResult<Paper> result = new CommonResult<Paper>();
 		try {
 			result.addDefaultModel(paperManager.getUnique(paper));
@@ -106,7 +111,8 @@ public class PaperServiceImpl implements PaperService {
 	}
 
 
-	public CommonResult<List<Paper>> getListByExample(Paper paper) {
+	@Override
+    public CommonResult<List<Paper>> getListByExample(Paper paper) {
 		CommonResult<List<Paper>> result = new CommonResult<List<Paper>>();
 		try {
 			List<Paper> list = paperManager.getListByExample(paper);
@@ -120,7 +126,8 @@ public class PaperServiceImpl implements PaperService {
 	}
 
 	
-	public CommonResult<List<Paper>> getPaperByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<Paper>> getPaperByPage(PageQuery pageQuery) {
 		CommonResult<List<Paper>> result = new CommonResult<List<Paper>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -138,7 +145,8 @@ public class PaperServiceImpl implements PaperService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return paperManager.count(pageQuery);
 	}
 

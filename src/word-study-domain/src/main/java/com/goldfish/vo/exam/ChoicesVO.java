@@ -38,12 +38,15 @@ public class ChoicesVO {
     public ChoicesVO(String choices)
     {
         a = choices.replace("{'A': '","").split("', 'B'")[0];
-        if(choices.contains(regexB))
+        if(choices.contains(regexB)) {
             b = choices.split(regexB)[1].split("', 'C'")[0];
-        if(choices.contains(regexC))
+        }
+        if(choices.contains(regexC)) {
             c = choices.split(regexC)[1].split("', 'D'")[0];
-        if(choices.contains(regexD))
+        }
+        if(choices.contains(regexD)) {
             d = choices.split(regexD)[1].split("'")[0];
+        }
     }
 
     public String getA() {

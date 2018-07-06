@@ -20,22 +20,26 @@ public class CourseStudyManagerImpl implements CourseStudyManager {
 	private CourseStudyDao courseStudyDao;
 
 
+  @Override
   public CourseStudy addCourseStudy(CourseStudy courseStudy) {
 		int i=courseStudyDao.addCourseStudy(courseStudy);
 		return courseStudy;
     }
     
+    @Override
     public void updateCourseStudy(CourseStudy courseStudy) {
 		courseStudyDao.updateCourseStudy(courseStudy);
     }
     
 
     
+    @Override
     public void deleteCourseStudy(Long id) {
 		courseStudyDao.deleteCourseStudy(id);
     }
 
 
+    @Override
     public CourseStudy getCourseStudyById(Long id) {
 		return courseStudyDao.getCourseStudyById(id);
     }
@@ -45,20 +49,24 @@ public class CourseStudyManagerImpl implements CourseStudyManager {
 
     	
    
+   @Override
    public CourseStudy getUnique(CourseStudy courseStudy) {
 		return courseStudyDao.getUnique(courseStudy);
     }
 
     
+ @Override
  public List<CourseStudy> getListByExample(CourseStudy courseStudy) {
     return courseStudyDao.getListByExample(courseStudy);
     }
 
     
+    @Override
     public List<CourseStudy> getCourseStudyByPage(PageQuery pageQuery) {
 		return courseStudyDao.getCourseStudyByPage( pageQuery.getParams());
     }
     	
+    @Override
     public int count(PageQuery pageQuery) {
 		return courseStudyDao.count( pageQuery.getParams());
     }

@@ -30,6 +30,7 @@ public class CourseStudyServiceImpl implements CourseStudyService {
 	@Resource(name="courseStudyManager")
 	private CourseStudyManager courseStudyManager;
     
+    @Override
     public CommonResult<CourseStudy> addCourseStudy(CourseStudy courseStudy) {
 		CommonResult<CourseStudy> result = new CommonResult<CourseStudy>();
 		try{
@@ -45,7 +46,8 @@ public class CourseStudyServiceImpl implements CourseStudyService {
 		return result;
 	}
 	
-	public CommonResult<CourseStudy> updateCourseStudy(CourseStudy courseStudy) {
+	@Override
+    public CommonResult<CourseStudy> updateCourseStudy(CourseStudy courseStudy) {
 		CommonResult<CourseStudy> result = new CommonResult<CourseStudy>();
 		try {
 			
@@ -62,7 +64,8 @@ public class CourseStudyServiceImpl implements CourseStudyService {
 	
    
 
-	public CommonResult<CourseStudy> deleteCourseStudy(Long id) {
+	@Override
+    public CommonResult<CourseStudy> deleteCourseStudy(Long id) {
 		CommonResult<CourseStudy> result = new CommonResult<CourseStudy>();
 		try {
 			courseStudyManager.deleteCourseStudy(id);
@@ -75,7 +78,8 @@ public class CourseStudyServiceImpl implements CourseStudyService {
     }
 
 
-    	public CommonResult<CourseStudy> getCourseStudyById(Long id) {
+    	@Override
+        public CommonResult<CourseStudy> getCourseStudyById(Long id) {
 		CommonResult<CourseStudy> result = new CommonResult<CourseStudy>();
 		try {
 			result.addDefaultModel("courseStudy", courseStudyManager.getCourseStudyById(id));
@@ -92,7 +96,8 @@ public class CourseStudyServiceImpl implements CourseStudyService {
 	
 
 
-	public CommonResult<CourseStudy> getUnique(CourseStudy courseStudy) {
+	@Override
+    public CommonResult<CourseStudy> getUnique(CourseStudy courseStudy) {
 		CommonResult<CourseStudy> result = new CommonResult<CourseStudy>();
 		try {
 			result.addDefaultModel(courseStudyManager.getUnique(courseStudy));
@@ -105,7 +110,8 @@ public class CourseStudyServiceImpl implements CourseStudyService {
 	}
 
 
-	public CommonResult<List<CourseStudy>> getListByExample(CourseStudy courseStudy) {
+	@Override
+    public CommonResult<List<CourseStudy>> getListByExample(CourseStudy courseStudy) {
 		CommonResult<List<CourseStudy>> result = new CommonResult<List<CourseStudy>>();
 		try {
 			List<CourseStudy> list = courseStudyManager.getListByExample(courseStudy);
@@ -119,7 +125,8 @@ public class CourseStudyServiceImpl implements CourseStudyService {
 	}
 
 	
-	public CommonResult<List<CourseStudy>> getCourseStudyByPage(PageQuery pageQuery) {
+	@Override
+    public CommonResult<List<CourseStudy>> getCourseStudyByPage(PageQuery pageQuery) {
 		CommonResult<List<CourseStudy>> result = new CommonResult<List<CourseStudy>>();
 		try {
 			int totalCount = this.count(pageQuery);
@@ -137,7 +144,8 @@ public class CourseStudyServiceImpl implements CourseStudyService {
 		return result;
 	}
 	
-	public int count(PageQuery pageQuery) {
+	@Override
+    public int count(PageQuery pageQuery) {
 		return courseStudyManager.count(pageQuery);
 	}
 

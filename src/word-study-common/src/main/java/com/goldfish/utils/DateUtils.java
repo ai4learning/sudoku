@@ -41,8 +41,9 @@ public class DateUtils {
 	 */
 	public static String format(Date date, String format) {
 		try {
-			if(date == null)
-				return null;
+			if(date == null) {
+                return null;
+            }
 			
 			SimpleDateFormat sdf = new SimpleDateFormat(format);
 			return sdf.format(date);

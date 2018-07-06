@@ -36,27 +36,35 @@ public enum QuestionTypes {
 
     public static QuestionTypes getQuestionTypesByNumber(int number)
     {
-        if (number == 0)
+        if (number == 0) {
             return EN2CH;
-        if (number == 1)
+        }
+        if (number == 1) {
             return CH2EN;
-        if (number == 2)
+        }
+        if (number == 2) {
             return LISTEN2CH;
-        if (number == 3)
+        }
+        if (number == 3) {
             return LISTEN2WRITE;
+        }
         return EN2CH;
     }
 
     public static QuestionTypes getQuestionTypesByFullName(String fullName)
     {
-        if (fullName.equals(EN2CH.getFullName()))
+        if (fullName.equals(EN2CH.getFullName())) {
             return EN2CH;
-        if (fullName.equals(CH2EN.getFullName()))
+        }
+        if (fullName.equals(CH2EN.getFullName())) {
             return CH2EN;
-        if (fullName.equals(LISTEN2CH.getFullName()))
+        }
+        if (fullName.equals(LISTEN2CH.getFullName())) {
             return LISTEN2CH;
-        if (fullName.equals(LISTEN2WRITE.getFullName()))
+        }
+        if (fullName.equals(LISTEN2WRITE.getFullName())) {
             return LISTEN2WRITE;
+        }
         return EN2CH;
     }
 }

@@ -23,43 +23,52 @@ public class ExamManagerImpl implements ExamManager {
     private ExamDao examDao;
 
 
+    @Override
     public Exam addExam(Exam exam) {
         int i = examDao.addExam(exam);
         return exam;
     }
 
+    @Override
     public void updateExam(Exam exam) {
         examDao.updateExam(exam);
     }
 
 
+    @Override
     public void deleteExam(Long id) {
         examDao.deleteExam(id);
     }
 
 
+    @Override
     public Exam getExamById(Long id) {
         return examDao.getExamById(id);
     }
 
 
+    @Override
     public Exam getUnique(Exam exam) {
         return examDao.getUnique(exam);
     }
 
 
+    @Override
     public List<Exam> getListByExample(Exam exam) {
         return examDao.getListByExample(exam);
     }
 
+    @Override
     public List<Exam> getListByUserRecent(PageQuery pageQuery) {
         return examDao.getListByUserRecent(pageQuery.getParams());
     }
 
+    @Override
     public List<Exam> getExamByPage(PageQuery pageQuery) {
         return examDao.getExamByPage(pageQuery.getParams());
     }
 
+    @Override
     public int count(PageQuery pageQuery) {
         return examDao.count(pageQuery.getParams());
     }
