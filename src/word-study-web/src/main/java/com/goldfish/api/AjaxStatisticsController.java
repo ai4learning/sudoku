@@ -7,11 +7,8 @@ import com.goldfish.constant.State;
 import com.goldfish.domain.Course;
 import com.goldfish.domain.Exam;
 import com.goldfish.domain.User;
-import com.goldfish.service.CourseService;
-import com.goldfish.service.ExamService;
-import com.goldfish.service.UnitStudyService;
-import com.goldfish.service.WordStudyService;
-import com.goldfish.vo.Statistics.*;
+import com.goldfish.service.*;
+import com.goldfish.vo.statistics.*;
 import com.goldfish.web.base.BaseController;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -28,7 +25,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/6/20 0020.
+ *
+ * @author Administrator
+ * @date 2018/6/20 0020
  * 学习报告
  * /api/Ajax/AjaxGetVocStudyResult
  * 最近一周所学单词
@@ -51,6 +50,8 @@ public class AjaxStatisticsController extends BaseController {
     private UnitStudyService unitStudyService;
     @Resource
     private CourseService courseService;
+    @Resource
+    private UserService userService;
 
     /**
      * /api/Ajax/AjaxGetVocStudyResult
@@ -83,16 +84,12 @@ public class AjaxStatisticsController extends BaseController {
         }
 
         List<VocCountVO> vocCountVOList = new ArrayList<>(Calendar.DAY_OF_WEEK);
-        PageQuery pageQuery = new PageQuery();
-        pageQuery.addQueryParam("studentId",user.getId().intValue());
-        pageQuery.addQueryParam("state", State.VALID.getState());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         for (int i=0;i<Calendar.DAY_OF_WEEK;i++)
         {
             String dateString = sdf.format(date);
-            pageQuery.addQueryParam("date", dateString);
-            int count = wordStudyService.countDay(pageQuery);
+            int count = countStudentStudiedWordsByDay(user.getId().intValue(),dateString);
             VocCountVO vocCountVO = new VocCountVO();
             vocCountVO.setDate(dateString);
             vocCountVO.setVoccount(count);
@@ -269,5 +266,59 @@ public class AjaxStatisticsController extends BaseController {
         testResultVO.setSuccess(true);
         testResultVO.setMsg(CommonConstant.LOAD_SUCCESS);
         return testResultVO;
+    }
+
+
+    @RequestMapping(value = "AjaxGetRealTimeSituation", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    SituationVO doAjaxGetRealTimeSituation(ModelMap context) {
+        SituationVO situationVO = new SituationVO();
+        User user = this.getUserInfo();
+        if (user == null) {
+            situationVO.setMsg(CommonConstant.LOAD_FAIL);
+            situationVO.setSuccess(false);
+            return situationVO;
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        situationVO.setClassNO(user.getCurrentClass());
+        situationVO.setDate(sdf.format(date));
+        List<PersonalAchievementVO> paVO = new ArrayList<>();
+        //获取同班同学信息
+        User userQuery = new User();
+        userQuery.setCurrentClass(user.getCurrentClass());
+        List<User> classMate = userService.getListByExample(userQuery).getDefaultModel();
+        if (classMate == null)
+        {
+            situationVO.setMsg(CommonConstant.LOAD_FAIL);
+            situationVO.setSuccess(false);
+            return situationVO;
+        }
+        for (User student : classMate)
+        {
+            paVO.add(new PersonalAchievementVO(student.getNikeName()
+                    ,countStudentStudiedWordsByDay(student.getId().intValue(),sdf.format(date))));
+        }
+        situationVO.setAchievements(paVO);
+        situationVO.setRealTime(true);
+        situationVO.setMsg(CommonConstant.LOAD_SUCCESS);
+        situationVO.setSuccess(true);
+        return situationVO;
+    }
+
+    @RequestMapping(value = "AjaxGetCumulativeSituation", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    SituationVO doAjaxGetCumulativeSituation(ModelMap context) {
+        return null;
+    }
+
+    private int countStudentStudiedWordsByDay(int studentId, String dateString)
+    {
+        PageQuery pageQuery = new PageQuery();
+        pageQuery.addQueryParam("studentId",studentId);
+        pageQuery.addQueryParam("state", State.VALID.getState());
+        pageQuery.addQueryParam("date", dateString);
+        return wordStudyService.countDay(pageQuery);
     }
 }
