@@ -95,7 +95,7 @@ public class AjaxStatisticsController extends BaseController {
             vocCountVO.setVoccount(count);
             vocCountVOList.add(vocCountVO);
 
-            date = DateFormatUtils.getNextDay(date);
+            date = DateFormatUtils.getYesterday(date);
         }
         vo.setVocCountVOList(vocCountVOList);
         vo.setMsg(CommonConstant.LOAD_SUCCESS);
@@ -272,6 +272,25 @@ public class AjaxStatisticsController extends BaseController {
     @RequestMapping(value = "AjaxGetRealTimeSituation", method = {RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody
     SituationVO doAjaxGetRealTimeSituation(ModelMap context) {
+        return generateSituationVO(true);
+    }
+
+    @RequestMapping(value = "AjaxGetCumulativeSituation", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    SituationVO doAjaxGetCumulativeSituation(ModelMap context) {
+        return generateSituationVO(false);
+    }
+
+    private int countStudentStudiedWordsByDay(int studentId, String dateString)
+    {
+        PageQuery pageQuery = new PageQuery();
+        pageQuery.addQueryParam("studentId",studentId);
+        pageQuery.addQueryParam("state", State.VALID.getState());
+        pageQuery.addQueryParam("date", dateString);
+        return wordStudyService.countDay(pageQuery);
+    }
+
+    private SituationVO generateSituationVO(boolean realTime) {
         SituationVO situationVO = new SituationVO();
         User user = this.getUserInfo();
         if (user == null) {
@@ -297,28 +316,18 @@ public class AjaxStatisticsController extends BaseController {
         }
         for (User student : classMate)
         {
-            paVO.add(new PersonalAchievementVO(student.getNikeName()
-                    ,countStudentStudiedWordsByDay(student.getId().intValue(),sdf.format(date))));
+            if (realTime) {
+                paVO.add(new PersonalAchievementVO(student.getNikeName()
+                        , countStudentStudiedWordsByDay(student.getId().intValue(), sdf.format(date))));
+            }else {
+
+            }
         }
         situationVO.setAchievements(paVO);
-        situationVO.setRealTime(true);
+        situationVO.setRealTime(realTime);
+
         situationVO.setMsg(CommonConstant.LOAD_SUCCESS);
         situationVO.setSuccess(true);
         return situationVO;
-    }
-
-    @RequestMapping(value = "AjaxGetCumulativeSituation", method = {RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody
-    SituationVO doAjaxGetCumulativeSituation(ModelMap context) {
-        return null;
-    }
-
-    private int countStudentStudiedWordsByDay(int studentId, String dateString)
-    {
-        PageQuery pageQuery = new PageQuery();
-        pageQuery.addQueryParam("studentId",studentId);
-        pageQuery.addQueryParam("state", State.VALID.getState());
-        pageQuery.addQueryParam("date", dateString);
-        return wordStudyService.countDay(pageQuery);
     }
 }
