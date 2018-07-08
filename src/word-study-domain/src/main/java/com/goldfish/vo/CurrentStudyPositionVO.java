@@ -28,6 +28,7 @@ public class CurrentStudyPositionVO {
     private String spelling;
 
     private Integer unitNbr;
+    @JSONField( name="isCurrentPos")
     private boolean isCurrentPos;
     @JSONField( name="isFinished")
     private Integer isFinished = 0;
