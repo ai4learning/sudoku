@@ -36,7 +36,8 @@ public class CurrentStudyPositionVO {
     private boolean isAllFinished = false;
     @JSONField( name="isTested")
     private Integer isTested = 0;
-    private Integer Status = 0;
+    @JSONField( name="Status")
+    private Integer status = 0;
 
     public Long getId() {
         return id;
@@ -119,10 +120,10 @@ public class CurrentStudyPositionVO {
     }
 
     public Integer getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(Integer status) {
-        Status = status;
+        this.status = status;
     }
 }
