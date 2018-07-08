@@ -1,4 +1,4 @@
-package com.goldfish.vo.statistics;
+package com.goldfish.vo.statistic;
 
 /**
  * Created by Administrator on 2018/6/20 0020.

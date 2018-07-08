@@ -8,7 +8,7 @@ import com.goldfish.domain.Course;
 import com.goldfish.domain.Exam;
 import com.goldfish.domain.User;
 import com.goldfish.service.*;
-import com.goldfish.vo.statistics.*;
+import com.goldfish.vo.statistic.*;
 import com.goldfish.web.base.BaseController;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;

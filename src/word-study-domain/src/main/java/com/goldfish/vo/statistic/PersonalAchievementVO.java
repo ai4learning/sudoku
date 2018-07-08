@@ -1,4 +1,4 @@
-package com.goldfish.vo.statistics;
+package com.goldfish.vo.statistic;
 
 /**
  * @author zhangjingtao

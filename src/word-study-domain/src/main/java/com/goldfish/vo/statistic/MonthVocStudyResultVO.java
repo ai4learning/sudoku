@@ -1,4 +1,4 @@
-package com.goldfish.vo.statistics;
+package com.goldfish.vo.statistic;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.goldfish.vo.BasicVO;
