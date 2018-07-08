@@ -21,7 +21,7 @@
         <profile>
             <id>development</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <pfile>development.properties</pfile>
@@ -44,7 +44,7 @@
         <profile>
             <id>production</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <pfile>production.properties</pfile>
