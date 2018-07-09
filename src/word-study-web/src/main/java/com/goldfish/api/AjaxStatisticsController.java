@@ -4,6 +4,7 @@ import com.goldfish.common.DateFormatUtils;
 import com.goldfish.common.PageQuery;
 import com.goldfish.constant.CommonConstant;
 import com.goldfish.constant.State;
+import com.goldfish.domain.ClassGrade;
 import com.goldfish.domain.Course;
 import com.goldfish.domain.Exam;
 import com.goldfish.domain.User;
@@ -52,6 +53,8 @@ public class AjaxStatisticsController extends BaseController {
     private CourseService courseService;
     @Resource
     private UserService userService;
+    @Resource
+    private ClassGradeService classGradeService;
 
     /**
      * /api/Ajax/AjaxGetVocStudyResult
@@ -308,6 +311,7 @@ public class AjaxStatisticsController extends BaseController {
         User userQuery = new User();
         userQuery.setCurrentClass(user.getCurrentClass());
         List<User> classMate = userService.getListByExample(userQuery).getDefaultModel();
+        ClassGrade classGrade = classGradeService.getClassGradeById(user.getCurrentClass()).getDefaultModel();
         if (classMate == null)
         {
             situationVO.setMsg(CommonConstant.LOAD_FAIL);

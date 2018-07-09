@@ -27,36 +27,44 @@ public class ClassGradeManagerImpl implements ClassGradeManager {
 
     @Override
     public void updateClassGrade(ClassGrade classGrade) {
-
+        classGradeDao.updateClassGrade(classGrade);
     }
 
     @Override
-    public void deleteClassGrade(Integer id) {
-
+    public void deleteClassGrade(Long id) {
+        classGradeDao.deleteClassGrade(id);
     }
 
     @Override
-    public ClassGrade getClassGradeById(Integer id) {
-        return null;
+    public ClassGrade getClassGradeById(Long id) {
+        return classGradeDao.getClassGradeById(id);
     }
 
     @Override
     public ClassGrade getUnique(ClassGrade classGrade) {
-        return null;
+        return classGradeDao.getUnique(classGrade);
     }
 
     @Override
     public List<ClassGrade> getListByExample(ClassGrade classGrade) {
-        return null;
+        return classGradeDao.getListByExample(classGrade);
     }
 
     @Override
     public List<ClassGrade> getClassGradeByPage(PageQuery pageQuery) {
-        return null;
+        return classGradeDao.getClassGradeByPage(pageQuery.getParams());
     }
 
     @Override
     public int count(PageQuery pageQuery) {
-        return 0;
+        return classGradeDao.count(pageQuery.getParams());
+    }
+
+    public ClassGradeDao getClassGradeDao() {
+        return classGradeDao;
+    }
+
+    public void setClassGradeDao(ClassGradeDao classGradeDao) {
+        this.classGradeDao = classGradeDao;
     }
 }

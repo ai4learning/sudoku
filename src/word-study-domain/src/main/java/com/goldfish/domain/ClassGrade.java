@@ -19,6 +19,13 @@ public class ClassGrade {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date end;
 
+    /**  创建时间  */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date created;
+    /**  更新时间  */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date modified;
+
     public Long getId() {
         return id;
     }
@@ -43,12 +50,30 @@ public class ClassGrade {
         this.end = end;
     }
 
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getModified() {
+        return modified;
+    }
+
+    public void setModified(Date modified) {
+        this.modified = modified;
+    }
+
     @Override
     public String toString() {
         return "ClassGrade{" +
                 "id=" + id +
                 ", start=" + start +
                 ", end=" + end +
+                ", created=" + created +
+                ", modified=" + modified +
                 '}';
     }
 }

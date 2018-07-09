@@ -35,4 +35,23 @@ public class DateFormatUtils {
         date = calendar.getTime();
         return date;
     }
+
+
+    /**
+     * date1-date2
+     * 此处2018年7月9日23:59和2018年7月10日00:01算相差一天
+     */
+    public static int getDateDifference(Date date1, Date date2)
+    {
+        Calendar calendar1 = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+        calendar1.setTime(date1);
+        calendar2.setTime(date2);
+        if (calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)) {
+            return calendar1.get(Calendar.DAY_OF_YEAR) - calendar2.get(Calendar.DAY_OF_YEAR);
+        }
+        else{
+            return (int)(calendar1.getTimeInMillis()-calendar2.getTimeInMillis())/(1000*3600*24)+1;
+        }
+    }
 }

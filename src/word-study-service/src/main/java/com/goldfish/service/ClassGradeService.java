@@ -1,5 +1,6 @@
-package com.goldfish.manager;
+package com.goldfish.service;
 
+import com.goldfish.common.CommonResult;
 import com.goldfish.common.PageQuery;
 import com.goldfish.domain.ClassGrade;
 
@@ -7,23 +8,24 @@ import java.util.List;
 
 /**
  * @author zhangjingtao
- * @date 2018/7/8 0008.
+ * @date 2018/7/9 0009.
  */
-public interface ClassGradeManager {
+public interface ClassGradeService {
     /**
      * 添加并返回设置id的ClassGrade对象
      *
      * @param classGrade
      * @return
      */
-    public ClassGrade addClassGrade(ClassGrade classGrade);
+    public CommonResult<ClassGrade> addClassGrade(ClassGrade classGrade);
 
     /**
      * 更新ClassGrade
      *
      * @param classGrade
      */
-    public void updateClassGrade(ClassGrade classGrade);
+    public CommonResult<ClassGrade> updateClassGrade(ClassGrade classGrade);
+
 
 
 
@@ -32,7 +34,7 @@ public interface ClassGradeManager {
      *
      * @param id
      */
-    public void deleteClassGrade(Long id);
+    public CommonResult<ClassGrade> deleteClassGrade(Long id);
 
     /**
      * 根据主键获取ClassGrade
@@ -40,8 +42,7 @@ public interface ClassGradeManager {
      * @param id
      * @return
      */
-    public ClassGrade getClassGradeById(Long id);
-
+    public CommonResult<ClassGrade> getClassGradeById(Long id);
 
 
 
@@ -54,7 +55,8 @@ public interface ClassGradeManager {
      * @param classGrade
      * @return
      */
-    public ClassGrade getUnique(ClassGrade classGrade);
+    public CommonResult<ClassGrade> getUnique(ClassGrade classGrade);
+
 
 
 
@@ -64,7 +66,8 @@ public interface ClassGradeManager {
      * @param  classGrade
      * @return
      */
-    public List<ClassGrade> getListByExample(ClassGrade classGrade);
+    public CommonResult<List<ClassGrade>> getListByExample(ClassGrade classGrade);
+
 
     /**
      * 分页取得ClassGrade列表
@@ -72,7 +75,7 @@ public interface ClassGradeManager {
      * @param pageQuery
      * @return
      */
-    public List<ClassGrade> getClassGradeByPage(PageQuery pageQuery);
+    public CommonResult<List<ClassGrade>> getClassGradeByPage(PageQuery pageQuery);
 
     /**
      * 根据查询条件返回数量
@@ -81,5 +84,4 @@ public interface ClassGradeManager {
      * @return
      */
     public int count(PageQuery pageQuery);
-
 }
