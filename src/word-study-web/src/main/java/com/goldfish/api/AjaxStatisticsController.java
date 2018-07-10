@@ -312,6 +312,10 @@ public class AjaxStatisticsController extends BaseController {
         userQuery.setCurrentClass(user.getCurrentClass());
         List<User> classMate = userService.getListByExample(userQuery).getDefaultModel();
         ClassGrade classGrade = classGradeService.getClassGradeById(user.getCurrentClass()).getDefaultModel();
+        int differenceDayNow = DateFormatUtils.getDateDifference(new Date(),classGrade.getStart());
+        int differenceDay = DateFormatUtils.getDateDifference(classGrade.getEnd(),classGrade.getStart());
+        int dayGap = differenceDayNow<differenceDay ? differenceDayNow : differenceDay;
+        situationVO.setDayNO(dayGap);
         if (classMate == null)
         {
             situationVO.setMsg(CommonConstant.LOAD_FAIL);
@@ -324,7 +328,14 @@ public class AjaxStatisticsController extends BaseController {
                 paVO.add(new PersonalAchievementVO(student.getNikeName()
                         , countStudentStudiedWordsByDay(student.getId().intValue(), sdf.format(date))));
             }else {
-
+                Date date1= classGrade.getStart();
+                int count = 0;
+                for (int i=0;i<dayGap;i++)
+                {
+                    count += countStudentStudiedWordsByDay(student.getId().intValue(), sdf.format(date1));
+                    date1 = DateFormatUtils.getNextday(date1);
+                }
+                paVO.add(new PersonalAchievementVO(student.getNikeName(), count));
             }
         }
         situationVO.setAchievements(paVO);

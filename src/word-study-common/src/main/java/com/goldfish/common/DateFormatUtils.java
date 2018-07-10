@@ -36,6 +36,14 @@ public class DateFormatUtils {
         return date;
     }
 
+    public static Date getNextday(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        date = calendar.getTime();
+        return date;
+    }
+
 
     /**
      * date1-date2
@@ -53,5 +61,15 @@ public class DateFormatUtils {
         else{
             return (int)(calendar1.getTimeInMillis()-calendar2.getTimeInMillis())/(1000*3600*24)+1;
         }
+    }
+
+    public static boolean isSameDay(Date date1,Date date2)
+    {
+        Calendar calendar1 = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+        calendar1.setTime(date1);
+        calendar2.setTime(date2);
+        return calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
+                && calendar1.get(Calendar.DAY_OF_YEAR) == calendar2.get(Calendar.DAY_OF_YEAR);
     }
 }
