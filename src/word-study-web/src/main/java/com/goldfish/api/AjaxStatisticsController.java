@@ -316,7 +316,7 @@ public class AjaxStatisticsController extends BaseController {
         if (classGrade != null) {
             int differenceDayNow = DateFormatUtils.getDateDifference(new Date(), classGrade.getStart());
             int differenceDay = DateFormatUtils.getDateDifference(classGrade.getEnd(), classGrade.getStart());
-            dayGap = differenceDayNow < differenceDay ? differenceDayNow : differenceDay;
+            dayGap = (differenceDayNow < differenceDay ? differenceDayNow : differenceDay) + 1;
         }else {
             dayGap = 0;
         }
