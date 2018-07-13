@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goldfish.dao.ClassGradeDao">
+
+    <resultMap id="ClassGrade-Map" type="com.goldfish.domain.ClassGrade">
+        <id property="id" column="id"/>
+        <result property="start" column="start"/>
+        <result property="end" column="end"/>
+        <result property="created" column="start"/>
+        <result property="modified" column="modified"/>
+    </resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+    <sql id="BEAN-COMMON-SQL">
+
+        <where>
+            <if test="id != null"> AND id = #{id}</if>
+
+        </where>
+
+    </sql>
+
+
+    <!-- 可以包含bean里面没有的字段-->
+    <sql id="MAP-COMMON-SQL">
+
+        <where>
+            <if test="id != null"> AND id = #{id}</if>
+
+        </where>
+
+    </sql>
+
+    <sql id="ORDER-SQL">
+        order by id desc
+    </sql>
+
+
+    <sql id="All-FIELDS">
+        id,start,end
+    </sql>
+
+    <insert id="addClassGrade" parameterType="com.goldfish.domain.ClassGrade">
+        insert into class_grade (start,end)
+        values(#{start},#{end})
+
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            select last_insert_id() as ID from dual
+        </selectKey>
+
+    </insert>
+
+
+    <update id="updateClassGrade" parameterType="com.goldfish.domain.ClassGrade" >
+        update  class_grade
+        <set>
+            <if test="start !=null"> start = #{start},</if>
+            <if test="end !=null"> end = #{end},</if>
+
+        </set>
+        where id = #{id}
+    </update>
+
+
+
+
+
+    <delete id="deleteClassGrade" parameterType="com.goldfish.domain.ClassGrade">
+        DELETE FROM class_grade WHERE id = #{id}
+    </delete>
+    <select id="getClassGradeById" resultMap="ClassGrade-Map" parameterType="java.lang.Long">
+        SELECT  <include refid="All-FIELDS"/> FROM class_grade	WHERE id = #{id}
+    </select>
+
+
+
+
+    <select id="getUnique" resultMap="ClassGrade-Map" parameterType="com.goldfish.domain.ClassGrade">
+        SELECT   <include refid="All-FIELDS"/> FROM class_grade
+        <include refid="BEAN-COMMON-SQL" /> limit 1
+    </select>
+
+
+    <select id="getListByExample" resultMap="ClassGrade-Map" parameterType="com.goldfish.domain.ClassGrade">
+        SELECT   <include refid="All-FIELDS"/> FROM class_grade
+        <include refid="BEAN-COMMON-SQL" />
+    </select>
+
+
+    <select id="getClassGradeByPage" resultMap="ClassGrade-Map" parameterType="java.util.HashMap">
+        <![CDATA[
+			SELECT  id,start,end FROM class_grade
+		]]>
+        <include refid="MAP-COMMON-SQL" />
+        <include refid="ORDER-SQL" />
+        LIMIT #{startIndex},#{pageSize}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        <![CDATA[
+			SELECT COUNT(1) FROM class_grade
+		]]>
+
+        <include refid="MAP-COMMON-SQL" />
+    </select>
+
+
+
+</mapper>
