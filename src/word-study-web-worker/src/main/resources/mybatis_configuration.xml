@@ -6,6 +6,7 @@
 	<typeAliases>
 
         <typeAlias type="com.goldfish.domain.ActivateCode" alias="ActivateCode"/>
+        <typeAlias type="com.goldfish.domain.ClassGrade" alias="ClassGrade"/>
         <typeAlias type="com.goldfish.domain.Course" alias="Course"/>
         <typeAlias type="com.goldfish.domain.CourseStudy" alias="CourseStudy"/>
         <typeAlias type="com.goldfish.domain.Exam" alias="Exam"/>
@@ -31,6 +32,7 @@
      <mappers>
 
          <mapper resource="sqlmap/ActivateCode.xml"/>
+         <mapper resource="sqlmap/ClassGrade.xml"/>
          <mapper resource="sqlmap/Course.xml"/>
          <mapper resource="sqlmap/CourseStudy.xml"/>
          <mapper resource="sqlmap/Exam.xml"/>

@@ -10,6 +10,11 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 
+    <bean id="classGradeDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.goldfish.dao.ClassGradeDao"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
 	<bean id="courseDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.goldfish.dao.CourseDao"/>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />

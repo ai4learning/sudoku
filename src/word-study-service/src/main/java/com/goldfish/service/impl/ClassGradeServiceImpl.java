@@ -30,8 +30,6 @@ public class ClassGradeServiceImpl implements ClassGradeService {
         try{
 
             classGrade.setCreated(new Date());
-
-
             classGrade.setModified(new Date());
 
             result.addDefaultModel(classGradeManager.addClassGrade(classGrade));

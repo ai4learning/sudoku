@@ -3,14 +3,18 @@
  */
 
 
- package com.goldfish.api;
+package com.goldfish.api;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.goldfish.common.DateFormatUtils;
+import com.goldfish.domain.ClassGrade;
+import com.goldfish.service.ClassGradeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 //import org.springframework.web.bind.annotation.PathVariable;
@@ -28,68 +32,87 @@ import com.goldfish.domain.User;
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
-	
-	@Resource(name="userService")
-	private UserService userService;
 
+    @Resource(name = "userService")
+    private UserService userService;
+    @Resource
+    private ClassGradeService classGradeService;
 
-	@RequestMapping(value="manage",method={RequestMethod.GET,RequestMethod.POST})
-	public String manage(){
-		return "/user/manage";
-	}
-
-	
-	@RequestMapping(value="add",method={RequestMethod.GET,RequestMethod.POST})
-    public String add() {
-		return "/user/add";
+    @RequestMapping(value = "manage", method = {RequestMethod.GET, RequestMethod.POST})
+    public String manage() {
+        return "/user/manage";
     }
-    
-	
-	@RequestMapping(value="doAdd",method={RequestMethod.GET,RequestMethod.POST})
-	 public @ResponseBody Map<String,Object> doAdd(User user, ModelMap context) {
-	    		CommonResult<User> result =userService.addUser(user);
-				return result.getReturnMap();
-	    }
-	 
-	 
-
-	@RequestMapping(value="update",method={RequestMethod.GET,RequestMethod.POST})
-	public String update(User user, ModelMap context) {
-		CommonResult<User> result = userService.getUserById(user.getId());
-		this.toVm(result, context);
-		return "/user/update";
-	}
-	    
-		
-		@RequestMapping(value="doUpdate",method={RequestMethod.GET,RequestMethod.POST})
-	    public @ResponseBody Map<String,Object> doUpdate(User user, ModelMap context) {
-			CommonResult<User> result = userService.updateUser(user);
-			return result.getReturnMap();
-	    }
-	    
-
-		@RequestMapping(value="view",method={RequestMethod.GET,RequestMethod.POST})
-		public String view(User user, ModelMap context) {
-			CommonResult<User> result = userService.getUserById(user.getId());
-			this.toVm(result, context);
-			return "/user/view";
-	    }
-	   
-		
-		@RequestMapping(value="doDelete",method={RequestMethod.GET,RequestMethod.POST})
-	    public @ResponseBody  Map<String,Object>  doDelete(User user) {
-			CommonResult<User> result =userService.deleteUser(user.getId());
-			return result.getReturnMap();
-	    }
-	    
-		@RequestMapping(value="list",method={RequestMethod.GET,RequestMethod.POST})
-	    public String list(HttpServletRequest request, ModelMap context) {
-			int pageSize = this.getPageSize(request,20,200);
-            PageQuery pageQuery=new PageQuery(request,pageSize);
-            CommonResult<List<User>> result = userService.getUserByPage(pageQuery);
-			this.toVm(result, context);
-			return "/user/list";
-	    }
 
 
+    @RequestMapping(value = "add", method = {RequestMethod.GET, RequestMethod.POST})
+    public String add() {
+        return "/user/add";
+    }
+
+
+    @RequestMapping(value = "doAdd", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    Map<String, Object> doAdd(User user, ModelMap context) {
+        CommonResult<User> result = userService.addUser(user);
+        generateClassGrade(user);
+        return result.getReturnMap();
+    }
+
+
+    @RequestMapping(value = "update", method = {RequestMethod.GET, RequestMethod.POST})
+    public String update(User user, ModelMap context) {
+        CommonResult<User> result = userService.getUserById(user.getId());
+        this.toVm(result, context);
+        return "/user/update";
+    }
+
+
+    @RequestMapping(value = "doUpdate", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    Map<String, Object> doUpdate(User user, ModelMap context) {
+        CommonResult<User> result = userService.updateUser(user);
+        generateClassGrade(user);
+        return result.getReturnMap();
+    }
+
+
+    @RequestMapping(value = "view", method = {RequestMethod.GET, RequestMethod.POST})
+    public String view(User user, ModelMap context) {
+        CommonResult<User> result = userService.getUserById(user.getId());
+        this.toVm(result, context);
+        return "/user/view";
+    }
+
+
+    @RequestMapping(value = "doDelete", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    Map<String, Object> doDelete(User user) {
+        CommonResult<User> result = userService.deleteUser(user.getId());
+        return result.getReturnMap();
+    }
+
+    @RequestMapping(value = "list", method = {RequestMethod.GET, RequestMethod.POST})
+    public String list(HttpServletRequest request, ModelMap context) {
+        int pageSize = this.getPageSize(request, 20, 200);
+        PageQuery pageQuery = new PageQuery(request, pageSize);
+        CommonResult<List<User>> result = userService.getUserByPage(pageQuery);
+        this.toVm(result, context);
+        return "/user/list";
+    }
+
+    private void generateClassGrade(User user)
+    {
+        if (user != null && user.getCurrentClass() != null)
+        {
+            ClassGrade classGrade = classGradeService.getClassGradeById(user.getCurrentClass()).getDefaultModel();
+            if (classGrade == null)
+            {
+                ClassGrade newClassGrade = new ClassGrade();
+                newClassGrade.setId(user.getCurrentClass());
+                newClassGrade.setStart(DateFormatUtils.removeHourMinuteSecond(DateFormatUtils.getNextDay(new Date())));
+                newClassGrade.setEnd(DateFormatUtils.removeHourMinuteSecond(DateFormatUtils.getNextWeekDay(new Date())));
+                classGradeService.addClassGrade(newClassGrade);
+            }
+        }
+    }
 }

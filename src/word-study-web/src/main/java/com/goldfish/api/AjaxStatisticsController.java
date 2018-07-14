@@ -338,7 +338,7 @@ public class AjaxStatisticsController extends BaseController {
                 for (int i=0;i<dayGap;i++)
                 {
                     count += countStudentStudiedWordsByDay(student.getId().intValue(), sdf.format(date1));
-                    date1 = DateFormatUtils.getNextday(date1);
+                    date1 = DateFormatUtils.getNextDay(date1);
                 }
                 paVO.add(new PersonalAchievementVO(student.getNikeName(), count));
             }

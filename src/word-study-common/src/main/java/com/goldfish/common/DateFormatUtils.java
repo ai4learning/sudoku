@@ -1,5 +1,6 @@
 package com.goldfish.common;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,10 +37,18 @@ public class DateFormatUtils {
         return date;
     }
 
-    public static Date getNextday(Date date) {
+    public static Date getNextDay(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DAY_OF_MONTH, 1);
+        date = calendar.getTime();
+        return date;
+    }
+
+    public static Date getNextWeekDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, 8);
         date = calendar.getTime();
         return date;
     }
@@ -71,5 +80,18 @@ public class DateFormatUtils {
         calendar2.setTime(date2);
         return calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
                 && calendar1.get(Calendar.DAY_OF_YEAR) == calendar2.get(Calendar.DAY_OF_YEAR);
+    }
+
+    public static Date removeHourMinuteSecond(Date date)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = sdf.format(date);
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTime(sdf.parse(dateString));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return calendar.getTime();
     }
 }

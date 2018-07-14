@@ -11,7 +11,6 @@
         <result property="modified" column="modified"/>
     </resultMap>
 
-
     <!-- 字段和bean里面一致，否则报错-->
     <sql id="BEAN-COMMON-SQL">
 
@@ -43,12 +42,8 @@
     </sql>
 
     <insert id="addClassGrade" parameterType="com.goldfish.domain.ClassGrade">
-        insert into class_grade (start,end)
-        values(#{start},#{end})
-
-        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
-            select last_insert_id() as ID from dual
-        </selectKey>
+        insert into class_grade (id,start,end,created,modified)
+        values(#{id},#{start},#{end},#{created},#{modified})
 
     </insert>
 
@@ -56,6 +51,7 @@
     <update id="updateClassGrade" parameterType="com.goldfish.domain.ClassGrade" >
         update  class_grade
         <set>
+            <if test="id !=null"> id = #{id},</if>
             <if test="start !=null"> start = #{start},</if>
             <if test="end !=null"> end = #{end},</if>
 
