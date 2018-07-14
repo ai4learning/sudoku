@@ -39,6 +39,8 @@
     		<if test="parentId != null"> AND parent_id = #{parentId}</if>
     		<if test="userState != null"> AND user_state = #{userState}</if>
     		<if test="state != null"> AND state = #{state}</if>
+    		<if test="currentClass != null"> AND current_class = #{currentClass}</if>
+
     		
     		</where>
     	 
