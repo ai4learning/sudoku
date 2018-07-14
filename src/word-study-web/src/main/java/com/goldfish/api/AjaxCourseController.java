@@ -24,9 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -624,6 +622,12 @@ public class AjaxCourseController extends BaseController implements DisposableBe
                     }
                 });
             }
+            wordStudyVOs.sort(new Comparator<UnitStudyVO>() {
+                @Override
+                public int compare(UnitStudyVO o1, UnitStudyVO o2) {
+                    return o1.getVocIndex()-o2.getVocIndex();
+                }
+            });
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e, "获取单元学习信息失败");
         }
