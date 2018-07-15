@@ -781,7 +781,6 @@ public class AjaxExamController extends AjaxErrorBookController{
         TestArea testArea1 = TestArea.getTestArea(testArea);
         wordStudyQuery.setMemoryLevel(testArea1.getCorrespondingMemoryLevel().getLevel());
         wordStudyQuery.setStudentId(user.getId().intValue());
-        wordStudyQuery.setUserCode(user.getUserCode());
         List<WordStudy> wordStudyList = wordStudyService.getStudiedWords(wordStudyQuery).getDefaultModel();
         if (wordStudyList == null) {
             return examVO;
@@ -792,12 +791,17 @@ public class AjaxExamController extends AjaxErrorBookController{
         String[] questionTypesArray = questionTypes.split(",");
         for (String str : questionTypesArray)
         {
+            List<Question> questionList = new ArrayList<>();
             Question questionQuery = new Question();
             QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber(Integer.valueOf(str));
             questionQuery.setType(qt.getFullName());
-            List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
-            if (questionList == null) {
-                continue;
+            questionQuery.setState(State.VALID.getState());
+            if (user.getLessonIds() != null) {
+                String[] lessonIds = user.getLessonIds().split(",");
+                for (String lessonId : lessonIds) {
+                    questionQuery.setLessonId(Integer.valueOf(lessonId));
+                    questionList.addAll(questionService.getListByExample(questionQuery).getDefaultModel());
+                }
             }
             Collections.shuffle(questionList);
             List nowList = ecList;
