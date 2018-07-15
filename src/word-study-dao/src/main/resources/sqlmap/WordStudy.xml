@@ -78,6 +78,10 @@
 	<sql id="ORDER-SQL">
 	 order by id desc
 	</sql>
+
+	<sql id="ORDER-ID-ASC">
+		order by id asc
+	</sql>
 	
 
 	<sql id="All-FIELDS">
@@ -146,7 +150,9 @@
 
 	<select id="getUnique" resultMap="WordStudy-Map" parameterType="com.goldfish.domain.WordStudy">
 		SELECT   <include refid="All-FIELDS"/> FROM word_study
-            <include refid="BEAN-COMMON-SQL" /> limit 1
+		<include refid="BEAN-COMMON-SQL" />
+		<include refid="ORDER-ID-ASC" />
+		limit 1
 	</select>
 
 
