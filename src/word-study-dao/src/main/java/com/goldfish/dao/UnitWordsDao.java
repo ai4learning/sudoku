@@ -89,4 +89,5 @@ public interface UnitWordsDao {
      */
     public int count(Map<String,Object> paramMap);
 
+    List<UnitWords> getUnitWordsAsc(Map<String, Object> params);
 }

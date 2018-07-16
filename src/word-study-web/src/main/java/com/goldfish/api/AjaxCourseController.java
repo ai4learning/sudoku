@@ -489,7 +489,6 @@ public class AjaxCourseController extends BaseController implements DisposableBe
     @ResponseBody
     RichUnitStudyVO doAjaxGetUnit(Integer unit, String moduleCode, ModelMap context) {
         RichUnitStudyVO richUnitStudyVO = new RichUnitStudyVO();
-
         try {
             // 1.获取登录信息
             String trainingCode = LoginContext.getLoginContext().getTrainingCode();
@@ -517,7 +516,6 @@ public class AjaxCourseController extends BaseController implements DisposableBe
                 richUnitStudyVO.setMsg("不存在该学生单元学习记录");
                 return richUnitStudyVO;
             }
-
             // 3.填充课本情况
              /*设置课程信息*/
             Course courseQuery = new Course();
@@ -556,14 +554,13 @@ public class AjaxCourseController extends BaseController implements DisposableBe
                 }
             }
             richUnitStudyVO.setStudyPos(currentPositionVO);
-
             /** 6.填充单元内单词 **/
             // 3.1查询单元内单词
             PageQuery pageQuery = new PageQuery(0, 1000000);
             pageQuery.setParam("lessonId", course.getBookNumber());
             pageQuery.setParam("unitNbr", unitStudy.getUnitNbr());
             pageQuery.setParam("state", State.VALID.getState());
-            CommonResult<List<UnitWords>> unitWordsResult = unitWordsService.getUnitWordsByPage(pageQuery);
+            CommonResult<List<UnitWords>> unitWordsResult = unitWordsService.getUnitWordsAsc(pageQuery);
             if (unitWordsResult == null || !unitStudyResult.isSuccess()) {
                 LogTypeEnum.DEFAULT.error("获取单元内单词失败");
                 richUnitStudyVO.setMsg("获取单元内单词失败");
@@ -575,7 +572,6 @@ public class AjaxCourseController extends BaseController implements DisposableBe
                 richUnitStudyVO.setMsg("单元内单词为空");
                 return richUnitStudyVO;
             }
-
             // 遍历，封装单元内单词学习情况
             List<UnitStudyVO> wordStudyVOs = new ArrayList<UnitStudyVO>(unitWords.size());
             richUnitStudyVO.setData(wordStudyVOs);

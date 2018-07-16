@@ -71,6 +71,11 @@ public class UnitWordsManagerImpl implements UnitWordsManager {
 		return unitWordsDao.count( pageQuery.getParams());
     }
 
+    @Override
+    public List<UnitWords> getUnitWordsAsc(PageQuery pageQuery) {
+        return unitWordsDao.getUnitWordsAsc( pageQuery.getParams());
+    }
+
     /******* getter and setter ***/
     
 	public UnitWordsDao getUnitWordsDao() {

@@ -88,5 +88,5 @@ public interface UnitWordsService {
     public int count(PageQuery pageQuery);
 
 
-
+    CommonResult<List<UnitWords>> getUnitWordsAsc(PageQuery pageQuery);
 }

@@ -150,6 +150,25 @@ public class UnitWordsServiceImpl implements UnitWordsService {
 		return unitWordsManager.count(pageQuery);
 	}
 
+	@Override
+	public CommonResult<List<UnitWords>> getUnitWordsAsc(PageQuery pageQuery) {
+		CommonResult<List<UnitWords>> result = new CommonResult<List<UnitWords>>();
+		try {
+			int totalCount = this.count(pageQuery);
+			if (totalCount > 0) {
+				pageQuery.setTotalCount(totalCount);
+				List<UnitWords> list = unitWordsManager.getUnitWordsAsc(pageQuery);
+				result.addDefaultModel("list", list);
+				result.addModel("pageQuery", pageQuery);
+			}
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("分页获取 单元单词失败", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+
 
 	/******* getter and setter ***/
 	public UnitWordsManager getUnitWordsManager() {

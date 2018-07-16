@@ -60,6 +60,10 @@
 	<sql id="ORDER-SQL">
 	 order by id desc
 	</sql>
+
+	<sql id="ORDER-SQL-ASC">
+		order by id asc
+	</sql>
 	
 
 	<sql id="All-FIELDS">
@@ -130,6 +134,15 @@
 		]]>
             <include refid="MAP-COMMON-SQL" />
             <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+
+	<select id="getUnitWordsAsc" resultMap="UnitWords-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  id,unit_code,lesson_id,unit_nbr,fst_class_id,unit,voc_code,voc_index,word_id,spelling,meaning,state,modified FROM unit_words
+		]]>
+		<include refid="MAP-COMMON-SQL" />
+		<include refid="ORDER-SQL-ASC" />
 		LIMIT #{startIndex},#{pageSize}
 	</select>
 	

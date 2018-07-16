@@ -88,4 +88,5 @@ public interface UnitWordsManager {
      */
     public int count(PageQuery pageQuery);
 
+ List<UnitWords> getUnitWordsAsc(PageQuery pageQuery);
 }
