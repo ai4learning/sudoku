@@ -6,4 +6,5 @@ package com.goldfish.concurrent.threadpool;
 public final class ThreadConstant {
 
     public static final String Course_Learning = "CourseLearning";
+    public static final String Exam = "Exam";
 }
