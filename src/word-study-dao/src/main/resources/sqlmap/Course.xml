@@ -50,6 +50,7 @@
 	   
 		<where>
 		<if test="id != null"> AND id = #{id}</if>
+		<if test="bookNumber != null"> AND book_number = #{bookNumber}</if>
 		<if test="type != null"> AND type = #{type}</if>
 		<if test="moduleCode != null"> AND module_code = #{moduleCode}</if>
 		<if test="bookName != null"> AND book_name = #{bookName}</if>
