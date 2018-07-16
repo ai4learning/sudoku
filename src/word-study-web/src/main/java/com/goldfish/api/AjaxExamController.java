@@ -766,10 +766,118 @@ public class AjaxExamController extends AjaxErrorBookController{
         "condition":0
     }
      */
-    @RequestMapping(value = "GetExam", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value="GetExam",method={RequestMethod.GET,RequestMethod.POST})
+    public @ResponseBody
+    ExamVO doGetExam(Integer testArea, Integer questionNbr, String questionTypes, ModelMap context) {
+        ExamVO examVO = new ExamVO();
+        List<QuestionVO> ecList = new ArrayList<>(questionNbr);
+        List<QuestionVO> ceList = new ArrayList<>(questionNbr);
+        List<QuestionVO> lcList = new ArrayList<>(questionNbr);
+        List<Listen2WriteVO> lwList = new ArrayList<>(questionNbr);
+        // 1.装填用户信息
+        User user = this.getUserInfo();
+        if (user == null) {
+            examVO.setCondition(-1);
+            return examVO;
+        }
+        //2.根据用户信息和testArea查询单词列表
+        WordStudy wordStudyQuery = new WordStudy();
+        TestArea testArea1 = TestArea.getTestArea(testArea);
+        wordStudyQuery.setMemoryLevel(testArea1.getCorrespondingMemoryLevel().getLevel());
+        wordStudyQuery.setStudentId(user.getId().intValue());
+        List<WordStudy> wordStudyList = wordStudyService.getStudiedWords(wordStudyQuery).getDefaultModel();
+        if (wordStudyList == null) {
+            return examVO;
+        }
+        Collections.shuffle(wordStudyList);
+        //3.根据questionTypes和questionNbr出题
+        //testArea=0&questionNbr=10&questionTypes=0,1,2
+        String[] questionTypesArray = questionTypes.split(",");
+        for (String str : questionTypesArray)
+        {
+            List<Question> questionList = new ArrayList<>();
+            Question questionQuery = new Question();
+            QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber(Integer.valueOf(str));
+            questionQuery.setType(qt.getFullName());
+            questionQuery.setState(State.VALID.getState());
+            if (user.getLessonIds() != null) {
+                String[] lessonIds = user.getLessonIds().split(",");
+                for (String lessonId : lessonIds) {
+                    questionQuery.setLessonId(Integer.valueOf(lessonId));
+                    questionList.addAll(questionService.getListByExample(questionQuery).getDefaultModel());
+                }
+            }
+            Collections.shuffle(questionList);
+            List nowList = ecList;
+            //获取当前是在往哪个List中写
+            if (qt.equals(QuestionTypes.EN2CH)) {
+                nowList = ecList;
+            } else if(qt.equals(QuestionTypes.CH2EN)) {
+                nowList = ceList;
+            } else if(qt.equals(QuestionTypes.LISTEN2CH)) {
+                nowList = lcList;
+            } else if(qt.equals(QuestionTypes.LISTEN2WRITE)) {
+                nowList = lwList;
+            }
+            for (Question question : questionList)
+            {
+                //如果写够了就break
+                if (nowList.size() >= questionNbr) {
+                    break;
+                }
+                for (WordStudy wordStudy : wordStudyList)
+                {
+                    if (question.getWordId().equals(wordStudy.getWordId()))
+                    {
+                        if (qt.equals(QuestionTypes.LISTEN2WRITE) && lwList.size()<questionNbr)
+                        {
+                            Listen2WriteVO vo = new Listen2WriteVO();
+                            vo.setAnswerIndex(question.getAnswerIndex());
+                            vo.setQuestion(question.getQuestion());
+                            vo.setSpelling(question.getSpelling());
+                            vo.setVocCode(question.getVocCode());
+                            lwList.add(vo);
+                        }
+                        else
+                        {
+                            ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
+                            QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
+                                    ,question.getVocCode(),question.getQuestion(),choicesVO,question.getId());
+                            if (qt.equals(QuestionTypes.EN2CH) && ecList.size()<questionNbr)
+                            {
+                                ecList.add(questionVO);
+                            }
+                            else if (qt.equals(QuestionTypes.CH2EN) && ceList.size()<questionNbr)
+                            {
+                                ceList.add(questionVO);
+                            }
+                            else if (qt.equals(QuestionTypes.LISTEN2CH) && lcList.size()<questionNbr)
+                            {
+                                lcList.add(questionVO);
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        examVO.setDataEn2Ch(ecList);
+        examVO.setDataCh2En(ceList);
+        examVO.setDataListen2Ch(lcList);
+        examVO.setDataListen2Write(lwList);
+        examVO.setCondition(0);
+        examVO.setMsg("success");
+        examVO.setSuccess(true);
+        return examVO;
+    }
+
+
+
+
+    @RequestMapping(value = "GetExam2", method = {RequestMethod.GET, RequestMethod.POST})
     public
     @ResponseBody
-    ExamVO doGetExam(Integer testArea, Integer questionNbr, String questionTypes, ModelMap context) {
+    ExamVO doGetExam2(Integer testArea, Integer questionNbr, String questionTypes, ModelMap context) {
         ExamVO examVO = new ExamVO();
         // 1.装填用户信息
         User user = this.getUserInfo();
