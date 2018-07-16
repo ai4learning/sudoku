@@ -839,15 +839,15 @@ public class AjaxExamController extends AjaxErrorBookController{
         questionQuery.setQuestionType(questionType);
         questionQuery.setState(State.VALID.getState());
         // 试题列表
-//        List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
-        List<Question> questionList = new LinkedList<>();
-        if (user.getLessonIds() != null) {
-            String[] lessonIds = user.getLessonIds().split(",");
-            for (String lessonId : lessonIds) {
-                questionQuery.setLessonId(Integer.valueOf(lessonId));
-                questionList.addAll(questionService.getListByExample(questionQuery).getDefaultModel());
-            }
-        }
+        List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
+//        List<Question> questionList = new LinkedList<>();
+//        if (user.getLessonIds() != null) {
+//            String[] lessonIds = user.getLessonIds().split(",");
+//            for (String lessonId : lessonIds) {
+//                questionQuery.setLessonId(Integer.valueOf(lessonId));
+//                questionList.addAll(questionService.getListByExample(questionQuery).getDefaultModel());
+//            }
+//        }
         if (user.getLessonIds() != null) {
             String[] lessonIds = user.getLessonIds().split(",");
             for (String lessonId : lessonIds) {
