@@ -146,7 +146,7 @@
         
 		<select class="forms_select input-medium" name="state" id="state">
 				<option value="1" #if($exam.state==1) selected #end>有效</option>
-				<option value="2" #if($exam.state==2) selected #end>无效</option>
+				<option value="5" #if($exam.state==5) selected #end>无效</option>
 </select>
 		
     
