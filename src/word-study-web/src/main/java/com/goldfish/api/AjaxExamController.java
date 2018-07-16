@@ -783,11 +783,11 @@ public class AjaxExamController extends AjaxErrorBookController{
             return examVO;
         }
         // 3.并行查询4种类型quesions，并并行生成问题列表
-        getQuestions(questionNbr, questionTypes, wordStudyList, examVO);
+        getQuestions(questionNbr, questionTypes, wordStudyList, examVO, user);
         return examVO;
     }
 
-    private void getQuestions(final Integer questionNbr, String questionTypes, final List<WordStudy> wordStudyList, ExamVO examVO) {
+    private void getQuestions(final Integer questionNbr, String questionTypes, final List<WordStudy> wordStudyList, ExamVO examVO, User user) {
         try {
             List<QuestionVO> ecList = new ArrayList<>(questionNbr);
             List<QuestionVO> ceList = new ArrayList<>(questionNbr);
@@ -795,14 +795,14 @@ public class AjaxExamController extends AjaxErrorBookController{
             List<Listen2WriteVO> lwList = new ArrayList<>(questionNbr);
             //testArea=0&questionNbr=10&questionTypes=0,1,2
             String[] questionTypesArray = questionTypes.split(",");
-            // 遍历questionType分别获取：0，1，2, 3
+            // 遍历questionType分别获取：0，1，2, 3，并行获取4类试题
             Map<Integer, FutureTask<List>> questionMap = new ConcurrentHashMap<>();
             for (String str : questionTypesArray) {
                 Integer questionType = Integer.valueOf(str);
                 FutureTask<List> getQuestionsTask = new FutureTask<List>(new Callable() {
                     @Override
                     public List call() throws Exception {
-                        return doGetQuestions(questionType, questionNbr, ecList, ceList, lcList, lwList, wordStudyList);
+                        return doGetQuestions(questionType, questionNbr, ecList, ceList, lcList, lwList, wordStudyList, user);
                     }
                 });
                 questionMap.put(questionType, getQuestionsTask);
@@ -833,10 +833,28 @@ public class AjaxExamController extends AjaxErrorBookController{
         }
     }
 
-    private List<QuestionVO> doGetQuestions(Integer questionType, Integer questionNbr, List<QuestionVO> ecList, List<QuestionVO> ceList, List<QuestionVO> lcList, List<Listen2WriteVO> lwList, List<WordStudy> wordStudyList) {
+    private List<QuestionVO> doGetQuestions(Integer questionType, Integer questionNbr, List<QuestionVO> ecList, List<QuestionVO> ceList, List<QuestionVO> lcList, List<Listen2WriteVO> lwList, List<WordStudy> wordStudyList, User user) {
+        QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber(questionType);
         Question questionQuery = new Question();
         questionQuery.setQuestionType(questionType);
-        QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber(questionType);
+        questionQuery.setState(State.VALID.getState());
+        // 试题列表
+//        List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
+        List<Question> questionList = new LinkedList<>();
+        if (user.getLessonIds() != null) {
+            String[] lessonIds = user.getLessonIds().split(",");
+            for (String lessonId : lessonIds) {
+                questionQuery.setLessonId(Integer.valueOf(lessonId));
+                questionList.addAll(questionService.getListByExample(questionQuery).getDefaultModel());
+            }
+        }
+        if (user.getLessonIds() != null) {
+            String[] lessonIds = user.getLessonIds().split(",");
+            for (String lessonId : lessonIds) {
+                questionQuery.setLessonId(Integer.valueOf(lessonId));
+                questionList.addAll(questionService.getListByExample(questionQuery).getDefaultModel());
+            }
+        }
         List nowList = ecList;
         //获取当前是在往哪个List中写
         if (qt.equals(QuestionTypes.EN2CH)) {
@@ -848,8 +866,6 @@ public class AjaxExamController extends AjaxErrorBookController{
         } else if (qt.equals(QuestionTypes.LISTEN2WRITE)) {
             nowList = lwList;
         }
-        // 试题列表
-        List<Question> questionList = questionService.getListByExample(questionQuery).getDefaultModel();
         if (questionList == null) {
             return nowList;
         }
