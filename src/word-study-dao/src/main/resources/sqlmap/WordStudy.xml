@@ -151,7 +151,7 @@
 	<select id="getUnique" resultMap="WordStudy-Map" parameterType="com.goldfish.domain.WordStudy">
 		SELECT   <include refid="All-FIELDS"/> FROM word_study
 		<include refid="BEAN-COMMON-SQL" />
-		<include refid="ORDER-ID-ASC" />
+		<include refid="ORDER-SQL" />
 		limit 1
 	</select>
 
