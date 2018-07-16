@@ -61,7 +61,8 @@
 		<select class="forms_select input-medium" name="testType" id="testType_search">
 			<option value="">全部</option>
 			
-				<option value="1">单元测试；2.自主测试；</option>
+				<option value="1">单元测试</option>
+				<option value="2">自主测试</option>
 		</select>
 	
     

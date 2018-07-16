@@ -39,8 +39,9 @@
 			<td>
         
 			
-				#if($item.testType==1)<span class="">单元测试；2.自主测试；</span> #end	
-			
+				#if($item.testType==1)<span class="">单元测试</span> #end
+				#if($item.testType==2)<span class="">自主测试</span> #end
+
 	
     </td>
 			<td>$!item.resultScore</td>

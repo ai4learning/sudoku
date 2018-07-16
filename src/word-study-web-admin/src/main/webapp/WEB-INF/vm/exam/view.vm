@@ -79,7 +79,8 @@
 			
         
 		<select class="forms_select input-medium form-control" name="testType" id="testType" disabled>
-						<option value="1" #if($exam.testType==1) selected  #end>单元测试；2.自主测试；</option>
+						<option value="1" #if($exam.testType==1) selected  #end>单元测试</option>
+						<option value="2" #if($exam.testType==2) selected  #end>自主测试</option>
 
 		</select>
 	
