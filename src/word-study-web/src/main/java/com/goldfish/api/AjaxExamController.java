@@ -766,99 +766,119 @@ public class AjaxExamController extends AjaxErrorBookController{
         "condition":0
     }
      */
+    /**
+     *  TODO：此处生词熟词均按照熟词出题。因为MemoryLevel在Mybatis的XML里没带进来。但实际是按照studied字段来选择用户学过的单词来出题。
+     *  为了避免问题。此处先这样写，不影响使用。
+     */
     @RequestMapping(value="GetExam",method={RequestMethod.GET,RequestMethod.POST})
     public @ResponseBody
     ExamVO doGetExam(Integer testArea, Integer questionNbr, String questionTypes, ModelMap context) {
         ExamVO examVO = new ExamVO();
+        String[] questionTypesArray = questionTypes.split(",");
         List<QuestionVO> ecList = new ArrayList<>(questionNbr);
         List<QuestionVO> ceList = new ArrayList<>(questionNbr);
         List<QuestionVO> lcList = new ArrayList<>(questionNbr);
         List<Listen2WriteVO> lwList = new ArrayList<>(questionNbr);
         // 1.装填用户信息
         User user = this.getUserInfo();
+        //性能原因，一次只获取一个lesson下的单词和试题。
+        int nowLessonId = -1;
         if (user == null) {
             examVO.setCondition(-1);
             return examVO;
         }
+        if (user.getLessonIds() == null)
+        {
+            examVO.setCondition(0);
+            return examVO;
+        }
+        List<String> lessonIds = Arrays.asList(user.getLessonIds().split(","));
+        Collections.shuffle(lessonIds);
         //2.根据用户信息和testArea查询单词列表
         WordStudy wordStudyQuery = new WordStudy();
+        List<WordStudy> wordStudyList = new ArrayList<>();
         TestArea testArea1 = TestArea.getTestArea(testArea);
         wordStudyQuery.setMemoryLevel(testArea1.getCorrespondingMemoryLevel().getLevel());
         wordStudyQuery.setStudentId(user.getId().intValue());
-        List<WordStudy> wordStudyList = wordStudyService.getStudiedWords(wordStudyQuery).getDefaultModel();
-        if (wordStudyList == null) {
-            return examVO;
-        }
-        Collections.shuffle(wordStudyList);
-        //3.根据questionTypes和questionNbr出题
-        //testArea=0&questionNbr=10&questionTypes=0,1,2
-        String[] questionTypesArray = questionTypes.split(",");
-        for (String str : questionTypesArray)
+        //防止出现用户的这个lesson根本没学过，导致出不来题
+        for (String lessonString : lessonIds)
         {
-            List<Question> questionList = new ArrayList<>();
-            Question questionQuery = new Question();
-            QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber(Integer.valueOf(str));
-            questionQuery.setType(qt.getFullName());
-            questionQuery.setState(State.VALID.getState());
-            if (user.getLessonIds() != null) {
-                String[] lessonIds = user.getLessonIds().split(",");
-                for (String lessonId : lessonIds) {
-                    questionQuery.setLessonId(Integer.valueOf(lessonId));
-                    questionList.addAll(questionService.getListByExample(questionQuery).getDefaultModel());
-                }
+            nowLessonId = Integer.valueOf(lessonString);
+            wordStudyQuery.setLessonId(nowLessonId);
+            wordStudyList = wordStudyService.getStudiedWords(wordStudyQuery).getDefaultModel();
+
+            if (wordStudyList == null || wordStudyList.isEmpty()) {
+                continue;
             }
-            Collections.shuffle(questionList);
-            List nowList = ecList;
-            //获取当前是在往哪个List中写
-            if (qt.equals(QuestionTypes.EN2CH)) {
-                nowList = ecList;
-            } else if(qt.equals(QuestionTypes.CH2EN)) {
-                nowList = ceList;
-            } else if(qt.equals(QuestionTypes.LISTEN2CH)) {
-                nowList = lcList;
-            } else if(qt.equals(QuestionTypes.LISTEN2WRITE)) {
-                nowList = lwList;
-            }
-            for (Question question : questionList)
+            Collections.shuffle(wordStudyList);
+            //3.根据questionTypes和questionNbr出题
+            //testArea=0&questionNbr=10&questionTypes=0,1,2
+            for (String str : questionTypesArray)
             {
-                //如果写够了就break
-                if (nowList.size() >= questionNbr) {
-                    break;
+                List<Question> questionList = new ArrayList<>();
+                Question questionQuery = new Question();
+                QuestionTypes qt = QuestionTypes.getQuestionTypesByNumber(Integer.valueOf(str));
+                questionQuery.setType(qt.getFullName());
+                questionQuery.setState(State.VALID.getState());
+                questionQuery.setLessonId(nowLessonId);
+                questionList = questionService.getListByExample(questionQuery).getDefaultModel();
+                Collections.shuffle(questionList);
+                List nowList = ecList;
+                //获取当前是在往哪个List中写
+                if (qt.equals(QuestionTypes.EN2CH)) {
+                    nowList = ecList;
+                } else if(qt.equals(QuestionTypes.CH2EN)) {
+                    nowList = ceList;
+                } else if(qt.equals(QuestionTypes.LISTEN2CH)) {
+                    nowList = lcList;
+                } else if(qt.equals(QuestionTypes.LISTEN2WRITE)) {
+                    nowList = lwList;
                 }
-                for (WordStudy wordStudy : wordStudyList)
+                for (Question question : questionList)
                 {
-                    if (question.getWordId().equals(wordStudy.getWordId()))
-                    {
-                        if (qt.equals(QuestionTypes.LISTEN2WRITE) && lwList.size()<questionNbr)
-                        {
-                            Listen2WriteVO vo = new Listen2WriteVO();
-                            vo.setAnswerIndex(question.getAnswerIndex());
-                            vo.setQuestion(question.getQuestion());
-                            vo.setSpelling(question.getSpelling());
-                            vo.setVocCode(question.getVocCode());
-                            lwList.add(vo);
-                        }
-                        else
-                        {
-                            ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
-                            QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
-                                    ,question.getVocCode(),question.getQuestion(),choicesVO,question.getId());
-                            if (qt.equals(QuestionTypes.EN2CH) && ecList.size()<questionNbr)
-                            {
-                                ecList.add(questionVO);
-                            }
-                            else if (qt.equals(QuestionTypes.CH2EN) && ceList.size()<questionNbr)
-                            {
-                                ceList.add(questionVO);
-                            }
-                            else if (qt.equals(QuestionTypes.LISTEN2CH) && lcList.size()<questionNbr)
-                            {
-                                lcList.add(questionVO);
-                            }
-                        }
+                    //如果写够了就break
+                    if (nowList.size() >= questionNbr) {
                         break;
                     }
+                    for (WordStudy wordStudy : wordStudyList)
+                    {
+                        if (question.getWordId().equals(wordStudy.getWordId()))
+                        {
+                            if (qt.equals(QuestionTypes.LISTEN2WRITE) && lwList.size()<questionNbr)
+                            {
+                                Listen2WriteVO vo = new Listen2WriteVO();
+                                vo.setAnswerIndex(question.getAnswerIndex());
+                                vo.setQuestion(question.getQuestion());
+                                vo.setSpelling(question.getSpelling());
+                                vo.setVocCode(question.getVocCode());
+                                lwList.add(vo);
+                            }
+                            else
+                            {
+                                ChoicesVO choicesVO = new ChoicesVO(question.getChoices());
+                                QuestionVO questionVO = new QuestionVO(question.getAnswerIndex(),question.getSpelling()
+                                        ,question.getVocCode(),question.getQuestion(),choicesVO,question.getId());
+                                if (qt.equals(QuestionTypes.EN2CH) && ecList.size()<questionNbr)
+                                {
+                                    ecList.add(questionVO);
+                                }
+                                else if (qt.equals(QuestionTypes.CH2EN) && ceList.size()<questionNbr)
+                                {
+                                    ceList.add(questionVO);
+                                }
+                                else if (qt.equals(QuestionTypes.LISTEN2CH) && lcList.size()<questionNbr)
+                                {
+                                    lcList.add(questionVO);
+                                }
+                            }
+                            break;
+                        }
+                    }
                 }
+            }
+            if (ecList.size()+ceList.size()+lcList.size()+lwList.size() >= questionNbr*questionTypesArray.length)
+            {
+                break;
             }
         }
         examVO.setDataEn2Ch(ecList);
