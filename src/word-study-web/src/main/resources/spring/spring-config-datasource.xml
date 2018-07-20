@@ -9,7 +9,7 @@
         <property name="maxWait" value="30000" />
         <property name="maxIdle" value="30" />
         <property name="minIdle" value="1" />
-        <property name="testOnBorrow" value="false"></property>
+        <property name="testOnBorrow" value="true"></property>
         <property name="testWhileIdle" value="true"></property>
         <property name="validationQuery" value="select 1"></property>
         <property name="timeBetweenEvictionRunsMillis"><value>30000</value></property>
