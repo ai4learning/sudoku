@@ -95,7 +95,7 @@
 			<label class="col-sm-2 control-label" for="lessonIds">关联课程</label>
 			<div class="col-sm-7 controls">
 
-			<input type="text" class="form-control"  name="lessonIds" id="lessonIds" placeholder="请输入关联课程（如1,2,3）" maxlength="50" value="$!{user.lessonIds}"/>
+			<input type="text" class="form-control"  name="lessonIds" id="lessonIds" placeholder="请输入关联课程（如1,2,3）" maxlength="500" value="$!{user.lessonIds}"/>
 			</div>
 		</div>
 
