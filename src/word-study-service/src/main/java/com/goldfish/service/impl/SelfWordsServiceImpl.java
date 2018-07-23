@@ -7,6 +7,7 @@ import java.util.*;
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.State;
 import com.goldfish.constant.WordLibType;
+import com.goldfish.dao.cache.local.WordContext;
 import com.goldfish.domain.Course;
 import com.goldfish.domain.CourseStudy;
 import com.goldfish.domain.Word;
@@ -35,8 +36,6 @@ public class SelfWordsServiceImpl implements SelfWordsService {
     private static final Logger logger = Logger.getLogger(SelfWordsServiceImpl.class);
     private static final Integer UN_LIMIT = 1000000000;
     private static final ErrorBookInfo ERROR_BOOK_INFO = new ErrorBookInfo();
-
-
     @Resource(name = "selfWordsManager")
     private SelfWordsManager selfWordsManager;
     @Resource
@@ -45,6 +44,8 @@ public class SelfWordsServiceImpl implements SelfWordsService {
     private CourseManager courseManager;
     @Resource
     private CourseStudyManager courseStudyManager;
+    @Resource
+    private WordContext wordContext;
 
     @Override
     public CommonResult<SelfWords> addSelfWords(SelfWords selfWords) {
@@ -198,7 +199,7 @@ public class SelfWordsServiceImpl implements SelfWordsService {
             unitWordVO.setSpelling(err.getSpelling());
             unitWordVO.setIsCollected(false);
 
-            Word word = wordManager.getWordById(err.getWordId());
+            Word word = wordContext.getWord(err.getWordId());
             unitWordVO.setMeaning(word.getMeaning());
             unitWordVO.setSoundMarkUs(word.getSoundMarkUs());
             unitWordVOs.add(unitWordVO);

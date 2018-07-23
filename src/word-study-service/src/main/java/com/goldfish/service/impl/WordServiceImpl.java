@@ -5,6 +5,8 @@ package com.goldfish.service.impl;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
+
+import com.goldfish.dao.cache.local.WordContext;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
@@ -27,6 +29,9 @@ public class WordServiceImpl implements WordService {
 	
 	@Resource(name="wordManager")
 	private WordManager wordManager;
+
+	@Resource
+	private WordContext wordContext;
     
     @Override
     public CommonResult<Word> addWord(Word word) {
@@ -83,7 +88,7 @@ public class WordServiceImpl implements WordService {
         public CommonResult<Word> getWordById(Integer id) {
 		CommonResult<Word> result = new CommonResult<Word>();
 		try {
-			result.addDefaultModel("word", wordManager.getWordById(id));
+			result.addDefaultModel("word", wordContext.getWord(id));
 			result.setSuccess(true);
 		} catch (Exception e) {
 			logger.error("根据主键获取 单词库失败", e);

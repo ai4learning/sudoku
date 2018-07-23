@@ -73,8 +73,8 @@ public class BaseController {
 
     protected LoginRecord getLoginRecord() {
         LoginContext loginContext = LoginContext.getLoginContext();
-        if (loginContext == null || org.apache.commons.lang3.StringUtils.isEmpty(loginContext.getTrainingId()) ||
-                org.apache.commons.lang3.StringUtils.isEmpty(loginContext.getTrainingCode())) {
+        if (loginContext == null || StringUtils.isEmpty(loginContext.getTrainingId()) ||
+                StringUtils.isEmpty(loginContext.getTrainingCode())) {
             return null;
         }
         try {
