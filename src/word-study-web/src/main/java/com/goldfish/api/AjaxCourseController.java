@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.goldfish.common.CommonResult;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.log.LogTypeEnum;
-import com.goldfish.concurrent.threadpool.ThreadConstant;
-import com.goldfish.concurrent.threadpool.ThreadPoolContext;
 import com.goldfish.constant.*;
 import com.goldfish.domain.*;
 import com.goldfish.service.*;
@@ -17,7 +15,6 @@ import com.goldfish.vo.user.UserBookVO;
 import com.goldfish.web.base.BaseController;
 import com.goldfish.web.interceptor.servlet.context.LoginContext;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.DisposableBean;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,24 +27,18 @@ import java.util.concurrent.*;
 /**
  * Created by John on 2018/5/20 0020.
  */
-public class AjaxCourseController extends BaseController implements DisposableBean  {
+public class AjaxCourseController extends BaseController {
     @Resource
     private CourseStudyService courseStudyService;
     @Resource
     private UnitStudyService unitStudyService;
-    @Resource
-    private UserService userService;
     @Resource
     private CourseService courseService;
     @Resource
     private UnitService unitService;
     @Resource
     private UnitWordsService unitWordsService;
-    @Resource
-    private WordStudyService wordStudyService;
-    @Resource
-    private WordService wordService;
-    private ThreadPoolExecutor threadPool = ThreadPoolContext.getThreadPool(ThreadConstant.Course_Learning, false);
+
 
 
     /**
@@ -497,133 +488,7 @@ public class AjaxCourseController extends BaseController implements DisposableBe
             LoginRecord loginRecord = loginRecordService.getLoginRecordByTraining(trainingId, trainingCode);
             richUnitStudyVO.setStudyToken(loginRecord.getStudyToken());
 
-            // 2.获取单元学习信息
-            UnitStudy unitStudyQuery = new UnitStudy();
-            unitStudyQuery.setStudentId(loginRecord.getUserId());
-            unitStudyQuery.setLessonCode(moduleCode);
-            unitStudyQuery.setUnitNbr(unit);
-            unitStudyQuery.setState(State.VALID.getState());
-            CommonResult<UnitStudy> unitStudyResult = unitStudyService.getUnique(unitStudyQuery);
-            if (unitStudyResult == null || !unitStudyResult.isSuccess()) {
-                LogTypeEnum.DEFAULT.error("获取学生单元学习情况异常");
-                richUnitStudyVO.setMsg("获取学生单元学习情况异常");
-                return richUnitStudyVO;
-            }
-
-            UnitStudy unitStudy = unitStudyResult.getDefaultModel();
-            if (unitStudy == null) {
-                LogTypeEnum.DEFAULT.info("不存在该学生单元学习记录");
-                richUnitStudyVO.setMsg("不存在该学生单元学习记录");
-                return richUnitStudyVO;
-            }
-            // 3.填充课本情况
-             /*设置课程信息*/
-            Course courseQuery = new Course();
-            courseQuery.setBookNumber(unitStudy.getLessonId());
-            courseQuery.setBookState(State.VALID.getState());
-            Course course = this.getCourseInfo(courseQuery, richUnitStudyVO);
-            if (course == null) {
-                return richUnitStudyVO;
-            }
-            BookStudyVO bookStudyVO = new BookStudyVO();
-            richUnitStudyVO.setBookInfo(bookStudyVO);
-
-            bookStudyVO.setId(course.getBookNumber());
-            bookStudyVO.setModuleCode(course.getModuleCode());
-            bookStudyVO.setBookName(course.getBookName());
-            bookStudyVO.setCoverImageUrl(course.getCoverImageUrl());
-            bookStudyVO.setTotalUnitNbr(course.getTotalUnitNbr());
-            bookStudyVO.setOutDate(course.isOutDate());
-
-            // 4.根据用户ID查询用户课程信息
-
-            CourseStudy courseStudy = this.getCourseStudy(loginRecord.getUserId(), course.getBookNumber(), richUnitStudyVO);
-            if (courseStudy == null) {
-                return richUnitStudyVO;
-            }
-            bookStudyVO.setStartFrom(courseStudy.getStartFrom());
-            bookStudyVO.setStudyMode(courseStudy.getStudyMode());
-
-            // 5.填充学习位置
-            /*设置当前单元内学习位置信息*/
-            CurrentStudyPositionVO currentPositionVO = new CurrentStudyPositionVO();
-            if (unitStudy.getIsAllFinished() != FinishState.COMPLETE.getState()) {
-                currentPositionVO = this.getCouseStudyPositionVo(PositionType.UNIT_STUDY_POSTION, null, unitStudy, richUnitStudyVO);
-                if (currentPositionVO == null) {
-                    return richUnitStudyVO;
-                }
-            }
-            richUnitStudyVO.setStudyPos(currentPositionVO);
-            /** 6.填充单元内单词 **/
-            // 3.1查询单元内单词
-            PageQuery pageQuery = new PageQuery(0, 1000000);
-            pageQuery.setParam("lessonId", course.getBookNumber());
-            pageQuery.setParam("unitNbr", unitStudy.getUnitNbr());
-            pageQuery.setParam("state", State.VALID.getState());
-            CommonResult<List<UnitWords>> unitWordsResult = unitWordsService.getUnitWordsAsc(pageQuery);
-            if (unitWordsResult == null || !unitStudyResult.isSuccess()) {
-                LogTypeEnum.DEFAULT.error("获取单元内单词失败");
-                richUnitStudyVO.setMsg("获取单元内单词失败");
-                return richUnitStudyVO;
-            }
-            List<UnitWords> unitWords = unitWordsResult.getDefaultModel();
-            if (unitWords == null || unitWords.isEmpty()) {
-                LogTypeEnum.DEFAULT.error("单元内单词为空");
-                richUnitStudyVO.setMsg("单元内单词为空");
-                return richUnitStudyVO;
-            }
-            // 遍历，封装单元内单词学习情况
-            List<UnitStudyVO> wordStudyVOs = new ArrayList<UnitStudyVO>(unitWords.size());
-            richUnitStudyVO.setData(wordStudyVOs);
-            richUnitStudyVO.setSuccess(true);
-            for (UnitWords unitWord : unitWords) {
-                UnitStudyVO unitStudyVO = new UnitStudyVO();
-                wordStudyVOs.add(unitStudyVO);
-
-                // 通过unitWord获取
-                unitStudyVO.setId(unitWord.getId());
-                unitStudyVO.setVocCode(unitWord.getVocCode());
-                unitStudyVO.setSpelling(unitWord.getSpelling());
-                unitStudyVO.setMeaning(unitWord.getMeaning());
-                unitStudyVO.setUnitId(0);
-                unitStudyVO.setUnitNbr(unitWord.getUnitNbr());
-                unitStudyVO.setLessonNbr(Integer.valueOf(String.valueOf(unitWord.getLessonId())));
-                unitStudyVO.setFstClassId(unitWord.getFstClassId());
-                unitStudyVO.setVocIndex(unitWord.getVocIndex());
-
-                // 通过word查询音标信息
-                Word wordQuery = new Word();
-                wordQuery.setId(unitWord.getWordId());
-                wordQuery.setState(State.VALID.getState());
-                Word word = wordService.getUnique(wordQuery).getDefaultModel();
-                unitStudyVO.setSoundMarkUs(word.getSoundMarkUs());
-                unitStudyVO.setSoundMarkUk(word.getSoundMarkUk());
-
-                // 查询是否被收藏
-                WordStudy wordStudyQuery = new WordStudy();
-                wordStudyQuery.setStudentId(loginRecord.getUserId());
-                wordStudyQuery.setWordId(unitWord.getWordId());
-                WordStudy wordStudy = wordStudyService.getUnique(wordStudyQuery).getDefaultModel();
-                unitStudyVO.setIsCollected(wordStudy.getIscollected() == 1);
-
-                // 更新单元学习状态
-                threadPool.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (unitStudy.getIsFinished() == FinishState.NOT_START.getState()) {
-                            // 单元学习状态为开始，则更新为未完成
-                            unitStudy.setIsFinished(FinishState.NOT_COMPLETE.getState());
-                            unitStudyService.updateUnitWordsStudy(unitStudy);
-                        }
-                    }
-                });
-            }
-            wordStudyVOs.sort(new Comparator<UnitStudyVO>() {
-                @Override
-                public int compare(UnitStudyVO o1, UnitStudyVO o2) {
-                    return o1.getVocIndex()-o2.getVocIndex();
-                }
-            });
+            return unitStudyService.getUnit(loginRecord.getUserId(), moduleCode, unit, richUnitStudyVO);
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e, "获取单元学习信息失败");
         }
@@ -734,12 +599,5 @@ public class AjaxCourseController extends BaseController implements DisposableBe
         pageQuery.addQueryParam("isAllFinished",FinishState.COMPLETE.getState());
         pageQuery.addQueryParam("state",State.VALID.getState());
         return unitStudyService.count(pageQuery);
-    }
-
-    @Override
-    public void destroy() throws Exception {
-        if (threadPool != null && !threadPool.isShutdown()) {
-            threadPool.shutdown();
-        }
     }
 }

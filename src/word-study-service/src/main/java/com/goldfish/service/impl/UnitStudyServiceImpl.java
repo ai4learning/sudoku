@@ -1,30 +1,30 @@
 package com.goldfish.service.impl;
 
-
-
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Date;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import com.goldfish.common.log.LogTypeEnum;
-import com.goldfish.constant.FinishState;
-import com.goldfish.constant.State;
-import com.goldfish.constant.StudyPhase;
-import com.goldfish.constant.WordLibType;
+import com.goldfish.concurrent.threadpool.ThreadConstant;
+import com.goldfish.concurrent.threadpool.ThreadPoolContext;
+import com.goldfish.constant.*;
 import com.goldfish.dao.cache.local.CourseContext;
 import com.goldfish.dao.cache.local.UnitWordContext;
 import com.goldfish.domain.*;
-import com.goldfish.manager.CourseStudyManager;
-import com.goldfish.manager.SelfWordsManager;
-import com.goldfish.manager.WordStudyManager;
+import com.goldfish.manager.*;
+import com.goldfish.vo.BaseVO;
 import com.goldfish.vo.BasicVO;
+import com.goldfish.vo.CurrentStudyPositionVO;
+import com.goldfish.vo.course.BookStudyVO;
 import com.goldfish.vo.unit.*;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 import com.goldfish.common.PageQuery;
 import com.goldfish.common.CommonResult;
-import com.goldfish.manager.UnitStudyManager;
 import com.goldfish.service.UnitStudyService;
 
 
@@ -35,7 +35,7 @@ import com.goldfish.service.UnitStudyService;
  *
  */
 @Service("unitStudyService")
-public class UnitStudyServiceImpl implements UnitStudyService {
+public class UnitStudyServiceImpl implements UnitStudyService,DisposableBean {
 
 	private static final Logger logger = Logger.getLogger(UnitStudyServiceImpl.class);
 	
@@ -51,7 +51,9 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 	private UnitWordContext unitWordContext;
 	@Resource
     private CourseStudyManager courseStudyManager;
-
+	@Resource
+	private WordManager wordManager;
+	private ThreadPoolExecutor threadPool = ThreadPoolContext.getThreadPool(ThreadConstant.Course_Learning, false);
 
 
 	@Override
@@ -123,6 +125,170 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		return saveUnitStudyVO;
 	}
 
+	@Override
+	public RichUnitStudyVO getUnit(Integer userId, String moduleCode, Integer unit, RichUnitStudyVO richUnitStudyVO) {
+		// 1.获取单元学习信息
+		UnitStudy unitStudy = this.getUnitStudy(userId, moduleCode, unit, richUnitStudyVO);
+		if (unitStudy == null) {
+			return richUnitStudyVO;
+		}
+		// 2.填充课本信息
+		Course course = this.getCourseInfo(unitStudy.getLessonId(), richUnitStudyVO);
+		if (course == null) {
+			return richUnitStudyVO;
+		}
+		if (!fullfillCourseStudyInfo(userId, richUnitStudyVO, unitStudy, course)){
+			return richUnitStudyVO;
+		}
+		// 3.填充单词学习
+		List<WordStudy> studyWords = this.getWordStudy(userId, course.getBookNumber(), unitStudy.getUnitNbr(), richUnitStudyVO);
+		if (studyWords == null || studyWords.isEmpty()) {
+			return richUnitStudyVO;
+		}
+		fullfillWordsInfo(richUnitStudyVO, unitStudy, studyWords);
+		return richUnitStudyVO;
+	}
+
+	private void fullfillWordsInfo(RichUnitStudyVO richUnitStudyVO, final UnitStudy unitStudy, List<WordStudy> studyWords) {
+		// 遍历，封装单元内单词学习情况
+		List<UnitStudyVO> wordStudyVOs = new ArrayList<UnitStudyVO>(studyWords.size());
+		richUnitStudyVO.setData(wordStudyVOs);
+		richUnitStudyVO.setSuccess(true);
+		for (WordStudy wordStudy : studyWords) {
+			UnitStudyVO unitStudyVO = new UnitStudyVO();
+			wordStudyVOs.add(unitStudyVO);
+			unitStudyVO.setVocCode(wordStudy.getVocCode());
+			unitStudyVO.setSpelling(wordStudy.getSpell());
+			unitStudyVO.setMeaning(wordStudy.getMeaning());
+			unitStudyVO.setUnitId(0);
+			unitStudyVO.setUnitNbr(wordStudy.getUnitNbr());
+			unitStudyVO.setLessonNbr(wordStudy.getLessonId());
+			// 查询是否被收藏
+			unitStudyVO.setIsCollected(wordStudy.getIscollected() == 1);
+
+			// 通过word查询音标信息
+			Word wordQuery = new Word();
+			wordQuery.setId(wordStudy.getWordId());
+			wordQuery.setState(State.VALID.getState());
+			Word word = wordManager.getUnique(wordQuery);
+			unitStudyVO.setSoundMarkUs(word.getSoundMarkUs());
+			unitStudyVO.setSoundMarkUk(word.getSoundMarkUk());
+
+			UnitWords unitWord = unitWordContext.getUnitWord(wordStudy.getVocCode());
+			// 通过unitWord获取
+			unitStudyVO.setId(unitWord.getId());
+			unitStudyVO.setFstClassId(unitWord.getFstClassId());
+			unitStudyVO.setVocIndex(unitWord.getVocIndex());
+			// 更新单元学习状态
+			threadPool.execute(new Runnable() {
+				@Override
+				public void run() {
+					if (unitStudy.getIsFinished() == FinishState.NOT_START.getState()) {
+						// 单元学习状态为开始，则更新为未完成
+						unitStudy.setIsFinished(FinishState.NOT_COMPLETE.getState());
+						unitStudyManager.updateUnitWordsStudy(unitStudy);
+					}
+				}
+			});
+		}
+		wordStudyVOs.sort(new Comparator<UnitStudyVO>() {
+			@Override
+			public int compare(UnitStudyVO o1, UnitStudyVO o2) {
+				return o1.getVocIndex()-o2.getVocIndex();
+			}
+		});
+	}
+
+	private boolean fullfillCourseStudyInfo(Integer userId, RichUnitStudyVO richUnitStudyVO, UnitStudy unitStudy, Course course) {
+		BookStudyVO bookStudyVO = new BookStudyVO();
+		richUnitStudyVO.setBookInfo(bookStudyVO);
+		bookStudyVO.setId(course.getBookNumber());
+		bookStudyVO.setModuleCode(course.getModuleCode());
+		bookStudyVO.setBookName(course.getBookName());
+		bookStudyVO.setCoverImageUrl(course.getCoverImageUrl());
+		bookStudyVO.setTotalUnitNbr(course.getTotalUnitNbr());
+		bookStudyVO.setOutDate(course.isOutDate());
+		// 4.根据用户ID查询用户课程信息
+		CourseStudy courseStudy = this.getCourseStudy(userId, course.getBookNumber(), richUnitStudyVO);
+		if (courseStudy == null) {
+			return false;
+		}
+		bookStudyVO.setStartFrom(courseStudy.getStartFrom());
+		bookStudyVO.setStudyMode(courseStudy.getStudyMode());
+
+		// 5.填充学习位置
+		/*设置当前单元内学习位置信息*/
+		CurrentStudyPositionVO currentPositionVO = new CurrentStudyPositionVO();
+		if (unitStudy.getIsAllFinished() != FinishState.COMPLETE.getState()) {
+			currentPositionVO = this.getCouseStudyPositionVo(PositionType.UNIT_STUDY_POSTION, null, unitStudy, richUnitStudyVO);
+			if (currentPositionVO == null) {
+				return false;
+			}
+		}
+		richUnitStudyVO.setStudyPos(currentPositionVO);
+		return true;
+	}
+
+
+	private UnitStudy getUnitStudy(Integer userId, String moduleCode, Integer unitNbr, RichUnitStudyVO richUnitStudyVO) {
+
+		UnitStudy unitStudyQuery = new UnitStudy();
+		unitStudyQuery.setStudentId(userId);
+		unitStudyQuery.setLessonCode(moduleCode);
+		unitStudyQuery.setUnitNbr(unitNbr);
+		unitStudyQuery.setState(State.VALID.getState());
+		CommonResult<UnitStudy> unitStudyResult = this.getUnique(unitStudyQuery);
+		if (unitStudyResult == null || !unitStudyResult.isSuccess()) {
+			LogTypeEnum.DEFAULT.error("获取学生单元学习情况异常");
+			richUnitStudyVO.setMsg("获取学生单元学习情况异常");
+			return null;
+		}
+
+		UnitStudy unitStudy = unitStudyResult.getDefaultModel();
+		if (unitStudy == null) {
+			LogTypeEnum.DEFAULT.info("不存在该学生单元学习记录");
+			richUnitStudyVO.setMsg("不存在该学生单元学习记录");
+			return null;
+		}
+		return unitStudy;
+	}
+
+	private Course getCourseInfo(Integer lessonId, BaseVO baseVO) {
+		Course course = courseContext.getCourse(lessonId);
+		if (course == null) {
+			LogTypeEnum.DEFAULT.error("找不到这门课，lessonId={}", lessonId);
+			baseVO.setSuccess(true);
+			baseVO.setMsg("找不到这门课");
+			return null;
+		}
+		return course;
+	}
+
+
+	/**
+	 * 获取课程学习
+	 *
+	 * @param studentId
+	 * @param lessonId
+	 * @param baseVO
+	 * @return
+	 */
+	private CourseStudy getCourseStudy(Integer studentId, Integer lessonId, BaseVO baseVO) {
+		CourseStudy courseStudyQuery = new CourseStudy();
+		courseStudyQuery.setLessonId(lessonId);
+		courseStudyQuery.setStudentId(studentId);
+		courseStudyQuery.setStatus(State.VALID.getState());
+		courseStudyQuery.setCurrentStudyBook(null);
+		CourseStudy studentCourse = courseStudyManager.getUnique(courseStudyQuery);
+		if (studentCourse == null) {
+			LogTypeEnum.DEFAULT.info("学生关联课程为空");
+			baseVO.setMsg("学生未关联课程");
+			baseVO.setSuccess(true);
+			return null;
+		}
+		return studentCourse;
+	}
+
 	protected WordStudy updateWordStudy(WordStudyDto dto,Integer userId) {
 	    WordStudy wordStudyQuery = new WordStudy();
 	    wordStudyQuery.setVocCode(dto.getVocCode());
@@ -176,6 +342,37 @@ public class UnitStudyServiceImpl implements UnitStudyService {
 		vo.setIsTested(unitStudy.getIsTested());
 		vo.setStatus(unitStudy.getStatus());
 		return vo;
+	}
+
+	private CurrentStudyPositionVO getCouseStudyPositionVo(PositionType positionType,
+														   CourseStudy courseStudy,
+														   UnitStudy unitStudy,
+														   BaseVO baseVO) {
+		CurrentStudyPositionVO currentPositionVO = new CurrentStudyPositionVO();
+		StudyPosition studyPosition = null;
+		if (PositionType.COURSE_STUDY_POSITION == positionType) {
+			currentPositionVO.setId(courseStudy.getId());
+			studyPosition = courseStudy;
+		} else {
+			currentPositionVO.setId(unitStudy.getId());
+			studyPosition = unitStudy;
+		}
+		currentPositionVO.setStudyPositionCode(studyPosition.getStudyPositionCode());
+		currentPositionVO.setPositionType(studyPosition.getPositionType());
+		currentPositionVO.setVocCode(studyPosition.getVocCode());
+
+		// 查询课程单词获取spell
+		UnitWords unitWordsQuery = new UnitWords();
+		unitWordsQuery.setVocCode(studyPosition.getVocCode());
+		unitWordsQuery.setState(State.VALID.getState());
+		currentPositionVO.setSpelling(studyPosition.getSpelling());
+		currentPositionVO.setUnitNbr(studyPosition.getUnitNbr());
+		currentPositionVO.setIsCurrentPos(State.getMap().get(studyPosition.getIsCurrentPos()).getResult());
+		currentPositionVO.setIsFinished(studyPosition.getIsFinished());
+		currentPositionVO.setIsAllFinished(State.getMap().get(studyPosition.getIsAllFinished()).getResult());
+		currentPositionVO.setIsTested(studyPosition.getIsTested());
+		currentPositionVO.setStatus(studyPosition.getStatus() - 1);// 原因：VO:0表示有效，DB:1表示有效
+		return currentPositionVO;
 	}
 
 
@@ -493,4 +690,37 @@ public class UnitStudyServiceImpl implements UnitStudyService {
         courseStudy.setSpelling(spelling);
         courseStudyManager.updateCourseStudy(courseStudy);
     }
+
+	public List<WordStudy> getWordStudy(Integer userId, Integer lessonId, Integer unitNbr, RichUnitStudyVO richUnitStudyVO) {
+		PageQuery pageQuery = new PageQuery(0, 1000000);
+		pageQuery.addQueryParam("studentId", userId);
+		pageQuery.addQueryParam("lessonId", lessonId);
+		pageQuery.addQueryParam("unitNbr", unitNbr);
+		pageQuery.addQueryParam("state", State.VALID.getState());
+		pageQuery.addQueryParam("isRemember", State.NO.getState());
+		// 降序查询，反过来查询正好是升序，因为插入时是逆序插入
+		List<WordStudy> studyWords = wordStudyManager.getWordStudyByPage(pageQuery);
+		if (studyWords == null) {
+			LogTypeEnum.DEFAULT.error("获取单元内单词失败");
+			richUnitStudyVO.setMsg("获取单元内单词失败");
+			return null;
+		}
+		else if (studyWords.isEmpty()) {
+			// 不存在未记住的单词，则重新学习
+			pageQuery = new PageQuery(0, 1000000);
+			pageQuery.addQueryParam("studentId", userId);
+			pageQuery.addQueryParam("lessonId", lessonId);
+			pageQuery.addQueryParam("unitNbr", unitNbr);
+			pageQuery.addQueryParam("state", State.VALID.getState());
+			studyWords = wordStudyManager.getWordStudyByPage(pageQuery);
+		}
+		return studyWords;
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		if (threadPool != null && !threadPool.isShutdown()) {
+			threadPool.shutdown();
+		}
+	}
 }

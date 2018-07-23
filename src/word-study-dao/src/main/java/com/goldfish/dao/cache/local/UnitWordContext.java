@@ -11,11 +11,12 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class UnitWordContext {
 
-    private Map<String, UnitWords> context = new HashMap<String, UnitWords>(512);
+    private Map<String, UnitWords> context = new ConcurrentHashMap<String, UnitWords>(512);
     @Resource
     private UnitWordsDao unitWordsDao;
 

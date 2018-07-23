@@ -8,34 +8,41 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component("courseContext")
 public class CourseContext {
-
-    private Map<Integer, String> context = new HashMap<Integer, String>();
-    private Map<String, Integer> code2Id = new HashMap<String, Integer>();
-    private Map<Integer, String> id2Code = new HashMap<Integer, String>();
+    private Map<String, Integer> code2Id = new ConcurrentHashMap<String, Integer>();
+    private Map<Integer, String> id2Code = new ConcurrentHashMap<Integer, String>();
+    private Map<Integer, Course> id2Course = new ConcurrentHashMap<Integer, Course>();
 
 
     @Resource(name = "courseDao")
     private CourseDao courseDao;
 
-    public String getName(Integer lessonNumber) {
-        String lessonName = context.get(lessonNumber);
-        if (lessonName != null) {
-            return lessonName;
+    public Course getCourse(Integer lessonNumber) {
+        Course course = id2Course.get(lessonNumber);
+        if (course != null) {
+            return course;
         }
         Course query = new Course();
         query.setBookNumber(lessonNumber);
-        Course course = courseDao.getUnique(query);
+        course = courseDao.getUnique(query);
         if (course == null) {
             LogTypeEnum.DEFAULT.error("Course Not Exist, lessonNumber={}", lessonNumber);
             return null;
         }
-        context.put(lessonNumber, course.getBookName());
-        return course.getBookName();
+        id2Course.put(lessonNumber, course);
+        return course;
+    }
+
+    public String getName(Integer lessonNumber) {
+        Course course = this.getCourse(lessonNumber);
+        if (course != null) {
+            return course.getBookName();
+        }
+        return null;
     }
 
     public Integer getLessonIdByCode(String moduleCode) {
