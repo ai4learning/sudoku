@@ -82,7 +82,7 @@ module.exports = {
       // },
       {
         context: ['/api', '/login'],
-        target: 'http://localhost:8180',
+        target: 'http://114.115.162.212:8086',
         changeOrigin: true
       },
       // {
