@@ -93,4 +93,6 @@ public interface WordStudyDao {
     public int countDay(Map<String,Object> paramMap);
 
     public List<WordStudy> getStudiedWords(WordStudy wordStudy);
+
+    public int countStudiedWords(Map<String,Object> paramMap);
 }

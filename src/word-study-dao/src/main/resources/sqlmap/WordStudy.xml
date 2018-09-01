@@ -194,7 +194,19 @@
 
     <select id="getStudiedWords" resultMap="WordStudy-Map" parameterType="com.goldfish.domain.WordStudy">
         SELECT   <include refid="All-FIELDS"/> FROM word_study
-        <include refid="BEAN-COMMON-SQL" /> AND studied != '1970-01-01 00:00:00'
+        <include refid="BEAN-COMMON-SQL" /> AND studied != '1970-01-01 00:00:00' AND studied is not NULL
+    </select>
+
+    <select id="countStudiedWords" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        <![CDATA[
+			SELECT COUNT(1) FROM word_study
+		]]>
+
+        <where>
+            <if test="studentId != null"> AND student_id = #{studentId}</if>
+            <if test="state != null"> AND state = #{state}</if>
+            AND studied != '1970-01-01 00:00:00' AND studied is not NULL
+        </where>
     </select>
 
 </mapper>

@@ -90,4 +90,6 @@ public interface WordStudyService {
     public int countDay(PageQuery pageQuery);
 
     public CommonResult<List<WordStudy>> getStudiedWords(WordStudy wordStudy);
+
+    public int countStudiedWords(PageQuery pageQuery);
 }
