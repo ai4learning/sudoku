@@ -197,6 +197,9 @@ public class UnitStudyServiceImpl implements UnitStudyService,DisposableBean {
 				return o1.getVocIndex()-o2.getVocIndex();
 			}
 		});
+		for (int index1=0;index1<wordStudyVOs.size();index1++){
+		    wordStudyVOs.get(index1).setVocIndex(index1);
+        }
 	}
 
 	private boolean fullfillCourseStudyInfo(Integer userId, RichUnitStudyVO richUnitStudyVO, UnitStudy unitStudy, Course course) {
