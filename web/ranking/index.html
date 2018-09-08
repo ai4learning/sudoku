@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>龙门单词集训赢——排行榜</title>
+  <link rel="stylesheet" type="text/css" href="/content/css/ranking.css" />
+  <link rel="stylesheet" type="text/css" href="/content/css/common.css" />
+  <script type="text/javascript" src="/content/js/jquery.js"></script>
+  <script>
+    // 检查 js/jquery/jquery.js是否加载
+    if (typeof jQuery == 'undefined') {
+      document.write('<script type="text/javascript" src="/content/js/jquery.js"><\/script>');
+    }
+  </script>
+</head>
+
+<body>
+    <div class="topline">
+      <div class="topcon">
+        <div class="l_con">小金鱼软件 . 集训赢欢迎您！！！</div>
+        <div class="r_con">
+          <a href="/">首页</a>
+          <a href="/UserCenter/">用户中心</a>
+          <a href="/ranking?ClassID=171" target="_blank" class="selected">排行榜</a>
+          <a href="/UserCenter/setting.html" id="btnPrivateSetting">设置</a>
+          <a href="/UserCenter/updatepassword.html">修改密码</a>
+          <a href="/Account">退出</a>
+        </div>
+      </div>
+    </div>
+  <div class="main-container">
+    <div style="width:1000px; height:auto; overflow:hidden; margin:30px auto 0">
+      <img src="/content/image/rankingtit.png" alt="排行榜" title="排行榜" />
+      <div class="share" style="display:none;">
+        <span class="sharetb">
+          <img src="image/sharebtn.png" />
+        </span>
+        <div class="bdsharebuttonbox fr">
+          <a href="#" class="bds_more" data-cmd="more"></a>
+          <a href="#" class="bds_qzone" data-cmd="qzone"></a>
+          <a href="#" class="bds_tsina" data-cmd="tsina"></a>
+          <a href="#" class="bds_tqq" data-cmd="tqq"></a>
+          <a href="#" class="bds_renren" data-cmd="renren"></a>
+          <a href="#" class="bds_weixin" data-cmd="weixin"></a>
+        </div>
+        <script>
+          window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdPic": "", "bdStyle": "0", "bdSize": "32" }, "share": {}, "image": { "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "32" }, "selectShare": { "bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"] } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+        </script>
+      </div>
+      <div id="todyaStudytimeRankingDiv" class="ranking-menu radius" style="">
+
+        <div class="ranking-group" style="text-align:center;">
+          <h3 style="text-align: left;">
+            <img src="/content/image/rankingday.png" />
+
+          </h3>
+          <div id="todyaStudytimeRanking" style="height: auto;  overflow:hidden;">
+            <span class="ranking-item"></span>
+          </div>
+        </div>
+      </div>
+      <div id="monthStudytimeRankingDiv" style="" class="ranking-menu radius">
+        <div class="ranking-group" style="text-align:center;">
+          <h3 style="text-align: left;">
+            <img src="/content/image/rankingmonth.png" />
+          </h3>
+          <div id="monthStudytimeRanking" style="height: auto; overflow:hidden;">
+            <span class="ranking-item"></span>
+          </div>
+        </div>
+      </div>
+      <div id="weekCashPointRankingDiv" class="ranking-menu radius" style="margin-right:0">
+        <div class="ranking-group" style="text-align:center;">
+          <h3 style="text-align: left;">
+            <img src="/content/image/rankingweek.png" />
+
+          </h3>
+          <div id="weekCashPointRanking" style="height: auto; overflow:hidden;">
+            <span class="ranking-item"></span>
+            <span class="ranking-item"></span>
+            <span class="ranking-item"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot gray">
+        <p>
+          成都小金鱼信息科技有限公司 版权所有 备案号：
+          <a href="http://www.miitbeian.gov.cn" target="_blank">川ICP备XXXXXXX号</a>
+        </p>
+  </div>
+  <script type="text/javascript" src="/content/js/jquery.js"></script>
+  <script type="text/javascript" src="/content/js/ranking.js"></script>
+</body>
+
+</html>

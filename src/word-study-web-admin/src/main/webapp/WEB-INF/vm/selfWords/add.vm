@@ -1,0 +1,211 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
+    
+<div class="modal-body " id="add_selfwords">
+	<form class="form-horizontal"  id="form_add_SelfWords" role="form">
+	
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">ID</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="id" id="id" placeholder="请输入ID" maxlength="19"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="moduleCode">模块CODE</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="moduleCode" id="moduleCode" placeholder="请输入模块CODE" maxlength="50"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studyId">学生ID</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="studyId" id="studyId" placeholder="请输入学生ID" maxlength="19"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="type">类型</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="type" id="type">
+			
+				<option value="1">复习词库</option>
+				<option value="2">错词库</option>
+		</select>
+	
+    
+				
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studentId">学生ID</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="studentId" id="studentId" placeholder="请输入学生ID" maxlength="19"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userCode">用户CODE</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="userCode" id="userCode" placeholder="请输入用户CODE" maxlength="50"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="lessonId">课程ID</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="unitNbr">单元号</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="unitNbr" id="unitNbr" placeholder="请输入单元号" maxlength="3"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="vocCode">单词CODE</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="vocCode" id="vocCode" placeholder="请输入单词CODE" maxlength="50"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="vocIndex">单词索引</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="vocIndex" id="vocIndex">
+			
+		</select>
+	
+    
+				
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="wordId">单词ID</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="wordId" id="wordId" placeholder="请输入单词ID" maxlength="10"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="spelling">单词拼写</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="spelling" id="spelling" placeholder="请输入单词拼写" maxlength="128"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="state" id="state">
+			
+				<option value="1">有效</option>
+				<option value="2">无效</option>
+		</select>
+	
+    
+				
+			</div>
+		</div>
+		
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_SelfWords">保存</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
+</div>
+
+
+
+
+<script language="javascript">
+
+
+void function(j) {
+	var set = {
+		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
+		moduleCode:  {must: false, maxlength:50, ftip:'模块CODE,最多50个字符'},
+		studyId:  {must: false, maxlength:19, ftip:'学生ID,最多19个字符' ,handler:'int' },
+		type:  {must: false, maxlength:3, ftip:'类型,最多3个字符' ,handler:'int' },
+		studentId:  {must: false, maxlength:19, ftip:'学生ID,最多19个字符' ,handler:'int' },
+		userCode:  {must: false, maxlength:50, ftip:'用户CODE,最多50个字符'},
+		lessonId:  {must: false, maxlength:10, ftip:'课程ID,最多10个字符' ,handler:'int' },
+		unitNbr:  {must: false, maxlength:3, ftip:'单元号,最多3个字符' ,handler:'int' },
+		vocCode:  {must: false, maxlength:50, ftip:'单词CODE,最多50个字符'},
+		vocIndex:  {must: false, maxlength:3, ftip:'单词索引,最多3个字符' ,handler:'int' },
+		wordId:  {must: false, maxlength:10, ftip:'单词ID,最多10个字符' ,handler:'int' },
+		spelling:  {must: false, maxlength:128, ftip:'单词拼写,最多128个字符'},
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
+	};
+	
+
+	j('#btn_add_SelfWords').click(function(e) {
+		gUtils.fSubmitForm(
+			j("#form_add_SelfWords").serialize(),
+			set, 
+			'/selfWords/doAdd.action', 
+			function() {
+				gDialog.fClose();
+				backToManage();
+			}
+		);
+	});
+
+
+	//form.friend.init(set);
+}(jQuery);
+
+
+	function backToManage(){
+    		var url='/selfWords/manage.action';
+    		gUtils.fMakeFullLink(url);
+            window.location=url;
+    };
+</script>

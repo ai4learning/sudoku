@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE>jshow系统</TITLE>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    #parse("/WEB-INF/vm/common/cssStatics.vm")
+    #parse("/WEB-INF/vm/common/jsStatics.vm")
+</HEAD>
+
+<body>
+
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+
+        #parse("/WEB-INF/vm/common/leftNav.vm")
+
+        <div class="main-content" #if(${request.getParameter('from')}=='erp') style="margin-left:0px;" #end>
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                </script>
+
+                <ul class="breadcrumb" id="crumbs" >
+                    <li>
+                        <i class="icon-home home-icon"></i>
+                        <a href="#">首页</a>
+                    </li>
+                    <li class="active">控制台</li>
+                </ul><!-- .breadcrumb -->
+
+            </div>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <h1>
+                        控制台
+                        <small>
+                            <i class="icon-double-angle-right"></i>
+                            查看
+                        </small>
+                    </h1>
+                </div><!-- /.page-header -->
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        $!{screen_content}
+
+                        <div class="hr hr32 hr-dotted"></div>
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                    <div class="col-xs-12">
+                        #include("/WEB-INF/vm/common/footer.vm")
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
+
+    </div><!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+
+
+</body>
+
+
+</HTML>

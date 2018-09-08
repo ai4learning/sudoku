@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE>加班报账系统</TITLE>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    #include("/WEB-INF/vm/common/statics.vm")
+</HEAD>
+
+<BODY>
+
+<div class="wrap">
+    <div class="navbar" style="margin-bottom:0px">
+        <div class="navbar-inner">
+            <ul class="nav pull-right">
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle">
+                        <i class="icon-user"></i>欢迎 ${pin}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/admin/logout"><i class="icon-off"></i> 登出</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <a href="#nogo" class="brand">加班报账系统</a>
+        </div>
+    </div>
+
+    <div class="g-sider">
+        #parse('/WEB-INF/vm/common/leftNavUser.vm')
+    </div>
+
+
+    <!--右侧内容区 begin -->
+    <div class="g-right">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <ul class="breadcrumb" id="crumbs" style="margin-bottom:1px">
+                                <li><a href="javascript:;">首页</a> <span class="divider">/</span></li>
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div id="main_content">
+                                <h2>欢迎使用商品池管理系统，请选择左侧菜单进行相关功能操作~！</h2>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--右侧内容区 end -->
+
+
+</div>
+
+
+</BODY>
+
+
+</HTML>

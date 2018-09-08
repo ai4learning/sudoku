@@ -1,0 +1,334 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#view_wordstudy").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
+
+
+<div class="modal-body " id="view_wordstudy">
+	<form class="form-horizontal"  id="form1" role="form">
+	
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">ID</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="id" id="id" value="$!{wordStudy.id}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="vocCode">单词CODE</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="vocCode" id="vocCode" value="$!{wordStudy.vocCode}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userVocCode">用户单词CODE</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="userVocCode" id="userVocCode" value="$!{wordStudy.userVocCode}" readonly/>
+				
+			</div>
+		</div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="wordId">单词ID</label>
+            <div class="col-sm-7 controls">
+
+                <input type="text" class="form-control"  name="wordId" id="wordId" placeholder="请输入单词ID" maxlength="128" value="$!{wordStudy.wordId}" readonly/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="spell">单词拼写</label>
+            <div class="col-sm-7 controls">
+
+                <input type="text" class="form-control"  name="spell" id="spell" placeholder="请输入单词拼写" maxlength="128" value="$!{wordStudy.spell}" readonly/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="meaning">单词释义</label>
+            <div class="col-sm-7 controls">
+
+                <input type="text" class="form-control"  name="meaning" id="meaning" placeholder="请输入单词拼写" maxlength="128" value="$!{wordStudy.meaning}" readonly/>
+            </div>
+        </div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studentId">学生ID</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="studentId" id="studentId" value="$!{wordStudy.studentId}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userCode">用户CODE</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="userCode" id="userCode" value="$!{wordStudy.userCode}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="memoryLevel">记忆等级</label>
+			<div class="col-sm-8 controls">
+			
+        
+		<select class="forms_select input-medium form-control" name="memoryLevel" id="memoryLevel" disabled>
+						<option value="1" #if($wordStudy.memoryLevel==1) selected  #end>生词</option>
+				<option value="2" #if($wordStudy.memoryLevel==2) selected  #end>熟词</option>
+				<option value="3" #if($wordStudy.memoryLevel==3) selected  #end>半生熟</option>
+
+		</select>
+	
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="reviewTimes">复习次数</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="reviewTimes" id="reviewTimes" value="$!{wordStudy.reviewTimes}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="timeLeft">剩余时间</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="timeLeft" id="timeLeft" value="$!{wordStudy.timeLeft}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="finishReadingTime">完成阅读时间</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="finishReadingTime" id="finishReadingTime" value="$!{wordStudy.finishReadingTime}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isFstReadSuccess">是否第一次就读成功</label>
+			<div class="col-sm-8 controls">
+			
+        
+		<select class="forms_select input-medium form-control" name="isFstReadSuccess" id="isFstReadSuccess" disabled>
+						<option value="0" #if($wordStudy.isFstReadSuccess==0) selected  #end>否</option>
+						<option value="1" #if($wordStudy.isFstReadSuccess==1) selected  #end>是</option>
+
+		</select>
+	
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="readFailTimes">读失败次数</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="readFailTimes" id="readFailTimes" value="$!{wordStudy.readFailTimes}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="continueReadFailTimes">持续读失败次数</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="continueReadFailTimes" id="continueReadFailTimes" value="$!{wordStudy.continueReadFailTimes}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isHalfReading">是否半读</label>
+			<div class="col-sm-8 controls">
+			
+        
+		<select class="forms_select input-medium form-control" name="isHalfReading" id="isHalfReading" disabled>
+						<option value="0" #if($wordStudy.isHalfReading==0) selected  #end>否</option>
+				<option value="1" #if($wordStudy.isHalfReading==1) selected  #end>是</option>
+
+		</select>
+	
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isFstSpellSuccess">是否第一个就拼写成功</label>
+			<div class="col-sm-8 controls">
+			
+        
+		<select class="forms_select input-medium form-control" name="isFstSpellSuccess" id="isFstSpellSuccess" disabled>
+						<option value="0" #if($wordStudy.isFstSpellSuccess==0) selected  #end>否</option>
+				<option value="1" #if($wordStudy.isFstSpellSuccess==1) selected  #end>是</option>
+
+		</select>
+	
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="spellFailTimes">拼写错误次数</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="spellFailTimes" id="spellFailTimes" value="$!{wordStudy.spellFailTimes}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="continueSpellFailTimes">连续拼写错误次数</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="continueSpellFailTimes" id="continueSpellFailTimes" value="$!{wordStudy.continueSpellFailTimes}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isHalfSpelling">是否为半写</label>
+			<div class="col-sm-8 controls">
+			
+        
+		<select class="forms_select input-medium form-control" name="isHalfSpelling" id="isHalfSpelling" disabled>
+						<option value="0" #if($wordStudy.isHalfSpelling==0) selected  #end>否</option>
+						<option value="1" #if($wordStudy.isHalfSpelling==1) selected  #end>是</option>
+
+		</select>
+	
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isRemember">是否记住</label>
+			<div class="col-sm-8 controls">
+			
+        
+		<select class="forms_select input-medium form-control" name="isRemember" id="isRemember" disabled>
+						<option value="0" #if($wordStudy.isRemember==0) selected  #end>否</option>
+						<option value="1" #if($wordStudy.isRemember==1) selected  #end>是</option>
+
+		</select>
+	
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isCancelReview">是否取消复习</label>
+			<div class="col-sm-8 controls">
+			
+        
+		<select class="forms_select input-medium form-control" name="isCancelReview" id="isCancelReview" disabled>
+						<option value="0" #if($wordStudy.isCancelReview==0) selected  #end>否</option>
+						<option value="1" #if($wordStudy.isCancelReview==1) selected  #end>是</option>
+
+		</select>
+	
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="iscollected">是否被收藏</label>
+			<div class="col-sm-8 controls">
+			
+        
+		<select class="forms_select input-medium form-control" name="iscollected" id="iscollected" disabled>
+						<option value="0" #if($wordStudy.iscollected==0) selected  #end>否</option>
+						<option value="1" #if($wordStudy.iscollected==1) selected  #end>是</option>
+
+		</select>
+	
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-8 controls">
+			
+        
+		<select class="forms_select input-medium form-control" name="state" id="state" disabled>
+						<option value="1" #if($wordStudy.state==1) selected  #end>有效</option>
+				<option value="2" #if($wordStudy.state==2) selected  #end>无效</option>
+
+		</select>
+	
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="created">创建时间</label>
+			<div class="col-sm-8 controls">
+			
+					<input type="text"  class="form-control" name="created" id="created" value="$!dateFormatUtils.format($!wordStudy.created)" readonly/>
+						
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="modified">更新时间</label>
+			<div class="col-sm-8 controls">
+			
+					<input type="text"  class="form-control" name="modified" id="modified" value="$!dateFormatUtils.format($!wordStudy.modified)" readonly/>
+						
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
+</div>
+
+
+<script language="javascript">
+
+
+function backToManage(){
+	var url='/wordStudy/manage.action';
+	gUtils.fMakeFullLink(url);
+    window.location=url;
+}
+
+</script>
