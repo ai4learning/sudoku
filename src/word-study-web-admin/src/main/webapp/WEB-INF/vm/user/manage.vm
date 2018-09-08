@@ -1,0 +1,158 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#search_user").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
+
+
+
+<div class="manage-content" id="search_user">
+
+<form class="form-inline" id="search_form_User">
+
+
+		<div class="form-group">
+			<label for="id_search">id</label>
+				
+				<input type="text"  name="id" id="id_search" class="form-control" placeholder="请输入id">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="userId_search">账户名</label>
+				
+				<input type="text"  name="userId" id="userId_search" class="form-control" placeholder="请输入账户名">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="nikeName_search">别名</label>
+				
+				<input type="text"  name="nikeName" id="nikeName_search" class="form-control" placeholder="请输入别名">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="roleType_search">角色</label>
+				
+        
+		<select class="forms_select input-medium" name="roleType" id="roleType_search">
+			<option value="">全部</option>
+			
+				<option value="1">用户</option>
+				<option value="2">管理员</option>
+		</select>
+	
+    
+
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="parentId_search">父ID</label>
+				
+				<input type="text"  name="parentId" id="parentId_search" class="form-control" placeholder="请输入父ID">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="userState_search">用户状态</label>
+				
+        
+		<select class="forms_select input-medium" name="userState" id="userState_search">
+			<option value="">全部</option>
+			
+				<option value="0">初始状态</option>
+				<option value="1">正常</option>
+				<option value="2">已激活</option>
+				<option value="3">不可用</option>
+		</select>
+	
+    
+
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="state_search">状态</label>
+				
+        
+		<select class="forms_select input-medium" name="state" id="state_search">
+			<option value="">全部</option>
+			
+				<option value="1">有效</option>
+				<option value="2">无效</option>
+		</select>
+	
+    
+
+		</div>&nbsp;&nbsp;
+		
+		<input type="button" onclick="queryUserList();" class="btn btn-primary" value="搜索"  />
+	</form>
+		
+<br/>
+
+
+
+		 <div class="page_operate">
+			 <button class="btn  btn-primary" type="button" id="add-user">
+				<span class="glyphicon glyphicon-plus"></span> 创建 用户</button>
+		</div>
+
+
+	<div id="dl_User"></div>
+</div>
+
+
+<script language="javascript">
+
+	function queryUserList(pageNo) {
+		if (!pageNo) {
+			pageNo = 1;
+		}
+		var page = pageNo;
+		var url = '/user/list.action';
+		var param = {
+			page: page
+		};
+		
+		var pageSize=jQuery("#JPageSize_queryList").val();
+        if(pageSize && !isNaN(pageSize)){
+            param['pageSize']=pageSize;
+        }
+
+		gUtils.fMergeParam(param,"search_form_User");
+		gUtils.fGetHtml(url, 'dl_User', param,'数据加载中...');
+	}
+	queryUserList();
+	
+
+
+
+
+void function(j) {
+	jQuery("#add-user").click(function(){
+		var url='/user/add.action';
+		url=gUtils.fMakeFullLink(url);
+		window.location=url;
+	});
+	
+}(jQuery);
+
+</script>

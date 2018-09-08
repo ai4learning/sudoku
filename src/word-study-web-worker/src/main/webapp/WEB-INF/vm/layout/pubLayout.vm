@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE>加班报账后台</TITLE>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    #include("/WEB-INF/vm/common/statics.vm")
+</HEAD>
+
+<BODY>
+<div class="navbar" style="margin-bottom:0px">
+    <div class="navbar-inner" >
+        <a href="#nogo" class="brand">加班报账管理系统</a>
+    </div>
+</div>
+
+
+
+
+<!--右侧内容区 begin -->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            $screen_content
+         </div>
+    </div>
+</div>
+<!--右侧内容区 end -->
+</BODY>
+</HTML>

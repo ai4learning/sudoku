@@ -1,0 +1,59 @@
+
+	
+
+	<!-- mybatis 配置开始-->
+	
+	<typeAlias type="com.goldfish.domain.Allexam" alias="Allexam"/>
+
+	<mapper resource="sqlmap/Allexam.xml" />
+	
+	<bean id="allexamDao" class="org.mybatis.spring.mapper.MapperFactoryBean">  
+	   <property name="mapperInterface" value="com.goldfish.dao.AllexamDao"/>
+	  <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
+	</bean>
+	
+	<!-- mybatis 配置end-->
+
+
+
+	<!-- ibatis 配置开始-->
+
+	<sqlMap resource="sqlmap//Allexam.xml" />
+	
+	<bean id="allexamDao" class="com.goldfish.dao.impl.AllexamDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- ibatis 配置end-->
+
+
+	
+
+	requirejs:true
+
+
+		
+
+
+
+
+
+	<!-- 可选配置项 start -->
+	<bean id="allexamManager" class="com.goldfish.dao.impl.AllexamManagerImpl">
+	</bean>
+	
+	<bean id="allexamService" class="com.goldfish.dao.impl.AllexamServiceImpl">
+	</bean>
+	<!-- 可选配置项 end -->
+
+
+
+
+	<!--struts config start-->
+	<!-- Allexam -->
+	<package name="-allexam" namespace="//allexam" extends="jshow-admin">
+		<action name="*" method="{1}" class="com.goldfish.web.action.AllexamAction">
+			<result>${path}//allexam/{1}.vm</result>
+		</action>
+	</package>
+	<!--struts config end-->
+	

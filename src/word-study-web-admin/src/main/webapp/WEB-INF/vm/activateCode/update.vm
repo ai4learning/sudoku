@@ -1,0 +1,121 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#update_activatecode").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
+
+
+    
+<div class="modal-body " id="update_activatecode">
+	<form class="form-horizontal"  id="form_update_ActivateCode" role="form">
+	
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">ID</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{activateCode.id}"readonly/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="activateCode">激活码</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="activateCode" id="activateCode" placeholder="请输入激活码" maxlength="50" value="$!{activateCode.activateCode}"readonly/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="lessonIds">课程号</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="lessonIds" id="lessonIds" placeholder="请输入关联课程号" maxlength="19" value="$!{activateCode.lessonIds}"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="expireTime">超时时间</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text" class="form-control j_datetime_picker" name="expireTime" id="expireTime"
+				 placeholder="请输入超时时间" maxlength="19" value="$!dateFormatUtils.format($!activateCode.expireTime)" />
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="state" id="state">
+				<option value="1" #if($activateCode.state==1) selected #end>正常</option>
+				<option value="2" #if($activateCode.state==2) selected #end>超期</option>
+				<option value="3" #if($activateCode.state==3) selected #end>无效</option>
+				<option value="4" #if($activateCode.state==4) selected #end>已使用</option>
+</select>
+		
+    
+
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-primary" id="btn_update_ActivateCode">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
+</div>
+
+
+<script language="javascript">
+
+
+
+
+void function(j) {
+	var set = {
+		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
+				activateCode:  {must: false, maxlength:50, ftip:'激活码,最多50个字符'},
+				lessonIds:  {must: false, maxlength:19, ftip:'课程ID,最多19个字符'},
+				expireTime:  {must: false, maxlength:19, ftip:'超时时间,最多19个字符'},
+				state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
+	};
+	
+
+	j('#btn_update_ActivateCode').click(function(e) {
+		gUtils.fSubmitForm(
+			j("#form_update_ActivateCode").serialize(),
+			set, 
+			'/activateCode/doUpdate.action', 
+			function() {
+				gDialog.fClose();
+				backToManage();
+			}
+		);
+	});
+
+
+	//form.friend.init(set);
+}(jQuery);
+
+
+	function backToManage(){
+    		var url='/activateCode/manage.action';
+    		gUtils.fMakeFullLink(url);
+            window.location=url;
+    };
+</script>

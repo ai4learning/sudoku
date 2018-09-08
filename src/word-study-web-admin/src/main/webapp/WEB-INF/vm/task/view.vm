@@ -1,0 +1,137 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#view_task").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
+
+
+<div class="modal-body " id="view_task">
+	<form class="form-horizontal"  id="form1" role="form">
+	
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">ID</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="id" id="id" value="$!{task.id}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="userId">用户ID</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="userId" id="userId" value="$!{task.userId}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="businessId">业务ID</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="businessId" id="businessId" value="$!{task.businessId}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="type">任务类型</label>
+			<div class="col-sm-8 controls">
+			
+        
+		<select class="forms_select input-medium form-control" name="type" id="type" disabled>
+				<option value="1" #if($task.type==1) selected  #end>用户学习数据初始化</option>
+				<option value="2" #if($task.type==2) selected  #end>生成错词本</option>
+				<option value="3" #if($task.type==3) selected  #end>生成复习本</option>
+				<option value="4" #if($task.type==4) selected  #end>删除用户学习数据</option>
+
+		</select>
+	
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="content">任务内容</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="content" id="content" value="$!{task.content}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="ext">扩展信息</label>
+			<div class="col-sm-8 controls">
+			
+							<input type="text" class="form-control" name="ext" id="ext" value="$!{task.ext}" readonly/>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-8 controls">
+			
+        
+		<select class="forms_select input-medium form-control" name="state" id="state" disabled>
+				<option value="0" #if($task.state==0) selected  #end>未执行</option>
+				<option value="1" #if($task.state==1) selected  #end>已执行</option>
+				<option value="2" #if($task.state==2) selected  #end>删除</option>
+
+		</select>
+	
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="created">创建时间</label>
+			<div class="col-sm-8 controls">
+			
+					<input type="text"  class="form-control" name="created" id="created" value="$!dateFormatUtils.format($!task.created)" readonly/>
+						
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="modified">修改时间</label>
+			<div class="col-sm-8 controls">
+			
+					<input type="text"  class="form-control" name="modified" id="modified" value="$!dateFormatUtils.format($!task.modified)" readonly/>
+						
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
+</div>
+
+
+<script language="javascript">
+
+
+function backToManage(){
+	var url='/task/manage.action';
+	gUtils.fMakeFullLink(url);
+    window.location=url;
+}
+
+</script>

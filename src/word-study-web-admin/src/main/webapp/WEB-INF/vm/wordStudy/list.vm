@@ -1,0 +1,189 @@
+
+<div class="row-fluid">
+	<div class="span12">
+		<table class="table table-striped table-bordered table-hover table-condensed">
+			<thead>
+				<tr>
+ 			<th><span>ID</span></th>
+			<th><span>学生ID</span></th>
+			<th><span>单词CODE</span></th>
+			#*<th><span>用户单词CODE</span></th>*#
+			<th><span>单词ID</span></th>
+			<th><span>单词拼写</span></th>
+			<th><span>单词释义</span></th>
+			#*<th><span>用户CODE</span></th>*#
+			<th><span>记忆等级</span></th>
+			<th><span>复习次数</span></th>
+			<th><span>剩余时间</span></th>
+			<th><span>完成阅读时间</span></th>
+			<th><span>是否第一次就读成功</span></th>
+			<th><span>读失败次数</span></th>
+			<th><span>持续读失败次数</span></th>
+			<th><span>是否半读</span></th>
+			<th><span>是否第一个就拼写成功</span></th>
+			<th><span>拼写错误次数</span></th>
+			<th><span>连续拼写错误次数</span></th>
+			<th><span>是否为半写</span></th>
+			<th><span>是否记住</span></th>
+			<th><span>是否取消复习</span></th>
+			<th><span>是否被收藏</span></th>
+			<th><span>状态</span></th>
+			<th><span>更新时间</span></th>
+
+				<th class="operate">操作</th>
+				</tr>
+			</thead>
+
+
+			<tbody>
+	#if($list && $list.size()!=0)
+		    #foreach($item in $list)
+		   <tr>
+				 			<td>$!item.id</td>
+               <td>$!item.studentId</td>
+               <td>$!item.vocCode</td>
+		   #*<td>$!item.userVocCode</td>*#
+               <td>$!item.wordId</td>
+               <td>$!item.spell</td>
+               <td>$!item.meaning</td>
+			#*<td>$!item.userCode</td>*#
+			<td>
+        
+			
+				#if($item.memoryLevel==1)<span class="">生词</span> #end
+				#if($item.memoryLevel==2)<span class="">熟词</span> #end
+				#if($item.memoryLevel==3)<span class="">半生熟</span> #end	
+			
+	
+    </td>
+			<td>$!item.reviewTimes</td>
+			<td>$!item.timeLeft</td>
+			<td>$!item.finishReadingTime</td>
+			<td>
+			
+				#if($item.isFstReadSuccess==-1)<span class="">初始化</span> #end
+				#if($item.isFstReadSuccess==0)<span class="">否</span> #end
+				#if($item.isFstReadSuccess==1)<span class="">是</span> #end
+
+	
+    		</td>
+			<td>$!item.readFailTimes</td>
+			<td>$!item.continueReadFailTimes</td>
+			<td>
+        
+			
+				#if($item.isHalfReading==0)<span class="">否</span> #end	
+			
+				#if($item.isHalfReading==1)<span class="">是</span> #end	
+			
+	
+    </td>
+			<td>
+        
+			
+				#if($item.isFstSpellSuccess==-1)<span class="">初始化</span> #end
+				#if($item.isFstSpellSuccess==0)<span class="">否</span> #end
+				#if($item.isFstSpellSuccess==1)<span class="">是</span> #end	
+			
+	
+    </td>
+			<td>$!item.spellFailTimes</td>
+			<td>$!item.continueSpellFailTimes</td>
+			<td>
+        
+			
+				#if($item.isHalfSpelling==0)<span class="">否</span> #end
+				#if($item.isHalfSpelling==1)<span class="">是</span> #end
+
+	
+    		</td>
+			<td>
+        
+			
+				#if($item.isRemember==0)<span class="">否</span> #end
+				#if($item.isRemember==1)<span class="">是</span> #end
+
+	
+    		</td>
+			<td>
+        
+			
+				#if($item.isCancelReview==0)<span class="">否</span> #end
+				#if($item.isCancelReview==1)<span class="">是</span> #end
+
+	
+    		</td>
+			<td>
+        
+			
+				#if($item.iscollected==0)<span class="">否</span> #end
+				#if($item.iscollected==1)<span class="">是</span> #end
+
+	
+    		</td>
+			<td>
+        
+			
+				#if($item.state==1)<span class="">有效</span> #end	
+			
+				#if($item.state==2)<span class="">无效</span> #end	
+			
+	
+    </td>
+			<td>$!dateFormatUtils.format($!item.modified)</td>
+
+				<td class="operate">
+					<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+						<button class="btn btn-xs btn-success JUpdate-wordStudy" type="button" itemid="$!item.id"><i class="icon-edit bigger-120"></i>编辑</button>
+						<button class="btn btn-xs btn-info JView-wordStudy" type="button" itemid="$!item.id"><i class="icon-eye-open bigger-120"></i>查看</button>
+						<button class="btn btn-xs btn-danger JDelete-wordStudy" type="button" itemid="$!item.id"> <i class="icon-trash bigger-120"></i>删除</button>
+					</div>
+				</td>
+		  </tr>
+			#end
+		#else
+		<tr>
+					<td colspan="25" class="message_default">没有记录！</td>
+		</tr>
+		#end
+
+
+			</tbody>
+
+
+		</table>
+
+		#if($pageQuery)
+			#showPageQuery($pageQuery,'queryWordStudyList','input')
+		#end
+
+	</div>
+</div>
+
+
+
+
+<script language="javascript">
+void function(j) {	
+	j('.JDelete-wordStudy').click(function() {
+		var id = j(this).attr('itemid');
+		var config={title:'删除单词学习',info:'您确定要删除单词学习吗？',"queryList":"queryWordStudyList",
+		url: '/wordStudy/doDelete.action',param:'id='+id};
+		gUtils.fConfirmAndRefreshList(config);
+	});
+	
+	j('.JUpdate-wordStudy').click(function() {
+		var id = j(this).attr('itemid');
+		//gDialog.fCreate({ title: '修改单词学习', url: '/wordStudy/update.action?id='+id,width:700}).show();
+		var url='/wordStudy/update.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
+	});
+
+	j('.JView-wordStudy').click(function() {
+		var id = j(this).attr('itemid');
+		//gDialog.fCreate({ title: '查看单词学习', url: '/wordStudy/view?id='+id,width:700}).show();
+		var url='/wordStudy/view.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
+	});
+}(jQuery);
+</script>

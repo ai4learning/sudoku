@@ -1,0 +1,320 @@
+
+
+CREATE TABLE `activate_code` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `activate_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '激活码',
+  `lesson_id` bigint(20) DEFAULT NULL COMMENT '课程ID',
+  `expire_time` datetime DEFAULT NULL COMMENT '超时时间',
+  `state` tinyint(4) DEFAULT '1' COMMENT '状态：1.正常；2.超期；3.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `course` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `type` tinyint(4) DEFAULT NULL COMMENT '课程类型',
+  `module_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '课程CODE',
+  `book_number` int(11) DEFAULT NULL COMMENT '课程号',
+  `book_name` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '课程名',
+  `book_type` tinyint(4) DEFAULT NULL COMMENT '课程类型：1.教材；2.特色；',
+  `order_type` tinyint(4) DEFAULT NULL COMMENT '年级类型：0.无；1.小学；2.初中；3.高中；4.大学；',
+  `book_state` tinyint(4) DEFAULT NULL COMMENT '课程状态：1.有效；2.无效；',
+  `book_price` decimal(11,0) DEFAULT NULL COMMENT '课程定价',
+  `introduce` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '课程简介',
+  `cover_image_url` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '封面',
+  `total_unit_nbr` tinyint(4) DEFAULT NULL COMMENT '总单元数',
+  `total_words` int(11) DEFAULT NULL COMMENT '单词总数',
+  `out_date` bit(1) DEFAULT NULL COMMENT '是否过期',
+  `unit_type` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '单元类型',
+  `ext` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '扩展信息',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `course_study` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `student_id` int(11) DEFAULT NULL COMMENT '学生ID',
+  `student_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '学生CODE',
+  `lesson_id` int(11) DEFAULT NULL COMMENT '课程ID',
+  `is_current_pos` bit(1) DEFAULT NULL COMMENT '是当前学习位置：1.是；2.否；',
+  `study_position_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '学习位置CODE',
+  `position_type` tinyint(4) DEFAULT NULL COMMENT '位子类型',
+  `unit_nbr` tinyint(4) DEFAULT NULL COMMENT '单元号',
+  `voc_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '单词CODE',
+  `start_from` tinyint(4) DEFAULT NULL COMMENT '从哪开始学',
+  `study_mode` tinyint(4) DEFAULT NULL COMMENT '学习模式：0.逆向学习；1.正向学习；',
+  `complete_word_count` int(11) DEFAULT NULL COMMENT '完成单词数统计',
+  `is_finished` tinyint(4) DEFAULT NULL COMMENT '是否学习完成：0.未完成；1.已完成；',
+  `is_test` tinyint(4) DEFAULT NULL COMMENT '是否测试完成：0.未完成；1.已完成；',
+  `is_all_finished` tinyint(4) DEFAULT NULL COMMENT '全部完成：0.未完成；1.已完成；',
+  `status` tinyint(4) DEFAULT NULL COMMENT '状态：0.有效；1.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `exam` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户ID',
+  `user_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户CODE',
+  `lesson_id` int(11) DEFAULT NULL COMMENT '课程ID',
+  `unit_nbr` tinyint(4) DEFAULT NULL COMMENT '课程号',
+  `page_id` bigint(20) DEFAULT NULL COMMENT '试卷ID',
+  `test_type` tinyint(4) DEFAULT '1' COMMENT '测试类型：1.单元测试；2.自主测试；',
+  `result_score` tinyint(4) DEFAULT NULL COMMENT '得分',
+  `standard_duration` bigint(4) DEFAULT NULL COMMENT '考试时长',
+  `real_duration` bigint(20) DEFAULT NULL COMMENT '实际用时',
+  `error_nbr` tinyint(4) DEFAULT NULL COMMENT '错误数',
+  `cash_point` int(11) DEFAULT NULL COMMENT '积分',
+  `cash_point_type` tinyint(4) DEFAULT '0' COMMENT '积分类型：0.未知；1.金币；',
+  `is_pass` bit(1) DEFAULT b'0' COMMENT '是否通过：0.未通过；1.通过；',
+  `state` tinyint(4) DEFAULT '1' COMMENT '状态：1.有效；2.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `paper` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `lesson_id` int(11) DEFAULT NULL COMMENT '课程ID',
+  `unit_nbr` tinyint(4) DEFAULT NULL COMMENT '单元号',
+  `type` tinyint(4) DEFAULT '1' COMMENT '试卷类型：1.单元测试；2.自主测试；',
+  `test_area` tinyint(4) DEFAULT '0' COMMENT '测试范围：0.单元内；1.课程内；',
+  `question_nbr` tinyint(4) DEFAULT NULL COMMENT '题数',
+  `queston_type` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '题目类型',
+  `standard_duration` bigint(20) DEFAULT NULL COMMENT '考试时长',
+  `questions` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '题目',
+  `state` tinyint(4) DEFAULT '1' COMMENT '状态：1.有效；2.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `question` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `question_type` tinyint(4) DEFAULT NULL COMMENT '试题类型：0.英译汉；1.汉译英；3.听选；4.听写；',
+  `lesson_id` int(11) DEFAULT NULL COMMENT '课程ID',
+  `unit_nbr` tinyint(4) DEFAULT NULL COMMENT '单元号',
+  `word_id` int(11) DEFAULT NULL COMMENT '单词ID',
+  `voc_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '单词CODE',
+  `spelling` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '单词拼写',
+  `question` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '题描述',
+  `choices` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '选项',
+  `answer_index` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '正确答案',
+  `level` tinyint(4) DEFAULT '0' COMMENT '难易层度：0.未知；1.容易；2.中等；3.较难；',
+  `state` tinyint(4) DEFAULT '1' COMMENT '状态：1.有效；2.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `self_words` (
+  `id` bigint(20) NOT NULL COMMENT 'ID',
+  `module_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '模块CODE',
+  `study_id` bigint(20) DEFAULT NULL COMMENT '学生ID',
+  `type` tinyint(4) DEFAULT NULL COMMENT '类型：1.复习词库；2.错词库；',
+  `student_id` bigint(20) DEFAULT NULL COMMENT '学生ID',
+  `user_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户CODE',
+  `lesson_id` int(11) DEFAULT NULL COMMENT '课程ID',
+  `unit_nbr` tinyint(4) DEFAULT NULL COMMENT '单元号',
+  `voc_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '单词CODE',
+  `voc_index` tinyint(4) DEFAULT NULL COMMENT '单词索引(单元内）',
+  `word_id` int(11) DEFAULT NULL COMMENT '单词ID',
+  `spelling` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '单词拼写',
+  `state` tinyint(4) DEFAULT '1' COMMENT '状态：1.有效；2.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `self_words_study` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `student_id` int(11) DEFAULT NULL COMMENT '学生ID',
+  `student_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '学生CODE',
+  `lesson_id` int(11) DEFAULT NULL COMMENT '课程ID',
+  `unit_nbr` tinyint(4) DEFAULT NULL COMMENT '课程号',
+  `type` tinyint(4) DEFAULT NULL COMMENT '类型：1.复习学习；2.错词学习；',
+  `current_phase` tinyint(4) DEFAULT NULL COMMENT '当前学习阶段：1.分批学习；2.整体回忆；3.测试；',
+  `total_reading_time` bigint(20) DEFAULT NULL COMMENT '总读时间',
+  `total_writing_time` bigint(20) DEFAULT NULL COMMENT '总写时间',
+  `total_number` int(11) DEFAULT NULL COMMENT '总学习单词数',
+  `is_finished` tinyint(4) DEFAULT NULL COMMENT '是否学习完成：1.未完成；2.已完成；',
+  `is_tested` tinyint(4) DEFAULT NULL COMMENT '是否测试完成：1.未完成；2.已完成；',
+  `study_pos` tinyint(4) DEFAULT NULL COMMENT '单词学习位置',
+  `state` tinyint(4) DEFAULT '1' COMMENT '状态：1.有效；2.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `training_record` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `word_training_id` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '训练ID',
+  `word_traning_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '训练CODE',
+  `study_token` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '学习token',
+  `user_name` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户名',
+  `student_id` int(11) DEFAULT NULL COMMENT '学生ID',
+  `student_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '学生CODE',
+  `state` tinyint(4) DEFAULT NULL COMMENT '状态：1.有效；2.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `unit` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `module_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '单元CODE',
+  `lesson_id` bigint(20) DEFAULT NULL COMMENT '课程ID',
+  `unit_nbr` tinyint(4) DEFAULT NULL COMMENT '单元号',
+  `unit` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '单元名称',
+  `total_words` tinyint(4) DEFAULT NULL COMMENT '单元单词数',
+  `state` tinyint(4) DEFAULT NULL COMMENT '状态：1.有效；2.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `unit_words` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `unit_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '单元CODE',
+  `lesson_id` bigint(20) DEFAULT NULL COMMENT '课程ID',
+  `unit_nbr` tinyint(4) DEFAULT NULL COMMENT '单元号',
+  `fst_class_id` tinyint(4) DEFAULT NULL COMMENT '单词归类',
+  `unit` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '单元名',
+  `voc_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '单词CODE',
+  `voc_index` int(8) DEFAULT NULL COMMENT '单词索引号（单元内）',
+  `word_id` bigint(20) DEFAULT NULL COMMENT '单词ID',
+  `spelling` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '拼写',
+  `state` tinyint(4) DEFAULT '1' COMMENT '状态：1.有效；2.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `unit_words_study` (
+  `id` bigint(20) DEFAULT NULL COMMENT 'ID',
+  `student_id` int(11) DEFAULT NULL COMMENT '学生ID',
+  `student_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '学生CODE',
+  `lesson_id` int(11) DEFAULT NULL COMMENT '课程ID',
+  `unit_nbr` tinyint(4) DEFAULT NULL COMMENT '课程号',
+  `current_phase` tinyint(4) DEFAULT '1' COMMENT '学习阶段：1.分批学习；2.整体回忆；3.单元测试；',
+  `total_reading_time` bigint(20) DEFAULT NULL COMMENT '总读时间',
+  `total_writing_time` bigint(20) DEFAULT NULL COMMENT '总写时间',
+  `total_number` int(11) DEFAULT NULL COMMENT '总学习单词数',
+  `is_finished` tinyint(4) DEFAULT '1' COMMENT '是否学习完成：1.未完成；2.已完成；',
+  `is_tested` tinyint(4) DEFAULT '1' COMMENT '是否测试完成：1.未完成；2.已完成；',
+  `study_pos` tinyint(4) DEFAULT NULL COMMENT '单词学习位置',
+  `state` tinyint(4) DEFAULT '1' COMMENT '状态：1.有效；2.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT '账户名',
+  `passwd` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT '密码',
+  `user_code` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT '用户code',
+  `nike_name` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '别名',
+  `role_type` tinyint(4) DEFAULT '1' COMMENT '角色',
+  `authority_level` tinyint(4) DEFAULT NULL COMMENT '权限等级',
+  `parent_id` bigint(20) DEFAULT NULL COMMENT '父ID',
+  `activate_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '激活码',
+  `user_state` tinyint(4) DEFAULT '0' COMMENT '用户状态：0.初始状态；1.正常；2.欠费；3.不可用；',
+  `total_login_times` bigint(20) DEFAULT NULL COMMENT '登录次数',
+  `current_class` bigint(20) DEFAULT NULL COMMENT '当前班级',
+  `current_teacher` bigint(20) DEFAULT NULL COMMENT '当前老师',
+  `level` tinyint(4) DEFAULT NULL COMMENT '等级',
+  `cash_point` bigint(20) DEFAULT NULL COMMENT '积分',
+  `state` tinyint(4) DEFAULT '1' COMMENT '状态：1.有效；2.无效；',
+  `created` datetime NOT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`,`user_id`,`user_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `word` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `spelling` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '单词拼写',
+  `meaning` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '释义',
+  `sound_mark_us` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '美音音标',
+  `sound_mark_uk` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '国际音标',
+  `word_type` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '词性',
+  `media_uri` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '读音',
+  `state` tinyint(4) DEFAULT NULL COMMENT '状态：1.有效；2.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `word_study` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `voc_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '单词CODE',
+  `user_voc_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户单词CODE',
+  `spell` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '单词拼写',
+  `student_id` int(11) DEFAULT NULL COMMENT '学生ID',
+  `user_code` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户CODE',
+  `memory_level` tinyint(4) DEFAULT NULL COMMENT '记忆等级：1.生词；2.熟词；3.半生熟；',
+  `review_tims` tinyint(4) DEFAULT NULL COMMENT '复习次数',
+  `time_left` bigint(20) DEFAULT NULL COMMENT '剩余时间',
+  `finish_reading_time` bigint(20) DEFAULT NULL COMMENT '完成阅读时间',
+  `is_fst_read_success` bit(1) DEFAULT b'0' COMMENT '是否第一次就读成功：0.否；1.是；',
+  `read_fail_times` tinyint(4) DEFAULT NULL COMMENT '读失败次数',
+  `continue_read_fail_times` tinyint(4) DEFAULT NULL COMMENT '持续读失败次数',
+  `is_half_reading` bit(1) DEFAULT b'0' COMMENT '是否半读：0.否；1.是；',
+  `is_fst_spell_success` bit(1) DEFAULT b'0' COMMENT '是否第一个就拼写成功：0.否；1.是；',
+  `spell_fail_times` tinyint(4) DEFAULT NULL COMMENT '拼写错误次数',
+  `continue_spell_fail_times` tinyint(4) DEFAULT NULL COMMENT '连续拼写错误次数',
+  `is_half_spelling` bit(1) DEFAULT b'0' COMMENT '是否为半写：0.否；1.是；',
+  `is_remember` bit(1) DEFAULT b'0' COMMENT '是否记住：0.否；1.是；',
+  `is_cancel_review` bit(1) DEFAULT b'0' COMMENT '是否取消复习：0.否；1.是；',
+  `isCollected` bit(1) DEFAULT NULL COMMENT '是否被收藏：0.否；1.是；',
+  `state` tinyint(4) DEFAULT '1' COMMENT '状态：1.有效；2.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `word_study_statistic` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `student_id` int(11) DEFAULT NULL COMMENT '学生ID',
+  `count` int(11) DEFAULT NULL COMMENT '单词数',
+  `state` tinyint(4) DEFAULT NULL COMMENT '状态：1.有效；2.无效；',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

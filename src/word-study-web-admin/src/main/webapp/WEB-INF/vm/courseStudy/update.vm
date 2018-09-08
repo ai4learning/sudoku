@@ -1,0 +1,248 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
+
+    
+<div class="modal-body " id="update_coursestudy">
+	<form class="form-horizontal"  id="form_update_CourseStudy" role="form">
+	
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="id">ID</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="id" id="id" placeholder="请输入ID" maxlength="19" value="$!{courseStudy.id}"readonly/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studentId">学生ID</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="studentId" id="studentId" placeholder="请输入学生ID" maxlength="10" value="$!{courseStudy.studentId}"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studentCode">学生CODE</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="studentCode" id="studentCode" placeholder="请输入学生CODE" maxlength="50" value="$!{courseStudy.studentCode}"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="lessonId">课程ID</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10" value="$!{courseStudy.lessonId}"/>
+			</div>
+		</div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="currentStudyBook">是当前学习教材</label>
+            <div class="col-sm-7 controls">
+                <select class="forms_select input-medium" name="currentStudyBook" id="currentStudyBook">
+                    <option value="0" #if($courseStudy.currentStudyBook==0) selected #end>否</option>
+                    <option value="1" #if($courseStudy.currentStudyBook==1) selected #end>是</option>
+                </select>
+            </div>
+        </div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isCurrentPos">是当前学习位置</label>
+			<div class="col-sm-7 controls">
+                <select class="forms_select input-medium" name="isCurrentPos" id="isCurrentPos">
+					<option value="0" #if($courseStudy.isCurrentPos==0) selected #end>否</option>
+					<option value="1" #if($courseStudy.isCurrentPos==1) selected #end>是</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studyPositionCode">学习位置CODE</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="studyPositionCode" id="studyPositionCode" placeholder="请输入学习位置CODE" maxlength="50" value="$!{courseStudy.studyPositionCode}"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="positionType">位置类型</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="positionType" id="positionType">
+				<option value="1" #if($courseStudy.positionType==1) selected #end>单词</option>
+				<option value="2" #if($courseStudy.positionType==2) selected #end>单元</option>
+</select>
+		
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="unitNbr">单元号</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="unitNbr" id="unitNbr" placeholder="请输入单元号" maxlength="3" value="$!{courseStudy.unitNbr}"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="vocCode">单词CODE</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="vocCode" id="vocCode" placeholder="请输入单词CODE" maxlength="50" value="$!{courseStudy.vocCode}"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="startFrom">从哪开始学</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="startFrom" id="startFrom" placeholder="请输入从哪开始学" maxlength="3" value="$!{courseStudy.startFrom}"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="studyMode">学习模式</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="studyMode" id="studyMode">
+			<option value="0" #if($courseStudy.studyMode==0) selected #end>正向学习</option>
+            <option value="1" #if($courseStudy.studyMode==1) selected #end>逆向学习</option>
+        </select>
+		
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="completeWordCount">完成单词数统计</label>
+			<div class="col-sm-7 controls">
+			
+			<input type="text" class="form-control"  name="completeWordCount" id="completeWordCount" placeholder="请输入完成单词数统计" maxlength="10" value="$!{courseStudy.completeWordCount}"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isFinished">是否学习完成</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="isFinished" id="isFinished">
+				<option value="0" #if($courseStudy.isFinished==0) selected #end>未完成</option>
+				<option value="1" #if($courseStudy.isFinished==1) selected #end>已完成</option>
+</select>
+		
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isTested">是否测试完成</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="isTested" id="isTested">
+				<option value="0" #if($courseStudy.isTested==0) selected #end>未完成</option>
+				<option value="1" #if($courseStudy.isTested==1) selected #end>已完成</option>
+</select>
+		
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="isAllFinished">全部完成</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="isAllFinished" id="isAllFinished">
+				<option value="0" #if($courseStudy.isAllFinished==0) selected #end>未完成</option>
+				<option value="1" #if($courseStudy.isAllFinished==1) selected #end>已完成</option>
+</select>
+		
+    
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="status">状态</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="status" id="status">
+				<option value="1" #if($courseStudy.status==1) selected #end>有效</option>
+				<option value="2" #if($courseStudy.status==2) selected #end>无效</option>
+</select>
+		
+    
+
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-primary" id="btn_update_CourseStudy">保存修改</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
+</div>
+
+
+<script language="javascript">
+
+
+
+
+void function(j) {
+	var set = {
+		 		id:  {must: true, maxlength:19, ftip:'ID,最多19个字符' ,handler:'int' },
+		studentId:  {must: false, maxlength:10, ftip:'学生ID,最多10个字符' ,handler:'int' },
+		studentCode:  {must: false, maxlength:50, ftip:'学生CODE,最多50个字符'},
+		lessonId:  {must: false, maxlength:10, ftip:'课程ID,最多10个字符' ,handler:'int' },
+		isCurrentPos:  {must: false, maxlength:1, ftip:'是当前学习位置,最多1个字符'},
+		studyPositionCode:  {must: false, maxlength:50, ftip:'学习位置CODE,最多50个字符'},
+		positionType:  {must: false, maxlength:3, ftip:'位置类型,最多3个字符' ,handler:'int' },
+		unitNbr:  {must: false, maxlength:3, ftip:'单元号,最多3个字符' ,handler:'int' },
+		vocCode:  {must: false, maxlength:50, ftip:'单词CODE,最多50个字符'},
+		startFrom:  {must: false, maxlength:3, ftip:'从哪开始学,最多3个字符' ,handler:'int' },
+		studyMode:  {must: false, maxlength:3, ftip:'学习模式,最多3个字符' ,handler:'int' },
+		completeWordCount:  {must: false, maxlength:10, ftip:'完成单词数统计,最多10个字符' ,handler:'int' },
+		isFinished:  {must: false, maxlength:3, ftip:'是否学习完成,最多3个字符' ,handler:'int' },
+		isTested:  {must: false, maxlength:3, ftip:'是否测试完成,最多3个字符' ,handler:'int' },
+		isAllFinished:  {must: false, maxlength:3, ftip:'全部完成,最多3个字符' ,handler:'int' },
+		status:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
+	};
+	
+
+	j('#btn_update_CourseStudy').click(function(e) {
+		gUtils.fSubmitForm(
+			j("#form_update_CourseStudy").serialize(),
+			set, 
+			'/courseStudy/doUpdate.action', 
+			function() {
+				gDialog.fClose();
+				backToManage();
+			}
+		);
+	});
+
+
+	//form.friend.init(set);
+}(jQuery);
+
+
+	function backToManage(){
+    		var url='/courseStudy/manage.action';
+    		gUtils.fMakeFullLink(url);
+            window.location=url;
+    };
+</script>

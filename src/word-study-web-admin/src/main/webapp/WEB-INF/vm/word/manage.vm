@@ -1,0 +1,108 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#search_word").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
+
+
+
+<div class="manage-content" id="search_word">
+
+<form class="form-inline" id="search_form_Word">
+
+
+		<div class="form-group">
+			<label for="id_search">ID</label>
+				
+				<input type="text"  name="id" id="id_search" class="form-control" placeholder="请输入ID">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="wordType_search">词性</label>
+				
+				<input type="text"  name="wordType" id="wordType_search" class="form-control" placeholder="请输入词性">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="state_search">状态</label>
+				
+        
+		<select class="forms_select input-medium" name="state" id="state_search">
+			<option value="">全部</option>
+			
+				<option value="1">有效</option>
+				<option value="2">无效</option>
+		</select>
+	
+    
+
+		</div>&nbsp;&nbsp;
+		
+		<input type="button" onclick="queryWordList();" class="btn btn-primary" value="搜索"  />
+	</form>
+		
+<br/>
+
+
+
+		 <div class="page_operate">
+			 <button class="btn  btn-primary" type="button" id="add-word">
+				<span class="glyphicon glyphicon-plus"></span> 创建 单词库</button>
+		</div>
+
+
+	<div id="dl_Word"></div>
+</div>
+
+
+<script language="javascript">
+
+	function queryWordList(pageNo) {
+		if (!pageNo) {
+			pageNo = 1;
+		}
+		var page = pageNo;
+		var url = '/word/list.action';
+		var param = {
+			page: page
+		};
+		
+		var pageSize=jQuery("#JPageSize_queryList").val();
+        if(pageSize && !isNaN(pageSize)){
+            param['pageSize']=pageSize;
+        }
+
+		gUtils.fMergeParam(param,"search_form_Word");
+		gUtils.fGetHtml(url, 'dl_Word', param,'数据加载中...');
+	}
+	queryWordList();
+	
+
+
+
+
+void function(j) {
+	jQuery("#add-word").click(function(){
+		var url='/word/add.action';
+		url=gUtils.fMakeFullLink(url);
+		window.location=url;
+	});
+	
+}(jQuery);
+
+</script>
