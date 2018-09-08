@@ -1,0 +1,77 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
+
+<div class="manage-content" id="search_allexam">
+
+<form class="form-inline" id="search_form_Allexam">
+
+
+		<div class="form-group">
+			<label for="id_search">Id</label>
+				
+				<input type="text"  name="id" id="id_search" class="form-control" placeholder="请输入Id">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="type_search">type</label>
+				
+				<input type="text"  name="type" id="type_search" class="form-control" placeholder="请输入type">
+				
+		</div>&nbsp;&nbsp;
+		
+		<input type="button" onclick="queryAllexamList();" class="btn btn-primary" value="搜索"  />
+	</form>
+		
+<br/>
+
+
+
+		 <div class="page_operate">
+			 <button class="btn  btn-primary" type="button" id="add-allexam">
+				<span class="glyphicon glyphicon-plus"></span> 创建 Allexam</button>
+		</div>
+
+
+	<div id="dl_Allexam"></div>
+</div>
+
+
+<script language="javascript">
+
+	function queryAllexamList(pageNo) {
+		if (!pageNo) {
+			pageNo = 1;
+		}
+		var page = pageNo;
+		var url = '/allexam/list.action';
+		var param = {
+			page: page
+		};
+		
+		var pageSize=jQuery("#JPageSize_queryList").val();
+        if(pageSize && !isNaN(pageSize)){
+            param['pageSize']=pageSize;
+        }
+
+		gUtils.fMergeParam(param,"search_form_Allexam");
+		gUtils.fGetHtml(url, 'dl_Allexam', param,'数据加载中...');
+	}
+	queryAllexamList();
+	
+
+
+
+
+void function(j) {
+	jQuery("#add-allexam").click(function(){
+		var url='/allexam/add.action';
+		url=gUtils.fMakeFullLink(url);
+		window.location=url;
+	});
+	
+}(jQuery);
+
+</script>

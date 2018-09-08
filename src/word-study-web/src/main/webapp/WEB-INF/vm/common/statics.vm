@@ -1,0 +1,25 @@
+	<link href="/misc/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="/misc/css/joywindow.bootstrap.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/misc/adminlte/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="/misc/adminlte/css/skins/_all-skins.min.css">
+
+
+
+	<script type="text/javascript" src="/misc/js/jQuery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="/misc/js/bootstrap.js"></script>	
+	<script type="text/javascript" src="/misc/js/modal.manager.plugin1.0.js?t=20141226"></script>
+	<script type="text/javascript" src="/misc/js/jshow.utils.js?t=20141226"></script>	
+	<script type="text/javascript" src="/misc/js/calendar/calendar.js"></script>	
+	<script type="text/javascript" src="/misc/js/form.validate.js"></script>
+    <script type="text/javascript" src="/misc/js/jquery.json-2.4.min.js"></script>
+
+    <!--
+    <script type="text/javascript" src="/misc/js/form.validate.js"></script>
+    <script type="text/javascript" src="/misc/js/jquery.ui.draggable.js"></script> -->

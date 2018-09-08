@@ -1,0 +1,1482 @@
+12d11
+< BASIC
+18c17
+< Can I help you_
+---
+> Can I help you?
+26d24
+< English-speaking
+27a26
+> English-speaking
+41,43c40,42
+< How about_
+< How much_
+< How old_
+---
+> How about?
+> How much?
+> How old?
+61d59
+< Miss
+63d60
+< Mrs.
+64a62
+> Mrs.
+90d87
+< Thanksgiving Day
+91a89
+> Thanksgiving Day
+105,107c103,105
+< What about_
+< What's the matter_
+< What's wrong_
+---
+> What about?
+> What's the matter?
+> What's wrong?
+110c108
+< a bit of
+---
+> a
+111a110
+> a bit of
+122d120
+< a little bit
+123a122
+> a little bit
+137d135
+< a
+177d174
+< accuse sb. of doing sth.
+178a176
+> accuse sb. of doing sth.
+189d186
+< across from
+190a188
+> across from
+192d189
+< action movie
+193a191
+> action movie
+202d199
+< adapt to
+203a201
+> adapt to
+205d202
+< add ... to
+206a204
+> add ... to
+237a236
+> after
+242d240
+< after
+245d242
+< again and again
+246a244
+> again and again
+255d252
+< agree with
+256a254
+> agree with
+260d257
+< ahead of
+261a259
+> ahead of
+264d261
+< air-conditioned
+265a263
+> air-conditioned
+280a279
+> all
+292d290
+< all
+324d321
+< amusement park
+325a323
+> amusement park
+334d331
+< and so on
+335a333
+> and so on
+348d345
+< another time
+349a347
+> another time
+356d353
+< any more
+357a355
+> any more
+366d363
+< apart from
+367a365
+> apart from
+375d372
+< appeal to sb.
+376a374
+> appeal to sb.
+394d391
+< approve of sth.
+395a393
+> approve of sth.
+414d411
+< around the world
+415a413
+> around the world
+426a425
+> as
+429d427
+< as a result of
+430a429
+> as a result of
+438d436
+< as soon as possible
+439a438
+> as soon as possible
+442d440
+< as
+445a444
+> ask
+448d446
+< ask
+463a462
+> at
+491d489
+< at
+577d574
+< base on
+578a576
+> base on
+594a593
+> be
+668d666
+< be
+680d677
+< because of
+681a679,680
+> because of
+> become
+686d684
+< become
+694d691
+< before long
+695a693
+> before long
+696a695
+> beg
+699,700d697
+< beg
+< begin with
+701a699
+> begin with
+710d707
+< believe in
+711a709
+> believe in
+714d711
+< belong to
+715a713
+> belong to
+726d723
+< best-seller
+727a725
+> best-seller
+730d727
+< between ... and
+731a729
+> between ... and
+735d732
+< big deal
+736a734
+> big deal
+775d772
+< blow out
+776a774
+> blow out
+779d776
+< board game
+781c778
+< boarding school
+---
+> board game
+782a780
+> boarding school
+784a783
+> body
+787d785
+< body
+809d806
+< both and
+810a808
+> both and
+830d827
+< bread maker
+831a829,830
+> bread maker
+> break
+834d832
+< break
+851d848
+< bright-coloured
+852a850
+> bright-coloured
+855a854
+> bring
+863d861
+< bring
+893d890
+< burn out
+895c892
+< burst out
+---
+> burn out
+896a894
+> burst out
+897a896
+> bus
+900d898
+< bus
+910a909
+> by
+920d918
+< by
+931a930
+> call
+934d932
+< call
+941d938
+< can't
+942a940
+> can't
+960d957
+< card games
+961a959,960
+> card games
+> care
+964d962
+< care
+974d971
+< carry on
+975a973
+> carry on
+981d978
+< cash crop
+982a980
+> cash crop
+984d981
+< cast about
+985a983
+> cast about
+991a990
+> catch
+995d993
+< catch
+998d995
+< cater for
+999a997
+> cater for
+1026d1023
+< chain store
+1027a1025
+> chain store
+1050a1049
+> check
+1053d1051
+< check
+1054a1053
+> cheer
+1057d1055
+< cheer
+1115d1112
+< clean up
+1116a1114
+> clean up
+1118d1115
+< clear out
+1119a1117
+> clear out
+1132d1129
+< close to
+1133a1131
+> close to
+1162d1159
+< cold-blooded
+1163a1161
+> cold-blooded
+1176a1175
+> come
+1190d1188
+< come
+1212d1209
+< compare ... with
+1213a1211
+> compare ... with
+1229d1226
+< compose music
+1230a1228
+> compose music
+1235a1234
+> computer
+1238d1236
+< computer
+1240d1237
+< concentrate on
+1241a1239
+> concentrate on
+1266d1263
+< connect ... with
+1267a1265
+> connect ... with
+1277d1274
+< consist of
+1278a1276
+> consist of
+1299d1296
+< contrast with
+1300a1298
+> contrast with
+1320d1317
+< coral reef
+1321a1319
+> coral reef
+1328d1325
+< correspond with
+1329a1327
+> correspond with
+1345d1342
+< country music
+1346a1344
+> country music
+1367d1364
+< credit card
+1368a1366
+> credit card
+1411a1410
+> cut
+1416d1414
+< cut
+1429d1426
+< dance to the music
+1430a1428
+> dance to the music
+1439d1436
+< date from
+1440a1438
+> date from
+1449d1446
+< deal with
+1450a1448
+> deal with
+1460d1457
+< declare war on
+1461a1459
+> declare war on
+1489d1486
+< department-store
+1490a1488
+> department-store
+1492d1489
+< depend on
+1493a1491
+> depend on
+1532a1531
+> die
+1535d1533
+< die
+1553d1550
+< dinner jacket
+1554a1552
+> dinner jacket
+1613d1610
+< divide ... into
+1614a1612
+> divide ... into
+1617a1616
+> do
+1626d1624
+< do
+1646d1643
+< double-decker
+1647a1645
+> double-decker
+1662a1661
+> draw
+1665d1663
+< draw
+1668d1665
+< dream team
+1670c1667
+< dress up
+---
+> dream team
+1671a1669
+> dress up
+1674d1671
+< drink tea
+1675a1673
+> drink tea
+1677a1676
+> drop
+1680d1678
+< drop
+1688d1685
+< due to
+1689a1687
+> due to
+1701d1698
+< each other
+1702a1700
+> each other
+1708d1705
+< earn one's living
+1709a1707
+> earn one's living
+1716d1713
+< easy-going
+1717a1715,1716
+> easy-going
+> eat
+1720d1718
+< eat
+1741d1738
+< either ... or
+1742a1740
+> either ... or
+1771d1768
+< end up
+1772a1770
+> end up
+1780a1779
+> enjoy
+1783d1781
+< enjoy
+1823d1820
+< even though
+1824a1822
+> even though
+1828d1825
+< ever since
+1829a1827,1828
+> ever since
+> every
+1832d1830
+< every
+1912a1911
+> fall
+1916d1914
+< fall in love with
+1917a1916
+> fall in love with
+1920d1918
+< fall
+1923a1922
+> family
+1926d1924
+< family
+1931a1930
+> far
+1934d1932
+< far
+1960a1959
+> feed
+1963c1962
+< feed
+---
+> feel
+1967d1965
+< feel
+1983d1980
+< field trip
+1984a1982
+> field trip
+2004d2001
+< find out
+2005a2003
+> find out
+2011d2008
+< fire station
+2012a2010
+> fire station
+2018a2017
+> first
+2021d2019
+< first
+2028a2027
+> fix
+2031d2029
+< fix
+2056d2053
+< fly a kite
+2057a2055
+> fly a kite
+2062d2059
+< folk song
+2064c2061
+< follow the rules
+---
+> folk song
+2065a2063
+> follow the rules
+2071a2070
+> for
+2076d2074
+< for
+2117d2114
+< free of charge
+2118a2116
+> free of charge
+2136a2135
+> from
+2143d2141
+< from
+2147d2144
+< fruit juice
+2148a2146
+> fruit juice
+2152d2149
+< full of
+2153a2151
+> full of
+2197a2196
+> get
+2204d2202
+< get down to sth.
+2205a2204
+> get down to sth.
+2212a2212
+> get on
+2216,2217d2215
+< get on
+< get out of control
+2218a2217
+> get out of control
+2226d2224
+< get
+2233a2232
+> give
+2243d2241
+< give
+2260a2259
+> go
+2269d2267
+< go on doing sth
+2271c2269
+< go out of one's way
+---
+> go on doing sth
+2272a2271
+> go out of one's way
+2282d2280
+< go
+2288d2285
+< gold medal
+2289a2287
+> gold medal
+2348d2345
+< grow up
+2349a2347
+> grow up
+2364d2361
+< had better do
+2365a2363
+> had better do
+2370d2367
+< half-way
+2371a2369
+> half-way
+2377a2376
+> hand
+2380d2378
+< hand
+2389d2386
+< hang out
+2390a2388
+> hang out
+2396d2393
+< hard-working
+2398c2395
+< hardly ever
+---
+> hard-working
+2399a2397
+> hardly ever
+2413a2412
+> have
+2434d2432
+< have to do with
+2436c2434
+< have
+---
+> have to do with
+2447a2446
+> hear
+2450d2448
+< hear
+2463a2462
+> help
+2467d2465
+< help
+2474d2471
+< here and there
+2475a2473
+> here and there
+2487d2484
+< hide and seek
+2488a2486
+> hide and seek
+2489a2488
+> high
+2492d2490
+< high
+2511a2510
+> hold
+2517d2515
+< hold
+2552d2549
+< hot dog
+2553a2551
+> hot dog
+2555d2552
+< hour after hour
+2556a2554
+> hour after hour
+2560a2559
+> how
+2564d2562
+< how
+2569d2566
+< human being
+2570a2568
+> human being
+2581d2578
+< hurry up
+2582a2580
+> hurry up
+2589a2588
+> ice
+2592d2590
+< ice
+2600d2597
+< if necessary
+2601a2599
+> if necessary
+2628a2627
+> in
+2633d2631
+< in addition to
+2634a2633
+> in addition to
+2641d2639
+< in front of
+2642a2641
+> in front of
+2648d2646
+< in order to
+2649a2648
+> in order to
+2676d2674
+< in
+2699d2696
+< information desk
+2700a2698
+> information desk
+2728d2725
+< instead of
+2729a2727
+> instead of
+2780d2777
+< it's a great pity that
+2781a2779
+> it's a great pity that
+2815d2812
+< junior high school
+2816a2814,2815
+> junior high school
+> junk
+2819c2818
+< junk
+---
+> just
+2822d2820
+< just
+2825a2824
+> keep
+2833d2831
+< keep
+2845a2844
+> kind
+2848d2846
+< kind
+2860a2859
+> knock
+2865d2863
+< knock
+2888d2885
+< large numbers of
+2889a2887
+> large numbers of
+2891d2888
+< last name
+2892a2890
+> last name
+2895d2892
+< later on
+2896a2894
+> later on
+2900d2897
+< laugh at
+2901a2899
+> laugh at
+2913d2910
+< lead to
+2914a2912
+> lead to
+2921d2918
+< learn ... from
+2922a2920
+> learn ... from
+2924a2923
+> leave
+2930d2928
+< leave
+2932a2931
+> left
+2935d2933
+< left
+2947d2944
+< less than
+2948a2946
+> less than
+2949a2948
+> let
+2952,2953d2950
+< let
+< letter-box
+2954a2952
+> letter-box
+2967a2966
+> lie
+2970d2968
+< lie
+2974d2971
+< lift up
+2976c2973
+< light-headedness
+---
+> lift up
+2977a2975
+> light-headedness
+2991d2988
+< listen to
+2992a2990
+> listen to
+2997d2994
+< little by little
+2999c2996
+< live on
+---
+> little by little
+3000a2998
+> live on
+3002a3001
+> living
+3005d3003
+< living
+3017a3016
+> long
+3020d3018
+< long
+3021a3020
+> look
+3035d3033
+< look up to
+3037c3035
+< look
+---
+> look up to
+3039a3038
+> lose
+3042d3040
+< lose
+3080a3079
+> make
+3102d3100
+< make one's way to
+3103a3102
+> make one's way to
+3114d3112
+< make up one's mind
+3115a3114
+> make up one's mind
+3117d3115
+< make
+3124d3121
+< man-made
+3125a3123
+> man-made
+3137d3134
+< march
+3147d3143
+< master musician
+3148a3145
+> master musician
+3159d3155
+< may
+3180d3175
+< melon seed
+3181a3177
+> melon seed
+3214d3209
+< middle school
+3216c3211
+< midfield player
+---
+> middle school
+3217a3213
+> midfield player
+3224a3221
+> milk
+3227d3223
+< milk
+3232d3227
+< mind reader
+3233a3229
+> mind reader
+3258d3253
+< mobile phone
+3260c3255
+< model plane
+---
+> mobile phone
+3261a3257
+> model plane
+3276d3271
+< moon cake
+3277a3273
+> moon cake
+3281a3278
+> more
+3285,3286d3281
+< more
+< morning paper
+3287a3283
+> morning paper
+3308d3303
+< mouth-to-mouth
+3309a3305
+> mouth-to-mouth
+3320d3315
+< multiply ... by
+3321a3317
+> multiply ... by
+3363d3358
+< neck and neck
+3364a3360
+> neck and neck
+3374d3369
+< neither ... nor
+3375a3371
+> neither ... nor
+3381d3376
+< never mind
+3382a3378
+> never mind
+3387d3382
+< next to
+3388a3384
+> next to
+3397a3394
+> no
+3403d3399
+< no
+3423a3420
+> not
+3429d3425
+< not
+3436d3431
+< now that
+3437a3433
+> now that
+3466a3463
+> of
+3469d3465
+< of
+3482a3479
+> on
+3504,3505d3500
+< on
+< once upon a time
+3506a3502,3503
+> once upon a time
+> one
+3512d3508
+< one
+3518d3513
+< open up
+3519a3515
+> open up
+3521d3516
+< opera house
+3522a3518
+> opera house
+3531d3526
+< or so
+3532a3528
+> or so
+3557d3552
+< out of date
+3558a3554
+> out of date
+3574a3571
+> over
+3577d3573
+< over
+3631a3628
+> part
+3634d3630
+< part
+3640a3637
+> pass
+3643d3639
+< pass
+3664a3661
+> pay
+3668d3664
+< pay
+3683d3678
+< pen-friend
+3684a3680
+> pen-friend
+3685a3682
+> pencil
+3689d3685
+< pencil
+3732a3729
+> pick
+3735d3731
+< pick
+3759d3754
+< place order
+3760a3756
+> place order
+3770a3767
+> play
+3780d3776
+< play
+3789d3784
+< plenty of
+3790a3786
+> plenty of
+3801a3798
+> point
+3804d3800
+< point
+3809d3804
+< police station
+3810a3806
+> police station
+3846d3841
+< post office
+3847a3843
+> post office
+3857d3852
+< potato chips
+3858a3854
+> potato chips
+3871d3866
+< pray for
+3872a3868
+> pray for
+3878d3873
+< prefer to
+3879a3875
+> prefer to
+3886d3881
+< prepare for
+3887a3883
+> prepare for
+3903d3898
+< primary school
+3905c3900
+< prime minister
+---
+> primary school
+3906a3902
+> prime minister
+3961d3956
+< pull together
+3962a3958
+> pull together
+3977a3974
+> put
+3988d3984
+< put
+3994d3989
+< quarrel with
+3995a3991
+> quarrel with
+4001d3996
+< queue jumper
+4002a3998
+> queue jumper
+4008a4005
+> quite
+4011d4007
+< quite
+4018d4013
+< radio station
+4019a4015
+> radio station
+4035d4030
+< raise money
+4036a4032
+> raise money
+4049d4044
+< rather than
+4050a4046
+> rather than
+4053d4048
+< raw material
+4054a4050
+> raw material
+4060d4055
+< read a newspaper
+4061a4057
+> read a newspaper
+4088d4083
+< record holder
+4089a4085
+> record holder
+4098d4093
+< refer to
+4099a4095
+> refer to
+4109d4104
+< regard ... as
+4110a4106
+> regard ... as
+4141d4136
+< rely on
+4142a4138
+> rely on
+4148d4143
+< remind sb. of sth.
+4149a4145
+> remind sb. of sth.
+4214a4211
+> ride
+4217d4213
+< ride
+4219a4216
+> right
+4223d4219
+< right
+4226d4221
+< ring up
+4227a4223
+> ring up
+4231d4226
+< rise to one's feet
+4232a4228
+> rise to one's feet
+4250d4245
+< roller-skating
+4251a4247
+> roller-skating
+4266d4261
+< round-trip
+4267a4263
+> round-trip
+4279a4276
+> run
+4282d4278
+< run
+4286d4281
+< rush out
+4287a4283
+> rush out
+4327a4324
+> say
+4330d4326
+< say
+4346d4341
+< school work
+4347a4343
+> school work
+4354d4349
+< science fiction
+4355a4351
+> science fiction
+4366d4361
+< scratch
+4390d4384
+< see-saw
+4391a4386
+> see-saw
+4398a4394
+> self
+4402d4397
+< self
+4409d4403
+< send up
+4411c4405
+< senior high school
+---
+> send up
+4412a4407
+> senior high school
+4427a4423
+> set
+4430d4425
+< set in motion
+4431a4427
+> set in motion
+4436d4431
+< set
+4455d4449
+< share feelings and ideas with
+4456a4451
+> share feelings and ideas with
+4481d4475
+< shop assistant
+4482a4477
+> shop assistant
+4485d4479
+< shopping list
+4486a4481
+> shopping list
+4488d4482
+< short wave
+4489a4484
+> short wave
+4495a4491
+> shout
+4498d4493
+< shout
+4500d4494
+< show off
+4501a4496
+> show off
+4506d4500
+< shut down
+4507a4502
+> shut down
+4510a4506
+> side
+4513d4508
+< side
+4532d4526
+< simple-minded
+4533a4528
+> simple-minded
+4545d4539
+< sit down
+4546a4541
+> sit down
+4550d4544
+< situation comedy
+4551a4546
+> situation comedy
+4587d4581
+< slow down
+4588a4583
+> slow down
+4590d4584
+< small talk
+4591a4586
+> small talk
+4597d4591
+< smoke-free
+4598a4593
+> smoke-free
+4602d4596
+< snack bar
+4603a4598
+> snack bar
+4616a4612
+> so
+4622,4623d4617
+< so
+< soap opera
+4624a4619
+> soap opera
+4626d4620
+< soccer ball
+4628c4622
+< social rules
+---
+> soccer ball
+4629a4624
+> social rules
+4636a4632
+> soft
+4639d4634
+< soft
+4669d4663
+< soul music
+4670a4665
+> soul music
+4682d4676
+< space station
+4683a4678
+> space station
+4690a4686
+> speak
+4693d4688
+< speak
+4703c4698
+< spend time
+---
+> spelling
+4704a4700
+> spend time
+4715d4710
+< split up
+4716a4712
+> split up
+4718d4713
+< spoken man
+4719a4715
+> spoken man
+4743d4738
+< stainless steel
+4744a4740
+> stainless steel
+4747a4744
+> stand
+4750d4746
+< stand
+4768d4763
+< stay up late
+4769a4765
+> stay up late
+4780d4775
+< step-mother
+4781a4777
+> step-mother
+4797d4792
+< stop ... from
+4798a4794
+> stop ... from
+4849d4844
+< such as
+4850a4846
+> such as
+4914d4909
+< sweep over
+4915a4911
+> sweep over
+4921d4916
+< swimming pool
+4923c4918
+< swing dance
+---
+> swimming pool
+4924a4920,4921
+> swing dance
+> switch
+4927d4923
+< switch
+4931d4926
+< symbolic ambassador
+4932a4928
+> symbolic ambassador
+4940a4937
+> table
+4943d4939
+< table
+4947a4944
+> take
+4970d4966
+< take out the rubbish
+4971a4968
+> take out the rubbish
+4985d4981
+< take
+4988a4985
+> talk
+4993d4989
+< talk
+4999a4996
+> tape
+5002d4998
+< tape
+5008d5003
+< tax-free
+5009a5005
+> tax-free
+5011a5008
+> tea
+5014,5015d5010
+< tea
+< teach oneself
+5016a5012
+> teach oneself
+5033a5030
+> telephone
+5037d5033
+< telephone
+5040a5037
+> tell
+5044d5040
+< tell
+5073d5068
+< thank you for
+5074a5070
+> thank you for
+5077d5072
+< thanks to
+5078a5074
+> thanks to
+5079a5076
+> the
+5093d5089
+< the
+5103d5098
+< there's no doubt that
+5104a5100
+> there's no doubt that
+5112a5109
+> think
+5115d5111
+< think
+5137a5134
+> throw
+5141d5137
+< throw
+5153d5148
+< till now
+5154a5150
+> till now
+5164a5161
+> to
+5167d5163
+< to
+5188d5183
+< too ... to
+5189a5185
+> too ... to
+5195d5190
+< top-class
+5196a5192
+> top-class
+5222d5217
+< traffic lights
+5223a5219
+> traffic lights
+5243d5238
+< treat ... as
+5244a5240
+> treat ... as
+5255d5250
+< trip over
+5256a5252
+> trip over
+5271a5268
+> try
+5274d5270
+< try
+5279a5276
+> turn
+5289d5285
+< turn
+5296a5293
+> twenty
+5299d5295
+< twenty
+5305d5300
+< two-story
+5306a5302
+> two-story
+5325d5320
+< under construction
+5326a5322
+> under construction
+5367a5364
+> up
+5369d5365
+< up to now
+5371c5367
+< up
+---
+> up to now
+5383d5378
+< use up
+5385c5380
+< used to
+---
+> use up
+5386a5382
+> used to
+5421d5416
+< very much
+5422a5418
+> very much
+5426d5421
+< vice versa
+5427a5423
+> vice versa
+5459d5454
+< wait for
+5460a5456
+> wait for
+5462a5459
+> wake
+5465,5466d5461
+< wake
+< walk into
+5467a5463
+> walk into
+5475d5470
+< war memorial
+5476a5472
+> war memorial
+5491d5486
+< watch TV
+5492a5488
+> watch TV
+5493a5490
+> water
+5496d5492
+< water
+5510d5505
+< wear out
+5511a5507
+> wear out
+5527a5524
+> well
+5530d5526
+< well
+5534d5529
+< western
+5588d5582
+< with an average of
+5589a5584
+> with an average of
+5591d5585
+< without doubt
+5592a5587
+> without doubt
+5606d5600
+< work out
+5607a5602
+> work out
+5615d5609
+< world-famous
+5616a5611
+> world-famous
+5627d5621
+< would like
+5628a5623
+> would like
+5639d5633
+< write down
+5640a5635
+> write down
+5642d5636
+< writing brush
+5643a5638
+> writing brush
+5645d5639
+< yard sale
+5646a5641
+> yard sale
