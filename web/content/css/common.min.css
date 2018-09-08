@@ -1,0 +1,52 @@
+﻿.success_tips {
+	font-size:20px;
+	color:red
+}
+.testresultAll {
+	width:1000px;
+	height:auto;
+	margin:50px auto;
+	font-size:14px;
+	font-family:"微软雅黑"
+}
+.testresultAll table {
+	border-collapse:collapse;
+	width:100%;
+	border:1px solid #dcdcdc
+}
+.trbggray {
+	background:#dcdcdc
+}
+.testresultAll table tr td {
+	color:#999;
+	line-height:36px;
+	text-align:center;
+	border-bottom:1px solid #dcdcdc;
+	border-right:1px solid #dcdcdc
+}
+.testresultAll table tr:nth-of-type(even) {
+	background:#F5FAFA
+}
+.testresultAll table tr:hover {
+	background:#E0F0F0
+}
+.testresultAll table tr:first-child td:first-child {
+	-moz-border-radius-topleft:3px;
+	-webkit-border-top-left-radius:3px;
+	border-top-left-radius:3px
+}
+.testresultAll table tr:first-child td:last-child {
+	-moz-border-radius-topright:3px;
+	-webkit-border-top-right-radius:3px;
+	border-top-right-radius:3px
+}
+.testresultAll tr:last-child td:first-child {
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	border-bottom-left-radius:3px
+}
+.testresultAll tr:last-child td:last-child {
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	border-bottom-left-radius:3px
+}

@@ -1,0 +1,169 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
+    
+<div class="modal-body " id="add_paper">
+	<form class="form-horizontal"  id="form_add_Paper" role="form">
+	
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="lessonId">课程ID</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="lessonId" id="lessonId" placeholder="请输入课程ID" maxlength="10"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="unitNbr">单元号</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="unitNbr" id="unitNbr" placeholder="请输入单元号" maxlength="3"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="type">试卷类型</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="type" id="type">
+			
+				<option value="1">单元测试</option>
+				<option value="2">自主测试</option>
+		</select>
+	
+    
+				
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="testArea">测试范围</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="testArea" id="testArea">
+			
+				<option value="0">单元内</option>
+				<option value="1">课程内</option>
+		</select>
+	
+    
+				
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="questionNbr">题数</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="questionNbr" id="questionNbr" placeholder="请输入题数" maxlength="3"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="questonType">题目类型</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="questonType" id="questonType" placeholder="请输入题目类型" maxlength="20"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="standardDuration">考试时长</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="standardDuration" id="standardDuration" placeholder="请输入考试时长" maxlength="19"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="questions">题目</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="questions" id="questions" placeholder="请输入题目" maxlength="255"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="state">状态</label>
+			<div class="col-sm-7 controls">
+			
+        
+		<select class="forms_select input-medium" name="state" id="state">
+			
+				<option value="1">有效</option>
+				<option value="2">无效</option>
+		</select>
+	
+    
+				
+			</div>
+		</div>
+		
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_Paper">保存</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
+</div>
+
+
+
+
+<script language="javascript">
+
+
+void function(j) {
+	var set = {
+		 		lessonId:  {must: false, maxlength:10, ftip:'课程ID,最多10个字符' ,handler:'int' },
+		unitNbr:  {must: false, maxlength:3, ftip:'单元号,最多3个字符' ,handler:'int' },
+		type:  {must: false, maxlength:3, ftip:'试卷类型,最多3个字符' ,handler:'int' },
+		testArea:  {must: false, maxlength:3, ftip:'测试范围,最多3个字符' ,handler:'int' },
+		questionNbr:  {must: false, maxlength:3, ftip:'题数,最多3个字符' ,handler:'int' },
+		questonType:  {must: false, maxlength:20, ftip:'题目类型,最多20个字符'},
+		standardDuration:  {must: false, maxlength:19, ftip:'考试时长,最多19个字符' ,handler:'int' },
+		questions:  {must: false, maxlength:255, ftip:'题目,最多255个字符'},
+		state:  {must: false, maxlength:3, ftip:'状态,最多3个字符' ,handler:'int' }
+	};
+	
+
+	j('#btn_add_Paper').click(function(e) {
+		gUtils.fSubmitForm(
+			j("#form_add_Paper").serialize(),
+			set, 
+			'/paper/doAdd.action', 
+			function() {
+				gDialog.fClose();
+				backToManage();
+			}
+		);
+	});
+
+
+	//form.friend.init(set);
+}(jQuery);
+
+
+	function backToManage(){
+    		var url='/paper/manage.action';
+    		gUtils.fMakeFullLink(url);
+            window.location=url;
+    };
+</script>

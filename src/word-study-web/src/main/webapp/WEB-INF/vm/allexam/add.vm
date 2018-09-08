@@ -1,0 +1,115 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+
+    
+<div class="modal-body " id="add_allexam">
+	<form class="form-horizontal"  id="form_add_Allexam" role="form">
+	
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="type">type</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="type" id="type" placeholder="请输入type" maxlength="80"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="answerindex">answerIndex</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="answerindex" id="answerindex" placeholder="请输入answerIndex" maxlength="80"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="choices">choices</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="choices" id="choices" placeholder="请输入choices" maxlength="160"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="spelling">spelling</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="spelling" id="spelling" placeholder="请输入spelling" maxlength="80"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="voccode">vocCode</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="voccode" id="voccode" placeholder="请输入vocCode" maxlength="80"/>
+								
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="question">question</label>
+			<div class="col-sm-7 controls">
+			
+				<input type="text"  class="form-control" name="question" id="question" placeholder="请输入question" maxlength="80"/>
+								
+			</div>
+		</div>
+		
+		
+
+	</form>
+</div>
+<div class="modal-footer">
+	<a href="javascript:;" class="btn btn-primary" id="btn_add_Allexam">保存</a>
+	<a href="javascript:;" class="btn btn-sm" onclick="backToManage();">返回</a>
+</div>
+
+
+
+
+<script language="javascript">
+
+
+void function(j) {
+	var set = {
+		 		type:  {must: false, maxlength:80, ftip:'type,最多80个字符'},
+		answerindex:  {must: false, maxlength:80, ftip:'answerIndex,最多80个字符'},
+		choices:  {must: false, maxlength:160, ftip:'choices,最多160个字符'},
+		spelling:  {must: false, maxlength:80, ftip:'spelling,最多80个字符'},
+		voccode:  {must: false, maxlength:80, ftip:'vocCode,最多80个字符'},
+		question:  {must: false, maxlength:80, ftip:'question,最多80个字符'}
+	};
+	
+
+	j('#btn_add_Allexam').click(function(e) {
+		gUtils.fSubmitForm(
+			j("#form_add_Allexam").serialize(),
+			set, 
+			'/allexam/doAdd.action', 
+			function() {
+				gDialog.fClose();
+				backToManage();
+			}
+		);
+	});
+
+
+	//form.friend.init(set);
+}(jQuery);
+
+
+	function backToManage(){
+    		var url='/allexam/manage.action';
+    		gUtils.fMakeFullLink(url);
+            window.location=url;
+    };
+</script>

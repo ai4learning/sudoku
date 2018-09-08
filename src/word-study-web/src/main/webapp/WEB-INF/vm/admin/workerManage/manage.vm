@@ -1,0 +1,11 @@
+<div class="manage-content">
+	<div id="dl"></div>
+</div>
+
+<script language="javascript">
+	function queryList(pageNo) {	
+		var url = '/admin/workerManage/list';
+		gUtils.fGetHtml(url, 'dl', '');
+	}
+	queryList();
+</script>

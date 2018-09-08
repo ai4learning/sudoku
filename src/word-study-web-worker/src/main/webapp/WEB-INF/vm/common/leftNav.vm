@@ -1,0 +1,404 @@
+#set($pageFrom=${request.getParameter('from')})
+#if(!$pageFrom || $pageFrom=='')
+    #set($pageFrom='self')
+#end
+
+
+<a class="menu-toggler" id="menu-toggler" href="#">
+    <span class="menu-text"></span>
+</a>
+
+<div class="sidebar" id="sidebar"   #if(${pageFrom}=='erp') style="display:none;" #end>
+    <script type="text/javascript">
+        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+    </script>
+
+#*
+    <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+            <button class="btn btn-success">
+                <i class="icon-signal"></i>
+            </button>
+
+            <button class="btn btn-info">
+                <i class="icon-pencil"></i>
+            </button>
+
+            <button class="btn btn-warning">
+                <i class="icon-group"></i>
+            </button>
+
+            <button class="btn btn-danger">
+                <i class="icon-cogs"></i>
+            </button>
+        </div>
+
+        <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+            <span class="btn btn-success"></span>
+
+            <span class="btn btn-info"></span>
+
+            <span class="btn btn-warning"></span>
+
+            <span class="btn btn-danger"></span>
+        </div>
+    </div><!-- #sidebar-shortcuts -->
+*#
+
+    <ul class="nav nav-list">
+        <li class="active">
+            <a href="/admin/main">
+                <i class="icon-dashboard"></i>
+                <span class="menu-text"> 控制台 </span>
+            </a>
+        </li>
+
+
+        <li>
+            <a href="#" class="dropdown-toggle" id="j_nav_1" menuname="用户管理">
+                <i class="icon-file-alt"></i>
+                <span class="menu-text">
+                    用户管理
+                    #*<span class="badge badge-primary ">5</span>*#
+                </span>
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/user/manage?from=$!{pageFrom}&menuId=j_nav_1_1"
+                       id="j_nav_1_1" parentid="j_nav_1"  menuname="用户管理" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        用户管理
+                    </a>
+                </li>
+                <li>
+                    <a href="/loginRecord/manage?from=$!{pageFrom}&menuId=j_nav_1_2"
+                       id="j_nav_1_2" parentid="j_nav_1"  menuname="登录管理" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        登录管理
+                    </a>
+                </li>
+                <li>
+                    <a href="/activateCode/manage?from=$!{pageFrom}&menuId=j_nav_1_3"
+                       id="j_nav_1_3" parentid="j_nav_1"  menuname="激活码管理" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        激活码管理
+                    </a>
+                </li>
+
+
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="dropdown-toggle" id="j_nav_2" menuname="资源库">
+                <i class="icon-file-alt"></i>
+                <span class="menu-text">
+                    资源管理
+                    #*<span class="badge badge-primary ">5</span>*#
+                </span>
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/course/manage?from=$!{pageFrom}&menuId=j_nav_2_1"
+                       id="j_nav_2_1" parentid="j_nav_2"  menuname="课程库" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        课程库
+                    </a>
+                </li>
+                <li>
+                    <a href="/unit/manage?from=$!{pageFrom}&menuId=j_nav_2_2"
+                       id="j_nav_2_2" parentid="j_nav_2"  menuname="课程单元库" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        课程单元库
+                    </a>
+                </li>
+                <li>
+                    <a href="/unitWords/manage?from=$!{pageFrom}&menuId=j_nav_2_3"
+                       id="j_nav_2_3" parentid="j_nav_2"  menuname="单元内单词" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        单元内单词
+                    </a>
+                </li>
+                <li>
+                    <a href="/word/manage?from=$!{pageFrom}&menuId=j_nav_2_4"
+                       id="j_nav_2_4" parentid="j_nav_2"  menuname="单词库" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        单词库
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="dropdown-toggle" id="j_nav_3" menuname="学生学习管理">
+                <i class="icon-file-alt"></i>
+                <span class="menu-text">
+                    学生学习管理
+                    #*<span class="badge badge-primary ">5</span>*#
+                </span>
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/courseStudy/manage?from=$!{pageFrom}&menuId=j_nav_3_1"
+                       id="j_nav_3_1" parentid="j_nav_3"  menuname="课程学习" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        课程学习
+                    </a>
+                </li>
+                <li>
+                    <a href="/unitWordsStudy/manage?from=$!{pageFrom}&menuId=j_nav_3_2"
+                       id="j_nav_3_2" parentid="j_nav_3"  menuname="单元单词学习" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        单元单词学习
+                    </a>
+                </li>
+                <li>
+                    <a href="/wordStudy/manage?from=$!{pageFrom}&menuId=j_nav_3_3"
+                       id="j_nav_3_3" parentid="j_nav_3"  menuname="整体单词学习情况" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        整体单词学习情况
+                    </a>
+                </li>
+                <li>
+                    <a href="/selfWords/manage?from=$!{pageFrom}&menuId=j_nav_3_4"
+                       id="j_nav_3_4" parentid="j_nav_3"  menuname="个人单词本" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        学生个人单词本
+                    </a>
+                </li>
+                <li>
+                    <a href="/selfWordsStudy/manage?from=$!{pageFrom}&menuId=j_nav_3_5"
+                       id="j_nav_3_5" parentid="j_nav_3"  menuname="个人单词学习情况" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        个人单词学习情况
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/wordStudyStatistic/manage?from=$!{pageFrom}&menuId=j_nav_3_6"
+                       id="j_nav_3_6" parentid="j_nav_3"  menuname="每日单词学习统计" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        每日单词学习统计
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+        <li>
+            <a href="#" class="dropdown-toggle" id="j_nav_4" menuname="考试管理">
+                <i class="icon-file-alt"></i>
+                <span class="menu-text">
+                    考试管理
+                    #*<span class="badge badge-primary ">5</span>*#
+                </span>
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/question/manage?from=$!{pageFrom}&menuId=j_nav_4_1"
+                       id="j_nav_4_1" parentid="j_nav_4"  menuname="试题库" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        试题库
+                    </a>
+                </li>
+                <li>
+                    <a href="/paper/manage?from=$!{pageFrom}&menuId=j_nav_4_2"
+                       id="j_nav_4_2" parentid="j_nav_4"  menuname="试卷管理" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        试卷管理
+                    </a>
+                </li>
+                <li>
+                    <a href="/exam/manage?from=$!{pageFrom}&menuId=j_nav_4_3"
+                       id="j_nav_4_3" parentid="j_nav_4"  menuname="学生考试管理" class="j_sub_nav">
+                        <i class="icon-double-angle-right"></i>
+                        学生考试管理
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+##        <li>
+##            <a href="#" class="dropdown-toggle">
+##                <i class="icon-desktop"></i>
+##                <span class="menu-text"> 资源管理 </span>
+##
+##                <b class="arrow icon-angle-down"></b>
+##            </a>
+##
+##            <ul class="submenu">
+##                <li>
+##                    <a href="elements.html">
+##                        <i class="icon-double-angle-right"></i>
+##                        组件
+##                    </a>
+##                </li>
+##
+##                <li>
+##                    <a href="buttons.html">
+##                        <i class="icon-double-angle-right"></i>
+##                        按钮 &amp; 图表
+##                    </a>
+##                </li>
+##
+##                <li>
+##                    <a href="treeview.html">
+##                        <i class="icon-double-angle-right"></i>
+##                        树菜单
+##                    </a>
+##                </li>
+##
+##                <li>
+##                    <a href="jquery-ui.html">
+##                        <i class="icon-double-angle-right"></i>
+##                        jQuery UI
+##                    </a>
+##                </li>
+##
+##                <li>
+##                    <a href="nestable-list.html">
+##                        <i class="icon-double-angle-right"></i>
+##                        可拖拽列表
+##                    </a>
+##                </li>
+##
+##                <li>
+##                    <a href="#" class="dropdown-toggle">
+##                        <i class="icon-double-angle-right"></i>
+##
+##                        三级菜单
+##                        <b class="arrow icon-angle-down"></b>
+##                    </a>
+##
+##                    <ul class="submenu">
+##                        <li>
+##                            <a href="#">
+##                                <i class="icon-leaf"></i>
+##                                第一级
+##                            </a>
+##                        </li>
+##
+##                        <li>
+##                            <a href="#" class="dropdown-toggle">
+##                                <i class="icon-pencil"></i>
+##
+##                                第四级
+##                                <b class="arrow icon-angle-down"></b>
+##                            </a>
+##
+##                            <ul class="submenu">
+##                                <li>
+##                                    <a href="#">
+##                                        <i class="icon-plus"></i>
+##                                        添加产品
+##                                    </a>
+##                                </li>
+##
+##                                <li>
+##                                    <a href="#">
+##                                        <i class="icon-eye-open"></i>
+##                                        查看商品
+##                                    </a>
+##                                </li>
+##                            </ul>
+##                        </li>
+##                    </ul>
+##                </li>
+##            </ul>
+##        </li>
+
+
+
+##        <li>
+##            <a href="#" class="dropdown-toggle">
+##                <i class="icon-file-alt"></i>
+##
+##								<span class="menu-text">
+##									其他页面
+##									<span class="badge badge-primary ">5</span>
+##								</span>
+##
+##                <b class="arrow icon-angle-down"></b>
+##            </a>
+##
+##            <ul class="submenu">
+##                <li>
+##                    <a href="faq.html">
+##                        <i class="icon-double-angle-right"></i>
+##                        帮助
+##                    </a>
+##                </li>
+##
+##                <li>
+##                    <a href="error-404.html">
+##                        <i class="icon-double-angle-right"></i>
+##                        404错误页面
+##                    </a>
+##                </li>
+##
+##                <li>
+##                    <a href="error-500.html">
+##                        <i class="icon-double-angle-right"></i>
+##                        500错误页面
+##                    </a>
+##                </li>
+##
+##                <li>
+##                    <a href="grid.html">
+##                        <i class="icon-double-angle-right"></i>
+##                        网格
+##                    </a>
+##                </li>
+##
+##                <li>
+##                    <a href="blank.html">
+##                        <i class="icon-double-angle-right"></i>
+##                        空白页面
+##                    </a>
+##                </li>
+##            </ul>
+##        </li>
+    </ul><!-- /.nav-list -->
+
+    <div class="sidebar-collapse" id="sidebar-collapse">
+        <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+    </div>
+
+    <script type="text/javascript">
+        try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+
+        jQuery(function(){
+            var j=jQuery;
+            var pageFrom='$!{pageFrom}';
+            var menuId="$!{request.getParameter('menuId')}";
+            if(menuId==''){
+                menuId='$!{menuId}';
+            }
+            if(menuId=='main'){
+              //  j("#j_nav_1").trigger('click');
+            }else  if(menuId!=null && menuId!=''){
+                var jthis=j("#"+menuId);
+                var parentId=jthis.attr('parentid');
+                var menuName=jthis.attr('menuname');
+                var jParent=j("#"+parentId);
+                var parentName=jParent.attr('menuname');
+                jParent.trigger('click');
+                jthis.parent('li').addClass("active");
+                gUtils.fUpdateNav(true,'crumb-'+parentId,parentName);
+                gUtils.fUpdateNav(false,'crumb-'+jthis.attr('id'),menuName);
+            }
+
+        });
+
+    </script>
+</div>

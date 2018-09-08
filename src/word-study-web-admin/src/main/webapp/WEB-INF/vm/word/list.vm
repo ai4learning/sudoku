@@ -1,0 +1,98 @@
+
+<div class="row-fluid">
+	<div class="span12">
+		<table class="table table-striped table-bordered table-hover table-condensed">
+			<thead>
+				<tr>
+ 			<th><span>ID</span></th>
+			<th><span>单词拼写</span></th>
+			<th><span>释义</span></th>
+			<th><span>美音音标</span></th>
+			<th><span>国际音标</span></th>
+			<th><span>词性</span></th>
+			<th><span>读音</span></th>
+			<th><span>状态</span></th>
+			<th><span>修改时间</span></th>
+
+				<th class="operate">操作</th>
+				</tr>
+			</thead>
+
+
+			<tbody>
+	#if($list && $list.size()!=0)
+		    #foreach($item in $list)
+		   <tr>
+				 			<td>$!item.id</td>
+			<td>$!item.spelling</td>
+			<td>$!item.meaning</td>
+			<td>$!item.soundMarkUs</td>
+			<td>$!item.soundMarkUk</td>
+			<td>$!item.wordType</td>
+			<td>$!item.mediaUri</td>
+			<td>
+        
+			
+				#if($item.state==1)<span class="">有效</span> #end	
+			
+				#if($item.state==2)<span class="">无效</span> #end	
+			
+	
+    </td>
+			<td>$!dateFormatUtils.format($!item.modified)</td>
+
+				<td class="operate">
+					<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+						<button class="btn btn-xs btn-success JUpdate-word" type="button" itemid="$!item.id"><i class="icon-edit bigger-120"></i>编辑</button>
+						<button class="btn btn-xs btn-info JView-word" type="button" itemid="$!item.id"><i class="icon-eye-open bigger-120"></i>查看</button>
+						<button class="btn btn-xs btn-danger JDelete-word" type="button" itemid="$!item.id"> <i class="icon-trash bigger-120"></i>删除</button>
+					</div>
+				</td>
+		  </tr>
+			#end
+		#else
+		<tr>
+					<td colspan="11" class="message_default">没有记录！</td>
+		</tr>
+		#end
+
+
+			</tbody>
+
+
+		</table>
+
+		#if($pageQuery)
+			#showPageQuery($pageQuery,'queryWordList','input')
+		#end
+
+	</div>
+</div>
+
+
+
+
+<script language="javascript">
+void function(j) {	
+	j('.JDelete-word').click(function() {
+		var id = j(this).attr('itemid');
+		var config={title:'删除单词库',info:'您确定要删除单词库吗？',"queryList":"queryWordList",
+		url: '/word/doDelete.action',param:'id='+id};
+		gUtils.fConfirmAndRefreshList(config);
+	});
+	
+	j('.JUpdate-word').click(function() {
+		var id = j(this).attr('itemid');
+		//gDialog.fCreate({ title: '修改单词库', url: '/word/update.action?id='+id,width:700}).show();
+		var url='/word/update.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
+	});
+
+	j('.JView-word').click(function() {
+		var id = j(this).attr('itemid');
+		//gDialog.fCreate({ title: '查看单词库', url: '/word/view?id='+id,width:700}).show();
+		var url='/word/view.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
+	});
+}(jQuery);
+</script>

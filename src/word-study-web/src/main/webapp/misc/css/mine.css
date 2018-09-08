@@ -1,0 +1,56 @@
+.page-header{
+	padding-bottom:0px;
+	margin: 10px 0 10px
+}
+.form-group {
+	margin-bottom:0px;
+}
+
+hr {
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.col-sm-1 {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.bs-example {
+	padding: 20px 10px 10px;
+}
+
+.col-left-margin {
+	margin-left: 50px;
+}
+.nav>.active>a {
+	 border-left: 0px;
+}
+ 
+
+.nav-ul { 
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none
+}
+.nav-ul a {
+	color: #767676;
+	text-decoration: none;
+	font-size: 12px;
+	padding: 4px 4px;
+}
+.nav-ul a:hover {
+	color: #767676;
+	text-decoration: none;
+}
+
+.tip-p {
+	margin:5px 5px;
+}
+
+.tip-pre {
+	padding: 0px;
+	background-color:transparent;
+	border:none;
+	border-radius:0px;
+}
+
