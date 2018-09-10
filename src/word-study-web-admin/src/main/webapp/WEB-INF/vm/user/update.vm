@@ -1,8 +1,6 @@
 #set($layout='/WEB-INF/vm/layout/adminLayout.vm')
 
 
-
-    
 <div class="modal-body " id="update_user">
 	<form class="form-horizontal"  id="form_update_User" role="form">
 	
@@ -95,7 +93,12 @@
 			<label class="col-sm-2 control-label" for="lessonIds">关联课程</label>
 			<div class="col-sm-7 controls">
 
-			<input type="text" class="form-control"  name="lessonIds" id="lessonIds" placeholder="请输入关联课程（如1,2,3）" maxlength="500" value="$!{user.lessonIds}"/>
+##			<input type="text" class="form-control"  name="lessonIds" id="lessonIds" placeholder="请输入关联课程（如1,2,3）" maxlength="500" value="$!{user.lessonIds}"/>
+			<select multiple class="form-control" name="lessonIds" id="lessonIds">
+				#foreach($item in $list)
+					<option value="$item.bookNumber" #if($selectedCourse.contains($item.bookNumber))selected#end>$item.bookNumber - $item.bookName</option>
+				#end
+			</select>
 			</div>
 		</div>
 
@@ -220,9 +223,18 @@ void function(j) {
 	
 
 	j('#btn_update_User').click(function(e) {
+	    var data = j("#form_update_User").serializeArray();
+	    var serializeObj = {}
+	    for(var i = 0; i < data.length; i++) {
+	        if(serializeObj[data[i].name]) {
+	            serializeObj[data[i].name] += ','+data[i].value
+			} else {
+	            serializeObj[data[i].name] = data[i].value
+			}
+		}
 		gUtils.fSubmitForm(
-			j("#form_update_User").serialize(),
-			set, 
+		    serializeObj,
+			set,
 			'/user/doUpdate.action', 
 			function() {
 				gDialog.fClose();
