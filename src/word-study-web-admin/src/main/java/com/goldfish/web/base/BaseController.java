@@ -21,21 +21,17 @@ public class BaseController {
 
 
     public int getPageSize(HttpServletRequest request,int defaultPageSize,int max) {
-        int pageSize = defaultPageSize;
-        if(request == null) {
-            return pageSize;
-        } else {
-            String pageSizeStr = request.getParameter("pageSize");
-            if (StringUtils.isNumeric(pageSizeStr)) {
-                try {
-                    pageSize = Integer.valueOf(pageSizeStr);
-                } catch (Exception e) {
-                }
-                //不能超过最大值
-                pageSize = pageSize > max ? max : pageSize;
+        String pageSizeStr=request.getParameter("pageSize");
+        int pageSize=defaultPageSize;
+        if(StringUtils.isNumeric(pageSizeStr)){
+            try{
+                pageSize=Integer.valueOf(pageSizeStr);
+            }catch (Exception e) {
             }
-            return pageSize;
+            //不能超过最大值
+            pageSize=pageSize>max?max:pageSize;
         }
+        return pageSize;
     }
 
 
