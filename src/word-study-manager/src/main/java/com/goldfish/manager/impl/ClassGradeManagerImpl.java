@@ -2,6 +2,7 @@ package com.goldfish.manager.impl;
 
 import com.goldfish.common.PageQuery;
 import com.goldfish.dao.ClassGradeDao;
+import com.goldfish.dao.cache.redis.RedisUtils;
 import com.goldfish.domain.ClassGrade;
 import com.goldfish.manager.ClassGradeManager;
 import org.springframework.stereotype.Component;
@@ -19,25 +20,35 @@ public class ClassGradeManagerImpl implements ClassGradeManager {
     @Resource
     private ClassGradeDao classGradeDao;
 
+    @Resource(name = "redisUtils")
+    private RedisUtils redisUtils;
+
     @Override
     public ClassGrade addClassGrade(ClassGrade classGrade) {
+        redisUtils.setObject(classGrade.getClass().getSimpleName() + ":" + classGrade.getId(), classGrade);
         classGradeDao.addClassGrade(classGrade);
         return classGrade;
     }
 
     @Override
     public void updateClassGrade(ClassGrade classGrade) {
+        redisUtils.setObject(classGrade.getClass().getSimpleName() + ":" + classGrade.getId(), classGrade);
         classGradeDao.updateClassGrade(classGrade);
     }
 
     @Override
     public void deleteClassGrade(Long id) {
+        redisUtils.deleteByKey(ClassGrade.class.getSimpleName() + ":" + id);
         classGradeDao.deleteClassGrade(id);
     }
 
     @Override
     public ClassGrade getClassGradeById(Long id) {
-        return classGradeDao.getClassGradeById(id);
+        ClassGrade classGrade = redisUtils.getObject(ClassGrade.class.getSimpleName() + ":" + id, ClassGrade.class);
+        if (classGrade == null) {
+            return classGradeDao.getClassGradeById(id);
+        }
+        return classGrade;
     }
 
     @Override
