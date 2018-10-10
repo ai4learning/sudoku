@@ -1,0 +1,1111 @@
+﻿html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video
+	{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	font-size: 100%;
+	vertical-align: baseline;
+	color: #4D4D4D;
+	/* font-family: arial, courier new, courier, \5b8b\4f53, monospace; */
+}
+
+/* line 22, D:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+	line-height: 1;
+}
+
+/* line 24, D:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol,ul {
+	list-style: none;
+}
+
+/* line 26, D:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* line 28, D:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption,th,td {
+	text-align: left;
+	font-weight: normal;
+	vertical-align: middle;
+}
+
+input:focus {
+	outline: none;
+}
+
+/* line 30, D:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q,blockquote {
+	quotes: none;
+}
+/* line 103, D:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before,q:after,blockquote:before,blockquote:after {
+	content: "";
+	content: none;
+}
+
+/* line 32, D:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+	border: none;
+}
+
+/* line 116, D:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary
+	{
+	display: block;
+}
+
+/* line 4, ../sass/screen-s.scss */
+body {
+	font-family: 微软雅黑, 黑体, 宋体, Arial;
+	font-size: 12px;
+}
+
+/* line 5, ../sass/screen-s.scss */
+a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* line 6, ../sass/screen-s.scss */
+input {
+	font-family: 微软雅黑, Arial;
+}
+
+.font10 {
+	font-size: 10px;
+}
+
+.font14 {
+	font-size: 14px;
+}
+
+.font16 {
+	font-size: 16px;
+}
+
+.font20 {
+	font-size: 20px;
+}
+
+.font30 {
+	font-size: 30px;
+}
+
+.fontDRed {
+	color: #5F0000;
+}
+
+.radius {
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+.radius_l5_r0 {
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.radius_l5_l0 {
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.radius_l5 {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.hide {
+	display: none;
+}
+
+input.text {
+	float: none;
+	width: 282px;
+	height: 24px;
+	line-height: 24px;
+	padding: 4px 20px 4px 3px;
+	border: 1px solid #cccccc;
+	font-size: 14px;
+	font-family: arial;
+}
+
+.input-txt {
+	background-color: #ffffff;
+	width: 240px;
+	border: solid 1px #cccccc;
+	float: left;
+	height: 21px;
+	padding-top: 3px;
+	border: 1px solid #CCC;
+	box-shadow: inset 0 3px 5px #f7f7f7;
+}
+
+/* line 9, ../sass/screen-s.scss */
+.light-text {
+	color: #fff;
+}
+
+.gray-text {
+	color: #999999;
+}
+/* line 12, ../sass/screen-s.scss */
+.dark-text {
+	color: #1e1e1e;
+}
+
+.btn {
+	border: none;
+	background: url(http://www.wordtraining.cn/image/button_bg.gif) no-repeat -2px -1px;
+	width: 120px;
+	height: 40px;
+	line-height: 40px;
+	font-weight: bold;
+	font-size: 14px;
+	border: solid 1px #ccc;
+	cursor: pointer;
+	font-family: 幼圆;
+}
+
+.btn:hover {
+	background: url(http://www.wordtraining.cn/image/button_bg.gif) no-repeat -2px -43px;
+}
+
+.btn-green {
+	border: none;
+	background: url(http://www.wordtraining.cn/image/button_bg.gif) no-repeat -2px -169px;
+	width: 78px;
+	height: 40px;
+	line-height: 40px;
+	font-weight: bold;
+	color: #fff;
+	font-size: 14px;
+	cursor: pointer;
+	font-family: 幼圆;
+}
+
+.btn-green:hover {
+	background: url(http://www.wordtraining.cn/image/button_bg.gif) no-repeat -2px -211px;
+}
+
+.btn-orange {
+	border: none;
+	background: url(http://www.wordtraining.cn/image/button_bg.gif) no-repeat -2px -85px;
+	width: 78px;
+	height: 40px;
+	line-height: 40px;
+	font-weight: bold;
+	color: #fff;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.btn-orange:hover {
+	background: url(http://www.wordtraining.cn/image/button_bg.gif) no-repeat -2px -128px;
+}
+
+.btn-slim {
+	border: none;
+	background: url(http://www.wordtraining.cn/image/button_bg.gif) no-repeat -2px -253px;
+	width: 68px;
+	height: 26px;
+	line-height: 21px;
+	margin-left: -6px;
+	font-size: 14px;
+	border: solid 1px #ccc;
+	cursor: pointer;
+}
+
+.btn-slim:hover {
+	background: url(http://www.wordtraining.cn/image/button_bg.gif) no-repeat -2px -281px;
+}
+
+.btn-frame-flat {
+	width: 78px;
+	height: 26px;
+	font-weight: bold;
+	color: #fff;
+	margin-left: -6px;
+	font-size: 14px;
+	color: #4d4d4d;
+	font-size: 12px;
+	background: none #ececec;
+	font-weight: normal;
+	border: solid 1px #ccc;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.btn-frame-flat:hover {
+	background-color: #fcfbfb;
+	cursor: pointer;
+}
+
+/* .btn-tab-simple-active {
+	border: solid 1px #ccc;
+	border-bottom: none;
+	background-color: #fff;
+	padding: 7px;
+	display: inline-block;
+	height: 10px;
+	position: relative;
+	z-index: 20;
+} */
+
+.message {
+	line-height: 30px;
+	padding-left: 60px;
+}
+
+/* line 26, ../sass/screen-s.scss */
+a.new {
+	background: url(http://www.wordtraining.cn/images/new.png) no-repeat;
+	background-position: 230px 4px;
+}
+
+/* line 31, ../sass/screen-s.scss */
+.solid-black {
+	background: #a59d9d;
+}
+
+/* line 35, ../sass/screen-s.scss */
+.solid-darkgreen {
+	background: #016C38;
+	background-image: url(http://www.wordtraining.cn/images/right06.png);
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+
+.range-title {
+	clear: both;
+	line-height: 56px;
+	/*border-bottom:dotted 1px #A59D9D;*/
+}
+
+.area-title {
+	color: #999999;
+	float: left;
+	clear: both;
+	text-align: left;
+	padding-left: 1.5em;
+}
+/* line 43, ../sass/screen-s.scss */
+.top-bar {
+	width: 100%;
+	height: 30px;
+	color: #b4b4b4;
+	background-color: #f4f4f4;
+	border-bottom: solid 1px #ccc;
+}
+/* line 49, ../sass/screen-s.scss */
+.top-bar ul {
+	width: 920px;
+	margin: 0 auto;
+}
+/* line 49, ../sass/screen-s.scss */
+.top-bar ul li {
+	float: left;
+	line-height: 30px;
+	margin-right: 8px;
+}
+/* line 49, ../sass/screen-s.scss */
+.top-bar ul li a {
+	color: #686868;
+}
+/* line 49, ../sass/screen-s.scss */
+.top-bar ul li a:hover {
+	color: #ff6600;
+}
+
+.top-bar img {
+	margin-bottom: -3px;
+	margin-right: 3px;
+}
+
+.center-mainmenu {
+	height: 490px;
+	width: 940px;
+	margin: 0 auto;
+}
+
+.center-mainmenu ul li {
+	float: left;
+}
+
+.center-mainmenu ul li img {
+	clear: both;
+	width: 100%;
+}
+/* line 51, ../sass/screen-s.scss */
+.model_wai {
+	width: 100%;
+	background: #e7e7e7;
+	padding-bottom: 2px;
+	margin-left: 2px;
+	padding-right: 2px;
+	margin-bottom: 14px;
+	margin-top: 14px;
+}
+
+/* line 52, ../sass/screen-s.scss */
+.model_nei {
+	border: 1px solid #dcdcdc;
+	background: #fcfcfc;
+	margin-left: -2px;
+	position: relative;
+	zoom: 1;
+	padding: 1px;
+	overflow: hidden;
+}
+
+/* line 54, ../sass/screen-s.scss */
+.main-container {
+	width: 1000px;
+	margin: 0 auto;
+	min-height:670px;
+}
+
+/* line 55, ../sass/screen-s.scss */
+.menubar,.handler {
+	width: 202px;
+	float: left;
+	height: auto;
+	background-color: #fefefe;
+	border: 1px solid #BDBDBD;
+	text-shadow: 0px 1px rgba(255, 255, 255, 0.5);
+	border-right: none;
+}
+
+/* line 65, ../sass/screen-s.scss */
+.handler {
+	width: 79%;
+	float: right;
+	border: 1px solid #BDBDBD;
+	/*  background-color: #f7f7f7;*/
+}
+
+/* line 66, ../sass/screen-s.scss */
+.handler-menubar,.bottom-menubar {
+	background-color: #f7f7f7;
+	border: 1px solid #BDBDBD;
+	border-right: none;
+	border-left: none;
+	height: 47px;
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+.study-theme {
+	line-height: 47px;
+}
+
+.theme-content .study-theme {
+	line-height: 32px;
+}
+
+.handle-title {
+	font-size: 16px;
+	font-family: 微软雅黑;
+	color: #FF6600;
+	margin-left: 0.5em;
+}
+
+#handler-content,.words-memory {
+	width: 79%;
+	margin: 1em auto;
+}
+/* line 69, ../sass/screen-s.scss */
+#handler-content h1,.words-memory h1 {
+	font-size: 30px;
+	color: #f16325;
+	display: inline;
+	font-weight: bold;
+}
+
+/* line 70, ../sass/screen-s.scss */
+#handler-content {
+	min-height: 490px;
+	height: 490px;
+	overflow-y: auto;
+}
+
+/* line 71, ../sass/screen-s.scss */
+.ipa {
+	display: inline-block;
+	margin-left: 0.6em;
+}
+
+/* line 72, ../sass/screen-s.scss */
+.translation {
+	font-size: 16px;
+	margin-top: 0.6em;
+}
+
+/* line 73, ../sass/screen-s.scss */
+.eqsentence {
+	margin-top: 2em;
+}
+
+/* line 74, ../sass/screen-s.scss */
+.eqtitle {
+	font-size: 18px;
+	color: #05ad78;
+	display: block;
+	clear: both;
+	margin-bottom: 1em;
+}
+
+/* line 75, ../sass/screen-s.scss */
+.eq p {
+	line-height: 21px;
+	font-size: 16px;
+}
+
+/* line 77, ../sass/screen-s.scss */
+.bottom-menubar {
+	height: 36px;
+	line-height: 36px;
+}
+
+/* line 78, ../sass/screen-s.scss */
+.study-info {
+	text-align: right;
+}
+/* line 78, ../sass/screen-s.scss */
+.study-info label {
+	margin-right: 4px;
+	margin-left: 6px;
+}
+
+/* line 80, ../sass/screen-s.scss */
+.area-header {
+	height: 37px;
+}
+
+/* line 81, ../sass/screen-s.scss */
+.area-select {
+	height: 37px;
+	background-color: #f7f7f7;
+}
+
+.confirm-frame {
+	display: inline-block;
+	padding: 3px;
+	height: 60px;
+	width: 60px;
+	margin-right: 5px;
+	border: solid 2px #fff;
+}
+
+.confirm-frame:hover {
+	border: solid 2px #ccc;
+}
+/* line 83, ../sass/screen-s.scss */
+#bar {
+	position: relative;
+}
+
+/* line 86, ../sass/screen-s.scss */
+#bar .nav-panel {
+	padding: 0;
+}
+
+/* line 89, ../sass/screen-s.scss */
+#bar div.nav-panel {
+	border-bottom-width: 0;
+}
+
+/* line 92, ../sass/screen-s.scss */
+.nav-panel span {
+	cursor: pointer;
+	list-style-type: none;
+}
+
+/* line 96, ../sass/screen-s.scss */
+.nav-panel span:hover {
+	border: 1px solid #ececec;
+	background-color: #f4f4f4;
+	width: 202px;
+}
+
+/*MyCourseBegin*/
+
+.sticker {
+	height: 20px;
+	width: 6px;
+	margin: 3px 8px;
+	float: left;
+}
+
+.sticker-actived {
+	width: 30px;
+}
+
+.theme-content {
+	width: 100%;
+	height: auto;
+	min-height: 500px;
+	padding: 2px;
+	clear: both;
+}
+
+.theme-menu {
+	width: 260px;
+	height: auto;
+	float: left;
+	overflow: hidden;
+	background-color: #fcfcfc;
+	border: solid 1px #ccc;
+}
+
+.theme-menu h3,.theme-slide h3 {
+	line-height: 32px;
+	padding-left: 18px;
+	clear: both;
+	background-color: #f7f7f7;
+	border: 1px solid #BDBDBD;
+	border-left: none;
+	border-right: none;
+}
+
+.track-info {
+	width: 500px;
+	height: 177px;
+	padding-left: 90px;
+	padding-top: 21px;
+	background: url(http://www.wordtraining.cn/image/info_bg.png) no-repeat;
+	border-left: dotted 1px #05AD78;
+}
+
+.mycourse,.colcourse {
+	margin-bottom: 5px;
+}
+
+.mycourse span {
+	clear: both;
+	height: 32px;
+	margin: 2px 0;
+	cursor: default;
+}
+
+.mycourse span a {
+	display: inline-block;
+	line-height: 32px;
+	height: 32px;
+	width: 228px;
+	margin: 0 auto;
+	color: #4d4d4d;
+	padding-right: 30px;
+	text-align: right;
+	border-bottom: dotted 1px #ccc;
+	overflow:hidden;
+}
+
+.course-name {
+	height: 32px;
+}
+
+.course-name a {
+	line-height: 32x;
+	height: 32px;
+}
+
+.mycourse span a:hover {
+	background-color: #f1f1e4;
+	opacity: 0.9;
+	filter: Alpha(Opacity = 90);
+}
+
+.colcourse span {
+	clear: both;
+	line-height: 32px;
+	width: 250px;
+	margin: 2px auto;
+	display: block;
+	cursor: default;
+}
+
+.colcourse span a {
+	float: right;
+	line-height: 32px;
+	height: 32px;
+	border-bottom: dotted 1px #ccc;
+}
+
+.morecourse a {
+	border: none;
+	color: #4d4d4d;
+}
+
+.theme-slide {
+	width: 705px;
+	height: auto;	
+	min-height: 430px;
+	max-height:610px;
+	overflow: hidden;
+	float: right;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	margin-bottom: 1em;
+	background-color: #fcfcfc;
+	border: solid 1px #ccc;
+}
+
+.slide-topic,.slide-footer {
+	height: 32px;
+	background-color: #fcfcfc;
+	border-bottom: solid 1px #e5e5e5;
+	padding: 3px;
+}
+
+.slide-topic {
+	border: none;
+	padding: 5px;
+	margin-bottom: 12px;
+}
+
+.slide-footer {
+	border: none;
+	border-top: solid 1px #e5e5e5;
+}
+
+.pm {
+	padding: 3px;
+}
+
+#userinfo {
+	width: 236px;
+	height: 64px;
+	border: solid 1px #ececec;
+	background-color: #fff;
+	margin: 3px;
+	margin-bottom: 1em;
+	padding: 8px;
+}
+
+#userinfo span {
+	color: #737373;
+}
+
+.book-intro {
+	width: 96%;
+	margin: 0 auto;
+	height: auto;
+	padding: 8px;
+	margin-bottom: 1.5em;
+	margin-top: 12px;
+	line-height: 21px;
+}
+
+.book-intro .book-intro-title {
+	font-size: 21px;
+	margin-right: 21px;
+	margin-left: 18px;
+}
+
+.book-unit {
+	width: 96%;
+	margin: 0 auto;
+	border: solid 1px #e5e5e5;
+	padding-left: 9px;
+	height: auto;
+	overflow-y: hidden;
+}
+
+.study-change {
+	display: inline;
+	margin-left: 3px;
+	border: none;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.study-change-active {
+	background-color: #ececec;
+}
+/*MyCourseEnd*/
+
+/* line 101, ../sass/screen-s.scss */
+.footer {
+	background: none repeat scroll 0 0 #f1f1e4;
+	border-top: 1px solid #E1DEDD;
+	clear: both;
+	width: 100%;
+	font-size: 12px;
+	margin-top: 0 !important;
+	color: #666;
+	font-family: Arial, Helvetica, sans-serif;
+	padding-top: 8px;
+	height: 60px;
+}
+/* line 111, ../sass/screen-s.scss */
+.footer ul {
+	float: right;
+}
+/* line 112, ../sass/screen-s.scss */
+.footer li {
+	float: left;
+}
+
+/* line 115, ../sass/screen-s.scss */
+.footer-content {
+	width: 780px;
+	margin: 0 auto;
+}
+
+/* line 117, ../sass/screen-s.scss */
+.copytight {
+	width: 290px;
+	padding: 12px;
+	float: right;
+}
+
+/* Large Buttons */
+/* line 121, ../sass/screen-s.scss */
+.tile-bt-large {
+	width: 120px;
+	height: 56px;
+	line-height: 56px;
+	text-align: center;
+	cursor: pointer;
+}
+
+/* line 128, ../sass/screen-s.scss */
+.tile-bt-large a {
+	display: block;
+	text-decoration: none;
+	font-size: 16px;
+	/*
+    text-decoration: !important;
+    */
+}
+
+/* line 136, ../sass/screen-s.scss */
+.tile-bt-large img {
+	vertical-align: middle;
+	margin: auto;
+	padding: 0px;
+	position: relative;
+	width: 25px;
+	height: 25px;
+	border: none;
+}
+
+/* line 145, ../sass/screen-s.scss */
+.tile-bt-large span {
+	vertical-align: middle;
+	display: inline;
+}
+
+.tile-bt-large:active {
+	opacity: 0.5;
+}
+
+/* End Large Buttons */
+/* Large Buttons_Horizonal */
+/* line 156, ../sass/screen-s.scss */
+.tile-bt-large_h {
+	text-align: center;
+	cursor: pointer;
+	width: 90px;
+	height: 190px;
+}
+
+/* line 162, ../sass/screen-s.scss */
+.tile-bt-large_h a {
+	display: block;
+	padding-top: 52px;
+	text-decoration: !important;
+}
+
+/* line 167, ../sass/screen-s.scss */
+.tile-bt-large_h img {
+	margin: 0 auto 0 auto;
+	padding-bottom: 54px;
+	height: 48px;
+	width: 48px;
+	position: relative;
+	display: block;
+}
+
+/* line 175, ../sass/screen-s.scss */
+.tile-bt-large_h span {
+	font-size: 14px;
+	padding-bottom: 20px;
+	display: block;
+}
+
+/* line 180, ../sass/screen-s.scss */
+.tile-bt-large_h:active {
+	opacity: 0.5;
+}
+
+/* End Large Buttons_Horizonal */
+/* line 184, ../sass/screen-s.scss */
+.unit-showitem {
+	margin: 5px;
+	float: left;
+	display: none;
+}
+
+/* line 189, ../sass/screen-s.scss */
+/* .unit-showitem:hover {
+  background-color: #ff6600;
+} */
+.ebbingDetailIntroduce {
+	width: 98%;
+	margin: 2em auto;
+	line-height: 21px;
+}
+
+.selftest {
+	width: :80%;
+	margin: 12px auto;
+}
+
+.selftest td {
+	line-height: 21px;
+	padding: 3px;
+	text-align: right;
+	vertical-align: top;
+}
+
+.vocabularyBooktable {
+	width: 98%;
+	margin: 2em auto;
+	border: solid 1px #e9e6e7;
+}
+
+.vocabularyBooktable tr {
+	border-bottom: solid 1px #e9e6e7;
+}
+
+.vocabularyBooktable td {
+	line-height: 32px;
+	padding: 5px;
+	text-align: center;
+}
+
+.vocabularyBooktable thead {
+	background-color: #e8fad9;
+}
+
+.vocabularyBooktable thead td,.vocabularyBooktable thead td label {
+	color: #5c5c5c;
+	font-weight: bold;
+}
+
+.vocabularyBooktable thead td label {
+	display: block;
+	width: 100%;
+	clear: both;
+	text-align: center;
+}
+
+.page-nav {
+	height: 53px;
+}
+
+.page-center {
+	position: relative;
+	line-height: 22px;
+	white-space: nowrap;
+	text-align: center;
+}
+
+.page-center .page-inner {
+	float: left;
+	position: relative;
+	left: 50%;
+}
+
+.page-center .page-content {
+	position: relative;
+	right: 50%;
+	float: left;
+	padding: 8px 0 7px 0;
+	font-size: 13px;
+	font-family: Arial, simsun, sans-serif;
+}
+
+.page-center .page-content .pre,.page-center .page-content .next {
+	width: 60px;
+	line-height: 23px;
+	_line-height: 24px;
+	line-height: 24px;
+	font-family: simsun;
+}
+
+.page-center .page-content a,.page-center .page-inner span {
+	float: left;
+	width: 23px;
+	height: 22px;
+	margin-right: 5px;
+	line-height: 22px;
+	overflow: hidden;
+	border: 1px solid #e7ecf0;
+	background: #fff;
+	text-decoration: none;
+	text-align: center;
+}
+
+.page-center .page-content a {
+	color: #737373;
+}
+
+.page-center .page-content a:hover {
+	background-color: #e4f8dc;
+}
+
+.page-center .cur {
+	width: 25px;
+	border: 0;
+	background: 0;
+	font-weight: 700;
+	color: #000;
+	border: 0 none !important;
+}
+
+.page-center .page-content .first,.page-center .page-content .last {
+	width: 41px;
+	line-height: 24px;
+}
+
+.tab-content-slim {
+	width: 500px;
+	height:312px;
+	position: fixed;
+	left:0px;
+	top:0px;
+	padding: 10px 20px 20px 20px;
+	border: solid 1px #ccc;
+	background-color: #fff;
+	z-index: 1012;
+}
+
+.tab-content-title
+{
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 40px;
+	border-bottom: 1px dashed #cdcdcd;
+}
+
+.tab-content-slim table {
+	width: 500px;
+	margin: auto;
+}
+
+.tab-content-slim table td {
+	line-height: 28px;
+	padding-left: 5px;
+	height: 28px;
+}
+
+.tab-menu {
+	float: right;
+	margin-right: 20px;
+	height: 43px;
+	line-height: 43px;
+	clear: both;
+}
+
+.tab-menu span {
+	clear: both;
+}
+
+.tab-menu span a {
+	display: inline-block;
+	width: 84px;
+	padding: 3px;
+	text-align: center;
+	border: solid 1px #ccc;
+	cursor: pointer;
+}
+
+.new-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: .40;
+	filter: Alpha(Opacity =   40);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.user_titbg{ 
+width:990px; 
+height:36px; 
+background:#eeeeee;
+border-bottom:1px solid #cdcdcd;
+padding:10px 0 0 10px;
+}
+
+#userdetailinfo{
+	width:1000px;
+	height:auto;
+	border:1px solid #dcdcdc;
+	margin:0 auto;
+	}
+#userdetailinfo  .tableinfo{ 
+width:450px;
+height:auto;
+margin:15px auto;
+font-size:16px;
+color:#666;
+}
+#userdetailinfo  .tableinfo td{ padding:5px 0;}
+
+#userdetailinfo  .tableinfo .input_text{
+ width:296px;
+ height:32px;
+ line-height:32px;
+ padding-left:10px;
+ border:1px solid #dcdcdc;
+ border-radius:5px;
+ -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+
+}
+
+.orange{
+	color:#ff6600;
+}
+.btn_red{
+	border: none;
+	width: 110px;
+	height: 32px;
+	background:#d2191f;
+	line-height: 32px;
+	font-weight: bold;
+	color: #fff;
+	font-size: 14px;
+	cursor: pointer;
+	font-family: 幼圆;
+	border-radius:3px ;
+	-moz-border-radius: 3px; /* Mozilla浏览器的私有属性 */ 
+	-webkit-border-radius: 3px; /* Webkit浏览器的私有属性 */ 
+	}
+
+.handle-save{ width:150px; height:40px; margin:60px auto;}
+

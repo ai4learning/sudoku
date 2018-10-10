@@ -1,0 +1,152 @@
+// img {
+//   max-width: 100%;
+//   height: auto;
+//   vertical-align: middle;
+// }
+
+html, body {
+  min-height: 100%;
+}
+
+.ant-btn {
+  &.unstarted {
+    background: #ccc;
+    color: white;
+
+    &:hover {
+      border-color: #ccc;
+    }
+  }
+
+  &.unfinished {
+    background: orange;
+    color: white;
+
+    &:hover {
+      border-color: orange;
+    }
+  }
+
+  &.finished {
+    background: #67B239;
+    color: white;
+
+    &:hover {
+      border-color: #67B239;
+    }
+  }
+
+  &.failed {
+    background: red;
+    color: white;
+
+    &:hover {
+      border-color: red;
+    }
+  }
+}
+
+#app {
+  height: 100%;
+  background: #eee;
+
+  .container {
+    height: 100%;
+  }
+  
+  .layout {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #eee;
+  }
+
+  .header {
+    background: #001529;
+
+    .header_container {
+      width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .header_logo {
+      display: flex;
+      padding-right: 30px;
+      float: left;
+      color: white;
+      justify-content: center;
+      align-items: center;
+      height: 64px;
+
+      .header_logo_img {
+        width: 100px;
+      }
+    }
+
+    .header_user {
+      position: absolute;
+      right: 20px;
+      top: 0;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      color: white;
+      cursor: pointer;
+
+      .ant-avatar.ant-avatar-icon {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .header_user_name {
+        padding: 4px;
+      }
+    }
+  }
+
+  .content {
+    width: 1200px;
+    padding: 15px 0;
+    margin: 0 auto;
+    flex: 1;
+    background: white;
+
+    .panel {
+      background: white;
+      position: relative;
+      padding: 10px;
+
+      .panel_header {
+        border-bottom: 2px solid #108ee9;
+        margin-bottom: 15px;
+        padding: 10px;
+      }
+
+      .panel_extra {
+        position: absolute;
+        top: 16px;
+        right: 24px;
+      }
+    }
+  }
+
+  .footer {
+    width: 100%;
+    height: auto;
+    min-height: 90px;
+    background: #3b414f;
+    border-top: 1px solid #bfbfbf
+  }
+
+  .footer * {
+    color: #808080;
+  }
+  
+  .footer p {
+    padding: 15px;
+    margin: 10px auto 0;
+    line-height: 30px;
+    text-align: center;
+  }
+}
+

@@ -1,0 +1,45 @@
+#set($layout='/WEB-INF/vm/layout/formLayout.vm')
+
+<div class="modal-body">
+    <form class="form-horizontal"  id="form_login" role="form">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="userName">用户名</label>
+            <div class="col-sm-7 controls">
+                <input type="text" class="form-control" name="userName" id="userName" placeholder="请输入用户名" maxlength="50"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="password">密码</label>
+            <div class="col-sm-7 controls">
+                <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码" maxlength="19"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <a href="javascript:;" class="btn btn-primary" id="btn_login">登录</a>
+</div>
+
+<script language="javascript">
+    void function(j) {
+        j('#btn_login').click(function(e) {
+            j.ajax({
+                url: '/login/doLogin',
+                type:'post',
+                dataType: "json",
+                data: j("#form_login").serialize(),
+                success: function(data, ts) {
+                    window.location.href="/admin/main";
+                },
+                beforeSend: function() {
+                    //$('.btn_submit').attr('disabled', true);
+                }
+            });
+        });
+    }(jQuery);
+</script>
+
+

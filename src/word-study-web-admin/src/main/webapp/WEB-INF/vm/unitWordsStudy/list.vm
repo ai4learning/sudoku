@@ -1,0 +1,136 @@
+
+<div class="row-fluid">
+	<div class="span12">
+		<table class="table table-striped table-bordered table-hover table-condensed">
+			<thead>
+				<tr>
+ 			<th><span>ID</span></th>
+			<th><span>学生ID</span></th>
+			<th><span>学生CODE</span></th>
+			<th><span>课程号</span></th>
+			<th><span>单元号</span></th>
+			<th><span>学习阶段</span></th>
+			<th><span>总读时间</span></th>
+			<th><span>总写时间</span></th>
+			<th><span>总学习单词数</span></th>
+			<th><span>是否学习完成</span></th>
+			<th><span>是否测试完成</span></th>
+			<th><span>单词学习位置</span></th>
+			<th><span>状态</span></th>
+			<th><span>修改时间</span></th>
+
+				<th class="operate">操作</th>
+				</tr>
+			</thead>
+
+
+			<tbody>
+	#if($list && $list.size()!=0)
+		    #foreach($item in $list)
+		   <tr>
+				 			<td>$!item.id</td>
+			<td>$!item.studentId</td>
+			<td>$!item.studentCode</td>
+			<td>$!item.lessonId</td>
+			<td>$!item.unitNbr</td>
+			<td>
+        
+			
+				#if($item.currentPhase==1)<span class="">强化训练</span> #end
+			
+				#if($item.currentPhase==2)<span class="">整体回忆</span> #end	
+			
+				#if($item.currentPhase==3)<span class="">单元测试</span> #end	
+			
+	
+    </td>
+			<td>$!item.totalReadingTime</td>
+			<td>$!item.totalWritingTime</td>
+			<td>$!item.totalNumber</td>
+			<td>
+        
+			
+				#if($item.isFinished==-1)<span class="">未开始</span> #end
+				#if($item.isFinished==0)<span class="">未完成</span> #end
+
+				#if($item.isFinished==1)<span class="">已完成</span> #end
+			
+	
+    </td>
+			<td>
+        
+			
+				#if($item.isTested==-1)<span class="">未通过</span> #end
+				#if($item.isTested==0)<span class="">未完成</span> #end
+
+				#if($item.isTested==1)<span class="">已完成</span> #end
+			
+	
+    </td>
+			<td>$!item.studyPos</td>
+			<td>
+        
+			
+				#if($item.state==1)<span class="">有效</span> #end	
+			
+				#if($item.state==2)<span class="">无效</span> #end	
+			
+	
+    </td>
+			<td>$!dateFormatUtils.format($!item.modified)</td>
+
+				<td class="operate">
+					<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+						<button class="btn btn-xs btn-success JUpdate-unitWordsStudy" type="button" itemid="$!item.id"><i class="icon-edit bigger-120"></i>编辑</button>
+						<button class="btn btn-xs btn-info JView-unitWordsStudy" type="button" itemid="$!item.id"><i class="icon-eye-open bigger-120"></i>查看</button>
+						<button class="btn btn-xs btn-danger JDelete-unitWordsStudy" type="button" itemid="$!item.id"> <i class="icon-trash bigger-120"></i>删除</button>
+					</div>
+				</td>
+		  </tr>
+			#end
+		#else
+		<tr>
+					<td colspan="16" class="message_default">没有记录！</td>
+		</tr>
+		#end
+
+
+			</tbody>
+
+
+		</table>
+
+		#if($pageQuery)
+			#showPageQuery($pageQuery,'queryUnitWordsStudyList','input')
+		#end
+
+	</div>
+</div>
+
+
+
+
+<script language="javascript">
+void function(j) {	
+	j('.JDelete-unitWordsStudy').click(function() {
+		var id = j(this).attr('itemid');
+		var config={title:'删除单元单词学习',info:'您确定要删除单元单词学习吗？',"queryList":"queryUnitWordsStudyList",
+		url: '/unitWordsStudy/doDelete.action',param:'id='+id};
+		gUtils.fConfirmAndRefreshList(config);
+	});
+	
+	j('.JUpdate-unitWordsStudy').click(function() {
+		var id = j(this).attr('itemid');
+		//gDialog.fCreate({ title: '修改单元单词学习', url: '/unitWordsStudy/update.action?id='+id,width:700}).show();
+		var url='/unitWordsStudy/update.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
+	});
+
+	j('.JView-unitWordsStudy').click(function() {
+		var id = j(this).attr('itemid');
+		//gDialog.fCreate({ title: '查看单元单词学习', url: '/unitWordsStudy/view?id='+id,width:700}).show();
+		var url='/unitWordsStudy/view.action?id='+id;
+		window.location=gUtils.fMakeFullLink(url);
+	});
+}(jQuery);
+</script>

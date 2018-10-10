@@ -1,0 +1,6 @@
+venv/
+.idea/*
+*.iml
+*.xml
+node_modules
+.DS_Store

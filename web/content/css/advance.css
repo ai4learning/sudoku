@@ -1,0 +1,463 @@
+﻿.om-showitem {
+	margin:5px;
+	float:left;
+	display:none;
+}
+/* END ONEMENU */
+
+
+
+
+/* TILE BUTTONS */
+
+/* Standar Buttons */
+.tile-bt {
+	text-align:center;
+	cursor:pointer;
+	width:90px;
+	height:90px;
+}
+.tile-bt a {
+	display:block;
+	padding-top:12px;
+	text-decoration: !important;
+}
+.tile-bt img {
+	margin:0 auto 0 auto;
+	padding-bottom:5px;
+	height:48px;
+	width:48px;
+	position:relative;
+	display:block;
+}
+.tile-bt span {
+	font-size:12px;
+	padding-bottom:10px;
+	display:block;
+}
+.tile-bt:active {
+	opacity:0.5;
+}
+/* End Standard Buttons */
+
+/* Extra Small Buttons */
+.tile-bt-extrasmall {
+	width:30px;
+	height:20px;
+	line-height:20px;
+	text-align:center;
+	cursor:pointer;
+}
+.tile-bt-extrasmall a {
+	display:block;
+	text-decoration:none;
+	/*
+    text-decoration: !important;
+    */
+}
+.tile-bt-extrasmall img {
+	margin:auto;
+	padding:0px;
+	position:relative;
+	width:20px;
+	height:20px;
+}
+.tile-bt-extrasmall span {
+	font-size:10px;
+	display:inline;
+}
+
+/* End extra small Buttons */
+
+/* Small Buttons */
+.tile-bt-small {
+	width:90px;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	cursor:pointer;
+}
+.tile-bt-small a {
+	display:block;
+	text-decoration:none;
+	/*
+    text-decoration: !important;
+    */
+}
+.tile-bt-small img {
+	vertical-align: middle;
+	margin:auto;
+	padding:0px;
+	position:relative;
+	width:20px;
+	height:20px;
+}
+.tile-bt-small span {
+	vertical-align: middle;
+	font-size:14px;
+	display:inline;
+}
+.tile-bt-small:active {
+	opacity:0.5;
+}
+/* End Small Buttons */
+
+
+
+/* Large Buttons */
+.tile-bt-large {
+	width:120px;
+	height:56px;
+	line-height:56px;
+	text-align:center;
+	cursor:pointer;
+}
+.tile-bt-large a {
+	display:block;
+	text-decoration:none;
+	font-size:16px;
+	/*
+    text-decoration: !important;
+    */
+}
+.tile-bt-large img {
+	vertical-align: middle;
+	margin:auto;
+	padding:0px;
+	position:relative;
+	width:25px;
+	height:25px;
+	border:none;
+}
+.tile-bt-large span {
+	vertical-align: middle;
+	display:inline;
+}
+.tile-bt-large:active {
+	opacity:0.5;
+}
+/* End Large Buttons */
+
+
+/* Large Buttons_Horizonal */
+.tile-bt-large-h {
+	text-align:center;
+	cursor:pointer;
+	height:76px;
+	width:190px;	
+}
+.tile-bt-large-h a {
+	display: table-cell; height: 76px; width: 190px; vertical-align: middle;
+	text-decoration: !important;
+}
+.tile-bt-large-h img {
+	margin:0 auto 0 auto;
+	padding-bottom:54px;
+	height:48px;
+	width:48px;
+	position:relative;
+	display:block;
+}
+.tile-bt-large-h span {
+	font-size:30px;
+	display:block;
+}
+.tile-bt-large-h:active {
+	opacity:0.5;
+}
+
+.tile-bt-large-v {
+	text-align:center;
+	cursor:pointer;
+	width:90px;
+	height:190px;
+}
+.tile-bt-large-v a {
+	display:block;
+	padding-top:52px;
+	text-decoration: !important;
+}
+.tile-bt-large-v img {
+	margin:0 auto 0 auto;
+	padding-bottom:54px;
+	height:48px;
+	width:48px;
+	position:relative;
+	display:block;
+}
+.tile-bt-large-v span {
+	font-size:14px;
+	padding-bottom:20px;
+	display:block;
+}
+.tile-bt-large-v:active {
+	opacity:0.5;
+}
+/* End Large Buttons_Horizonal */
+
+/* Extralarge Buttons */
+.tile-bt-extralarge {
+	text-align:center;
+	cursor:pointer;
+	width:190px;
+	height:190px;
+	line-height:190px;
+}
+.tile-bt-extralarge a {
+	display:block;
+	/* padding-top:52px; */
+	text-decoration: !important;
+}
+.tile-bt-extralarge img {
+	margin:0 auto 0 auto;
+/*	padding-bottom:22px;	*/
+	height:80px;
+	width:80px;
+	position:relative;
+	display:block;
+}
+.tile-bt-extralarge span {
+	font-size:34px;
+	/* padding-bottom:20px; */
+	display:block;
+}
+.tile-bt-extralarge:active {
+	opacity:0.5;
+}
+
+/* End Extralarge Buttons */
+
+
+/* END TILE BUTTONS */
+
+
+
+
+
+/* MASONRY TRANSITION */
+.masonry,
+.masonry .masonry-brick {
+  -webkit-transition-duration: 0.7s;
+     -moz-transition-duration: 0.7s;
+      -ms-transition-duration: 0.7s;
+       -o-transition-duration: 0.7s;
+          transition-duration: 0.7s;
+}
+
+.masonry {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.masonry .masonry-brick {
+  -webkit-transition-property: left, right, top;
+     -moz-transition-property: left, right, top;
+      -ms-transition-property: left, right, top;
+       -o-transition-property: left, right, top;
+          transition-property: left, right, top;
+}
+/* END MASONRY TRANSITION */
+
+
+
+/* SHADOW LIST */
+
+.shadow-white, .shadow-black, .shadow-blue, .shadow-green, .shadow-red {
+	/*display:inline-block;*/
+}
+.shadow-white:hover {
+	box-shadow:0px 0px 6px 3px #fff;
+	-webkit-box-shadow:0px 0px 6px 3px #fff;
+	-moz-box-shadow:0px 0px 6px 3px #fff;
+	-o-box-shadow:0px 0px 6px 3px #fff;
+	-ms-box-shadow:0px 0px 6px 3px #fff;
+/*	filter:
+          progid:DXImageTransform.Microsoft.Shadow(color=#dddddd,direction=0,strength=1),
+          progid:DXImageTransform.Microsoft.Shadow(color=#dddddd,direction=45,strength=1),
+          progid:DXImageTransform.Microsoft.Shadow(color=#dddddd,direction=90,strength=1),
+          progid:DXImageTransform.Microsoft.Shadow(color=#dddddd,direction=135,strength=1),
+          progid:DXImageTransform.Microsoft.Shadow(color=#dddddd,direction=180,strength=1),
+          progid:DXImageTransform.Microsoft.Shadow(color=#dddddd,direction=225,strength=1),
+          progid:DXImageTransform.Microsoft.Shadow(color=#dddddd,direction=270,strength=1),
+          progid:DXImageTransform.Microsoft.Shadow(color=#dddddd,direction=315,strength=1);
+          */
+}
+.shadow-blue:hover {
+	box-shadow:0px 0px 6px 3px #38D1F7;
+	-webkit-box-shadow:0px 0px 6px 3px #38D1F7;
+	-moz-box-shadow:0px 0px 6px 3px #38D1F7;
+	-o-box-shadow:0px 0px 6px 3px #38D1F7;
+	-ms-box-shadow:0px 0px 6px 3px #38D1F7;
+}
+.shadow-green:hover {
+	box-shadow:0px 0px 6px 3px #AACA37;
+	-webkit-box-shadow:0px 0px 6px 3px #AACA37;
+	-moz-box-shadow:0px 0px 6px 3px #AACA37;
+	-o-box-shadow:0px 0px 6px 3px #AACA37;
+	-ms-box-shadow:0px 0px 6px 3px #AACA37;
+}
+.shadow-red:hover {
+	box-shadow:0px 0px 6px 3px #E81750;
+	-webkit-box-shadow:0px 0px 6px 3px #E81750;
+	-moz-box-shadow:0px 0px 6px 3px #E81750;
+	-o-box-shadow:0px 0px 6px 3px #E81750;
+	-ms-box-shadow:0px 0px 6px 3px #E81750;
+}
+.shadow-black:hover {
+	box-shadow:0px 0px 6px 3px #444;
+	-webkit-box-shadow:0px 0px 6px 3px #444;
+	-moz-box-shadow:0px 0px 6px 3px #444;
+	-o-box-shadow:0px 0px 6px 3px #444;
+	-ms-box-shadow:0px 0px 6px 3px #444;
+}
+.shadow-gray:hover {
+	box-shadow:0px 0px 2px 2px #686868;
+	-webkit-box-shadow:0px 0px 2px 2px #686868;
+	-moz-box-shadow:0px 0px 2px 2px #686868;
+	-o-box-shadow:0px 0px 2px 2px #686868;
+	-ms-box-shadow:0px 0px 2px 2px #686868;
+}
+
+/* END SHADOW LIST */
+
+
+
+
+/* BACKGROUND LIST */
+
+/* Solid Colors */
+.solid-blue { background:#00BBE2; }
+.solid-blue-2 { background:#2C84EE; }
+.solid-darkblue { background:#044E94; background-image:url(http://www.wordtraining.cn/content/css/images/lock01.png); background-repeat:no-repeat; background-position:bottom right;}
+.solid-darkblue-nolock { background:#044E94; background-repeat:no-repeat; background-position:bottom right;}
+.solid-violetred { background:#781766; }
+.solid-red { background:#E51400;}
+.solid-red-2 { background:#E81750; }
+.solid-pink { background:#FF539B; }
+.solid-purple { background:#D02090; }
+.solid-orange { background:#FB8F02; }
+.solid-orange-2 { background:#FF6600; }
+.solid-orange-3 { background:#DD5F37; }
+.solid-coral { background:#CD5B45; }
+.solid-green { background:#67B239; }
+.solid-green-2 {background:#96BF01; }
+.solid-darkgreen { background:#016C38; background-image:url(http://www.wordtraining.cn/content/css/images/right06.png); background-repeat:no-repeat; background-position:bottom right; }
+.solid-olive { background:#999900}
+.solid-grass { background:#CDCD00; }
+.solid-darkred { background:#5F0000; }
+.solid-gold { background:#FEE9AE; }
+.solid-yellow { background:#F7D100; }
+.solid-black { background:#000; }
+.solid-smoke { background:#F5F5F5; }
+.solid-gray2 {background:#737373;}
+.studied-gray { background-color:#cccccc; background-image:url(http://www.wordtraining.cn/content/css/images/right3.png); background-repeat:no-repeat; background-position:bottom right; }
+.studied-gray2 { background-color:#737373; background-image:url(http://www.wordtraining.cn/content/css/images/right08.png); background-repeat:no-repeat; background-position:bottom right; }
+.unstudy-orange {background-color:#ff8800;}
+.studied-green { background-color:#67B239; background-image:url(http://www.wordtraining.cn/content/css/images/right05.png); background-repeat:no-repeat; background-position:bottom right; }
+.studing-green{background-color:#67B239;}
+/* End Solid Colors */
+
+/* Transparent Colors */
+.transparent-deepsea {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33003564, endColorstr=#33003564);/* For IE 5.5 - 7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33003564, endColorstr=#33003564)";/* For IE 8*/
+	background: rgba(0,53,100,0.2);/* Modern browser */
+}
+.transparent-smoke {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33f5f5f5, endColorstr=#33f5f5f5);/* For IE 5.5 - 7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33f5f5f5, endColorstr=#33f5f5f5)";/* For IE 8*/
+	background: rgba(245,245,245,0.2);/* Modern browser */
+}
+.transparent-grass {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33CDCD00, endColorstr=#33CDCD00);/* For IE 5.5 - 7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33CDCD00, endColorstr=#33CDCD00)";/* For IE 8*/
+	background: rgba(205,250,0,0.2);/* Modern browser */
+}
+.transparent-black {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33000000, endColorstr=#33000000);/* For IE 5.5 - 7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33000000, endColorstr=#33000000)";/* For IE 8*/
+	background: rgba(0,0,0,0.2);/* Modern browser */
+}
+.transparent-red {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33FF0000, endColorstr=#33FF0000);/* For IE 5.5 - 7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33FF0000, endColorstr=#33FF0000)";/* For IE 8*/
+	background: rgba(255,0,0,0.2);/* Modern browser */
+}
+.transparent-violetred {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33D02090, endColorstr=#33D02090);/* For IE 5.5 - 7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33D02090, endColorstr=#33D02090)";/* For IE 8*/
+	background: rgba(208,32,144,0.2);/* Modern browser */
+}
+.transparent-green {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#3367B239, endColorstr=#3367B239);/* For IE 5.5 - 7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#3367B239, endColorstr=#3367B239)";/* For IE 8*/
+	background: rgba(103,178,57,0.2);/* Modern browser */
+}
+.transparent-yellow {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33FFFF00, endColorstr=#33FFFF00);/* For IE 5.5 - 7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33FFFF00, endColorstr=#33FFFF00)";/* For IE 8*/
+	background: rgba(255,255,0,0.2);/* Modern browser */
+}
+.transparent-orange { 
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33FB8F02, endColorstr=#33FB8F02);/* For IE 5.5 - 7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33FB8F02, endColorstr=#33FB8F02)";/* For IE 8*/
+	background: rgba(251,143,2,0.2);/* Modern browser */
+}
+.transparent-coral {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33CD5B45, endColorstr=#33CD5B45);/* For IE 5.5 - 7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33CD5B45, endColorstr=#33CD5B45)";/* For IE 8*/
+	background: rgba(205,91,69,0.2);/* Modern browser */
+}
+.transparent-wheat {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33EED8AE, endColorstr=#33EED8AE);/* For IE 5.5 - 7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33EED8AE, endColorstr=#33EED8AE)";/* For IE 8*/
+	background: rgba(238,216,174,0.2);/* Modern browser */
+}
+.transparent-redwine {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#338B0000, endColorstr=#338B0000);/* For IE 5.5 - 7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#338B0000, endColorstr=#338B0000)";/* For IE 8*/
+	background: rgba(139,0,0,0.2);/* Modern browser */
+}
+/* End Transparent Colors */
+
+/* Background Images */
+.img-wood { background:#FB8F02 url(http://www.wordtraining.cn/content/images/bg/wood_pattern.jpg) repeat; }
+.img-purtywood { background:#FB8F02 url(http://www.wordtraining.cn/content/images/bg/purty_wood.jpg) repeat; }
+.img-woodtexture { background:#FB8F02 url(http://www.wordtraining.cn/content/images/bg/wood_texture.jpg) repeat; }
+.img-darkwood { background:#000 url(http://www.wordtraining.cn/content/images/bg/dark_wood.jpg) repeat; }
+.img-retinawood { background:#FB8F02 url(http://www.wordtraining.cn/content/images/bg/retina_wood.png) repeat; }
+.img-nastyfabric { background:#999 url(http://www.wordtraining.cn/content/images/bg/nasty_fabric.png) repeat; }
+.img-wildoliva { background:#555 url(http://www.wordtraining.cn/content/images/bg/wild_oliva.png) repeat; }
+.img-darkbrick { background:#555 url(http://www.wordtraining.cn/content/images/bg/dark_brick_wall.png) repeat; }
+/* End Background Images */
+
+/* END BACKGROUND LIST */
+
+
+
+
+
+
+/* MISC */
+.clearspace { clear: both; }
+.floatleft { float:left; }
+.floatright { float:right; }
+.none { display: none !important; width:0px !important; }
+.light-text {
+	color:#fff;
+}
+.dark-text {
+	color:#1e1e1e;
+}
+.gradient {
+	background: -moz-linear-gradient(-45deg,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.3))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(-45deg,  rgba(255,255,255,0) 00%,rgba(255,255,255,0.3) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(-45deg,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.3) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(-45deg,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.3) 100%); /* IE10+ */
+	background: linear-gradient(-45deg,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.3) 100%); /* W3C */
+}
+.margin-5 { margin:5px; }

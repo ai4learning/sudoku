@@ -1,0 +1,132 @@
+#set($layout='/WEB-INF/vm/layout/adminLayout.vm')
+
+        
+	<script type="text/javascript">
+		require(['calendar'],function(calendar){
+			
+				jQuery("#search_coursestudy").find(".j_datetime_picker").calendar({
+						frondose : true,
+						disabled: false
+					});
+				
+		});
+
+	</script>
+	
+    
+
+
+
+<div class="manage-content" id="search_coursestudy">
+
+<form class="form-inline" id="search_form_CourseStudy">
+
+
+		<div class="form-group">
+			<label for="id_search">ID</label>
+				
+				<input type="text"  name="id" id="id_search" class="form-control" placeholder="请输入ID">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="studentId_search">学生ID</label>
+				
+				<input type="text"  name="studentId" id="studentId_search" class="form-control" placeholder="请输入学生ID">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="lessonId_search">课程ID</label>
+				
+				<input type="text"  name="lessonId" id="lessonId_search" class="form-control" placeholder="请输入课程ID">
+				
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="positionType_search">位置类型</label>
+				
+        
+		<select class="forms_select input-medium" name="positionType" id="positionType_search">
+			<option value="">全部</option>
+			
+				<option value="1">单词</option>
+				<option value="2">单元</option>
+		</select>
+	
+    
+
+		</div>&nbsp;&nbsp;
+		
+
+		<div class="form-group">
+			<label for="status_search">状态</label>
+				
+        
+		<select class="forms_select input-medium" name="status" id="status_search">
+			<option value="">全部</option>
+			
+				<option value="1">有效</option>
+				<option value="2">无效</option>
+		</select>
+	
+    
+
+		</div>&nbsp;&nbsp;
+		
+		<input type="button" onclick="queryCourseStudyList();" class="btn btn-primary" value="搜索"  />
+	</form>
+		
+<br/>
+
+
+
+		 <div class="page_operate">
+			 <button class="btn  btn-primary" type="button" id="add-courseStudy">
+				<span class="glyphicon glyphicon-plus"></span> 创建 课程学习</button>
+		</div>
+
+
+	<div id="dl_CourseStudy"></div>
+</div>
+
+
+<script language="javascript">
+
+	function queryCourseStudyList(pageNo) {
+		if (!pageNo) {
+			pageNo = 1;
+		}
+		var page = pageNo;
+		var url = '/courseStudy/list.action';
+		var param = {
+			page: page
+		};
+		
+		var pageSize=jQuery("#JPageSize_queryList").val();
+        if(pageSize && !isNaN(pageSize)){
+            param['pageSize']=pageSize;
+        }
+
+		gUtils.fMergeParam(param,"search_form_CourseStudy");
+		gUtils.fGetHtml(url, 'dl_CourseStudy', param,'数据加载中...');
+	}
+	queryCourseStudyList();
+	
+
+
+
+
+void function(j) {
+	jQuery("#add-courseStudy").click(function(){
+		var url='/courseStudy/add.action';
+		url=gUtils.fMakeFullLink(url);
+		window.location=url;
+	});
+	
+}(jQuery);
+
+</script>

@@ -1,0 +1,89 @@
+<div class="row-fluid">
+	<div class="span12">
+		<table class="table table-striped table-hover  table-bordered table-condensed">
+			<thead>
+			<tr class="table_head">
+			<th><span>job名称</span></th>
+		##	<th><span>job class</span></th>
+			<th><span>触发器名称</span></th>
+			<th><span>表达式</span></th>
+			<th><span>状态</span></th>
+			<th><span>服务器实例Id</span></th>
+				<th class="operate">操作</th>
+				</tr>
+			</thead>
+
+
+			<tbody>
+			#if($quartzJobTasks && $quartzJobTasks.size()!=0)
+    		    #foreach($item in $quartzJobTasks)
+        		   <tr>
+        			<td>$!item.jobName</td>
+        		##	<td>$!item.jobClass</td>
+        			<td>$!item.triggerName</td>
+					<td>$!item.cronExpression</td>
+        			<td>
+        				#if($item.state==0)
+        					<span class="label label-success">正常</span>
+        				#elseif($item.state==1)
+        					<span class="label label-important">暂停</span>
+        				#elseif($item.state==2)
+        					<span class="label">结束</span>
+        				#elseif($item.state==3)
+        					<span class="label label-warning">错误</span>
+						#elseif($item.state==4)
+        					<span class="label label-inverse">阻塞</span>
+						#end
+        			</td>
+					<td>$!instanceId</td>
+        				<td class="operate">
+    						#if($item.state==0)
+								<button class="btn btn-primary JTrigger-jobTask" type="button" itemid="$!item.jobName">触发Job</button>
+            					<button class="btn btn-danger JPause-jobTask" type="button" itemid="$!item.jobName">暂停Job</button>
+            				#elseif($item.state==1)
+            					<button class="btn btn-primary JResume-jobTask" type="button" itemid="$!item.jobName">恢复Job</button>
+    						#end
+        				</td>
+        		  </tr>
+    			#end
+    		#else
+    		<tr>
+    					<td colspan="8" class="message_default">没有记录！</td>
+    		</tr>
+    		#end
+
+
+			</tbody>
+
+
+		</table>
+
+	</div>
+</div>
+
+
+##showPageQuery($pageQuery,'queryList')
+
+
+<script language="javascript">
+void function(j) {	
+	j('.JPause-jobTask').click(function() {
+		var id = j(this).attr('itemid');
+		var config={title:'暂停 quartz JobTask',info:'<span  class="label label-warning">警告，该操作具有一定风险，请慎重操作！</span><br/>'+
+		'您确定要暂停Quartz的jobTask吗？如果需要暂停，请多次点击暂停所有实例！',url: '/admin/workerManage/pauseJobTask',param:'jobName='+id};
+		gUtils.fConfirmAndRefreshList(config);
+	});
+	
+	j('.JTrigger-jobTask').click(function() {
+		var id = j(this).attr('itemid');
+		var config={title:'触发 quartz JobTask',info:'您确定要触发Quartz的jobTask么，触发后任务将立即执行？',url: '/admin/workerManage/triggerJobTask',param:'jobName='+id};
+		gUtils.fConfirmAndRefreshList(config);
+	});
+	
+	j('.JResume-jobTask').click(function() {
+		var id = j(this).attr('itemid');
+		var config={title:'恢复 quartz JobTask',info:'您确定要恢复暂停的Quartz jobTask吗？请多次点击，恢复所有的实例！',url: '/admin/workerManage/resumeJobTask',param:'jobName='+id};
+		gUtils.fConfirmAndRefreshList(config);
+	});
+}(jQuery);
+</script>

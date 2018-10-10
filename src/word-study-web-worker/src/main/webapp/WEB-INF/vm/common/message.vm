@@ -1,0 +1,49 @@
+<style type="text/css">
+
+   #messageArea{
+	   background-color:#fff;
+	   width:90%;
+	   margin:0 auto;
+	   border: solid 1px #D4D4D4;
+	   }
+	#title{
+		width:100%;
+		margin:0;
+		height:28px;
+		line-height:28px;
+		background-color:#FFC;
+		border-bottom: solid 1px #D4D4D4;
+	}
+	#titleMemo{
+		
+		 font-weight: bold;
+		 color:red;
+		 margin-left: 7px;
+		}
+	#errorMemo{
+		border-top: solid 1px #D4D4D4;
+		}
+	 .titleStyle{
+		 font-weight: bold;
+		 font-style:normal;
+		 }
+		 p{
+			 margin-left: 24px;
+			 font-style:italic;
+			 }
+</style>
+
+<div style="width:100%;height:60px;"><p></p></div>
+	
+<div id="messageArea">
+
+   <div id="title">
+   	 <span id="titleMemo">出错了</span>
+
+    </div>
+   <div id="error">
+      <p><span class="titleStyle">错误描述：</span>
+       $!{result} 
+      </p>
+   </div>
+</div>
