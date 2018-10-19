@@ -12,6 +12,10 @@ public class ClassGrade {
 
     private Long id;
 
+    private Long teacherId;
+
+    private String name;
+
     /**  创建时间  */
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date start;
@@ -66,10 +70,28 @@ public class ClassGrade {
         this.modified = modified;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
+    }
+
     @Override
     public String toString() {
         return "ClassGrade{" +
                 "id=" + id +
+                ", teacherId=" + teacherId +
+                ", name='" + name + '\'' +
                 ", start=" + start +
                 ", end=" + end +
                 ", created=" + created +

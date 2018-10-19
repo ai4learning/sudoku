@@ -7,6 +7,14 @@ public class BasicVO {
     protected boolean success;
     protected String msg;
 
+    public BasicVO() {
+    }
+
+    public BasicVO(boolean success, String msg) {
+        this.success = success;
+        this.msg = msg;
+    }
+
     public String getMsg() {
         return msg;
     }

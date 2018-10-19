@@ -5,9 +5,11 @@
 
     <resultMap id="ClassGrade-Map" type="com.goldfish.domain.ClassGrade">
         <id property="id" column="id"/>
+        <result property="teacherId" column="teacherId"/>
+        <result property="name" column="name"/>
         <result property="start" column="start"/>
         <result property="end" column="end"/>
-        <result property="created" column="start"/>
+        <result property="created" column="created"/>
         <result property="modified" column="modified"/>
     </resultMap>
 
@@ -38,12 +40,12 @@
 
 
     <sql id="All-FIELDS">
-        id,start,end
+        id,teacherId,name,start,end
     </sql>
 
     <insert id="addClassGrade" parameterType="com.goldfish.domain.ClassGrade">
-        insert into class_grade (id,start,end,created,modified)
-        values(#{id},#{start},#{end},#{created},#{modified})
+        insert into class_grade (id,teacherId,name,start,end,created,modified)
+        values(#{id},#{teacherId},#{name},#{start},#{end},#{created},#{modified})
 
     </insert>
 
@@ -52,9 +54,10 @@
         update  class_grade
         <set>
             <if test="id !=null"> id = #{id},</if>
+            <if test="teacherId !=null"> teacherId = #{teacherId},</if>
+            <if test="name !=null"> name = #{name},</if>
             <if test="start !=null"> start = #{start},</if>
             <if test="end !=null"> end = #{end},</if>
-
         </set>
         where id = #{id}
     </update>
@@ -87,7 +90,7 @@
 
     <select id="getClassGradeByPage" resultMap="ClassGrade-Map" parameterType="java.util.HashMap">
         <![CDATA[
-			SELECT  id,start,end FROM class_grade
+			SELECT  id,teacherId,name,start,end FROM class_grade
 		]]>
         <include refid="MAP-COMMON-SQL" />
         <include refid="ORDER-SQL" />
