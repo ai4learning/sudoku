@@ -5,6 +5,7 @@
 
 package com.goldfish.api;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.goldfish.common.DateFormatUtils;
 import com.goldfish.domain.ClassGrade;
+import com.goldfish.domain.Course;
 import com.goldfish.service.ClassGradeService;
+import com.goldfish.service.CourseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 //import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +40,8 @@ public class UserController extends BaseController {
     private UserService userService;
     @Resource
     private ClassGradeService classGradeService;
+    @Resource(name="courseService")
+    private CourseService courseService;
 
     @RequestMapping(value = "manage", method = {RequestMethod.GET, RequestMethod.POST})
     public String manage() {
@@ -62,7 +67,17 @@ public class UserController extends BaseController {
     @RequestMapping(value = "update", method = {RequestMethod.GET, RequestMethod.POST})
     public String update(User user, ModelMap context) {
         CommonResult<User> result = userService.getUserById(user.getId());
+        int pageSize = this.getPageSize(null,200,2000);
+        PageQuery pageQuery = new PageQuery(null,pageSize);
+        CommonResult<List<Course>> courseResult = courseService.getCourseByPage(pageQuery);
+        this.toVm(courseResult, context);
         this.toVm(result, context);
+        String [] selectedCourse = result.getDefaultModel().getLessonIds().split(",");
+        List<Integer> selectedCourseClone = new ArrayList<Integer>();
+        for(int i = 0; i < selectedCourse.length; i++) {
+            selectedCourseClone.add(Integer.valueOf(selectedCourse[i]));
+        }
+        context.put("selectedCourse", selectedCourseClone);
         return "/user/update";
     }
 
