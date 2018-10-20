@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {Button, Form, Input, Icon, Card} from 'antd'
+import React, { Component } from 'react'
+import { Button, Form, Input, Icon, Card } from 'antd'
 import fetch from '@common/fetch'
-import {getQueryString} from '@common/util'
+import { getQueryString } from '@common/util'
 
 class LoginForm extends Component {
   constructor(props) {
@@ -15,8 +15,8 @@ class LoginForm extends Component {
       type: 'json',
       noTip: true
     }).then(data => {
-      if(data.success && data.userId) {
-        this.props.router.push('/user')
+      if (data.success && data.userId) {
+        this.props.router.push('/teacher')
       }
     })
   }
@@ -54,7 +54,7 @@ class LoginForm extends Component {
   handleSubmit(e) {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
-      if(err) return
+      if (err) return
       var redirect = getQueryString('redirect')
       fetch({
         url: '/login/doLogin',
@@ -62,12 +62,12 @@ class LoginForm extends Component {
         type: 'json',
         data: values
       }).then(() => {
-        this.props.router.push(redirect || '/user')
+        this.props.router.push(redirect || '/teacher')
       }).catch((e) => {
         console.log(e)
       })
     })
-    
+
   }
 }
 

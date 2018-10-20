@@ -25,7 +25,8 @@ module.exports = {
   },
   output: {
     filename: 'app.[hash:8].js',
-    path: path.join(__dirname, 'dist')
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/dist/'
   },
   module: {
     rules: [
@@ -38,6 +39,13 @@ module.exports = {
         test: /\.jsx?$/,
         include: path.join(__dirname, 'src'),
         loader: 'babel-loader?cacheDirectory',
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
+        }
       }
     ]
   },
@@ -59,6 +67,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       filename: '../index.html',
+      alwaysWriteToDisk: true
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/teacher.html',
+      filename: '../teacher.html',
       alwaysWriteToDisk: true
     }),
     new HtmlWebpackHarddiskPlugin(),
