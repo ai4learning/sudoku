@@ -16,7 +16,6 @@ import com.goldfish.service.UserService;
 import com.goldfish.vo.BasicVO;
 import com.goldfish.vo.teacher.*;
 import com.goldfish.web.interceptor.servlet.context.LoginContext;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,7 +81,17 @@ public class ApiAjaxController {
     @RequestMapping(value = "AjaxUpdateClass", method = {RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxUpdateClass(ClassVO classVO) {
-        return doAjaxAddClass(classVO);
+        User teacher = this.getUserInfo();
+        if (classVO == null || teacher == null){
+            return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
+        }
+        ClassGrade classGrade = classGradeService.getClassGradeById(classVO.getId()).getDefaultModel();
+        classGrade.setTeacherId(teacher.getId());
+        classGrade.setName(classVO.getName());
+        classGrade.setStart(DateFormatUtils.parse(classVO.getStart(),null));
+        classGrade.setEnd(DateFormatUtils.parse(classVO.getEnd(),null));
+        classGradeService.updateClassGrade(classGrade);
+        return new BasicVO(true,CommonConstant.SUCCESS);
     }
 
     @RequestMapping(value = "AjaxGetCourses", method = {RequestMethod.GET, RequestMethod.POST})
@@ -107,10 +116,40 @@ public class ApiAjaxController {
         return getCoursesVO;
     }
 
+    @RequestMapping(value = "AjaxGetStudents", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    GetStudentsVO doAjaxGetStudents() {
+        User teacher = this.getUserInfo();
+        GetStudentsVO getStudentsVO = new GetStudentsVO();
+        if (teacher == null){
+            getStudentsVO.setData(null);
+            getStudentsVO.setMsg(CommonConstant.FAIL);
+            getStudentsVO.setSuccess(false);
+            return getStudentsVO;
+        }
+        User queryStudent = new User();
+        queryStudent.setCurrentTeacher(teacher.getId());
+        List<User> studentList = userService.getListByExample(queryStudent).getDefaultModel();
+        for (User student : studentList){
+            student.setPasswd(null);
+            student.setRoleType(null);
+            student.setAuthorityLevel(null);
+            student.setActivateCode(null);
+            student.setState(null);
+            student.setUserState(null);
+            student.setModified(null);
+        }
+        getStudentsVO.setData(studentList);
+        getStudentsVO.setSuccess(true);
+        getStudentsVO.setMsg(CommonConstant.SUCCESS);
+        return getStudentsVO;
+    }
+
     @RequestMapping(value = "AjaxAddStudent", method = {RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxAddStudent(@RequestBody UpdateStudentVO updateStudentVO) {
-        if (updateStudentVO==null){
+        User teacher = this.getUserInfo();
+        if (updateStudentVO == null || teacher == null){
             return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
         }
         User user = new User();
@@ -118,10 +157,11 @@ public class ApiAjaxController {
         user.setUserCode(updateStudentVO.getUserCode());
         user.setNikeName(updateStudentVO.getNickName());
         user.setLessonIds(updateStudentVO.getLessonIds());
+        user.setCurrentTeacher(teacher.getId());
         try {
             user.setCurrentClass(Long.valueOf(updateStudentVO.getCurrentClass()));
         }catch(Exception e){
-            LogTypeEnum.DEFAULT.warn("批量增加学生，班级信息错误"+e);
+            LogTypeEnum.DEFAULT.warn("增加学生，班级信息错误"+e);
         }
         user.setRoleType(1);
         /************************以下为非必要字段***********************/
@@ -137,7 +177,8 @@ public class ApiAjaxController {
     @RequestMapping(value = "AjaxUpdateStudent", method = {RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxUpdateStudent(@RequestBody UpdateStudentVO updateStudentVO) {
-        if (updateStudentVO==null){
+        User teacher = this.getUserInfo();
+        if (updateStudentVO == null || teacher == null){
             return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
         }
         User queryUser = new User();
@@ -150,6 +191,7 @@ public class ApiAjaxController {
         user.setUserCode(updateStudentVO.getUserCode());
         user.setNikeName(updateStudentVO.getNickName());
         user.setLessonIds(updateStudentVO.getLessonIds());
+        user.setCurrentTeacher(teacher.getId());
         try {
             user.setCurrentClass(Long.valueOf(updateStudentVO.getCurrentClass()));
         }catch(Exception e){
@@ -159,10 +201,16 @@ public class ApiAjaxController {
         return new BasicVO(true,CommonConstant.SUCCESS);
     }
 
+    /**
+     * TODO 批量Insert操作需要优化，使用for循环单个insert效率低
+     * @param batchAddStudentVO
+     * @return
+     */
     @RequestMapping(value = "AjaxBatchAddStudent", method = {RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxBatchAddStudent(@RequestBody BatchAddStudentVO batchAddStudentVO) {
-        if (batchAddStudentVO == null){
+        User teacher = this.getUserInfo();
+        if (batchAddStudentVO == null || teacher == null){
             return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
         }
         for (int index=1;index<=batchAddStudentVO.getTotal();index++){
@@ -176,6 +224,7 @@ public class ApiAjaxController {
             }
             user.setPasswd(batchAddStudentVO.getPassword());
             user.setRoleType(1);
+            user.setCurrentTeacher(teacher.getId());
             /************************以下为非必要字段***********************/
             user.setUserCode(user.getUserId());
             user.setNikeName(user.getUserId());
@@ -209,13 +258,12 @@ public class ApiAjaxController {
 
     protected LoginRecord getLoginRecord() {
         LoginContext loginContext = LoginContext.getLoginContext();
-        if (loginContext == null || StringUtils.isEmpty(loginContext.getTrainingId()) ||
-                StringUtils.isEmpty(loginContext.getTrainingCode())) {
+        if (loginContext == null) {
             return null;
         }
         try {
             // 获取用户登录信息
-            return loginRecordService.getLoginRecordByTraining(loginContext.getTrainingId(), loginContext.getTrainingCode());
+            return loginRecordService.getLoginRecordByToken(loginContext.getUserName(),loginContext.getToken());
         } catch (Exception e) {
             LogTypeEnum.DEFAULT.error(e, "获取登录信息失败");
             return null;

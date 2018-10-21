@@ -11,6 +11,7 @@ package com.goldfish.vo.teacher;
  *     name: "班级名称",
  */
 public class ClassVO {
+    private Long id;
     private String name;
     private String start;
     private String end;
@@ -18,7 +19,8 @@ public class ClassVO {
     public ClassVO() {
     }
 
-    public ClassVO(String name, String start, String end) {
+    public ClassVO(Long id, String name, String start, String end) {
+        this.id = id;
         this.name = name;
         this.start = start;
         this.end = end;
@@ -27,7 +29,8 @@ public class ClassVO {
     @Override
     public String toString() {
         return "ClassVO{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", start='" + start + '\'' +
                 ", end='" + end + '\'' +
                 '}';
@@ -55,5 +58,13 @@ public class ClassVO {
 
     public void setEnd(String end) {
         this.end = end;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
