@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.goldfish.dao.UserDao">
+
+  <resultMap id="User-Map" type="com.goldfish.domain.User">
+ 		<id property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="passwd" column="passwd"/>
+		<result property="userCode" column="user_code"/>
+		<result property="nikeName" column="nike_name"/>
+		<result property="roleType" column="role_type"/>
+		<result property="authorityLevel" column="authority_level"/>
+		<result property="parentId" column="parent_id"/>
+		<result property="activateCode" column="activate_code"/>
+		<result property="lessonIds" column="lesson_ids"/>
+		<result property="userState" column="user_state"/>
+		<result property="totalLoginTimes" column="total_login_times"/>
+		<result property="currentClass" column="current_class"/>
+		<result property="currentTeacher" column="current_teacher"/>
+		<result property="level" column="level"/>
+		<result property="cashPoint" column="cash_point"/>
+		<result property="state" column="state"/>
+		<result property="created" column="created"/>
+		<result property="modified" column="modified"/>
+
+	</resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+	<sql id="BEAN-COMMON-SQL">
+    	 
+    		<where>
+    		<if test="id != null"> AND id = #{id}</if>
+    		<if test="userId != null"> AND user_id = #{userId}</if>
+    		<if test="passwd != null"> AND passwd = #{passwd}</if>
+    		<if test="nikeName != null"> AND nike_name = #{nikeName}</if>
+    		<if test="roleType != null"> AND role_type = #{roleType}</if>
+    		<if test="parentId != null"> AND parent_id = #{parentId}</if>
+    		<if test="userState != null"> AND user_state = #{userState}</if>
+    		<if test="state != null"> AND state = #{state}</if>
+    		<if test="currentClass != null"> AND current_class = #{currentClass}</if>
+
+    		
+    		</where>
+    	 
+    	</sql>
+
+
+	<!-- 可以包含bean里面没有的字段-->
+	<sql id="MAP-COMMON-SQL">
+	   
+		<where>
+		<if test="id != null"> AND id = #{id}</if>
+		<if test="userId != null"> AND user_id = #{userId}</if>
+		<if test="nikeName != null"> AND nike_name = #{nikeName}</if>
+		<if test="roleType != null"> AND role_type = #{roleType}</if>
+		<if test="parentId != null"> AND parent_id = #{parentId}</if>
+		<if test="userState != null"> AND user_state = #{userState}</if>
+		<if test="state != null"> AND state = #{state}</if>
+		
+		</where>
+	 	
+	</sql>
+	
+	<sql id="ORDER-SQL">
+	 order by id desc
+	</sql>
+	
+
+	<sql id="All-FIELDS">
+		id,user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,lesson_ids,user_state,total_login_times,current_class,current_teacher,level,cash_point,state,created,modified
+	</sql>
+
+	<insert id="addUser" parameterType="com.goldfish.domain.User">
+		insert into user (user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,lesson_ids,user_state,total_login_times,current_class,current_teacher,level,cash_point,state,created,modified)
+			values(#{userId},#{passwd},#{userCode},#{nikeName},#{roleType},#{authorityLevel},#{parentId},#{activateCode},#{lessonIds},#{userState},#{totalLoginTimes},#{currentClass},#{currentTeacher},#{level},#{cashPoint},#{state},#{created},#{modified})
+
+		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+		   select last_insert_id() as ID from dual
+		</selectKey> 
+   
+	 </insert>
+
+    
+    <update id="updateUser" parameterType="com.goldfish.domain.User" >
+    	update  user 
+	<set>
+			<if test="userId !=null"> user_id = #{userId},</if>
+			<if test="passwd !=null"> passwd = #{passwd},</if>
+			<if test="userCode !=null"> user_code = #{userCode},</if>
+			<if test="nikeName !=null"> nike_name = #{nikeName},</if>
+			<if test="roleType !=null"> role_type = #{roleType},</if>
+			<if test="authorityLevel !=null"> authority_level = #{authorityLevel},</if>
+			<if test="parentId !=null"> parent_id = #{parentId},</if>
+			<if test="activateCode !=null"> activate_code = #{activateCode},</if>
+			<if test="lessonIds !=null"> lesson_ids = #{lessonIds},</if>
+			<if test="userState !=null"> user_state = #{userState},</if>
+			<if test="totalLoginTimes !=null"> total_login_times = #{totalLoginTimes},</if>
+			<if test="currentClass !=null"> current_class = #{currentClass},</if>
+			<if test="currentTeacher !=null"> current_teacher = #{currentTeacher},</if>
+			<if test="level !=null"> level = #{level},</if>
+			<if test="cashPoint !=null"> cash_point = #{cashPoint},</if>
+			<if test="state !=null"> state = #{state},</if>
+			<if test="created !=null"> created = #{created},</if>
+			<if test="modified !=null"> modified = #{modified},</if>
+
+	</set>
+	 where id = #{id}
+  	</update>
+  
+	
+
+    
+
+	<delete id="deleteUser" parameterType="com.goldfish.domain.User">
+		DELETE FROM user WHERE id = #{id}
+	</delete>
+	<select id="getUserById" resultMap="User-Map" parameterType="java.lang.Long">
+		SELECT  <include refid="All-FIELDS"/> FROM user	WHERE id = #{id}
+	</select>  
+    
+
+
+
+	<select id="getUnique" resultMap="User-Map" parameterType="com.goldfish.domain.User">
+		SELECT   <include refid="All-FIELDS"/> FROM user
+            <include refid="BEAN-COMMON-SQL" /> limit 1
+	</select>
+
+
+	<select id="getListByExample" resultMap="User-Map" parameterType="com.goldfish.domain.User">
+		SELECT   <include refid="All-FIELDS"/> FROM user
+            <include refid="BEAN-COMMON-SQL" />
+	</select>
+
+	
+	<select id="getUserByPage" resultMap="User-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  id,user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,lesson_ids,user_state,total_login_times,current_class,current_teacher,level,cash_point,state,modified FROM user
+		]]>
+            <include refid="MAP-COMMON-SQL" />
+            <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM user
+		]]>
+		
+              <include refid="MAP-COMMON-SQL" />
+	</select>
+	
+
+
+</mapper>

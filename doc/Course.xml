@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='Course' cnname='课程' dbTableName='course'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='INT' canBeNull='false' readonly='false' isPK='true' length='10' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='type' columnName='type' cnname='课程类型' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='course_type_DICT' comment='课程类型：1.教材，2.错词本，' />
+    <column dataName='moduleCode' columnName='module_code' cnname='课程CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='课程CODE' />
+    <column dataName='bookNumber' columnName='book_number' cnname='课程号' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='课程号' />
+    <column dataName='bookName' columnName='book_name' cnname='课程名' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='课程名' />
+    <column dataName='bookType' columnName='book_type' cnname='课程类型' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='course_bookType_DICT' comment='课程类型：1.教材，2.特色，' />
+    <column dataName='orderType' columnName='order_type' cnname='年级类型' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='course_orderType_DICT' comment='年级类型：0.无，1.小学，2.初中，3.高中，4.大学' />
+    <column dataName='bookState' columnName='book_state' cnname='课程状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='course_bookState_DICT' comment='课程状态：1.有效，2.无效，' />
+    <column dataName='bookPrice' columnName='book_price' cnname='课程定价' columnType='DECIMAL' canBeNull='true' readonly='false' isPK='false' length='11' jspTag='TEXT' dictName='' comment='课程定价' />
+    <column dataName='introduce' columnName='introduce' cnname='课程简介' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='255' jspTag='TEXT' dictName='' comment='课程简介' />
+    <column dataName='coverImageUrl' columnName='cover_image_url' cnname='封面' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='255' jspTag='TEXT' dictName='' comment='封面' />
+    <column dataName='totalUnitNbr' columnName='total_unit_nbr' cnname='总单元数' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='总单元数' />
+    <column dataName='totalWords' columnName='total_words' cnname='单词总数' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='单词总数' />
+    <column dataName='outDate' columnName='out_date' cnname='是否过期' columnType='BIT' canBeNull='true' readonly='false' isPK='false' length='1' jspTag='TEXT' dictName='' comment='是否过期' />
+    <column dataName='unitType' columnName='unit_type' cnname='单元类型' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='单元类型' />
+    <column dataName='ext' columnName='ext' cnname='扩展信息' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='255' jspTag='TEXT' dictName='' comment='扩展信息' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,type,book_name,book_type,order_type,book_state,unit_type</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,type,module_code,book_number,book_name,book_type,order_type,book_state,book_price,introduce,cover_image_url,total_unit_nbr,total_words,out_date,unit_type,ext,modified</queryList>
+  <addList>id,type,module_code,book_number,book_name,book_type,order_type,book_state,book_price,introduce,cover_image_url,total_unit_nbr,total_words,out_date,unit_type,ext</addList>
+  <updateList>id,type,module_code,book_number,book_name,book_type,order_type,book_state,book_price,introduce,cover_image_url,total_unit_nbr,total_words,out_date,unit_type,ext</updateList>
+  <viewList>id,type,module_code,book_number,book_name,book_type,order_type,book_state,book_price,introduce,cover_image_url,total_unit_nbr,total_words,out_date,unit_type,ext,created,modified</viewList>
+  <allColumn>id,type,module_code,book_number,book_name,book_type,order_type,book_state,book_price,introduce,cover_image_url,total_unit_nbr,total_words,out_date,unit_type,ext,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='course_bookType_DICT' name='book_type字段的字典项'>
+      <option value='1' cssClass=''>教材</option>
+      <option value='2' cssClass=''>特色</option>
+    </dict>
+    <dict id='course_orderType_DICT' name='order_type字段的字典项'>
+      <option value='0' cssClass=''>无</option>
+      <option value='1' cssClass=''>小学</option>
+      <option value='2' cssClass=''>初中</option>
+      <option value='3' cssClass=''>高中</option>
+      <option value='4' cssClass=''>大学</option>
+    </dict>
+    <dict id='course_type_DICT' name='type字段的字典项'>
+      <option value='1' cssClass=''>教材</option>
+      <option value='2' cssClass=''>错词本</option>
+    </dict>
+    <dict id='course_bookState_DICT' name='book_state字段的字典项'>
+      <option value='1' cssClass=''>有效</option>
+      <option value='2' cssClass=''>无效</option>
+    </dict>
+  </dicts>
+</tableModel>

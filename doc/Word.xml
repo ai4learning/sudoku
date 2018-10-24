@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='Word' cnname='单词库' dbTableName='word'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='INT' canBeNull='false' readonly='false' isPK='true' length='10' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='spelling' columnName='spelling' cnname='单词拼写' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='128' jspTag='TEXT' dictName='' comment='单词拼写' />
+    <column dataName='meaning' columnName='meaning' cnname='释义' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='255' jspTag='TEXT' dictName='' comment='释义' />
+    <column dataName='soundMarkUs' columnName='sound_mark_us' cnname='美音音标' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='128' jspTag='TEXT' dictName='' comment='美音音标' />
+    <column dataName='soundMarkUk' columnName='sound_mark_uk' cnname='国际音标' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='128' jspTag='TEXT' dictName='' comment='国际音标' />
+    <column dataName='wordType' columnName='word_type' cnname='词性' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='词性' />
+    <column dataName='mediaUri' columnName='media_uri' cnname='读音' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='255' jspTag='TEXT' dictName='' comment='读音' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='word_state_DICT' comment='状态：1.有效，2.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,word_type,state</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,spelling,meaning,sound_mark_us,sound_mark_uk,word_type,media_uri,state,modified</queryList>
+  <addList>id,spelling,meaning,sound_mark_us,sound_mark_uk,word_type,media_uri,state</addList>
+  <updateList>id,spelling,meaning,sound_mark_us,sound_mark_uk,word_type,media_uri,state</updateList>
+  <viewList>id,spelling,meaning,sound_mark_us,sound_mark_uk,word_type,media_uri,state,created,modified</viewList>
+  <allColumn>id,spelling,meaning,sound_mark_us,sound_mark_uk,word_type,media_uri,state,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='word_state_DICT' name='state字段的字典项'>
+      <option value='1' cssClass=''>有效</option>
+      <option value='2' cssClass=''>无效</option>
+    </dict>
+  </dicts>
+</tableModel>

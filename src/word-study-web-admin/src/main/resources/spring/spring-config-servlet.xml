@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
+       default-autowire="byName">
+
+       <!--不用做登录拦截的请求-->
+       <bean class="com.goldfish.web.interceptor.servlet.context.ExcludeReqstPath">
+              <property name="pathSet">
+                     <set>
+                            <value>/login/login</value>
+<!--                            <value>/index</value>-->
+                     </set>
+               </property>
+       </bean>
+
+       <!--限制cookie任意写入，只允许一下4种cookie写入-->
+       <bean id="cookieUtils" class="com.goldfish.web.interceptor.servlet.CookieUtils">
+           <property name="GCookie">
+               <util:list>
+                   <bean class="com.goldfish.web.interceptor.servlet.GCookie">
+                       <property name="name" value="_user_"/>
+                       <property name="path" value="/"/>
+                   </bean>
+                   <bean class="com.goldfish.web.interceptor.servlet.GCookie">
+                       <property name="name" value="_token_"/>
+                       <property name="path" value="/"/>
+                   </bean>
+                   <bean class="com.goldfish.web.interceptor.servlet.GCookie">
+                       <property name="name" value="WordTrainingID"/>
+                       <property name="path" value="/"/>
+                   </bean>
+                   <bean class="com.goldfish.web.interceptor.servlet.GCookie">
+                       <property name="name" value="WordTrainingCode"/>
+                       <property name="path" value="/"/>
+                   </bean>
+               </util:list>
+           </property>
+       </bean>
+
+       <!--登录拦截-->
+       <mvc:interceptors>
+              <mvc:interceptor>
+                     <mvc:mapping path="/**" />
+                     <bean class="com.goldfish.web.interceptor.LoginInterceptor">
+                            <property name="cookieUtils" ref="cookieUtils" />
+                            <property name="loginRecordService" ref="loginRecordService" />
+                            <property name="sessionTimeout" value="1800" />
+                            <property name="rate" value="2" />
+                            <property name="loginUri" value="/login/login" />
+                            <property name="doLoginUri" value="/login/doLogin" />
+                     </bean>
+              </mvc:interceptor>
+       </mvc:interceptors>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <ref bean="stringHttpMessageConverter" />
+            <ref bean="fastJsonHttpMessageConverter" />
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean id="stringHttpMessageConverter"
+          class="org.springframework.http.converter.StringHttpMessageConverter">
+        <constructor-arg value="UTF-8" index="0"></constructor-arg><!--
+            避免出现乱码 -->
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="fastJsonHttpMessageConverter"
+          class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value><!-- 避免IE出现下载JSON文件的情况 -->
+            </list>
+        </property>
+        <property name="features">
+            <util:list>
+                <!-- <value>WriteMapNullValue</value> -->
+                <value>QuoteFieldNames</value>
+                <value>WriteDateUseDateFormat</value>
+            </util:list>
+        </property>
+    </bean>
+
+
+    <!-- velocity视图配置 -->
+    <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="." />
+        <property name="configLocation" value="classpath:velocity.properties" />
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">UTF-8</prop><!-- 指定模板引擎进行模板处理的编码 -->
+                <prop key="output.encoding">UTF-8</prop><!-- 指定输出流的编码 -->
+                <prop key="contentType">text/html;charset=UTF-8</prop><!-- contentType -->
+            </props>
+        </property>
+    </bean>
+
+    <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <property name="cache" value="false"></property><!--是否缓存模板 -->
+        <property name="suffix" value=".vm" />
+        <property name="prefix" value="/WEB-INF/vm/" />
+        <property name="layoutUrl" value="/WEB-INF/vm/layout/default.vm" />
+        <property name="exposeSpringMacroHelpers" value="true" />
+        <property name="dateToolAttribute" value="dateTool" />
+        <property name="numberToolAttribute" value="numberTool" />
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
+        <property name="order" value="1"></property>
+        <!-- velocity工具类配置 -->
+        <property name="toolboxConfigLocation" value="/WEB-INF/classes/velocityToolbox.xml" />
+    </bean>
+
+
+
+
+    <!-- spring mvc实现上传需添加该操作类  依赖包commons-fileupload-1.2.2.jar commons-io-2.0.1.jar -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 指定所上传文件的总大小不能超过5000KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+        <property name="maxUploadSize">
+            <value>52428800</value>
+        </property>
+        <property name="maxInMemorySize">
+            <value>4096</value>
+        </property>
+    </bean>
+
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">errors/error</prop>
+                <prop key="java.lang.Throwable">errors/error</prop>
+            </props>
+        </property>
+        <property name="statusCodes">
+            <props>
+                <prop key="errors/error">500</prop>
+                <prop key="errors/error">404</prop>
+            </props>
+        </property>
+        <property name="warnLogCategory" value="WARN"></property>
+        <property name="defaultErrorView" value="errors/error"></property>
+        <property name="defaultStatusCode" value="500"></property>
+    </bean>
+
+    <bean name="velocityTools" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="stringUtils">
+                    <bean class="org.apache.commons.lang.StringUtils" />
+                </entry>
+                <entry key="stringEscapeUtils">
+                    <bean class="org.apache.commons.lang.StringEscapeUtils" />
+                </entry>
+
+                <entry key="dateUtils">
+                    <bean class="org.apache.commons.lang.time.DateUtils" />
+                </entry>
+                <entry key="dateFormatUtils">
+                    <bean class="com.goldfish.utils.DateUtils"/>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+
+</beans>

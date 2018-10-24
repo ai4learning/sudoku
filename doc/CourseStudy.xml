@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='CourseStudy' cnname='课程学习' dbTableName='course_study'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='BIGINT' canBeNull='false' readonly='false' isPK='true' length='19' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='studentId' columnName='student_id' cnname='学生ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='学生ID' />
+    <column dataName='studentCode' columnName='student_code' cnname='学生CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='学生CODE' />
+    <column dataName='lessonId' columnName='lesson_id' cnname='课程ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='课程ID' />
+    <column dataName='isCurrentPos' columnName='is_current_pos' cnname='是当前学习位置' columnType='BIT' canBeNull='true' readonly='false' isPK='false' length='1' jspTag='SELECT' dictName='courseStudy_isCurrentPos_DICT' comment='是当前学习位置：1.是；2.否；' />
+    <column dataName='studyPositionCode' columnName='study_position_code' cnname='学习位置CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='学习位置CODE' />
+    <column dataName='positionType' columnName='position_type' cnname='位置类型' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='courseStudy_positionType_DICT' comment='位置类型：1.单词，2.单元，' />
+    <column dataName='unitNbr' columnName='unit_nbr' cnname='单元号' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='单元号' />
+    <column dataName='vocCode' columnName='voc_code' cnname='单词CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='单词CODE' />
+    <column dataName='startFrom' columnName='start_from' cnname='从哪开始学' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='从哪开始学' />
+    <column dataName='studyMode' columnName='study_mode' cnname='学习模式' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='courseStudy_studyMode_DICT' comment='学习模式：0.逆向学习，1.正向学习，' />
+    <column dataName='completeWordCount' columnName='complete_word_count' cnname='完成单词数统计' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='完成单词数统计' />
+    <column dataName='isFinished' columnName='is_finished' cnname='是否学习完成' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='courseStudy_isFinished_DICT' comment='是否学习完成：0.未完成，1.已完成，' />
+    <column dataName='isTest' columnName='is_test' cnname='是否测试完成' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='courseStudy_isTest_DICT' comment='是否测试完成：0.未完成，1.已完成，' />
+    <column dataName='isAllFinished' columnName='is_all_finished' cnname='全部完成' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='courseStudy_isAllFinished_DICT' comment='全部完成：0.未完成，1.已完成，' />
+    <column dataName='status' columnName='status' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='courseStudy_status_DICT' comment='状态：0.有效，1.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,student_id,lesson_id,position_type,status</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,student_id,student_code,lesson_id,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,modified</queryList>
+  <addList>id,student_id,student_code,lesson_id,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status</addList>
+  <updateList>id,student_id,student_code,lesson_id,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status</updateList>
+  <viewList>id,student_id,student_code,lesson_id,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,created,modified</viewList>
+  <allColumn>id,student_id,student_code,lesson_id,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='courseStudy_isFinished_DICT' name='is_finished字段的字典项'>
+      <option value='0' cssClass=''>未完成</option>
+      <option value='1' cssClass=''>已完成</option>
+    </dict>
+    <dict id='courseStudy_isAllFinished_DICT' name='is_all_finished字段的字典项'>
+      <option value='0' cssClass=''>未完成</option>
+      <option value='1' cssClass=''>已完成</option>
+    </dict>
+    <dict id='courseStudy_positionType_DICT' name='position_type字段的字典项'>
+      <option value='1' cssClass=''>单词</option>
+      <option value='2' cssClass=''>单元</option>
+    </dict>
+    <dict id='courseStudy_isTest_DICT' name='is_test字段的字典项'>
+      <option value='0' cssClass=''>未完成</option>
+      <option value='1' cssClass=''>已完成</option>
+    </dict>
+    <dict id='courseStudy_studyMode_DICT' name='study_mode字段的字典项'>
+      <option value='0' cssClass=''>逆向学习</option>
+      <option value='1' cssClass=''>正向学习</option>
+    </dict>
+    <dict id='courseStudy_status_DICT' name='status字段的字典项'>
+      <option value='0' cssClass=''>有效</option>
+      <option value='1' cssClass=''>无效</option>
+    </dict>
+    <dict id='courseStudy_isCurrentPos_DICT' name='is_current_pos字段的字典项'>
+      <option value='1' cssClass=''>是；2.否；</option>
+    </dict>
+  </dicts>
+</tableModel>

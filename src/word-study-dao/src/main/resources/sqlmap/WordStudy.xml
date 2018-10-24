@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.goldfish.dao.WordStudyDao">
+
+  <resultMap id="WordStudy-Map" type="com.goldfish.domain.WordStudy">
+ 		<id property="id" column="id"/>
+		<result property="vocCode" column="voc_code"/>
+		<result property="userVocCode" column="user_voc_code"/>
+		<result property="wordId" column="word_id"/>
+		<result property="spell" column="spell"/>
+		<result property="meaning" column="meaning"/>
+		<result property="studentId" column="student_id"/>
+		<result property="lessonId" column="lesson_id"/>
+		<result property="unitNbr" column="unit_nbr"/>
+		<result property="userCode" column="user_code"/>
+		<result property="memoryLevel" column="memory_level"/>
+		<result property="reviewTimes" column="review_times"/>
+		<result property="timeLeft" column="time_left"/>
+		<result property="finishReadingTime" column="finish_reading_time"/>
+		<result property="isFstReadSuccess" column="is_fst_read_success"/>
+		<result property="readFailTimes" column="read_fail_times"/>
+		<result property="continueReadFailTimes" column="continue_read_fail_times"/>
+		<result property="isHalfReading" column="is_half_reading"/>
+		<result property="isFstSpellSuccess" column="is_fst_spell_success"/>
+		<result property="spellFailTimes" column="spell_fail_times"/>
+		<result property="continueSpellFailTimes" column="continue_spell_fail_times"/>
+		<result property="isHalfSpelling" column="is_half_spelling"/>
+		<result property="isRemember" column="is_remember"/>
+		<result property="isCancelReview" column="is_cancel_review"/>
+		<result property="iscollected" column="isCollected"/>
+		<result property="state" column="state"/>
+		<result property="created" column="created"/>
+		<result property="modified" column="modified"/>
+		<result property="studied" column="studied"/>
+
+	</resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+	<sql id="BEAN-COMMON-SQL">
+    	 
+    		<where>
+    		<if test="id != null"> AND id = #{id}</if>
+    		<if test="studentId != null"> AND student_id = #{studentId}</if>
+    		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+    		<if test="unitNbr != null"> AND unit_nbr = #{unitNbr}</if>
+    		<if test="isRemember != null"> AND is_remember = #{isRemember}</if>
+    		<if test="vocCode != null"> AND voc_code = #{vocCode}</if>
+    		<if test="wordId != null"> AND word_id = #{wordId}</if>
+    		<if test="spell != null"> AND spell = #{spell}</if>
+    		<if test="meaning != null"> AND meaning = #{meaning}</if>
+    		<if test="state != null"> AND state = #{state}</if>
+    		<if test="iscollected != null"> AND isCollected = #{iscollected}</if>
+
+    		</where>
+    	 
+	</sql>
+
+
+	<!-- 可以包含bean里面没有的字段-->
+	<sql id="MAP-COMMON-SQL">
+	   
+		<where>
+			<if test="id != null"> AND id = #{id}</if>
+			<if test="studentId != null"> AND student_id = #{studentId}</if>
+			<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+			<if test="unitNbr != null"> AND unit_nbr = #{unitNbr}</if>
+			<if test="isRemember != null"> AND is_remember = #{isRemember}</if>
+			<if test="wordId != null"> AND word_id = #{wordId}</if>
+			<if test="spell != null"> AND spell = #{spell}</if>
+			<if test="meaning != null"> AND meaning = #{meaning}</if>
+			<if test="state != null"> AND state = #{state}</if>
+		</where>
+	 	
+	</sql>
+	
+	<sql id="ORDER-SQL">
+	 order by id desc
+	</sql>
+
+	<sql id="ORDER-ID-ASC">
+		order by id asc
+	</sql>
+	
+
+	<sql id="All-FIELDS">
+		id,student_id,lesson_id,unit_nbr,voc_code,user_voc_code,word_id,spell,meaning,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified,studied
+	</sql>
+
+	<insert id="addWordStudy" parameterType="com.goldfish.domain.WordStudy">
+		insert into word_study (student_id,lesson_id,unit_nbr,voc_code,user_voc_code,word_id,spell,meaning,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified,studied)
+			values(#{studentId},#{lessonId},#{unitNbr},#{vocCode},#{userVocCode},#{wordId},#{spell},#{meaning},#{userCode},#{memoryLevel},#{reviewTimes},#{timeLeft},#{finishReadingTime},#{isFstReadSuccess},#{readFailTimes},#{continueReadFailTimes},#{isHalfReading},#{isFstSpellSuccess},#{spellFailTimes},#{continueSpellFailTimes},#{isHalfSpelling},#{isRemember},#{isCancelReview},#{iscollected},#{state},#{created},#{modified},#{studied})
+    
+		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+		   select last_insert_id() as ID from dual
+		</selectKey> 
+   
+	 </insert>
+
+    
+    <update id="updateWordStudy" parameterType="com.goldfish.domain.WordStudy" >
+    	update  word_study 
+	<set>
+			<if test="studentId !=null"> student_id = #{studentId},</if>
+			<if test="lessonId !=null"> lesson_id = #{lessonId},</if>
+			<if test="unitNbr !=null"> unit_nbr = #{unitNbr},</if>
+			<if test="vocCode !=null"> voc_code = #{vocCode},</if>
+			<if test="userVocCode !=null"> user_voc_code = #{userVocCode},</if>
+			<if test="wordId !=null"> word_id = #{wordId},</if>
+			<if test="spell !=null"> spell = #{spell},</if>
+			<if test="meaning !=null"> meaning = #{meaning},</if>
+			<if test="userCode !=null"> user_code = #{userCode},</if>
+			<if test="memoryLevel !=null"> memory_level = #{memoryLevel},</if>
+			<if test="reviewTimes !=null"> review_times = #{reviewTimes},</if>
+			<if test="timeLeft !=null"> time_left = #{timeLeft},</if>
+			<if test="finishReadingTime !=null"> finish_reading_time = #{finishReadingTime},</if>
+			<if test="isFstReadSuccess !=null"> is_fst_read_success = #{isFstReadSuccess},</if>
+			<if test="readFailTimes !=null"> read_fail_times = #{readFailTimes},</if>
+			<if test="continueReadFailTimes !=null"> continue_read_fail_times = #{continueReadFailTimes},</if>
+			<if test="isHalfReading !=null"> is_half_reading = #{isHalfReading},</if>
+			<if test="isFstSpellSuccess !=null"> is_fst_spell_success = #{isFstSpellSuccess},</if>
+			<if test="spellFailTimes !=null"> spell_fail_times = #{spellFailTimes},</if>
+			<if test="continueSpellFailTimes !=null"> continue_spell_fail_times = #{continueSpellFailTimes},</if>
+			<if test="isHalfSpelling !=null"> is_half_spelling = #{isHalfSpelling},</if>
+			<if test="isRemember !=null"> is_remember = #{isRemember},</if>
+			<if test="isCancelReview !=null"> is_cancel_review = #{isCancelReview},</if>
+			<if test="iscollected !=null"> isCollected = #{iscollected},</if>
+			<if test="state !=null"> state = #{state},</if>
+			<if test="created !=null"> created = #{created},</if>
+			<if test="modified !=null"> modified = #{modified},</if>
+			<if test="studied !=null"> studied = #{studied},</if>
+
+	</set>
+	<where>
+		<if test="id != null"> AND id = #{id}</if>
+		<if test="vocCode != null"> AND voc_code = #{vocCode}</if>
+	</where>
+  	</update>
+
+	<delete id="deleteWordStudy" parameterType="com.goldfish.domain.WordStudy">
+		DELETE FROM word_study WHERE id = #{id}
+	</delete>
+	<select id="getWordStudyById" resultMap="WordStudy-Map" parameterType="java.lang.Long">
+		SELECT  <include refid="All-FIELDS"/> FROM word_study	WHERE id = #{id}
+	</select>  
+    
+
+
+
+	<select id="getUnique" resultMap="WordStudy-Map" parameterType="com.goldfish.domain.WordStudy">
+		SELECT   <include refid="All-FIELDS"/> FROM word_study
+		<include refid="BEAN-COMMON-SQL" />
+		<include refid="ORDER-SQL" />
+		limit 1
+	</select>
+
+
+	<select id="getListByExample" resultMap="WordStudy-Map" parameterType="com.goldfish.domain.WordStudy">
+		SELECT   <include refid="All-FIELDS"/> FROM word_study
+            <include refid="BEAN-COMMON-SQL" />
+	</select>
+
+	
+	<select id="getWordStudyByPage" resultMap="WordStudy-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  id,student_id,lesson_id,unit_nbr,voc_code,user_voc_code,word_id,spell,meaning,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,modified,studied FROM word_study
+		]]>
+            <include refid="MAP-COMMON-SQL" />
+            <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM word_study
+		]]>
+		
+              <include refid="MAP-COMMON-SQL" />
+	</select>
+
+	<select id="countDay" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM word_study
+		]]>
+
+		<where>
+			<if test="studentId != null"> AND student_id = #{studentId}</if>
+			<if test="state != null"> AND state = #{state}</if>
+			<if test="date != null"> AND TO_DAYS(#{date})=TO_DAYS(studied)</if>
+
+		</where>
+	</select>
+
+    <select id="getStudiedWords" resultMap="WordStudy-Map" parameterType="com.goldfish.domain.WordStudy">
+        SELECT   <include refid="All-FIELDS"/> FROM word_study
+        <include refid="BEAN-COMMON-SQL" /> AND studied != '1970-01-01 00:00:00' AND studied is not NULL
+    </select>
+
+    <select id="countStudiedWords" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        <![CDATA[
+			SELECT COUNT(1) FROM word_study
+		]]>
+
+        <where>
+            <if test="studentId != null"> AND student_id = #{studentId}</if>
+            <if test="state != null"> AND state = #{state}</if>
+            AND studied != '1970-01-01 00:00:00' AND studied is not NULL
+        </where>
+    </select>
+
+</mapper>

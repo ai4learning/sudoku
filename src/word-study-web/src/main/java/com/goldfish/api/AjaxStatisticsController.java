@@ -4,10 +4,7 @@ import com.goldfish.common.DateFormatUtils;
 import com.goldfish.common.PageQuery;
 import com.goldfish.constant.CommonConstant;
 import com.goldfish.constant.State;
-import com.goldfish.domain.ClassGrade;
-import com.goldfish.domain.Course;
-import com.goldfish.domain.Exam;
-import com.goldfish.domain.User;
+import com.goldfish.domain.*;
 import com.goldfish.service.*;
 import com.goldfish.vo.statistic.*;
 import com.goldfish.web.base.BaseController;
@@ -312,15 +309,6 @@ public class AjaxStatisticsController extends BaseController {
         userQuery.setCurrentClass(user.getCurrentClass());
         List<User> classMate = userService.getListByExample(userQuery).getDefaultModel();
         ClassGrade classGrade = classGradeService.getClassGradeById(user.getCurrentClass()).getDefaultModel();
-        int dayGap;
-        if (classGrade != null) {
-            int differenceDayNow = DateFormatUtils.getDateDifference(new Date(), classGrade.getStart());
-            int differenceDay = DateFormatUtils.getDateDifference(classGrade.getEnd(), classGrade.getStart());
-            dayGap = (differenceDayNow < differenceDay ? differenceDayNow : differenceDay) + 1;
-        }else {
-            dayGap = 0;
-        }
-        situationVO.setDayNO(dayGap);
         if (classMate == null)
         {
             situationVO.setMsg(CommonConstant.LOAD_FAIL);
@@ -333,13 +321,10 @@ public class AjaxStatisticsController extends BaseController {
                 paVO.add(new PersonalAchievementVO(student.getNikeName()
                         , countStudentStudiedWordsByDay(student.getId().intValue(), sdf.format(date))));
             }else {
-                Date date1= classGrade == null ? new Date() : classGrade.getStart();
-                int count = 0;
-                for (int i=0;i<dayGap;i++)
-                {
-                    count += countStudentStudiedWordsByDay(student.getId().intValue(), sdf.format(date1));
-                    date1 = DateFormatUtils.getNextDay(date1);
-                }
+                PageQuery pageQuery = new PageQuery();
+                pageQuery.addQueryParam("studentId",student.getId().intValue());
+                pageQuery.addQueryParam("state", State.VALID.getState());
+                int count = wordStudyService.countStudiedWords(pageQuery);
                 paVO.add(new PersonalAchievementVO(student.getNikeName(), count));
             }
         }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE configuration PUBLIC "http://mybatis.org/dtd/mybatis-3-config.dtd" "mybatis-3-config.dtd" >
+ <configuration>
+   
+   	<!-- 别名 -->
+	<typeAliases>
+
+        <typeAlias type="com.goldfish.domain.ActivateCode" alias="ActivateCode"/>
+        <typeAlias type="com.goldfish.domain.ClassGrade" alias="ClassGrade"/>
+        <typeAlias type="com.goldfish.domain.Course" alias="Course"/>
+        <typeAlias type="com.goldfish.domain.CourseStudy" alias="CourseStudy"/>
+        <typeAlias type="com.goldfish.domain.Exam" alias="Exam"/>
+        <typeAlias type="com.goldfish.domain.LoginRecord" alias="LoginRecord"/>
+        <typeAlias type="com.goldfish.domain.Paper" alias="Paper"/>
+        <typeAlias type="com.goldfish.domain.Question" alias="Question"/>
+        <typeAlias type="com.goldfish.domain.SelfWords" alias="SelfWords"/>
+        <typeAlias type="com.goldfish.domain.SelfWordsStudy" alias="SelfWordsStudy"/>
+        <typeAlias type="com.goldfish.domain.Unit" alias="Unit"/>
+        <typeAlias type="com.goldfish.domain.UnitWords" alias="UnitWords"/>
+        <typeAlias type="com.goldfish.domain.UnitStudy" alias="UnitWordsStudy"/>
+        <typeAlias type="com.goldfish.domain.User" alias="User"/>
+        <typeAlias type="com.goldfish.domain.Word" alias="Word"/>
+        <typeAlias type="com.goldfish.domain.Allword" alias="Allword"/>
+        <typeAlias type="com.goldfish.domain.WordStudy" alias="WordStudy"/>
+        <typeAlias type="com.goldfish.domain.WordStudyStatistic" alias="WordStudyStatistic"/>
+        <typeAlias type="com.goldfish.domain.Task" alias="Task"/>
+        <typeAlias type="com.goldfish.domain.Allexam" alias="Allexam"/>
+
+    </typeAliases>
+	
+     <mappers>
+
+         <mapper resource="sqlmap/ActivateCode.xml"/>
+         <mapper resource="sqlmap/ClassGrade.xml"/>
+         <mapper resource="sqlmap/Course.xml"/>
+         <mapper resource="sqlmap/CourseStudy.xml"/>
+         <mapper resource="sqlmap/Exam.xml"/>
+         <mapper resource="sqlmap/LoginRecord.xml"/>
+         <mapper resource="sqlmap/Paper.xml"/>
+         <mapper resource="sqlmap/Question.xml"/>
+         <mapper resource="sqlmap/SelfWords.xml"/>
+         <mapper resource="sqlmap/SelfWordsStudy.xml"/>
+         <mapper resource="sqlmap/Unit.xml"/>
+         <mapper resource="sqlmap/UnitWords.xml"/>
+         <mapper resource="sqlmap/UnitWordsStudy.xml"/>
+         <mapper resource="sqlmap/User.xml"/>
+         <mapper resource="sqlmap/Word.xml"/>
+         <mapper resource="sqlmap/Allword.xml"/>
+         <mapper resource="sqlmap/WordStudy.xml"/>
+         <mapper resource="sqlmap/WordStudyStatistic.xml"/>
+         <mapper resource="sqlmap/Task.xml"/>
+         <mapper resource="sqlmap/Allexam.xml"/>
+     </mappers>
+	
+
+ </configuration>

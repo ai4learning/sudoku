@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.goldfish.dao.CourseStudyDao">
+
+  <resultMap id="CourseStudy-Map" type="com.goldfish.domain.CourseStudy">
+ 		<id property="id" column="id"/>
+		<result property="studentId" column="student_id"/>
+		<result property="studentCode" column="student_code"/>
+		<result property="lessonId" column="lesson_id"/>
+		<result property="currentStudyBook" column="current_study_book"/>
+		<result property="unitNbr" column="unit_nbr"/>
+		<result property="startFrom" column="start_from"/>
+		<result property="studyMode" column="study_mode"/>
+		<result property="completeWordCount" column="complete_word_count"/>
+
+		<result property="studyPositionCode" column="study_position_code"/>
+		<result property="positionType" column="position_type"/>
+		<result property="vocCode" column="voc_code"/>
+		<result property="spelling" column="spelling"/>
+		<result property="isAllFinished" column="is_all_finished"/>
+		<result property="isFinished" column="is_finished"/>
+		<result property="isTested" column="is_test"/>
+		<result property="isCurrentPos" column="is_current_pos"/>
+		<result property="status" column="status"/>
+
+		<result property="created" column="created"/>
+		<result property="modified" column="modified"/>
+
+	</resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+	<sql id="BEAN-COMMON-SQL">
+    	 
+    		<where>
+    		<if test="id != null"> AND id = #{id}</if>
+    		<if test="studentId != null"> AND student_id = #{studentId}</if>
+    		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+    		<if test="positionType != null"> AND position_type = #{positionType}</if>
+    		<if test="currentStudyBook != null"> AND current_study_book = #{currentStudyBook}</if>
+    		<if test="status != null"> AND status = #{status}</if>
+    		
+    		</where>
+    	 
+    	</sql>
+
+
+	<!-- 可以包含bean里面没有的字段-->
+	<sql id="MAP-COMMON-SQL">
+	   
+		<where>
+		<if test="id != null"> AND id = #{id}</if>
+		<if test="studentId != null"> AND student_id = #{studentId}</if>
+		<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+		<if test="positionType != null"> AND position_type = #{positionType}</if>
+		<if test="currentStudyBook != null"> AND current_study_book = #{currentStudyBook}</if>
+		<if test="status != null"> AND status = #{status}</if>
+		
+		</where>
+	 	
+	</sql>
+	
+	<sql id="ORDER-SQL">
+	 order by id desc
+	</sql>
+	
+
+	<sql id="All-FIELDS">
+		id,student_id,student_code,lesson_id,current_study_book,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,spelling,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,created,modified
+	</sql>
+
+	<insert id="addCourseStudy" parameterType="com.goldfish.domain.CourseStudy">
+		insert into course_study (student_id,student_code,lesson_id,current_study_book,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,spelling,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,created,modified)
+			values(#{studentId},#{studentCode},#{lessonId},#{currentStudyBook},#{isCurrentPos},#{studyPositionCode},#{positionType},#{unitNbr},#{vocCode},#{spelling},#{startFrom},#{studyMode},#{completeWordCount},#{isFinished},#{isTested},#{isAllFinished},#{status},#{created},#{modified})
+    
+		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+		   select last_insert_id() as ID from dual
+		</selectKey> 
+   
+	 </insert>
+
+    
+    <update id="updateCourseStudy" parameterType="com.goldfish.domain.CourseStudy" >
+    	update  course_study 
+	<set>
+			<if test="studentId !=null"> student_id = #{studentId},</if>
+			<if test="studentCode !=null"> student_code = #{studentCode},</if>
+			<if test="lessonId !=null"> lesson_id = #{lessonId},</if>
+			<if test="isCurrentPos !=null"> is_current_pos = #{isCurrentPos},</if>
+			<if test="currentStudyBook !=null"> current_study_book = #{currentStudyBook},</if>
+			<if test="studyPositionCode !=null"> study_position_code = #{studyPositionCode},</if>
+			<if test="positionType !=null"> position_type = #{positionType},</if>
+			<if test="unitNbr !=null"> unit_nbr = #{unitNbr},</if>
+			<if test="vocCode !=null"> voc_code = #{vocCode},</if>
+			<if test="spelling !=null"> spelling = #{spelling},</if>
+			<if test="startFrom !=null"> start_from = #{startFrom},</if>
+			<if test="studyMode !=null"> study_mode = #{studyMode},</if>
+			<if test="completeWordCount !=null"> complete_word_count = #{completeWordCount},</if>
+			<if test="isFinished !=null"> is_finished = #{isFinished},</if>
+			<if test="isTested !=null"> is_test = #{isTested},</if>
+			<if test="isAllFinished !=null"> is_all_finished = #{isAllFinished},</if>
+			<if test="status !=null"> status = #{status},</if>
+			<if test="created !=null"> created = #{created},</if>
+			<if test="modified !=null"> modified = #{modified},</if>
+
+	</set>
+	 where id = #{id}
+  	</update>
+  
+	
+
+    
+
+	<delete id="deleteCourseStudy" parameterType="com.goldfish.domain.CourseStudy">
+		DELETE FROM course_study WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteCourseStudyByCondition" parameterType="com.goldfish.domain.CourseStudy">
+		DELETE FROM course_study
+		<where>
+			<if test="studentId != null"> AND student_id = #{studentId}</if>
+			<if test="lessonId != null"> AND lesson_id = #{lessonId}</if>
+		</where>
+	</delete>
+
+
+
+	<select id="getCourseStudyById" resultMap="CourseStudy-Map" parameterType="java.lang.Long">
+		SELECT  <include refid="All-FIELDS"/> FROM course_study	WHERE id = #{id}
+	</select>  
+    
+
+
+
+	<select id="getUnique" resultMap="CourseStudy-Map" parameterType="com.goldfish.domain.CourseStudy">
+		SELECT   <include refid="All-FIELDS"/> FROM course_study
+            <include refid="BEAN-COMMON-SQL" /> limit 1
+	</select>
+
+
+	<select id="getListByExample" resultMap="CourseStudy-Map" parameterType="com.goldfish.domain.CourseStudy">
+		SELECT   <include refid="All-FIELDS"/> FROM course_study
+            <include refid="BEAN-COMMON-SQL" />
+	</select>
+
+	
+	<select id="getCourseStudyByPage" resultMap="CourseStudy-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  id,student_id,student_code,lesson_id,current_study_book,is_current_pos,study_position_code,position_type,unit_nbr,voc_code,spelling,start_from,study_mode,complete_word_count,is_finished,is_test,is_all_finished,status,modified FROM course_study
+		]]>
+            <include refid="MAP-COMMON-SQL" />
+            <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM course_study
+		]]>
+		
+              <include refid="MAP-COMMON-SQL" />
+	</select>
+	
+
+
+</mapper>

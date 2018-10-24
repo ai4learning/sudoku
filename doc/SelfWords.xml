@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='SelfWords' cnname='学生自身单词' dbTableName='self_words'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='BIGINT' canBeNull='false' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='moduleCode' columnName='module_code' cnname='模块CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='模块CODE' />
+    <column dataName='studyId' columnName='study_id' cnname='学生ID' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='学生ID' />
+    <column dataName='type' columnName='type' cnname='类型' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='selfWords_type_DICT' comment='类型：1.复习词库，2.错词库，' />
+    <column dataName='studentId' columnName='student_id' cnname='学生ID' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='学生ID' />
+    <column dataName='userCode' columnName='user_code' cnname='用户CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='用户CODE' />
+    <column dataName='lessonId' columnName='lesson_id' cnname='课程ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='课程ID' />
+    <column dataName='unitNbr' columnName='unit_nbr' cnname='单元号' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='单元号' />
+    <column dataName='vocCode' columnName='voc_code' cnname='单词CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='单词CODE' />
+    <column dataName='vocIndex' columnName='voc_index' cnname='单词索引' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='selfWords_vocIndex_DICT' comment='单词索引(单元内）' />
+    <column dataName='wordId' columnName='word_id' cnname='单词ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='单词ID' />
+    <column dataName='spelling' columnName='spelling' cnname='单词拼写' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='128' jspTag='TEXT' dictName='' comment='单词拼写' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='selfWords_state_DICT' comment='状态：1.有效，2.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,study_id,type,student_id,lesson_id,word_id,state</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,module_code,study_id,type,student_id,user_code,lesson_id,unit_nbr,voc_code,voc_index,word_id,spelling,state,modified</queryList>
+  <addList>id,module_code,study_id,type,student_id,user_code,lesson_id,unit_nbr,voc_code,voc_index,word_id,spelling,state</addList>
+  <updateList>id,module_code,study_id,type,student_id,user_code,lesson_id,unit_nbr,voc_code,voc_index,word_id,spelling,state</updateList>
+  <viewList>id,module_code,study_id,type,student_id,user_code,lesson_id,unit_nbr,voc_code,voc_index,word_id,spelling,state,created,modified</viewList>
+  <allColumn>id,module_code,study_id,type,student_id,user_code,lesson_id,unit_nbr,voc_code,voc_index,word_id,spelling,state,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='selfWords_state_DICT' name='state字段的字典项'>
+      <option value='1' cssClass=''>有效</option>
+      <option value='2' cssClass=''>无效</option>
+    </dict>
+    <dict id='selfWords_type_DICT' name='type字段的字典项'>
+      <option value='1' cssClass=''>复习词库</option>
+      <option value='2' cssClass=''>错词库</option>
+    </dict>
+    <dict id='selfWords_vocIndex_DICT' name='voc_index字段的字典项' />
+  </dicts>
+</tableModel>

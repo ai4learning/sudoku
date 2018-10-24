@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.goldfish.dao.CourseDao">
+
+  <resultMap id="Course-Map" type="com.goldfish.domain.Course">
+ 		<id property="id" column="id"/>
+		<result property="type" column="type"/>
+		<result property="moduleCode" column="module_code"/>
+		<result property="bookNumber" column="book_number"/>
+		<result property="bookName" column="book_name"/>
+		<result property="bookType" column="book_type"/>
+		<result property="orderType" column="order_type"/>
+		<result property="bookState" column="book_state"/>
+		<result property="bookPrice" column="book_price"/>
+		<result property="introduce" column="introduce"/>
+		<result property="coverImageUrl" column="cover_image_url"/>
+		<result property="totalUnitNbr" column="total_unit_nbr"/>
+		<result property="totalWords" column="total_words"/>
+		<result property="outDate" column="out_date"/>
+		<result property="unitType" column="unit_type"/>
+		<result property="ext" column="ext"/>
+		<result property="created" column="created"/>
+		<result property="modified" column="modified"/>
+
+	</resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+	<sql id="BEAN-COMMON-SQL">
+    	 
+    		<where>
+    		<if test="id != null"> AND id = #{id}</if>
+    		<if test="bookNumber != null"> AND book_number = #{bookNumber}</if>
+    		<if test="type != null"> AND type = #{type}</if>
+    		<if test="moduleCode != null"> AND module_code = #{moduleCode}</if>
+    		<if test="bookName != null"> AND book_name like concat(#{bookName},"%")</if>
+    		<if test="bookType != null"> AND book_type = #{bookType}</if>
+    		<if test="orderType != null"> AND order_type = #{orderType}</if>
+    		<if test="bookState != null"> AND book_state = #{bookState}</if>
+    		<if test="unitType != null"> AND unit_type = #{unitType}</if>
+    		
+    		</where>
+    	 
+    	</sql>
+
+
+	<!-- 可以包含bean里面没有的字段-->
+	<sql id="MAP-COMMON-SQL">
+	   
+		<where>
+		<if test="id != null"> AND id = #{id}</if>
+		<if test="bookNumber != null"> AND book_number = #{bookNumber}</if>
+		<if test="type != null"> AND type = #{type}</if>
+		<if test="moduleCode != null"> AND module_code = #{moduleCode}</if>
+		<if test="bookName != null"> AND book_name = #{bookName}</if>
+		<if test="bookType != null"> AND book_type = #{bookType}</if>
+		<if test="orderType != null"> AND order_type = #{orderType}</if>
+		<if test="bookState != null"> AND book_state = #{bookState}</if>
+		<if test="unitType != null"> AND unit_type = #{unitType}</if>
+		
+		</where>
+	 	
+	</sql>
+	
+	<sql id="ORDER-SQL">
+	 order by id desc
+	</sql>
+	
+
+	<sql id="All-FIELDS">
+		id,type,module_code,book_number,book_name,book_type,order_type,book_state,book_price,introduce,cover_image_url,total_unit_nbr,total_words,out_date,unit_type,ext,created,modified
+	</sql>
+
+	<insert id="addCourse" parameterType="com.goldfish.domain.Course">
+		insert into course (type,module_code,book_number,book_name,book_type,order_type,book_state,book_price,introduce,cover_image_url,total_unit_nbr,total_words,out_date,unit_type,ext,created,modified)
+			values(#{type},#{moduleCode},#{bookNumber},#{bookName},#{bookType},#{orderType},#{bookState},#{bookPrice},#{introduce},#{coverImageUrl},#{totalUnitNbr},#{totalWords},#{outDate},#{unitType},#{ext},#{created},#{modified})
+    
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+		   select last_insert_id() as ID from dual
+		</selectKey> 
+   
+	 </insert>
+
+    
+    <update id="updateCourse" parameterType="com.goldfish.domain.Course" >
+    	update  course 
+	<set>
+			<if test="type !=null"> type = #{type},</if>
+			<if test="moduleCode !=null"> module_code = #{moduleCode},</if>
+			<if test="bookNumber !=null"> book_number = #{bookNumber},</if>
+			<if test="bookName !=null"> book_name = #{bookName},</if>
+			<if test="bookType !=null"> book_type = #{bookType},</if>
+			<if test="orderType !=null"> order_type = #{orderType},</if>
+			<if test="bookState !=null"> book_state = #{bookState},</if>
+			<if test="bookPrice !=null"> book_price = #{bookPrice},</if>
+			<if test="introduce !=null"> introduce = #{introduce},</if>
+			<if test="coverImageUrl !=null"> cover_image_url = #{coverImageUrl},</if>
+			<if test="totalUnitNbr !=null"> total_unit_nbr = #{totalUnitNbr},</if>
+			<if test="totalWords !=null"> total_words = #{totalWords},</if>
+			<if test="outDate !=null"> out_date = #{outDate},</if>
+			<if test="unitType !=null"> unit_type = #{unitType},</if>
+			<if test="ext !=null"> ext = #{ext},</if>
+			<if test="created !=null"> created = #{created},</if>
+			<if test="modified !=null"> modified = #{modified},</if>
+
+	</set>
+	 where id = #{id}
+  	</update>
+  
+	
+
+    
+
+	<delete id="deleteCourse" parameterType="com.goldfish.domain.Course">
+		DELETE FROM course WHERE id = #{id}
+	</delete>
+	<select id="getCourseById" resultMap="Course-Map" parameterType="java.lang.Integer">
+		SELECT  <include refid="All-FIELDS"/> FROM course	WHERE id = #{id}
+	</select>  
+    
+
+
+
+	<select id="getUnique" resultMap="Course-Map" parameterType="com.goldfish.domain.Course">
+		SELECT   <include refid="All-FIELDS"/> FROM course
+            <include refid="BEAN-COMMON-SQL" /> limit 1
+	</select>
+
+
+	<select id="getListByExample" resultMap="Course-Map" parameterType="com.goldfish.domain.Course">
+		SELECT   <include refid="All-FIELDS"/> FROM course
+            <include refid="BEAN-COMMON-SQL" />
+	</select>
+
+	
+	<select id="getCourseByPage" resultMap="Course-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  id,type,module_code,book_number,book_name,book_type,order_type,book_state,book_price,introduce,cover_image_url,total_unit_nbr,total_words,out_date,unit_type,ext,modified FROM course 
+		]]>
+            <include refid="MAP-COMMON-SQL" />
+            <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM course
+		]]>
+		
+              <include refid="MAP-COMMON-SQL" />
+	</select>
+	
+
+
+</mapper>

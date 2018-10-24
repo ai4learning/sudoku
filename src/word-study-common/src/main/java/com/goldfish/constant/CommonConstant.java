@@ -60,4 +60,7 @@ public class CommonConstant {
 	public static final String MEMORY_FAIL = "记忆保存失败";
 	public static final String LOAD_SUCCESS = "完成加载";
 	public static final String LOAD_FAIL = "加载失败";
+	public static final String PARAMETER_ERROR = "入参错误";
+	public static final String SUCCESS = "成功";
+	public static final String FAIL = "失败";
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='Question' cnname='试题' dbTableName='question'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='BIGINT' canBeNull='false' readonly='false' isPK='true' length='19' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='questionType' columnName='question_type' cnname='试题类型' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='question_questionType_DICT' comment='试题类型：0.英译汉，1.汉译英，3.听选，4.听写，' />
+    <column dataName='lessonId' columnName='lesson_id' cnname='课程ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='课程ID' />
+    <column dataName='unitNbr' columnName='unit_nbr' cnname='单元号' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='单元号' />
+    <column dataName='wordId' columnName='word_id' cnname='单词ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='单词ID' />
+    <column dataName='vocCode' columnName='voc_code' cnname='单词CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='单词CODE' />
+    <column dataName='spelling' columnName='spelling' cnname='单词拼写' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='128' jspTag='TEXT' dictName='' comment='单词拼写' />
+    <column dataName='question' columnName='question' cnname='题描述' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='255' jspTag='TEXT' dictName='' comment='题描述' />
+    <column dataName='choices' columnName='choices' cnname='选项' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='255' jspTag='TEXT' dictName='' comment='选项' />
+    <column dataName='answerIndex' columnName='answer_index' cnname='正确答案' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='20' jspTag='TEXT' dictName='' comment='正确答案' />
+    <column dataName='level' columnName='level' cnname='难易层度' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='question_level_DICT' comment='难易层度：0.未知，1.容易，2.中等，3.较难，' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='question_state_DICT' comment='状态：1.有效，2.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,question_type,lesson_id,word_id,state</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,question_type,lesson_id,unit_nbr,word_id,voc_code,spelling,question,choices,answer_index,level,state,modified</queryList>
+  <addList>id,question_type,lesson_id,unit_nbr,word_id,voc_code,spelling,question,choices,answer_index,level,state</addList>
+  <updateList>id,question_type,lesson_id,unit_nbr,word_id,voc_code,spelling,question,choices,answer_index,level,state</updateList>
+  <viewList>id,question_type,lesson_id,unit_nbr,word_id,voc_code,spelling,question,choices,answer_index,level,state,created,modified</viewList>
+  <allColumn>id,question_type,lesson_id,unit_nbr,word_id,voc_code,spelling,question,choices,answer_index,level,state,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='question_questionType_DICT' name='question_type字段的字典项'>
+      <option value='0' cssClass=''>英译汉</option>
+      <option value='1' cssClass=''>汉译英</option>
+      <option value='3' cssClass=''>听选</option>
+      <option value='4' cssClass=''>听写</option>
+    </dict>
+    <dict id='question_state_DICT' name='state字段的字典项'>
+      <option value='1' cssClass=''>有效</option>
+      <option value='2' cssClass=''>无效</option>
+    </dict>
+    <dict id='question_level_DICT' name='level字段的字典项'>
+      <option value='0' cssClass=''>未知</option>
+      <option value='1' cssClass=''>容易</option>
+      <option value='2' cssClass=''>中等</option>
+      <option value='3' cssClass=''>较难</option>
+    </dict>
+  </dicts>
+</tableModel>

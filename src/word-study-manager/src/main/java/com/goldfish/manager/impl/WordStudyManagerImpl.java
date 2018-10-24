@@ -90,4 +90,9 @@ public class WordStudyManagerImpl implements WordStudyManager {
     public List<WordStudy> getStudiedWords(WordStudy wordStudy){
 	    return  wordStudyDao.getStudiedWords(wordStudy);
     }
+
+    @Override
+    public int countStudiedWords(PageQuery pageQuery) {
+        return wordStudyDao.countStudiedWords(pageQuery.getParams());
+    }
 }

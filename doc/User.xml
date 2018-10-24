@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='User' cnname='用户' dbTableName='user'>
+    <column dataName='id' columnName='id' cnname='id' columnType='BIGINT' canBeNull='false' readonly='false' isPK='true' length='19' jspTag='TEXT' dictName='' comment='id' />
+    <column dataName='userId' columnName='user_id' cnname='账户名' columnType='VARCHAR' canBeNull='false' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='账户名' />
+    <column dataName='passwd' columnName='passwd' cnname='密码' columnType='VARCHAR' canBeNull='false' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='密码' />
+    <column dataName='userCode' columnName='user_code' cnname='用户code' columnType='VARCHAR' canBeNull='false' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='用户code' />
+    <column dataName='nikeName' columnName='nike_name' cnname='别名' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='别名' />
+    <column dataName='roleType' columnName='role_type' cnname='角色' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='user_roleType_DICT' comment='角色：1.用户，2.管理员，' />
+    <column dataName='authorityLevel' columnName='authority_level' cnname='权限等级' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='user_authorityLevel_DICT' comment='权限等级：1.默认，2.其他，' />
+    <column dataName='parentId' columnName='parent_id' cnname='父ID' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='父ID' />
+    <column dataName='activateCode' columnName='activate_code' cnname='激活码' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='激活码' />
+    <column dataName='userState' columnName='user_state' cnname='用户状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='user_userState_DICT' comment='用户状态：0.初始状态，1.正常，2.欠费，3.不可用，' />
+    <column dataName='totalLoginTimes' columnName='total_login_times' cnname='登录次数' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='登录次数' />
+    <column dataName='currentClass' columnName='current_class' cnname='当前班级' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='当前班级' />
+    <column dataName='currentTeacher' columnName='current_teacher' cnname='当前老师' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='当前老师' />
+    <column dataName='level' columnName='level' cnname='等级' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='user_level_DICT' comment='等级：1.庶人，2.童生，3.秀才，4.举人，5.进士，6.探花，7.榜眼，8.状元，' />
+    <column dataName='cashPoint' columnName='cash_point' cnname='积分' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='积分' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='user_state_DICT' comment='状态：1.有效，2.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='false' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,user_id,nike_name,role_type,parent_id,user_state,state</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,user_state,total_login_times,current_class,current_teacher,level,cash_point,state,modified</queryList>
+  <addList>id,user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,user_state,total_login_times,current_class,current_teacher,level,cash_point,state</addList>
+  <updateList>id,user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,user_state,total_login_times,current_class,current_teacher,level,cash_point,state</updateList>
+  <viewList>id,user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,user_state,total_login_times,current_class,current_teacher,level,cash_point,state,created,modified</viewList>
+  <allColumn>id,user_id,passwd,user_code,nike_name,role_type,authority_level,parent_id,activate_code,user_state,total_login_times,current_class,current_teacher,level,cash_point,state,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='user_roleType_DICT' name='role_type字段的字典项'>
+      <option value='1' cssClass=''>用户</option>
+      <option value='2' cssClass=''>管理员</option>
+    </dict>
+    <dict id='user_authorityLevel_DICT' name='authority_level字段的字典项'>
+      <option value='1' cssClass=''>默认</option>
+      <option value='2' cssClass=''>其他</option>
+    </dict>
+    <dict id='user_level_DICT' name='level字段的字典项'>
+      <option value='1' cssClass=''>庶人</option>
+      <option value='2' cssClass=''>童生</option>
+      <option value='3' cssClass=''>秀才</option>
+      <option value='4' cssClass=''>举人</option>
+      <option value='5' cssClass=''>进士</option>
+      <option value='6' cssClass=''>探花</option>
+      <option value='7' cssClass=''>榜眼</option>
+      <option value='8' cssClass=''>状元</option>
+    </dict>
+    <dict id='user_state_DICT' name='state字段的字典项'>
+      <option value='1' cssClass=''>有效</option>
+      <option value='2' cssClass=''>无效</option>
+    </dict>
+    <dict id='user_userState_DICT' name='user_state字段的字典项'>
+      <option value='0' cssClass=''>初始状态</option>
+      <option value='1' cssClass=''>正常</option>
+      <option value='2' cssClass=''>欠费</option>
+      <option value='3' cssClass=''>不可用</option>
+    </dict>
+  </dicts>
+</tableModel>

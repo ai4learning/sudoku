@@ -178,4 +178,9 @@ public class WordStudyServiceImpl implements WordStudyService {
         }
         return result;
     }
+
+    @Override
+    public int countStudiedWords(PageQuery pageQuery) {
+        return wordStudyManager.countStudiedWords(pageQuery);
+    }
 }

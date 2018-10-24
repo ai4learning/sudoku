@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.goldfish.dao.WordDao">
+
+  <resultMap id="Word-Map" type="com.goldfish.domain.Word">
+ 		<id property="id" column="id"/>
+		<result property="spelling" column="spelling"/>
+		<result property="meaning" column="meaning"/>
+		<result property="soundMarkUs" column="sound_mark_us"/>
+		<result property="soundMarkUk" column="sound_mark_uk"/>
+		<result property="wordType" column="word_type"/>
+		<result property="mediaUri" column="media_uri"/>
+		<result property="state" column="state"/>
+		<result property="created" column="created"/>
+		<result property="modified" column="modified"/>
+
+	</resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+	<sql id="BEAN-COMMON-SQL">
+    	 
+    		<where>
+    		<if test="id != null"> AND id = #{id}</if>
+			<if test="spelling != null"> AND spelling = #{spelling}</if>
+			<if test="meaning != null"> AND meaning = #{meaning}</if>
+    		<if test="wordType != null"> AND word_type = #{wordType}</if>
+    		<if test="state != null"> AND state = #{state}</if>
+    		
+    		</where>
+    	 
+    	</sql>
+
+
+	<!-- 可以包含bean里面没有的字段-->
+	<sql id="MAP-COMMON-SQL">
+	   
+		<where>
+		<if test="id != null"> AND id = #{id}</if>
+		<if test="spelling != null"> AND spelling = #{spelling}</if>
+		<if test="meaning != null"> AND meaning = #{meaning}</if>
+		<if test="wordType != null"> AND word_type = #{wordType}</if>
+		<if test="state != null"> AND state = #{state}</if>
+		
+		</where>
+	 	
+	</sql>
+	
+	<sql id="ORDER-SQL">
+	 order by id desc
+	</sql>
+	
+
+	<sql id="All-FIELDS">
+		id,spelling,meaning,sound_mark_us,sound_mark_uk,word_type,media_uri,state,created,modified
+	</sql>
+
+	<insert id="addWord" parameterType="com.goldfish.domain.Word">
+		insert into word (spelling,meaning,sound_mark_us,sound_mark_uk,word_type,media_uri,state,created,modified)
+			values(#{spelling},#{meaning},#{soundMarkUs},#{soundMarkUk},#{wordType},#{mediaUri},#{state},#{created},#{modified})
+    
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+		   select last_insert_id() as ID from dual
+		</selectKey> 
+   
+	 </insert>
+
+    
+    <update id="updateWord" parameterType="com.goldfish.domain.Word" >
+    	update  word 
+	<set>
+			<if test="spelling !=null"> spelling = #{spelling},</if>
+			<if test="meaning !=null"> meaning = #{meaning},</if>
+			<if test="soundMarkUs !=null"> sound_mark_us = #{soundMarkUs},</if>
+			<if test="soundMarkUk !=null"> sound_mark_uk = #{soundMarkUk},</if>
+			<if test="wordType !=null"> word_type = #{wordType},</if>
+			<if test="mediaUri !=null"> media_uri = #{mediaUri},</if>
+			<if test="state !=null"> state = #{state},</if>
+			<if test="created !=null"> created = #{created},</if>
+			<if test="modified !=null"> modified = #{modified},</if>
+
+	</set>
+	 where id = #{id}
+  	</update>
+  
+	
+
+    
+
+	<delete id="deleteWord" parameterType="com.goldfish.domain.Word">
+		DELETE FROM word WHERE id = #{id}
+	</delete>
+	<select id="getWordById" resultMap="Word-Map" parameterType="java.lang.Integer">
+		SELECT  <include refid="All-FIELDS"/> FROM word	WHERE id = #{id}
+	</select>  
+    
+
+
+
+	<select id="getUnique" resultMap="Word-Map" parameterType="com.goldfish.domain.Word">
+		SELECT   <include refid="All-FIELDS"/> FROM word
+            <include refid="BEAN-COMMON-SQL" /> limit 1
+	</select>
+
+
+	<select id="getListByExample" resultMap="Word-Map" parameterType="com.goldfish.domain.Word">
+		SELECT   <include refid="All-FIELDS"/> FROM word
+            <include refid="BEAN-COMMON-SQL" />
+	</select>
+
+	
+	<select id="getWordByPage" resultMap="Word-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  id,spelling,meaning,sound_mark_us,sound_mark_uk,word_type,media_uri,state,modified FROM word 
+		]]>
+            <include refid="MAP-COMMON-SQL" />
+            <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM word
+		]]>
+		
+              <include refid="MAP-COMMON-SQL" />
+	</select>
+	
+
+
+</mapper>

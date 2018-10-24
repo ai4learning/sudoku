@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='WordStudy' cnname='单词学习' dbTableName='word_study'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='BIGINT' canBeNull='false' readonly='false' isPK='true' length='19' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='vocCode' columnName='voc_code' cnname='单词CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='单词CODE' />
+    <column dataName='userVocCode' columnName='user_voc_code' cnname='用户单词CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='用户单词CODE' />
+    <column dataName='spell' columnName='spell' cnname='单词拼写' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='128' jspTag='TEXT' dictName='' comment='单词拼写' />
+    <column dataName='studentId' columnName='student_id' cnname='学生ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='学生ID' />
+    <column dataName='userCode' columnName='user_code' cnname='用户CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='用户CODE' />
+    <column dataName='memoryLevel' columnName='memory_level' cnname='记忆等级' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='wordStudy_memoryLevel_DICT' comment='记忆等级：1.生词，2.熟词，3.半生熟，' />
+    <column dataName='reviewTimes' columnName='review_times' cnname='复习次数' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='复习次数' />
+    <column dataName='timeLeft' columnName='time_left' cnname='剩余时间' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='剩余时间' />
+    <column dataName='finishReadingTime' columnName='finish_reading_time' cnname='完成阅读时间' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='完成阅读时间' />
+    <column dataName='isFstReadSuccess' columnName='is_fst_read_success' cnname='是否第一次就读成功' columnType='BIT' canBeNull='true' readonly='false' isPK='false' length='1' jspTag='SELECT' dictName='wordStudy_isFstReadSuccess_DICT' comment='是否第一次就读成功：0.否；1.是；' />
+    <column dataName='readFailTimes' columnName='read_fail_times' cnname='读失败次数' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='读失败次数' />
+    <column dataName='continueReadFailTimes' columnName='continue_read_fail_times' cnname='持续读失败次数' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='持续读失败次数' />
+    <column dataName='isHalfReading' columnName='is_half_reading' cnname='是否半读' columnType='BIT' canBeNull='true' readonly='false' isPK='false' length='1' jspTag='SELECT' dictName='wordStudy_isHalfReading_DICT' comment='是否半读：0.否，1.是，' />
+    <column dataName='isFstSpellSuccess' columnName='is_fst_spell_success' cnname='是否第一个就拼写成功' columnType='BIT' canBeNull='true' readonly='false' isPK='false' length='1' jspTag='SELECT' dictName='wordStudy_isFstSpellSuccess_DICT' comment='是否第一个就拼写成功：0.否，1.是，' />
+    <column dataName='spellFailTimes' columnName='spell_fail_times' cnname='拼写错误次数' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='拼写错误次数' />
+    <column dataName='continueSpellFailTimes' columnName='continue_spell_fail_times' cnname='连续拼写错误次数' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='连续拼写错误次数' />
+    <column dataName='isHalfSpelling' columnName='is_half_spelling' cnname='是否为半写' columnType='BIT' canBeNull='true' readonly='false' isPK='false' length='1' jspTag='SELECT' dictName='wordStudy_isHalfSpelling_DICT' comment='是否为半写：0.否；1.是；' />
+    <column dataName='isRemember' columnName='is_remember' cnname='是否记住' columnType='BIT' canBeNull='true' readonly='false' isPK='false' length='1' jspTag='SELECT' dictName='wordStudy_isRemember_DICT' comment='是否记住：0.否；1.是；' />
+    <column dataName='isCancelReview' columnName='is_cancel_review' cnname='是否取消复习' columnType='BIT' canBeNull='true' readonly='false' isPK='false' length='1' jspTag='SELECT' dictName='wordStudy_isCancelReview_DICT' comment='是否取消复习：0.否；1.是；' />
+    <column dataName='iscollected' columnName='isCollected' cnname='是否被收藏' columnType='BIT' canBeNull='true' readonly='false' isPK='false' length='1' jspTag='SELECT' dictName='wordStudy_iscollected_DICT' comment='是否被收藏：0.否；1.是；' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='wordStudy_state_DICT' comment='状态：1.有效，2.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='更新时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='更新时间' />
+  </tableDefine>
+  <searchKeys>id,student_id,state</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,voc_code,user_voc_code,spell,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,modified</queryList>
+  <addList>id,voc_code,user_voc_code,spell,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state</addList>
+  <updateList>id,voc_code,user_voc_code,spell,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state</updateList>
+  <viewList>id,voc_code,user_voc_code,spell,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified</viewList>
+  <allColumn>id,voc_code,user_voc_code,spell,student_id,user_code,memory_level,review_times,time_left,finish_reading_time,is_fst_read_success,read_fail_times,continue_read_fail_times,is_half_reading,is_fst_spell_success,spell_fail_times,continue_spell_fail_times,is_half_spelling,is_remember,is_cancel_review,isCollected,state,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='wordStudy_isRemember_DICT' name='is_remember字段的字典项'>
+      <option value='0' cssClass=''>否；1.是；</option>
+    </dict>
+    <dict id='wordStudy_isCancelReview_DICT' name='is_cancel_review字段的字典项'>
+      <option value='0' cssClass=''>否；1.是；</option>
+    </dict>
+    <dict id='wordStudy_isHalfReading_DICT' name='is_half_reading字段的字典项'>
+      <option value='0' cssClass=''>否</option>
+      <option value='1' cssClass=''>是</option>
+    </dict>
+    <dict id='wordStudy_isHalfSpelling_DICT' name='is_half_spelling字段的字典项'>
+      <option value='0' cssClass=''>否；1.是；</option>
+    </dict>
+    <dict id='wordStudy_isFstReadSuccess_DICT' name='is_fst_read_success字段的字典项'>
+      <option value='0' cssClass=''>否；1.是；</option>
+    </dict>
+    <dict id='wordStudy_isFstSpellSuccess_DICT' name='is_fst_spell_success字段的字典项'>
+      <option value='0' cssClass=''>否</option>
+      <option value='1' cssClass=''>是</option>
+    </dict>
+    <dict id='wordStudy_state_DICT' name='state字段的字典项'>
+      <option value='1' cssClass=''>有效</option>
+      <option value='2' cssClass=''>无效</option>
+    </dict>
+    <dict id='wordStudy_memoryLevel_DICT' name='memory_level字段的字典项'>
+      <option value='1' cssClass=''>生词</option>
+      <option value='2' cssClass=''>熟词</option>
+      <option value='3' cssClass=''>半生熟</option>
+    </dict>
+    <dict id='wordStudy_iscollected_DICT' name='isCollected字段的字典项'>
+      <option value='0' cssClass=''>否；1.是；</option>
+    </dict>
+  </dicts>
+</tableModel>

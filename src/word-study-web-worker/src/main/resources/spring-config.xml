@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+						http://www.springframework.org/schema/context 
+                     http://www.springframework.org/schema/context/spring-context-3.2.xsd"
+	   default-autowire="byName">
+
+	<!-- 采用注解方式注入 -->
+	<context:component-scan base-package="com.goldfish" />
+
+	<!--配置数据源属性文件  -->
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:props/important.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<import resource="spring/spring-config-datasource.xml"/>
+	<import resource="spring/spring-config-dao.xml"/>
+	<import resource="spring/spring-config-scheduler.xml"/>
+	<import resource="spring/spring-config-servlet.xml"/>
+	<!--	<import resource="spring/spring-config-dao.xml"/>-->
+<!--	<import resource="spring/spring-config-service.xml"/>
+	<import resource="spring/spring-config-manager.xml"/>-->
+	<!--
+      <import resource="spring/${spring.config.redis.file}"/>
+    -->
+
+
+</beans>

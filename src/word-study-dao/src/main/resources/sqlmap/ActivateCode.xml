@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.goldfish.dao.ActivateCodeDao">
+
+  <resultMap id="ActivateCode-Map" type="com.goldfish.domain.ActivateCode">
+ 		<id property="id" column="id"/>
+		<result property="activateCode" column="activate_code"/>
+		<result property="lessonIds" column="lesson_ids"/>
+		<result property="expireTime" column="expire_time"/>
+		<result property="state" column="state"/>
+		<result property="created" column="created"/>
+		<result property="modified" column="modified"/>
+
+	</resultMap>
+
+
+    <!-- 字段和bean里面一致，否则报错-->
+	<sql id="BEAN-COMMON-SQL">
+    	 
+    		<where>
+    		<if test="id != null"> AND id = #{id}</if>
+    		<if test="activateCode != null"> AND activate_code = #{activateCode}</if>
+    		<if test="state != null"> AND state = #{state}</if>
+    		
+    		</where>
+    	 
+    	</sql>
+
+
+	<!-- 可以包含bean里面没有的字段-->
+	<sql id="MAP-COMMON-SQL">
+	   
+		<where>
+		<if test="id != null"> AND id = #{id}</if>
+		<if test="activateCode != null"> AND activate_code = #{activateCode}</if>
+		<if test="state != null"> AND state = #{state}</if>
+		
+		</where>
+	 	
+	</sql>
+	
+	<sql id="ORDER-SQL">
+	 order by id desc
+	</sql>
+	
+
+	<sql id="All-FIELDS">
+		id,activate_code,lesson_ids,expire_time,state,created,modified
+	</sql>
+
+	<insert id="addActivateCode" parameterType="com.goldfish.domain.ActivateCode">
+		insert into activate_code (activate_code,lesson_ids,expire_time,state,created,modified)
+			values(#{activateCode},#{lessonIds},#{expireTime},#{state},#{created},#{modified})
+    
+		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+		   select last_insert_id() as ID from dual
+		</selectKey> 
+   
+	 </insert>
+
+    
+    <update id="updateActivateCode" parameterType="com.goldfish.domain.ActivateCode" >
+    	update  activate_code 
+	<set>
+			<if test="activateCode !=null"> activate_code = #{activateCode},</if>
+			<if test="lessonIds !=null"> lesson_ids = #{lessonIds},</if>
+			<if test="expireTime !=null"> expire_time = #{expireTime},</if>
+			<if test="state !=null"> state = #{state},</if>
+			<if test="created !=null"> created = #{created},</if>
+			<if test="modified !=null"> modified = #{modified},</if>
+
+	</set>
+	 where id = #{id}
+  	</update>
+  
+	
+
+    
+
+	<delete id="deleteActivateCode" parameterType="com.goldfish.domain.ActivateCode">
+		DELETE FROM activate_code WHERE id = #{id}
+	</delete>
+	<select id="getActivateCodeById" resultMap="ActivateCode-Map" parameterType="java.lang.Long">
+		SELECT  <include refid="All-FIELDS"/> FROM activate_code	WHERE id = #{id}
+	</select>  
+    
+
+
+
+	<select id="getUnique" resultMap="ActivateCode-Map" parameterType="com.goldfish.domain.ActivateCode">
+		SELECT   <include refid="All-FIELDS"/> FROM activate_code
+            <include refid="BEAN-COMMON-SQL" /> limit 1
+	</select>
+
+
+	<select id="getListByExample" resultMap="ActivateCode-Map" parameterType="com.goldfish.domain.ActivateCode">
+		SELECT   <include refid="All-FIELDS"/> FROM activate_code
+            <include refid="BEAN-COMMON-SQL" />
+	</select>
+
+	
+	<select id="getActivateCodeByPage" resultMap="ActivateCode-Map" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT  id,activate_code,lesson_ids,expire_time,state,modified FROM activate_code 
+		]]>
+            <include refid="MAP-COMMON-SQL" />
+            <include refid="ORDER-SQL" />
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(1) FROM activate_code
+		]]>
+		
+              <include refid="MAP-COMMON-SQL" />
+	</select>
+	
+
+
+</mapper>

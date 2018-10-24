@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='LoginRecord' cnname='登录' dbTableName='login_record'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='BIGINT' canBeNull='false' readonly='false' isPK='true' length='19' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='wordTrainingId' columnName='word_training_id' cnname='训练ID' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='训练ID' />
+    <column dataName='wordTraningCode' columnName='word_traning_code' cnname='训练CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='训练CODE' />
+    <column dataName='studyToken' columnName='study_token' cnname='学习token' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='学习token' />
+    <column dataName='userId' columnName='user_id' cnname='用户ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='用户ID' />
+    <column dataName='userCode' columnName='user_code' cnname='用户CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='用户CODE' />
+    <column dataName='userName' columnName='user_name' cnname='用户名' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='用户名' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='loginRecord_state_DICT' comment='状态：1.有效，2.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,word_training_id,user_id,user_name,state</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,word_training_id,word_traning_code,study_token,user_id,user_code,user_name,state,modified</queryList>
+  <addList>id,word_training_id,word_traning_code,study_token,user_id,user_code,user_name,state</addList>
+  <updateList>id,word_training_id,word_traning_code,study_token,user_id,user_code,user_name,state</updateList>
+  <viewList>id,word_training_id,word_traning_code,study_token,user_id,user_code,user_name,state,created,modified</viewList>
+  <allColumn>id,word_training_id,word_traning_code,study_token,user_id,user_code,user_name,state,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='loginRecord_state_DICT' name='state字段的字典项'>
+      <option value='1' cssClass=''>有效</option>
+      <option value='2' cssClass=''>无效</option>
+    </dict>
+  </dicts>
+</tableModel>

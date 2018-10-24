@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.goldfish.common.log.LogTypeEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,21 @@ public class DateFormatUtils {
 		}
 		return sdf.format(date);
 	}
+
+	public static Date parse(String dateString, String pattern){
+        SimpleDateFormat sdf = null;
+        if (StringUtils.isEmpty(pattern)) {
+            sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        } else {
+            sdf = new SimpleDateFormat(pattern);
+        }
+        try {
+            return sdf.parse(dateString);
+        } catch (ParseException e) {
+            LogTypeEnum.DEFAULT.warn("日期转换错误"+e);
+            return new Date();
+        }
+    }
 
     public static Date getYesterday(Date date) {
         Calendar calendar = Calendar.getInstance();

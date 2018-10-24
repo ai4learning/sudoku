@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='Exam' cnname='考试' dbTableName='exam'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='BIGINT' canBeNull='false' readonly='false' isPK='true' length='19' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='userId' columnName='user_id' cnname='用户ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='用户ID' />
+    <column dataName='userCode' columnName='user_code' cnname='用户CODE' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='50' jspTag='TEXT' dictName='' comment='用户CODE' />
+    <column dataName='lessonId' columnName='lesson_id' cnname='课程ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='课程ID' />
+    <column dataName='unitNbr' columnName='unit_nbr' cnname='课程号' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='课程号' />
+    <column dataName='pageId' columnName='page_id' cnname='试卷ID' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='试卷ID' />
+    <column dataName='testType' columnName='test_type' cnname='测试类型' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='exam_testType_DICT' comment='测试类型：1.单元测试；2.自主测试；' />
+    <column dataName='resultScore' columnName='result_score' cnname='得分' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='得分' />
+    <column dataName='standardDuration' columnName='standard_duration' cnname='考试时长' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='考试时长' />
+    <column dataName='realDuration' columnName='real_duration' cnname='实际用时' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='实际用时' />
+    <column dataName='errorNbr' columnName='error_nbr' cnname='错误数' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='TEXT' dictName='' comment='错误数' />
+    <column dataName='cashPoint' columnName='cash_point' cnname='积分' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='积分' />
+    <column dataName='cashPointType' columnName='cash_point_type' cnname='积分类型' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='exam_cashPointType_DICT' comment='积分类型：0.未知，1.金币，' />
+    <column dataName='isPass' columnName='is_pass' cnname='是否通过' columnType='BIT' canBeNull='true' readonly='false' isPK='false' length='1' jspTag='SELECT' dictName='exam_isPass_DICT' comment='是否通过：0.未通过，1.通过，' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='true' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='exam_state_DICT' comment='状态：1.有效，2.无效，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,user_id,lesson_id,page_id,test_type,cash_point_type,state</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,user_id,user_code,lesson_id,unit_nbr,page_id,test_type,result_score,standard_duration,real_duration,error_nbr,cash_point,cash_point_type,is_pass,state,modified</queryList>
+  <addList>id,user_id,user_code,lesson_id,unit_nbr,page_id,test_type,result_score,standard_duration,real_duration,error_nbr,cash_point,cash_point_type,is_pass,state</addList>
+  <updateList>id,user_id,user_code,lesson_id,unit_nbr,page_id,test_type,result_score,standard_duration,real_duration,error_nbr,cash_point,cash_point_type,is_pass,state</updateList>
+  <viewList>id,user_id,user_code,lesson_id,unit_nbr,page_id,test_type,result_score,standard_duration,real_duration,error_nbr,cash_point,cash_point_type,is_pass,state,created,modified</viewList>
+  <allColumn>id,user_id,user_code,lesson_id,unit_nbr,page_id,test_type,result_score,standard_duration,real_duration,error_nbr,cash_point,cash_point_type,is_pass,state,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='exam_isPass_DICT' name='is_pass字段的字典项'>
+      <option value='0' cssClass=''>未通过</option>
+      <option value='1' cssClass=''>通过</option>
+    </dict>
+    <dict id='exam_state_DICT' name='state字段的字典项'>
+      <option value='1' cssClass=''>有效</option>
+      <option value='2' cssClass=''>无效</option>
+    </dict>
+    <dict id='exam_cashPointType_DICT' name='cash_point_type字段的字典项'>
+      <option value='0' cssClass=''>未知</option>
+      <option value='1' cssClass=''>金币</option>
+    </dict>
+    <dict id='exam_testType_DICT' name='test_type字段的字典项'>
+      <option value='1' cssClass=''>单元测试；2.自主测试；</option>
+    </dict>
+  </dicts>
+</tableModel>

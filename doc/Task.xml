@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<tableModel>
+  <tableDefine id='Task' cnname='任务表' dbTableName='task'>
+    <column dataName='id' columnName='id' cnname='ID' columnType='BIGINT' canBeNull='false' readonly='false' isPK='true' length='19' jspTag='TEXT' dictName='' comment='ID' />
+    <column dataName='userId' columnName='user_id' cnname='用户ID' columnType='INT' canBeNull='true' readonly='false' isPK='false' length='10' jspTag='TEXT' dictName='' comment='用户ID' />
+    <column dataName='businessId' columnName='business_id' cnname='业务ID' columnType='BIGINT' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='TEXT' dictName='' comment='业务ID' />
+    <column dataName='type' columnName='type' cnname='类型' columnType='TINYINT' canBeNull='false' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='task_type_DICT' comment='类型：1.用户学习数据初始化，2.生成错词本，3.生成复习本，' />
+    <column dataName='content' columnName='content' cnname='任务内容' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='255' jspTag='TEXT' dictName='' comment='任务内容' />
+    <column dataName='ext' columnName='ext' cnname='扩展信息' columnType='VARCHAR' canBeNull='true' readonly='false' isPK='false' length='255' jspTag='TEXT' dictName='' comment='扩展信息' />
+    <column dataName='state' columnName='state' cnname='状态' columnType='TINYINT' canBeNull='false' readonly='false' isPK='false' length='3' jspTag='SELECT' dictName='task_state_DICT' comment='状态：1.未执行，2.已执行，3.删除，' />
+    <column dataName='created' columnName='created' cnname='创建时间' columnType='DATETIME' canBeNull='false' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='创建时间' />
+    <column dataName='modified' columnName='modified' cnname='修改时间' columnType='DATETIME' canBeNull='true' readonly='false' isPK='false' length='19' jspTag='DATETIME' dictName='' comment='修改时间' />
+  </tableDefine>
+  <searchKeys>id,user_id,business_id,type,state</searchKeys>
+  <orderColumns>
+    <orderColumn orderType='desc'>id</orderColumn>
+  </orderColumns>
+  <queryList>id,user_id,business_id,type,content,ext,state,modified</queryList>
+  <addList>id,user_id,business_id,type,content,ext,state</addList>
+  <updateList>id,user_id,business_id,type,content,ext,state</updateList>
+  <viewList>id,user_id,business_id,type,content,ext,state,created,modified</viewList>
+  <allColumn>id,user_id,business_id,type,content,ext,state,created,modified</allColumn>
+  <createTime>created</createTime>
+  <updateTime>modified</updateTime>
+  <dicts>
+    <dict id='task_state_DICT' name='state字段的字典项'>
+      <option value='1' cssClass=''>未执行</option>
+      <option value='2' cssClass=''>已执行</option>
+      <option value='3' cssClass=''>删除</option>
+    </dict>
+    <dict id='task_type_DICT' name='type字段的字典项'>
+      <option value='1' cssClass=''>用户学习数据初始化</option>
+      <option value='2' cssClass=''>生成错词本</option>
+      <option value='3' cssClass=''>生成复习本</option>
+    </dict>
+  </dicts>
+</tableModel>

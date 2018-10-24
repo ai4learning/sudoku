@@ -96,4 +96,5 @@ public interface WordStudyManager {
      */
     public int countDay(PageQuery pageQuery);
     public List<WordStudy> getStudiedWords(WordStudy wordStudy);
+    public int countStudiedWords(PageQuery pageQuery);
 }
