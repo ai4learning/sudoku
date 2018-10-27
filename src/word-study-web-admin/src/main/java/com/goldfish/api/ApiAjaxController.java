@@ -42,7 +42,7 @@ public class ApiAjaxController {
     @Resource
     private CourseService courseService;
 
-    @RequestMapping(value = "AjaxGetClassList", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxGetClassList", method = {RequestMethod.GET})
     public @ResponseBody
     GetClassListVO doAjaxGetClassList() {
         GetClassListVO getClassListVO = new GetClassListVO();
@@ -62,9 +62,9 @@ public class ApiAjaxController {
         return getClassListVO;
     }
 
-    @RequestMapping(value = "AjaxAddClass", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxAddClass", method = {RequestMethod.POST})
     public @ResponseBody
-    BasicVO doAjaxAddClass(ClassVO classVO) {
+    BasicVO doAjaxAddClass(@RequestBody ClassVO classVO) {
         User teacher = this.getUserInfo();
         if (classVO == null || teacher == null){
             return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
@@ -78,9 +78,9 @@ public class ApiAjaxController {
         return new BasicVO(true,CommonConstant.SUCCESS);
     }
 
-    @RequestMapping(value = "AjaxUpdateClass", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxUpdateClass", method = {RequestMethod.POST})
     public @ResponseBody
-    BasicVO doAjaxUpdateClass(ClassVO classVO) {
+    BasicVO doAjaxUpdateClass(@RequestBody ClassVO classVO) {
         User teacher = this.getUserInfo();
         if (classVO == null || teacher == null){
             return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
@@ -94,7 +94,7 @@ public class ApiAjaxController {
         return new BasicVO(true,CommonConstant.SUCCESS);
     }
 
-    @RequestMapping(value = "AjaxGetCourses", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxGetCourses", method = {RequestMethod.GET})
     public @ResponseBody
     GetCoursesVO doAjaxGetCourses() {
         User teacher = this.getUserInfo();
@@ -116,7 +116,7 @@ public class ApiAjaxController {
         return getCoursesVO;
     }
 
-    @RequestMapping(value = "AjaxGetStudents", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxGetStudents", method = {RequestMethod.GET})
     public @ResponseBody
     GetStudentsVO doAjaxGetStudents() {
         User teacher = this.getUserInfo();
@@ -145,7 +145,7 @@ public class ApiAjaxController {
         return getStudentsVO;
     }
 
-    @RequestMapping(value = "AjaxAddStudent", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxAddStudent", method = {RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxAddStudent(@RequestBody UpdateStudentVO updateStudentVO) {
         User teacher = this.getUserInfo();
@@ -174,7 +174,7 @@ public class ApiAjaxController {
         return new BasicVO(true,CommonConstant.SUCCESS);
     }
 
-    @RequestMapping(value = "AjaxUpdateStudent", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxUpdateStudent", method = {RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxUpdateStudent(@RequestBody UpdateStudentVO updateStudentVO) {
         User teacher = this.getUserInfo();
@@ -206,7 +206,7 @@ public class ApiAjaxController {
      * @param batchAddStudentVO
      * @return
      */
-    @RequestMapping(value = "AjaxBatchAddStudent", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxBatchAddStudent", method = {RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxBatchAddStudent(@RequestBody BatchAddStudentVO batchAddStudentVO) {
         User teacher = this.getUserInfo();
