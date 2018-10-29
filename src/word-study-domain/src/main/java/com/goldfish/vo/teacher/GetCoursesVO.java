@@ -1,5 +1,6 @@
 package com.goldfish.vo.teacher;
 
+import com.goldfish.domain.Course;
 import com.goldfish.vo.BasicVO;
 
 import java.util.List;
@@ -9,13 +10,13 @@ import java.util.List;
  * @date 2018/10/19 0019.
  */
 public class GetCoursesVO extends BasicVO {
-    private List<GetCoursesElementVO> data;
+    private List<Course> data;
 
-    public List<GetCoursesElementVO> getData() {
+    public List<Course> getData() {
         return data;
     }
 
-    public void setData(List<GetCoursesElementVO> data) {
+    public void setData(List<Course> data) {
         this.data = data;
     }
 

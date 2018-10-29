@@ -31,21 +31,23 @@ export default class Sider extends React.Component {
           <h1>教师端</h1>
         </div>
         <Menu theme="dark" mode="inline" selectedKeys={[this.state.current]}>
-          <Menu.Item key="/resource">
-            <Link to='/resource'>
-              <Icon type="file-text" />
+          <Menu.Item key="/teacher/class">
+            <Link to='/teacher/class'>
+              <Icon type="solution" />
               <span>班级管理</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key="/potential">
-            <Link to='/potential'>
+          <Menu.Item key="/teacher/student">
+            <Link to='/teacher/student'>
               <Icon type="team" />
               <span>学生管理</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key="/feedback">
-            <Icon type="clock-circle" />
-            <span>课程分配</span>
+          <Menu.Item key="/teacher/course">
+            <Link to='/teacher/course'>
+              <Icon type="book" />
+              <span>课程管理</span>
+            </Link>
           </Menu.Item>
         </Menu>
       </Layout.Sider>

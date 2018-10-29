@@ -17,6 +17,7 @@ import com.goldfish.vo.BasicVO;
 import com.goldfish.vo.teacher.*;
 import com.goldfish.web.interceptor.servlet.context.LoginContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhangjingtao
@@ -32,7 +34,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/api/Ajax")
-public class ApiAjaxController {
+public class AjaxTeacherController {
     @Resource(name="classGradeService")
     private ClassGradeService classGradeService;
     @Resource(name="userService")
@@ -106,11 +108,7 @@ public class ApiAjaxController {
             return getCoursesVO;
         }
         List<Course> courseList = courseService.getListByExample(new Course()).getDefaultModel();
-        List<GetCoursesElementVO> elementVOS = new ArrayList<>();
-        for (Course course : courseList){
-            elementVOS.add(new GetCoursesElementVO(course.getId(),course.getBookName()));
-        }
-        getCoursesVO.setData(elementVOS);
+        getCoursesVO.setData(courseList);
         getCoursesVO.setSuccess(true);
         getCoursesVO.setMsg(CommonConstant.SUCCESS);
         return getCoursesVO;
@@ -130,15 +128,6 @@ public class ApiAjaxController {
         User queryStudent = new User();
         queryStudent.setCurrentTeacher(teacher.getId());
         List<User> studentList = userService.getListByExample(queryStudent).getDefaultModel();
-        for (User student : studentList){
-            student.setPasswd(null);
-            student.setRoleType(null);
-            student.setAuthorityLevel(null);
-            student.setActivateCode(null);
-            student.setState(null);
-            student.setUserState(null);
-            student.setModified(null);
-        }
         getStudentsVO.setData(studentList);
         getStudentsVO.setSuccess(true);
         getStudentsVO.setMsg(CommonConstant.SUCCESS);
@@ -149,26 +138,29 @@ public class ApiAjaxController {
     public @ResponseBody
     BasicVO doAjaxAddStudent(@RequestBody UpdateStudentVO updateStudentVO) {
         User teacher = this.getUserInfo();
-        if (updateStudentVO == null || teacher == null){
+        if (updateStudentVO == null || teacher == null) {
             return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
         }
         User user = new User();
-        user.setPasswd(updateStudentVO.getPassword());
-        user.setUserCode(updateStudentVO.getUserCode());
-        user.setNikeName(updateStudentVO.getNickName());
+        user.setUserId(updateStudentVO.getUserId());
+        user.setPasswd(updateStudentVO.getPasswd());
         user.setLessonIds(updateStudentVO.getLessonIds());
+        user.setCurrentClass(updateStudentVO.getCurrentClass());
         user.setCurrentTeacher(teacher.getId());
-        try {
-            user.setCurrentClass(Long.valueOf(updateStudentVO.getCurrentClass()));
-        }catch(Exception e){
-            LogTypeEnum.DEFAULT.warn("增加学生，班级信息错误"+e);
+        String userCode = updateStudentVO.getUserCode();
+        if(userCode == null) {
+            userCode = user.getUserId();
         }
-        user.setRoleType(1);
-        /************************以下为非必要字段***********************/
-        user.setUserCode(user.getUserId());
-        user.setNikeName(user.getUserId());
+        user.setUserCode(userCode);
+        String nikeName = updateStudentVO.getNikeName();
+        if(nikeName == null) {
+            nikeName = user.getUserId();
+        }
+        user.setNikeName(nikeName);
         user.setAuthorityLevel(1);
-        user.setUserState(0);
+        user.setUserState(updateStudentVO.getUserState());
+        user.setState(updateStudentVO.getState());
+        user.setRoleType(1);
         user.setLevel(1);
         userService.addUser(user);
         return new BasicVO(true,CommonConstant.SUCCESS);
@@ -187,16 +179,14 @@ public class ApiAjaxController {
         if (user == null){
             return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
         }
-        user.setPasswd(updateStudentVO.getPassword());
+        user.setPasswd(updateStudentVO.getPasswd());
         user.setUserCode(updateStudentVO.getUserCode());
-        user.setNikeName(updateStudentVO.getNickName());
+        user.setNikeName(updateStudentVO.getNikeName());
         user.setLessonIds(updateStudentVO.getLessonIds());
         user.setCurrentTeacher(teacher.getId());
-        try {
-            user.setCurrentClass(Long.valueOf(updateStudentVO.getCurrentClass()));
-        }catch(Exception e){
-            LogTypeEnum.DEFAULT.warn("批量增加学生，班级信息错误"+e);
-        }
+        user.setCurrentClass(updateStudentVO.getCurrentClass());
+        user.setUserState(updateStudentVO.getUserState());
+        user.setState(updateStudentVO.getState());
         userService.updateUser(user);
         return new BasicVO(true,CommonConstant.SUCCESS);
     }
@@ -216,16 +206,11 @@ public class ApiAjaxController {
         for (int index=1;index<=batchAddStudentVO.getTotal();index++){
             User user = new User();
             user.setUserId(batchAddStudentVO.getPrefix()+String.valueOf(index));
-            user.setLessonIds(batchAddStudentVO.getLessonIdList());
-            try {
-                user.setCurrentClass(Long.valueOf(batchAddStudentVO.getCurrentClass()));
-            }catch(Exception e){
-                LogTypeEnum.DEFAULT.warn("批量增加学生，班级信息错误"+e);
-            }
-            user.setPasswd(batchAddStudentVO.getPassword());
+            user.setLessonIds(batchAddStudentVO.getLessonIds());
+            user.setCurrentClass(Long.valueOf(batchAddStudentVO.getCurrentClass()));
+            user.setPasswd(batchAddStudentVO.getPasswd());
             user.setRoleType(1);
             user.setCurrentTeacher(teacher.getId());
-            /************************以下为非必要字段***********************/
             user.setUserCode(user.getUserId());
             user.setNikeName(user.getUserId());
             user.setAuthorityLevel(1);
@@ -268,5 +253,26 @@ public class ApiAjaxController {
             LogTypeEnum.DEFAULT.error(e, "获取登录信息失败");
             return null;
         }
+    }
+
+    /**
+     * 用户登录心跳
+     * @param context
+     * @return
+     *
+     * {"success":true,"UserId":"jiaoshi"}
+     */
+    @RequestMapping(value="AjaxHeartBeat",method={RequestMethod.GET,RequestMethod.POST})
+    public @ResponseBody
+    Map<String,Object> doAjaxHeartBeat(ModelMap context) {
+        CommonResult result = new CommonResult();
+        LoginRecord loginRecord = getLoginRecord();
+        if (loginRecord == null) {
+            result.addDefaultModel("UserId", "");
+            return result.getReturnMap();
+        }
+        result.addDefaultModel("UserId", loginRecord.getUserName());
+        result.setSuccess(true);
+        return result.getReturnMap();
     }
 }

@@ -8,20 +8,20 @@ import com.alibaba.fastjson.annotation.JSONField;
  */
 public class BatchAddStudentVO {
     private String prefix;
-    private String password;
-    @JSONField(name="lesson_ids")
-    private String lessonIdList;
-    @JSONField(name="current_class")
+    private String passwd;
+    private String lessonIds;
     private String currentClass;
     private Integer total;
+    private Integer userState;
+    private Integer state;
 
     public BatchAddStudentVO() {
     }
 
-    public BatchAddStudentVO(String prefix, String password, String lessonIdList, String currentClass, Integer total) {
+    public BatchAddStudentVO(String prefix, String passwd, String lessonIds, String currentClass, Integer total) {
         this.prefix = prefix;
-        this.password = password;
-        this.lessonIdList = lessonIdList;
+        this.passwd = passwd;
+        this.lessonIds = lessonIds;
         this.currentClass = currentClass;
         this.total = total;
     }
@@ -34,20 +34,20 @@ public class BatchAddStudentVO {
         this.prefix = prefix;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswd() {
+        return passwd;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswd(String password) {
+        this.passwd = password;
     }
 
-    public String getLessonIdList() {
-        return lessonIdList;
+    public String getLessonIds() {
+        return lessonIds;
     }
 
-    public void setLessonIdList(String lessonIdList) {
-        this.lessonIdList = lessonIdList;
+    public void setLessonIds(String lessonIds) {
+        this.lessonIds = lessonIds;
     }
 
     public String getCurrentClass() {
@@ -66,12 +66,28 @@ public class BatchAddStudentVO {
         this.total = total;
     }
 
+    public Integer getUserState() {
+        return userState;
+    }
+
+    public void setUserState(Integer userState) {
+        this.userState = userState;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "BatchAddStudentVO{" +
                 "prefix='" + prefix + '\'' +
-                ", password='" + password + '\'' +
-                ", lessonIdList='" + lessonIdList + '\'' +
+                ", password='" + passwd + '\'' +
+                ", lessonIdList='" + lessonIds + '\'' +
                 ", currentClass='" + currentClass + '\'' +
                 ", total=" + total +
                 '}';

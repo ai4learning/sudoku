@@ -52,6 +52,7 @@ module.exports = {
   externals: {
     "react": 'React',
     "react-dom": "ReactDOM",
+    "moment": "moment",
     "antd": "antd",
     "bizcharts": "BizCharts",
     "@antv/data-set": "DataSet"
@@ -81,13 +82,12 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, './'),
     publicPath: '/dist/',
-    historyApiFallback: true,
     compress: true,
 
     proxy: [
       {
         context: ['/api', '/login'],
-        target: 'http://114.115.162.212:8086',
+        target: 'http://0.0.0.0:8180',
         changeOrigin: true
       },
       {
