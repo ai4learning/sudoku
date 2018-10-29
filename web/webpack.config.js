@@ -25,7 +25,8 @@ module.exports = {
   },
   output: {
     filename: 'app.[hash:8].js',
-    path: path.join(__dirname, 'dist')
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/dist/'
   },
   module: {
     rules: [
@@ -38,12 +39,20 @@ module.exports = {
         test: /\.jsx?$/,
         include: path.join(__dirname, 'src'),
         loader: 'babel-loader?cacheDirectory',
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
+        }
       }
     ]
   },
   externals: {
     "react": 'React',
     "react-dom": "ReactDOM",
+    "moment": "moment",
     "antd": "antd",
     "bizcharts": "BizCharts",
     "@antv/data-set": "DataSet"
@@ -61,6 +70,11 @@ module.exports = {
       filename: '../index.html',
       alwaysWriteToDisk: true
     }),
+    new HtmlWebpackPlugin({
+      template: 'src/teacher.html',
+      filename: '../teacher.html',
+      alwaysWriteToDisk: true
+    }),
     new HtmlWebpackHarddiskPlugin(),
     new CleanWebpackPlugin(['dist']),
     // new BundleAnalyzerPlugin()
@@ -68,13 +82,12 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, './'),
     publicPath: '/dist/',
-    historyApiFallback: true,
     compress: true,
 
     proxy: [
       {
         context: ['/api', '/login'],
-        target: 'http://114.115.162.212:8086',
+        target: 'http://0.0.0.0:8180',
         changeOrigin: true
       },
       {

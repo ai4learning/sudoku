@@ -1,11 +1,218 @@
-// img {
-//   max-width: 100%;
-//   height: auto;
-//   vertical-align: middle;
-// }
-
 html, body {
   min-height: 100%;
+}
+
+#app {
+  height: 100%;
+  background: #eee;
+
+  .container {
+    height: 100%;
+
+    .ant-card {
+      margin-bottom: 30px;
+    }
+  }
+  
+  .user-layout {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #eee;
+
+    .header {
+      background: #001529;
+
+      .header_container {
+        width: 1200px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .header_logo {
+        display: flex;
+        padding-right: 30px;
+        float: left;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        height: 64px;
+
+        .header_logo_img {
+          width: 100px;
+        }
+      }
+
+      .header_user {
+        position: absolute;
+        right: 20px;
+        top: 0;
+        display: flex;
+        height: 100%;
+        align-items: center;
+        color: white;
+        cursor: pointer;
+
+        .ant-avatar.ant-avatar-icon {
+          background: rgba(255, 255, 255, 0.3);
+        }
+
+        .header_user_name {
+          padding: 4px;
+        }
+      }
+    }
+
+    .content {
+      width: 1200px;
+      padding: 15px 0;
+      margin: 0 auto;
+      flex: 1;
+      background: white;
+
+      .panel {
+        background: white;
+        position: relative;
+        padding: 10px;
+
+        .panel_header {
+          border-bottom: 2px solid #108ee9;
+          margin-bottom: 15px;
+          padding: 10px;
+        }
+
+        .panel_extra {
+          position: absolute;
+          top: 16px;
+          right: 24px;
+        }
+      }
+    }
+
+    .footer {
+      width: 100%;
+      height: auto;
+      min-height: 90px;
+      background: #3b414f;
+      border-top: 1px solid #bfbfbf
+    }
+
+    .footer * {
+      color: #808080;
+    }
+    
+    .footer p {
+      padding: 15px;
+      margin: 10px auto 0;
+      line-height: 30px;
+      text-align: center;
+    }
+  }
+  
+  .teacher-layout {
+    .sider {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+
+      .logo-bar {
+        background: #002140;
+        height: 60px;
+        line-height: 60px;
+        overflow: hidden;
+        padding-left: 24px;
+        position: relative; 
+
+        img {
+          width: 40px;
+        }
+
+        h1 {
+          color: #fff;
+          display: inline-block;
+          font-size: 20px;
+          font-weight: 600;
+          margin: 0 0 0 12px;
+          vertical-align: middle;
+        }
+      }
+    }
+
+    .main {
+      transition: all 0.3s;
+
+      .header {
+        padding: 0 12px 0 0;
+        background: #fff;
+        height: 60px;
+        line-height: 60px;
+
+        .header_trigger {
+          cursor: pointer;
+          font-size: 20px;
+          height: 60px;
+          line-height: 60px;
+          padding: 0 24px;
+          transition: all 0.3s;
+
+          &:hover {
+            color: #1890ff;
+          }
+        }
+
+        .header_right {
+          float: right;
+          height: 100%;
+          overflow: hidden;
+
+          .header_user {
+            padding: 0 8px;
+            
+            &:hover {
+              background: rgba(0, 0, 0, 0.025);
+            }
+
+            .header_user_name {
+              padding: 4px;
+            }
+          }
+        }
+      }
+
+      .content {
+        background: #fff;
+        margin: 10px 10px 0;
+
+        .panel {
+          background: white;
+          padding: 10px;
+          position: relative;
+
+          .panel_header {
+            border-bottom: 2px solid #108ee9;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: 600;
+          }
+
+          .panel_extra {
+            position: absolute;
+            top: 16px;
+            right: 24px;
+          }
+        }
+        
+        .ant-card-head-title {
+          padding: 12px 0;
+        }
+      }
+
+      .footer {
+        text-align: center;
+      }
+    }
+  }
 }
 
 .ant-btn {
@@ -46,107 +253,8 @@ html, body {
   }
 }
 
-#app {
-  height: 100%;
-  background: #eee;
-
-  .container {
-    height: 100%;
-  }
-  
-  .layout {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    background: #eee;
-  }
-
-  .header {
-    background: #001529;
-
-    .header_container {
-      width: 1200px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .header_logo {
-      display: flex;
-      padding-right: 30px;
-      float: left;
-      color: white;
-      justify-content: center;
-      align-items: center;
-      height: 64px;
-
-      .header_logo_img {
-        width: 100px;
-      }
-    }
-
-    .header_user {
-      position: absolute;
-      right: 20px;
-      top: 0;
-      display: flex;
-      height: 100%;
-      align-items: center;
-      color: white;
-      cursor: pointer;
-
-      .ant-avatar.ant-avatar-icon {
-        background: rgba(255, 255, 255, 0.3);
-      }
-
-      .header_user_name {
-        padding: 4px;
-      }
-    }
-  }
-
-  .content {
-    width: 1200px;
-    padding: 15px 0;
-    margin: 0 auto;
-    flex: 1;
-    background: white;
-
-    .panel {
-      background: white;
-      position: relative;
-      padding: 10px;
-
-      .panel_header {
-        border-bottom: 2px solid #108ee9;
-        margin-bottom: 15px;
-        padding: 10px;
-      }
-
-      .panel_extra {
-        position: absolute;
-        top: 16px;
-        right: 24px;
-      }
-    }
-  }
-
-  .footer {
-    width: 100%;
-    height: auto;
-    min-height: 90px;
-    background: #3b414f;
-    border-top: 1px solid #bfbfbf
-  }
-
-  .footer * {
-    color: #808080;
-  }
-  
-  .footer p {
-    padding: 15px;
-    margin: 10px auto 0;
-    line-height: 30px;
-    text-align: center;
-  }
-}
-
+// img {
+//   max-width: 100%;
+//   height: auto;
+//   vertical-align: middle;
+// }

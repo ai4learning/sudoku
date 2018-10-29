@@ -55,12 +55,12 @@ export default class Header extends Component {
       this.setState({
         userInfo: {}
       })
-      location.href = '/#/user/login'
+      this.props.router.push('/user/login')
     }).catch(() => {
       this.setState({
         userInfo: {}
       })
-      location.href = '/#/user/login'
+      this.props.router.push('/user/login')
     })
   }
 

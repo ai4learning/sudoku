@@ -5,18 +5,26 @@ import UserLayout from './layout/user/Layout'
 import AdminLayout from './layout/admin/Layout'
 import Home from './pages/Home'
 import Word from './pages/user/word/Word'
-import Login from './pages/user/login/Login'
+import UserLogin from './pages/user/login/Login'
 import Center from './pages/user/center/Center'
 import Rank from './pages/user/rank/Rank'
 import UnitTest from './pages/user/test/unit/UnitTest'
 import SelfTest from './pages/user/test/self/SelfTest'
 import TestResults from './pages/user/test/results/TestResults'
 
+import TeacherLayout from './layout/teacher/Layout'
+import TeacherLogin from './pages/teacher/login/Login'
+import TeacherClass from './pages/teacher/class/Class'
+import TeacherStudent from './pages/teacher/student/Student'
+import TeacherCourse from './pages/teacher/course/Course'
+import TeacherUnit from './pages/teacher/course/Unit'
+import TeacherWord from './pages/teacher/course/Word'
+
 export default (
     <Route path='/' component={App}>
       <Route path='user' component={UserLayout}>
         <IndexRoute component={Word}></IndexRoute>
-        <Route path='login' component={Login}></Route>
+        <Route path='login' component={UserLogin}></Route>
         <Route path='word' component={Word}></Route>
         <Route path='center' component={Center}></Route>
         <Route path='rank' component={Rank}></Route>
@@ -26,6 +34,14 @@ export default (
       </Route>
       <Route path='admin' component={AdminLayout}>
         <IndexRoute component={Word}></IndexRoute>
+      </Route>
+      <Route path='teacher' component={TeacherLayout}>
+        <Route path='login' component={TeacherLogin}></Route>
+        <Route path='class' component={TeacherClass}></Route>
+        <Route path='student' component={TeacherStudent}></Route>
+        <Route path='course' component={TeacherCourse}></Route>
+        <Route path='unit' component={TeacherUnit}></Route>
+        <Route path='word' component={TeacherWord}></Route>
       </Route>
       <IndexRoute component={Home}>
       </IndexRoute>

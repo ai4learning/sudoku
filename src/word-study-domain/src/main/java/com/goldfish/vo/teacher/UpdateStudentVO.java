@@ -18,28 +18,27 @@ import com.alibaba.fastjson.annotation.JSONField;
  * }
  */
 public class UpdateStudentVO {
-    @JSONField(name="user_id")
     private String userId;
-    private String password;
-    @JSONField(name="user_code")
+    private String passwd;
     private String userCode;
-    @JSONField(name="nick_name")
-    private String nickName;
-    @JSONField(name="lesson_ids")
+    private String nikeName;
     private String lessonIds;
-    @JSONField(name="current_class")
-    private String currentClass;
+    private Long currentClass;
+    private Integer userState;
+    private Integer state;
 
     public UpdateStudentVO() {
     }
 
-    public UpdateStudentVO(String userId, String password, String userCode, String nickName, String lessonIds, String currentClass) {
+    public UpdateStudentVO(String userId, String passwd, String userCode, String nikeName, String lessonIds, Long currentClass, Integer userState, Integer state) {
         this.userId = userId;
-        this.password = password;
+        this.passwd = passwd;
         this.userCode = userCode;
-        this.nickName = nickName;
+        this.nikeName = nikeName;
         this.lessonIds = lessonIds;
         this.currentClass = currentClass;
+        this.userState = userState;
+        this.state = state;
     }
 
     public String getUserId() {
@@ -50,28 +49,12 @@ public class UpdateStudentVO {
         this.userId = userId;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getUserCode() {
         return userCode;
     }
 
     public void setUserCode(String userCode) {
         this.userCode = userCode;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 
     public String getLessonIds() {
@@ -82,21 +65,53 @@ public class UpdateStudentVO {
         this.lessonIds = lessonIds;
     }
 
-    public String getCurrentClass() {
+    public Long getCurrentClass() {
         return currentClass;
     }
 
-    public void setCurrentClass(String currentClass) {
+    public void setCurrentClass(Long currentClass) {
         this.currentClass = currentClass;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+    public String getNikeName() {
+        return nikeName;
+    }
+
+    public void setNikeName(String nikeName) {
+        this.nikeName = nikeName;
+    }
+
+    public Integer getUserState() {
+        return userState;
+    }
+
+    public void setUserState(Integer userState) {
+        this.userState = userState;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     @Override
     public String toString() {
         return "UpdateStudentVO{" +
                 "userId='" + userId + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + passwd + '\'' +
                 ", userCode='" + userCode + '\'' +
-                ", nickName='" + nickName + '\'' +
+                ", nickName='" + nikeName + '\'' +
                 ", lessonIds='" + lessonIds + '\'' +
                 ", currentClass='" + currentClass + '\'' +
                 '}';
