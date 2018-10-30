@@ -15,6 +15,7 @@ import com.goldfish.vo.user.UserBookVO;
 import com.goldfish.web.base.BaseController;
 import com.goldfish.web.interceptor.servlet.context.LoginContext;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +28,8 @@ import java.util.concurrent.*;
 /**
  * Created by John on 2018/5/20 0020.
  */
+@Controller
+@RequestMapping("/api/Ajax")
 public class AjaxCourseController extends BaseController {
     @Resource
     private CourseStudyService courseStudyService;
