@@ -26,12 +26,12 @@ export default class Header extends React.Component {
       this.setState({
         userInfo: {}
       })
-      this.props.router.push('/teacher/login')
+      this.props.router.push('/user/login?redirect='+encodeURIComponent(location.href))
     }).catch(() => {
       this.setState({
         userInfo: {}
       })
-      this.props.router.push('/teacher/login')
+      this.props.router.push('/user/login?redirect='+encodeURIComponent(location.href))
     })
   }
 

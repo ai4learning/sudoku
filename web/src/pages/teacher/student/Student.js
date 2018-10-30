@@ -44,7 +44,7 @@ export default class Student extends React.Component {
     })
     fetch({
       url: '/api/Ajax/AjaxGetStudents',
-      method: 'post',
+      method: 'get',
       type: 'json'
     }).then(result => {
       this.setState({
@@ -57,7 +57,7 @@ export default class Student extends React.Component {
   getClassData = () => {
     fetch({
       url: '/api/Ajax/AjaxGetClassList',
-      method: 'post',
+      method: 'get',
       type: 'json'
     }).then(result => {
       let classMap = {}
@@ -73,7 +73,7 @@ export default class Student extends React.Component {
   getCourseData = () => {
     fetch({
       url: '/api/Ajax/AjaxGetCourses',
-      method: 'post',
+      method: 'get',
       type: 'json'
     }).then(result => {
       let courseMap = {}

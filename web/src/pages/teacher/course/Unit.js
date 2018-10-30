@@ -54,7 +54,7 @@ export default class Unit extends React.Component {
   getCourseData = () => {
     fetch({
       url: '/api/Ajax/AjaxGetCourses',
-      method: 'post',
+      method: 'get',
       type: 'json'
     }).then(result => {
       let courseMap = {}
@@ -74,6 +74,7 @@ export default class Unit extends React.Component {
           <Card title='查询条件'>
             <UnitSearchForm
               courseMap={this.state.courseMap}
+              data={this.state.searchData}
               onSearch={this.getUnitData}
               >
             </UnitSearchForm>
@@ -86,7 +87,7 @@ export default class Unit extends React.Component {
                 {
                   title: '单元号',
                   key: 'Id',
-
+                  dataIndex: 'Id'
                 }
               ]}
               >

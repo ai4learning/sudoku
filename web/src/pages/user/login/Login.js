@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Button, Form, Input, Icon, Card} from 'antd'
 import fetch from '@common/fetch'
-import {getQueryString} from '@common/util'
 
 class LoginForm extends Component {
   constructor(props) {
@@ -55,14 +54,13 @@ class LoginForm extends Component {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if(err) return
-      var redirect = getQueryString('redirect')
       fetch({
         url: '/login/doLogin',
         method: 'post',
         type: 'json',
         data: values
       }).then(() => {
-        this.props.router.push(redirect || '/user')
+        location.href = this.props.location.query.redirect || '/'
       }).catch((e) => {
         console.log(e)
       })

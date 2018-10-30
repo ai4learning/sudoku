@@ -19,7 +19,7 @@ export default class Course extends React.Component {
     })
     fetch({
       url: '/api/Ajax/AjaxGetCourses',
-      method: 'post',
+      method: 'get',
       type: 'json'
     }).then(result => {
       this.setState({
@@ -75,6 +75,6 @@ export default class Course extends React.Component {
   }
 
   goToUnit = (record) => {
-    this.props.router.push('/teacher/unit?moduleCode=' + record.moduleCode)
+    this.props.router.push('/teacher/word?moduleCode=' + record.moduleCode)
   }
 }

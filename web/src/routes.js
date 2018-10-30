@@ -13,11 +13,9 @@ import SelfTest from './pages/user/test/self/SelfTest'
 import TestResults from './pages/user/test/results/TestResults'
 
 import TeacherLayout from './layout/teacher/Layout'
-import TeacherLogin from './pages/teacher/login/Login'
 import TeacherClass from './pages/teacher/class/Class'
 import TeacherStudent from './pages/teacher/student/Student'
 import TeacherCourse from './pages/teacher/course/Course'
-import TeacherUnit from './pages/teacher/course/Unit'
 import TeacherWord from './pages/teacher/course/Word'
 
 export default (
@@ -36,11 +34,10 @@ export default (
         <IndexRoute component={Word}></IndexRoute>
       </Route>
       <Route path='teacher' component={TeacherLayout}>
-        <Route path='login' component={TeacherLogin}></Route>
+        <IndexRoute component={TeacherClass}></IndexRoute>
         <Route path='class' component={TeacherClass}></Route>
         <Route path='student' component={TeacherStudent}></Route>
         <Route path='course' component={TeacherCourse}></Route>
-        <Route path='unit' component={TeacherUnit}></Route>
         <Route path='word' component={TeacherWord}></Route>
       </Route>
       <IndexRoute component={Home}>

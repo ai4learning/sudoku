@@ -10,7 +10,27 @@ html, body {
     height: 100%;
 
     .ant-card {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+    }
+
+    .panel {
+      background: white;
+      padding: 10px;
+      position: relative;
+
+      .panel_header {
+        border-bottom: 2px solid #108ee9;
+        margin-bottom: 12px;
+        padding: 7px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .panel_extra {
+        position: absolute;
+        top: 16px;
+        right: 24px;
+      }
     }
   }
   
@@ -68,25 +88,7 @@ html, body {
       padding: 15px 0;
       margin: 0 auto;
       flex: 1;
-      background: white;
-
-      .panel {
-        background: white;
-        position: relative;
-        padding: 10px;
-
-        .panel_header {
-          border-bottom: 2px solid #108ee9;
-          margin-bottom: 15px;
-          padding: 10px;
-        }
-
-        .panel_extra {
-          position: absolute;
-          top: 16px;
-          right: 24px;
-        }
-      }
+      background: white;  
     }
 
     .footer {
@@ -183,29 +185,27 @@ html, body {
         background: #fff;
         margin: 10px 10px 0;
 
-        .panel {
-          background: white;
-          padding: 10px;
-          position: relative;
+        .ant-card {
+          &.ant-card-wider-padding {
+            .ant-card-head {
+              padding: 0 20px;
+            }
 
-          .panel_header {
-            border-bottom: 2px solid #108ee9;
-            margin-bottom: 15px;
-            padding: 10px;
-            font-size: 18px;
-            font-weight: 600;
+            .ant-card-body {
+              padding: 15px 20px;
+            }
           }
 
-          .panel_extra {
-            position: absolute;
-            top: 16px;
-            right: 24px;
+          .ant-card-head-title {
+            padding: 10px 0;
+          }
+
+          .ant-card-extra {
+            padding: 12px 0;
           }
         }
         
-        .ant-card-head-title {
-          padding: 12px 0;
-        }
+
       }
 
       .footer {

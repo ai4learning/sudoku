@@ -27,7 +27,7 @@ export default class Class extends React.Component {
     })
     fetch({
       url: '/api/Ajax/AjaxGetClassList',
-      method: 'post',
+      method: 'get',
       type: 'json'
     }).then(result => {
       this.setState({
