@@ -14,7 +14,9 @@ import com.goldfish.vo.exam.*;
 import com.goldfish.domain.Paper;
 import com.goldfish.service.PaperService;
 import com.goldfish.service.QuestionService;
+import com.goldfish.web.base.BaseController;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +29,9 @@ import java.util.concurrent.*;
 /**
  * Created by John on 2018/5/20 0020.
  */
-public class AjaxExamController extends AjaxErrorBookController{
+@Controller
+@RequestMapping("/api/Ajax")
+public class AjaxExamController extends BaseController {
 
     /**
      * 单元测试每种题型都是10个题目

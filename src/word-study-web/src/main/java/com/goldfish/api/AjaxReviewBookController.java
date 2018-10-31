@@ -2,6 +2,7 @@ package com.goldfish.api;
 
 import com.goldfish.common.CommonResult;
 import com.goldfish.web.base.BaseController;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +13,9 @@ import java.util.Map;
 /**
  * Created by John on 2018/5/20 0020.
  */
-public class AjaxReviewBookController extends AjaxCourseController {
+@Controller
+@RequestMapping("/api/Ajax")
+public class AjaxReviewBookController extends BaseController {
 
 
     /**

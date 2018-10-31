@@ -10,6 +10,8 @@ import com.goldfish.vo.error.ErrorBookVO;
 import com.goldfish.vo.error.ErrorWordsVO;
 import com.goldfish.vo.unit.SaveUnitStudyVO;
 import com.goldfish.vo.unit.WordStudyDto;
+import com.goldfish.web.base.BaseController;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +24,9 @@ import java.util.Map;
 /**
  * Created by John on 2018/5/20 0020.
  */
-public class AjaxErrorBookController extends AjaxReviewBookController {
+@Controller
+@RequestMapping("/api/Ajax")
+public class AjaxErrorBookController extends BaseController {
 
     @Resource(name="selfWordsStudyService")
     private SelfWordsStudyService errorWordsStudyService;
