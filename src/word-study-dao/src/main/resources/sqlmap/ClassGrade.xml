@@ -44,16 +44,17 @@
     </sql>
 
     <insert id="addClassGrade" parameterType="com.goldfish.domain.ClassGrade">
-        insert into class_grade (id,teacherId,name,start,end,created,modified)
-        values(#{id},#{teacherId},#{name},#{start},#{end},#{created},#{modified})
-
+        insert into class_grade (teacherId,name,start,end,created,modified)
+        values(#{teacherId},#{name},#{start},#{end},#{created},#{modified})
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            select last_insert_id() as ID from dual
+        </selectKey>
     </insert>
 
 
     <update id="updateClassGrade" parameterType="com.goldfish.domain.ClassGrade" >
         update  class_grade
         <set>
-            <if test="id !=null"> id = #{id},</if>
             <if test="teacherId !=null"> teacherId = #{teacherId},</if>
             <if test="name !=null"> name = #{name},</if>
             <if test="start !=null"> start = #{start},</if>
