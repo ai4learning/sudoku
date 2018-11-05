@@ -206,7 +206,7 @@ public class AjaxTeacherController {
         for (int index=1;index<=batchAddStudentVO.getTotal();index++){
             User user = new User();
             user.setUserId(batchAddStudentVO.getPrefix()+String.valueOf(index));
-            user.setLessonIds(batchAddStudentVO.getLessonIds());
+            user.setLessonIds(String.join(",", batchAddStudentVO.getLessonIds()));
             user.setCurrentClass(Long.valueOf(batchAddStudentVO.getCurrentClass()));
             user.setPasswd(batchAddStudentVO.getPasswd());
             user.setRoleType(1);
@@ -216,6 +216,7 @@ public class AjaxTeacherController {
             user.setAuthorityLevel(1);
             user.setUserState(0);
             user.setLevel(1);
+            user.setState(1);
             userService.addUser(user);
         }
         return new BasicVO(true,CommonConstant.SUCCESS);

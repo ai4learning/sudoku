@@ -1,6 +1,6 @@
 package com.goldfish.vo.teacher;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import java.util.List;
 
 /**
  * @author zhangjingtao
@@ -9,7 +9,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 public class BatchAddStudentVO {
     private String prefix;
     private String passwd;
-    private String lessonIds;
+    private List<String> lessonIds;
     private String currentClass;
     private Integer total;
     private Integer userState;
@@ -18,12 +18,14 @@ public class BatchAddStudentVO {
     public BatchAddStudentVO() {
     }
 
-    public BatchAddStudentVO(String prefix, String passwd, String lessonIds, String currentClass, Integer total) {
+    public BatchAddStudentVO(String prefix, String passwd, List<String> lessonIds, String currentClass, Integer total, Integer userState, Integer state) {
         this.prefix = prefix;
         this.passwd = passwd;
         this.lessonIds = lessonIds;
         this.currentClass = currentClass;
         this.total = total;
+        this.userState = userState;
+        this.state = state;
     }
 
     public String getPrefix() {
@@ -42,11 +44,11 @@ public class BatchAddStudentVO {
         this.passwd = password;
     }
 
-    public String getLessonIds() {
+    public List<String> getLessonIds() {
         return lessonIds;
     }
 
-    public void setLessonIds(String lessonIds) {
+    public void setLessonIds(List<String> lessonIds) {
         this.lessonIds = lessonIds;
     }
 
@@ -86,10 +88,12 @@ public class BatchAddStudentVO {
     public String toString() {
         return "BatchAddStudentVO{" +
                 "prefix='" + prefix + '\'' +
-                ", password='" + passwd + '\'' +
-                ", lessonIdList='" + lessonIds + '\'' +
+                ", passwd='" + passwd + '\'' +
+                ", lessonIds=" + lessonIds +
                 ", currentClass='" + currentClass + '\'' +
                 ", total=" + total +
+                ", userState=" + userState +
+                ", state=" + state +
                 '}';
     }
 }
