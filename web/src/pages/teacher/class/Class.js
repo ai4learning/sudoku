@@ -27,7 +27,7 @@ export default class Class extends React.Component {
     })
     fetch({
       url: '/api/Ajax/AjaxGetClassList',
-      method: 'get',
+      method: 'post',
       type: 'json'
     }).then(result => {
       this.setState({
@@ -45,6 +45,7 @@ export default class Class extends React.Component {
             <Table
               loading={this.state.loading}
               dataSource={this.state.list}
+              pagination={{ showTotal: (total) => `共 ${total} 条数据`, showQuickJumper: true, showSizeChanger: true, pageSizeOptions: [10, 20, 50, 100]}}
               columns={[
                 {
                   title: '班级编号',
@@ -141,7 +142,8 @@ export default class Class extends React.Component {
         url: url,
         method: 'post',
         type: 'json',
-        data: values,
+        contentType: 'application/json',
+        data: JSON.stringify(values)
         }).then(() => {
           hide()
           message.success(tip)

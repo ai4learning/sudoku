@@ -32,7 +32,7 @@ export default Form.create()(
                   rules: [{ required: true, message: '请输入用户名' }],
                   initialValue: isEdit ? data.userId : ''
                 })(
-                  <Input readonly={isEdit} />
+                  <Input disabled={isEdit} />
                 )
               }
             </Form.Item>
@@ -84,12 +84,12 @@ export default Form.create()(
               {
                 getFieldDecorator('currentClass', {
                   rules: [{ required: true, message: '请选择当前班级' }],
-                  initialValue: isEdit ? data.currentClass : undefined
+                  initialValue: isEdit ? data.currentClass+'' : undefined
                 })(
                   <Select>
                     {
                       Object.keys(classMap).map(item => {
-                        return <Select.Option key={item} value={item}>{classMap[item].name}</Select.Option>
+                        return <Select.Option key={item+''} value={item+''}>{classMap[item].name}</Select.Option>
                       })
                     }
                   </Select>

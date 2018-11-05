@@ -2,7 +2,7 @@ import React from 'react'
 import {Modal, Form, Input, Select} from 'antd'
 
 export default Form.create()(
-  class BatchModalForm extends React.Component {
+  class BatchStudentModalForm extends React.Component {
     constructor(props) {
       super(props)
     }
@@ -52,7 +52,7 @@ export default Form.create()(
             </Form.Item>
             <Form.Item {...formItemLayout} label='关联课程'>
               {
-                getFieldDecorator('lesson_ids', {})(
+                getFieldDecorator('lessonIds', {})(
                   <Select mode='multiple'>
                     {
                       Object.keys(courseMap).map(item => {
@@ -65,7 +65,9 @@ export default Form.create()(
             </Form.Item>
             <Form.Item {...formItemLayout} label='当前班级'>
               {
-                getFieldDecorator('current_class', {})(
+                getFieldDecorator('currentClass', {
+                  rules: [{ required: true, message: '请选择当前班级' }],
+                })(
                   <Select>
                     {
                       Object.keys(classMap).map(item => {
@@ -78,7 +80,9 @@ export default Form.create()(
             </Form.Item>
             <Form.Item {...formItemLayout} label='用户状态'>
               {
-                getFieldDecorator('user_state', {})(
+                getFieldDecorator('userState', {
+                  rules: [{ required: true, message: '请选择当前用户状态' }],
+                })(
                   <Select>
                     {
                       Object.keys(userStateMap).map(item => {
@@ -91,7 +95,9 @@ export default Form.create()(
             </Form.Item>
             <Form.Item {...formItemLayout} label='状态'>
               {
-                getFieldDecorator('state', {})(
+                getFieldDecorator('state', {
+                  rules: [{ required: true, message: '请选择状态' }],
+                })(
                   <Select>
                     {
                       Object.keys(stateMap).map(item => {

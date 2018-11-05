@@ -1,9 +1,11 @@
 import React from 'react'
-import { Table, Card, Button, Divider, Modal, Tag} from 'antd'
+import { Table, Card, Button, Divider, Modal, Tag, message} from 'antd'
 import Panel from '@components/Panel'
 import fetch from '@common/fetch'
 import StudentModalForm from './module/StudentModalForm'
-import BatchModalForm from './module/BatchModalForm'
+import BatchStudentModalForm from './module/BatchStudentModalForm'
+import StudentSearchForm from './module/StudentSearchForm'
+import BatchCourseModalForm from './module/BatchCourseModalForm'
 
 export default class Student extends React.Component {
   constructor(props) {
@@ -25,11 +27,18 @@ export default class Student extends React.Component {
     loading: false,
     isStudentModalFormVisible: false,
     isStudentModalFormEdit: false,
-    isBatchModalFormVisible: false,
+    isBatchStudentModalFormVisible: false,
+    isBatchCourseModalFormVisible: false,
     list: [],
     studentItem: {},
     courseMap: {},
-    classMap: {}
+    classMap: {},
+    searchData: {
+      userId: '',
+      currentClass: '',
+      userState: '',
+      state: ''
+    }
   }
 
   componentWillMount() {
@@ -38,14 +47,17 @@ export default class Student extends React.Component {
     this.getStudentData()
   }
 
-  getStudentData = () => {
+  getStudentData = (data = {}) => {
+    let searchData = Object.assign({}, this.state.searchData, data)
     this.setState({
       loading: true
     })
     fetch({
       url: '/api/Ajax/AjaxGetStudents',
-      method: 'get',
-      type: 'json'
+      method: 'post',
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(searchData)
     }).then(result => {
       this.setState({
         list: result.data || [],
@@ -57,7 +69,7 @@ export default class Student extends React.Component {
   getClassData = () => {
     fetch({
       url: '/api/Ajax/AjaxGetClassList',
-      method: 'get',
+      method: 'post',
       type: 'json'
     }).then(result => {
       let classMap = {}
@@ -73,12 +85,12 @@ export default class Student extends React.Component {
   getCourseData = () => {
     fetch({
       url: '/api/Ajax/AjaxGetCourses',
-      method: 'get',
+      method: 'post',
       type: 'json'
     }).then(result => {
       let courseMap = {}
       ;(result.data || []).forEach(item => {
-        courseMap[item.id] = item
+        courseMap[item.bookNumber] = item
       })
       this.setState({
         courseMap: courseMap
@@ -90,18 +102,30 @@ export default class Student extends React.Component {
     return (
       <div className="page_teacher_student">
         <Panel title="学生管理">
+          <Card title='查询条件'>
+            <StudentSearchForm
+              data={this.state.searchData}
+              classMap={this.state.classMap}
+              userStateMap={this.userStateMap}
+              stateMap={this.stateMap}
+              onSearch={this.getStudentData}
+              >
+            </StudentSearchForm>
+          </Card>
           <Card
             title='学生列表'
             extra={
               <span>
                 <Button type='primary' size='small' onClick={() => this.showStudentModalForm(false)}>学生新增</Button>
-                <Button type='primary' size='small' onClick={this.showBatchModalForm} style={{marginLeft: '5px'}}>批量新增</Button>
+                <Button type='primary' size='small' onClick={this.showBatchStudentModalForm} style={{marginLeft: '5px'}}>批量新增</Button>
+                <Button type='primary' size='small' onClick={this.showBatchCourseModalForm} style={{marginLeft: '5px'}}>批量关联</Button>
               </span>
             }
             >
             <Table
               loading={this.state.loading}
               dataSource={this.state.list}
+              pagination={{ showTotal: (total) => `共 ${total} 条数据`, showQuickJumper: true, showSizeChanger: true, pageSizeOptions: [10, 20, 50, 100] }}
               columns={[
                 {
                   title: '用户名',
@@ -171,8 +195,6 @@ export default class Student extends React.Component {
                     return (
                       <span>
                         <a href='javascript:;' onClick={() => this.showStudentModalForm(true, record)}>编辑</a>
-                        <Divider type='vertical'></Divider>
-                        <a href='javascript:;' onClick={() => this.handleDeleteStudent(record)}>删除</a>
                       </span>
                     )
                   }
@@ -194,17 +216,26 @@ export default class Student extends React.Component {
             ref={this.studentModalFormRef}
             >
           </StudentModalForm>
-          <BatchModalForm
-            visible={this.state.isBatchModalFormVisible}
-            onOk={() => this.handleBatchModalForm(true)}
-            onCancel={() => this.handleBatchModalForm(false)}
+          <BatchStudentModalForm
+            visible={this.state.isBatchStudentModalFormVisible}
+            onOk={() => this.handleBatchStudentModalForm(true)}
+            onCancel={() => this.handleBatchStudentModalForm(false)}
             courseMap={this.state.courseMap}
             classMap={this.state.classMap}
             userStateMap={this.userStateMap}
             stateMap={this.stateMap}
-            ref={this.batchModalFormRef}
+            ref={this.batchStudentModalRef}
             >
-          </BatchModalForm>
+          </BatchStudentModalForm>
+          <BatchCourseModalForm
+            visible={this.state.isBatchCourseModalFormVisible}
+            onOk={() => this.handleBatchCourseModalForm(true)}
+            onCancel={() => this.handleBatchCourseModalForm(false)}
+            courseMap={this.state.courseMap}
+            classMap={this.state.classMap}
+            ref={this.batchCourseModalRef}
+            >
+          </BatchCourseModalForm>
         </Panel>
       </div>
     )
@@ -244,9 +275,10 @@ export default class Student extends React.Component {
       }
       fetch({
         url: url,
-        method: 'get',
+        method: 'post',
         type: 'json',
-        data: values
+        contentType: 'application/json',
+        data: JSON.stringify(values)
       }).then(() => {
         hide()
         message.success(tip)
@@ -265,27 +297,71 @@ export default class Student extends React.Component {
     })
   }
 
-  batchModalFormRef = (form) => {
-    this.batchForm = form
+  batchStudentModalRef = (form) => {
+    this.batchStudentForm = form
   }
 
-  showBatchModalForm = () => {
+  showBatchStudentModalForm = () => {
     this.setState({
-      isBatchModalFormVisible: true
+      isBatchStudentModalFormVisible: true
     })
   }
 
-  handleBatchModalForm = (f) => {
+  handleBatchStudentModalForm = (f) => {
     let hide = () => {
       this.setState({
-        isBatchModalFormVisible: false
+        isBatchStudentModalFormVisible: false
       })
     }
     if(!f) return hide()
-    this.batchForm.validateFields((err, valuse) => {
+    this.batchStudentForm.validateFields((err, values) => {
       if(err) return
-      // TODO 批量新增
-      hide()
+      fetch({
+        url: '/api/Ajax/AjaxBatchAddStudent',
+        method: 'post',
+        type: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(values)
+      }).then(() => {
+        hide()
+        message.success('批量添加成功')
+        this.getStudentData()
+      })
+    })
+  }
+
+  batchCourseModalRef = (form) => {
+    this.batchCourseForm = form
+  }
+
+  showBatchCourseModalForm = () => {
+    this.setState({
+      isBatchCourseModalFormVisible: true
+    })
+  }
+
+  handleBatchCourseModalForm = (f) => {
+    let hide = () => {
+      this.setState({
+        isBatchCourseModalFormVisible: false
+      })
+    }
+    if (!f) return hide()
+    this.batchCourseForm.validateFields((err, values) => {
+      if (err) return
+      values['userIds'] = values['userIds'].join(',')
+      values['lessonIds'] = values['lessonIds'].join(',')
+      fetch({
+        url: '/api/Ajax/AjaxBatchAssignCourse',
+        method: 'post',
+        type: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(values)
+      }).then(() => {
+        hide()
+        message.success('批量添加成功')
+        this.getStudentData()
+      })
     })
   }
 }

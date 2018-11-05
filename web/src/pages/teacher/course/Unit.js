@@ -30,7 +30,7 @@ export default class Unit extends React.Component {
 
   componentWillMount() {
     this.getCourseData()
-    // this.getUnitData()
+    this.getUnitData()
   }
 
   getUnitData = (data = {}) => {
@@ -44,8 +44,9 @@ export default class Unit extends React.Component {
       type: 'json',
       data: searchData
     }).then(result => {
+      console.log(result)
       this.setState({
-        list: (((result.data||{}.books||{})[0])||{}).CourseUnits || [],
+        list: ((result.books||[])[0]||{}).CourseUnits || [],
         loading: false
       })
     })

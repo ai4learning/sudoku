@@ -40,13 +40,13 @@ export default class Word extends React.Component {
       loading: true
     })
     fetch({
-      url: '/api/Ajax/AjaxLoadCourse',
+      url: '/api/Ajax/AjaxGetUnit',
       method: 'post',
       type: 'json',
       data: searchData
     }).then(result => {
       this.setState({
-        list: (((result.data || {}.books || {})[0]) || {}).CourseUnits || [],
+        list: result.data || [],
         loading: false
       })
     })
@@ -55,7 +55,7 @@ export default class Word extends React.Component {
   getCourseData = () => {
     fetch({
       url: '/api/Ajax/AjaxGetCourses',
-      method: 'get',
+      method: 'post',
       type: 'json'
     }).then(result => {
       let courseMap = {}
@@ -84,11 +84,32 @@ export default class Word extends React.Component {
             <Table
               loading={this.state.loading}
               dataSource={this.state.list}
+              pagination={{ showTotal: (total) => `共 ${total} 条数据`, showQuickJumper: true, showSizeChanger: true, pageSizeOptions: [10, 20, 50, 100] }}
               columns={[
                 {
-                  title: '单词编号',
+                  title: '编号',
                   key: 'Id',
                   dataIndex: 'Id'
+                },
+                {
+                  title: '拼写',
+                  key: 'spelling',
+                  dataIndex: 'spelling'
+                },
+                {
+                  title: '释义',
+                  key: 'meaning',
+                  dataIndex: 'meaning'
+                },
+                {
+                  title: '发音',
+                  key: 'soundMarkUs',
+                  dataIndex: 'soundMarkUs'
+                },
+                {
+                  title: '单词Code',
+                  key: 'vocCode',
+                  dataIndex: 'vocCode'
                 }
               ]}
             >

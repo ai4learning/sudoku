@@ -2,6 +2,7 @@ import React from 'react'
 import { Table, Card } from 'antd'
 import Panel from '@components/Panel'
 import fetch from '@common/fetch'
+import CourseSearchForm from './module/CourseSearchForm'
 
 export default class Course extends React.Component {
   constructor(props) {
@@ -10,17 +11,27 @@ export default class Course extends React.Component {
 
   state = {
     list: [],
-    loading: false
+    loading: false,
+    searchData: {
+      bookName: ''
+    }
   }
 
   componentWillMount() {
+    this.getCourseData()
+  }
+
+  getCourseData = (data = {}) => {
+    let searchData = Object.assign({}, this.state.searchData, data)
     this.setState({
       loading: true
     })
     fetch({
       url: '/api/Ajax/AjaxGetCourses',
-      method: 'get',
-      type: 'json'
+      method: 'post',
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(searchData)
     }).then(result => {
       this.setState({
         list: result.data || [],
@@ -37,10 +48,18 @@ export default class Course extends React.Component {
     return (
       <div className="page_teacher_course">
         <Panel title="课程管理">
+          <Card title='查询条件'>
+            <CourseSearchForm
+              data={this.state.searchData}
+              onSearch={this.getCourseData}
+              >
+            </CourseSearchForm>
+          </Card>
           <Card title='课程列表'>
             <Table
               loading={this.state.loading}
               dataSource={this.state.list}
+              pagination={{ showTotal: (total) => `共 ${total} 条数据`, showQuickJumper: true, showSizeChanger: true, pageSizeOptions: [10, 20, 50, 100] }}
               columns={[
                 {
                   title: '课程编号',
