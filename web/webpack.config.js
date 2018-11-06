@@ -38,6 +38,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: path.join(__dirname, 'src'),
+        exclude: /node_modules/,
         loader: 'babel-loader?cacheDirectory',
       },
       {
@@ -82,8 +83,6 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, './'),
     publicPath: '/dist/',
-    compress: true,
-
     proxy: [
       {
         context: ['/api', '/login'],
