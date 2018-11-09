@@ -1,5 +1,6 @@
 package com.goldfish.manager.impl;
 
+import com.goldfish.dao.cache.redis.RedisUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -22,28 +23,37 @@ public class ExamManagerImpl implements ExamManager {
     @Resource(name = "examDao")
     private ExamDao examDao;
 
+    @Resource(name = "redisUtils")
+    private RedisUtils redisUtils;
 
     @Override
     public Exam addExam(Exam exam) {
         int i = examDao.addExam(exam);
+        redisUtils.setObject(exam.getClass().getSimpleName() + ":" + exam.getId(), exam);
         return exam;
     }
 
     @Override
     public void updateExam(Exam exam) {
+        redisUtils.setObject(exam.getClass().getSimpleName() + ":" + exam.getId(), exam);
         examDao.updateExam(exam);
     }
 
 
     @Override
     public void deleteExam(Long id) {
+        redisUtils.deleteByKey(Exam.class.getSimpleName() + ":" + id);
         examDao.deleteExam(id);
     }
 
 
     @Override
     public Exam getExamById(Long id) {
-        return examDao.getExamById(id);
+        Exam exam = redisUtils.getObject(Exam.class.getSimpleName() + ":" + id, Exam.class);
+        if (exam == null) {
+            return examDao.getExamById(id);
+        }
+        return exam;
     }
 
 
