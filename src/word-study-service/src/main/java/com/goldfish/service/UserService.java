@@ -86,6 +86,6 @@ public interface UserService {
      * @return
      */
     public int count(PageQuery pageQuery);
-	
-	
+
+    public CommonResult<List<User>> getUserLike(PageQuery pageQuery);
 }

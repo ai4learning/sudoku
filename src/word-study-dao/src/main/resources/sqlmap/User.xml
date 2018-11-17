@@ -58,10 +58,24 @@
 		<if test="parentId != null"> AND parent_id = #{parentId}</if>
 		<if test="userState != null"> AND user_state = #{userState}</if>
 		<if test="state != null"> AND state = #{state}</if>
-		
+        <if test="currentClass != null"> AND current_class = #{currentClass}</if>
 		</where>
 	 	
 	</sql>
+
+    <!-- 可以包含bean里面没有的字段-->
+    <sql id="MAP-LIKE-SQL">
+        <where>
+            <if test="id != null"> AND id like CONCAT('%',#{id},'%')</if>
+            <if test="userId != null"> AND user_id like CONCAT('%',#{userId},'%')</if>
+            <if test="nikeName != null"> AND nike_name like CONCAT('%',#{nikeName},'%')</if>
+            <if test="roleType != null"> AND role_type like CONCAT('%',#{roleType},'%')</if>
+            <if test="parentId != null"> AND parent_id like CONCAT('%',#{parentId},'%')</if>
+            <if test="userState != null"> AND user_state like CONCAT('%',#{userState},'%')</if>
+            <if test="state != null"> AND state like CONCAT('%',#{state},'%')</if>
+            <if test="currentClass != null"> AND current_class like CONCAT('%',#{currentClass},'%')</if>
+        </where>
+    </sql>
 	
 	<sql id="ORDER-SQL">
 	 order by id desc
@@ -151,7 +165,9 @@
 		
               <include refid="MAP-COMMON-SQL" />
 	</select>
-	
 
+    <select id="getUserLike" resultMap="User-Map" parameterType="java.util.HashMap">
+        select <include refid="All-FIELDS"/> FROM user <include refid="MAP-LIKE-SQL" />
+    </select>
 
 </mapper>

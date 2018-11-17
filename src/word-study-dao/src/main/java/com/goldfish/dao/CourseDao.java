@@ -90,4 +90,5 @@ public interface CourseDao {
      */
     public int count(Map<String,Object> paramMap);
 
+    public List<Course> getCourseLikeBookName(String bookNamePattern);
 }

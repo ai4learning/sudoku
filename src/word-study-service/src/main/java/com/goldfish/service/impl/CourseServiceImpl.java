@@ -150,8 +150,22 @@ public class CourseServiceImpl implements CourseService {
 		return courseManager.count(pageQuery);
 	}
 
+    @Override
+    public CommonResult<List<Course>> getCourseLikeBookName(String bookNamePattern) {
+        CommonResult<List<Course>> result = new CommonResult<List<Course>>();
+        try {
+            List<Course> list = courseManager.getCourseLikeBookName(bookNamePattern);
+            result.addDefaultModel("list", list);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            logger.error("取得 课程失败", e);
+            result.setSuccess(false);
+        }
+        return result;
+    }
 
-	/******* getter and setter ***/
+
+    /******* getter and setter ***/
 	public CourseManager getCourseManager() {
 		return courseManager;
 	}

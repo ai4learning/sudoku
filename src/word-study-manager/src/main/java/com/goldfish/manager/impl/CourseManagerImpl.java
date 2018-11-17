@@ -43,8 +43,8 @@ public class CourseManagerImpl implements CourseManager {
     public Course getCourseById(Integer id) {
 		return courseDao.getCourseById(id);
     }
-    
-   
+
+
 
 
     	
@@ -69,6 +69,11 @@ public class CourseManagerImpl implements CourseManager {
     @Override
     public int count(PageQuery pageQuery) {
 		return courseDao.count( pageQuery.getParams());
+    }
+
+    @Override
+    public List<Course> getCourseLikeBookName(String bookNamePattern) {
+        return courseDao.getCourseLikeBookName(bookNamePattern);
     }
 
     /******* getter and setter ***/

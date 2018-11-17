@@ -90,4 +90,5 @@ public interface UserDao {
      */
     public int count(Map<String,Object> paramMap);
 
+    public List<User> getUserLike(Map<String,Object> paramMap);
 }

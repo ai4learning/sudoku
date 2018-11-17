@@ -150,7 +150,8 @@
 		
               <include refid="MAP-COMMON-SQL" />
 	</select>
-	
 
-
+    <select id="getCourseLikeBookName" resultMap="Course-Map" parameterType="java.lang.String">
+        SELECT <include refid="All-FIELDS"/> FROM course WHERE book_name like CONCAT('%',#{bookName},'%')
+    </select>
 </mapper>

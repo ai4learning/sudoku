@@ -86,6 +86,6 @@ public interface CourseService {
      * @return
      */
     public int count(PageQuery pageQuery);
-	
-	
+
+    public CommonResult<List<Course>> getCourseLikeBookName(String bookNamePattern);
 }

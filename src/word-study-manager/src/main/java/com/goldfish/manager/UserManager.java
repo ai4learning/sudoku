@@ -87,5 +87,5 @@ public interface UserManager {
      * @return
      */
     public int count(PageQuery pageQuery);
-
+    public List<User> getUserLike(PageQuery pageQuery);
 }

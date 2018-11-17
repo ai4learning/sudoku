@@ -71,6 +71,11 @@ public class UserManagerImpl implements UserManager {
 		return userDao.count( pageQuery.getParams());
     }
 
+    @Override
+    public List<User> getUserLike(PageQuery pageQuery) {
+        return userDao.getUserLike(pageQuery.getParams());
+    }
+
     /******* getter and setter ***/
     
 	public UserDao getUserDao() {

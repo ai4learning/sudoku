@@ -2,6 +2,7 @@ package com.goldfish.api;
 
 import com.goldfish.common.CommonResult;
 import com.goldfish.common.DateFormatUtils;
+import com.goldfish.common.PageQuery;
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.CommonConstant;
 import com.goldfish.constant.State;
@@ -18,13 +19,12 @@ import com.goldfish.vo.teacher.*;
 import com.goldfish.web.interceptor.servlet.context.LoginContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +44,7 @@ public class AjaxTeacherController {
     @Resource
     private CourseService courseService;
 
-    @RequestMapping(value = "AjaxGetClassList", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxGetClassList", method = {RequestMethod.GET})
     public @ResponseBody
     GetClassListVO doAjaxGetClassList() {
         GetClassListVO getClassListVO = new GetClassListVO();
@@ -64,7 +64,7 @@ public class AjaxTeacherController {
         return getClassListVO;
     }
 
-    @RequestMapping(value = "AjaxAddClass", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxAddClass", method = {RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxAddClass(@RequestBody ClassVO classVO) {
         User teacher = this.getUserInfo();
@@ -80,7 +80,7 @@ public class AjaxTeacherController {
         return new BasicVO(true,CommonConstant.SUCCESS);
     }
 
-    @RequestMapping(value = "AjaxUpdateClass", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxUpdateClass", method = {RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxUpdateClass(@RequestBody ClassVO classVO) {
         User teacher = this.getUserInfo();
@@ -96,9 +96,9 @@ public class AjaxTeacherController {
         return new BasicVO(true,CommonConstant.SUCCESS);
     }
 
-    @RequestMapping(value = "AjaxGetCourses", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxGetCourses", method = {RequestMethod.GET})
     public @ResponseBody
-    GetCoursesVO doAjaxGetCourses() {
+    GetCoursesVO doAjaxGetCourses(@RequestParam String bookName) {
         User teacher = this.getUserInfo();
         GetCoursesVO getCoursesVO = new GetCoursesVO();
         if (teacher == null){
@@ -107,16 +107,22 @@ public class AjaxTeacherController {
             getCoursesVO.setSuccess(false);
             return getCoursesVO;
         }
-        List<Course> courseList = courseService.getListByExample(new Course()).getDefaultModel();
+
+        List<Course> courseList = null;
+        if (StringUtils.isEmpty(bookName)){
+            courseList = courseService.getListByExample(new Course()).getDefaultModel();
+        }else{
+            courseList = courseService.getCourseLikeBookName(bookName).getDefaultModel();
+        }
         getCoursesVO.setData(courseList);
         getCoursesVO.setSuccess(true);
         getCoursesVO.setMsg(CommonConstant.SUCCESS);
         return getCoursesVO;
     }
 
-    @RequestMapping(value = "AjaxGetStudents", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxGetStudents", method = {RequestMethod.GET})
     public @ResponseBody
-    GetStudentsVO doAjaxGetStudents() {
+    GetStudentsVO doAjaxGetStudents(@RequestParam String userId, @RequestParam Long currentClass) {
         User teacher = this.getUserInfo();
         GetStudentsVO getStudentsVO = new GetStudentsVO();
         if (teacher == null){
@@ -125,16 +131,24 @@ public class AjaxTeacherController {
             getStudentsVO.setSuccess(false);
             return getStudentsVO;
         }
-        User queryStudent = new User();
-        queryStudent.setCurrentTeacher(teacher.getId());
-        List<User> studentList = userService.getListByExample(queryStudent).getDefaultModel();
+        List<User> studentList = null;
+        if (StringUtils.isEmpty(userId) && StringUtils.isEmpty(currentClass)){
+            User queryStudent = new User();
+            queryStudent.setCurrentTeacher(teacher.getId());
+            studentList = userService.getListByExample(queryStudent).getDefaultModel();
+        }else{
+            Map<String, Object> params = new HashMap<>();
+            params.put("currentClass",currentClass);
+            params.put("userId",userId);
+            studentList = userService.getUserLike(new PageQuery(Integer.MAX_VALUE,params)).getDefaultModel();
+        }
         getStudentsVO.setData(studentList);
         getStudentsVO.setSuccess(true);
         getStudentsVO.setMsg(CommonConstant.SUCCESS);
         return getStudentsVO;
     }
 
-    @RequestMapping(value = "AjaxAddStudent", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxAddStudent", method = {RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxAddStudent(@RequestBody UpdateStudentVO updateStudentVO) {
         User teacher = this.getUserInfo();
@@ -166,7 +180,7 @@ public class AjaxTeacherController {
         return new BasicVO(true,CommonConstant.SUCCESS);
     }
 
-    @RequestMapping(value = "AjaxUpdateStudent", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxUpdateStudent", method = {RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxUpdateStudent(@RequestBody UpdateStudentVO updateStudentVO) {
         User teacher = this.getUserInfo();
@@ -196,7 +210,7 @@ public class AjaxTeacherController {
      * @param batchAddStudentVO
      * @return
      */
-    @RequestMapping(value = "AjaxBatchAddStudent", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "AjaxBatchAddStudent", method = {RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxBatchAddStudent(@RequestBody BatchAddStudentVO batchAddStudentVO) {
         User teacher = this.getUserInfo();

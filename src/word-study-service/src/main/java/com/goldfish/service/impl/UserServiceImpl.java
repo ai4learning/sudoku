@@ -285,8 +285,23 @@ public class UserServiceImpl implements UserService {
 		return userManager.count(pageQuery);
 	}
 
+    @Override
+    public CommonResult<List<User>> getUserLike(PageQuery pageQuery) {
+        CommonResult<List<User>> result = new CommonResult<List<User>>();
+        try {
+            List<User> list = userManager.getUserLike(pageQuery);
+            result.addDefaultModel("list", list);
+            result.addModel("pageQuery", pageQuery);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            logger.error("获取模糊查询用户失败", e);
+            result.setSuccess(false);
+        }
+        return result;
+    }
 
-	/******* getter and setter ***/
+
+    /******* getter and setter ***/
 	public UserManager getUserManager() {
 		return userManager;
 	}

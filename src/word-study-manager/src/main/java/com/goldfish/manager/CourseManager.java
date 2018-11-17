@@ -88,4 +88,5 @@ public interface CourseManager {
      */
     public int count(PageQuery pageQuery);
 
+    public List<Course> getCourseLikeBookName(String bookNamePattern);
 }
