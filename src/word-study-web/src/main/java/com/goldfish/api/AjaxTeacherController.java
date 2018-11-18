@@ -33,7 +33,7 @@ import java.util.Map;
  * @date 2018/10/19 0019.
  */
 @Controller
-@RequestMapping("/api/Ajax")
+@RequestMapping("/api/teacher")
 public class AjaxTeacherController {
     @Resource(name="classGradeService")
     private ClassGradeService classGradeService;

@@ -53,11 +53,10 @@ export default class Student extends React.Component {
       loading: true
     })
     fetch({
-      url: '/api/Ajax/AjaxGetStudents',
-      method: 'post',
+      url: '/api/teacher/AjaxGetStudents',
+      method: 'get',
       type: 'json',
-      contentType: 'application/json',
-      data: JSON.stringify(searchData)
+      data: searchData
     }).then(result => {
       this.setState({
         list: result.data || [],
@@ -68,8 +67,8 @@ export default class Student extends React.Component {
 
   getClassData = () => {
     fetch({
-      url: '/api/Ajax/AjaxGetClassList',
-      method: 'post',
+      url: '/api/teacher/AjaxGetClassList',
+      method: 'get',
       type: 'json'
     }).then(result => {
       let classMap = {}
@@ -84,8 +83,8 @@ export default class Student extends React.Component {
 
   getCourseData = () => {
     fetch({
-      url: '/api/Ajax/AjaxGetCourses',
-      method: 'post',
+      url: '/api/teacher/AjaxGetCourses',
+      method: 'get',
       type: 'json'
     }).then(result => {
       let courseMap = {}
@@ -267,10 +266,10 @@ export default class Student extends React.Component {
       let url = ''
       let tip = ''
       if(this.state.isStudentModalFormEdit) {
-        url = '/api/Ajax/AjaxUpdateStudent'
+        url = '/api/teacher/AjaxUpdateStudent'
         tip = '修改成功'
       } else {
-        url = '/api/Ajax/AjaxAddStudent'
+        url = '/api/teacher/AjaxAddStudent'
         tip = '新增成功'
       }
       fetch({
@@ -317,7 +316,7 @@ export default class Student extends React.Component {
     this.batchStudentForm.validateFields((err, values) => {
       if(err) return
       fetch({
-        url: '/api/Ajax/AjaxBatchAddStudent',
+        url: '/api/teacher/AjaxBatchAddStudent',
         method: 'post',
         type: 'json',
         contentType: 'application/json',
@@ -352,7 +351,7 @@ export default class Student extends React.Component {
       values['userIds'] = values['userIds'].join(',')
       values['lessonIds'] = values['lessonIds'].join(',')
       fetch({
-        url: '/api/Ajax/AjaxBatchAssignCourse',
+        url: '/api/teacher/AjaxBatchAssignCourse',
         method: 'post',
         type: 'json',
         contentType: 'application/json',

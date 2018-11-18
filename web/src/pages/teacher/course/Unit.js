@@ -54,7 +54,7 @@ export default class Unit extends React.Component {
 
   getCourseData = () => {
     fetch({
-      url: '/api/Ajax/AjaxGetCourses',
+      url: '/api/teacher/AjaxGetCourses',
       method: 'get',
       type: 'json'
     }).then(result => {

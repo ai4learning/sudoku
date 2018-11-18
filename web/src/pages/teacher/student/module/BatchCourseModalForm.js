@@ -82,11 +82,10 @@ export default Form.create()(
         currentClass: value
       }
       fetch({
-        url: '/api/Ajax/AjaxGetStudents',
-        method: 'post',
+        url: '/api/teacher/AjaxGetStudents',
+        method: 'get',
         type: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify(data)
+        data: data
       }).then(result => {
         this.setState({
           students: result.data

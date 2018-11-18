@@ -27,11 +27,10 @@ export default class Course extends React.Component {
       loading: true
     })
     fetch({
-      url: '/api/Ajax/AjaxGetCourses',
-      method: 'post',
+      url: '/api/teacher/AjaxGetCourses',
+      method: 'get',
       type: 'json',
-      contentType: 'application/json',
-      data: JSON.stringify(searchData)
+      data: searchData
     }).then(result => {
       this.setState({
         list: result.data || [],
