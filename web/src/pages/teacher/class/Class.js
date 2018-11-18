@@ -26,8 +26,8 @@ export default class Class extends React.Component {
       loading: true
     })
     fetch({
-      url: '/api/Ajax/AjaxGetClassList',
-      method: 'post',
+      url: '/api/teacher/AjaxGetClassList',
+      method: 'get',
       type: 'json'
     }).then(result => {
       this.setState({
@@ -132,10 +132,10 @@ export default class Class extends React.Component {
       let tip = ''
 
       if(this.state.isClassModalFormEdit) {
-        url = '/api/Ajax/AjaxUpdateClass'
+        url = '/api/teacher/AjaxUpdateClass'
         tip = '修改成功'
       } else {
-        url = '/api/Ajax/AjaxAddClass'
+        url = '/api/teacher/AjaxAddClass'
         tip = '新增成功'
       }
       fetch({
@@ -158,7 +158,7 @@ export default class Class extends React.Component {
       content: '确定要删除该班级？',
       onOk: () => {
         fetch({
-          url: '/api/Ajax/AjaxDeleteClass',
+          url: '/api/teacher/AjaxDeleteClass',
           method: 'post',
           type: 'json'
         })

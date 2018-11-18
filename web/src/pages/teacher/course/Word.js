@@ -54,8 +54,8 @@ export default class Word extends React.Component {
 
   getCourseData = () => {
     fetch({
-      url: '/api/Ajax/AjaxGetCourses',
-      method: 'post',
+      url: '/api/teacher/AjaxGetCourses',
+      method: 'get',
       type: 'json'
     }).then(result => {
       let courseMap = {}
