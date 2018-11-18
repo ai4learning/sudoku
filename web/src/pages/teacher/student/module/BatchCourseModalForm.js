@@ -79,7 +79,10 @@ export default Form.create()(
 
     handleCurrentClassChange = (value) => {
       let data = {
-        currentClass: value
+        currentClass: value,
+        userId: '',
+        userState: '',
+        state: ''
       }
       fetch({
         url: '/api/teacher/AjaxGetStudents',
