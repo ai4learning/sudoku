@@ -63,4 +63,5 @@ public class CommonConstant {
 	public static final String PARAMETER_ERROR = "入参错误";
 	public static final String SUCCESS = "成功";
 	public static final String FAIL = "失败";
+	public static final String COMMA_SPLIT = ",";
 }

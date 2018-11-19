@@ -23,10 +23,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author zhangjingtao
@@ -49,7 +46,7 @@ public class AjaxTeacherController {
     GetClassListVO doAjaxGetClassList() {
         GetClassListVO getClassListVO = new GetClassListVO();
         User teacher = this.getUserInfo();
-        if (teacher == null){
+        if (teacher == null || teacher.getRoleType()==1){
             getClassListVO.setData(null);
             getClassListVO.setSuccess(false);
             getClassListVO.setMsg(CommonConstant.FAIL);
@@ -68,8 +65,8 @@ public class AjaxTeacherController {
     public @ResponseBody
     BasicVO doAjaxAddClass(@RequestBody ClassVO classVO) {
         User teacher = this.getUserInfo();
-        if (classVO == null || teacher == null){
-            return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
+        if (classVO == null || teacher == null || teacher.getRoleType()==1){
+            return new BasicVO(false, CommonConstant.FAIL);
         }
         ClassGrade classGrade = new ClassGrade();
         classGrade.setTeacherId(teacher.getId());
@@ -84,8 +81,8 @@ public class AjaxTeacherController {
     public @ResponseBody
     BasicVO doAjaxUpdateClass(@RequestBody ClassVO classVO) {
         User teacher = this.getUserInfo();
-        if (classVO == null || teacher == null){
-            return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
+        if (classVO == null || teacher == null || teacher.getRoleType()==1){
+            return new BasicVO(false, CommonConstant.FAIL);
         }
         ClassGrade classGrade = classGradeService.getClassGradeById(classVO.getId()).getDefaultModel();
         classGrade.setTeacherId(teacher.getId());
@@ -98,10 +95,10 @@ public class AjaxTeacherController {
 
     @RequestMapping(value = "AjaxGetCourses", method = {RequestMethod.GET})
     public @ResponseBody
-    GetCoursesVO doAjaxGetCourses(@RequestParam String bookName) {
+    GetCoursesVO doAjaxGetCourses(@RequestParam(required = false) String bookName) {
         User teacher = this.getUserInfo();
         GetCoursesVO getCoursesVO = new GetCoursesVO();
-        if (teacher == null){
+        if (teacher == null || teacher.getRoleType()==1){
             getCoursesVO.setData(null);
             getCoursesVO.setMsg(CommonConstant.FAIL);
             getCoursesVO.setSuccess(false);
@@ -122,17 +119,20 @@ public class AjaxTeacherController {
 
     @RequestMapping(value = "AjaxGetStudents", method = {RequestMethod.GET})
     public @ResponseBody
-    GetStudentsVO doAjaxGetStudents(@RequestParam String userId, @RequestParam Long currentClass) {
+    GetStudentsVO doAjaxGetStudents(@RequestParam(required = false) String userId,
+                                    @RequestParam(required = false) Long currentClass,
+                                    @RequestParam(required = false) Integer userState,
+                                    @RequestParam(required = false) Integer state) {
         User teacher = this.getUserInfo();
         GetStudentsVO getStudentsVO = new GetStudentsVO();
-        if (teacher == null){
+        if (teacher == null || teacher.getRoleType()==1){
             getStudentsVO.setData(null);
             getStudentsVO.setMsg(CommonConstant.FAIL);
             getStudentsVO.setSuccess(false);
             return getStudentsVO;
         }
         List<User> studentList = null;
-        if (StringUtils.isEmpty(userId) && StringUtils.isEmpty(currentClass)){
+        if (StringUtils.isEmpty(userId) && currentClass==null && userState==null && state==null){
             User queryStudent = new User();
             queryStudent.setCurrentTeacher(teacher.getId());
             studentList = userService.getListByExample(queryStudent).getDefaultModel();
@@ -140,6 +140,8 @@ public class AjaxTeacherController {
             Map<String, Object> params = new HashMap<>();
             params.put("currentClass",currentClass);
             params.put("userId",userId);
+            params.put("userState",userState);
+            params.put("state",state);
             studentList = userService.getUserLike(new PageQuery(Integer.MAX_VALUE,params)).getDefaultModel();
         }
         getStudentsVO.setData(studentList);
@@ -152,8 +154,8 @@ public class AjaxTeacherController {
     public @ResponseBody
     BasicVO doAjaxAddStudent(@RequestBody UpdateStudentVO updateStudentVO) {
         User teacher = this.getUserInfo();
-        if (updateStudentVO == null || teacher == null) {
-            return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
+        if (updateStudentVO == null || teacher == null || teacher.getRoleType()==1) {
+            return new BasicVO(false, CommonConstant.FAIL);
         }
         User user = new User();
         user.setUserId(updateStudentVO.getUserId());
@@ -184,14 +186,14 @@ public class AjaxTeacherController {
     public @ResponseBody
     BasicVO doAjaxUpdateStudent(@RequestBody UpdateStudentVO updateStudentVO) {
         User teacher = this.getUserInfo();
-        if (updateStudentVO == null || teacher == null){
-            return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
+        if (updateStudentVO == null || teacher == null || teacher.getRoleType()==1){
+            return new BasicVO(false, CommonConstant.FAIL);
         }
         User queryUser = new User();
         queryUser.setUserId(updateStudentVO.getUserId());
         User user = userService.getUnique(queryUser).getDefaultModel();
         if (user == null){
-            return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
+            return new BasicVO(false, CommonConstant.FAIL);
         }
         user.setPasswd(updateStudentVO.getPasswd());
         user.setUserCode(updateStudentVO.getUserCode());
@@ -214,8 +216,8 @@ public class AjaxTeacherController {
     public @ResponseBody
     BasicVO doAjaxBatchAddStudent(@RequestBody BatchAddStudentVO batchAddStudentVO) {
         User teacher = this.getUserInfo();
-        if (batchAddStudentVO == null || teacher == null){
-            return new BasicVO(false, CommonConstant.PARAMETER_ERROR);
+        if (batchAddStudentVO == null || teacher == null || teacher.getRoleType()==1){
+            return new BasicVO(false, CommonConstant.FAIL);
         }
         for (int index=1;index<=batchAddStudentVO.getTotal();index++){
             User user = new User();
@@ -289,5 +291,36 @@ public class AjaxTeacherController {
         result.addDefaultModel("UserId", loginRecord.getUserName());
         result.setSuccess(true);
         return result.getReturnMap();
+    }
+
+    @RequestMapping(value = "AjaxBatchAssignCourse", method = {RequestMethod.POST})
+    public @ResponseBody
+    BasicVO doAjaxBatchAssignCourse(@RequestBody BatchAssignCourseVO batchAssignCourseVO) {
+        User teacher = this.getUserInfo();
+        if (batchAssignCourseVO == null || !batchAssignCourseVO.isVaild() || teacher == null || teacher.getRoleType()==1){
+            return new BasicVO(false, CommonConstant.FAIL);
+        }
+
+        for (String userId : batchAssignCourseVO.getUserIds().split(CommonConstant.COMMA_SPLIT)){
+            //根据userId查询学生
+            User queryUser = new User();
+            queryUser.setUserId(userId);
+            User user = userService.getUnique(queryUser).getDefaultModel();
+            //增量更新学生课程
+            user = incrementAddStudentCourse(user,batchAssignCourseVO.getLessonIds());
+            userService.updateUser(user);
+        }
+        return new BasicVO(true,CommonConstant.SUCCESS);
+    }
+
+    private User incrementAddStudentCourse(User user,String incrementCourse){
+        HashSet<String> set = new HashSet<>();
+        Collections.addAll(set, incrementCourse.split(CommonConstant.COMMA_SPLIT));
+        if (!StringUtils.isEmpty(user.getLessonIds())){
+            Collections.addAll(set, user.getLessonIds().split(CommonConstant.COMMA_SPLIT));
+        }
+        String[] courses = set.toArray(new String[0]);
+        user.setLessonIds(String.join(",",courses));
+        return user;
     }
 }
