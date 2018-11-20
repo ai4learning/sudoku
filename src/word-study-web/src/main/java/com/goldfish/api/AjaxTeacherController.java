@@ -6,16 +6,14 @@ import com.goldfish.common.PageQuery;
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.CommonConstant;
 import com.goldfish.constant.State;
-import com.goldfish.domain.ClassGrade;
-import com.goldfish.domain.Course;
-import com.goldfish.domain.LoginRecord;
-import com.goldfish.domain.User;
-import com.goldfish.service.ClassGradeService;
-import com.goldfish.service.CourseService;
-import com.goldfish.service.LoginRecordService;
-import com.goldfish.service.UserService;
+import com.goldfish.domain.*;
+import com.goldfish.service.*;
 import com.goldfish.vo.BasicVO;
+import com.goldfish.vo.course.BookStudyVO;
+import com.goldfish.vo.course.BookVO;
 import com.goldfish.vo.teacher.*;
+import com.goldfish.vo.unit.RichUnitStudyVO;
+import com.goldfish.vo.unit.UnitStudyVO;
 import com.goldfish.web.interceptor.servlet.context.LoginContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,6 +38,8 @@ public class AjaxTeacherController {
     protected LoginRecordService loginRecordService;
     @Resource
     private CourseService courseService;
+    @Resource
+    private UnitWordsService unitWordsService;
 
     @RequestMapping(value = "AjaxGetClassList", method = {RequestMethod.GET})
     public @ResponseBody
@@ -142,6 +142,7 @@ public class AjaxTeacherController {
             params.put("userId",userId);
             params.put("userState",userState);
             params.put("state",state);
+            params.put("currentTeacher",teacher.getId());
             studentList = userService.getUserLike(new PageQuery(Integer.MAX_VALUE,params)).getDefaultModel();
         }
         getStudentsVO.setData(studentList);
@@ -236,6 +237,50 @@ public class AjaxTeacherController {
             userService.addUser(user);
         }
         return new BasicVO(true,CommonConstant.SUCCESS);
+    }
+
+    @RequestMapping(value = "AjaxGetUnit", method = {RequestMethod.GET})
+    public
+    @ResponseBody
+    RichUnitStudyVO doAjaxGetUnit(@RequestParam Integer unit, @RequestParam String moduleCode) {
+        RichUnitStudyVO richUnitStudyVO = new RichUnitStudyVO();
+        User teacher = this.getUserInfo();
+        if (teacher == null || teacher.getRoleType()==1){
+            richUnitStudyVO.setMsg(CommonConstant.FAIL);
+            richUnitStudyVO.setSuccess(false);
+            return richUnitStudyVO;
+        }
+        //1、此处不需要学习进度信息
+        richUnitStudyVO.setStudyPos(null);
+        richUnitStudyVO.setStudyToken(null);
+        //2、生成不含进度的课本信息
+        Course queryCourse = new Course();
+        queryCourse.setModuleCode(moduleCode);
+        Course course = courseService.getUnique(queryCourse).getDefaultModel();
+        richUnitStudyVO.setBookInfo((BookStudyVO) BookStudyVO.generateBookVO(course));
+        //3、生成不含进度的单元单词信息
+        List<UnitStudyVO> unitStudyVOList = new ArrayList<>();
+        UnitWords queryUnit = new UnitWords();
+        queryUnit.setUnitNbr(unit);
+        queryUnit.setLessonId(course.getBookNumber().longValue());
+        List<UnitWords> unitWordsList = unitWordsService.getListByExample(queryUnit).getDefaultModel();
+        for (UnitWords unitWords : unitWordsList){
+            UnitStudyVO unitStudyVO = new UnitStudyVO();
+            unitStudyVO.setVocCode(unitWords.getVocCode());
+            unitStudyVO.setVocIndex(unitWords.getVocIndex());
+            unitStudyVO.setUnitNbr(unit);
+            unitStudyVO.setFstClassId(unitWords.getFstClassId());
+            unitStudyVO.setSpelling(unitWords.getSpelling());
+            unitStudyVO.setMeaning(unitWords.getMeaning());
+            //此处为了保持与学生端一致，设置为unitWord的id,实际上我觉得应该是word_id
+            unitStudyVO.setId(unitWords.getId());
+            unitStudyVO.setLessonNbr(unitWords.getLessonId().intValue());
+            unitStudyVOList.add(unitStudyVO);
+        }
+        richUnitStudyVO.setData(unitStudyVOList);
+        richUnitStudyVO.setSuccess(true);
+        richUnitStudyVO.setMsg(CommonConstant.SUCCESS);
+        return richUnitStudyVO;
     }
 
     protected User getUserInfo()

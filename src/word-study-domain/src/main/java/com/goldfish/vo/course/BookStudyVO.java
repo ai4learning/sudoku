@@ -1,5 +1,7 @@
 package com.goldfish.vo.course;
 
+import com.goldfish.domain.Course;
+
 /**
  *         "Id":5,
  *         "moduleCode":"8a108cb7-42ad-314f-0142-ad33a0a70001",
@@ -31,5 +33,15 @@ public class BookStudyVO extends BookVO{
 
     public void setStudyMode(Integer studyMode) {
         this.studyMode = studyMode;
+    }
+
+    public static BookStudyVO generateBookVO(Course course){
+        BookStudyVO bookVO = new BookStudyVO();
+        bookVO.setBookName(course.getBookName());
+        bookVO.setCoverImageUrl(course.getCoverImageUrl());
+        bookVO.setModuleCode(course.getModuleCode());
+        bookVO.setTotalUnitNbr(course.getTotalUnitNbr());
+        bookVO.setId(course.getBookNumber());
+        return bookVO;
     }
 }
