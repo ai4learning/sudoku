@@ -351,8 +351,8 @@ export default class Student extends React.Component {
     if (!f) return hide()
     this.batchCourseForm.validateFields((err, values) => {
       if (err) return
-      values['userIds'] = values['userIds'].join(',')
-      values['lessonIds'] = values['lessonIds'].join(',')
+      values['userIds'] = (values['userIds']||[]).join(',')
+      values['lessonIds'] = (values['lessonIds']||[]).join(',')
       fetch({
         url: '/api/teacher/AjaxBatchAssignCourse',
         method: 'post',

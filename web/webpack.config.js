@@ -86,7 +86,7 @@ module.exports = {
     proxy: [
       {
         context: ['/api', '/login'],
-        target: 'http://0.0.0.0:8180',
+        target: 'http://47.106.116.148',
         changeOrigin: true
       },
       {

@@ -13,7 +13,7 @@ export default class Word extends React.Component {
     loading: false,
     searchData: {
       moduleCode: this.props.location.query.moduleCode,
-      unitNbr: this.props.location.query.unitNbr || 1
+      unit: this.props.location.query.unit || 1
     },
     list: [],
     courseMap: {}
@@ -40,8 +40,8 @@ export default class Word extends React.Component {
       loading: true
     })
     fetch({
-      url: '/api/Ajax/AjaxGetUnit',
-      method: 'post',
+      url: '/api/teacher/AjaxGetUnit',
+      method: 'get',
       type: 'json',
       data: searchData
     }).then(result => {
