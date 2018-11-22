@@ -40,8 +40,7 @@
     		<if test="userState != null"> AND user_state = #{userState}</if>
     		<if test="state != null"> AND state = #{state}</if>
     		<if test="currentClass != null"> AND current_class = #{currentClass}</if>
-
-    		
+    		<if test="currentTeacher != null"> AND current_teacher = #{currentTeacher}</if>
     		</where>
     	 
     	</sql>
@@ -59,6 +58,7 @@
 		<if test="userState != null"> AND user_state = #{userState}</if>
 		<if test="state != null"> AND state = #{state}</if>
         <if test="currentClass != null"> AND current_class = #{currentClass}</if>
+            <if test="currentTeacher != null"> AND current_teacher = #{currentTeacher}</if>
 		</where>
 	 	
 	</sql>
