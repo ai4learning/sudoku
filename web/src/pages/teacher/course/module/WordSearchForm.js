@@ -44,8 +44,8 @@ export default Form.create()(
           </Form.Item>
           <Form.Item label='单元'>
             {
-              getFieldDecorator('unitNbr', {
-                initialValue: +data.unitNbr
+              getFieldDecorator('unit', {
+                initialValue: +data.unit
               })(
                 <Select>
                   {
