@@ -54,6 +54,6 @@ public class BatchAssignCourseVO {
     }
 
     public boolean isVaild(){
-        return !StringUtils.isEmpty(userIds) && !StringUtils.isEmpty(lessonIds);
+        return !StringUtils.isEmpty(lessonIds);
     }
 }
