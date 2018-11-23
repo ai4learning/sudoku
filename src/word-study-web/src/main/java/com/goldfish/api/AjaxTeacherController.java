@@ -346,14 +346,26 @@ public class AjaxTeacherController {
             return new BasicVO(false, CommonConstant.FAIL);
         }
 
-        for (String userId : batchAssignCourseVO.getUserIds().split(CommonConstant.COMMA_SPLIT)){
-            //根据userId查询学生
+        if (StringUtils.isEmpty(batchAssignCourseVO.getUserIds())){
             User queryUser = new User();
-            queryUser.setUserId(userId);
-            User user = userService.getUnique(queryUser).getDefaultModel();
-            //增量更新学生课程
-            user = incrementAddStudentCourse(user,batchAssignCourseVO.getLessonIds());
-            userService.updateUser(user);
+            queryUser.setCurrentClass(batchAssignCourseVO.getCurrentClass().longValue());
+            List<User> userList = userService.getListByExample(queryUser).getDefaultModel();
+            for (User user : userList) {
+                //增量更新学生课程
+                user = incrementAddStudentCourse(user, batchAssignCourseVO.getLessonIds());
+                userService.updateUser(user);
+            }
+        }
+        else {
+            for (String userId : batchAssignCourseVO.getUserIds().split(CommonConstant.COMMA_SPLIT)) {
+                //根据userId查询学生
+                User queryUser = new User();
+                queryUser.setUserId(userId);
+                User user = userService.getUnique(queryUser).getDefaultModel();
+                //增量更新学生课程
+                user = incrementAddStudentCourse(user, batchAssignCourseVO.getLessonIds());
+                userService.updateUser(user);
+            }
         }
         return new BasicVO(true,CommonConstant.SUCCESS);
     }
