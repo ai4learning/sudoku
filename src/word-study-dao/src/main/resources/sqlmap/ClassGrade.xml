@@ -18,7 +18,8 @@
 
         <where>
             <if test="id != null"> AND id = #{id}</if>
-
+            <if test="teacherId != null"> AND teacherId = #{teacherId}</if>
+            <if test="name != null"> AND name = #{name}</if>
         </where>
 
     </sql>
@@ -29,7 +30,8 @@
 
         <where>
             <if test="id != null"> AND id = #{id}</if>
-
+            <if test="teacherId != null"> AND teacherId = #{teacherId}</if>
+            <if test="name != null"> AND name = #{name}</if>
         </where>
 
     </sql>

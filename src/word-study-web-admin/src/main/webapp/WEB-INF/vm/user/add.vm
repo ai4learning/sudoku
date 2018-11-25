@@ -54,6 +54,7 @@
 			
 				<option value="1">用户</option>
 				<option value="2">管理员</option>
+				<option value="3">教师</option>
 		</select>
 	
     

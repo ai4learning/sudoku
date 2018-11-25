@@ -42,9 +42,9 @@
 			
 				#if($item.roleType==1)<span class="">用户</span> #end	
 			
-				#if($item.roleType==2)<span class="">管理员</span> #end	
-			
-	
+				#if($item.roleType==2)<span class="">管理员</span> #end
+
+				#if($item.roleType==3)<span class="">教师</span> #end
     </td>
 			<td>
         
