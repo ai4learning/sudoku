@@ -58,6 +58,11 @@
                             <property name="doLoginUri" value="/login/doLogin" />
                      </bean>
               </mvc:interceptor>
+           <mvc:interceptor>
+               <mvc:mapping path="/api/teacher/**" />
+               <bean class="com.goldfish.web.interceptor.TeacherInterceptor">
+               </bean>
+           </mvc:interceptor>
        </mvc:interceptors>
 
     <mvc:annotation-driven>
