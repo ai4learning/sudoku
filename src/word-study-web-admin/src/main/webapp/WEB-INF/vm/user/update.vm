@@ -52,6 +52,7 @@
 		<select class="forms_select input-medium" name="roleType" id="roleType">
 				<option value="1" #if($user.roleType==1) selected #end>用户</option>
 				<option value="2" #if($user.roleType==2) selected #end>管理员</option>
+            	<option value="3" #if($user.roleType==3) selected #end>教师</option>
 </select>
 		
     
