@@ -38,10 +38,33 @@ export default function fetch(options) {
         reject(result)
       }
     }).fail(err => {
-      console.error('error: ', err)
-      Modal.error({
-        title: '未知错误，请稍后重试~'
-      })
+      if(err.status == '403') {
+        Modal.confirm({
+          title: '暂无权限',
+          content: '抱歉，您暂无权限访问此页面！',
+          okText: '返回首页',
+          cancelText: '退出登录',
+          iconType: 'warning',
+          onOk: () => {
+            location.href = '/'
+          },
+          onCancel: () => {
+            fetch({
+              url: '/login/logout',
+              method: 'post',
+              type: 'json',
+              noTip: true
+            }).catch(() => {
+              location.href = '/#/user/login'
+            })
+          }
+        })
+      } else {
+        console.error('error: ', err)
+        Modal.error({
+          title: '未知错误，请稍后重试~'
+        })
+      }
       reject(err)
     }).always(() => {
       requesting[uid] = false
