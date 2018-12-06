@@ -2,11 +2,13 @@ package com.goldfish.web.interceptor;
 
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.State;
+import com.goldfish.constant.UserRoleType;
 import com.goldfish.domain.LoginRecord;
 import com.goldfish.domain.User;
 import com.goldfish.service.LoginRecordService;
 import com.goldfish.service.UserService;
 import com.goldfish.web.interceptor.servlet.context.LoginContext;
+import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -47,8 +49,8 @@ public class TeacherInterceptor extends HandlerInterceptorAdapter {
         userQuery.setId(Long.valueOf(String.valueOf(userId)));
         userQuery.setState(State.VALID.getState());
         User user = userService.getUnique(userQuery).getDefaultModel();
-        if (user.getRoleType()==1){
-            response.sendRedirect(loginUri);
+        if (UserRoleType.USER.getType().equals(user.getRoleType())){
+            response.setStatus(HttpStatus.SC_FORBIDDEN);
             return false;
         }else{
             return true;

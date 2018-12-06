@@ -4,7 +4,7 @@ package com.goldfish.constant;
  * Created by John on 2018/5/16 0016.
  */
 public enum UserRoleType {
-    USER(1, "用户"),ADMIN(2, "管理员");
+    USER(1, "学生"),ADMIN(2, "管理员"),TEACHER(3, "教师");
 
     private Integer type;
     private String desc;

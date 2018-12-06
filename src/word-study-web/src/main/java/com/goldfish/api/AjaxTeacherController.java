@@ -6,6 +6,7 @@ import com.goldfish.common.PageQuery;
 import com.goldfish.common.log.LogTypeEnum;
 import com.goldfish.constant.CommonConstant;
 import com.goldfish.constant.State;
+import com.goldfish.constant.UserRoleType;
 import com.goldfish.domain.*;
 import com.goldfish.service.*;
 import com.goldfish.vo.BasicVO;
@@ -16,6 +17,7 @@ import com.goldfish.vo.unit.RichUnitStudyVO;
 import com.goldfish.vo.unit.UnitStudyVO;
 import com.goldfish.web.interceptor.servlet.context.LoginContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +48,7 @@ public class AjaxTeacherController {
     GetClassListVO doAjaxGetClassList() {
         GetClassListVO getClassListVO = new GetClassListVO();
         User teacher = this.getUserInfo();
-        if (teacher == null || teacher.getRoleType()==1){
+        if (teacher == null || UserRoleType.USER.getType().equals(teacher.getRoleType())){
             getClassListVO.setData(null);
             getClassListVO.setSuccess(false);
             getClassListVO.setMsg(CommonConstant.FAIL);
@@ -65,7 +67,7 @@ public class AjaxTeacherController {
     public @ResponseBody
     BasicVO doAjaxAddClass(@RequestBody ClassVO classVO) {
         User teacher = this.getUserInfo();
-        if (classVO == null || teacher == null || teacher.getRoleType()==1){
+        if (classVO == null || teacher == null || UserRoleType.USER.getType().equals(teacher.getRoleType())){
             return new BasicVO(false, CommonConstant.FAIL);
         }
         ClassGrade classGrade = new ClassGrade();
@@ -73,15 +75,19 @@ public class AjaxTeacherController {
         classGrade.setName(classVO.getName());
         classGrade.setStart(DateFormatUtils.parse(classVO.getStart(),null));
         classGrade.setEnd(DateFormatUtils.parse(classVO.getEnd(),null));
-        classGradeService.addClassGrade(classGrade);
-        return new BasicVO(true,CommonConstant.SUCCESS);
+        CommonResult<ClassGrade> result = classGradeService.addClassGrade(classGrade);
+        if (result.isSuccess()) {
+            return new BasicVO(true, CommonConstant.SUCCESS);
+        }else{
+            return new BasicVO(false, CommonConstant.FAIL);
+        }
     }
 
     @RequestMapping(value = "AjaxUpdateClass", method = {RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxUpdateClass(@RequestBody ClassVO classVO) {
         User teacher = this.getUserInfo();
-        if (classVO == null || teacher == null || teacher.getRoleType()==1){
+        if (classVO == null || teacher == null || UserRoleType.USER.getType().equals(teacher.getRoleType())){
             return new BasicVO(false, CommonConstant.FAIL);
         }
         ClassGrade classGrade = classGradeService.getClassGradeById(classVO.getId()).getDefaultModel();
@@ -89,8 +95,12 @@ public class AjaxTeacherController {
         classGrade.setName(classVO.getName());
         classGrade.setStart(DateFormatUtils.parse(classVO.getStart(),null));
         classGrade.setEnd(DateFormatUtils.parse(classVO.getEnd(),null));
-        classGradeService.updateClassGrade(classGrade);
-        return new BasicVO(true,CommonConstant.SUCCESS);
+        CommonResult<ClassGrade> result = classGradeService.updateClassGrade(classGrade);
+        if (result.isSuccess()) {
+            return new BasicVO(true, CommonConstant.SUCCESS);
+        }else{
+            return new BasicVO(false, CommonConstant.FAIL);
+        }
     }
 
     @RequestMapping(value = "AjaxGetCourses", method = {RequestMethod.GET})
@@ -98,7 +108,7 @@ public class AjaxTeacherController {
     GetCoursesVO doAjaxGetCourses(@RequestParam(required = false) String bookName) {
         User teacher = this.getUserInfo();
         GetCoursesVO getCoursesVO = new GetCoursesVO();
-        if (teacher == null || teacher.getRoleType()==1){
+        if (teacher == null || UserRoleType.USER.getType().equals(teacher.getRoleType())){
             getCoursesVO.setData(null);
             getCoursesVO.setMsg(CommonConstant.FAIL);
             getCoursesVO.setSuccess(false);
@@ -125,7 +135,7 @@ public class AjaxTeacherController {
                                     @RequestParam(required = false) Integer state) {
         User teacher = this.getUserInfo();
         GetStudentsVO getStudentsVO = new GetStudentsVO();
-        if (teacher == null || teacher.getRoleType()==1){
+        if (teacher == null || UserRoleType.USER.getType().equals(teacher.getRoleType())){
             getStudentsVO.setData(null);
             getStudentsVO.setMsg(CommonConstant.FAIL);
             getStudentsVO.setSuccess(false);
@@ -155,7 +165,7 @@ public class AjaxTeacherController {
     public @ResponseBody
     BasicVO doAjaxAddStudent(@RequestBody UpdateStudentVO updateStudentVO) {
         User teacher = this.getUserInfo();
-        if (updateStudentVO == null || teacher == null || teacher.getRoleType()==1) {
+        if (updateStudentVO == null || teacher == null || UserRoleType.USER.getType().equals(teacher.getRoleType())) {
             return new BasicVO(false, CommonConstant.FAIL);
         }
         User user = new User();
@@ -179,15 +189,19 @@ public class AjaxTeacherController {
         user.setState(updateStudentVO.getState());
         user.setRoleType(1);
         user.setLevel(1);
-        userService.addUser(user);
-        return new BasicVO(true,CommonConstant.SUCCESS);
+        CommonResult<User> result = userService.addUser(user);
+        if (result.isSuccess()){
+            return new BasicVO(true,CommonConstant.SUCCESS);
+        }else{
+            return new BasicVO(false, CommonConstant.FAIL);
+        }
     }
 
     @RequestMapping(value = "AjaxUpdateStudent", method = {RequestMethod.POST})
     public @ResponseBody
     BasicVO doAjaxUpdateStudent(@RequestBody UpdateStudentVO updateStudentVO) {
         User teacher = this.getUserInfo();
-        if (updateStudentVO == null || teacher == null || teacher.getRoleType()==1){
+        if (updateStudentVO == null || teacher == null || UserRoleType.USER.getType().equals(teacher.getRoleType())){
             return new BasicVO(false, CommonConstant.FAIL);
         }
         User queryUser = new User();
@@ -204,8 +218,12 @@ public class AjaxTeacherController {
         user.setCurrentClass(updateStudentVO.getCurrentClass());
         user.setUserState(updateStudentVO.getUserState());
         user.setState(updateStudentVO.getState());
-        userService.updateUser(user);
-        return new BasicVO(true,CommonConstant.SUCCESS);
+        CommonResult<User> result = userService.updateUser(user);
+        if (result.isSuccess()){
+            return new BasicVO(true,CommonConstant.SUCCESS);
+        }else{
+            return new BasicVO(false, CommonConstant.FAIL);
+        }
     }
 
     /**
@@ -214,10 +232,11 @@ public class AjaxTeacherController {
      * @return
      */
     @RequestMapping(value = "AjaxBatchAddStudent", method = {RequestMethod.POST})
+    @Transactional
     public @ResponseBody
     BasicVO doAjaxBatchAddStudent(@RequestBody BatchAddStudentVO batchAddStudentVO) {
         User teacher = this.getUserInfo();
-        if (batchAddStudentVO == null || teacher == null || teacher.getRoleType()==1){
+        if (batchAddStudentVO == null || teacher == null || UserRoleType.USER.getType().equals(teacher.getRoleType())){
             return new BasicVO(false, CommonConstant.FAIL);
         }
         for (int index=1;index<=batchAddStudentVO.getTotal();index++){
@@ -234,7 +253,10 @@ public class AjaxTeacherController {
             user.setUserState(0);
             user.setLevel(1);
             user.setState(1);
-            userService.addUser(user);
+            CommonResult<User> result = userService.addUser(user);
+            if (!result.isSuccess()){
+                throw new RuntimeException();
+            }
         }
         return new BasicVO(true,CommonConstant.SUCCESS);
     }
@@ -245,7 +267,7 @@ public class AjaxTeacherController {
     RichUnitStudyVO doAjaxGetUnit(@RequestParam Integer unit, @RequestParam String moduleCode) {
         RichUnitStudyVO richUnitStudyVO = new RichUnitStudyVO();
         User teacher = this.getUserInfo();
-        if (teacher == null || teacher.getRoleType()==1){
+        if (teacher == null || UserRoleType.USER.getType().equals(teacher.getRoleType())){
             richUnitStudyVO.setMsg(CommonConstant.FAIL);
             richUnitStudyVO.setSuccess(false);
             return richUnitStudyVO;
@@ -325,6 +347,7 @@ public class AjaxTeacherController {
      * {"success":true,"UserId":"jiaoshi"}
      */
     @RequestMapping(value="AjaxHeartBeat",method={RequestMethod.GET,RequestMethod.POST})
+    @Transactional
     public @ResponseBody
     Map<String,Object> doAjaxHeartBeat(ModelMap context) {
         CommonResult result = new CommonResult();
@@ -342,7 +365,8 @@ public class AjaxTeacherController {
     public @ResponseBody
     BasicVO doAjaxBatchAssignCourse(@RequestBody BatchAssignCourseVO batchAssignCourseVO) {
         User teacher = this.getUserInfo();
-        if (batchAssignCourseVO == null || !batchAssignCourseVO.isVaild() || teacher == null || teacher.getRoleType()==1){
+        if (batchAssignCourseVO == null || !batchAssignCourseVO.isVaild() || teacher == null
+                || UserRoleType.USER.getType().equals(teacher.getRoleType())){
             return new BasicVO(false, CommonConstant.FAIL);
         }
 
@@ -353,7 +377,10 @@ public class AjaxTeacherController {
             for (User user : userList) {
                 //增量更新学生课程
                 user = incrementAddStudentCourse(user, batchAssignCourseVO.getLessonIds());
-                userService.updateUser(user);
+                CommonResult<User> result = userService.updateUser(user);
+                if (!result.isSuccess()){
+                    throw new RuntimeException();
+                }
             }
         }
         else {
@@ -364,7 +391,10 @@ public class AjaxTeacherController {
                 User user = userService.getUnique(queryUser).getDefaultModel();
                 //增量更新学生课程
                 user = incrementAddStudentCourse(user, batchAssignCourseVO.getLessonIds());
-                userService.updateUser(user);
+                CommonResult<User> result = userService.updateUser(user);
+                if (!result.isSuccess()){
+                    throw new RuntimeException();
+                }
             }
         }
         return new BasicVO(true,CommonConstant.SUCCESS);
