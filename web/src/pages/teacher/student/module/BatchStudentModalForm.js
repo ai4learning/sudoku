@@ -50,19 +50,6 @@ export default Form.create()(
                 )
               }
             </Form.Item>
-            <Form.Item {...formItemLayout} label='关联课程'>
-              {
-                getFieldDecorator('lessonIds', {})(
-                  <Select mode='multiple'>
-                    {
-                      Object.keys(courseMap).map(item => {
-                        return <Select.Option key={item} value={item}>{courseMap[item].bookName}</Select.Option>
-                      })
-                    }
-                  </Select>
-                )
-              }
-            </Form.Item>
             <Form.Item {...formItemLayout} label='当前班级'>
               {
                 getFieldDecorator('currentClass', {
@@ -78,7 +65,20 @@ export default Form.create()(
                 )
               }
             </Form.Item>
-            <Form.Item {...formItemLayout} label='用户状态'>
+            <Form.Item {...formItemLayout} label='关联课程'>
+              {
+                getFieldDecorator('lessonIds', {})(
+                  <Select mode='multiple'>
+                    {
+                      Object.keys(courseMap).map(item => {
+                        return <Select.Option key={item} value={item}>{courseMap[item].bookName}</Select.Option>
+                      })
+                    }
+                  </Select>
+                )
+              }
+            </Form.Item>
+            {/* <Form.Item {...formItemLayout} label='用户状态'>
               {
                 getFieldDecorator('userState', {
                   rules: [{ required: true, message: '请选择当前用户状态' }],
@@ -107,7 +107,7 @@ export default Form.create()(
                   </Select>
                 )
               }
-            </Form.Item>
+            </Form.Item> */}
           </Form>
         </Modal>
       )
