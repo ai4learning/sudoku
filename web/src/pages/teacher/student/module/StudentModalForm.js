@@ -46,7 +46,7 @@ export default Form.create()(
                 )
               }
             </Form.Item>
-            <Form.Item {...formItemLayout} label='用户code'>
+            {/* <Form.Item {...formItemLayout} label='用户code'>
               {
                 getFieldDecorator('userCode', {
                   initialValue: isEdit ? data.userCode : ''
@@ -54,29 +54,14 @@ export default Form.create()(
                   <Input />
                 )
               }
-            </Form.Item>
-            <Form.Item {...formItemLayout} label='别名'>
+            </Form.Item> */}
+            <Form.Item {...formItemLayout} label='姓名'>
               {
                 getFieldDecorator('nikeName', {
-                  initialValue: isEdit ? data.nikeName : ''
+                  initialValue: isEdit ? data.nikeName : '',
+                  rules: [{required: true, message: '请输入姓名'}]
                 })(
                   <Input />
-                )
-              }
-            </Form.Item>
-            <Form.Item {...formItemLayout} label='关联课程'>
-              {
-                getFieldDecorator('lessonIds', {
-                  initialValue: (isEdit&&data.lessonIds) ? (data.lessonIds).split(',') : []
-                })(
-                  <Select mode="multiple">
-                    {
-                      Object.keys(courseMap).map(item => {
-                        let bookName = (courseMap[item]||{}).bookName
-                        return <Select.Option key={item} value={item}>{bookName}</Select.Option>
-                      })
-                    }
-                  </Select>
                 )
               }
             </Form.Item>
@@ -96,7 +81,23 @@ export default Form.create()(
                 )
               }
             </Form.Item>
-            <Form.Item {...formItemLayout} label='用户状态'>
+            <Form.Item {...formItemLayout} label='关联课程'>
+              {
+                getFieldDecorator('lessonIds', {
+                  initialValue: (isEdit && data.lessonIds) ? (data.lessonIds).split(',') : []
+                })(
+                  <Select mode="multiple">
+                    {
+                      Object.keys(courseMap).map(item => {
+                        let bookName = (courseMap[item] || {}).bookName
+                        return <Select.Option key={item} value={item}>{bookName}</Select.Option>
+                      })
+                    }
+                  </Select>
+                )
+              }
+            </Form.Item>
+            {/* <Form.Item {...formItemLayout} label='用户状态'>
               {
                 getFieldDecorator('userState', {
                   rules: [{ required: true, message: '请选择用户状态' }],
@@ -127,7 +128,7 @@ export default Form.create()(
                   </Select>
                 )
               }
-            </Form.Item>
+            </Form.Item> */}
           </Form>
         </Modal>
       )

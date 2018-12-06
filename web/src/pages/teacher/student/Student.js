@@ -266,6 +266,7 @@ export default class Student extends React.Component {
     this.studentForm.validateFields((err, values) => {
       if (err) return
       values['lessonIds'] = (values['lessonIds']||[]).join(',')
+      values['userCode'] = values['userId']
       let url = ''
       let tip = ''
       if(this.state.isStudentModalFormEdit) {
