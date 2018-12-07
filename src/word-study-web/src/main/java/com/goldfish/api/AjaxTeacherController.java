@@ -189,6 +189,7 @@ public class AjaxTeacherController {
         user.setState(updateStudentVO.getState());
         user.setRoleType(1);
         user.setLevel(1);
+        user.setState(State.VALID.getState());
         CommonResult<User> result = userService.addUser(user);
         if (result.isSuccess()){
             return new BasicVO(true,CommonConstant.SUCCESS);
@@ -217,7 +218,7 @@ public class AjaxTeacherController {
         user.setCurrentTeacher(teacher.getId());
         user.setCurrentClass(updateStudentVO.getCurrentClass());
         user.setUserState(updateStudentVO.getUserState());
-        user.setState(updateStudentVO.getState());
+        user.setState(State.VALID.getState());
         CommonResult<User> result = userService.updateUser(user);
         if (result.isSuccess()){
             return new BasicVO(true,CommonConstant.SUCCESS);
@@ -242,7 +243,11 @@ public class AjaxTeacherController {
         for (int index=1;index<=batchAddStudentVO.getTotal();index++){
             User user = new User();
             user.setUserId(batchAddStudentVO.getPrefix()+String.valueOf(index));
-            user.setLessonIds(String.join(",", batchAddStudentVO.getLessonIds()));
+            if (batchAddStudentVO.getLessonIds()!=null) {
+                user.setLessonIds(String.join(",", batchAddStudentVO.getLessonIds()));
+            }else{
+                user.setLessonIds("");
+            }
             user.setCurrentClass(Long.valueOf(batchAddStudentVO.getCurrentClass()));
             user.setPasswd(batchAddStudentVO.getPasswd());
             user.setRoleType(1);
@@ -252,7 +257,7 @@ public class AjaxTeacherController {
             user.setAuthorityLevel(1);
             user.setUserState(0);
             user.setLevel(1);
-            user.setState(1);
+            user.setState(State.VALID.getState());
             CommonResult<User> result = userService.addUser(user);
             if (!result.isSuccess()){
                 throw new RuntimeException();
