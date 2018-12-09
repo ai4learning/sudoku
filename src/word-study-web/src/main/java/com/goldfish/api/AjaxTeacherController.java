@@ -168,8 +168,13 @@ public class AjaxTeacherController {
         if (updateStudentVO == null || teacher == null || UserRoleType.USER.getType().equals(teacher.getRoleType())) {
             return new BasicVO(false, CommonConstant.FAIL);
         }
+        //不能插入重复UserID，且需要给出易读的信息
         User user = new User();
         user.setUserId(updateStudentVO.getUserId());
+        User oldUser = userService.getUnique(user).getDefaultModel();
+        if (oldUser!=null){
+            return new BasicVO(false, oldUser.getUserId()+CommonConstant.USER_REPEAT);
+        }
         user.setPasswd(updateStudentVO.getPasswd());
         user.setLessonIds(updateStudentVO.getLessonIds());
         user.setCurrentClass(updateStudentVO.getCurrentClass());
@@ -240,6 +245,15 @@ public class AjaxTeacherController {
         if (batchAddStudentVO == null || teacher == null || UserRoleType.USER.getType().equals(teacher.getRoleType())){
             return new BasicVO(false, CommonConstant.FAIL);
         }
+
+        for (int index=1;index<=batchAddStudentVO.getTotal();index++) {
+            User user = new User();
+            user.setUserId(batchAddStudentVO.getPrefix() + String.valueOf(index));
+            if(userService.getUnique(user).getDefaultModel()!=null){
+                return new BasicVO(false,user.getUserId()+CommonConstant.USER_REPEAT);
+            }
+        }
+
         for (int index=1;index<=batchAddStudentVO.getTotal();index++){
             User user = new User();
             user.setUserId(batchAddStudentVO.getPrefix()+String.valueOf(index));

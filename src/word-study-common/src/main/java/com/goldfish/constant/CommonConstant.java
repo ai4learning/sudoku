@@ -64,4 +64,5 @@ public class CommonConstant {
 	public static final String SUCCESS = "成功";
 	public static final String FAIL = "失败";
 	public static final String COMMA_SPLIT = ",";
+	public static final String USER_REPEAT = "已存在，请使用其他用户名";
 }
