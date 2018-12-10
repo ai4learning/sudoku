@@ -94,6 +94,9 @@ export default class Header extends Component {
               <Menu.Item key='home' key='/user'><Link to='/user'>首页</Link></Menu.Item>
               <Menu.Item key='user' key='/user/center'><Link to='/user/center'>用户中心</Link></Menu.Item>
               <Menu.Item key='rank' key='/user/rank'><Link to='/user/rank'>排行榜</Link></Menu.Item>
+              {
+                this.state.userInfo.roleType && this.state.userInfo.roleType != 1 ? <Menu.Item key='teacher' key='/teacher'><a href='/teacher.html#/teacher/class'>教师端</a></Menu.Item> : null
+              }
             </Menu>
           </div>
           <div className='header_user'>

@@ -16,6 +16,7 @@ public class UserVO extends BaseVO{
     protected java.util.Date created;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     protected java.util.Date modified;
+    protected Integer roleType;
 
     public String getUserId() { return userId; }
 
@@ -47,5 +48,13 @@ public class UserVO extends BaseVO{
 
     public void setTotalLoginTimes(Long totalLoginTimes) {
         this.totalLoginTimes = totalLoginTimes;
+    }
+
+    public Integer getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(Integer roleType) {
+        this.roleType = roleType;
     }
 }

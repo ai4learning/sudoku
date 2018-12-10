@@ -67,11 +67,11 @@ export default class Class extends React.Component {
                   dataIndex: 'end',
                   key: 'end'
                 },
-                {
-                  title: '创建时间',
-                  dataIndex: 'created',
-                  key: 'created'
-                },
+                // {
+                //   title: '创建时间',
+                //   dataIndex: 'created',
+                //   key: 'created'
+                // },
                 {
                   title: '操作',
                   key: 'actions',
