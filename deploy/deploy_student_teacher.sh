@@ -1,17 +1,44 @@
 #!/bin/bash
-usage() 
-{ 
+usage()
+{
 cat <<HELP
-./deploy_admin.sh [options]
--f : forcely restart admin process) 
+./deploy_student_teacher.sh [development|production] [options]
+development : deploy test enviroment
+production  : deploy a production enviroment
+-f : forcely restart admin process
 HELP
-exit 1 
+exit 1
 }
 
-nargs=$# 
-if [ $nargs -gt 0 ] && [ ! $1 = -f ] ; then 
-	 usage 
+nargs=$#
+force_flag=0
+build_mode=development
+
+if [ $nargs -lt 1 ] || [ $nargs -gt 3 ] ; then
+  usage
 fi
+
+if [ $nargs = 2 ] ; then
+ if [ $2 = -f ] ; then
+  force_flag=1
+ else
+  usage
+ fi
+fi
+
+case $1 in
+ "development")
+    echo "development..."
+    build_mode="development"
+    ;;
+ "production")
+    echo "production..."
+    build_mode="production"
+    ;;
+  *)
+    usage
+    ;;
+esac
 
 src_dir=/home/sudoku/src
 target_dir=/opt
@@ -24,7 +51,7 @@ parser="Already up-to-date"
 len=${#parser}
 if [ "$parser" == "${ret:0:$len}" ]
 then
- if [ $nargs -eq 0 ] ; then
+ if [ $force_flag = 0 ] ; then
   echo "Already up-to-date,ready to exitng without restarting service"
   exit 0
  else
@@ -35,7 +62,7 @@ fi
 echo "Ready to fetch lastest code"
 
 echo "Rebuilding project.."
-mvn clean package -Dmaven.test.skip=true -Pproduction
+mvn clean package -Dmaven.test.skip=true -P$build_mode
 
 sh "$target_dir/word-study/bin/shutdown.sh"
 

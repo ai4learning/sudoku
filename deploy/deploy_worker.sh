@@ -34,7 +34,7 @@ fi
 echo "Ready to fetch lastest code"
 
 echo "Rebuilding project.."
-mvn clean package -Dmaven.test.skip=true -Pproduction
+mvn clean package -Dmaven.test.skip=true -Pdevelopment
 
 sh "$target_dir/word-study-worker/bin/shutdown.sh"
 
