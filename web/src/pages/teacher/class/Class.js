@@ -47,11 +47,11 @@ export default class Class extends React.Component {
               dataSource={this.state.list}
               pagination={{ showTotal: (total) => `共 ${total} 条数据`, showQuickJumper: true, showSizeChanger: true, pageSizeOptions: [10, 20, 50, 100]}}
               columns={[
-                {
-                  title: '班级编号',
-                  dataIndex: 'id',
-                  key: 'id'
-                },
+                // {
+                //   title: '班级编号',
+                //   dataIndex: 'id',
+                //   key: 'id'
+                // },
                 {
                   title: '班级名称',
                   dataIndex: 'name',
