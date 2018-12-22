@@ -68,6 +68,7 @@ public class BaseController {
         userVO.setUserId(user.getUserId());
         userVO.setCreated(user.getCreated());
         userVO.setModified(user.getModified());
+        userVO.setRoleType(user.getRoleType());
         return user;
     }
 

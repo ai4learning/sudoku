@@ -35,7 +35,18 @@ export default Form.create()(
             <Form.Item {...formItemLayout} label='用户名前缀'>
               {
                 getFieldDecorator('prefix', {
-                  rules: [{required: true, message: '请输入用户名前缀'}],
+                  rules: [
+                    {required: true, message: '请输入用户名前缀'},
+                    {
+                      validator: (rule, value, callback) => {
+                        if(value.length > 20) {
+                          callback('前缀不能超过20个字符')
+                        } else {
+                          callback()
+                        }
+                      }
+                    }
+                  ],
                 })(
                   <Input />
                 )

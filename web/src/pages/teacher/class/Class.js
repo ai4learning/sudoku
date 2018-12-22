@@ -47,11 +47,11 @@ export default class Class extends React.Component {
               dataSource={this.state.list}
               pagination={{ showTotal: (total) => `共 ${total} 条数据`, showQuickJumper: true, showSizeChanger: true, pageSizeOptions: [10, 20, 50, 100]}}
               columns={[
-                {
-                  title: '班级编号',
-                  dataIndex: 'id',
-                  key: 'id'
-                },
+                // {
+                //   title: '班级编号',
+                //   dataIndex: 'id',
+                //   key: 'id'
+                // },
                 {
                   title: '班级名称',
                   dataIndex: 'name',
@@ -67,11 +67,11 @@ export default class Class extends React.Component {
                   dataIndex: 'end',
                   key: 'end'
                 },
-                {
-                  title: '创建时间',
-                  dataIndex: 'created',
-                  key: 'created'
-                },
+                // {
+                //   title: '创建时间',
+                //   dataIndex: 'created',
+                //   key: 'created'
+                // },
                 {
                   title: '操作',
                   key: 'actions',

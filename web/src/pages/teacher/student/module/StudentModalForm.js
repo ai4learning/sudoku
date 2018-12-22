@@ -29,7 +29,18 @@ export default Form.create()(
             <Form.Item {...formItemLayout} label='用户名'>
               {
                 getFieldDecorator('userId', {
-                  rules: [{ required: true, message: '请输入用户名' }],
+                  rules: [
+                    { required: true, message: '请输入用户名' },
+                    {
+                      validator: (rule, value, callback) => {
+                        if(value.length > 20) {
+                          callback('用户名不能超过20个字符')
+                        } else {
+                          callback()
+                        }
+                      }
+                    }
+                  ],
                   initialValue: isEdit ? data.userId : ''
                 })(
                   <Input disabled={isEdit} />
