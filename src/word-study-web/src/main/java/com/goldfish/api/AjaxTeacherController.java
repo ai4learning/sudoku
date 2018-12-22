@@ -12,6 +12,7 @@ import com.goldfish.service.*;
 import com.goldfish.vo.BasicVO;
 import com.goldfish.vo.course.BookStudyVO;
 import com.goldfish.vo.course.BookVO;
+import com.goldfish.vo.statistic.SituationVO;
 import com.goldfish.vo.teacher.*;
 import com.goldfish.vo.unit.RichUnitStudyVO;
 import com.goldfish.vo.unit.UnitStudyVO;
@@ -42,6 +43,8 @@ public class AjaxTeacherController {
     private CourseService courseService;
     @Resource
     private UnitWordsService unitWordsService;
+    @Resource
+    private AjaxStatisticsController ajaxStatisticsController;
 
     @RequestMapping(value = "AjaxGetClassList", method = {RequestMethod.GET})
     public @ResponseBody
@@ -428,5 +431,31 @@ public class AjaxTeacherController {
         String[] courses = set.toArray(new String[0]);
         user.setLessonIds(String.join(",",courses));
         return user;
+    }
+
+    @RequestMapping(value = "AjaxGetCumulativeSituationTeacher", method = {RequestMethod.GET})
+    public @ResponseBody
+    SituationVO doAjaxGetCumulativeSituationTeacher(@RequestParam Integer classNO) {
+        SituationVO situationVO = new SituationVO();
+        GetClassListVO getClassListVO = doAjaxGetClassList();
+        if (getClassListVO.getData().stream().noneMatch(d -> d.getId().intValue() == classNO)){
+            situationVO.setSuccess(false);
+            situationVO.setMsg("无权查看其它班级");
+            return situationVO;
+        }
+        return ajaxStatisticsController.generateSituationVOStep2(false,classNO.longValue());
+    }
+
+    @RequestMapping(value = "AjaxGetRealTimeSituationTeacher", method = {RequestMethod.GET})
+    public @ResponseBody
+    SituationVO doAjaxGetRealTimeSituationTeacher(@RequestParam Integer classNO) {
+        SituationVO situationVO = new SituationVO();
+        GetClassListVO getClassListVO = doAjaxGetClassList();
+        if (getClassListVO.getData().stream().noneMatch(d -> d.getId().intValue() == classNO)){
+            situationVO.setSuccess(false);
+            situationVO.setMsg("无权查看其它班级");
+            return situationVO;
+        }
+        return ajaxStatisticsController.generateSituationVOStep2(true,classNO.longValue());
     }
 }
