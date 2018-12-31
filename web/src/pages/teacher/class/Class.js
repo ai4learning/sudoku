@@ -79,8 +79,8 @@ export default class Class extends React.Component {
                     return (
                       <span>
                         <a href='javascript:;' onClick={() => this.showClassModalForm(true, record)}>编辑</a>
-                        {/* <Divider type='vertical'></Divider>
-                        <a href='javascript:;' onClick={() => this.handleDeleteClass(record)}>删除</a> */}
+                        <Divider type='vertical'></Divider>
+                        <a href='javascript:;' onClick={() => this.goRank(record)}>排名</a>
                       </span>
                     )
                   }
@@ -101,6 +101,10 @@ export default class Class extends React.Component {
         </Panel>
       </div>
     )
+  }
+
+  goRank = (record) => {
+    this.props.router.push('/teacher/rank?classNo=' + record.id)
   }
 
   classModalFormRef = (form) => {
