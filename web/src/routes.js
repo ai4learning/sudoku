@@ -17,6 +17,7 @@ import TeacherClass from './pages/teacher/class/Class'
 import TeacherStudent from './pages/teacher/student/Student'
 import TeacherCourse from './pages/teacher/course/Course'
 import TeacherWord from './pages/teacher/course/Word'
+import TeacherRank from './pages/teacher/rank/Rank'
 
 export default (
     <Route path='/' component={App}>
@@ -39,6 +40,7 @@ export default (
         <Route path='student' component={TeacherStudent}></Route>
         <Route path='course' component={TeacherCourse}></Route>
         <Route path='word' component={TeacherWord}></Route>
+        <Route path='rank' component={TeacherRank}></Route>
       </Route>
       <IndexRoute component={Home}>
       </IndexRoute>

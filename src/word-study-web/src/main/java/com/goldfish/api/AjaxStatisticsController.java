@@ -298,17 +298,21 @@ public class AjaxStatisticsController extends BaseController {
             situationVO.setSuccess(false);
             return situationVO;
         }
+        return generateSituationVOStep2(realTime,user.getCurrentClass());
+    }
 
+    public SituationVO generateSituationVOStep2(boolean realTime,Long classId) {
+        SituationVO situationVO = new SituationVO();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-        situationVO.setClassNO(user.getCurrentClass());
+        situationVO.setClassNO(classId);
         situationVO.setDate(sdf.format(date));
         List<PersonalAchievementVO> paVO = new ArrayList<>();
         //获取同班同学信息
         User userQuery = new User();
-        userQuery.setCurrentClass(user.getCurrentClass());
+        userQuery.setCurrentClass(classId);
         List<User> classMate = userService.getListByExample(userQuery).getDefaultModel();
-        ClassGrade classGrade = classGradeService.getClassGradeById(user.getCurrentClass()).getDefaultModel();
+        ClassGrade classGrade = classGradeService.getClassGradeById(classId).getDefaultModel();
         if (classMate == null)
         {
             situationVO.setMsg(CommonConstant.LOAD_FAIL);
