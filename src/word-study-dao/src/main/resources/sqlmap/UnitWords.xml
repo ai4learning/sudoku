@@ -34,7 +34,9 @@
     		<if test="wordId != null"> AND word_id = #{wordId}</if>
     		<if test="vocCode != null"> AND voc_code = #{vocCode}</if>
     		<if test="state != null"> AND state = #{state}</if>
-    		
+    		<if test="spelling != null"> AND spelling = #{spelling}</if>
+    		<if test="meaning != null"> AND meaning = #{meaning}</if>
+
     		</where>
     	 
     	</sql>
