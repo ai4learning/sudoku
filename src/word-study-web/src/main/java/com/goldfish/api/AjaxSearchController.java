@@ -10,6 +10,7 @@ import com.goldfish.service.CourseService;
 import com.goldfish.service.UnitWordsService;
 import com.goldfish.service.WordService;
 import com.goldfish.vo.word.SimilarWordVO;
+import com.goldfish.vo.word.SimilarWordsVO;
 import com.goldfish.vo.word.WordDetailVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,13 +55,17 @@ public class AjaxSearchController {
 
     @RequestMapping(value = "AjaxGetSimilarWords", method = {RequestMethod.GET})
     public @ResponseBody
-    List<SimilarWordVO> doAjaxGetSimilarWords(@RequestParam String keyword) {
-        return bkTree.get10SimilarWords(keyword).stream().map(spell->{
+    SimilarWordsVO doAjaxGetSimilarWords(@RequestParam String keyword) {
+        SimilarWordsVO words = new SimilarWordsVO();
+        words.setData(bkTree.get10SimilarWords(keyword).stream().map(spell->{
             Word queryWord = new Word();
             queryWord.setSpelling(spell);
             Word word = wordService.getUnique(queryWord).getDefaultModel();
             return new SimilarWordVO(spell,word.getMeaning());
-        }).collect(Collectors.toList());
+        }).collect(Collectors.toList()));
+        words.setSuccess(true);
+        words.setMsg(CommonConstant.SUCCESS);
+        return words;
     }
 
     @RequestMapping(value = "AjaxGetWord", method = {RequestMethod.GET})
