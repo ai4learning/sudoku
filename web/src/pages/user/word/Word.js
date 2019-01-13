@@ -5,6 +5,7 @@ import TestSelf from './testSelf/TestSelf'
 import MemoryCurve from './memoryCurve/MemoryCurve'
 import Report from './report/Report'
 import Collect from './collect/Collect'
+import WordSearch from './search/WordSearch'
 
 export default class Word extends Component {
   constructor(props) {
@@ -30,6 +31,9 @@ export default class Word extends Component {
           </Tabs.TabPane>
           <Tabs.TabPane key='collect' tab={<span><Icon type='star-o'/>我的收藏</span>}>
             <Collect></Collect>
+          </Tabs.TabPane>
+          <Tabs.TabPane key='search' tab={<span><Icon type='search' />单词搜索</span>}>
+            <WordSearch></WordSearch>
           </Tabs.TabPane>
         </Tabs>
       </div>
