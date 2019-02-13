@@ -6,6 +6,9 @@
 package com.goldfish.domain;
 
 import java.io.Serializable;
+
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.metadata.BaseRowModel;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -14,52 +17,66 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @since 2018-5-8
  * 单元内单词 Domain 类
  */
-public class UnitWords  implements Serializable {
+public class UnitWords extends BaseRowModel implements Serializable {
 	
   private static final long serialVersionUID = -3095041461388608385L;
 	
 	/**  ID  */
 	private Long id; 
 	/**  单元CODE  */
-	private String unitCode; 
+	private String unitCode = "0";
 	/**  课程ID  */
 	private Long lessonId; 
 	/**  单元号  */
+    @ExcelProperty(index = 0)
 	private Integer unitNbr; 
 	/**  单词归类  */
-	private Integer fstClassId; 
+	private Integer fstClassId;
 	/**  单元名  */
 	private String unit; 
 	/**  单词CODE  */
+    @ExcelProperty(index = 1)
 	private String vocCode; 
 	/**  单词索引号  */
 	private Integer vocIndex; 
 	/**  单词ID  */
 	private Integer wordId; 
 	/**  拼写  */
+    @ExcelProperty(index = 2)
 	private String spelling; 
 	/**  释义  */
+    @ExcelProperty(index = 3)
 	private String meaning; 
 	/**  状态  */
-	private Integer state; 
+	private Integer state = 1;
 	/**  创建时间  */
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date created; 
 	/**  修改时间  */
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private java.util.Date modified; 
+	private java.util.Date modified;
 
-  	public void setId(Long id) {
+    /**  美音音标  */
+    @ExcelProperty(index = 4)
+    private String soundMarkUs;
+
+    public void setId(Long id) {
   	  this.id=id;
   	}
   
   	public Long getId() {
   	  return this.id;
   	}
-	
-	  	
 
-  	public void setUnitCode(String unitCode) {
+    public String getSoundMarkUs() {
+        return soundMarkUs;
+    }
+
+    public void setSoundMarkUs(String soundMarkUs) {
+        this.soundMarkUs = soundMarkUs;
+    }
+
+    public void setUnitCode(String unitCode) {
   	  this.unitCode=unitCode;
   	}
   
@@ -197,4 +214,25 @@ public class UnitWords  implements Serializable {
 		final UnitWords unitWord = (UnitWords) obj;
 		return this.wordId.equals(unitWord.getWordId()) && this.vocCode.equals(unitWord.getVocCode());
 	}
+
+    @Override
+    public String toString() {
+        return "UnitWords{" +
+                "id=" + id +
+                ", unitCode='" + unitCode + '\'' +
+                ", lessonId=" + lessonId +
+                ", unitNbr=" + unitNbr +
+                ", fstClassId=" + fstClassId +
+                ", unit='" + unit + '\'' +
+                ", vocCode='" + vocCode + '\'' +
+                ", vocIndex=" + vocIndex +
+                ", wordId=" + wordId +
+                ", spelling='" + spelling + '\'' +
+                ", meaning='" + meaning + '\'' +
+                ", state=" + state +
+                ", created=" + created +
+                ", modified=" + modified +
+                ", soundMarkUs='" + soundMarkUs + '\'' +
+                '}';
+    }
 }

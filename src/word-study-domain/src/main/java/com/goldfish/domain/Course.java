@@ -6,6 +6,9 @@
 package com.goldfish.domain;
 
 import java.io.Serializable;
+
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.metadata.BaseRowModel;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -14,38 +17,46 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @since 2018-5-8
  * 课程 Domain 类
  */
-public class Course  implements Serializable {
+public class Course extends BaseRowModel implements Serializable {
 	
   private static final long serialVersionUID = -5423909666921649131L;
 	
 	/**  ID  */
 	private Integer id; 
 	/**  课程类型  */
-	private Integer type; 
+	private Integer type = 1;
 	/**  课程CODE  */
+    @ExcelProperty(index = 0)
 	private String moduleCode; 
 	/**  课程号  */
+    @ExcelProperty(index = 1)
 	private Integer bookNumber; 
 	/**  课程名  */
+    @ExcelProperty(index = 2)
 	private String bookName; 
 	/**  课程类型  */
-	private Integer bookType; 
+	private Integer bookType = 1;
 	/**  年级类型  */
+    @ExcelProperty(index = 3)
 	private Integer orderType; 
 	/**  课程状态  */
-	private Integer bookState; 
+	private Integer bookState = 1;
 	/**  课程定价  */
 	private java.math.BigDecimal bookPrice; 
 	/**  课程简介  */
+    @ExcelProperty(index = 4)
 	private String introduce; 
 	/**  封面  */
+    @ExcelProperty(index = 5)
 	private String coverImageUrl; 
 	/**  总单元数  */
+    @ExcelProperty(index = 6)
 	private Integer totalUnitNbr; 
 	/**  单词总数  */
+    @ExcelProperty(index = 7)
 	private Integer totalWords; 
 	/**  是否过期  */
-	private boolean outDate;
+	private boolean outDate = false;
 	/**  单元类型  */
 	private String unitType; 
 	/**  扩展信息  */
@@ -55,9 +66,16 @@ public class Course  implements Serializable {
 	private java.util.Date created; 
 	/**  修改时间  */
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private java.util.Date modified; 
+	private java.util.Date modified;
 
-  	public void setId(Integer id) {
+    public Course() {
+    }
+
+    public Course(Course oldCourse) {
+
+    }
+
+    public void setId(Integer id) {
   	  this.id=id;
   	}
   
@@ -233,13 +251,27 @@ public class Course  implements Serializable {
   	  return this.modified;
   	}
 
-	@Override
-	public String toString() {
-		return "Course{" +
-				"id=" + id +
-				", type=" + type +
-				", moduleCode='" + moduleCode + '\'' +
-				", bookName='" + bookName + '\'' +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", type=" + type +
+                ", moduleCode='" + moduleCode + '\'' +
+                ", bookNumber=" + bookNumber +
+                ", bookName='" + bookName + '\'' +
+                ", bookType=" + bookType +
+                ", orderType=" + orderType +
+                ", bookState=" + bookState +
+                ", bookPrice=" + bookPrice +
+                ", introduce='" + introduce + '\'' +
+                ", coverImageUrl='" + coverImageUrl + '\'' +
+                ", totalUnitNbr=" + totalUnitNbr +
+                ", totalWords=" + totalWords +
+                ", outDate=" + outDate +
+                ", unitType='" + unitType + '\'' +
+                ", ext='" + ext + '\'' +
+                ", created=" + created +
+                ", modified=" + modified +
+                '}';
+    }
 }

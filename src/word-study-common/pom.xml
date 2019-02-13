@@ -49,6 +49,10 @@
             <groupId>net.sf.jxls</groupId>
             <artifactId>jxls-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+        </dependency>
 
         <!-- 日志依赖 -->
         <dependency>

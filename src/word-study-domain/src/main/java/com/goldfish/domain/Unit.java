@@ -6,6 +6,9 @@
 package com.goldfish.domain;
 
 import java.io.Serializable;
+
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.metadata.BaseRowModel;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -14,26 +17,31 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @since 2018-5-8
  * 课程单元 Domain 类
  */
-public class Unit  implements Serializable {
+public class Unit extends BaseRowModel implements Serializable {
 	
   private static final long serialVersionUID = -7318057365187516194L;
 	
 	/**  ID  */
 	private Long id; 
 	/**  单元CODE  */
-	private String moduleCode; 
+	private String moduleCode = "0";
 	/**  课程ID  */
+
 	private Long lessonId;
 	/**  课程名 **/
+
 	private String lessonName;
 	/**  单元号  */
+    @ExcelProperty(index = 0)
 	private Integer unitNbr; 
 	/**  单元名称  */
+    @ExcelProperty(index = 1)
 	private String unit; 
 	/**  单元单词数  */
+    @ExcelProperty(index = 2)
 	private Integer totalWords; 
 	/**  状态  */
-	private Integer state; 
+	private Integer state = 1;
 	/**  创建时间  */
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date created; 
@@ -136,4 +144,25 @@ public class Unit  implements Serializable {
 	public void setLessonName(String lessonName) {
 		this.lessonName = lessonName;
 	}
+
+    @Override
+    public String toString() {
+        return "Unit{" +
+                "id=" + id +
+                ", moduleCode='" + moduleCode + '\'' +
+                ", lessonId=" + lessonId +
+                ", lessonName='" + lessonName + '\'' +
+                ", unitNbr=" + unitNbr +
+                ", unit='" + unit + '\'' +
+                ", totalWords=" + totalWords +
+                ", state=" + state +
+                ", created=" + created +
+                ", modified=" + modified +
+                '}';
+    }
+
+    public void getInfoFromCourse(Course course){
+  	    this.lessonId = course.getBookNumber().longValue();
+  	    this.lessonName = course.getBookName();
+  	}
 }
