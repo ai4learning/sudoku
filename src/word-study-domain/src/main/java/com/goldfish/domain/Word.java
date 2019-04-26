@@ -39,9 +39,19 @@ public class Word  implements Serializable {
 	private java.util.Date created; 
 	/**  修改时间  */
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private java.util.Date modified; 
+	private java.util.Date modified;
 
-  	public void setId(Integer id) {
+    public Word() {
+    }
+
+    public Word(String spelling, String meaning, String soundMarkUs) {
+        this.spelling = spelling;
+        this.meaning = meaning;
+        this.soundMarkUs = soundMarkUs;
+        this.state = 1;
+    }
+
+    public void setId(Integer id) {
   	  this.id=id;
   	}
   
@@ -149,4 +159,20 @@ public class Word  implements Serializable {
 		Word word = (Word) obj;
 		return this.spelling.equals(word.spelling) && this.meaning.equals(word.meaning);
 	}
+
+    @Override
+    public String toString() {
+        return "Word{" +
+                "id=" + id +
+                ", spelling='" + spelling + '\'' +
+                ", meaning='" + meaning + '\'' +
+                ", soundMarkUs='" + soundMarkUs + '\'' +
+                ", soundMarkUk='" + soundMarkUk + '\'' +
+                ", wordType='" + wordType + '\'' +
+                ", mediaUri='" + mediaUri + '\'' +
+                ", state=" + state +
+                ", created=" + created +
+                ", modified=" + modified +
+                '}';
+    }
 }
